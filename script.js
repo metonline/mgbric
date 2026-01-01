@@ -1039,7 +1039,19 @@ document.addEventListener('DOMContentLoaded', function() {
                             .then(fallbackData => {
                                 if (Array.isArray(fallbackData) && fallbackData.length > 0) {
                                     allData = fallbackData;
-                                    document.getElementById('fileInfo').innerHTML = `<span style='color:green;'>✓ Yedek veritabanı yüklendi (${allData.length} kayıt)</span>`;
+                                    // Tarih ve saati formatla (dd.mm.yy HH:MM)
+                                    const now = new Date();
+                                    const dd = String(now.getDate()).padStart(2, '0');
+                                    const mm = String(now.getMonth() + 1).padStart(2, '0');
+                                    const yy = String(now.getFullYear()).slice(-2);
+                                    const hh = String(now.getHours()).padStart(2, '0');
+                                    const min = String(now.getMinutes()).padStart(2, '0');
+                                    const dateTimeStr = `${dd}.${mm}.${yy} ${hh}:${min}`;
+                                    const msg = getTranslation('results.databaseUpdated')
+                                        .replace('{date}', dateTimeStr)
+                                        .replace('{time}', '')
+                                        .replace('{count}', allData.length);
+                                    document.getElementById('fileInfo').innerHTML = `<span style='color:green;'>${msg}</span>`;
                                     databaseReady = true;
                                     initializePlayerSearch();
                                     if (queuedModalOpen) {
@@ -1066,7 +1078,19 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 } else {
                     allData = data;
-                    document.getElementById('fileInfo').innerHTML = `<span style='color:green;'>✓ Veritabanı yüklendi (${allData.length} kayıt)</span>`;
+                    // Tarih ve saati formatla (dd.mm.yy HH:MM)
+                    const now = new Date();
+                    const dd = String(now.getDate()).padStart(2, '0');
+                    const mm = String(now.getMonth() + 1).padStart(2, '0');
+                    const yy = String(now.getFullYear()).slice(-2);
+                    const hh = String(now.getHours()).padStart(2, '0');
+                    const min = String(now.getMinutes()).padStart(2, '0');
+                    const dateTimeStr = `${dd}.${mm}.${yy} ${hh}:${min}`;
+                    const msg = getTranslation('results.databaseUpdated')
+                        .replace('{date}', dateTimeStr)
+                        .replace('{time}', '')
+                        .replace('{count}', allData.length);
+                    document.getElementById('fileInfo').innerHTML = `<span style='color:green;'>${msg}</span>`;
                     databaseReady = true;
                     initializePlayerSearch();
                     // If a modal open was queued, run it now
