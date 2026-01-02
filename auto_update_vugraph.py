@@ -26,13 +26,14 @@ def get_last_tournament_date():
         print(f"⚠️ Database okunamadı: {e}")
     return None
 
-def get_upcoming_dates(start_date=None, days_ahead=7):
+def get_upcoming_dates(start_date=None, days_ahead=7, days_back=3):
     """
-    Sonraki günlerdeki mümkün turnuva tarihlerini al
+    Belirtilen aralıktaki turnuva tarihlerini al (geçmiş + gelecek)
     
     Parameters:
     - start_date: başlangıç tarihi (varsayılan: bugün)
     - days_ahead: kaç gün ileri bakılacak (varsayılan: 7)
+    - days_back: kaç gün geriye bakılacak (varsayılan: 3)
     """
     if start_date:
         try:
@@ -43,7 +44,14 @@ def get_upcoming_dates(start_date=None, days_ahead=7):
         current = datetime.now()
     
     dates = []
-    for i in range(days_ahead):
+    
+    # Geçmiş tarihleri ekle (en eski önce)
+    for i in range(days_back, 0, -1):
+        check_date = current - timedelta(days=i)
+        dates.append(check_date.strftime("%d.%m.%Y"))
+    
+    # Bugün ve ileri tarihleri ekle
+    for i in range(days_ahead + 1):
         check_date = current + timedelta(days=i)
         dates.append(check_date.strftime("%d.%m.%Y"))
     
@@ -65,8 +73,8 @@ def main():
     last_date = get_last_tournament_date()
     print(f"\n📅 Son kaydedilen tarih: {last_date or 'Bulunamadı'}")
     
-    # Sonraki 7 günü kontrol et
-    upcoming_dates = get_upcoming_dates(days_ahead=7)
+    # Kontrol edilecek tarihleri al (son 3 gün + sonraki 7 gün)
+    upcoming_dates = get_upcoming_dates(days_back=3, days_ahead=7)
     print(f"\n🔍 Kontrol edilecek tarihler ({len(upcoming_dates)} gün):")
     for date in upcoming_dates:
         print(f"   • {date}")
