@@ -17,7 +17,7 @@
     "player": {
       "title": "👤 Show Player Performance",
       "name": "Enter Player Name",
-      "placeholder": "Type name...",
+      "placeholder": "Enter Player Name...",
       "currentMonth": "📅 This Month",
       "currentYear": "📅 This Year",
       "last3Years": "📅 Last 3 Years",

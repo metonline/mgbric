@@ -17,7 +17,7 @@
     "player": {
       "title": "👤 Oyuncu Performansını Göster",
       "name": "Oyuncu Adını Giriniz",
-      "placeholder": "İsim yazınız...",
+      "placeholder": "Oyuncu Adını Giriniz...",
       "currentMonth": "📅 Bu Ay",
       "currentYear": "📅 Bu Yıl",
       "last3Years": "📅 Son 3 Yıl",
