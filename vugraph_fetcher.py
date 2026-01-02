@@ -242,9 +242,9 @@ class VugraphDataFetcher:
         print(f"   Added {len(new_records)} new records")
         print(f"   Total database now: {len(data)} records")
         
-        # Save database
+        # Save database (UTF-8 without BOM)
         try:
-            with open('database.json', 'w', encoding='utf-8') as f:
+            with open('database.json', 'w', encoding='utf-8-sig') as f:
                 json.dump(data, f, ensure_ascii=False, indent=2)
             print(f"\n   ✓ Database saved successfully")
         except Exception as e:

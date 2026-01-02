@@ -1,5 +1,5 @@
 // Service Worker - Offline desteği ve caching
-const CACHE_NAME = 'hosgoru-v6';
+const CACHE_NAME = 'hosgoru-v7';
 const urlsToCache = [
   '/',
   '/index.html',
@@ -7,6 +7,7 @@ const urlsToCache = [
   '/script.js',
   '/database.xlsx',
   '/manifest.json'
+  // database.json ASLA buraya eklemeyin!
 ];
 
 // Kurulum sırasında cache'e dosyaları ekle
@@ -44,10 +45,23 @@ self.addEventListener('activate', event => {
 self.addEventListener('fetch', event => {
   // GET istekleri için network-first stratejisi
   if (event.request.method === 'GET') {
+    // Database.json ASLA cache'lenmesin - her zaman network'ten al
+    if (event.request.url.includes('database.json') || 
+        event.request.url.includes('database_temp.json')) {
+      event.respondWith(
+        fetch(event.request)
+          .catch(() => {
+            // Network başarısız olursa eski cache'den al
+            return caches.match(event.request);
+          })
+      );
+      return;
+    }
+    
     event.respondWith(
       fetch(event.request)
         .then(response => {
-          // Başarılı response'u cache'le
+          // Başarılı response'u cache'le (database.json dışında)
           const responseToCache = response.clone();
           caches.open(CACHE_NAME).then(cache => {
             cache.put(event.request, responseToCache);
