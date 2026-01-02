@@ -56,7 +56,7 @@
     "eastWest": "🧭 East-West",
     "northSouthResults": "North-South Results",
     "eastWestResults": "East-West Results",
-    "databaseUpdated": "✓ Updated @ {date} ({count})",
+    "databaseUpdated": "✓ Updated @ {date} - {count} records",
     "databaseLoading": "Database loading...",
     "backupLoading": "Database empty, loading backup...",
     "backupLoaded": "Backup database loaded",

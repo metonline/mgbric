@@ -46,6 +46,45 @@ function getTranslation(keyPath) {
     return value || keyPath;
 }
 
+// Dosya bilgisini göster (dil değişiklikleri için dinamik)
+function updateFileInfo() {
+    if (!allData || allData.length === 0) {
+        return;
+    }
+    const lastDate = getLastDateFromDatabase();
+    const msg = getTranslation('results.databaseUpdated')
+        .replace('{date}', lastDate)
+        .replace('{count}', allData.length);
+    document.getElementById('fileInfo').innerHTML = `<span style='color:green;'>${msg}</span>`;
+}
+
+// Database'deki en son tarihi al (DD.MM.YY formatında)
+function getLastDateFromDatabase() {
+    if (!allData || allData.length === 0) {
+        return 'N/A';
+    }
+    
+    // Tüm tarihleri al ve sırala
+    const dates = [...new Set(allData.map(r => r.Tarih))].filter(d => d);
+    if (dates.length === 0) return 'N/A';
+    
+    // DD.MM.YYYY formatını karşılaştır için sayıya dönüştür
+    const sortedDates = dates.sort((a, b) => {
+        const [da, doa, ya] = a.split('.').map(Number);
+        const [db, dob, yb] = b.split('.').map(Number);
+        const dateA = ya * 10000 + doa * 100 + da;
+        const dateB = yb * 10000 + dob * 100 + db;
+        return dateB - dateA; // En yenisi ilk
+    });
+    
+    // DD.MM.YY formatına dönüştür
+    const lastDate = sortedDates[0]; // En son (en yeni) tarih
+    const [d, mo, y] = lastDate.split('.').map(Number);
+    const yy = String(y).slice(-2);
+    const dateFormatted = `${String(d).padStart(2, '0')}.${String(mo).padStart(2, '0')}.${yy}`;
+    return dateFormatted;
+}
+
 // Dili değiştir ve sayfayı güncelle
 function switchLanguage(lang) {
     console.log(`🔄 switchLanguage('${lang}') çağrıldı`);
@@ -115,6 +154,9 @@ function switchLanguage(lang) {
     const privacyLinkEn = document.getElementById('privacyLink-en');
     if (privacyLinkTr) privacyLinkTr.style.display = lang === 'tr' ? 'inline' : 'none';
     if (privacyLinkEn) privacyLinkEn.style.display = lang === 'en' ? 'inline' : 'none';
+    
+    // Dosya bilgisini güncelle (dil değişikliği için)
+    updateFileInfo();
     
     console.log(`✅ Dil değiştirildi: ${lang.toUpperCase()}`);
 }
@@ -1057,18 +1099,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             .then(fallbackData => {
                                 if (Array.isArray(fallbackData) && fallbackData.length > 0) {
                                     allData = fallbackData;
-                                    // Tarih ve saati formatla (dd.mm.yy HH:MM)
-                                    const now = new Date();
-                                    const dd = String(now.getDate()).padStart(2, '0');
-                                    const mm = String(now.getMonth() + 1).padStart(2, '0');
-                                    const yy = String(now.getFullYear()).slice(-2);
-                                    const hh = String(now.getHours()).padStart(2, '0');
-                                    const min = String(now.getMinutes()).padStart(2, '0');
-                                    const dateTimeStr = `${dd}.${mm}.${yy} - ${hh}:${min}`;
-                                    const msg = getTranslation('results.databaseUpdated')
-                                        .replace('{date}', dateTimeStr)
-                                        .replace('{count}', allData.length);
-                                    document.getElementById('fileInfo').innerHTML = `<span style='color:green;'>${msg}</span>`;
+                                    updateFileInfo();
                                     databaseReady = true;
                                     initializePlayerSearch();
                                     if (queuedModalOpen) {
@@ -1095,18 +1126,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 } else {
                     allData = data;
-                    // Tarih ve saati formatla (dd.mm.yy HH:MM)
-                    const now = new Date();
-                    const dd = String(now.getDate()).padStart(2, '0');
-                    const mm = String(now.getMonth() + 1).padStart(2, '0');
-                    const yy = String(now.getFullYear()).slice(-2);
-                    const hh = String(now.getHours()).padStart(2, '0');
-                    const min = String(now.getMinutes()).padStart(2, '0');
-                    const dateTimeStr = `${dd}.${mm}.${yy} - ${hh}:${min}`;
-                    const msg = getTranslation('results.databaseUpdated')
-                        .replace('{date}', dateTimeStr)
-                        .replace('{count}', allData.length);
-                    document.getElementById('fileInfo').innerHTML = `<span style='color:green;'>${msg}</span>`;
+                    updateFileInfo();
                     databaseReady = true;
                     initializePlayerSearch();
                     // If a modal open was queued, run it now

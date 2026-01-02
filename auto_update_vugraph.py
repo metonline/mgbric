@@ -11,7 +11,9 @@ import os
 from datetime import datetime, timedelta
 
 # Add current directory to path so modules can be imported
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, SCRIPT_DIR)
+DB_FILE = os.path.join(SCRIPT_DIR, 'database.json')
 
 from vugraph_fetcher import VugraphDataFetcher
 
@@ -21,7 +23,7 @@ socket.setdefaulttimeout(30)
 def get_last_tournament_date():
     """Database'den en son turnuva tarihini al"""
     try:
-        with open('database.json', 'r', encoding='utf-8') as f:
+        with open(DB_FILE, 'r', encoding='utf-8-sig') as f:
             data = json.load(f)
         if data:
             # En son eklenmiş kayıttan tarihi al

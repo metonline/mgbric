@@ -56,7 +56,7 @@
     "eastWest": "🧭 Doğu-Batı",
     "northSouthResults": "Kuzey-Güney Sonuçları",
     "eastWestResults": "Doğu-Batı Sonuçları",
-    "databaseUpdated": "✓ Güncelleme @ {date} ({count})",
+    "databaseUpdated": "✓ Güncelleme @ {date} - {count} kayıt",
     "databaseLoading": "Veritabanı yükleniyor...",
     "backupLoading": "Veritabanı boş, yedek yükleniyor...",
     "backupLoaded": "Yedek veritabanı yüklendi",

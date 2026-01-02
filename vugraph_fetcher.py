@@ -6,6 +6,7 @@ import requests
 from bs4 import BeautifulSoup
 from datetime import datetime
 import sys
+import os
 
 class VugraphDataFetcher:
     """
@@ -14,6 +15,7 @@ class VugraphDataFetcher:
     """
     
     BASE_URL = "https://clubs.vugraph.com/hosgoru"
+    DB_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'database.json')
     
     def __init__(self):
         self.records_added = []
@@ -176,7 +178,7 @@ class VugraphDataFetcher:
         
         # Load current database
         try:
-            with open('database.json', 'r', encoding='utf-8') as f:
+            with open(self.DB_FILE, 'r', encoding='utf-8-sig') as f:
                 data = json.load(f)
         except Exception as e:
             self.errors.append(f"Failed to load database: {e}")
@@ -244,7 +246,7 @@ class VugraphDataFetcher:
         
         # Save database (UTF-8 without BOM)
         try:
-            with open('database.json', 'w', encoding='utf-8-sig') as f:
+            with open(self.DB_FILE, 'w', encoding='utf-8') as f:
                 json.dump(data, f, ensure_ascii=False, indent=2)
             print(f"\n   ✓ Database saved successfully")
         except Exception as e:
