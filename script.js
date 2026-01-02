@@ -10,16 +10,28 @@ async function loadTranslations(lang) {
     try {
         const response = await fetch(`./` + lang + `.json?v=` + Date.now());
         if (response.ok) {
-            translations[lang] = await response.json();
-            console.log(`✓ ${lang.toUpperCase()} çeviriler yüklendi`);
+            const data = await response.json();
+            translations[lang] = data;
+            console.log(`✓ ${lang.toUpperCase()} çeviriler yüklendi (${Object.keys(data).length} key)`);
+            return true;
+        } else {
+            console.error(`❌ ${lang.toUpperCase()} dosyası bulunamadı (HTTP ${response.status})`);
+            return false;
         }
     } catch (e) {
-        console.warn(`⚠️ ${lang.toUpperCase()} çeviriler yüklenemedi:`, e);
+        console.error(`❌ ${lang.toUpperCase()} çeviriler yüklenemedi:`, e.message);
+        return false;
     }
 }
 
 // Belirli bir çeviriye erişimi
 function getTranslation(keyPath) {
+    // Eğer çeviriler yüklenmemişse, anahtar döndür
+    if (!currentLanguage || !translations[currentLanguage]) {
+        console.warn(`⚠️ Çeviriler henüz yüklenmemiş. Lang: ${currentLanguage}, Translations:`, Object.keys(translations));
+        return keyPath;
+    }
+    
     let value = translations[currentLanguage];
     const keys = keyPath.split('.');
     
