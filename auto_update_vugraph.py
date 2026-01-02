@@ -8,17 +8,71 @@ import json
 import sys
 import socket
 import os
+import subprocess
 from datetime import datetime, timedelta
+from dotenv import load_dotenv
 
 # Add current directory to path so modules can be imported
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, SCRIPT_DIR)
 DB_FILE = os.path.join(SCRIPT_DIR, 'database.json')
+ENV_FILE = os.path.join(SCRIPT_DIR, '.env.github')
+
+# Load GitHub credentials
+load_dotenv(ENV_FILE)
+GITHUB_TOKEN = os.getenv('GITHUB_TOKEN')
+GITHUB_REPO = os.getenv('GITHUB_REPO')
+GITHUB_BRANCH = os.getenv('GITHUB_BRANCH', 'main')
 
 from vugraph_fetcher import VugraphDataFetcher
 
 # Timeout ayarları
 socket.setdefaulttimeout(30)
+
+def push_to_github(commit_message):
+    """Database'i GitHub'a push et"""
+    if not GITHUB_TOKEN or not GITHUB_REPO:
+        print("⚠️ GitHub token veya repo bilgisi eksik, push yapılamıyor")
+        return False
+    
+    try:
+        os.chdir(SCRIPT_DIR)
+        
+        # Git config
+        subprocess.run(['git', 'config', 'user.email', 'bot@hosgoru.local'], 
+                      capture_output=True, timeout=10)
+        subprocess.run(['git', 'config', 'user.name', 'HosGoruBot'], 
+                      capture_output=True, timeout=10)
+        
+        # Git add + commit + push
+        subprocess.run(['git', 'add', 'database.json'], 
+                      capture_output=True, timeout=10, check=True)
+        
+        result = subprocess.run(['git', 'commit', '-m', commit_message], 
+                               capture_output=True, timeout=10)
+        
+        if result.returncode != 0:
+            # Değişiklik yok, push gerek yok
+            return True
+        
+        # Push with token
+        remote_url = f"https://{GITHUB_TOKEN}@github.com/{GITHUB_REPO}.git"
+        push_result = subprocess.run(['git', 'push', remote_url, GITHUB_BRANCH],
+                                    capture_output=True, timeout=30)
+        
+        if push_result.returncode == 0:
+            print(f"✅ GitHub'a push başarılı: {commit_message}")
+            return True
+        else:
+            print(f"❌ GitHub push hatalı: {push_result.stderr.decode('utf-8', errors='ignore')[:200]}")
+            return False
+            
+    except subprocess.TimeoutExpired:
+        print("⚠️ GitHub push timeout (30s)")
+        return False
+    except Exception as e:
+        print(f"⚠️ GitHub push hatası: {str(e)[:100]}")
+        return False
 
 def get_last_tournament_date():
     """Database'den en son turnuva tarihini al"""
@@ -119,6 +173,11 @@ def main():
             print(f"   • {str(error)[:80]}")
     
     print(f"{'='*60}\n")
+    
+    # GitHub'a push et (yeni veri varsa)
+    if success_count > 0:
+        commit_msg = f"Auto: {success_count} date(s) updated - {datetime.now().strftime('%d.%m.%Y %H:%M')}"
+        push_to_github(commit_msg)
     
     # Başarı durumunu döndür
     if success_count > 0:
