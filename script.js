@@ -326,36 +326,60 @@ function updateMobilePageButtons() {
 // ===== SWIPE NAVIGATION =====
 function initSwipeNavigation() {
     const mobileModal = document.getElementById('mobileResultsModal');
-    if (!mobileModal) return;
+    if (!mobileModal) {
+        console.warn('⚠️ mobileResultsModal bulunamadı');
+        return;
+    }
     
     let touchStartX = 0;
+    let touchStartY = 0;
     let touchEndX = 0;
+    let touchEndY = 0;
+    
+    console.log('✓ Swipe navigation initialized');
     
     mobileModal.addEventListener('touchstart', (e) => {
         touchStartX = e.changedTouches[0].screenX;
-    }, false);
+        touchStartY = e.changedTouches[0].screenY;
+        console.log('touchstart:', touchStartX, touchStartY);
+    }, { passive: true });
     
     mobileModal.addEventListener('touchend', (e) => {
         touchEndX = e.changedTouches[0].screenX;
+        touchEndY = e.changedTouches[0].screenY;
+        console.log('touchend:', touchEndX, touchEndY);
         handleSwipe();
-    }, false);
+    }, { passive: true });
     
     function handleSwipe() {
-        const swipeThreshold = 50; // Minimum swipe distance
-        const diff = touchStartX - touchEndX;
+        const swipeThreshold = 50;
+        const verticalThreshold = 30;
         
-        // Sağa swipe → Sonraki sayfa
-        if (diff > swipeThreshold) {
-            const nextBtn = document.querySelector('#resultsNavigation button:last-child');
-            if (nextBtn && nextBtn.style.visibility !== 'hidden') {
-                nextBtn.click();
-            }
+        const diffX = touchStartX - touchEndX;
+        const diffY = Math.abs(touchStartY - touchEndY);
+        
+        // Vertical movement daha fazla ise (scroll) swipe olarak sayma
+        if (diffY > verticalThreshold) {
+            console.log('Vertical movement detected, ignoring swipe');
+            return;
         }
-        // Sola swipe → Önceki sayfa
-        else if (diff < -swipeThreshold) {
+        
+        console.log('Horizontal diff:', diffX);
+        
+        // Sağa swipe (diffX negative) → Önceki sayfa
+        if (diffX < -swipeThreshold) {
+            console.log('🔄 Sola swipe - Önceki sayfa');
             const prevBtn = document.querySelector('#resultsNavigation button:first-child');
             if (prevBtn && prevBtn.style.visibility !== 'hidden') {
                 prevBtn.click();
+            }
+        }
+        // Sola swipe (diffX positive) → Sonraki sayfa
+        else if (diffX > swipeThreshold) {
+            console.log('🔄 Sağa swipe - Sonraki sayfa');
+            const nextBtn = document.querySelector('#resultsNavigation button:last-child');
+            if (nextBtn && nextBtn.style.visibility !== 'hidden') {
+                nextBtn.click();
             }
         }
     }
