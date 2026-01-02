@@ -322,6 +322,44 @@ function updateMobilePageButtons() {
     if (prevBtn) prevBtn.style.visibility = currentPage === 1 ? 'hidden' : 'visible';
     if (nextBtn) nextBtn.style.visibility = currentPage === 3 ? 'hidden' : 'visible';
 }
+
+// ===== SWIPE NAVIGATION =====
+function initSwipeNavigation() {
+    const mobileModal = document.getElementById('mobileResultsModal');
+    if (!mobileModal) return;
+    
+    let touchStartX = 0;
+    let touchEndX = 0;
+    
+    mobileModal.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+    }, false);
+    
+    mobileModal.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+    }, false);
+    
+    function handleSwipe() {
+        const swipeThreshold = 50; // Minimum swipe distance
+        const diff = touchStartX - touchEndX;
+        
+        // Sağa swipe → Sonraki sayfa
+        if (diff > swipeThreshold) {
+            const nextBtn = document.querySelector('#resultsNavigation button:last-child');
+            if (nextBtn && nextBtn.style.visibility !== 'hidden') {
+                nextBtn.click();
+            }
+        }
+        // Sola swipe → Önceki sayfa
+        else if (diff < -swipeThreshold) {
+            const prevBtn = document.querySelector('#resultsNavigation button:first-child');
+            if (prevBtn && prevBtn.style.visibility !== 'hidden') {
+                prevBtn.click();
+            }
+        }
+    }
+}
 // ===== MOBILE MODAL CLOSING =====
 function closeMobileModal() {
     const mobileModal = document.getElementById('mobileResultsModal');
@@ -1526,6 +1564,7 @@ function showMobileModal(data) {
         modal.style.display = 'flex';
         modal.style.flexDirection = 'column';
         document.body.style.overflow = 'hidden';
+        initSwipeNavigation(); // Swipe'ı başlat
         console.log('✓ mobileResultsModal açıldı');
     } else {
         console.error('❌ mobileResultsModal element bulunamadı!');
