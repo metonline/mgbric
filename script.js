@@ -2289,3 +2289,30 @@ if (document.readyState === 'loading') {
 }
 
 console.log('✓ script.js yüklendi - Tüm fonksiyonlar hazır');
+
+// ===== BRIDGE HANDS FUNCTIONS =====
+function viewBridgeHandsForDate() {
+    const dateInput = document.getElementById('selectedDate');
+    if (!dateInput || !dateInput.value) {
+        alert('Lütfen bir tarih seçiniz');
+        return;
+    }
+    const selectedDate = dateInput.value;
+    const [year, month, day] = selectedDate.split('-');
+    const turkishDate = `${day}.${month}.${year}`;
+    window.open(`hands_viewer.html?date=${turkishDate}`, '_blank');
+}
+
+function viewAllBridgeHands() {
+    window.open('hands_viewer.html', '_blank');
+}
+
+function exportHandsAsJSON() {
+    const link = document.createElement('a');
+    const timestamp = new Date().toISOString().slice(0, 10);
+    link.href = 'hands_database.json';
+    link.download = `hands_database_${timestamp}.json`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
