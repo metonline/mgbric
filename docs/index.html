@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tournament Hands - Filter by Date</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f0f0;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .filter-section {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .filter-title {
+            font-size: 16px;
+            color: #1a5490;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
+        .filter-options {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+        
+        .radio-option input[type="radio"] {
+            cursor: pointer;
+        }
+        
+        .radio-option label {
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .filter-inputs {
+            display: grid;
+            gap: 10px;
+        }
+        
+        .date-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .date-group.single {
+            grid-template-columns: 1fr;
+        }
+        
+        .input-field {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .input-field label {
+            font-size: 11px;
+            color: #666;
+            margin-bottom: 3px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        
+        .input-field input {
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 13px;
+        }
+        
+        .input-field input:focus {
+            outline: none;
+            border-color: #1a5490;
+            box-shadow: 0 0 5px rgba(26, 84, 144, 0.2);
+        }
+        
+        .btn-search {
+            background: linear-gradient(135deg, #2d5016 0%, #1a3a0f 100%);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            align-self: flex-start;
+        }
+        
+        .btn-search:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(45, 80, 22, 0.4);
+        }
+        
+        .boards-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 40px;
+            max-width: 1800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .boards-grid.hidden {
+            display: none;
+        }
+        
+        .board {
+            background: white;
+            border: 2px solid #333;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            page-break-inside: avoid;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .board-title {
+            background: linear-gradient(135deg, #1a5490 0%, #0d3567 100%);
+            color: white;
+            padding: 15px;
+            font-weight: bold;
+            font-size: 12px;
+            text-align: center;
+            border-bottom: 2px solid #0d3567;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .board-title-info {
+            flex: 1;
+            text-align: center;
+        }
+        
+        .board-title-date {
+            text-align: right;
+            margin-left: 15px;
+            white-space: nowrap;
+            font-size: 11px;
+        }
+        
+        .board-content {
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+        
+        .bbo-section {
+            margin-bottom: 0;
+            flex-shrink: 0;
+        }
+        
+        .bbo-iframe-wrapper {
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            overflow: hidden;
+            aspect-ratio: 4 / 5;
+            width: 100%;
+            height: auto;
+        }
+        
+        .bbo-iframe-wrapper iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+        }
+        
+        .dd-section {
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 10px;
+            overflow-x: auto;
+            flex-shrink: 0;
+            min-height: 150px;
+        }
+        
+        .dd-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 11px;
+        }
+        
+        .dd-table th {
+            color: black;
+            padding: 6px;
+            font-weight: bold;
+            text-align: center;
+            border: 1px solid #ddd;
+            font-size: 16px;
+        }
+        
+        .dd-table td {
+            border: 1px solid #ddd;
+            padding: 6px;
+            text-align: center;
+        }
+        
+        .dd-table tr:nth-child(even) td {
+            background: none;
+        }
+        
+        .dd-row-label {
+            font-weight: bold;
+            background: #e8e8e8;
+            color: #333;
+        }
+        
+        .suit-spades, .suit-clubs {
+            color: black;
+            font-size: 16px;
+        }
+        
+        .suit-hearts, .suit-diamonds {
+            color: #d32f2f;
+            font-size: 16px;
+        }
+        
+        .no-results {
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            text-align: center;
+            color: #666;
+            display: none;
+        }
+        
+        .no-results.show {
+            display: block;
+        }
+        
+        .tournaments-list {
+            display: none;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .tournaments-list.show {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .tournament-item {
+            background: white;
+            border-left: 4px solid #1a5490;
+            border-radius: 4px;
+            padding: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .tournament-item:hover {
+            background: #f5f5f5;
+            transform: translateX(5px);
+            box-shadow: 0 3px 15px rgba(26, 84, 144, 0.2);
+        }
+        
+        .tournament-info {
+            flex: 1;
+            cursor: pointer;
+        }
+        
+        .tournament-name {
+            font-weight: bold;
+            color: #1a5490;
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+        
+        .tournament-meta {
+            font-size: 12px;
+            color: #666;
+            display: flex;
+            gap: 15px;
+        }
+        
+        .tournament-meta span {
+            display: flex;
+            gap: 5px;
+        }
+        
+        .tournament-actions {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .btn-download-lin {
+            background: linear-gradient(135deg, #2d5016 0%, #1a3a0f 100%);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+        
+        .btn-download-lin:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(45, 80, 22, 0.4);
+        }
+        
+        @media (max-width: 1400px) {
+            .boards-grid {
+                grid-template-columns: 2fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .filter-section {
+                padding: 15px;
+            }
+            
+            .date-group {
+                grid-template-columns: 1fr;
+            }
+            
+            .boards-grid {
+                grid-template-columns: 1fr;
+                gap: 0;
+                padding: 0;
+            }
+            
+            .board {
+                scroll-snap-align: start;
+                margin: 0;
+                height: 100vh;
+                overflow: hidden;
+                border-radius: 8px;
+                margin-bottom: 20px;
+                padding: 0;
+            }
+            
+            .board-content {
+                padding: 10px;
+                height: calc(100vh - 100px);
+                overflow: hidden;
+            }
+            
+            .bbo-iframe-wrapper {
+                aspect-ratio: 4 / 5;
+                height: 50vh;
+            }
+            
+            .dd-section {
+                min-height: auto;
+                height: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="filter-section" id="filterSection">
+            <div class="filter-title">🔍 Filter by Date</div>
+            
+            <div class="filter-options">
+                <div class="radio-option">
+                    <input type="radio" id="singleDate" name="filterType" value="single" checked onchange="toggleDateInput()">
+                    <label for="singleDate">Single Date</label>
+                </div>
+                <div class="radio-option">
+                    <input type="radio" id="dateRange" name="filterType" value="range" onchange="toggleDateInput()">
+                    <label for="dateRange">Date Range</label>
+                </div>
+            </div>
+            
+            <div class="filter-inputs">
+                <div class="date-group single" id="dateGroup">
+                    <div class="input-field">
+                        <label for="selectedDate">Date</label>
+                        <input type="date" id="selectedDate" value="2026-01-04">
+                    </div>
+                </div>
+                
+                <div class="date-group" id="dateRangeGroup" style="display: none;">
+                    <div class="input-field">
+                        <label for="startDate">Start Date</label>
+                        <input type="date" id="startDate">
+                    </div>
+                    <div class="input-field">
+                        <label for="endDate">End Date</label>
+                        <input type="date" id="endDate">
+                    </div>
+                </div>
+            </div>
+            
+            <button class="btn-search" onclick="searchTournaments()">🔍 Search</button>
+        </div>
+        
+        <!-- Tournaments List Results -->
+        <div class="tournaments-list" id="tournamentsContainer"></div>
+        
+        <!-- Boards Grid Results -->
+        <div class="boards-grid hidden" id="boardsContainer"></div>
+        
+        <div class="no-results" id="noResults">
+            No results found. Please try another date or date range.
+        </div>
+    </div>
+
+    <script>
+        let allBoards = {};
+        let allDDTables = {};
+        let currentBoards = {};
+        let tournamentsData = {}; // Stores tournaments with their boards
+
+        async function loadDatabase() {
+            try {
+                const [boardsRes, ddRes] = await Promise.all([
+                    fetch('/hands_database.json'),
+                    fetch('/dd_tables.json').catch(() => null)
+                ]);
+                
+                allBoards = await boardsRes.json();
+                if (ddRes) {
+                    allDDTables = await ddRes.json();
+                }
+                
+                groupBoardsByTournament();
+            } catch (error) {
+                console.error('Error loading database:', error);
+            }
+        }
+
+        function groupBoardsByTournament() {
+            // Group boards by tournament and date
+            const groupedByTournament = {};
+            
+            for (const [boardId, boardData] of Object.entries(allBoards)) {
+                const tournament = boardData.tournament || 'UNKNOWN';
+                const date = boardData.date || '2026-01-04';
+                const key = `${date}_${tournament}`;
+                
+                if (!groupedByTournament[key]) {
+                    groupedByTournament[key] = {
+                        name: tournament,
+                        date: date,
+                        boards: {}
+                    };
+                }
+                
+                groupedByTournament[key].boards[boardId] = {
+                    N: boardData.N,
+                    S: boardData.S,
+                    E: boardData.E,
+                    W: boardData.W,
+                    board_num: boardData.board_num || boardId
+                };
+            }
+            
+            tournamentsData = groupedByTournament;
+        }
+
+        function toggleDateInput() {
+            const isSingle = document.getElementById('singleDate').checked;
+            document.getElementById('dateGroup').style.display = isSingle ? 'grid' : 'none';
+            document.getElementById('dateRangeGroup').style.display = isSingle ? 'none' : 'grid';
+        }
+
+        function searchTournaments() {
+            const isSingle = document.getElementById('singleDate').checked;
+
+            if (isSingle) {
+                const searchDate = document.getElementById('selectedDate').value;
+                showTournamentsForDate(searchDate);
+            } else {
+                const startDate = document.getElementById('startDate').value;
+                const endDate = document.getElementById('endDate').value;
+                
+                if (!startDate || !endDate) {
+                    alert('Please select both start and end dates');
+                    return;
+                }
+                
+                showTournamentsForDateRange(startDate, endDate);
+            }
+        }
+
+        function showTournamentsForDate(date) {
+            // Find tournaments that match this date
+            const matchingTournaments = Object.entries(tournamentsData).filter(([key, tournament]) => {
+                return tournament.date === date;
+            });
+            
+            displayTournamentsList(matchingTournaments);
+        }
+
+        function showTournamentsForDateRange(startDate, endDate) {
+            // Find tournaments within date range
+            const matchingTournaments = Object.entries(tournamentsData).filter(([key, tournament]) => {
+                return tournament.date >= startDate && tournament.date <= endDate;
+            });
+            
+            displayTournamentsList(matchingTournaments);
+        }
+
+        function formatDate(dateStr) {
+            const date = new Date(dateStr);
+            const day = String(date.getDate()).padStart(2, '0');
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const year = String(date.getFullYear()).slice(-2);
+            return `${day}.${month}.${year}`;
+        }
+
+        function displayTournamentsList(tournaments) {
+            const container = document.getElementById('tournamentsContainer');
+            container.innerHTML = '';
+            
+            if (tournaments.length === 0) {
+                document.getElementById('noResults').classList.add('show');
+                document.getElementById('boardsContainer').classList.add('hidden');
+                container.classList.remove('show');
+                return;
+            }
+            
+            tournaments.forEach(([key, tournament]) => {
+                const boardCount = Object.keys(tournament.boards).length;
+                const tournamentItem = document.createElement('div');
+                tournamentItem.className = 'tournament-item';
+                
+                const allLinData = [];
+                Object.entries(tournament.boards).forEach(([boardNum, boardData]) => {
+                    const lin = generateLIN(parseInt(boardNum), boardData);
+                    allLinData.push({ boardNum: parseInt(boardNum), lin });
+                });
+                
+                const html = `
+                    <div class="tournament-info" onclick="showTournamentBoards('${key}')">
+                        <div class="tournament-name">${tournament.name}</div>
+                        <div class="tournament-meta">
+                            ${formatDate(tournament.date)}
+                        </div>
+                    </div>
+                    <div class="tournament-actions">
+                        <button class="btn-download-lin" onclick="downloadAllLIN(${JSON.stringify(allLinData).replace(/"/g, '&quot;')}, '${tournament.name.replace(/'/g, "\\'")}')">
+                            ⬇️ Download LIN
+                        </button>
+                    </div>
+                `;
+                
+                tournamentItem.innerHTML = html;
+                container.appendChild(tournamentItem);
+            });
+            
+            container.classList.add('show');
+            document.getElementById('boardsContainer').classList.add('hidden');
+            document.getElementById('noResults').classList.remove('show');
+            document.getElementById('filterSection').style.display = 'none';
+        }
+
+        function showTournamentBoards(tournamentKey) {
+            const tournament = tournamentsData[tournamentKey];
+            if (!tournament) return;
+            
+            currentBoards = tournament.boards;
+            displayBoards(tournament.date, tournament.name);
+        }
+
+        function generateLIN(boardNum, boardData) {
+            const n = boardData.N || {};
+            const s = boardData.S || {};
+            const e = boardData.E || {};
+            const w = boardData.W || {};
+            
+            const nHand = 'S' + (n.S || '-') + 'H' + (n.H || '-') + 'D' + (n.D || '-') + 'C' + (n.C || '-');
+            const eHand = 'S' + (e.S || '-') + 'H' + (e.H || '-') + 'D' + (e.D || '-') + 'C' + (e.C || '-');
+            const sHand = 'S' + (s.S || '-') + 'H' + (s.H || '-') + 'D' + (s.D || '-') + 'C' + (s.C || '-');
+            const wHand = 'S' + (w.S || '-') + 'H' + (w.H || '-') + 'D' + (w.D || '-') + 'C' + (w.C || '-');
+            
+            const dealer = ((boardNum - 1) % 4) + 1;
+            const vulnPattern = [0, 1, 2, 3, 1, 2, 3, 0, 2, 3, 0, 1, 3, 0, 1, 2];
+            const vuln = vulnPattern[(boardNum - 1) % 16];
+            
+            const lin = `qx|o1|md|${dealer}${sHand},${wHand},${nHand},${eHand}|rh||ah|Board%20${boardNum}|sv|${vuln}|pg||`;
+            return lin;
+        }
+
+        function downloadAllLIN(linDataArray, tournamentName) {
+            // Create a combined LIN file with all boards
+            let allLinContent = '';
+            
+            linDataArray.sort((a, b) => a.boardNum - b.boardNum);
+            
+            linDataArray.forEach(item => {
+                allLinContent += `${item.lin}\n`;
+            });
+            
+            // Create download
+            const element = document.createElement('a');
+            element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(allLinContent));
+            element.setAttribute('download', `${tournamentName.replace(/\s+/g, '_')}_boards.lin`);
+            element.style.display = 'none';
+            document.body.appendChild(element);
+            element.click();
+            document.body.removeChild(element);
+        }
+
+        function displayBoards(date, tournamentName) {
+            const container = document.getElementById('boardsContainer');
+            container.innerHTML = '';
+            
+            const boardNums = Object.keys(currentBoards).map(Number).sort((a, b) => a - b);
+            const formattedDate = formatDate(date);
+            
+            if (boardNums.length === 0) {
+                document.getElementById('noResults').classList.add('show');
+                document.getElementById('tournamentsContainer').classList.remove('show');
+                container.classList.add('hidden');
+                return;
+            }
+            
+            boardNums.forEach(i => {
+                const boardData = currentBoards[String(i)];
+                if (!boardData) return;
+                
+                const lin = generateLIN(i, boardData);
+                const bboUrl = `https://www.bridgebase.com/tools/handviewer.html?lin=${encodeURIComponent(lin)}`;
+                
+                const dealer = ((i - 1) % 4) + 1;
+                const dealerNames = ['N', 'E', 'S', 'W'];
+                const dealerName = dealerNames[dealer - 1];
+                
+                const vulnPattern = [0, 1, 2, 3, 1, 2, 3, 0, 2, 3, 0, 1, 3, 0, 1, 2];
+                const vulnNum = vulnPattern[(i - 1) % 16];
+                const vulnNames = ['None', 'N/S', 'E/W', 'Both'];
+                const vulnName = vulnNames[vulnNum];
+                
+                const ddData = allDDTables[String(i)];
+                const tricks = ddData ? ddData.NS_tricks : [0,0,0,0,0];
+                
+                const boardViewer = document.createElement('div');
+                boardViewer.className = 'board';
+                
+                let html = `
+                    <div class="board-title">
+                        <div class="board-title-info">Board ${i} • Dealer: ${dealerName} • Vulnerability: ${vulnName}</div>
+                        <div class="board-title-date">${formattedDate}</div>
+                    </div>
+                    
+                    <div class="board-content">
+                        <div class="bbo-section">
+                            <div class="bbo-iframe-wrapper">
+                                <iframe 
+                                    src="${bboUrl}"
+                                    allow="clipboard-write"
+                                    sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-presentation"
+                                ></iframe>
+                            </div>
+                        </div>
+                        
+                        <div class="dd-section">
+                            <table class="dd-table">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th><span class="suit-spades">♠</span></th>
+                                        <th><span class="suit-hearts">♥</span></th>
+                                        <th><span class="suit-diamonds">♦</span></th>
+                                        <th><span class="suit-clubs">♣</span></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="dd-row-label">North</td>
+                                        <td>${tricks[0]}</td>
+                                        <td>${tricks[1]}</td>
+                                        <td>${tricks[2]}</td>
+                                        <td>${tricks[3]}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="dd-row-label">South</td>
+                                        <td>${tricks[0]}</td>
+                                        <td>${tricks[1]}</td>
+                                        <td>${tricks[2]}</td>
+                                        <td>${tricks[3]}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="dd-row-label">East</td>
+                                        <td>${13 - tricks[0]}</td>
+                                        <td>${13 - tricks[1]}</td>
+                                        <td>${13 - tricks[2]}</td>
+                                        <td>${13 - tricks[3]}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="dd-row-label">West</td>
+                                        <td>${13 - tricks[0]}</td>
+                                        <td>${13 - tricks[1]}</td>
+                                        <td>${13 - tricks[2]}</td>
+                                        <td>${13 - tricks[3]}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                `;
+                
+                boardViewer.innerHTML = html;
+                container.appendChild(boardViewer);
+            });
+            
+            document.getElementById('boardsContainer').classList.remove('hidden');
+            document.getElementById('tournamentsContainer').classList.remove('show');
+            document.getElementById('noResults').classList.remove('show');
+        }
+
+        document.addEventListener('DOMContentLoaded', loadDatabase);
+    </script>
+</body>
+</html>
