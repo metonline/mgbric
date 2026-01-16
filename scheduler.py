@@ -68,16 +68,14 @@ class DatabaseScheduler:
                     'dates_processed': success_count
                 }
                 self.log_update(log_entry)
-                return True
             else:
                 print(f"[{datetime.now()}] [FAIL] Database update failed (0 dates processed)")
-                log_entry = {
-                    'timestamp': datetime.now().isoformat(),
-                    'status': 'failed',
-                    'date_range': f"{start_date} to {end_date}"
-                }
-                self.log_update(log_entry)
-                return False
+            
+            # After updating tournament data, fetch hands for new tournaments
+            print(f"\n[{datetime.now()}] [HANDS] Starting hands fetching for 2026+ tournaments...")
+            self.fetch_tournament_hands()
+            
+            return True
                 
         except Exception as e:
             print(f"[{datetime.now()}] [ERROR] Error during database update: {str(e)}")
@@ -168,6 +166,171 @@ class DatabaseScheduler:
         """Get list of scheduled jobs"""
         return self.scheduler.get_jobs()
 
+    def fetch_tournament_hands(self):
+        """Fetch hands for tournaments from 2026+ that don't have hands yet"""
+        try:
+            import requests
+            from bs4 import BeautifulSoup
+            from collections import defaultdict
+            from urllib.parse import urlparse, parse_qs
+            import re
+            
+            print(f"[{datetime.now()}] Loading database...")
+            db_path = os.path.join(self.repo_path, 'database.json')
+            with open(db_path, 'r', encoding='utf-8') as f:
+                database = json.load(f)
+            
+            # Group tournaments and check which need hands
+            tournaments_need_hands = defaultdict(list)
+            cutoff_date = datetime.strptime('01.01.2026', '%d.%m.%Y')
+            
+            for idx, record in enumerate(database):
+                # Skip records that already have hands
+                if 'Hands' in record:
+                    continue
+                
+                # Filter by date - only 2026 onwards
+                date_str = record.get('Tarih', '')
+                try:
+                    record_date = datetime.strptime(date_str, '%d.%m.%Y')
+                    if record_date < cutoff_date:
+                        continue
+                except:
+                    continue
+                
+                # Extract event ID
+                link = record.get('Link', '')
+                try:
+                    parsed = urlparse(link)
+                    params = parse_qs(parsed.query)
+                    event_id = params.get('event', [None])[0]
+                    if event_id:
+                        tournaments_need_hands[event_id].append(idx)
+                except:
+                    continue
+            
+            if not tournaments_need_hands:
+                print(f"[{datetime.now()}] [OK] All tournaments already have hands")
+                return True
+            
+            print(f"[{datetime.now()}] [HANDS] Found {len(tournaments_need_hands)} tournaments needing hands")
+            
+            # Fetch hands for up to 3 tournaments per scheduled run (to avoid timeouts)
+            hands_fetched = 0
+            for event_id, record_indices in list(tournaments_need_hands.items())[:3]:
+                try:
+                    print(f"[{datetime.now()}] Fetching hands for event {event_id}...")
+                    hands = self._fetch_event_hands(event_id)
+                    
+                    if hands:
+                        for idx in record_indices:
+                            database[idx]['Hands'] = hands
+                            database[idx]['HandsFetched'] = True
+                        hands_fetched += 1
+                        print(f"[{datetime.now()}] [OK] Fetched {len(hands)} boards")
+                    else:
+                        print(f"[{datetime.now()}] [WARN] Failed to fetch hands for event {event_id}")
+                    
+                    # Rate limiting
+                    import time
+                    time.sleep(2)
+                except Exception as e:
+                    print(f"[{datetime.now()}] [ERROR] Error fetching hands: {str(e)[:50]}")
+                    continue
+            
+            # Save updated database
+            if hands_fetched > 0:
+                with open(db_path, 'w', encoding='utf-8') as f:
+                    json.dump(database, f, ensure_ascii=False, indent=2)
+                print(f"[{datetime.now()}] [OK] Hands database saved ({hands_fetched} tournaments)")
+                return True
+            
+            return False
+            
+        except Exception as e:
+            print(f"[{datetime.now()}] [ERROR] Error in hands fetching: {str(e)}")
+            return False
+    
+    def _fetch_event_hands(self, event_id, num_boards=30):
+        """Fetch hands for a single event"""
+        try:
+            import requests
+            from bs4 import BeautifulSoup
+            import re
+            import time
+            
+            hands_by_board = {}
+            
+            for board_num in range(1, num_boards + 1):
+                try:
+                    url = f"https://clubs.vugraph.com/hosgoru/boardsummary.php?event={event_id}&board={board_num}"
+                    response = requests.get(url, timeout=5)
+                    response.encoding = 'utf-8'
+                    soup = BeautifulSoup(response.content, 'html.parser')
+                    board_text = soup.get_text()
+                    
+                    hands = {}
+                    for direction in ['North', 'South', 'East', 'West']:
+                        patterns = [
+                            rf"{direction}\s*[:\s]+([AKQJT2-9]*(?:\s+[AKQJT2-9]*)*)",
+                            rf"{direction.lower()}.*?[:\s]+([AKQJT2-9]+)",
+                        ]
+                        
+                        hand_found = None
+                        for pattern in patterns:
+                            match = re.search(pattern, board_text, re.IGNORECASE)
+                            if match:
+                                hand_found = match.group(1)
+                                break
+                        
+                        if hand_found:
+                            hands[direction[0]] = self._parse_hand_string(hand_found)
+                        else:
+                            hands[direction[0]] = {'S': '', 'H': '', 'D': '', 'C': ''}
+                    
+                    if any(hands.values()):
+                        hands_by_board[str(board_num)] = hands
+                    
+                    time.sleep(0.3)
+                except:
+                    time.sleep(0.3)
+                    continue
+            
+            return hands_by_board if hands_by_board else None
+        except:
+            return None
+    
+    def _parse_hand_string(self, hand_str):
+        """Parse hand string to dict"""
+        if not hand_str or hand_str.strip() in ['-', '']:
+            return {'S': '', 'H': '', 'D': '', 'C': ''}
+        
+        result = {}
+        hand_str = hand_str.strip()
+        
+        if ':' in hand_str:
+            for suit_part in hand_str.split():
+                if ':' in suit_part:
+                    suit, cards = suit_part.split(':')
+                    result[suit.upper()] = cards
+        else:
+            suits = ['S', 'H', 'D', 'C']
+            current_suit = 0
+            current_cards = ''
+            
+            for char in hand_str:
+                if char in suits:
+                    if current_cards:
+                        result[suits[current_suit]] = current_cards
+                        current_cards = ''
+                    current_suit = suits.index(char)
+                else:
+                    current_cards += char
+            
+            if current_cards:
+                result[suits[current_suit]] = current_cards
+        
+        return {s: result.get(s, '') for s in ['S', 'H', 'D', 'C']}
 
 if __name__ == '__main__':
     scheduler = DatabaseScheduler()

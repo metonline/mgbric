@@ -29,6 +29,13 @@ from scheduler import DatabaseScheduler
 scheduler = DatabaseScheduler()
 scheduler.update_database()
 "
+      
+      - name: Fetch tournament hands (2026+)
+        run: python -c "
+from scheduler import DatabaseScheduler
+scheduler = DatabaseScheduler()
+scheduler.fetch_tournament_hands()
+"
         
       - name: Commit and push if changes
         run: |
