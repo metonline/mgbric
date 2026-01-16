@@ -47,14 +47,20 @@ function getTranslation(keyPath) {
 }
 
 // Dosya bilgisini göster (dil değişiklikleri için dinamik)
+function formatNumber(num) {
+    /**Format number with thousands separator (Turkish style: 55.996)*/
+    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+}
+
 function updateFileInfo() {
     if (!allData || allData.length === 0) {
         return;
     }
     const lastDate = getLastDateFromDatabase();
+    const formattedCount = formatNumber(allData.length);
     const msg = getTranslation('results.databaseUpdated')
         .replace('{date}', lastDate)
-        .replace('{count}', allData.length);
+        .replace('{count}', formattedCount);
     document.getElementById('fileInfo').innerHTML = `<span style='color:green;'>${msg}</span>`;
 }
 
