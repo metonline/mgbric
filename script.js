@@ -196,27 +196,44 @@ async function initLanguage() {
                 const response = await fetch('database.json');
                 const data = await response.json();
                 
-                if (data && data.length > 0) {
-                    // Database sonda en yeni tarih var (eski -> yeni sıralanmış)
-                    const latestRecord = data[data.length - 1];
-                    const latestDateStr = latestRecord.Tarih; // Format: "02.01.2026" (DD.MM.YYYY)
+                let latestDateStr = null;
+                
+                // Handle dict format: {"legacy_records": [...], "events": {...}}
+                if (data.legacy_records && Array.isArray(data.legacy_records) && data.legacy_records.length > 0) {
+                    // Extract all dates and find max
+                    const dates = data.legacy_records
+                        .filter(r => r.Tarih && /^\d{2}\.\d{2}\.\d{4}$/.test(r.Tarih))
+                        .map(r => {
+                            const [day, month, year] = r.Tarih.split('.');
+                            return { date: new Date(year, month - 1, day), str: r.Tarih };
+                        })
+                        .sort((a, b) => b.date - a.date);
                     
-                    if (latestDateStr) {
-                        // Tarih zaten DD.MM.YYYY formatında, direkt kullan
-                        selectedDateInput.value = latestDateStr;
-                        console.log(`✓ Tarih input'u en son güncelleme tarihine ayarlandı: ${latestDateStr}`);
+                    if (dates.length > 0) {
+                        latestDateStr = dates[0].str;
+                        console.log(`✓ Dict formatından max tarih alındı: ${latestDateStr}`);
                     }
+                }
+                // Handle array format (old)
+                else if (Array.isArray(data) && data.length > 0) {
+                    const latestRecord = data[data.length - 1];
+                    latestDateStr = latestRecord.Tarih;
+                    console.log(`✓ Array formatından tarih alındı: ${latestDateStr}`);
+                }
+                
+                if (latestDateStr) {
+                    selectedDateInput.value = latestDateStr;
+                    console.log(`✓ Tarih input'u en son güncelleme tarihine ayarlandı: ${latestDateStr}`);
                 } else {
-                    throw new Error('Database boş');
+                    throw new Error('Database boş veya tarih bulunamadı');
                 }
             } catch (err) {
                 console.warn(`⚠️ Database tarih alınamadı, fallback kullan. Hata: ${err.message}`);
-                // Fallback: bugünün bir gün öncesi (DD.MM.YYYY formatında)
+                // Fallback: bugünün tarihi (DD.MM.YYYY formatında)
                 const now = new Date();
-                const yesterday = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 1);
-                const dd = String(yesterday.getDate()).padStart(2, '0');
-                const mm = String(yesterday.getMonth() + 1).padStart(2, '0');
-                const yyyy = yesterday.getFullYear();
+                const dd = String(now.getDate()).padStart(2, '0');
+                const mm = String(now.getMonth() + 1).padStart(2, '0');
+                const yyyy = now.getFullYear();
                 selectedDateInput.value = `${dd}.${mm}.${yyyy}`;
                 console.log(`✓ Fallback tarih kullanıldı: ${dd}.${mm}.${yyyy}`);
             }
@@ -2366,7 +2383,9 @@ if (document.readyState === 'loading') {
 let currentPickerMonth = new Date();
 
 function openDatePicker() {
+    // Set calendar to show current month
     currentPickerMonth = new Date();
+    currentPickerMonth.setHours(12, 0, 0, 0);  // Avoid timezone issues
     updateCalendarDisplay();
     
     // Get latest date from database (not today)
@@ -2449,9 +2468,12 @@ function updateCalendarDisplay() {
     today.setHours(0, 0, 0, 0);
     
     for (let i = 0; i < 42; i++) {
+        // Create a copy of the date to avoid reference issues
+        const cellDate = new Date(currentDate);
+        
         const day = document.createElement('button');
-        const dateNum = currentDate.getDate();
-        const dateMonth = currentDate.getMonth();
+        const dateNum = cellDate.getDate();
+        const dateMonth = cellDate.getMonth();
         
         day.textContent = dateNum;
         day.style.padding = '8px';
@@ -2464,7 +2486,7 @@ function updateCalendarDisplay() {
         day.style.fontWeight = 'normal';
         
         // Check if this is today
-        const dateToCheck = new Date(currentDate);
+        const dateToCheck = new Date(cellDate);
         dateToCheck.setHours(0, 0, 0, 0);
         const isToday = dateToCheck.getTime() === today.getTime();
         
@@ -2479,9 +2501,11 @@ function updateCalendarDisplay() {
             day.style.fontWeight = 'bold';
             day.style.border = '2px solid #1e7e34';
             day.style.boxShadow = '0 0 8px rgba(40, 167, 69, 0.5)';
-            day.onclick = () => selectDateFromPicker(currentDate);
+            // Use cellDate copy, not currentDate
+            day.onclick = () => selectDateFromPicker(new Date(cellDate));
         } else {
-            day.onclick = () => selectDateFromPicker(currentDate);
+            // Use cellDate copy, not currentDate
+            day.onclick = () => selectDateFromPicker(new Date(cellDate));
         }
         
         grid.appendChild(day);
@@ -2490,11 +2514,16 @@ function updateCalendarDisplay() {
 }
 
 function selectDateFromPicker(date) {
-    const day = String(date.getDate()).padStart(2, '0');
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const year = date.getFullYear();
+    // Ensure date is not modified by reference issues
+    const safeDate = new Date(date);
+    safeDate.setHours(12, 0, 0, 0);
+    
+    const day = String(safeDate.getDate()).padStart(2, '0');
+    const month = String(safeDate.getMonth() + 1).padStart(2, '0');
+    const year = safeDate.getFullYear();
     const formattedDate = `${day}.${month}.${year}`;
     
+    console.log(`📅 Seçilen tarih (Safe): ${formattedDate}`);
     document.getElementById('selectedDate').value = formattedDate;
     closeDatePicker();
     
