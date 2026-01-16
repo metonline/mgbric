@@ -264,27 +264,35 @@ def serve_database():
 
 @app.route('/api/data', methods=['GET'])
 def serve_database_api():
-    """API endpoint - stream large file without loading to memory"""
+    """API endpoint - convert dict format to array format for compatibility"""
     try:
         db_path = os.path.join(REPO_PATH, 'database.json')
         
-        def generate():
-            """Stream file in chunks"""
-            with open(db_path, 'rb') as f:
-                while True:
-                    chunk = f.read(8192)  # 8KB chunks
-                    if not chunk:
-                        break
-                    yield chunk
+        # Load and parse database
+        with open(db_path, 'r', encoding='utf-8') as f:
+            data = json.load(f)
         
-        response = Response(generate(), mimetype='application/json')
+        # Convert to array format for script.js compatibility
+        if isinstance(data, dict) and 'events' in data:
+            # New dict format - extract all records
+            records = []
+            for event_id, event_data in data.get('events', {}).items():
+                if 'results' in event_data:
+                    records.extend(event_data['results'].get('NS', []))
+                    records.extend(event_data['results'].get('EW', []))
+            response_data = records
+        else:
+            # Already array format
+            response_data = data if isinstance(data, list) else []
+        
+        response = jsonify(response_data)
         response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate, max-age=0, private'
         response.headers['Pragma'] = 'no-cache'
         response.headers['Expires'] = '0'
         return response
     except Exception as e:
         print(f"[{datetime.now()}] Error serving API: {e}")
-        return jsonify({'error': f'Could not load database: {str(e)}'}), 500
+        return jsonify([]), 500
 
 @app.route('/<path:filename>', methods=['GET'])
 def serve_static(filename):
