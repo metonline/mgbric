@@ -19,13 +19,8 @@ from flask import Flask, request, jsonify, send_file, send_from_directory
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from vugraph_fetcher import VugraphDataFetcher
-from scheduler import DatabaseScheduler
 
 app = Flask(__name__, static_folder='.', static_url_path='')
-
-# Initialize scheduler
-scheduler = DatabaseScheduler()
-scheduler.start()
 
 # Configuration
 WEBHOOK_SECRET = os.environ.get('GITHUB_WEBHOOK_SECRET', 'your-webhook-secret-here')
