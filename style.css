@@ -155,9 +155,8 @@ header p {
     width: 100% !important;
     margin: 0 !important;
     text-align: center !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
+    display: block !important;
+    cursor: pointer !important;
 }
 
 /* Oyuncu adı input'u */
@@ -171,8 +170,7 @@ header p {
     box-sizing: border-box !important;
     width: 100% !important;
     margin: 0 !important;
-    display: flex !important;
-    align-items: center !important;
+    display: block !important;
 }
 
 /* Tarih Seç Butonu - Mavi */
