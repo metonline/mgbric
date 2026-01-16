@@ -212,16 +212,27 @@ async function initLanguage() {
                     const dates = validRecords
                         .map(r => {
                             const [day, month, year] = r.Tarih.split('.');
+                            const parsedDate = new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
                             return { 
-                                date: new Date(parseInt(year), parseInt(month) - 1, parseInt(day)), 
-                                str: r.Tarih 
+                                date: parsedDate,
+                                str: r.Tarih,
+                                parsed: `${parseInt(year)}-${String(parseInt(month)).padStart(2, '0')}-${String(parseInt(day)).padStart(2, '0')}`
                             };
                         })
                         .sort((a, b) => b.date - a.date);
                     
+                    // Debug: Show first 10 dates
+                    console.log(`📍 İlk 10 tarih (sorted DESC):`);
+                    dates.slice(0, 10).forEach((d, i) => {
+                        console.log(`   ${i+1}. ${d.str} → JS: ${d.date.toISOString()}`);
+                    });
+                    
                     if (dates.length > 0) {
                         const latestDateStr = dates[0].str;
+                        const latestDateObj = dates[0].date;
+                        console.log(`🎯 MAX DATE: ${latestDateStr} (JS: ${latestDateObj.toISOString()})`);
                         selectedDateInput.value = latestDateStr;
+                        console.log(`✓ Input'a set: ${selectedDateInput.value}`);
                         console.log(`✓ Tarih input'u en son güncelleme tarihine ayarlandı: ${latestDateStr}`);
                     }
                 } else {
