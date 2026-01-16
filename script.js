@@ -194,15 +194,29 @@ async function initLanguage() {
             try {
                 // Database'den en son tarihi al
                 const response = await fetch('database.json');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
                 const data = await response.json();
+                console.log(`📊 Database yapısı:`, {
+                    isArray: Array.isArray(data),
+                    hasLegacy: !!data.legacy_records,
+                    hasEvents: !!data.events,
+                    keys: Object.keys(data || {})
+                });
                 
                 let latestDateStr = null;
                 
                 // Handle dict format: {"legacy_records": [...], "events": {...}}
-                if (data.legacy_records && Array.isArray(data.legacy_records) && data.legacy_records.length > 0) {
+                if (data && data.legacy_records && Array.isArray(data.legacy_records) && data.legacy_records.length > 0) {
+                    console.log(`📌 legacy_records bulundu, total: ${data.legacy_records.length}`);
+                    
                     // Extract all dates and find max
-                    const dates = data.legacy_records
-                        .filter(r => r.Tarih && /^\d{2}\.\d{2}\.\d{4}$/.test(r.Tarih))
+                    const validRecords = data.legacy_records.filter(r => r.Tarih && /^\d{2}\.\d{2}\.\d{4}$/.test(r.Tarih));
+                    console.log(`📅 Geçerli tarih kaydı: ${validRecords.length}`);
+                    
+                    const dates = validRecords
                         .map(r => {
                             const [day, month, year] = r.Tarih.split('.');
                             return { date: new Date(year, month - 1, day), str: r.Tarih };
@@ -216,9 +230,17 @@ async function initLanguage() {
                 }
                 // Handle array format (old)
                 else if (Array.isArray(data) && data.length > 0) {
+                    console.log(`📌 Array format bulundu, total: ${data.length}`);
                     const latestRecord = data[data.length - 1];
                     latestDateStr = latestRecord.Tarih;
                     console.log(`✓ Array formatından tarih alındı: ${latestDateStr}`);
+                }
+                else {
+                    console.warn(`⚠️ Ne dict, ne array format bulundu`);
+                    console.log(`Data keys:`, Object.keys(data || {}));
+                    if (data && data.legacy_records) {
+                        console.log(`legacy_records type: ${typeof data.legacy_records}, isArray: ${Array.isArray(data.legacy_records)}, length: ${data.legacy_records?.length}`);
+                    }
                 }
                 
                 if (latestDateStr) {
@@ -229,6 +251,7 @@ async function initLanguage() {
                 }
             } catch (err) {
                 console.warn(`⚠️ Database tarih alınamadı, fallback kullan. Hata: ${err.message}`);
+                console.error(`❌ Full error:`, err);
                 // Fallback: bugünün tarihi (DD.MM.YYYY formatında)
                 const now = new Date();
                 const dd = String(now.getDate()).padStart(2, '0');
