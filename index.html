@@ -89,15 +89,12 @@
                 
                 <!-- 6-Card Grid: 2 input (date + button) + 4 filter buttons -->
                 <div id="dateFilterGrid" class="date-filter-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; align-items: stretch; width: 100%; margin: 0; padding: 0;">
-                    <!-- Card 1: Tarih Input with Calendar Icon (DD.MM.YYYY format) -->
-                    <div style="display: flex; align-items: center; gap: 8px; height: 48px;">
-                        <input type="text" id="selectedDate" placeholder="GG.AA.YYYY" style="flex: 1; padding: 8px 12px; border: 2px solid #ced4da; border-radius: 6px; font-size: 0.9em; box-sizing: border-box; text-align: center; height: 100%; margin: 0;" />
-                        <button onclick="openDatePicker()" style="height: 100%; padding: 8px 12px; background: #17a2b8; color: white; border: 2px solid #17a2b8; border-radius: 6px; cursor: pointer; font-size: 1.2em; display: flex; align-items: center; justify-content: center;">📅</button>
-                    </div>
+                    <!-- Card 1: Tarih Input (Display Only) -->
+                    <input type="text" id="selectedDate" placeholder="GG.AA.YYYY" style="height: 48px; padding: 8px 12px; border: 2px solid #ced4da; border-radius: 6px; font-size: 0.9em; box-sizing: border-box; text-align: center; width: 100%; margin: 0;" readonly />
                     
-                    <!-- Card 2: Tarih Seç Button -->
-                    <button class="btn btn-info quick-btn" id="filterDateBtn" onclick="filterBySelectedDate()">
-                        <span data-i18n="filters.date.select">Tarih Seç</span>
+                    <!-- Card 2: Tarih Seç Button (Opens Calendar & Applies Filter) -->
+                    <button class="btn btn-info quick-btn" id="filterDateBtn" onclick="openDatePicker()">
+                        <span data-i18n="filters.date.select">📅 Tarih Seç</span>
                     </button>
                     
                     <!-- Card 3: Bu Ay -->

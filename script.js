@@ -2384,5 +2384,10 @@ function selectDateFromPicker(date) {
     
     document.getElementById('selectedDate').value = formattedDate;
     closeDatePicker();
+    
+    // Automatically apply filter with selected date
+    setTimeout(() => {
+        filterBySelectedDate();
+    }, 100);
 }
 
