@@ -74,8 +74,8 @@
                 
                 <!-- 6-Card Grid: 2 input (date + button) + 4 filter buttons -->
                 <div id="dateFilterGrid" class="date-filter-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; align-items: stretch; width: 100%; margin: 0; padding: 0;">
-                    <!-- Card 1: Tarih Input -->
-                    <input type="date" id="selectedDate" style="height: 48px; padding: 8px 12px; border: 2px solid #ced4da; border-radius: 6px; font-size: 0.9em; box-sizing: border-box; width: 100%; margin: 0; text-align: center; display: flex; align-items: center; justify-content: center;" />
+                    <!-- Card 1: Tarih Input (DD.MM.YYYY format) -->
+                    <input type="text" id="selectedDate" placeholder="GG.AA.YYYY" style="height: 48px; padding: 8px 12px; border: 2px solid #ced4da; border-radius: 6px; font-size: 0.9em; box-sizing: border-box; width: 100%; margin: 0; text-align: center; display: block; cursor: pointer;" />
                     
                     <!-- Card 2: Tarih Seç Button -->
                     <button class="btn btn-info quick-btn" id="filterDateBtn" onclick="filterBySelectedDate()">

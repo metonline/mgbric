@@ -700,9 +700,16 @@ function filterBySelectedDate() {
         alert('Lütfen bir tarih seçin');
         return;
     }
-    // selectedDate format: YYYY-MM-DD
-    const [year, month, day] = selectedDateInput.value.split('-');
-    const filterDate = `${String(day).padStart(2, '0')}.${String(month).padStart(2, '0')}.${year}`;
+    // selectedDate format: DD.MM.YYYY (e.g., "16.01.2026")
+    const filterDate = selectedDateInput.value.trim();
+    
+    // Validate format
+    const dateRegex = /^\d{2}\.\d{2}\.\d{4}$/;
+    if (!dateRegex.test(filterDate)) {
+        alert('Lütfen tarih formatını GG.AA.YYYY olarak girin (örn: 16.01.2026)');
+        return;
+    }
+    
     console.log(`🔍 Seçilen tarih: ${filterDate}`);
     console.log(`📊 Toplam kayıt: ${allData.length}`);
     const filtered = allData.filter(record => record.Tarih === filterDate);
