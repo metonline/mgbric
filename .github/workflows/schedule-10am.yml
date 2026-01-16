@@ -1,9 +1,9 @@
-name: Database Update - 10:00 AM
+name: Database Update - 10:00 AM (Turkey / 07:00 UTC)
 
 on:
   schedule:
-    # Runs at 10:00 UTC every day
-    - cron: '0 10 * * *'
+    # Runs at 07:00 UTC (10:00 Turkey time)
+    - cron: '0 7 * * *'
   workflow_dispatch:
 
 jobs:
@@ -42,4 +42,4 @@ scheduler.fetch_tournament_hands()
           git config --local user.email 'action@github.com'
           git config --local user.name 'GitHub Action'
           git add database.json
-          git diff --quiet && git diff --staged --quiet || (git commit -m '🤖 Auto-update: Database from Vugraph (10:00)' && git push)
+          git diff --quiet && git diff --staged --quiet || (git commit -m '🤖 Auto-update: Database from Vugraph (10:00 Turkey)' && git push)

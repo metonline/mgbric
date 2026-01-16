@@ -1,9 +1,9 @@
-name: Database Update - Evening (17:00-18:00 every 5 min)
+name: Database Update - Evening (17:00-18:00 Turkey / 14:00-15:00 UTC every 5 min)
 
 on:
   schedule:
-    # Runs every 5 minutes from 17:00 to 17:55 UTC
-    - cron: '0,5,10,15,20,25,30,35,40,45,50,55 17 * * *'
+    # Runs every 5 minutes from 14:00 to 14:55 UTC (17:00-17:55 Turkey time)
+    - cron: '0,5,10,15,20,25,30,35,40,45,50,55 14 * * *'
   workflow_dispatch:
 
 jobs:
@@ -42,4 +42,4 @@ scheduler.fetch_tournament_hands()
           git config --local user.email 'action@github.com'
           git config --local user.name 'GitHub Action'
           git add database.json
-          git diff --quiet && git diff --staged --quiet || (git commit -m '🤖 Auto-update: Database from Vugraph (17:00-18:00)' && git push)
+          git diff --quiet && git diff --staged --quiet || (git commit -m '🤖 Auto-update: Database from Vugraph (17:00 Turkey)' && git push)
