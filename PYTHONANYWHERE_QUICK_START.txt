@@ -1,0 +1,124 @@
+╔════════════════════════════════════════════════════════════════════════════╗
+║                  🚀 BRIC on PythonAnywhere - QUICK START                    ║
+╚════════════════════════════════════════════════════════════════════════════╝
+
+📦 NEW FILES CREATED:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ wsgi.py
+   └─ Entry point for PythonAnywhere (Flask WSGI)
+
+✅ PYTHONANYWHERE_DEPLOY.md
+   └─ Complete deployment guide
+
+✅ setup_pythonanywhere.sh
+   └─ Setup reference script
+
+
+🎯 5-STEP DEPLOYMENT:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+STEP 1️⃣  Sign Up (2 min)
+   → https://www.pythonanywhere.com
+   → Click "Pricing & Sign up"
+   → Sign up with GitHub or email
+   → Verify email
+
+STEP 2️⃣  Create Web App (2 min)
+   → Go to "Web" tab (top menu)
+   → Click "Add a new web app"
+   → Select Python 3.10
+   → Choose: "Flask" (or Manual WSGI)
+
+STEP 3️⃣  Clone Your Repository (1 min)
+   → Click "Consoles" → "Bash console"
+   → Run: git clone https://github.com/metonline/mgbric.git
+   → Run: cd mgbric
+
+STEP 4️⃣  Install Dependencies (2 min)
+   → Still in Bash console:
+   → Run: pip install -r requirements.txt
+
+STEP 5️⃣  Configure & Deploy (1 min)
+   → Go to "Web" tab → Your app name
+   → Source code: /home/YOUR_USERNAME/mgbric
+   → WSGI file: /home/YOUR_USERNAME/mgbric/wsgi.py
+   → Click "Reload"
+   → ✅ Done! Your site is live!
+
+
+🌐 YOUR LIVE URL:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+https://YOUR_USERNAME.pythonanywhere.com/
+
+
+📝 IMPORTANT NOTES:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+⚠️  Replace "YOUR_USERNAME" in wsgi.py with your actual PythonAnywhere username
+
+✅ Free tier includes:
+   • 1 web app
+   • 512MB storage
+   • Python environment
+   • Free SSL certificate
+
+✅ Features:
+   • Flask support (perfect for your webhook_server.py)
+   • Persistent storage for database.json
+   • GitHub webhook integration ready
+   • Scheduled tasks available
+   • Easy to scale to paid tier
+
+
+🔧 CONFIGURATION DETAILS:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Web App Configuration (Web tab → Your App):
+
+Source code:        /home/YOUR_USERNAME/mgbric
+Working directory:  /home/YOUR_USERNAME/mgbric
+WSGI file:          /home/YOUR_USERNAME/mgbric/wsgi.py
+Python version:     3.10
+Virtualenv:         (automatic)
+
+
+🆘 TROUBLESHOOTING:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+502 Bad Gateway?
+  → Check error logs in Web tab
+  → Run: pip install -r requirements.txt
+  → Click "Reload" button
+
+Cannot find module?
+  → Ensure virtualenv is active
+  → Check file permissions
+  → Run pip install again
+
+Database not found?
+  → Ensure database.json exists in /home/YOUR_USERNAME/mgbric/
+  → Check file permissions: chmod 644 database.json
+
+
+📚 DOCUMENTATION:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Read more:
+  • PYTHONANYWHERE_DEPLOY.md - Full deployment guide
+  • https://help.pythonanywhere.com - Official docs
+  • https://help.pythonanywhere.com/pages/Flask - Flask guide
+
+
+✨ NEXT STEP:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. Go to https://www.pythonanywhere.com
+2. Sign up (2 minutes)
+3. Follow the 5-step deployment above
+4. Your site is LIVE! 🎉
+
+═════════════════════════════════════════════════════════════════════════════
+Status: ✅ READY FOR PYTHONANYWHERE | Repository: github.com/metonline/mgbric
+═════════════════════════════════════════════════════════════════════════════
