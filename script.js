@@ -1201,63 +1201,89 @@ document.addEventListener('DOMContentLoaded', function() {
     // Auto-copy temp database if main is empty or invalid
     // Use Flask endpoints for database loading
     function tryLoadDatabase(mainFile, fallbackFile) {
+        // Try new API endpoint first (always fresh data)
+        let apiUrl = './api/data?v=' + Date.now();
         let mainUrl = './database.json?v=' + Date.now();
         let fallbackUrl = './database_temp.json?v=' + Date.now();
-        fetch(mainUrl)
+        
+        // Try API endpoint first
+        fetch(apiUrl)
             .then(response => {
-                if (!response.ok) throw new Error('Veritabanı yüklenemedi');
+                if (!response.ok) throw new Error('API endpoint failed');
                 return response.json();
             })
-            .then(data => {
+            .then(apiData => {
+                // Extract records from API response
+                let data = apiData.records || apiData;
+                
                 if (!Array.isArray(data) || data.length === 0) {
-                    if (fallbackFile) {
-                        document.getElementById('fileInfo').innerHTML = '<span style="color:orange;">⚠️ Veritabanı boş, yedek yükleniyor...</span>';
-                        fetch(fallbackUrl)
-                            .then(r => r.json())
-                            .then(fallbackData => {
-                                if (Array.isArray(fallbackData) && fallbackData.length > 0) {
-                                    allData = fallbackData;
-                                    updateFileInfo();
-                                    databaseReady = true;
-                                    initializePlayerSearch();
-                                    if (queuedModalOpen) {
-                                        openGlobalStatsModal(...queuedModalOpen);
-                                        queuedModalOpen = null;
-                                    }
-                                } else {
-                                    document.getElementById('fileInfo').innerHTML = '<span style="color:red;">❌ Hiçbir veritabanı yüklenemedi. Lütfen database.json veya database_temp.json dosyasını kontrol edin.</span>';
-                                    allData = [];
-                                    databaseReady = false;
-                                }
-                            })
-                            .catch(() => {
-                                document.getElementById('fileInfo').innerHTML = '<span style="color:red;">❌ Hiçbir veritabanı yüklenemedi. Lütfen database.json veya database_temp.json dosyasını kontrol edin.</span>';
-                                allData = [];
-                                databaseReady = false;
-                            });
-                        return;
-                    } else {
-                        document.getElementById('fileInfo').innerHTML = '<span style="color:red;">❌ Hiçbir veritabanı yüklenemedi. Lütfen database.json veya database_temp.json dosyasını kontrol edin.</span>';
-                        allData = [];
-                        databaseReady = false;
-                        return;
-                    }
-                } else {
-                    allData = data;
-                    updateFileInfo();
-                    databaseReady = true;
-                    initializePlayerSearch();
-                    // If a modal open was queued, run it now
-                    if (queuedModalOpen) {
-                        openGlobalStatsModal(...queuedModalOpen);
-                        queuedModalOpen = null;
-                    }
+                    throw new Error('API returned empty data');
+                }
+                
+                allData = data;
+                updateFileInfo();
+                databaseReady = true;
+                initializePlayerSearch();
+                if (queuedModalOpen) {
+                    openGlobalStatsModal(...queuedModalOpen);
+                    queuedModalOpen = null;
                 }
             })
-            .catch(err => {
-                document.getElementById('fileInfo').innerHTML = `<span style='color:red;'>❌ Hiçbir veritabanı yüklenemedi: ${err.message}</span>`;
-                allData = [];
-                databaseReady = false;
+            .catch(apiErr => {
+                // Fall back to direct JSON file
+                console.warn('API endpoint failed, trying direct file:', apiErr.message);
+                fetch(mainUrl)
+                    .then(response => {
+                        if (!response.ok) throw new Error('Database file not found');
+                        return response.json();
+                    })
+                    .then(data => {
+                        if (!Array.isArray(data) || data.length === 0) {
+                            if (fallbackFile) {
+                                document.getElementById('fileInfo').innerHTML = '<span style="color:orange;">⚠️ Veritabanı boş, yedek yükleniyor...</span>';
+                                fetch(fallbackUrl)
+                                    .then(r => r.json())
+                                    .then(fallbackData => {
+                                        if (Array.isArray(fallbackData) && fallbackData.length > 0) {
+                                            allData = fallbackData;
+                                            updateFileInfo();
+                                            databaseReady = true;
+                                            initializePlayerSearch();
+                                            if (queuedModalOpen) {
+                                                openGlobalStatsModal(...queuedModalOpen);
+                                                queuedModalOpen = null;
+                                            }
+                                        } else {
+                                            document.getElementById('fileInfo').innerHTML = '<span style="color:red;">❌ Hiçbir veritabanı yüklenemedi. Lütfen database.json veya database_temp.json dosyasını kontrol edin.</span>';
+                                            allData = [];
+                                            databaseReady = false;
+                                        }
+                                    })
+                                    .catch(() => {
+                                        document.getElementById('fileInfo').innerHTML = '<span style="color:red;">❌ Hiçbir veritabanı yüklenemedi. Lütfen database.json veya database_temp.json dosyasını kontrol edin.</span>';
+                                        allData = [];
+                                        databaseReady = false;
+                                    });
+                                return;
+                            } else {
+                                throw new Error('Database is empty');
+                            }
+                        } else {
+                            allData = data;
+                            updateFileInfo();
+                            databaseReady = true;
+                            initializePlayerSearch();
+                            if (queuedModalOpen) {
+                                openGlobalStatsModal(...queuedModalOpen);
+                                queuedModalOpen = null;
+                            }
+                        }
+                    })
+                    .catch(err => {
+                        document.getElementById('fileInfo').innerHTML = `<span style='color:red;'>❌ Hiçbir veritabanı yüklenemedi: ${err.message}</span>`;
+                        allData = [];
+                        databaseReady = false;
+                    });
             });
     }
     tryLoadDatabase('database.json', 'database_temp.json');

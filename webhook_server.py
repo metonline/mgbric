@@ -246,13 +246,39 @@ def serve_database():
             data = json.load(f)
         
         response = jsonify(data)
-        # Set no-cache headers to force fresh load
-        response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate, max-age=0'
+        # Set aggressively no-cache headers to force fresh load
+        response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate, max-age=0, private'
+        response.headers['Pragma'] = 'no-cache'
+        response.headers['Expires'] = '0'
+        response.headers['ETag'] = None
+        response.headers['Last-Modified'] = datetime.now().isoformat()
+        return response
+    except Exception as e:
+        print(f"[{datetime.now()}] Error serving database.json: {e}")
+        return jsonify({'error': f'Could not load database: {str(e)}'}), 500
+
+@app.route('/api/data', methods=['GET'])
+def serve_database_api():
+    """API endpoint for database - always fresh"""
+    try:
+        db_path = os.path.join(REPO_PATH, 'database.json')
+        # Load fresh from disk every time
+        with open(db_path, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+        
+        response = jsonify({
+            'records': data,
+            'count': len(data),
+            'timestamp': datetime.now().isoformat(),
+            'version': 2
+        })
+        # Set aggressively no-cache headers
+        response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate, max-age=0, private'
         response.headers['Pragma'] = 'no-cache'
         response.headers['Expires'] = '0'
         return response
     except Exception as e:
-        print(f"[{datetime.now()}] Error serving database.json: {e}")
+        print(f"[{datetime.now()}] Error serving API: {e}")
         return jsonify({'error': f'Could not load database: {str(e)}'}), 500
 
 @app.route('/<path:filename>', methods=['GET'])
