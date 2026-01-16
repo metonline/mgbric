@@ -213,6 +213,15 @@ def handle_webhook():
 @app.route('/health', methods=['GET'])
 def health_check():
     """Health check endpoint"""
+    # Force reload database.json to ensure latest data is served
+    import importlib
+    try:
+        db_path = os.path.join(REPO_PATH, 'database.json')
+        with open(db_path, 'r', encoding='utf-8') as f:
+            json.load(f)
+    except Exception as e:
+        print(f"[{datetime.now()}] Warning: Could not load database: {e}")
+    
     return jsonify({
         'status': 'healthy',
         'service': 'GitHub Webhook Server',
