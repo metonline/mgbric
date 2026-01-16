@@ -51,7 +51,9 @@ function formatNumber(num) {
     /**Format number with thousands separator based on current language*/
     // Turkish style: 55.996 (uses periods)
     // English style: 55,996 (uses commas)
-    const separator = currentLanguage === 'tr' ? '.' : ',';
+    // Get language from localStorage to ensure it matches the current UI language
+    const lang = localStorage.getItem('language') || localStorage.getItem('appLanguage') || 'tr';
+    const separator = lang === 'tr' ? '.' : ',';
     return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, separator);
 }
 
