@@ -2293,4 +2293,96 @@ if (document.readyState === 'loading') {
     setupAutoDataRefresh();
 }
 
-console.log('✓ script.js yüklendi - Tüm fonksiyonlar hazır');
+// ===== DATE PICKER CALENDAR =====
+let currentPickerMonth = new Date();
+
+function openDatePicker() {
+    currentPickerMonth = new Date();
+    updateCalendarDisplay();
+    document.getElementById('datePickerModal').style.display = 'flex';
+}
+
+function closeDatePicker() {
+    document.getElementById('datePickerModal').style.display = 'none';
+}
+
+function prevCalendarMonth() {
+    currentPickerMonth.setMonth(currentPickerMonth.getMonth() - 1);
+    updateCalendarDisplay();
+}
+
+function nextCalendarMonth() {
+    currentPickerMonth.setMonth(currentPickerMonth.getMonth() + 1);
+    updateCalendarDisplay();
+}
+
+function updateCalendarDisplay() {
+    const monthNames = ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 
+                       'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'];
+    
+    const year = currentPickerMonth.getFullYear();
+    const month = currentPickerMonth.getMonth();
+    
+    // Update header
+    document.getElementById('calendarMonthYear').textContent = `${monthNames[month]} ${year}`;
+    
+    // Generate calendar grid
+    const firstDay = new Date(year, month, 1);
+    const lastDay = new Date(year, month + 1, 0);
+    const startDate = new Date(firstDay);
+    startDate.setDate(startDate.getDate() - firstDay.getDay());
+    
+    const grid = document.getElementById('calendarGrid');
+    grid.innerHTML = '';
+    
+    // Day headers
+    const dayHeaders = ['Paz', 'Pzt', 'Sal', 'Çar', 'Per', 'Cum', 'Cmt'];
+    dayHeaders.forEach(day => {
+        const header = document.createElement('div');
+        header.textContent = day;
+        header.style.fontWeight = 'bold';
+        header.style.textAlign = 'center';
+        header.style.color = '#666';
+        header.style.fontSize = '0.85em';
+        grid.appendChild(header);
+    });
+    
+    // Generate dates
+    const currentDate = new Date(startDate);
+    for (let i = 0; i < 42; i++) {
+        const day = document.createElement('button');
+        const dateNum = currentDate.getDate();
+        const dateMonth = currentDate.getMonth();
+        
+        day.textContent = dateNum;
+        day.style.padding = '8px';
+        day.style.border = '1px solid #ddd';
+        day.style.borderRadius = '4px';
+        day.style.cursor = 'pointer';
+        day.style.fontSize = '0.9em';
+        day.style.background = '#fff';
+        day.style.color = '#333';
+        
+        if (dateMonth !== month) {
+            day.style.color = '#ccc';
+            day.style.background = '#f5f5f5';
+            day.disabled = true;
+        } else {
+            day.onclick = () => selectDateFromPicker(currentDate);
+        }
+        
+        grid.appendChild(day);
+        currentDate.setDate(currentDate.getDate() + 1);
+    }
+}
+
+function selectDateFromPicker(date) {
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = date.getFullYear();
+    const formattedDate = `${day}.${month}.${year}`;
+    
+    document.getElementById('selectedDate').value = formattedDate;
+    closeDatePicker();
+}
+
