@@ -822,4 +822,21 @@ function closeGlobalStatsModal() {
     currentGlobalPage = 1;
 }
 
+// ===== MODAL NAVIGATION FUNCTIONS =====
+function handleModalPrevClick(event) {
+    if (event) {
+        event.preventDefault();
+        event.stopPropagation();
+    }
+    goToPreviousPage();
+}
+
+function handleModalNextClick(event) {
+    if (event) {
+        event.preventDefault();
+        event.stopPropagation();
+    }
+    goToNextPage();
+}
+
 console.log('✓ script.js yüklendi - Tüm fonksiyonlar hazır');
