@@ -187,13 +187,16 @@ class VugraphDataFetcher:
         
         # Initialize if new format
         if isinstance(data, list):
-            # Convert old format to new
+            # Convert old format to new - PRESERVE OLD DATA!
+            old_records = data  # Save old array
             data = {
                 "version": "2.0",
                 "last_updated": datetime.now().isoformat(),
                 "events": {},
-                "metadata": {"total_tournaments": 0, "total_boards": 0}
+                "metadata": {"total_tournaments": 0, "total_boards": 0},
+                "legacy_records": old_records  # Keep all old records for compatibility
             }
+            print(f"   ℹ️ Converted old format: saved {len(old_records)} legacy records")
         elif not isinstance(data, dict) or 'events' not in data:
             data = {
                 "version": "2.0",

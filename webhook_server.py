@@ -273,22 +273,30 @@ def serve_database_api():
             data = json.load(f)
         
         # Convert to array format for script.js compatibility
-        if isinstance(data, dict) and 'events' in data:
-            # New dict format - extract all records
-            records = []
-            for event_id, event_data in data.get('events', {}).items():
-                if 'results' in event_data:
-                    records.extend(event_data['results'].get('NS', []))
-                    records.extend(event_data['results'].get('EW', []))
-            response_data = records
+        records = []
+        
+        if isinstance(data, dict):
+            # Add legacy records first
+            if 'legacy_records' in data:
+                records.extend(data.get('legacy_records', []))
+                print(f"[{datetime.now()}] Added {len(data['legacy_records'])} legacy records")
+            
+            # Add new records from events
+            if 'events' in data:
+                for event_id, event_data in data.get('events', {}).items():
+                    if 'results' in event_data:
+                        records.extend(event_data['results'].get('NS', []))
+                        records.extend(event_data['results'].get('EW', []))
+                print(f"[{datetime.now()}] Added {len([r for e in data.get('events', {}).values() for r in e.get('results', {}).get('NS', []) + e.get('results', {}).get('EW', [])])} new records from events")
         else:
             # Already array format
-            response_data = data if isinstance(data, list) else []
+            records = data if isinstance(data, list) else []
         
-        response = jsonify(response_data)
+        response = jsonify(records)
         response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate, max-age=0, private'
         response.headers['Pragma'] = 'no-cache'
         response.headers['Expires'] = '0'
+        print(f"[{datetime.now()}] Serving {len(records)} total records via /api/data")
         return response
     except Exception as e:
         print(f"[{datetime.now()}] Error serving API: {e}")
