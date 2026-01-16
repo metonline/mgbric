@@ -266,12 +266,36 @@ def serve_database_api():
         with open(db_path, 'r', encoding='utf-8') as f:
             data = json.load(f)
         
-        response = jsonify({
-            'records': data,
-            'count': len(data),
-            'timestamp': datetime.now().isoformat(),
-            'version': 2
-        })
+        # Handle both old and new database formats
+        if isinstance(data, dict) and 'events' in data:
+            # New format: extract records from events
+            records = []
+            for event_id, event_data in data.get('events', {}).items():
+                if 'results' in event_data:
+                    ns_results = event_data['results'].get('NS', [])
+                    ew_results = event_data['results'].get('EW', [])
+                    records.extend(ns_results)
+                    records.extend(ew_results)
+            
+            response_data = {
+                'records': records,
+                'count': len(records),
+                'events_count': len(data.get('events', {})),
+                'timestamp': datetime.now().isoformat(),
+                'last_updated': data.get('last_updated'),
+                'version': 2
+            }
+        else:
+            # Old format (array of records)
+            records = data if isinstance(data, list) else []
+            response_data = {
+                'records': records,
+                'count': len(records),
+                'timestamp': datetime.now().isoformat(),
+                'version': 1
+            }
+        
+        response = jsonify(response_data)
         # Set aggressively no-cache headers
         response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate, max-age=0, private'
         response.headers['Pragma'] = 'no-cache'
@@ -279,7 +303,7 @@ def serve_database_api():
         return response
     except Exception as e:
         print(f"[{datetime.now()}] Error serving API: {e}")
-        return jsonify({'error': f'Could not load database: {str(e)}'}), 500
+        return jsonify({'error': f'Could not load database: {str(e)}', 'records': []}), 500
 
 @app.route('/<path:filename>', methods=['GET'])
 def serve_static(filename):

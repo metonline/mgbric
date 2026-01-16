@@ -171,6 +171,7 @@ class VugraphDataFetcher:
         """
         Main method: Fetch and add all tournament data for a specific date
         tarih format: "29.12.2025"
+        Now handles new database format (dict with events)
         """
         print(f"\n{'='*60}")
         print(f"Fetching data for: {tarih}")
@@ -184,13 +185,30 @@ class VugraphDataFetcher:
             self.errors.append(f"Failed to load database: {e}")
             return False
         
+        # Initialize if new format
+        if isinstance(data, list):
+            # Convert old format to new
+            data = {
+                "version": "2.0",
+                "last_updated": datetime.now().isoformat(),
+                "events": {},
+                "metadata": {"total_tournaments": 0, "total_boards": 0}
+            }
+        elif not isinstance(data, dict) or 'events' not in data:
+            data = {
+                "version": "2.0",
+                "last_updated": datetime.now().isoformat(),
+                "events": {},
+                "metadata": {"total_tournaments": 0, "total_boards": 0}
+            }
+        
         # Fetch calendar
         print("1. Fetching Vugraph calendar...")
         calendar_html = self.fetch_calendar()
         if not calendar_html:
             return False
         
-        # Parse events (this shows all events, we need to identify which are for this date)
+        # Parse events for this date
         print("2. Parsing calendar events...")
         events = self.parse_calendar_for_date(calendar_html, tarih)
         print(f"   Found {len(events)} total events")
@@ -199,18 +217,10 @@ class VugraphDataFetcher:
             self.errors.append("No events found in calendar")
             return False
         
-        # For practical use, we'll fetch all events found for this specific date
-        # The parse_calendar_for_date now correctly filters by date from calendar grid
-        print("\n3. Fetching tournament data...")
-        
-        if not events:
-            self.errors.append(f"No events found for {tarih} in calendar")
-            return False
-        
+        print(f"\n3. Fetching tournament data...")
         print(f"   Found {len(events)} event(s) for {tarih}")
         
         # Process all events for this date
-        new_records = []
         for event in events:
             print(f"\n   Event {event['id']}: {event['name']}")
             
@@ -224,30 +234,36 @@ class VugraphDataFetcher:
                 ns_count = len([r for r in records if r.get('Direction') == 'NS'])
                 ew_count = len([r for r in records if r.get('Direction') == 'EW'])
                 print(f"   ✓ Parsed {len(records)} records (NS: {ns_count}, EW: {ew_count})")
-                new_records.extend(records)
+                
+                # Store in new format
+                event_key = f"event_{event['id']}"
+                data['events'][event_key] = {
+                    'id': event['id'],
+                    'name': turnuva_name,
+                    'date': tarih,
+                    'results': {
+                        'NS': [r for r in records if r.get('Direction') == 'NS'],
+                        'EW': [r for r in records if r.get('Direction') == 'EW']
+                    }
+                }
+                self.records_added.extend(records)
             else:
                 print(f"   ✗ No records found")
         
-        if not new_records:
+        if not self.records_added:
             self.errors.append("No records could be parsed from any event")
             return False
         
-        # Remove existing records for this date
+        # Update metadata
         print(f"\n4. Updating database...")
-        old_count = len(data)
-        data = [r for r in data if r.get('Tarih') != tarih]
-        removed = old_count - len(data)
-        print(f"   Removed {removed} old records for {tarih}")
-        
-        # Add new records
-        data.extend(new_records)
-        print(f"   Added {len(new_records)} new records")
-        print(f"   Total database now: {len(data)} records")
+        data['last_updated'] = datetime.now().isoformat()
+        data['metadata']['total_tournaments'] = len(data['events'])
         
         # Save database (UTF-8 without BOM)
         try:
             with open(self.DB_FILE, 'w', encoding='utf-8') as f:
                 json.dump(data, f, ensure_ascii=False, indent=2)
+
             print(f"\n   ✓ Database saved successfully")
         except Exception as e:
             self.errors.append(f"Failed to save database: {e}")
