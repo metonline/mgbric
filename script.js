@@ -48,8 +48,11 @@ function getTranslation(keyPath) {
 
 // Dosya bilgisini göster (dil değişiklikleri için dinamik)
 function formatNumber(num) {
-    /**Format number with thousands separator (Turkish style: 55.996)*/
-    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    /**Format number with thousands separator based on current language*/
+    // Turkish style: 55.996 (uses periods)
+    // English style: 55,996 (uses commas)
+    const separator = currentLanguage === 'tr' ? '.' : ',';
+    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, separator);
 }
 
 function updateFileInfo() {
