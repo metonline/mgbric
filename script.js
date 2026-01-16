@@ -212,7 +212,10 @@ async function initLanguage() {
                     const dates = validRecords
                         .map(r => {
                             const [day, month, year] = r.Tarih.split('.');
-                            return { date: new Date(year, month - 1, day), str: r.Tarih };
+                            return { 
+                                date: new Date(parseInt(year), parseInt(month) - 1, parseInt(day)), 
+                                str: r.Tarih 
+                            };
                         })
                         .sort((a, b) => b.date - a.date);
                     
@@ -674,7 +677,7 @@ function loadDatabase(period) {
 
     const parseDate = (dateStr) => {
         const [day, month, year] = dateStr.split('.');
-        return new Date(year, month - 1, day);
+        return new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
     };
 
     const startStr = formatDate(startDate);
@@ -2394,7 +2397,7 @@ function openDatePicker() {
             .filter(r => r.Tarih && /^\d{2}\.\d{2}\.\d{4}$/.test(r.Tarih))
             .map(r => {
                 const [day, month, year] = r.Tarih.split('.');
-                return new Date(year, month - 1, day);
+                return new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
             })
             .sort((a, b) => b - a);  // Sort descending
         
