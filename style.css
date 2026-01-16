@@ -353,13 +353,15 @@ header p {
 
 /* Date input special styling for Grid */
 input[type="date"] {
-    appearance: none;
+    /* appearance: none;
     -webkit-appearance: none;
-    -moz-appearance: none;
+    -moz-appearance: none; */
 }
 
 .input-group input[type="date"]::-webkit-calendar-picker-indicator {
-    display: none;
+    /* display: none; */
+    cursor: pointer;
+    filter: invert(0.5);
 }
 }
 
