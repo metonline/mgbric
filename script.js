@@ -2369,13 +2369,31 @@ function openDatePicker() {
     currentPickerMonth = new Date();
     updateCalendarDisplay();
     
-    // Set today as default
-    const today = new Date();
-    const day = String(today.getDate()).padStart(2, '0');
-    const month = String(today.getMonth() + 1).padStart(2, '0');
-    const year = today.getFullYear();
-    const todayFormatted = `${day}.${month}.${year}`;
-    document.getElementById('selectedDate').value = todayFormatted;
+    // Get latest date from database (not today)
+    let defaultDate = new Date();
+    
+    if (allData && allData.length > 0) {
+        // Find the latest date in database
+        const dates = allData
+            .filter(r => r.Tarih && /^\d{2}\.\d{2}\.\d{4}$/.test(r.Tarih))
+            .map(r => {
+                const [day, month, year] = r.Tarih.split('.');
+                return new Date(year, month - 1, day);
+            })
+            .sort((a, b) => b - a);  // Sort descending
+        
+        if (dates.length > 0) {
+            defaultDate = dates[0];  // Latest date
+            console.log(`📅 Default tarih database'den alındı: ${defaultDate.toLocaleDateString('tr-TR')}`);
+        }
+    }
+    
+    // Set default as latest database date
+    const day = String(defaultDate.getDate()).padStart(2, '0');
+    const month = String(defaultDate.getMonth() + 1).padStart(2, '0');
+    const year = defaultDate.getFullYear();
+    const defaultFormatted = `${day}.${month}.${year}`;
+    document.getElementById('selectedDate').value = defaultFormatted;
     
     document.getElementById('datePickerModal').style.display = 'flex';
 }
