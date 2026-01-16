@@ -1,6 +1,6 @@
 # Fly.io Configuration for BRIC
 
-app = "bric-tournament"
+app = "mgbric"
 primary_region = "ams"  # Amsterdam - closest to Turkey
 
 [build]
