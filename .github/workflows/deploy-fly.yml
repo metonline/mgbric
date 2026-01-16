@@ -11,6 +11,7 @@ on:
       - 'style.css'
       - 'webhook_server.py'
       - '.github/workflows/deploy-fly.yml'
+  workflow_dispatch:  # Allow manual trigger
 
 jobs:
   deploy:
@@ -21,18 +22,27 @@ jobs:
       - name: Setup Fly CLI
         uses: superfly/flyctl-actions/setup@master
       
-      - name: Verify Fly API Token
+      - name: Check Token
         run: |
+          echo "Token length: ${#FLY_API_TOKEN}"
           if [ -z "$FLY_API_TOKEN" ]; then
-            echo "❌ ERROR: FLY_API_TOKEN is not set!"
+            echo "❌ ERROR: FLY_API_TOKEN is empty!"
             exit 1
-          else
-            echo "✓ FLY_API_TOKEN is configured"
           fi
+          echo "✓ Token is set"
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
       
-      - name: Deploy with flyctl
-        run: flyctl deploy --remote-only --app mgbric
+      - name: Auth Status
+        run: flyctl auth whoami
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+        continue-on-error: true
+      
+      - name: Deploy to Fly.io
+        run: |
+          echo "Starting deployment..."
+          flyctl deploy --remote-only --app mgbric -v
+          echo "✓ Deployment completed"
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
