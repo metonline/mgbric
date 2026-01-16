@@ -4,13 +4,6 @@ on:
   push:
     branches:
       - main
-    paths:
-      - 'database.json'
-      - 'index.html'
-      - 'script.js'
-      - 'style.css'
-      - 'webhook_server.py'
-      - '.github/workflows/deploy-fly.yml'
   workflow_dispatch:  # Allow manual trigger
 
 jobs:
