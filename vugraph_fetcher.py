@@ -271,7 +271,19 @@ class VugraphDataFetcher:
         
         # Verify
         print(f"\n5. Verification:")
-        verify = [r for r in data if r.get('Tarih') == tarih]
+        # Handle both old and new format
+        if isinstance(data, dict) and 'events' in data:
+            # New format
+            all_records = []
+            for event_data in data.get('events', {}).values():
+                if 'results' in event_data:
+                    all_records.extend(event_data['results'].get('NS', []))
+                    all_records.extend(event_data['results'].get('EW', []))
+            verify = [r for r in all_records if r.get('Tarih') == tarih]
+        else:
+            # Old format (array) - shouldn't happen but handle it
+            verify = [r for r in data if isinstance(r, dict) and r.get('Tarih') == tarih]
+        
         verify_ns = [r for r in verify if r.get('Direction') == 'NS']
         verify_ew = [r for r in verify if r.get('Direction') == 'EW']
         print(f"   {tarih}: {len(verify)} total records")
