@@ -188,28 +188,26 @@ async function initLanguage() {
                 if (data && data.length > 0) {
                     // Database sonda en yeni tarih var (eski -> yeni sıralanmış)
                     const latestRecord = data[data.length - 1];
-                    const latestDateStr = latestRecord.Tarih; // Format: "02.01.2026"
+                    const latestDateStr = latestRecord.Tarih; // Format: "02.01.2026" (DD.MM.YYYY)
                     
                     if (latestDateStr) {
-                        // DD.MM.YYYY -> YYYY-MM-DD dönüştür
-                        const [day, month, year] = latestDateStr.split('.');
-                        const inputDateValue = `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-                        selectedDateInput.value = inputDateValue;
-                        console.log(`✓ Tarih input'u en son güncelleme tarihine ayarlandı: ${inputDateValue} (${latestDateStr})`);
+                        // Tarih zaten DD.MM.YYYY formatında, direkt kullan
+                        selectedDateInput.value = latestDateStr;
+                        console.log(`✓ Tarih input'u en son güncelleme tarihine ayarlandı: ${latestDateStr}`);
                     }
                 } else {
                     throw new Error('Database boş');
                 }
             } catch (err) {
-                console.warn(`⚠️ Database tarih alınamadı, bugünün bir önceki günü kullan. Hata: ${err.message}`);
-                // Fallback: bugünün bir gün öncesi
+                console.warn(`⚠️ Database tarih alınamadı, fallback kullan. Hata: ${err.message}`);
+                // Fallback: bugünün bir gün öncesi (DD.MM.YYYY formatında)
                 const now = new Date();
                 const yesterday = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 1);
-                const yyyy = yesterday.getFullYear();
-                const mm = String(yesterday.getMonth() + 1).padStart(2, '0');
                 const dd = String(yesterday.getDate()).padStart(2, '0');
-                selectedDateInput.value = `${yyyy}-${mm}-${dd}`;
-                console.log(`✓ Fallback tarih kullanıldı: ${yyyy}-${mm}-${dd}`);
+                const mm = String(yesterday.getMonth() + 1).padStart(2, '0');
+                const yyyy = yesterday.getFullYear();
+                selectedDateInput.value = `${dd}.${mm}.${yyyy}`;
+                console.log(`✓ Fallback tarih kullanıldı: ${dd}.${mm}.${yyyy}`);
             }
         }
         
