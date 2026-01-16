@@ -1316,13 +1316,6 @@ document.addEventListener('DOMContentLoaded', function() {
                             queuedModalOpen = null;
                         }
                     })
-                            initializePlayerSearch();
-                            if (queuedModalOpen) {
-                                openGlobalStatsModal(...queuedModalOpen);
-                                queuedModalOpen = null;
-                            }
-                        }
-                    })
                     .catch(err => {
                         document.getElementById('fileInfo').innerHTML = `<span style='color:red;'>❌ Hiçbir veritabanı yüklenemedi: ${err.message}</span>`;
                         allData = [];
