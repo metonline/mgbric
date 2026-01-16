@@ -1,4 +1,4 @@
-// Script version for cache busting - v378
+// Script version for cache busting - v379
 const SCRIPT_VERSION = '377';
 
 // ===== DİL SISTEMI (i18n) =====
@@ -188,67 +188,6 @@ async function initLanguage() {
         await new Promise(resolve => setTimeout(resolve, 100)); // Kısa delay
         switchLanguage(currentLanguage);
         
-        // Tarih input'unun default değerini en son veri güncelleme tarihine ayarla
-        const selectedDateInput = document.getElementById('selectedDate');
-        if (selectedDateInput) {
-            try {
-                // Wait for allData to be ready (max 5 seconds)
-                let attempts = 0;
-                while (!databaseReady || !allData || allData.length === 0) {
-                    await new Promise(resolve => setTimeout(resolve, 100));
-                    attempts++;
-                    if (attempts > 50) {
-                        throw new Error('allData yükleme timeout - 5 saniye beklendi');
-                    }
-                }
-                
-                console.log(`📊 allData hazır: ${allData.length} kayıt`);
-                
-                // Extract all valid dates and find max
-                const validRecords = allData.filter(r => r.Tarih && /^\d{2}\.\d{2}\.\d{4}$/.test(r.Tarih));
-                console.log(`📅 Geçerli tarih kaydı: ${validRecords.length}`);
-                
-                if (validRecords.length > 0) {
-                    const dates = validRecords
-                        .map(r => {
-                            const [day, month, year] = r.Tarih.split('.');
-                            const parsedDate = new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
-                            return { 
-                                date: parsedDate,
-                                str: r.Tarih,
-                                parsed: `${parseInt(year)}-${String(parseInt(month)).padStart(2, '0')}-${String(parseInt(day)).padStart(2, '0')}`
-                            };
-                        })
-                        .sort((a, b) => b.date - a.date);
-                    
-                    // Debug: Show first 10 dates
-                    console.log(`📍 İlk 10 tarih (sorted DESC):`);
-                    dates.slice(0, 10).forEach((d, i) => {
-                        console.log(`   ${i+1}. ${d.str} → JS: ${d.date.toISOString()}`);
-                    });
-                    
-                    if (dates.length > 0) {
-                        const latestDateStr = dates[0].str;
-                        const latestDateObj = dates[0].date;
-                        console.log(`🎯 MAX DATE: ${latestDateStr} (JS: ${latestDateObj.toISOString()})`);
-                        selectedDateInput.value = latestDateStr;
-                        console.log(`✓ Input'a set: ${selectedDateInput.value}`);
-                        console.log(`✓ Tarih input'u en son güncelleme tarihine ayarlandı: ${latestDateStr}`);
-                    }
-                } else {
-                    throw new Error('allData içinde geçerli tarih bulunmadı');
-                }
-            } catch (err) {
-                console.warn(`⚠️ Tarih alınamadı, fallback kullan. Hata: ${err.message}`);
-                // Fallback: bugünün tarihi (DD.MM.YYYY formatında)
-                const now = new Date();
-                const dd = String(now.getDate()).padStart(2, '0');
-                const mm = String(now.getMonth() + 1).padStart(2, '0');
-                const yyyy = now.getFullYear();
-                selectedDateInput.value = `${dd}.${mm}.${yyyy}`;
-                console.log(`✓ Fallback tarih kullanıldı: ${dd}.${mm}.${yyyy}`);
-            }
-        }
         
         console.log(`✓ Dil sistemi başarıyla başlatıldı`);
     } catch (e) {
@@ -2399,7 +2338,36 @@ function openDatePicker() {
     currentPickerMonth.setHours(12, 0, 0, 0);  // Avoid timezone issues
     updateCalendarDisplay();
     
-    // Get latest date from database (not today)
+    // Ensure selectedDate input has a default value (latest database date)
+    const selectedDateInput = document.getElementById('selectedDate');
+    if (selectedDateInput && !selectedDateInput.value) {
+        console.log(`🔍 selectedDate input boş, max tarih set ediliyor...`);
+        
+        // Get latest date from database (not today)
+        if (allData && allData.length > 0) {
+            // Find the latest date in database
+            const dates = allData
+                .filter(r => r.Tarih && /^\d{2}\.\d{2}\.\d{4}$/.test(r.Tarih))
+                .map(r => {
+                    const [day, month, year] = r.Tarih.split('.');
+                    return { 
+                        date: new Date(parseInt(year), parseInt(month) - 1, parseInt(day)),
+                        str: r.Tarih 
+                    };
+                })
+                .sort((a, b) => b.date - a.date);
+            
+            if (dates.length > 0) {
+                const latestDateStr = dates[0].str;
+                selectedDateInput.value = latestDateStr;
+                console.log(`✓ selectedDate'a max tarih set: ${latestDateStr}`);
+            }
+        } else {
+            console.warn(`⚠️ allData boş veya yüklenmemiş`);
+        }
+    }
+    
+    // Get latest date from database (for calendar month)
     let defaultDate = new Date();
     
     if (allData && allData.length > 0) {
