@@ -1,5 +1,5 @@
 // Script version for cache busting - v379
-const SCRIPT_VERSION = '377';
+const SCRIPT_VERSION = '379';
 
 // ===== DİL SISTEMI (i18n) =====
 let translations = {};
