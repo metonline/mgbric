@@ -18,10 +18,21 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       
-      - name: Deploy to Fly.io
+      - name: Setup Fly CLI
         uses: superfly/flyctl-actions/setup@master
       
+      - name: Verify Fly API Token
+        run: |
+          if [ -z "$FLY_API_TOKEN" ]; then
+            echo "❌ ERROR: FLY_API_TOKEN is not set!"
+            exit 1
+          else
+            echo "✓ FLY_API_TOKEN is configured"
+          fi
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+      
       - name: Deploy with flyctl
-        run: flyctl deploy --remote-only
+        run: flyctl deploy --remote-only --app mgbric
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
