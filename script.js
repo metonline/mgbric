@@ -2423,3 +2423,80 @@ function selectDateFromPicker(date) {
     }, 100);
 }
 
+// ========== HANDS VIEWER ==========
+function openHandsViewer(tournamentName) {
+    const filteredResults = filterResults(database, 
+        currentFilter.date || '', 
+        currentFilter.tournament || tournamentName,
+        currentFilter.player || '',
+        currentFilter.minScore || 0,
+        currentFilter.maxScore || 100
+    );
+    
+    if (!filteredResults || filteredResults.length === 0) {
+        alert(i18n[currentLanguage].noResults || 'No results found');
+        return;
+    }
+    
+    const firstRecord = filteredResults[0];
+    if (!firstRecord.Hands) {
+        alert(i18n[currentLanguage].noHands || 'Hands not available for this tournament');
+        return;
+    }
+    
+    showHandsModal(firstRecord.Hands, firstRecord.Turnuva);
+}
+
+function showHandsModal(hands, tournamentName) {
+    let modal = document.getElementById('handsModal');
+    if (!modal) {
+        modal = document.createElement('div');
+        modal.id = 'handsModal';
+        modal.className = 'modal';
+        modal.innerHTML = `
+            <div class="modal-content" style="width: 95%; max-width: 1000px; max-height: 90vh; overflow-y: auto;">
+                <span class="close" onclick="closeHandsModal()">&times;</span>
+                <h2 id="handsTitle"></h2>
+                <div id="handsGrid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-top: 20px;"></div>
+            </div>
+        `;
+        document.body.appendChild(modal);
+    }
+    
+    document.getElementById('handsTitle').textContent = tournamentName + ' - ' + (i18n[currentLanguage].hands || 'Hands');
+    const grid = document.getElementById('handsGrid');
+    grid.innerHTML = '';
+    
+    // Display hands for each board
+    for (const [boardNum, boardHands] of Object.entries(hands)) {
+        const boardDiv = document.createElement('div');
+        boardDiv.className = 'board-card';
+        boardDiv.style.cssText = `
+            border: 2px solid #1e3c72;
+            border-radius: 8px;
+            padding: 15px;
+            background: #f8f9fa;
+            font-size: 12px;
+            font-family: monospace;
+        `;
+        
+        let handsHTML = `<strong>Board ${boardNum}</strong><br><br>`;
+        for (const [direction, suit] of Object.entries(boardHands)) {
+            let dirName = {N: 'North', S: 'South', E: 'East', W: 'West'}[direction];
+            let cards = suit.S + ' ' + suit.H + ' ' + suit.D + ' ' + suit.C;
+            handsHTML += `<div><strong>${dirName}:</strong> ${cards}</div>`;
+        }
+        
+        boardDiv.innerHTML = handsHTML;
+        grid.appendChild(boardDiv);
+    }
+    
+    modal.style.display = 'block';
+}
+
+function closeHandsModal() {
+    const modal = document.getElementById('handsModal');
+    if (modal) {
+        modal.style.display = 'none';
+    }
+}
