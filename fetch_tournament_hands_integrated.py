@@ -65,6 +65,7 @@ def fetch_hands_for_event(event_id, num_boards=30):
     Returns: {'1': {'N': {...}, 'E': {...}, 'S': {...}, 'W': {...}}, '2': {...}, ...}
     """
     hands_by_board = {}
+    failed_boards = []
     
     print(f"  Fetching hands for event {event_id}...")
     
@@ -109,9 +110,52 @@ def fetch_hands_for_event(event_id, num_boards=30):
             time.sleep(0.5)
             
         except Exception as e:
-            print(f"    Board {board_num}: Error - {str(e)[:50]}")
+            error_msg = str(e)[:50]
+            print(f"    Board {board_num}: Error - {error_msg}")
+            failed_boards.append(board_num)
             time.sleep(0.5)
             continue
+    
+    # Retry failed boards once
+    if failed_boards:
+        print(f"  Retrying {len(failed_boards)} failed boards...")
+        for board_num in failed_boards:
+            try:
+                url = f"https://clubs.vugraph.com/hosgoru/boardsummary.php?event={event_id}&board={board_num}"
+                response = requests.get(url, timeout=8)
+                response.encoding = 'utf-8'
+                soup = BeautifulSoup(response.content, 'html.parser')
+                
+                board_text = soup.get_text()
+                
+                hands = {}
+                for direction in ['North', 'South', 'East', 'West']:
+                    patterns = [
+                        rf"{direction}\s*[:\s]+([AKQJT2-9]*(?:\s+[AKQJT2-9]*)*)",
+                        rf"{direction.lower()}.*?[:\s]+([AKQJT2-9]+)",
+                    ]
+                    
+                    hand_found = None
+                    for pattern in patterns:
+                        match = re.search(pattern, board_text, re.IGNORECASE)
+                        if match:
+                            hand_found = match.group(1)
+                            break
+                    
+                    if hand_found:
+                        hands[direction[0]] = parse_hand_string(hand_found)
+                    else:
+                        hands[direction[0]] = {'S': '', 'H': '', 'D': '', 'C': ''}
+                
+                if any(hands.values()):
+                    hands_by_board[str(board_num)] = hands
+                    print(f"    Board {board_num}: Retry OK")
+                
+                time.sleep(0.5)
+            except Exception as e:
+                print(f"    Board {board_num}: Retry failed")
+                time.sleep(0.5)
+                continue
     
     return hands_by_board if hands_by_board else None
 
