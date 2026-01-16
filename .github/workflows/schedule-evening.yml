@@ -1,9 +1,10 @@
-name: Database Update - Evening (17:00-18:00 Turkey / 14:00-15:00 UTC every 5 min)
+name: Database Update - Evening (17:00-18:30 Turkey / 14:00-15:30 UTC every 5 min)
 
 on:
   schedule:
-    # Runs every 5 minutes from 14:00 to 14:55 UTC (17:00-17:55 Turkey time)
+    # Runs every 5 minutes from 14:00 to 15:30 UTC (17:00-18:30 Turkey time)
     - cron: '0,5,10,15,20,25,30,35,40,45,50,55 14 * * *'
+    - cron: '0,5,10,15,20,25,30 15 * * *'
   workflow_dispatch:
 
 jobs:
