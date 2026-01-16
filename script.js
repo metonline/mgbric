@@ -2299,6 +2299,15 @@ let currentPickerMonth = new Date();
 function openDatePicker() {
     currentPickerMonth = new Date();
     updateCalendarDisplay();
+    
+    // Set today as default
+    const today = new Date();
+    const day = String(today.getDate()).padStart(2, '0');
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const year = today.getFullYear();
+    const todayFormatted = `${day}.${month}.${year}`;
+    document.getElementById('selectedDate').value = todayFormatted;
+    
     document.getElementById('datePickerModal').style.display = 'flex';
 }
 
@@ -2349,6 +2358,9 @@ function updateCalendarDisplay() {
     
     // Generate dates
     const currentDate = new Date(startDate);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    
     for (let i = 0; i < 42; i++) {
         const day = document.createElement('button');
         const dateNum = currentDate.getDate();
@@ -2362,11 +2374,25 @@ function updateCalendarDisplay() {
         day.style.fontSize = '0.9em';
         day.style.background = '#fff';
         day.style.color = '#333';
+        day.style.fontWeight = 'normal';
+        
+        // Check if this is today
+        const dateToCheck = new Date(currentDate);
+        dateToCheck.setHours(0, 0, 0, 0);
+        const isToday = dateToCheck.getTime() === today.getTime();
         
         if (dateMonth !== month) {
             day.style.color = '#ccc';
             day.style.background = '#f5f5f5';
             day.disabled = true;
+        } else if (isToday) {
+            // Highlight today distinctly
+            day.style.background = '#28a745';
+            day.style.color = 'white';
+            day.style.fontWeight = 'bold';
+            day.style.border = '2px solid #1e7e34';
+            day.style.boxShadow = '0 0 8px rgba(40, 167, 69, 0.5)';
+            day.onclick = () => selectDateFromPicker(currentDate);
         } else {
             day.onclick = () => selectDateFromPicker(currentDate);
         }
