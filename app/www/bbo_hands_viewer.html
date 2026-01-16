@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BBO Format Hands Viewer - Tournament Boards</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: #333;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+
+        .header h1 {
+            color: #1e3c72;
+            margin-bottom: 10px;
+            font-size: 24px;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .controls {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+
+        .board-selector {
+            display: grid;
+            grid-template-columns: repeat(10, 1fr);
+            gap: 5px;
+            margin: 10px 0;
+        }
+
+        .board-btn {
+            padding: 8px;
+            border: 2px solid #1e3c72;
+            background: white;
+            color: #1e3c72;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .board-btn:hover {
+            background: #1e3c72;
+            color: white;
+        }
+
+        .board-btn.active {
+            background: #ff6b35;
+            color: white;
+            border-color: #ff6b35;
+        }
+
+        /* Responsive Grid Layout */
+        .hands-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        /* Tablet: 2 per row */
+        @media (min-width: 768px) and (max-width: 1024px) {
+            .hands-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Desktop: 3 per row */
+        @media (min-width: 1025px) {
+            .hands-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        /* BBO Hand Card */
+        .hand-card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .hand-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+
+        .board-header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 12px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+        }
+
+        .board-number {
+            font-size: 18px;
+        }
+
+        .board-dealer {
+            background: rgba(255,255,255,0.3);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+
+        .hand-display {
+            padding: 16px;
+            background: #f5f5f5;
+        }
+
+        .player-section {
+            margin-bottom: 14px;
+        }
+
+        .player-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .player-name {
+            font-weight: bold;
+            color: #1e3c72;
+            font-size: 12px;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* BBO-style hand display */
+        .hand-row {
+            display: flex;
+            gap: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            margin-bottom: 4px;
+        }
+
+        .suit-symbol {
+            width: 16px;
+            height: 16px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            border-radius: 2px;
+            font-size: 12px;
+        }
+
+        .suit-s { background: #000; } /* Spades - Black */
+        .suit-h { background: #c41e3a; } /* Hearts - Red */
+        .suit-d { background: #c41e3a; } /* Diamonds - Red */
+        .suit-c { background: #000; } /* Clubs - Black */
+
+        .cards {
+            font-weight: bold;
+            letter-spacing: 1px;
+            min-width: 60px;
+        }
+
+        .void {
+            color: #999;
+            font-style: italic;
+        }
+
+        .dd-table-section {
+            background: #fff;
+            border-top: 2px solid #1e3c72;
+            padding: 12px 16px;
+        }
+
+        .dd-title {
+            font-weight: bold;
+            color: #1e3c72;
+            font-size: 11px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+        }
+
+        .dd-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 11px;
+        }
+
+        .dd-table th {
+            background: #1e3c72;
+            color: white;
+            padding: 4px;
+            text-align: center;
+            font-weight: bold;
+            border: 1px solid #1e3c72;
+        }
+
+        .dd-table td {
+            padding: 4px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        .dd-table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+
+        .dd-suit-label {
+            background: #f0f0f0;
+            font-weight: bold;
+            color: #1e3c72;
+        }
+
+        .dd-value {
+            font-weight: bold;
+        }
+
+        .dd-value-high {
+            color: #27ae60;
+        }
+
+        .dd-value-low {
+            color: #c41e3a;
+        }
+
+        /* Stats Footer */
+        .card-stats {
+            background: #f0f0f0;
+            padding: 8px 16px;
+            font-size: 10px;
+            color: #666;
+            border-top: 1px solid #ddd;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: white;
+            font-size: 18px;
+        }
+
+        .error {
+            background: #c41e3a;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        /* Mobile optimization */
+        @media (max-width: 767px) {
+            .controls {
+                flex-direction: column;
+            }
+
+            .board-selector {
+                grid-template-columns: repeat(5, 1fr);
+            }
+
+            .header h1 {
+                font-size: 20px;
+            }
+
+            .board-header {
+                font-size: 14px;
+            }
+
+            .hand-row {
+                font-size: 12px;
+            }
+
+            .dd-table {
+                font-size: 10px;
+            }
+
+            .dd-table td, .dd-table th {
+                padding: 3px;
+            }
+        }
+
+        .view-toggle {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .view-btn {
+            padding: 8px 16px;
+            border: 2px solid #1e3c72;
+            background: white;
+            color: #1e3c72;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .view-btn.active {
+            background: #1e3c72;
+            color: white;
+        }
+
+        .view-btn:hover {
+            background: #1e3c72;
+            color: white;
+        }
+
+        .export-btns {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .export-btn {
+            padding: 8px 16px;
+            background: #27ae60;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .export-btn:hover {
+            background: #229954;
+        }
+
+        .no-hands {
+            text-align: center;
+            padding: 20px;
+            color: #999;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎴 BBO Format - Tournament Hands Viewer</h1>
+            <p>PAZAR SİMULTANE Tournament (Event #404377) • All 30 Boards</p>
+            
+            <div class="view-toggle">
+                <button class="view-btn active" onclick="setView('all')">📋 All Boards</button>
+                <button class="view-btn" onclick="setView('single')">📄 Single Board</button>
+            </div>
+
+            <div id="single-board-selector" style="display: none; margin-top: 10px;">
+                <label for="boardSelect">Select Board:</label>
+                <select id="boardSelect" onchange="showBoard(this.value)" style="margin-left: 10px; padding: 8px; border: 2px solid #1e3c72; border-radius: 4px;">
+                    <option value="">Choose a board...</option>
+                </select>
+            </div>
+
+            <div class="board-selector" id="boardSelector">
+                <!-- Generated by JavaScript -->
+            </div>
+
+            <div class="export-btns">
+                <button class="export-btn" onclick="exportAsJSON()">📥 Export as JSON</button>
+                <button class="export-btn" onclick="exportAsCSV()">📊 Export as CSV</button>
+                <button class="export-btn" onclick="printView()">🖨️ Print All</button>
+            </div>
+        </div>
+
+        <div id="loading" class="loading">Loading hands database...</div>
+
+        <div id="error" class="error" style="display: none;"></div>
+
+        <div id="hands-container" class="hands-grid" style="display: none;">
+            <!-- Generated by JavaScript -->
+        </div>
+    </div>
+
+    <script>
+        let allBoards = {};
+        let currentView = 'all';
+
+        // Load hands database
+        async function loadDatabase() {
+            try {
+                const response = await fetch('/hands_database.json?v=' + Date.now());
+                if (!response.ok) throw new Error('Failed to load database');
+                
+                const data = await response.json();
+                
+                // Handle both simple and nested formats
+                if (data.events) {
+                    // Nested format from previous scripts
+                    allBoards = data.events['hosgoru_04_01_2026'].boards;
+                } else {
+                    // Simple format from direct fetch
+                    allBoards = data;
+                }
+                
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('hands-container').style.display = 'grid';
+                
+                initializeUI();
+                displayAllBoards();
+                
+            } catch (error) {
+                showError('Failed to load hands database: ' + error.message);
+            }
+        }
+
+        function initializeUI() {
+            const selector = document.getElementById('boardSelector');
+            const selectBox = document.getElementById('boardSelect');
+            
+            for (let i = 1; i <= 30; i++) {
+                // Board selector buttons
+                const btn = document.createElement('button');
+                btn.className = 'board-btn';
+                btn.textContent = i;
+                btn.onclick = () => showBoard(i);
+                selector.appendChild(btn);
+                
+                // Select dropdown
+                const option = document.createElement('option');
+                option.value = i;
+                option.textContent = `Board ${i}`;
+                selectBox.appendChild(option);
+            }
+            
+            updateBoardButtons(1);
+        }
+
+        function setView(view) {
+            currentView = view;
+            document.querySelectorAll('.view-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            if (view === 'single') {
+                document.getElementById('single-board-selector').style.display = 'block';
+                document.getElementById('boardSelector').style.display = 'none';
+                showBoard(document.getElementById('boardSelect').value || 1);
+            } else {
+                document.getElementById('single-board-selector').style.display = 'none';
+                document.getElementById('boardSelector').style.display = 'grid';
+                displayAllBoards();
+            }
+        }
+
+        function showBoard(boardNum) {
+            currentView = 'single';
+            document.querySelectorAll('.view-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.view-btn')[1].classList.add('active');
+            document.getElementById('single-board-selector').style.display = 'block';
+            document.getElementById('boardSelector').style.display = 'none';
+            
+            document.getElementById('boardSelect').value = boardNum;
+            
+            const container = document.getElementById('hands-container');
+            container.innerHTML = '';
+            
+            const boardData = getBoard(boardNum);
+            if (boardData) {
+                container.appendChild(createBoardCard(boardNum, boardData));
+            }
+            
+            updateBoardButtons(boardNum);
+        }
+
+        function displayAllBoards() {
+            const container = document.getElementById('hands-container');
+            container.innerHTML = '';
+            
+            for (let i = 1; i <= 30; i++) {
+                const boardData = getBoard(i);
+                if (boardData) {
+                    container.appendChild(createBoardCard(i, boardData));
+                }
+            }
+        }
+
+        function getBoard(boardNum) {
+            const boardStr = String(boardNum);
+            const board = allBoards[boardStr];
+            
+            if (!board) return null;
+            
+            // Handle both formats
+            if (board.hands) {
+                return board;
+            } else {
+                // Simple format: N, S, E, W keys
+                return {
+                    hands: {
+                        'North': board.N || {},
+                        'South': board.S || {},
+                        'East': board.E || {},
+                        'West': board.W || {}
+                    },
+                    dd_analysis: board.dd_analysis || {},
+                    dealer: board.dealer || 'N',
+                    vulnerability: board.vulnerability || 'None'
+                };
+            }
+        }
+
+        function createBoardCard(boardNum, boardData) {
+            const card = document.createElement('div');
+            card.className = 'hand-card';
+            
+            const dealer = boardData.dealer || 'N';
+            const dealerLabels = { 'N': 'North', 'E': 'East', 'S': 'South', 'W': 'West' };
+            
+            let html = `
+                <div class="board-header">
+                    <span class="board-number">Board ${boardNum}</span>
+                    <span class="board-dealer">Dealer: ${dealerLabels[dealer] || dealer}</span>
+                </div>
+                <div class="hand-display">
+            `;
+            
+            const hands = boardData.hands;
+            const playerOrder = ['North', 'South', 'East', 'West'];
+            
+            for (const player of playerOrder) {
+                const hand = hands[player] || {};
+                html += `
+                    <div class="player-section">
+                        <div class="player-name">${player}</div>
+                `;
+                
+                const suits = ['S', 'H', 'D', 'C'];
+                const suitNames = { 'S': 'Spades', 'H': 'Hearts', 'D': 'Diamonds', 'C': 'Clubs' };
+                const suitClasses = { 'S': 'suit-s', 'H': 'suit-h', 'D': 'suit-d', 'C': 'suit-c' };
+                
+                for (const suit of suits) {
+                    const cards = hand[suit] || '-';
+                    const isEmpty = cards === '-' || cards === '';
+                    
+                    html += `
+                        <div class="hand-row">
+                            <span class="suit-symbol ${suitClasses[suit]}">${suit}</span>
+                            <span class="cards ${isEmpty ? 'void' : ''}">${cards === '' || cards === '-' ? '—' : cards}</span>
+                        </div>
+                    `;
+                }
+                
+                html += `</div>`;
+            }
+            
+            html += `</div>`;
+            
+            // Add DD Table
+            if (boardData.dd_analysis && Object.keys(boardData.dd_analysis).length > 0) {
+                html += createDDTable(boardData.dd_analysis);
+            }
+            
+            // Stats footer
+            html += `
+                <div class="card-stats">
+                    <span>📊 Double Dummy Analysis Included</span>
+                    <span>🎴 Board ${boardNum}</span>
+                </div>
+            `;
+            
+            card.innerHTML = html;
+            return card;
+        }
+
+        function createDDTable(ddAnalysis) {
+            let html = `
+                <div class="dd-table-section">
+                    <div class="dd-title">Double Dummy Tricks (6-13)</div>
+                    <table class="dd-table">
+                        <thead>
+                            <tr>
+                                <th>Suit</th>
+                                <th>N</th>
+                                <th>S</th>
+                                <th>E</th>
+                                <th>W</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+            `;
+            
+            const suits = ['NT', 'S', 'H', 'D', 'C'];
+            
+            for (const suit of suits) {
+                html += `<tr><td class="dd-suit-label">${suit}</td>`;
+                
+                for (const player of ['N', 'S', 'E', 'W']) {
+                    const key = `${suit}${player}`;
+                    const value = ddAnalysis[key] || '-';
+                    const valueClass = value > 8 ? 'dd-value-high' : value < 7 ? 'dd-value-low' : '';
+                    
+                    html += `<td class="dd-value ${valueClass}">${value}</td>`;
+                }
+                
+                html += `</tr>`;
+            }
+            
+            html += `
+                        </tbody>
+                    </table>
+                </div>
+            `;
+            
+            return html;
+        }
+
+        function updateBoardButtons(activeBoard) {
+            document.querySelectorAll('.board-btn').forEach((btn, idx) => {
+                btn.classList.remove('active');
+                if (idx + 1 === parseInt(activeBoard)) {
+                    btn.classList.add('active');
+                }
+            });
+        }
+
+        function showError(message) {
+            document.getElementById('loading').style.display = 'none';
+            const errorDiv = document.getElementById('error');
+            errorDiv.textContent = '❌ ' + message;
+            errorDiv.style.display = 'block';
+        }
+
+        function exportAsJSON() {
+            const dataStr = JSON.stringify(allBoards, null, 2);
+            const dataBlob = new Blob([dataStr], {type: 'application/json'});
+            downloadFile(dataBlob, 'tournament_boards.json');
+        }
+
+        function exportAsCSV() {
+            let csv = 'Board,Player,Spades,Hearts,Diamonds,Clubs\n';
+            
+            for (let i = 1; i <= 30; i++) {
+                const board = getBoard(i);
+                if (board) {
+                    for (const [player, hand] of Object.entries(board.hands)) {
+                        csv += `${i},${player},${hand.S || '-'},${hand.H || '-'},${hand.D || '-'},${hand.C || '-'}\n`;
+                    }
+                }
+            }
+            
+            const dataBlob = new Blob([csv], {type: 'text/csv'});
+            downloadFile(dataBlob, 'tournament_boards.csv');
+        }
+
+        function downloadFile(blob, filename) {
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = filename;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+        }
+
+        function printView() {
+            window.print();
+        }
+
+        // Load on page load
+        window.addEventListener('load', loadDatabase);
+    </script>
+</body>
+</html>

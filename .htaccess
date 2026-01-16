@@ -1,3 +1,6 @@
+# PHP handling
+AddType application/x-httpd-php .php
+
 # Cache kontrol - HTML dosyaları cache'lenmesin
 <FilesMatch "\.html?$">
     Header set Cache-Control "no-cache, no-store, must-revalidate, max-age=0"

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Modal Test</title>
+</head>
+<body>
+    <h1>2-Sayfa Modal Test</h1>
+    <p>Aşağıdaki butonları tıkla ve konsolda (F12) çıkıyı gözle.</p>
+    
+    <button onclick="testCurrentMonth()">Test "Bu Ay"</button>
+    <button onclick="testCurrentYear()">Test "Bu Yıl"</button>
+    <button onclick="testLast3Years()">Test "Son 3 Yıl"</button>
+    <button onclick="testSince2020()">Test "2020'den Beri"</button>
+    <button onclick="checkModalDisplay()">Modal Display Kontrolü</button>
+    <button onclick="closeGlobalRangeModal()">Modal Kapat</button>
+    
+    <script>
+        function testCurrentMonth() {
+            console.log('=== Test: Bu Ay ===');
+            console.log('Calling setDateRangeFilter("currentMonth")...');
+            setDateRangeFilter('currentMonth', null);
+        }
+        
+        function testCurrentYear() {
+            console.log('=== Test: Bu Yıl ===');
+            console.log('Calling setDateRangeFilter("currentYear")...');
+            setDateRangeFilter('currentYear', null);
+        }
+        
+        function testLast3Years() {
+            console.log('=== Test: Son 3 Yıl ===');
+            console.log('Calling setDateRangeFilter("last3Years")...');
+            setDateRangeFilter('last3Years', null);
+        }
+        
+        function testSince2020() {
+            console.log('=== Test: 2020\'den Beri ===');
+            console.log('Calling setDateRangeFilter("since2020")...');
+            setDateRangeFilter('since2020', null);
+        }
+        
+        function checkModalDisplay() {
+            const modal = document.getElementById('globalRangeModal');
+            const content = document.getElementById('rangeModalContent');
+            const title = document.getElementById('rangeModalTitle');
+            
+            console.log('Modal display:', modal ? modal.style.display : 'NOT FOUND');
+            console.log('Modal content:', content ? content.innerHTML.substring(0, 100) : 'NOT FOUND');
+            console.log('Modal title:', title ? title.textContent : 'NOT FOUND');
+            console.log('window.globalRangeData:', window.globalRangeData ? window.globalRangeData.length + ' records' : 'NOT SET');
+            console.log('window.currentRangeTab:', window.currentRangeTab || 'NOT SET');
+        }
+    </script>
+</body>
+</html>

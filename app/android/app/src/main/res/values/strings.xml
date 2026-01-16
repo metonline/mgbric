@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Briç Turnuva Analizi</string>
+    <string name="title_activity_main">Briç Turnuva Analizi</string>
+    <string name="package_name">com.hosgoru.turnuva</string>
+    <string name="custom_url_scheme">com.hosgoru.turnuva</string>
+</resources>

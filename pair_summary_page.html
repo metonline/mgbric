@@ -1,0 +1,97 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+<title>Vugraph Briç Kulüpleri İçin Turnuva Sonuçları Yayınlama Sistemi: </title>
+<meta name="author" content="Güray Sunamak">
+<meta name="generator" content="Vi IMproved 6.4">
+<meta name="copyright" content="© 2006 Odeva Internet Teknolojileri">
+<meta name="keywords" content="Vugraph, Bridge, Club, Vugraph Bridge Club, Bridge Club, Tournament, Bridge Tournament, Tournament Result, Briç, Kulüp, Vugraf, Vugraf Briç Kulübü, Vugraph Briç Kulübü, Briç Kulübü, Turnuva, Briç Turnuvası, Turnuva Sonuçları, Vugraph Briç Kulüpleri İçin Turnuva Sonuçları Yayınlama Sistemi">
+<meta name="description" content="Vugraph Briç Kulüpleri İçin Turnuva Sonuçları Yayınlama Sistemi, briç kulüplerinin turnuva sonuçlarının pratik bir şekilde Internet'te yayınlamaları için gerekli yazılımları sağlayan bir briç portalıdır.">
+<meta name="date" content="2006-01-21T17:49:37+00:00">
+<meta name="robots" content="INDEX,FOLLOW">
+<meta http-equiv="Content-Language" content="en-US"><meta name="revisit-after" content="15 days"><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-9">
+<link rel="shortcut icon" href="https://vugraph.com/images/spade_icon.ico" type="image/x-icon">
+<link rel="stylesheet" href="https://vugraph.com/vugraph.css" type="text/css">
+<script type="text/javascript" src="https://vugraph.com/js/overlib_mini/overlib_mini.js"><!-- overLIB (c) Erik Bosrup --></script>
+<link rel="stylesheet" href="https://clubs.vugraph.com/default.css">
+<style type="text/css">
+body { background-color: #FFF }
+h1 { color: #003300; font-size: 28px; font-weight: bold; font-style: italic; white-space: nowrap }
+h2 { color: #003300; font-size: 22px; font-weight: bold; font-style: italic; white-space: nowrap }
+h3 { color: #003300; font-size: 18px; font-weight: bold; font-style: italic; white-space: nowrap; display: block; border-bottom: thin solid #666; }
+h4 { color: #003300; font-size: 16px; font-weight: bold; white-space: nowrap; text-align: center }
+span.banner {font-size: 22px; color: #003300; font-weight: bold; font-style: italic; white-space: nowrap }
+td.capt, th.capt { font-size: 14px; font-weight: bold; color: #FFF; text-align: center; background-color: #003300; border: medium ridge #FFF; }
+td.capt2 { font-size: 14px; font-weight: bold; color: #FFF; text-align: center; background-color: #003300; border: 1px solid #FFF; }
+td.captL,th.captL { font-size: 11px; font-weight: bold; color: #FFF; text-align: left; background-color: #003300; padding-left: 4px; padding-right: 4px; border: medium ridge #FFF; white-space: nowrap }
+td.captR { font-size: 11px; font-weight: bold; color: #FFF; text-align: right; background-color: #003300; border: medium ridge #FFF; }
+td.captC { font-size: 11px; font-weight: bold; color: #FFF; text-align: center; background-color: #003300; border: medium ridge #FFF; }
+td.weekdays { font-size: 11px; font-weight: bold; color: #FFF; text-align: center; background-color: #003300; border: 1px ridge #FFF; }
+td.days { height: 32px; font-size: 10px; font-weight: bold; color: #003300; text-align: right; vertical-align: top; background-color: #FFF; border: 1px solid #003300; }
+td.days2 { font-size: 10px; font-weight: bold; color: #003300; text-align: right; vertical-align: top; background-color: #FFF; }
+td.events { font-size: 10px; color: #003300; text-align: left; background-color: #FFF; white-space: nowrap; }
+.frm td.hdr { padding: 1px; padding-left: 4px; padding-right: 4px; font-size: 11px; font-weight: bold; text-align: right; color: #003300; background-color: #FFF; border: 1px solid #003300; }
+.frm td { padding: 1px; padding-left: 4px; font-size: 11px; text-align: left; color: #003300; background-color: #FFF; border: 1px solid #003300; }
+td.results { padding: 1px; padding-left: 4px; font-size: 11px; font-weight: bold; color: #003300; background-color: #FFF; border: 1px solid #003300; }
+td.resultsimportant { padding: 1px; padding-left: 4px; font-size: 11px; font-weight: bold; color: #003300; background-color: #99CC00; border: 1px solid #003300; }
+td.resultscopy { padding: 1px; padding-left: 4px; font-size: 11px; font-weight: bold; color: #003300; background-color: #FFF; border: 1px solid #003300; }
+td.resultspecial { padding: 1px; padding-left: 4px; font-size: 11px; font-weight: bold; color: #FFF; background-color: #99CC00; border: 1px solid #003300; }
+td.resultsMO { padding: 1px; padding-left: 4px; font-size: 11px; font-weight: bold; color: #003300; background-color: #99CC00; border: 1px solid #003300; text-decoration: underline }
+td.fantastic { padding: 1px; padding-left: 4px; text-align: center; font-size: 18px; font-weight: bold; color: #003300; background-color: #FFF; border: 1px solid #003300; }
+td.links { text-align: center; background-color: #FFF; padding-top: 10px; padding-bottom: 10px; }
+td.oyuncu { text-align: left; width: 110px; height: 120px; padding-left: 4px; background-color: #FFF; vertical-align: middle; font-size: 16px !important; letter-spacing: 2px}
+td.oyuncu img { margin-right: 4px; }
+td.lineup { text-align: center; font-size: 11px; color: #003300; background-color: #FFF; font-weight: bold; border: 1px solid #003300; }
+td.oyuncu span.isim { font-size: 14px; text-align: center; color: #009; font-style: italic; font-weight: bold; text-decoration: underline; letter-spacing: 0px }
+td.bbox { width: 80px; height: 100px; text-align: center; }
+table.bridgetable {background-color: #063 }
+table.bridgetable td { padding: 5px; }
+table.crosstable td { padding-right: 16px; margin: 0 auto; }
+</style>
+</head>
+<body>
+<div id="page">
+<div id="container">
+<table width="100%"><tbody><tr><td>&nbsp;</td><td style="text-align: center; vertical-align: bottom"><h1 style="padding: 0; margin: 0">Hoşgörü Briç Kulübü&nbsp;&nbsp;&nbsp;<a href="mailto:hosgorubric@gmail.com"><img src="/images/email.gif" alt="E-Posta"></a></h1></td><td><a href="https://vugraph.com"><img src="https://vugraph.com/images/vugraph_logo_small.gif" alt="Vugraph"></a></td></tr></tbody></table><script type="text/javascript" src="https://vugraph.com/js/setpointer.js"></script>
+<h3>PAZAR SİMULTANE (04-01-2026 14:00)</h3><h4>EMİNE BİLLUR ARAZ - RABİA YEŞİM SOMER Çift Özeti</h4>
+<table style="margin: 0 auto">
+<colgroup>
+	<col align="right">
+	<col align="left">
+	<col align="right">
+	<col align="right">
+</colgroup>
+<tbody><tr><td class="capt">Bord</td><td class="capt">Rakip</td><td class="capt">Sonuç</td><td class="capt">Skor</td></tr>
+<tr onmouseover="setPointer(this,'resultsMO',true);" onmouseout="setPointer(this,'results',false);" onclick="location.href='boarddetails.php?event=404377&amp;section=A&amp;pair=9&amp;direction=NS&amp;board=1';"><td class="results">1</td><td class="results">Nadir İsmet HERGÜNŞER - FİKRET  GÜNEŞ</td><td class="results">50</td><td class="results">88.00</td></tr>
+<tr onmouseover="setPointer(this,'resultsMO',true);" onmouseout="setPointer(this,'results',false);" onclick="location.href='boarddetails.php?event=404377&amp;section=A&amp;pair=9&amp;direction=NS&amp;board=2';"><td class="results">2</td><td class="results">Nadir İsmet HERGÜNŞER - FİKRET  GÜNEŞ</td><td class="results">1430</td><td class="results">92.00</td></tr>
+<tr onmouseover="setPointer(this,'resultsMO',true);" onmouseout="setPointer(this,'results',false);" onclick="location.href='boarddetails.php?event=404377&amp;section=A&amp;pair=9&amp;direction=NS&amp;board=3';"><td class="results">3</td><td class="results">KADİR ŞAHİN - TUBA BAĞDAT</td><td class="results">-50</td><td class="results">88.00</td></tr>
+<tr onmouseover="setPointer(this,'resultsMO',true);" onmouseout="setPointer(this,'results',false);" onclick="location.href='boarddetails.php?event=404377&amp;section=A&amp;pair=9&amp;direction=NS&amp;board=4';"><td class="results">4</td><td class="results">KADİR ŞAHİN - TUBA BAĞDAT</td><td class="results">-200</td><td class="results">33.00</td></tr>
+<tr onmouseover="setPointer(this,'resultsMO',true);" onmouseout="setPointer(this,'results',false);" onclick="location.href='boarddetails.php?event=404377&amp;section=A&amp;pair=9&amp;direction=NS&amp;board=5';"><td class="results">5</td><td class="results">NAHİDE BERKİZ ARKUN - TALHA ÜNSAL</td><td class="results">100</td><td class="results">100.00</td></tr>
+<tr onmouseover="setPointer(this,'resultsMO',true);" onmouseout="setPointer(this,'results',false);" onclick="location.href='boarddetails.php?event=404377&amp;section=A&amp;pair=9&amp;direction=NS&amp;board=6';"><td class="results">6</td><td class="results">NAHİDE BERKİZ ARKUN - TALHA ÜNSAL</td><td class="results">100</td><td class="results">58.00</td></tr>
+<tr onmouseover="setPointer(this,'resultsMO',true);" onmouseout="setPointer(this,'results',false);" onclick="location.href='boarddetails.php?event=404377&amp;section=A&amp;pair=9&amp;direction=NS&amp;board=7';"><td class="results">7</td><td class="results">BAYRAM ÇETİNKAYA - İLYAS FATİH COŞKUN</td><td class="results">140</td><td class="results">63.00</td></tr>
+<tr onmouseover="setPointer(this,'resultsMO',true);" onmouseout="setPointer(this,'results',false);" onclick="location.href='boarddetails.php?event=404377&amp;section=A&amp;pair=9&amp;direction=NS&amp;board=8';"><td class="results">8</td><td class="results">BAYRAM ÇETİNKAYA - İLYAS FATİH COŞKUN</td><td class="results">100</td><td class="results">13.00</td></tr>
+<tr onmouseover="setPointer(this,'resultsMO',true);" onmouseout="setPointer(this,'results',false);" onclick="location.href='boarddetails.php?event=404377&amp;section=A&amp;pair=9&amp;direction=NS&amp;board=9';"><td class="results">9</td><td class="results">MEHMET SEDAT CENGİZ - MEHMET ALİ KORDÖV</td><td class="results">-650</td><td class="results">67.00</td></tr>
+<tr onmouseover="setPointer(this,'resultsMO',true);" onmouseout="setPointer(this,'results',false);" onclick="location.href='boarddetails.php?event=404377&amp;section=A&amp;pair=9&amp;direction=NS&amp;board=10';"><td class="results">10</td><td class="results">MEHMET SEDAT CENGİZ - MEHMET ALİ KORDÖV</td><td class="results">-650</td><td class="results">29.00</td></tr>
+<tr onmouseover="setPointer(this,'resultsMO',true);" onmouseout="setPointer(this,'results',false);" onclick="location.href='boarddetails.php?event=404377&amp;section=A&amp;pair=9&amp;direction=NS&amp;board=11';"><td class="results">11</td><td class="results">Handan UZUNER - ÖZLEM AYDIN</td><td class="results">460</td><td class="results">92.00</td></tr>
+<tr onmouseover="setPointer(this,'resultsMO',true);" onmouseout="setPointer(this,'results',false);" onclick="location.href='boarddetails.php?event=404377&amp;section=A&amp;pair=9&amp;direction=NS&amp;board=12';"><td class="results">12</td><td class="results">Handan UZUNER - ÖZLEM AYDIN</td><td class="results">500</td><td class="results">58.00</td></tr>
+<tr onmouseover="setPointer(this,'resultsMO',true);" onmouseout="setPointer(this,'results',false);" onclick="location.href='boarddetails.php?event=404377&amp;section=A&amp;pair=9&amp;direction=NS&amp;board=17';"><td class="results">17</td><td class="results">VOLKAN DENİZCİ - HAYATİ ERGÜR</td><td class="results">100</td><td class="results">100.00</td></tr>
+<tr onmouseover="setPointer(this,'resultsMO',true);" onmouseout="setPointer(this,'results',false);" onclick="location.href='boarddetails.php?event=404377&amp;section=A&amp;pair=9&amp;direction=NS&amp;board=18';"><td class="results">18</td><td class="results">VOLKAN DENİZCİ - HAYATİ ERGÜR</td><td class="results">500</td><td class="results">8.00</td></tr>
+<tr onmouseover="setPointer(this,'resultsMO',true);" onmouseout="setPointer(this,'results',false);" onclick="location.href='boarddetails.php?event=404377&amp;section=A&amp;pair=9&amp;direction=NS&amp;board=19';"><td class="results">19</td><td class="results">ÖMER GÜNEŞ - ALİ KÜÇÜKÇAĞLAYAN</td><td class="results">-50</td><td class="results">42.00</td></tr>
+<tr onmouseover="setPointer(this,'resultsMO',true);" onmouseout="setPointer(this,'results',false);" onclick="location.href='boarddetails.php?event=404377&amp;section=A&amp;pair=9&amp;direction=NS&amp;board=20';"><td class="results">20</td><td class="results">ÖMER GÜNEŞ - ALİ KÜÇÜKÇAĞLAYAN</td><td class="results">650</td><td class="results">79.00</td></tr>
+<tr onmouseover="setPointer(this,'resultsMO',true);" onmouseout="setPointer(this,'results',false);" onclick="location.href='boarddetails.php?event=404377&amp;section=A&amp;pair=9&amp;direction=NS&amp;board=21';"><td class="results">21</td><td class="results">OJENİ TÜRÜSEL - MURAT DEMİRSAN</td><td class="results">680</td><td class="results">67.00</td></tr>
+<tr onmouseover="setPointer(this,'resultsMO',true);" onmouseout="setPointer(this,'results',false);" onclick="location.href='boarddetails.php?event=404377&amp;section=A&amp;pair=9&amp;direction=NS&amp;board=22';"><td class="results">22</td><td class="results">OJENİ TÜRÜSEL - MURAT DEMİRSAN</td><td class="results">100</td><td class="results">58.00</td></tr>
+<tr onmouseover="setPointer(this,'resultsMO',true);" onmouseout="setPointer(this,'results',false);" onclick="location.href='boarddetails.php?event=404377&amp;section=A&amp;pair=9&amp;direction=NS&amp;board=23';"><td class="results">23</td><td class="results">ONUR ŞENOCAK - A.UĞUR GÖNEL</td><td class="results">200</td><td class="results">79.00</td></tr>
+<tr onmouseover="setPointer(this,'resultsMO',true);" onmouseout="setPointer(this,'results',false);" onclick="location.href='boarddetails.php?event=404377&amp;section=A&amp;pair=9&amp;direction=NS&amp;board=24';"><td class="results">24</td><td class="results">ONUR ŞENOCAK - A.UĞUR GÖNEL</td><td class="results">100</td><td class="results">67.00</td></tr>
+<tr onmouseover="setPointer(this,'resultsMO',true);" onmouseout="setPointer(this,'results',false);" onclick="location.href='boarddetails.php?event=404377&amp;section=A&amp;pair=9&amp;direction=NS&amp;board=25';"><td class="results">25</td><td class="results">ZAFER ŞENGÜL - SADIK KORKMAZ</td><td class="results">100</td><td class="results">67.00</td></tr>
+<tr onmouseover="setPointer(this,'resultsMO',true);" onmouseout="setPointer(this,'results',false);" onclick="location.href='boarddetails.php?event=404377&amp;section=A&amp;pair=9&amp;direction=NS&amp;board=26';"><td class="results">26</td><td class="results">ZAFER ŞENGÜL - SADIK KORKMAZ</td><td class="results">PASS</td><td class="results">42.00</td></tr>
+<tr onmouseover="setPointer(this,'resultsMO',true);" onmouseout="setPointer(this,'results',false);" onclick="location.href='boarddetails.php?event=404377&amp;section=A&amp;pair=9&amp;direction=NS&amp;board=27';"><td class="results">27</td><td class="results">CİHAN VATANSEVER - ERTUĞRUL YAVUZ</td><td class="results">150</td><td class="results">75.00</td></tr>
+<tr onmouseover="setPointer(this,'resultsMO',true);" onmouseout="setPointer(this,'results',false);" onclick="location.href='boarddetails.php?event=404377&amp;section=A&amp;pair=9&amp;direction=NS&amp;board=28';"><td class="results">28</td><td class="results">CİHAN VATANSEVER - ERTUĞRUL YAVUZ</td><td class="results">170</td><td class="results">88.00</td></tr>
+<tr onmouseover="setPointer(this,'resultsMO',true);" onmouseout="setPointer(this,'results',false);" onclick="location.href='boarddetails.php?event=404377&amp;section=A&amp;pair=9&amp;direction=NS&amp;board=29';"><td class="results">29</td><td class="results">KEMAL BAKIMCI - Polat TAŞCIOĞLU</td><td class="results">-500</td><td class="results">17.00</td></tr>
+<tr onmouseover="setPointer(this,'resultsMO',true);" onmouseout="setPointer(this,'results',false);" onclick="location.href='boarddetails.php?event=404377&amp;section=A&amp;pair=9&amp;direction=NS&amp;board=30';"><td class="results">30</td><td class="results">KEMAL BAKIMCI - Polat TAŞCIOĞLU</td><td class="results">-140</td><td class="results">50.00</td></tr>
+</tbody></table>
+<p class="links"><a href="http://www.hosgorubric.com" target="_top"><img src="/images/home.png" alt="">Ana Sayfa</a>&nbsp;&nbsp;&nbsp;<a href="calendar.php?month=1&amp;year=2026"><img src="/images/calendar.gif" alt="">Turnuva Takvimi</a>&nbsp;&nbsp;&nbsp;<a href="eventresults.php?event=404377"><img src="/images/results.gif" alt="">"PAZAR SİMULTANE" Sonuçları</a></p>
+<hr style="height: 1px; margin-top: 30px; margin-bottom: 10px"><p style="text-align: center">Sonuçları sağlayan: <a href="https://clubs.vugraph.com/hosgoru/">https://clubs.vugraph.com/hosgoru/</a></p>
+	<p style="font-style: italic; text-align: center"><a href="https://vugraph.com">©2005 <img src="/images/vugraph_logo.gif" width="60" style="display: inline; vertical-align: bottom" alt="Vugraph Tournament Results Publishing Portal"> Turnuva Sonuçları Yayınlama Sistemi</a></p>
+</div>
+</div>
+
+
+</body></html>

@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PAZAR SIMULTANEE - Exact BBO Rendering</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            background: white;
+        }
+        
+        @page {
+            size: A4 landscape;
+            margin: 8mm;
+        }
+        
+        .header {
+            text-align: center;
+            font-weight: bold;
+            font-size: 12px;
+            padding: 8px;
+            border-bottom: 1px solid #333;
+            margin-bottom: 8px;
+        }
+        
+        .boards-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            padding: 8px;
+        }
+        
+        .board {
+            page-break-inside: avoid;
+            background: white;
+            border: 2px solid #333;
+        }
+        
+        /* Main table container - mimics BBO's green background */
+        .board-inner {
+            background: #2d5016;
+            padding: 8px;
+            position: relative;
+            min-height: 320px;
+            display: grid;
+            grid-template-columns: 100px auto 100px;
+            grid-template-rows: auto 1fr auto;
+            gap: 8px;
+        }
+        
+        /* Top left - board number */
+        .board-num {
+            grid-column: 1;
+            grid-row: 1;
+            background: white;
+            border: 1px solid #333;
+            padding: 4px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 11px;
+            color: #333;
+        }
+        
+        /* Top center - North hand */
+        .hand-box {
+            background: #c8d5e0;
+            border: 1px solid #666;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            font-size: 9px;
+        }
+        
+        .hand-header {
+            display: flex;
+            font-weight: bold;
+            font-size: 9px;
+            padding: 3px 6px;
+            color: white;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .hand-header.north {
+            background: #3366cc;
+        }
+        
+        .hand-header.west {
+            background: #ffcc00;
+            color: #333;
+        }
+        
+        .hand-header.east {
+            background: #3366cc;
+        }
+        
+        .hand-header.south {
+            background: #3366cc;
+        }
+        
+        .hand-cards {
+            padding: 6px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            font-family: 'Courier New', monospace;
+            color: #333;
+            line-height: 1.4;
+        }
+        
+        .suit-line {
+            display: flex;
+            gap: 3px;
+            margin: 1px 0;
+        }
+        
+        .suit-icon {
+            width: 12px;
+            font-weight: bold;
+            font-size: 10px;
+        }
+        
+        .cards-text {
+            letter-spacing: 0.3px;
+            font-weight: 500;
+        }
+        
+        /* Position grid */
+        .hand-north {
+            grid-column: 2;
+            grid-row: 1;
+            margin: 0 auto;
+            min-width: 140px;
+        }
+        
+        .hand-west {
+            grid-column: 1;
+            grid-row: 2;
+            min-width: 100px;
+        }
+        
+        .hand-east {
+            grid-column: 3;
+            grid-row: 2;
+            min-width: 100px;
+        }
+        
+        .hand-south {
+            grid-column: 2;
+            grid-row: 3;
+            margin: 0 auto;
+            min-width: 140px;
+        }
+        
+        /* DD Table Box - bottom left */
+        .dd-box {
+            grid-column: 1;
+            grid-row: 3;
+            background: white;
+            border: 1px solid #666;
+            padding: 6px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            font-size: 8px;
+        }
+        
+        .dd-title {
+            font-weight: bold;
+            text-align: center;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 3px;
+            font-size: 9px;
+        }
+        
+        .dd-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 1px;
+            background: #999;
+            padding: 2px;
+        }
+        
+        .dd-header-cell {
+            background: #999;
+            color: white;
+            font-weight: bold;
+            padding: 2px;
+            text-align: center;
+            font-size: 7px;
+        }
+        
+        .dd-suit-cell {
+            background: #999;
+            color: white;
+            font-weight: bold;
+            padding: 2px;
+            text-align: center;
+            font-size: 8px;
+        }
+        
+        .dd-value-cell {
+            background: white;
+            color: #333;
+            font-weight: bold;
+            padding: 2px;
+            text-align: center;
+            font-size: 8px;
+            border: 1px solid #ccc;
+        }
+        
+        /* Info panel - top right */
+        .info-panel {
+            grid-column: 3;
+            grid-row: 1;
+            background: rgba(0, 0, 0, 0.3);
+            color: white;
+            border: 1px solid #666;
+            padding: 4px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 4px;
+            font-size: 8px;
+        }
+        
+        .dealer-box {
+            width: 24px;
+            height: 24px;
+            background: white;
+            color: #333;
+            border: 2px solid #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 12px;
+            border-radius: 2px;
+        }
+        
+        .vuln-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 16px);
+            gap: 1px;
+        }
+        
+        .vuln-pos {
+            width: 16px;
+            height: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 2px;
+            font-size: 7px;
+            font-weight: bold;
+        }
+        
+        .vuln-pos.vulnerable {
+            background: #ffcc00;
+            color: #333;
+        }
+        
+        @media print {
+            .board {
+                page-break-inside: avoid;
+                break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">PAZAR SIMULTANEE - Event #404377 (04-01-2026) - BBO Original Design with DD Tables</div>
+    
+    <div class="boards-container" id="container"></div>
+
+    <script>
+        let boards = {};
+        let ddTables = {};
+
+        async function init() {
+            try {
+                const [b, d] = await Promise.all([
+                    fetch('/hands_database.json').then(r => r.json()),
+                    fetch('/dd_tables.json').then(r => r.json()).catch(() => ({}))
+                ]);
+                boards = b;
+                ddTables = d;
+                render();
+            } catch (e) {
+                console.error(e);
+            }
+        }
+
+        function render() {
+            const container = document.getElementById('container');
+            container.innerHTML = '';
+            
+            for (let boardNum = 1; boardNum <= 30; boardNum++) {
+                const bdata = boards[boardNum];
+                if (!bdata) continue;
+                
+                const dealer = ((boardNum - 1) % 4) + 1;
+                const dealerLetter = ['N', 'E', 'S', 'W'][dealer - 1];
+                
+                const vulnIdx = (boardNum - 1) % 16;
+                const vulnArray = [0, 1, 2, 3, 1, 2, 3, 0, 2, 3, 0, 1, 3, 0, 1, 2];
+                const vuln = vulnArray[vulnIdx];
+                
+                // Vulnerability positions
+                let vulnMap = {W: false, N: false, E: false, S: false};
+                if (vuln === 1) { vulnMap.N = vulnMap.S = true; }
+                if (vuln === 2) { vulnMap.E = vulnMap.W = true; }
+                if (vuln === 3) { vulnMap.W = vulnMap.N = vulnMap.E = vulnMap.S = true; }
+                
+                const dd = ddTables[boardNum] || {NS_tricks: [0,0,0,0,0]};
+                const tricks = dd.NS_tricks || [0,0,0,0,0];
+                
+                const board = document.createElement('div');
+                board.className = 'board';
+                board.innerHTML = `
+                    <div class="board-inner">
+                        <!-- Board Number -->
+                        <div class="board-num">Board<br>${boardNum}</div>
+                        
+                        <!-- North -->
+                        <div class="hand-box hand-north">
+                            <div class="hand-header north">N North</div>
+                            <div class="hand-cards">
+                                <div class="suit-line"><span class="suit-icon">♠</span><span class="cards-text">${bdata.N.S || '-'}</span></div>
+                                <div class="suit-line"><span class="suit-icon">♥</span><span class="cards-text">${bdata.N.H || '-'}</span></div>
+                                <div class="suit-line"><span class="suit-icon">♦</span><span class="cards-text">${bdata.N.D || '-'}</span></div>
+                                <div class="suit-line"><span class="suit-icon">♣</span><span class="cards-text">${bdata.N.C || '-'}</span></div>
+                            </div>
+                        </div>
+                        
+                        <!-- West -->
+                        <div class="hand-box hand-west">
+                            <div class="hand-header west">W West</div>
+                            <div class="hand-cards">
+                                <div class="suit-line"><span class="suit-icon">♠</span><span class="cards-text">${bdata.W.S || '-'}</span></div>
+                                <div class="suit-line"><span class="suit-icon">♥</span><span class="cards-text">${bdata.W.H || '-'}</span></div>
+                                <div class="suit-line"><span class="suit-icon">♦</span><span class="cards-text">${bdata.W.D || '-'}</span></div>
+                                <div class="suit-line"><span class="suit-icon">♣</span><span class="cards-text">${bdata.W.C || '-'}</span></div>
+                            </div>
+                        </div>
+                        
+                        <!-- East -->
+                        <div class="hand-box hand-east">
+                            <div class="hand-header east">E East</div>
+                            <div class="hand-cards">
+                                <div class="suit-line"><span class="suit-icon">♠</span><span class="cards-text">${bdata.E.S || '-'}</span></div>
+                                <div class="suit-line"><span class="suit-icon">♥</span><span class="cards-text">${bdata.E.H || '-'}</span></div>
+                                <div class="suit-line"><span class="suit-icon">♦</span><span class="cards-text">${bdata.E.D || '-'}</span></div>
+                                <div class="suit-line"><span class="suit-icon">♣</span><span class="cards-text">${bdata.E.C || '-'}</span></div>
+                            </div>
+                        </div>
+                        
+                        <!-- South -->
+                        <div class="hand-box hand-south">
+                            <div class="hand-header south">S South</div>
+                            <div class="hand-cards">
+                                <div class="suit-line"><span class="suit-icon">♠</span><span class="cards-text">${bdata.S.S || '-'}</span></div>
+                                <div class="suit-line"><span class="suit-icon">♥</span><span class="cards-text">${bdata.S.H || '-'}</span></div>
+                                <div class="suit-line"><span class="suit-icon">♦</span><span class="cards-text">${bdata.S.D || '-'}</span></div>
+                                <div class="suit-line"><span class="suit-icon">♣</span><span class="cards-text">${bdata.S.C || '-'}</span></div>
+                            </div>
+                        </div>
+                        
+                        <!-- DD Table -->
+                        <div class="dd-box">
+                            <div class="dd-title">DD Table</div>
+                            <div class="dd-grid">
+                                <div class="dd-header-cell"></div><div class="dd-header-cell">♠</div><div class="dd-header-cell">♥</div><div class="dd-header-cell">♦</div><div class="dd-header-cell">♣</div>
+                                <div class="dd-suit-cell">N</div><div class="dd-value-cell">${tricks[0]}</div><div class="dd-value-cell">${tricks[1]}</div><div class="dd-value-cell">${tricks[2]}</div><div class="dd-value-cell">${tricks[3]}</div>
+                                <div class="dd-suit-cell">S</div><div class="dd-value-cell">${tricks[0]}</div><div class="dd-value-cell">${tricks[1]}</div><div class="dd-value-cell">${tricks[2]}</div><div class="dd-value-cell">${tricks[3]}</div>
+                                <div class="dd-suit-cell">E</div><div class="dd-value-cell">${13-tricks[0]}</div><div class="dd-value-cell">${13-tricks[1]}</div><div class="dd-value-cell">${13-tricks[2]}</div><div class="dd-value-cell">${13-tricks[3]}</div>
+                                <div class="dd-suit-cell">W</div><div class="dd-value-cell">${13-tricks[0]}</div><div class="dd-value-cell">${13-tricks[1]}</div><div class="dd-value-cell">${13-tricks[2]}</div><div class="dd-value-cell">${13-tricks[3]}</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Info Panel -->
+                        <div class="info-panel">
+                            <div class="dealer-box">${dealerLetter}</div>
+                            <div class="vuln-grid">
+                                <div class="vuln-pos ${vulnMap.W ? 'vulnerable' : ''}">W</div>
+                                <div class="vuln-pos ${vulnMap.N ? 'vulnerable' : ''}">N</div>
+                                <div class="vuln-pos ${vulnMap.E ? 'vulnerable' : ''}">E</div>
+                                <div class="vuln-pos ${vulnMap.S ? 'vulnerable' : ''}">S</div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                container.appendChild(board);
+            }
+        }
+
+        init();
+    </script>
+</body>
+</html>

@@ -1,0 +1,1608 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    height: 100%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* background-image: url('bridge.png'); */
+    /* background-size: 25%; */
+    /* background-repeat: repeat; */
+    /* background-position: center; */
+    /* background-attachment: fixed; */
+    background-color: #667eea;
+    min-height: 100vh;
+    padding: 20px;
+    color: #333;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    backdrop-filter: blur(5px);
+}
+
+header {
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    color: white;
+    padding: 30px;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+header p {
+    font-size: 1.1em;
+    opacity: 0.9;
+}
+
+.upload-section {
+    padding: 30px;
+    background: #f8f9fa;
+    border-bottom: 2px solid #e9ecef;
+}
+
+.upload-box {
+    text-align: center;
+}
+
+.upload-label {
+    display: inline-block;
+    padding: 15px 30px;
+    background: #28a745;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: bold;
+    transition: all 0.3s;
+}
+
+.upload-label:hover {
+    background: #218838;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+}
+
+#excelFile {
+    display: none;
+}
+
+.file-info {
+    margin-top: 15px;
+    font-size: 1.1em;
+    color: #28a745;
+    font-weight: bold;
+}
+
+.filters-section {
+    padding: 30px;
+    background: white;
+}
+
+.filters-section h2 {
+    color: #1e3c72;
+    margin: 0 0 20px 0;
+    padding: 0;
+    font-size: 1.5em;
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+.filter-group {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    border: 2px solid #e9ecef;
+}
+
+/* 6-Card Grid Layout */
+#dateFilterGrid,
+.date-filter-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 15px !important;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    align-items: stretch !important;
+}
+
+.input-group {
+    flex: 1;
+    min-width: 160px;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+}
+
+#dateFilterGrid .input-group {
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: stretch;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    flex: unset;
+    min-width: unset;
+}
+
+/* Tarih input'u doğrudan grid'de - inline style ile kontrol */
+#selectedDate {
+    height: 48px !important;
+    min-height: 48px !important;
+    padding: 8px 12px !important;
+    border: 2px solid #ced4da !important;
+    border-radius: 6px !important;
+    font-size: 0.9em !important;
+    box-sizing: border-box !important;
+    width: 100% !important;
+    margin: 0 !important;
+    text-align: center !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+/* Oyuncu adı input'u */
+#playerName {
+    height: 48px !important;
+    min-height: 48px !important;
+    padding: 8px 12px !important;
+    border: 2px solid #ced4da !important;
+    border-radius: 6px !important;
+    font-size: 0.9em !important;
+    box-sizing: border-box !important;
+    width: 100% !important;
+    margin: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+}
+
+/* Tarih Seç Butonu - Mavi */
+#filterDateBtn {
+    background: #007bff !important;
+}
+
+#filterDateBtn:hover {
+    background: #0056b3 !important;
+}
+
+/* Quick Button Standardization */
+.quick-btn {
+    height: 48px !important;
+    min-height: 48px !important;
+    padding: 0 12px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 0.85em !important;
+    white-space: normal !important;
+    line-height: 1.2 !important;
+    margin: 0 !important;
+    border: none !important;
+    background: #17a2b8 !important;
+    color: white !important;
+    border-radius: 6px !important;
+    cursor: pointer !important;
+    transition: all 0.3s !important;
+    box-sizing: border-box !important;
+    text-align: center !important;
+    overflow: hidden !important;
+}
+
+.quick-btn:hover {
+    background: #138496 !important;
+    box-shadow: 0 4px 12px rgba(23, 162, 184, 0.3) !important;
+}
+
+.quick-btn.active {
+    background: #0c5460 !important;
+    box-shadow: 0 5px 15px rgba(23, 162, 184, 0.5) !important;
+}
+
+.grid-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 32px;
+    padding: 0;
+    background: white;
+    border: 2px solid #ddd;
+    border-radius: 6px;
+    box-sizing: border-box;
+    transition: all 0.3s;
+    overflow: hidden;
+    font-size: 0.85em;
+    min-width: 0;
+    flex: 1;
+    cursor: pointer;
+    line-height: 32px;
+}
+
+.grid-card:hover {
+    border-color: #667eea;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+}
+
+.grid-card input[type="text"],
+.grid-card input[type="date"] {
+    width: 100%;
+    text-align: center;
+    padding: 4px 8px !important;
+    margin: 0 !important;
+    border: 2px solid #ccc !important;
+    border-radius: 6px !important;
+    font-size: 0.9em;
+    box-sizing: border-box;
+    height: 32px;
+    line-height: 24px;
+    vertical-align: middle;
+    background: white;
+}
+
+#dateFilterGrid button.grid-card {
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    border: none;
+    background: #17a2b8;
+    color: white;
+    font-weight: 500;
+    font-size: 0.85em;
+}
+
+#dateFilterGrid button.grid-card:hover {
+    background: #138496;
+    box-shadow: 0 4px 12px rgba(23, 162, 184, 0.3);
+}
+
+/* Tarih seçim konteyner */
+.date-filter-container {
+    display: flex !important;
+    gap: 15px !important;
+    align-items: flex-end !important;
+    flex-wrap: wrap !important;
+    overflow-x: auto;
+    padding-bottom: 5px;
+}
+
+/* Tarih ve Göster Butonu - Eşit Genişlik */
+.date-time-container {
+    display: flex !important;
+    gap: 10px !important;
+    align-items: flex-end !important;
+    flex: 1 1 100% !important;
+    width: 100% !important;
+}
+
+.date-time-container .input-group {
+    flex: 1 1 48% !important;
+    min-width: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+.date-time-container .btn {
+    flex: 1 1 48% !important;
+    min-width: 0 !important;
+    padding: 12px 15px !important;
+    font-size: 0.95em !important;
+}
+
+.filter-group h3 {
+    color: #2a5298;
+    margin: 0 0 10px 0;
+    padding: 0;
+    font-size: 1.5em;
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+.filter-inputs {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: flex-end;
+}
+
+.input-group {
+    flex: 1;
+    min-width: 160px;
+}
+
+.input-group.full-width {
+    flex: 2;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    text-align: center;
+    font-weight: 600;
+    color: #495057;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 4px 8px;
+    border: 2px solid #ced4da;
+    border-radius: 6px;
+    font-size: 1em;
+    transition: all 0.3s;
+    height: 32px;
+    line-height: 24px;
+    box-sizing: border-box;
+    margin: 0;
+}
+
+/* Date input special styling for Grid */
+input[type="date"] {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.input-group input[type="date"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    font-size: 1.2em;
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.btn {
+    padding: 0 25px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    white-space: nowrap;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+.btn-primary {
+    background: #667eea;
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #5568d3;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+}
+
+.btn-success {
+    background: #28a745;
+    color: white;
+}
+
+.btn-success:hover {
+    background: #218838;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+}
+
+.btn-secondary {
+    background: #6c757d;
+    color: white;
+    width: 100%;
+}
+
+.btn-secondary:hover {
+    background: #5a6268;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(108, 117, 125, 0.3);
+}
+
+.btn-info {
+    background: #17a2b8;
+    color: white;
+}
+
+.btn-info:hover {
+    background: #138496;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(23, 162, 184, 0.3);
+}
+
+.btn-info.active {
+    background: #0c5460;
+    box-shadow: 0 5px 15px rgba(23, 162, 184, 0.5);
+}
+
+/* Hızlı Filtreler Container */
+.quick-filters-container {
+    display: none !important; /* Turnuva sonuçları filtrelerini gizle */
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-left: 20px;
+}
+
+/* directionResultsSection içindeki filtre butonlarını kesinlikle gizle */
+#directionResultsSection .quick-filters-container {
+    display: none !important;
+}
+
+.quick-btn {
+    padding: 0 15px !important;
+    font-size: 0.9em !important;
+    white-space: nowrap;
+    height: 32px;
+    line-height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Hızlı Zaman Filtreleri */
+.quick-time-filters {
+    display: flex;
+    gap: 10px;
+    flex-wrap: nowrap;
+}
+
+.quick-time-filters .btn {
+    white-space: nowrap;
+    padding: 10px 15px !important;
+    font-size: 0.9em !important;
+}
+
+.btn-copy {
+    background: #fd7e14;
+    color: white;
+}
+
+.btn-copy:hover {
+    background: #e56b08;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(253, 126, 20, 0.3);
+}
+
+.results-section {
+    padding: 30px;
+}
+
+.results-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.results-header h2 {
+    color: #1e3c72;
+    font-size: 1.8em;
+}
+
+.results-actions {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.result-count {
+    background: #667eea;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-weight: 600;
+}
+
+.table-container {
+    overflow-x: auto;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    -webkit-overflow-scrolling: touch; /* iOS'ta yumuşak kaydırma */
+    max-width: 100%;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    table-layout: fixed;
+}
+
+thead {
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    color: white;
+}
+
+thead th {
+    padding: 12px 10px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.95em;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    cursor: pointer;
+    user-select: none;
+}
+
+thead th:nth-child(1), 
+thead th:nth-child(5) { 
+    cursor: pointer;
+}
+
+/* Sıralama sütununu center yap */
+thead th:nth-child(2) {
+    text-align: center;
+}
+
+tbody td:nth-child(2) {
+    text-align: center;
+}
+
+thead th:nth-child(1) { width: 10%; } /* Tarih - Dar */
+thead th:nth-child(2) { width: 8%; }  /* Sıra - Dar */
+thead th:nth-child(3) { width: 23%; } /* Oyuncu 1 - Geniş */
+thead th:nth-child(4) { width: 23%; } /* Oyuncu 2 - Geniş */
+thead th:nth-child(5) { width: 10%; } /* Skor - Dar */
+thead th:nth-child(6) { width: 13%; display: none; } /* Yön - Dar (gizli) */
+thead th:nth-child(7) { width: 13%; display: none; } /* Turnuva - Dar (gizli) */
+
+/* Partner Mode: Oyuncu 2 sütununu gizle, Oyuncu 1 başlığını Partner yap */
+#resultsTable.partner-mode thead th:nth-child(3) { width: 20%; }
+#resultsTable.partner-mode thead th:nth-child(4) { display: none; }
+
+#resultsTable.partner-mode tbody td:nth-child(4) { display: none; }
+
+tbody tr {
+    border-bottom: 1px solid #e9ecef;
+    transition: all 0.2s;
+}
+
+tbody tr:hover {
+    background: #f8f9fa;
+    transform: scale(1.01);
+}
+
+tbody td {
+    padding: 10px 8px;
+    color: #495057;
+    font-size: 0.95em;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+tbody td:nth-child(1) {
+    font-weight: bold;
+    color: #667eea;
+}
+
+tbody td:nth-child(5) {
+    font-weight: bold;
+    color: #28a745;
+}
+
+tbody td:nth-child(6),
+tbody td:nth-child(7) {
+    display: none;
+}
+
+.no-data {
+    text-align: center;
+    padding: 40px !important;
+    color: #6c757d;
+    font-style: italic;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-top: 20px;
+    padding: 20px;
+}
+
+.pagination button {
+    min-width: 120px;
+}
+
+.pagination span {
+    font-size: 1.1em;
+    font-weight: 600;
+    color: #1e3c72;
+}
+
+.stats-section {
+    padding: 30px;
+    background: #f8f9fa;
+    border-top: 2px solid #e9ecef;
+    display: none;
+}
+
+.stats-section h2 {
+    color: #1e3c72;
+    margin-bottom: 20px;
+    font-size: 1.8em;
+}
+
+/* Kuzey-Güney ve Doğu-Batı sonuçları - Responsive Grid */
+#directionResultsGrid {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 12px !important;
+    max-width: 100%;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: 1fr !important;
+    gap: 20px;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+.stat-card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.stat-card h3 {
+    color: #667eea;
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+.stat-card p {
+    color: #6c757d;
+    font-size: 1em;
+}
+
+/* Desktop layout için date-time-container */
+.date-time-container {
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 10px !important;
+    align-items: flex-end !important;
+    width: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+}
+
+.date-time-container .input-group {
+    width: auto !important;
+    flex: 0 1 auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+}
+
+.date-time-container .input-group label {
+    display: block !important;
+}
+
+.date-time-container .input-group input {
+    width: 200px !important;
+    height: 44px !important;
+    font-size: 1em !important;
+    padding: 8px 10px !important;
+    box-sizing: border-box !important;
+    margin: 0 !important;
+    line-height: 28px !important;
+    text-align: center !important;
+}
+
+.date-time-container .btn {
+    width: auto !important;
+    height: 44px !important;
+    padding: 8px 20px !important;
+    font-size: 1em !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    min-width: auto !important;
+}
+
+/* Desktop - 768px üzeri */
+@media (min-width: 769px) {
+    #directionResultsGrid,
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+}
+
+/* Mobil Uyumlu Tasarım - Tablet ve Daha Küçük Ekranlar (768px ve altı) */
+@media (max-width: 768px) {
+    body {
+        padding: 10px !important;
+        margin: 0 !important;
+    }
+    
+    /* 6-Card Grid - Mobilde 2x3 layout */
+    #dateFilterGrid,
+    .date-filter-grid {
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 10px !important;
+    }
+    
+    .grid-card {
+        height: 44px;
+        padding: 10px 6px;
+    }
+    
+    .grid-card input[type="date"] {
+        padding: 6px 4px;
+        font-size: 0.8em;
+        height: 32px;
+    }
+    
+    .grid-card.btn {
+        padding: 6px 4px;
+        font-size: 0.8em;
+        line-height: 1.2;
+        height: 44px !important;
+    }
+    
+    .container {
+        border-radius: 15px;
+        padding: 0 !important;
+    }
+    
+    header {
+        padding: 20px 15px;
+    }
+    
+    header h1 {
+        font-size: 1.5em;
+        margin-bottom: 8px;
+        text-align: center !important;
+    }
+    
+    header p {
+        font-size: 0.95em;
+        text-align: center !important;
+    }
+    
+    .filters-section,
+    .results-section,
+    .stats-section,
+    .upload-section {
+        padding: 10px 5px !important;
+        margin: 0 !important;
+    }
+    
+    .filter-group {
+        padding: 10px 8px !important;
+        margin-bottom: 10px !important;
+    }
+    
+    .filters-section h2 {
+        margin-bottom: 15px !important;
+        margin-top: 0 !important;
+        text-align: center !important;
+    }
+    
+    .filter-group {
+        margin-top: 15px !important;
+    }
+    
+    .filter-group h3 {
+        margin-bottom: 12px !important;
+        font-size: 1.2em !important;
+        text-align: center !important;
+    }
+    
+    /* Mobilde tarih + göster container - yan yana eşit boyut */
+    .date-time-container {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 12px !important;
+        width: 100% !important;
+        margin: 0 0 15px 0 !important;
+        padding: 0 !important;
+        box-sizing: border-box !important;
+    }
+    
+    .date-time-container .input-group {
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        box-sizing: border-box !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: stretch !important;
+        height: 100% !important;
+    }
+    
+    .date-time-container .input-group label {
+        display: block !important;
+        font-size: 0.8em !important;
+        margin-bottom: 6px !important;
+        text-align: center !important;
+        color: #666 !important;
+        font-weight: 600 !important;
+    }
+    
+    .date-time-container .input-group input {
+        width: 100% !important;
+        height: 42px !important;
+        text-align: center !important;
+        font-size: 0.9em !important;
+        padding: 8px 6px !important;
+        box-sizing: border-box !important;
+        margin: 0 !important;
+        flex: 1 !important;
+    }
+    
+    .date-time-container .btn {
+        width: 100% !important;
+        height: auto !important;
+        padding: 8px 6px !important;
+        font-size: 0.9em !important;
+        margin: 0 !important;
+        box-sizing: border-box !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        min-width: auto !important;
+        align-self: flex-end !important;
+        min-height: 42px !important;
+    }
+    
+    /* Günün Şampiyonları mobilde 2 kolon */
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+    
+    div[style*="display: flex"][style*="gap: 15px"][style*="flex-wrap: wrap"] {
+        flex-direction: column !important;
+    }
+    
+    /* Tarih input ve butonları mobilde de yan yana tut */
+    .date-filter-container {
+        flex-wrap: nowrap !important;
+        overflow-x: auto !important;
+        gap: 8px !important;
+        padding-bottom: 10px;
+        scroll-behavior: smooth;
+    }
+    
+    .date-filter-container .input-group {
+        flex-shrink: 0;
+        max-width: 150px !important;
+    }
+    
+    #quickDateFilters {
+        flex-wrap: nowrap !important;
+        overflow-x: auto !important;
+        gap: 12px !important;
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important;
+        width: 100% !important;
+        margin-top: 15px !important;
+    }
+    
+    #quickDateFilters .quick-btn {
+        flex-shrink: 0;
+        white-space: nowrap;
+        font-size: 0.85em;
+        padding: 10px 8px;
+        min-width: auto;
+        height: 42px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    #quickPlayerTimeFilters {
+        flex-wrap: nowrap !important;
+        overflow-x: auto !important;
+        gap: 12px !important;
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important;
+        margin-top: 12px !important;
+    }
+    
+    #quickPlayerTimeFilters .quick-btn {
+        flex-shrink: 0;
+        white-space: nowrap;
+        font-size: 0.85em;
+        padding: 10px 8px;
+        min-width: auto;
+        height: 42px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .filter-inputs {
+        flex-direction: column;
+    }
+    
+    .input-group {
+        flex: 1;
+        min-width: 100%;
+    }
+    
+    .quick-time-filters {
+        flex-direction: row !important;
+        flex-wrap: wrap;
+    }
+    
+    .quick-time-filters .btn {
+        width: auto !important;
+        flex: 1 1 45%;
+        min-width: 120px;
+    }
+    
+    .results-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .results-header h2 {
+        font-size: 1.4em;
+    }
+    
+    .results-actions {
+        width: 100%;
+        flex-direction: column;
+    }
+    
+    .btn {
+        width: 100%;
+    }
+    
+    .btn-copy {
+        width: 100%;
+    }
+    
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 15px;
+    }
+    
+    /* Kuzey-Güney ve Doğu-Batı sonuçları mobilde 2 kolon */
+    #directionResultsGrid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 12px !important;
+    }
+    
+    table {
+        font-size: 0.9em;
+    }
+    
+    /* Mobil kolon genişlikleri - responsive */
+    thead th:nth-child(1) { width: 12% !important; } /* Tarih */
+    thead th:nth-child(2) { width: 10% !important; } /* Sıra */
+    thead th:nth-child(3) { width: 25% !important; } /* Oyuncu 1 */
+    thead th:nth-child(4) { width: 25% !important; } /* Oyuncu 2 */
+    thead th:nth-child(5) { width: 10% !important; } /* Skor */
+    
+    thead th {
+        padding: 8px 4px !important;
+        font-size: 0.75em !important;
+    }
+    
+    tbody td {
+        padding: 6px 3px !important;
+        font-size: 0.8em !important;
+        word-wrap: break-word !important;
+        overflow-wrap: break-word !important;
+    }
+    
+    thead th,
+    tbody td {
+        padding: 10px 8px;
+    }
+    
+    .pagination {
+        gap: 10px;
+    }
+    
+    .pagination button {
+        min-width: 80px;
+        padding: 10px 15px;
+    }
+    
+    /* Mobilde direction results section modal gibi */
+    #directionResultsSection {
+        display: none !important;
+    }
+    
+    #directionResultsSection[style*="display: block"] {
+        position: fixed !important;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100vw !important;
+        height: 100vh !important;
+        margin: 0 !important;
+        padding: 70px 10px 10px 10px !important;
+        z-index: 1000;
+        overflow-y: auto;
+        background: white;
+        border-radius: 0 !important;
+    }
+    
+    .results-back-btn-mobile {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1002;
+        background: white;
+        padding: 15px 10px;
+        border-bottom: 1px solid #ddd;
+    }
+    
+    /* Mobil sayfa akışı */
+    .modal-results-page {
+        position: fixed !important;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100vw !important;
+        height: 100vh !important;
+        margin: 0 !important;
+        padding: 70px 10px 80px 10px !important;
+        z-index: 1000;
+        overflow-y: auto;
+        background: white;
+        border-radius: 0 !important;
+        display: none !important;
+    }
+    
+    .modal-results-page[style*="display: block"] {
+        display: block !important;
+    }
+    
+    .modal-navigation {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 1001;
+        display: flex;
+        gap: 10px;
+        padding: 15px;
+        background: white;
+        border-top: 1px solid #ddd;
+    }
+    
+    .modal-navigation button {
+        flex: 1;
+        padding: 10px;
+        font-size: 0.9em;
+    }
+}
+
+/* Mobil Uyumlu Tasarım - Küçük Telefonlar (480px ve altı) */
+@media (max-width: 480px) {
+    /* 6-Card Grid - Mobilde 2x3 layout */
+    .date-filter-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+    
+    .grid-card {
+        min-height: 80px;
+        padding: 10px 6px;
+    }
+    
+    .grid-card label {
+        margin-bottom: 4px;
+        font-size: 0.7em;
+    }
+    
+    .grid-card input[type="date"] {
+        padding: 6px 4px;
+        font-size: 0.8em;
+        height: 32px;
+    }
+    
+    .grid-card.btn {
+        padding: 6px 4px;
+        font-size: 0.75em;
+        line-height: 1.2;
+    }
+    
+    .container {
+        border-radius: 10px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+    
+    header {
+        padding: 15px 10px;
+    }
+    
+    header h1 {
+        font-size: 1.2em;
+        margin-bottom: 5px;
+    }
+    
+    header p {
+        font-size: 0.85em;
+    }
+    
+    .filters-section,
+    .results-section,
+    .stats-section,
+    .upload-section {
+        padding: 15px 10px;
+    }
+    
+    .filter-group {
+        padding: 15px;
+        margin-bottom: 15px;
+    }
+    
+    .filter-group h3 {
+        font-size: 1.2em;
+        margin-bottom: 15px;
+    }
+    
+    .filters-section h2 {
+        font-size: 1.2em;
+        margin-bottom: 15px;
+    }
+    
+    .input-group label {
+        font-size: 0.9em;
+        margin-bottom: 6px;
+    }
+    
+    .input-group input,
+    .input-group select {
+        padding: 10px 8px;
+        font-size: 16px; /* Mobil cihazlarda zoom'u önlemek için */
+    }
+    
+    .btn {
+        padding: 10px 15px;
+        font-size: 0.9em;
+        width: 100%;
+    }
+    
+    .quick-time-filters {
+        flex-direction: column !important;
+    }
+    
+    .quick-time-filters .btn {
+        width: 100% !important;
+        padding: 10px 12px !important;
+        font-size: 0.85em !important;
+    }
+    
+    .upload-label {
+        padding: 12px 20px;
+        font-size: 0.95em;
+    }
+    
+    .results-header {
+        flex-direction: column;
+    }
+    
+    .results-header h2 {
+        font-size: 1.2em;
+    }
+    
+    .result-count {
+        padding: 6px 12px;
+        font-size: 0.9em;
+    }
+    
+    /* Kuzey-Güney ve Doğu-Batı sonuçları mobilde 2 kolon */
+    #directionResultsGrid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+    
+    .stat-card {
+        padding: 15px 10px;
+    }
+    
+    .stat-card h3 {
+        font-size: 1.5em;
+    }
+    
+    .stat-card p {
+        font-size: 0.85em;
+    }
+    
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+    
+    table {
+        font-size: 0.8em;
+    }
+    
+    thead th,
+    tbody td {
+        padding: 8px 5px;
+    }
+    
+    tbody tr:hover {
+        transform: none;
+    }
+    
+    .table-container {
+        border-radius: 8px;
+    }
+    
+    .pagination {
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+    
+    .pagination button {
+        min-width: 60px;
+        padding: 8px 12px;
+        font-size: 0.85em;
+    }
+    
+    .pagination span {
+        font-size: 0.9em;
+        width: 100%;
+        text-align: center;
+    }
+}
+
+/* Mobil Tasarım - Filtre Butonları Alt Alta */
+@media (max-width: 768px) {
+    /* GRID - MOBİL'DE directionResultsGrid 1 KOLON */
+    #directionResultsGrid {
+        grid-template-columns: 1fr !important;
+    }
+    
+    /* Tüm flex containers dikey olsun - ANCAK tarih seçimi hariç */
+    .quick-filters-container,
+    .quick-time-filters,
+    .filter-group > div {
+        display: flex !important;
+        flex-direction: column !important;
+        flex-wrap: nowrap !important;
+        gap: 10px !important;
+        width: 100% !important;
+    }
+    
+    /* Hızlı filtre butonları container'ı dikey */
+    div[style*="display: flex"][style*="gap: 10px"][style*="flex-wrap: nowrap"] {
+        display: flex !important;
+        flex-direction: column !important;
+        flex-wrap: nowrap !important;
+        gap: 10px !important;
+        width: 100% !important;
+    }
+    
+    /* Tarih seçimi bölümü YAN YANA kalacak */
+    div[style*="gap: 20px"][style*="flex-wrap: wrap"] {
+        display: flex !important;
+        flex-direction: row !important;
+        gap: 15px !important;
+        width: 100% !important;
+        align-items: flex-end !important;
+        flex-wrap: wrap !important;
+    }
+    
+    /* Tarih input + Göster butonu container'ı - SPESYAL */
+    div[style*="gap: 8px"][style*="align-items: center"] {
+        display: flex !important;
+        flex-direction: row !important;
+        gap: 8px !important;
+        width: 100% !important;
+        align-items: center !important;
+        flex-wrap: nowrap !important;
+        min-width: 100% !important;
+    }
+    
+    .quick-filters-container {
+        margin-left: 0 !important;
+    }
+    
+    /* Tüm butonlar - hızlı filtreler tam genişlik */
+    .quick-btn,
+    .quick-time-filters .btn {
+        width: 100% !important;
+        white-space: normal !important;
+        min-height: 44px !important;
+        padding: 12px 15px !important;
+    }
+    
+    .filter-group {
+        margin-bottom: 20px !important;
+    }
+    
+    /* Tarih input'u container'da eşit genişlik */
+    div[style*="gap: 8px"][style*="align-items: center"] .input-group {
+        flex: 1 !important;
+        width: auto !important;
+        min-width: 0 !important;
+        margin-bottom: 0 !important;
+    }
+    
+    /* Tarih input yüksekliği ve padding */
+    div[style*="gap: 8px"][style*="align-items: center"] .input-group input {
+        width: auto !important;
+        flex: 1 !important;
+        height: 36px !important;
+        padding: 8px 10px !important;
+    }
+    
+    /* Mobilde directionResultsSection'ı full-width göster */
+    #directionResultsSection {
+        position: relative !important;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 15px 10px !important;
+        background: #f8f9fa !important;
+    }
+    
+    #directionResultsGrid {
+        grid-template-columns: 1fr !important;
+        gap: 10px !important;
+    }
+    
+    /* Mobilde modal sayfa styling */
+}
+}
+        width: 100% !important;
+        height: 42px !important;
+        text-align: center !important;
+        padding: 8px 10px !important;
+        font-size: 0.95em !important;
+    }
+    
+    /* Tarih input label */
+    div[style*="gap: 8px"][style*="align-items: center"] .input-group label {
+        text-align: center !important;
+        display: block !important;
+        margin-bottom: 6px !important;
+        font-size: 0.9em !important;
+        font-weight: 500 !important;
+    }
+    
+    /* Göster butonu - eşit genişlik ve yükseklik */
+    div[style*="gap: 8px"][style*="align-items: center"] .btn-primary {
+        flex: 1 !important;
+        height: 42px !important;
+        width: auto !important;
+        padding: 0 !important;
+        margin-top: 22px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        white-space: nowrap !important;
+        font-size: 1em !important;
+    }
+    
+    /* Oyuncu adı input'u en üstte */
+    .filter-group .input-group {
+        order: -2;
+        margin-bottom: 15px;
+        width: 100% !important;
+    }
+}
+
+/* Çok Küçük Telefonlar (360px ve altı) */
+@media (max-width: 360px) {
+    header h1 {
+        font-size: 1em;
+    }
+    
+    .filters-section h2 {
+        font-size: 1.1em;
+    }
+    
+    .filter-group h3 {
+        font-size: 1.1em;
+    }
+    
+    /* Kuzey-Güney ve Doğu-Batı sonuçları mobilde tek kolon */
+    #directionResultsGrid,
+    #directionResultsGrid.stats-grid {
+        grid-template-columns: 1fr !important;
+        gap: 15px !important;
+    }
+    
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .result-count {
+        padding: 5px 10px;
+        font-size: 0.8em;
+    }
+
+    /* Oyuncu Adı + Butonlar Responsive */
+    div[style*="display: flex"][style*="gap: 10px"] > .input-group[style*="flex: 0 1 300px"] {
+        flex: 0 1 100% !important;
+        min-width: 100% !important;
+    }
+
+    div[style*="display: flex"][style*="gap: 10px"] > #quickPlayerTimeFilters {
+        flex: 1 1 100% !important;
+        min-width: 100% !important;
+        margin-top: 10px;
+    }
+
+ 
+ / *   A u t o c o m p l e t e   D r o p d o w n   S t i l l e r i   * / 
+ . a u t o c o m p l e t e - s u g g e s t i o n s   { 
+         p o s i t i o n :   a b s o l u t e ; 
+         t o p :   1 0 0 % ; 
+         l e f t :   0 ; 
+         r i g h t :   0 ; 
+         b a c k g r o u n d :   w h i t e ; 
+         b o r d e r :   2 p x   s o l i d   # 6 6 7 e e a ; 
+         b o r d e r - t o p :   n o n e ; 
+         b o r d e r - r a d i u s :   0   0   8 p x   8 p x ; 
+         m a x - h e i g h t :   2 5 0 p x ; 
+         o v e r f l o w - y :   a u t o ; 
+         z - i n d e x :   1 0 0 0 ; 
+         b o x - s h a d o w :   0   4 p x   1 2 p x   r g b a ( 0 ,   0 ,   0 ,   0 . 1 5 ) ; 
+ } 
+ 
+ . a u t o c o m p l e t e - s u g g e s t i o n s . h i d d e n   { 
+         d i s p l a y :   n o n e ; 
+ } 
+ 
+ . a u t o c o m p l e t e - s u g g e s t i o n   { 
+         p a d d i n g :   1 0 p x   1 5 p x ; 
+         c u r s o r :   p o i n t e r ; 
+         b o r d e r - b o t t o m :   1 p x   s o l i d   # f 0 f 0 f 0 ; 
+         t r a n s i t i o n :   b a c k g r o u n d - c o l o r   0 . 2 s ; 
+         f o n t - s i z e :   0 . 9 5 e m ; 
+ } 
+ 
+ . a u t o c o m p l e t e - s u g g e s t i o n : h o v e r   { 
+         b a c k g r o u n d - c o l o r :   # f 0 f 4 f f ; 
+ } 
+ 
+ . a u t o c o m p l e t e - s u g g e s t i o n . s e l e c t e d   { 
+         b a c k g r o u n d - c o l o r :   # 6 6 7 e e a ; 
+         c o l o r :   w h i t e ; 
+ } 
+ 
+ . a u t o c o m p l e t e - s u g g e s t i o n : l a s t - c h i l d   { 
+         b o r d e r - b o t t o m :   n o n e ; 
+ } 
+ 
+ /* ===== 3-SAYFALI MODAL ST�LLER� ===== */
+
+/* Champions Sayfas� */
+#championsContent {
+    padding: 20px;
+    background: white;
+}
+
+#championsContent h3 {
+    text-align: center;
+    color: #1e3c72;
+    margin-bottom: 20px;
+    font-size: 1.1em;
+}
+
+.champion-card-ns {
+    padding: 10px;
+    background: #E8F4F8;
+    margin-bottom: 8px;
+    border-radius: 5px;
+    border-left: 4px solid #20B2AA;
+}
+
+.champion-card-ew {
+    padding: 10px;
+    background: #F0F8E8;
+    margin-bottom: 8px;
+    border-radius: 5px;
+    border-left: 4px solid #6DB66D;
+}
+
+/* Kuzey-G�ney Sonu�lar� (NS) */
+#nsResultsContent {
+    padding: 20px;
+    background: white;
+}
+
+#nsResultsContent h3 {
+    text-align: center;
+    color: #20B2AA;
+    margin-bottom: 20px;
+    font-size: 1.1em;
+}
+
+.ns-result-card {
+    padding: 12px;
+    background: #E8F4F8;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border-left: 4px solid #20B2AA;
+}
+
+.ns-result-card > div:first-child {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+/* Do�u-Bat� Sonu�lar� (EW) */
+#ewResultsContent {
+    padding: 20px;
+    background: white;
+}
+
+#ewResultsContent h3 {
+    text-align: center;
+    color: #6DB66D;
+    margin-bottom: 20px;
+    font-size: 1.1em;
+}
+
+.ew-result-card {
+    padding: 12px;
+    background: #F0F8E8;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border-left: 4px solid #6DB66D;
+}
+
+.ew-result-card > div:first-child {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+/* Mobil 3-sayfa modal navigasyonu */
+#mobileResultsModal > div:last-child {
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background: #f5f5f5;
+    border-top: 1px solid #ddd;
+    flex-shrink: 0;
+}
+
+#currentPage {
+    font-weight: bold;
+    min-width: 20px;
+}
+
+/* Sayfa ge�i�i animasyonu */
+#pagesContainer {
+    overflow: hidden;
+}

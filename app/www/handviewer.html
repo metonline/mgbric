@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bridge Hand Viewer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1a472a 0%, #2d5a3d 100%);
+            color: #333;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .viewer-header {
+            text-align: center;
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .viewer-header h1 {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        .viewer-header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .hand-viewer {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .board-info {
+            background: linear-gradient(135deg, #1a472a 0%, #2d5a3d 100%);
+            color: white;
+            padding: 16px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .board-info strong {
+            font-size: 18px;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .hand-display {
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        /* North (top) */
+        .position-north {
+            text-align: center;
+            order: 1;
+        }
+
+        /* West (left) */
+        .position-west {
+            text-align: right;
+            order: 2;
+            margin-right: 20px;
+        }
+
+        /* East (right) */
+        .position-east {
+            text-align: left;
+            order: 3;
+            margin-left: 20px;
+        }
+
+        /* South (bottom) */
+        .position-south {
+            text-align: center;
+            order: 4;
+        }
+
+        /* For desktop: arrange in compass pattern */
+        @media (min-width: 768px) {
+            .hand-display {
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr;
+                grid-template-rows: auto auto auto;
+                padding: 60px 40px;
+                gap: 20px;
+            }
+
+            .position-north {
+                grid-column: 2;
+                grid-row: 1;
+                order: unset;
+                margin: 0;
+            }
+
+            .position-west {
+                grid-column: 1;
+                grid-row: 2;
+                order: unset;
+                text-align: right;
+            }
+
+            .position-east {
+                grid-column: 3;
+                grid-row: 2;
+                order: unset;
+                text-align: left;
+            }
+
+            .position-south {
+                grid-column: 2;
+                grid-row: 3;
+                order: unset;
+            }
+        }
+
+        .player-hand {
+            background: #f5f5f5;
+            padding: 16px;
+            border-radius: 8px;
+            border: 2px solid #ddd;
+        }
+
+        .player-name {
+            font-weight: bold;
+            color: #1a472a;
+            font-size: 14px;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .suits-container {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .suit-row {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .suit-symbol {
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            border-radius: 3px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .suit-s { background: #000; }
+        .suit-h { background: #c41e3a; }
+        .suit-d { background: #c41e3a; }
+        .suit-c { background: #000; }
+
+        .cards {
+            letter-spacing: 1px;
+            min-width: 60px;
+            font-size: 13px;
+        }
+
+        .void {
+            color: #999;
+            font-style: italic;
+        }
+
+        .dd-section {
+            background: #f9f9f9;
+            padding: 20px;
+            border-top: 2px solid #1a472a;
+            text-align: center;
+        }
+
+        .dd-title {
+            font-weight: bold;
+            color: #1a472a;
+            font-size: 12px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            letter-spacing: 1px;
+        }
+
+        .dd-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 11px;
+            margin: 0 auto;
+            max-width: 400px;
+        }
+
+        .dd-table th {
+            background: #1a472a;
+            color: white;
+            padding: 6px;
+            font-weight: bold;
+            border: 1px solid #1a472a;
+        }
+
+        .dd-table td {
+            padding: 5px;
+            text-align: center;
+            border: 1px solid #ddd;
+            font-weight: bold;
+        }
+
+        .dd-table tr:nth-child(even) {
+            background: #f0f0f0;
+        }
+
+        .dd-suit-label {
+            background: #e8e8e8;
+            color: #1a472a;
+            font-weight: bold;
+        }
+
+        .footer {
+            background: #f5f5f5;
+            padding: 12px;
+            text-align: center;
+            font-size: 11px;
+            color: #666;
+            border-top: 1px solid #ddd;
+        }
+
+        .controls {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 10px 16px;
+            background: white;
+            color: #1a472a;
+            border: 2px solid #1a472a;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background: #1a472a;
+            color: white;
+        }
+
+        .board-nav {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 15px;
+            align-items: center;
+        }
+
+        .board-nav select {
+            padding: 8px;
+            border: 2px solid #1a472a;
+            border-radius: 4px;
+            font-weight: bold;
+            background: white;
+            color: #1a472a;
+        }
+
+        .copy-link {
+            background: #27ae60;
+        }
+
+        .copy-link:hover {
+            background: #229954;
+            color: white;
+        }
+
+        @media (max-width: 767px) {
+            .hand-display {
+                padding: 20px;
+            }
+
+            .player-hand {
+                padding: 12px;
+            }
+
+            .suit-row {
+                font-size: 12px;
+            }
+
+            .suit-symbol {
+                width: 18px;
+                height: 18px;
+                font-size: 12px;
+            }
+        }
+
+        .loading {
+            text-align: center;
+            color: white;
+            padding: 40px;
+        }
+
+        .error {
+            background: #c41e3a;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="viewer-header">
+            <h1>🎴 Bridge Hand Viewer</h1>
+            <p>PAZAR SİMULTANE Tournament • Event #404377</p>
+        </div>
+
+        <div id="viewer" class="hand-viewer" style="display: none;">
+            <div class="board-info">
+                <strong>Board <span id="boardNum">1</span></strong>
+                <span>Dealer: <span id="dealerName">North</span></span>
+                <span id="vulnText"></span>
+            </div>
+
+            <div class="hand-display" id="handDisplay">
+                <!-- Generated by JavaScript -->
+            </div>
+
+            <div id="ddSection" class="dd-section" style="display: none;">
+                <!-- DD Table generated by JavaScript -->
+            </div>
+
+            <div class="footer">
+                Double Dummy • All 30 Boards Available
+            </div>
+        </div>
+
+        <div id="loading" class="loading">
+            Loading tournament database...
+        </div>
+
+        <div id="error" style="display: none;" class="error">
+            <!-- Error message here -->
+        </div>
+
+        <div class="controls">
+            <button class="btn" onclick="openAllBoards()">📋 View All Boards</button>
+            <button class="btn copy-link" onclick="copyLink()">📋 Copy Link</button>
+            <button class="btn" onclick="printBoard()">🖨️ Print</button>
+        </div>
+
+        <div class="board-nav">
+            <label for="boardSelect">Jump to board:</label>
+            <select id="boardSelect" onchange="loadBoard(this.value)">
+                <!-- Generated by JavaScript -->
+            </select>
+        </div>
+    </div>
+
+    <script>
+        let allBoards = {};
+        let currentBoard = 1;
+
+        // Load database on page load
+        async function loadDatabase() {
+            try {
+                const response = await fetch('/hands_database.json?v=' + Date.now());
+                if (!response.ok) throw new Error('Failed to load database');
+                
+                const data = await response.json();
+                
+                // Handle both formats
+                if (data.events) {
+                    allBoards = data.events['hosgoru_04_01_2026'].boards;
+                } else {
+                    allBoards = data;
+                }
+                
+                initUI();
+                
+                // Check for board parameter in URL
+                const params = new URLSearchParams(window.location.search);
+                const boardParam = params.get('board');
+                if (boardParam && allBoards[boardParam]) {
+                    currentBoard = parseInt(boardParam);
+                }
+                
+                loadBoard(currentBoard);
+                
+            } catch (error) {
+                showError('Failed to load database: ' + error.message);
+            }
+        }
+
+        function initUI() {
+            const select = document.getElementById('boardSelect');
+            for (let i = 1; i <= 30; i++) {
+                const option = document.createElement('option');
+                option.value = i;
+                option.textContent = `Board ${i}`;
+                select.appendChild(option);
+            }
+        }
+
+        function loadBoard(boardNum) {
+            currentBoard = parseInt(boardNum);
+            const boardData = getBoard(boardNum);
+            
+            if (!boardData) {
+                showError(`Board ${boardNum} not found`);
+                return;
+            }
+            
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('error').style.display = 'none';
+            document.getElementById('viewer').style.display = 'block';
+            
+            // Update board info
+            document.getElementById('boardNum').textContent = boardNum;
+            const dealerMap = { 'N': 'North', 'E': 'East', 'S': 'South', 'W': 'West' };
+            const dealer = boardData.dealer || 'N';
+            document.getElementById('dealerName').textContent = dealerMap[dealer] || dealer;
+            
+            // Update vulnerability
+            const vulnText = boardData.vulnerability || 'None';
+            document.getElementById('vulnText').textContent = `Vulnerability: ${vulnText}`;
+            
+            // Display hands
+            displayHands(boardData);
+            
+            // Display DD table if available
+            if (boardData.dd_analysis && Object.keys(boardData.dd_analysis).length > 0) {
+                displayDDTable(boardData.dd_analysis);
+            } else {
+                document.getElementById('ddSection').style.display = 'none';
+            }
+            
+            // Update board selector
+            document.getElementById('boardSelect').value = boardNum;
+            
+            // Update URL
+            window.history.replaceState({}, '', `?board=${boardNum}`);
+        }
+
+        function getBoard(boardNum) {
+            const boardStr = String(boardNum);
+            const board = allBoards[boardStr];
+            
+            if (!board) return null;
+            
+            if (board.hands) {
+                return board;
+            } else {
+                return {
+                    hands: {
+                        'North': board.N || {},
+                        'South': board.S || {},
+                        'East': board.E || {},
+                        'West': board.W || {}
+                    },
+                    dd_analysis: board.dd_analysis || {},
+                    dealer: board.dealer || 'N',
+                    vulnerability: board.vulnerability || 'None'
+                };
+            }
+        }
+
+        function displayHands(boardData) {
+            const container = document.getElementById('handDisplay');
+            container.innerHTML = '';
+            
+            const hands = boardData.hands;
+            const positions = [
+                { name: 'North', key: 'North', class: 'position-north' },
+                { name: 'West', key: 'West', class: 'position-west' },
+                { name: 'East', key: 'East', class: 'position-east' },
+                { name: 'South', key: 'South', class: 'position-south' }
+            ];
+            
+            for (const pos of positions) {
+                const hand = hands[pos.key] || {};
+                const handDiv = document.createElement('div');
+                handDiv.className = `player-hand ${pos.class}`;
+                
+                let html = `<div class="player-name">${pos.name}</div>`;
+                html += '<div class="suits-container">';
+                
+                const suits = ['S', 'H', 'D', 'C'];
+                const suitClasses = { 'S': 'suit-s', 'H': 'suit-h', 'D': 'suit-d', 'C': 'suit-c' };
+                
+                for (const suit of suits) {
+                    const cards = hand[suit] || '-';
+                    const isEmpty = cards === '-' || cards === '';
+                    
+                    html += `
+                        <div class="suit-row">
+                            <span class="suit-symbol ${suitClasses[suit]}">${suit}</span>
+                            <span class="cards ${isEmpty ? 'void' : ''}">${cards === '' || cards === '-' ? '—' : cards}</span>
+                        </div>
+                    `;
+                }
+                
+                html += '</div>';
+                handDiv.innerHTML = html;
+                container.appendChild(handDiv);
+            }
+        }
+
+        function displayDDTable(ddAnalysis) {
+            const section = document.getElementById('ddSection');
+            
+            let html = '<div class="dd-title">Double Dummy Analysis</div>';
+            html += '<table class="dd-table"><thead><tr><th>Suit</th><th>N</th><th>S</th><th>E</th><th>W</th></tr></thead><tbody>';
+            
+            const suits = ['NT', 'S', 'H', 'D', 'C'];
+            for (const suit of suits) {
+                html += `<tr><td class="dd-suit-label">${suit}</td>`;
+                for (const player of ['N', 'S', 'E', 'W']) {
+                    const key = `${suit}${player}`;
+                    const value = ddAnalysis[key] || '-';
+                    html += `<td>${value}</td>`;
+                }
+                html += '</tr>';
+            }
+            
+            html += '</tbody></table>';
+            section.innerHTML = html;
+            section.style.display = 'block';
+        }
+
+        function openAllBoards() {
+            window.location.href = '/bbo_hands_viewer.html';
+        }
+
+        function copyLink() {
+            const link = `${window.location.origin}${window.location.pathname}?board=${currentBoard}`;
+            navigator.clipboard.writeText(link).then(() => {
+                alert('Link copied to clipboard!');
+            });
+        }
+
+        function printBoard() {
+            window.print();
+        }
+
+        function showError(message) {
+            document.getElementById('loading').style.display = 'none';
+            const errorDiv = document.getElementById('error');
+            errorDiv.textContent = '❌ ' + message;
+            errorDiv.style.display = 'block';
+        }
+
+        // Load on page load
+        window.addEventListener('load', loadDatabase);
+    </script>
+</body>
+</html>

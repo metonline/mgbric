@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Boards - Hand Display with Solver Links</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #2a5f2a;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1800px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            background-color: #1a3a0f;
+            color: white;
+            padding: 20px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 5px;
+        }
+        
+        .controls {
+            background-color: white;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .controls button {
+            padding: 10px 20px;
+            background-color: #1a5490;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            margin: 5px;
+            font-size: 14px;
+        }
+        
+        .controls button:hover {
+            background-color: #0d3567;
+        }
+        
+        .boards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
+            gap: 15px;
+        }
+        
+        .board-card {
+            background-color: white;
+            border: 2px solid #333;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+        }
+        
+        .board-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.4);
+        }
+        
+        .board-header {
+            background-color: #1a5490;
+            color: white;
+            padding: 12px;
+            font-weight: bold;
+            font-size: 16px;
+            text-align: center;
+        }
+        
+        .board-info {
+            padding: 12px;
+            background-color: #f0f0f0;
+            font-size: 13px;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .board-info p {
+            margin: 4px 0;
+        }
+        
+        .hands-display {
+            padding: 15px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        
+        .hand {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            padding: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+        }
+        
+        .hand-player {
+            font-weight: bold;
+            color: #1a5490;
+            margin-bottom: 5px;
+            font-size: 13px;
+        }
+        
+        .suit {
+            margin: 3px 0;
+        }
+        
+        .suit-symbol {
+            font-weight: bold;
+            margin-right: 3px;
+        }
+        
+        .spades { color: #000; }
+        .hearts { color: #c41e3a; }
+        .diamonds { color: #4169e1; }
+        .clubs { color: #000; }
+        
+        .board-footer {
+            padding: 12px;
+            text-align: center;
+            background-color: #f5f5f5;
+            border-top: 1px solid #ddd;
+        }
+        
+        .board-footer a {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #fd7e14;
+            color: white;
+            text-decoration: none;
+            border-radius: 3px;
+            font-weight: bold;
+            font-size: 12px;
+            transition: background-color 0.2s;
+        }
+        
+        .board-footer a:hover {
+            background-color: #e06c00;
+        }
+        
+        .status {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+            border-radius: 4px;
+            display: none;
+            text-align: center;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🌉 PAZAR SIMULTANEE - All 30 Boards</h1>
+            <p>Event #404377 • 04-01-2026 • Click any board to open in Bridge Solver with DD Table</p>
+        </div>
+        
+        <div class="controls">
+            <button onclick="copyAllLinks()">📋 Copy All Board Links</button>
+            <button onclick="downloadLinks()">⬇️ Download All Links</button>
+        </div>
+        
+        <div id="status" class="status"></div>
+        
+        <div class="boards-grid" id="boardsContainer"></div>
+    </div>
+
+    <script>
+        let allBoards = {};
+        let allLinUrls = {};
+
+        async function loadDatabase() {
+            try {
+                const response = await fetch('/hands_database.json');
+                allBoards = await response.json();
+                generateAllBoards();
+            } catch (error) {
+                console.error('Error loading database:', error);
+                document.getElementById('status').innerHTML = '❌ Error loading database';
+                document.getElementById('status').style.display = 'block';
+            }
+        }
+
+        function generateLIN(boardNum, boardData) {
+            const n = boardData.N || {};
+            const s = boardData.S || {};
+            const e = boardData.E || {};
+            const w = boardData.W || {};
+            
+            const nHand = 'S' + (n.S || '-') + 'H' + (n.H || '-') + 'D' + (n.D || '-') + 'C' + (n.C || '-');
+            const eHand = 'S' + (e.S || '-') + 'H' + (e.H || '-') + 'D' + (e.D || '-') + 'C' + (e.C || '-');
+            const sHand = 'S' + (s.S || '-') + 'H' + (s.H || '-') + 'D' + (s.D || '-') + 'C' + (s.C || '-');
+            const wHand = 'S' + (w.S || '-') + 'H' + (w.H || '-') + 'D' + (w.D || '-') + 'C' + (w.C || '-');
+            
+            const dealer = ((boardNum - 1) % 4) + 1;
+            const vulnPattern = [0, 1, 2, 3, 1, 2, 3, 0, 2, 3, 0, 1, 3, 0, 1, 2];
+            const vuln = vulnPattern[(boardNum - 1) % 16];
+            
+            const lin = `qx|o1|md|${dealer}${sHand},${wHand},${nHand},${eHand}|rh||ah|Board%20${boardNum}|sv|${vuln}|pg||`;
+            return lin;
+        }
+
+        function getDealerName(dealerNum) {
+            const dealers = ['North', 'East', 'South', 'West'];
+            return dealers[dealerNum];
+        }
+        
+        function getVulnerability(boardNum) {
+            const vulnPattern = [0, 1, 2, 3, 1, 2, 3, 0, 2, 3, 0, 1, 3, 0, 1, 2];
+            const vulnIndex = vulnPattern[(boardNum - 1) % 16];
+            const vulnNames = ['None', 'N-S', 'E-W', 'Both'];
+            return vulnNames[vulnIndex];
+        }
+
+        function formatHand(hand) {
+            if (!hand) return '-';
+            return hand;
+        }
+
+        function createHandHTML(playerName, handData) {
+            const suits = [
+                { symbol: '♠', name: 'spades', key: 'S' },
+                { symbol: '♥', name: 'hearts', key: 'H' },
+                { symbol: '♦', name: 'diamonds', key: 'D' },
+                { symbol: '♣', name: 'clubs', key: 'C' }
+            ];
+            
+            let html = `<div class="hand">
+                <div class="hand-player">${playerName}</div>`;
+            
+            suits.forEach(suit => {
+                const cards = formatHand(handData[suit.key]);
+                html += `<div class="suit"><span class="suit-symbol ${suit.name}">${suit.symbol}</span>${cards}</div>`;
+            });
+            
+            html += `</div>`;
+            return html;
+        }
+
+        function generateAllBoards() {
+            const container = document.getElementById('boardsContainer');
+            container.innerHTML = '';
+            
+            for (let i = 1; i <= 30; i++) {
+                const boardData = allBoards[String(i)];
+                if (!boardData) continue;
+                
+                const lin = generateLIN(i, boardData);
+                const solverUrl = `https://www.jago.io/?l=${encodeURIComponent(lin)}`;
+                const bboUrl = `https://www.bridgebase.com/tools/handviewer.html?lin=${encodeURIComponent(lin)}`;
+                
+                allLinUrls[i] = solverUrl;
+                
+                const dealer = ((i - 1) % 4);
+                const dealerName = getDealerName(dealer);
+                const vuln = getVulnerability(i);
+                
+                const boardCard = document.createElement('div');
+                boardCard.className = 'board-card';
+                
+                let handHTML = `
+                    <div class="board-header">Board ${i}</div>
+                    <div class="board-info">
+                        <p><strong>Dealer:</strong> ${dealerName}</p>
+                        <p><strong>Vulnerability:</strong> ${vuln}</p>
+                    </div>
+                    <div class="hands-display">
+                        ${createHandHTML('North', boardData.N || {})}
+                        ${createHandHTML('East', boardData.E || {})}
+                        ${createHandHTML('South', boardData.S || {})}
+                        ${createHandHTML('West', boardData.W || {})}
+                    </div>
+                    <div class="board-footer">
+                        <a href="https://bridgesoln.com" target="_blank" onclick="return openWithDD(event, '${bboUrl}')">
+                            📊 View with DD Table (BBO)
+                        </a>
+                    </div>
+                `;
+                
+                boardCard.innerHTML = handHTML;
+                container.appendChild(boardCard);
+            }
+            
+            showStatus('✅ All 30 boards loaded! Click any board to see DD analysis.', 3000);
+        }
+
+        function openWithDD(event, url) {
+            // Open BBO in new tab for DD table
+            window.open(url, '_blank');
+            return false;
+        }
+
+        function copyAllLinks() {
+            let allLinks = '';
+            for (let i = 1; i <= 30; i++) {
+                if (allLinUrls[i]) {
+                    allLinks += `Board ${i}: ${allLinUrls[i]}\n\n`;
+                }
+            }
+            
+            navigator.clipboard.writeText(allLinks).then(() => {
+                showStatus('✅ All 30 board links copied!', 2000);
+            });
+        }
+
+        function downloadLinks() {
+            let content = 'PAZAR SIMULTANEE - All Board Links\nEvent #404377 • 04-01-2026\n\n';
+            
+            for (let i = 1; i <= 30; i++) {
+                if (allLinUrls[i]) {
+                    content += `Board ${i}:\n${allLinUrls[i]}\n\n`;
+                }
+            }
+            
+            const element = document.createElement('a');
+            element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(content));
+            element.setAttribute('download', 'BRIC_Tournament_Board_Links.txt');
+            element.style.display = 'none';
+            document.body.appendChild(element);
+            element.click();
+            document.body.removeChild(element);
+            
+            showStatus('✅ Links downloaded!', 1500);
+        }
+
+        function showStatus(message, duration) {
+            const status = document.getElementById('status');
+            status.innerHTML = message;
+            status.style.display = 'block';
+            if (duration) {
+                setTimeout(() => {
+                    status.style.display = 'none';
+                }, duration);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', loadDatabase);
+    </script>
+</body>
+</html>

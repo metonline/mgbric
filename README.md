@@ -1,48 +1,52 @@
-# Hoşgörü Turnuva Analiz ve Tarayıcı (TR/EN)
+# Webhook Server - Shared Hosting Setup
 
-## TR
-- Amaç: Kulüp takviminden turnuva sonuçlarını çekmek ve web arayüzünde analiz etmek.
-- Akış:
-  - `run_bot.py` ile sonuçları tarayın, `database.xlsx` güncellenir.
-  - `index.html` + `script.js` ile Excel verisini yükleyip filtreleyin ve istatistiklere bakın.
-- Hızlı Başlangıç:
-  1. Python ortamında bağımlılıkları kurun:
-     ```bash
-     pip install pandas requests beautifulsoup4 openpyxl
-     ```
-  2. Botu çalıştırın (Türkçe çıktı, 3 deneme):
-     ```bash
-     python run_bot.py --lang tr --retries 3
-     ```
-  3. Excel dosyası çalışma dizininde `database.xlsx` olarak oluşur/güncellenir.
-  4. Tarayıcıda `index.html` dosyasını açın.
+## Files Included
+- webhook_server.py: Main Flask server
+- vugraph_fetcher.py: Vugraph data fetcher
+- auto_update_vugraph.py: Database update script
+- .env.webhook: Webhook secret (KEEP SAFE!)
 
-- Dil (CLI):
-  - `--lang tr|en` ile terminal çıktısını Türkçe/İngilizce seçebilirsiniz.
-  - Bot, ortam değişkeni `HOSGORU_LANG` üzerinden dili alır.
+## Installation Steps
 
-## EN
-- Purpose: Fetch tournament results from the club calendar and analyze them in the web UI.
-- Flow:
-  - Run `run_bot.py` to scrape results; it updates `database.xlsx`.
-  - Use `index.html` + `script.js` to load Excel data, filter, and view stats.
-- Quick Start:
-  1. Install dependencies in your Python environment:
-     ```bash
-     pip install pandas requests beautifulsoup4 openpyxl
-     ```
-  2. Run the bot (English output, 3 retries):
-     ```bash
-     python run_bot.py --lang en --retries 3
-     ```
-  3. Excel file `database.xlsx` is created/updated in the working directory.
-  4. Open `index.html` in your browser.
+### Option 1: Using cPanel Python App (RECOMMENDED)
+1. Upload all files to /home/username/webhook_app/ (via FTP)
+2. In cPanel > Software > Setup Python App
+3. Select Python version (3.6+)
+4. App root: /home/username/webhook_app
+5. App domain: mgbric.info
+6. App URI: /hosgoru
+7. Application startup file: webhook_server.py
+8. Click Create
+9. Note the public URL assigned
 
-- Language (CLI):
-  - Select terminal output language via `--lang tr|en`.
-  - The scraper reads language from the `HOSGORU_LANG` environment variable.
+### Option 2: Manual cPanel Setup
+1. Upload files via FTP to /public_html/hosgoru/
+2. Set permissions: chmod 755 on directories, 644 on files
+3. Create .htaccess with proxy rules
+4. In cPanel > Cron Jobs > Add job to keep server running
 
-## Notes
-- Web UI supports TR/EN via an in-page language selector.
-- Stats include global summaries and per-player insights.
-- If site structure changes, scraping may need adjustments.
+## GitHub Webhook Setup
+1. Go to: https://github.com/USERNAME/BRIC/settings/hooks
+2. Add webhook with:
+   - Payload URL: https://mgbric.info/hosgoru/webhook
+   - Secret: (copy from .env.webhook)
+   - Events: Push events
+   - Active: Yes
+
+## Testing
+1. Make a push to your GitHub repository
+2. Check GitHub webhook Recent Deliveries
+3. Look for Status 200 response
+4. Verify database.json updated
+
+## Important
+- Keep .env.webhook secure (contains webhook secret)
+- Do not commit to GitHub
+- Monitor server uptime via cPanel
+
+## Troubleshooting
+If webhook does not work:
+1. Check cPanel Python app status
+2. Review error logs in cPanel
+3. Verify .env.webhook has correct secret
+4. Test with curl: curl https://mgbric.info/hosgoru/health

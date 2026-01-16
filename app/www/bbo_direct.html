@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BBO Direct Links - Tournament Boards</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            background-color: #1a5490;
+            color: white;
+            padding: 20px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+        
+        .header h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        .controls {
+            background-color: white;
+            padding: 20px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .boards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 10px;
+        }
+        
+        .board-link {
+            display: block;
+            padding: 15px;
+            background-color: #1a5490;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            text-align: center;
+            font-weight: bold;
+            transition: all 0.2s;
+            border: 2px solid #1a5490;
+        }
+        
+        .board-link:hover {
+            background-color: white;
+            color: #1a5490;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .board-link small {
+            display: block;
+            font-size: 11px;
+            margin-top: 5px;
+            opacity: 0.9;
+        }
+        
+        .info {
+            background-color: #e8f4f8;
+            padding: 15px;
+            border-left: 4px solid #1a5490;
+            border-radius: 4px;
+        }
+        
+        .info p {
+            color: #333;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+        
+        .info code {
+            background-color: #f0f0f0;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>PAZAR SİMULTANE - Tournament Boards</h1>
+            <p>Event #404377 • 04-01-2026 • 30 Boards from Vugraph</p>
+            <p>Click any board number to view in BridgeBase Hand Viewer</p>
+        </div>
+        
+        <div class="controls">
+            <div class="boards-grid" id="boardsGrid"></div>
+        </div>
+        
+        <div class="info">
+            <p><strong>How to use:</strong></p>
+            <p>1. Click any board number (1-30) below</p>
+            <p>2. The BridgeBase hand viewer will open in a new tab with the board data</p>
+            <p>3. Use BBO's controls (Rewind, Previous, Next, Options, GIB, Play) to analyze</p>
+            <p><strong>Note:</strong> Each link contains the complete hand data in LIN format</p>
+        </div>
+    </div>
+    
+    <script>
+        let allBoards = {};
+        
+        async function loadDatabase() {
+            try {
+                const response = await fetch('/hands_database.json');
+                const data = await response.json();
+                allBoards = data;
+                generateBoardLinks();
+            } catch (error) {
+                console.error('Error loading database:', error);
+                document.getElementById('boardsGrid').innerHTML = '<p>Error loading boards</p>';
+            }
+        }
+        
+        function generateBoardLinks() {
+            const grid = document.getElementById('boardsGrid');
+            
+            for (let boardNum = 1; boardNum <= 30; boardNum++) {
+                const boardData = allBoards[String(boardNum)];
+                if (!boardData) continue;
+                
+                const lin = generateLIN(boardNum, boardData);
+                const bbUrl = `https://www.bridgebase.com/tools/handviewer.html?lin=${encodeURIComponent(lin)}`;
+                
+                const link = document.createElement('a');
+                link.href = bbUrl;
+                link.target = '_blank';
+                link.className = 'board-link';
+                link.innerHTML = `Board ${boardNum}<small>Click to view</small>`;
+                
+                grid.appendChild(link);
+            }
+        }
+        
+        function generateLIN(boardNum, boardData) {
+            const n = boardData.N || {};
+            const s = boardData.S || {};
+            const e = boardData.E || {};
+            const w = boardData.W || {};
+            
+            // Build hand strings with dashes for voids
+            const nHand = (n.S || '-') + (n.H || '-') + (n.D || '-') + (n.C || '-');
+            const eHand = (e.S || '-') + (e.H || '-') + (e.D || '-') + (e.C || '-');
+            const sHand = (s.S || '-') + (s.H || '-') + (s.D || '-') + (s.C || '-');
+            const wHand = (w.S || '-') + (w.H || '-') + (w.D || '-') + (w.C || '-');
+            
+            // Determine dealer
+            const dealers = ['N', 'E', 'S', 'W'];
+            const dealer = dealers[(boardNum - 1) % 4];
+            
+            // Determine vulnerability
+            const vulnPattern = [
+                '-', 'N', 'E', 'B',
+                'N', 'E', 'B', '-',
+                'E', 'B', '-', 'N',
+                'B', '-', 'N', 'E'
+            ];
+            const vuln = vulnPattern[(boardNum - 1) % 16];
+            
+            return `pn|Vugraph,,,|md|${dealer}${boardNum},${nHand},${eHand},${sHand},${wHand}|sv|${vuln}|`;
+        }
+        
+        document.addEventListener('DOMContentLoaded', loadDatabase);
+    </script>
+</body>
+</html>

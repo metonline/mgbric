@@ -1,0 +1,46 @@
+# Webhook Setup Checklist
+
+Before You Start:
+[ ] Have FTP credentials for mgbric.info
+[ ] Can access cPanel
+[ ] .env.webhook file has webhook secret
+[ ] Know your cPanel username
+
+FTP Upload Phase:
+[ ] Connect to FTP server
+[ ] Create /home/username/webhook_app/ folder
+[ ] Upload webhook_server.py
+[ ] Upload vugraph_fetcher.py
+[ ] Upload auto_update_vugraph.py
+[ ] Upload .env.webhook
+[ ] Set correct file permissions (755 for .py files)
+
+cPanel Setup Phase:
+[ ] Log in to cPanel
+[ ] Open Setup Python App
+[ ] Python version: 3.6+ selected
+[ ] App root path: /home/username/webhook_app
+[ ] Domain: mgbric.info
+[ ] URI: /hosgoru
+[ ] Startup file: webhook_server.py
+[ ] Click Create button
+[ ] Copy the Application URL shown
+
+GitHub Webhook Phase:
+[ ] Go to repository Settings > Webhooks
+[ ] Add or update webhook
+[ ] Payload URL: https://mgbric.info/hosgoru/webhook
+[ ] Secret: (from .env.webhook)
+[ ] Content type: application/json
+[ ] Events: Push events
+[ ] Active: checked
+[ ] Save webhook
+
+Testing Phase:
+[ ] Make a test push to repository
+[ ] Check GitHub Recent Deliveries
+[ ] See Status 200 response
+[ ] Verify database.json updated
+[ ] Check website shows new data
+
+Completed! Webhook is now live.

@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BridgeBase Hand Viewer - Tournament Boards</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            background-color: #1a5490;
+            color: white;
+            padding: 20px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+        
+        .header h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        .controls {
+            background-color: white;
+            padding: 20px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            flex-wrap: wrap;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .board-selector {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .board-selector label {
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .board-selector select {
+            padding: 8px 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+            cursor: pointer;
+            background-color: white;
+        }
+        
+        .board-buttons {
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+        }
+        
+        .board-buttons button {
+            padding: 8px 12px;
+            border: 1px solid #ccc;
+            background-color: white;
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 12px;
+            transition: all 0.2s;
+        }
+        
+        .board-buttons button:hover {
+            background-color: #1a5490;
+            color: white;
+            border-color: #1a5490;
+        }
+        
+        .board-buttons button.active {
+            background-color: #1a5490;
+            color: white;
+            border-color: #1a5490;
+        }
+        
+        .viewer-wrapper {
+            background-color: white;
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .bbo-iframe {
+            width: 100%;
+            height: 900px;
+            border: none;
+            display: block;
+        }
+        
+        .info {
+            background-color: #e8f4f8;
+            padding: 15px;
+            border-left: 4px solid #1a5490;
+            margin-top: 20px;
+            border-radius: 4px;
+        }
+        
+        .info p {
+            color: #333;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        
+        .info code {
+            background-color: #f0f0f0;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>PAZAR SİMULTANE - Tournament Boards Viewer</h1>
+            <p>Event #404377 • 04-01-2026 • 30 Boards from Vugraph</p>
+        </div>
+        
+        <div class="controls">
+            <div class="board-selector">
+                <label for="boardSelect">Select Board:</label>
+                <select id="boardSelect">
+                    <option value="">-- Choose Board (1-30) --</option>
+                </select>
+            </div>
+            
+            <div class="board-buttons" id="boardButtons"></div>
+        </div>
+        
+        <div class="viewer-wrapper">
+            <iframe 
+                id="bboViewer" 
+                class="bbo-iframe"
+                allow="clipboard-write"
+            ></iframe>
+        </div>
+        
+        <div class="info">
+            <p><strong>How to use:</strong></p>
+            <p>1. Select a board from the dropdown or click a board number button (1-30)</p>
+            <p>2. The BridgeBase hand viewer will load the selected board in its native interface</p>
+            <p>3. Use the viewer controls (Rewind, Previous, Next, Options, GIB, Play) to analyze the board</p>
+            <p>4. All boards are from the PAZAR SİMULTANE tournament recovered from Vugraph</p>
+        </div>
+    </div>
+    
+    <script>
+        // Load hands database
+        let allBoards = {};
+        let currentBoard = 1;
+        
+        async function loadDatabase() {
+            try {
+                const response = await fetch('/hands_database.json');
+                const data = await response.json();
+                
+                // Data is flat format: {"1": {N, S, E, W}, "2": {...}, ...}
+                allBoards = data;
+                console.log('Loaded boards:', Object.keys(allBoards).slice(0, 5));
+                
+                initializeBoard();
+            } catch (error) {
+                console.error('Error loading database:', error);
+            }
+        }
+        
+        function initializeBoard() {
+            // Populate board selector dropdown
+            const select = document.getElementById('boardSelect');
+            for (let i = 1; i <= 30; i++) {
+                const option = document.createElement('option');
+                option.value = i;
+                option.textContent = `Board ${i}`;
+                select.appendChild(option);
+            }
+            
+            // Populate board buttons
+            const buttonsContainer = document.getElementById('boardButtons');
+            for (let i = 1; i <= 30; i++) {
+                const button = document.createElement('button');
+                button.textContent = i;
+                button.dataset.board = i;
+                button.addEventListener('click', function() {
+                    loadBoard(i);
+                });
+                buttonsContainer.appendChild(button);
+            }
+            
+            // Event listeners
+            select.addEventListener('change', function() {
+                if (this.value) {
+                    loadBoard(parseInt(this.value));
+                }
+            });
+            
+            // Load first board by default
+            loadBoard(1);
+        }
+        
+        function loadBoard(boardNum) {
+            currentBoard = boardNum;
+            
+            // Update UI
+            document.getElementById('boardSelect').value = boardNum;
+            document.querySelectorAll('.board-buttons button').forEach(btn => {
+                btn.classList.remove('active');
+                if (parseInt(btn.dataset.board) === boardNum) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            // Get hand data
+            const boardData = allBoards[String(boardNum)];
+            if (!boardData) {
+                console.error(`Board ${boardNum} not found`);
+                return;
+            }
+            
+            // Generate LIN format
+            const lin = generateLIN(boardNum, boardData);
+            console.log(`Loading Board ${boardNum}:`, lin);
+            
+            // Set iframe src with LIN parameter
+            const bbUrl = `https://www.bridgebase.com/tools/handviewer.html?lin=${encodeURIComponent(lin)}`;
+            console.log(`Setting iframe URL: ${bbUrl.substring(0, 100)}...`);
+            document.getElementById('bboViewer').src = bbUrl;
+        }
+        
+        function generateLIN(boardNum, boardData) {
+            // Extract hands from board data (format: {"N": {S, H, D, C}, "S": {}, "E": {}, "W": {}})
+            const n = boardData.N || boardData.North || {};
+            const s = boardData.S || boardData.South || {};
+            const e = boardData.E || boardData.East || {};
+            const w = boardData.W || boardData.West || {};
+            
+            // Build hand strings in suit order: Spades, Hearts, Diamonds, Clubs
+            const nHand = (n.S || '-') + (n.H || '-') + (n.D || '-') + (n.C || '-');
+            const eHand = (e.S || '-') + (e.H || '-') + (e.D || '-') + (e.C || '-');
+            const sHand = (s.S || '-') + (s.H || '-') + (s.D || '-') + (s.C || '-');
+            const wHand = (w.S || '-') + (w.H || '-') + (w.D || '-') + (w.C || '-');
+            
+            // Determine dealer (rounds 1-4: N, E, S, W)
+            const dealers = ['N', 'E', 'S', 'W'];
+            const dealer = dealers[(boardNum - 1) % 4];
+            
+            // Determine vulnerability (standard bridge rotation)
+            const vulnPattern = [
+                '-', 'N', 'E', 'B',  // Boards 1-4
+                'N', 'E', 'B', '-',  // Boards 5-8
+                'E', 'B', '-', 'N',  // Boards 9-12
+                'B', '-', 'N', 'E'   // Boards 13-16
+            ];
+            const vuln = vulnPattern[(boardNum - 1) % 16];
+            
+            // Build LIN string: md|{dealer}{board},{N hand},{E hand},{S hand},{W hand}
+            const lin = `pn|Vugraph,,,|md|${dealer}${boardNum},${nHand},${eHand},${sHand},${wHand}|sv|${vuln}|`;
+            
+            console.log(`Board ${boardNum}: dealer=${dealer}, vuln=${vuln}, LIN=${lin.substring(0, 100)}...`);
+            return lin;
+        }
+        
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', loadDatabase);
+    </script>
+</body>
+</html>

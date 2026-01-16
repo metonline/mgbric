@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Hands Database</title>
+</head>
+<body>
+    <h1>Test Hands Database</h1>
+    <pre id="output"></pre>
+    <script>
+        async function test() {
+            const output = document.getElementById('output');
+            
+            try {
+                output.textContent += "1. Fetching hands_database.json...\n";
+                const response = await fetch('hands_database.json?v=' + Date.now());
+                output.textContent += `   Status: ${response.status}\n`;
+                output.textContent += `   OK: ${response.ok}\n`;
+                
+                const data = await response.json();
+                output.textContent += "2. JSON parsed successfully!\n";
+                
+                const eventKeys = Object.keys(data.events);
+                output.textContent += `3. Events count: ${eventKeys.length}\n`;
+                
+                if (eventKeys.length > 0) {
+                    const firstKey = eventKeys[0];
+                    const event = data.events[firstKey];
+                    output.textContent += `4. First event: ${event.name}\n`;
+                    output.textContent += `   Date: ${event.date}\n`;
+                    
+                    const boardKeys = Object.keys(event.boards);
+                    output.textContent += `   Boards: ${boardKeys.length}\n`;
+                    
+                    const firstBoard = event.boards[boardKeys[0]];
+                    output.textContent += `5. First board: ${boardKeys[0]}\n`;
+                    output.textContent += `   Dealer: ${firstBoard.dealer}\n`;
+                    output.textContent += `   Vulnerability: ${firstBoard.vulnerability}\n`;
+                    
+                    output.textContent += "   Hands:\n";
+                    ['North', 'South', 'East', 'West'].forEach(pos => {
+                        const hand = firstBoard.hands[pos];
+                        const handStr = (hand.S || '') + ' ' + (hand.H || '') + ' ' + (hand.D || '') + ' ' + (hand.C || '');
+                        output.textContent += `     ${pos}: ${handStr}\n`;
+                    });
+                }
+                
+                output.textContent += "\n✓ ALL TESTS PASSED!\n";
+                
+            } catch (error) {
+                output.textContent += `ERROR: ${error.message}\n`;
+            }
+        }
+        
+        test();
+    </script>
+</body>
+</html>

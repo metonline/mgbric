@@ -1,0 +1,69 @@
+# FTP Upload Instructions for cPanel Shared Hosting
+
+## Step 1: Download Bundle
+1. Download webhook_shared_hosting_[date].zip
+2. Extract to a temporary folder
+
+## Step 2: FTP Connection
+1. Open FileZilla or any FTP client
+2. Connect to mgbric.info:
+   - Server: ftp.mgbric.info or your FTP host
+   - Username: your cPanel username
+   - Password: your cPanel password
+   - Port: 21
+
+3. Navigate to home directory (/home/username/)
+4. Create new folder: webhook_app
+5. Upload all files into webhook_app/
+
+## Step 3: cPanel Configuration
+1. Log in to cPanel (cpanel.mgbric.info or control.mgbric.info)
+2. Go to Software section > Setup Python App
+3. Fill in form:
+   - Python version: 3.6 or 3.8+ (any available)
+   - Application root: /home/username/webhook_app
+   - Application domain: mgbric.info
+   - Application URI: /hosgoru
+   - Application startup file: webhook_server.py
+4. Click "Create" button
+5. cPanel shows your Application URL - COPY IT!
+
+## Step 4: Update GitHub Webhook
+1. Go to https://github.com/USERNAME/BRIC/settings/hooks
+2. Click existing webhook or create new one
+3. Update Payload URL to: https://mgbric.info/hosgoru/webhook
+4. Content type: application/json
+5. Secret: Look in .env.webhook file
+6. Save
+
+## Step 5: Test
+1. In GitHub webhook settings, click "Recent Deliveries"
+2. Make a test push to your repository
+3. Check if you see Status 200 response
+4. If error, click delivery to see response details
+
+## Troubleshooting
+
+Problem: Status shows error (4xx or 5xx)
+Solution:
+- Verify .env.webhook has exact secret
+- Check Python app is running in cPanel
+- Look at error logs in cPanel > Errors section
+
+Problem: Webhook times out
+Solution:
+- Shared hosting may have execution limits
+- Contact hosting provider to increase timeout
+- Or use alternative cron method instead
+
+Problem: "Bad address" or connection refused
+Solution:
+- Check firewall is not blocking
+- Verify you're using correct domain (mgbric.info)
+- Try test endpoint: https://mgbric.info/hosgoru/health
+
+## Support
+If issues persist, contact your hosting provider with:
+- Error message from GitHub webhook delivery
+- Python app status from cPanel
+- Error logs from cPanel

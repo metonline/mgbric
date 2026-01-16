@@ -155,8 +155,9 @@ header p {
     width: 100% !important;
     margin: 0 !important;
     text-align: center !important;
-    display: block !important;
-    cursor: pointer !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
 }
 
 /* Oyuncu adı input'u */
@@ -170,7 +171,8 @@ header p {
     box-sizing: border-box !important;
     width: 100% !important;
     margin: 0 !important;
-    display: block !important;
+    display: flex !important;
+    align-items: center !important;
 }
 
 /* Tarih Seç Butonu - Mavi */
@@ -353,15 +355,13 @@ header p {
 
 /* Date input special styling for Grid */
 input[type="date"] {
-    /* appearance: none;
+    appearance: none;
     -webkit-appearance: none;
-    -moz-appearance: none; */
+    -moz-appearance: none;
 }
 
 .input-group input[type="date"]::-webkit-calendar-picker-indicator {
-    /* display: none; */
-    cursor: pointer;
-    filter: invert(0.5);
+    display: none;
 }
 }
 

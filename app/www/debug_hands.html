@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Debug Hands Viewer</title>
+    <style>
+        body { font-family: monospace; padding: 20px; background: #f0f0f0; }
+        pre { background: white; padding: 15px; border-radius: 5px; overflow-x: auto; border: 1px solid #ddd; }
+    </style>
+</head>
+<body>
+    <h1>Debug: Hands Viewer</h1>
+    <pre id="log"></pre>
+    
+    <script>
+        const log = document.getElementById('log');
+        
+        function addLog(msg) {
+            log.textContent += msg + '\n';
+            console.log(msg);
+        }
+        
+        addLog('=== Starting debug ===');
+        
+        // Test 1: JSON loading
+        async function test() {
+            try {
+                addLog('\n1. Fetching JSON...');
+                const resp = await fetch('hands_database.json');
+                addLog(`   Status: ${resp.status}`);
+                
+                const data = await resp.json();
+                const events = data.events || {};
+                addLog(`   Events: ${Object.keys(events).length}`);
+                
+                // Get first event
+                const firstKey = Object.keys(events)[0];
+                const event = events[firstKey];
+                addLog(`   First event: ${event.name}`);
+                addLog(`   Boards: ${Object.keys(event.boards).length}`);
+                
+                // Get first board
+                const boardKeys = Object.keys(event.boards);
+                const board = event.boards[boardKeys[0]];
+                addLog(`   First board (${boardKeys[0]}):`);
+                addLog(`     Dealer: ${board.dealer}`);
+                addLog(`     Vulnerability: ${board.vulnerability}`);
+                addLog(`     Contract: ${board.result.contract}`);
+                
+                // Check hands
+                addLog(`   Hands:`);
+                ['North', 'South', 'East', 'West'].forEach(pos => {
+                    const hand = board.hands[pos];
+                    if (hand) {
+                        const str = `${hand.S || '-'} ${hand.H || '-'} ${hand.D || '-'} ${hand.C || '-'}`;
+                        addLog(`     ${pos}: ${str}`);
+                    } else {
+                        addLog(`     ${pos}: MISSING!`);
+                    }
+                });
+                
+                addLog('\n✓ ALL DATA OK');
+                
+            } catch (error) {
+                addLog(`ERROR: ${error.message}`);
+                addLog(error.stack);
+            }
+        }
+        
+        test();
+    </script>
+</body>
+</html>

@@ -1,0 +1,212 @@
+[
+  {
+    "board": 1,
+    "dealer": "N",
+    "vulnerability": "None",
+    "lin_string": "qx|o1|md|1SAKJT93HQDQJ854CT,SQ864HJ97DT3CA842,S52HKT8642DA62CKQ|rh||ah|Board%201|sv|0|pg||",
+    "url": "https://www.bridgebase.com/tools/handviewer.html?lin=qx|o1|md|1SAKJT93HQDQJ854CT,SQ864HJ97DT3CA842,S52HKT8642DA62CKQ|rh||ah|Board%201|sv|0|pg||"
+  },
+  {
+    "board": 2,
+    "dealer": "E",
+    "vulnerability": "N-S",
+    "lin_string": "qx|o1|md|2S64H963D9542CT752,SAQ75HAQ72D7CA643,SJHKJT54DAJT86CJ9|rh||ah|Board%202|sv|1|pg||",
+    "url": "https://www.bridgebase.com/tools/handviewer.html?lin=qx|o1|md|2S64H963D9542CT752,SAQ75HAQ72D7CA643,SJHKJT54DAJT86CJ9|rh||ah|Board%202|sv|1|pg||"
+  },
+  {
+    "board": 3,
+    "dealer": "S",
+    "vulnerability": "E-W",
+    "lin_string": "qx|o1|md|3SQ7653H9DJ653CJ85,S4HAKQT64DQT4C973,SAKJ2H52DA8CAQT62|rh||ah|Board%203|sv|2|pg||",
+    "url": "https://www.bridgebase.com/tools/handviewer.html?lin=qx|o1|md|3SQ7653H9DJ653CJ85,S4HAKQT64DQT4C973,SAKJ2H52DA8CAQT62|rh||ah|Board%203|sv|2|pg||"
+  },
+  {
+    "board": 4,
+    "dealer": "W",
+    "vulnerability": "Both",
+    "lin_string": "qx|o1|md|4S94HJT6542D8C8652,SKQ5HQ9DK7432CJT7,ST863HAK8DQ96CQ93|rh||ah|Board%204|sv|3|pg||",
+    "url": "https://www.bridgebase.com/tools/handviewer.html?lin=qx|o1|md|4S94HJT6542D8C8652,SKQ5HQ9DK7432CJT7,ST863HAK8DQ96CQ93|rh||ah|Board%204|sv|3|pg||"
+  },
+  {
+    "board": 5,
+    "dealer": "N",
+    "vulnerability": "E-W",
+    "lin_string": "qx|o1|md|1SQ2HK6DKQJ743CAT9,SJ65HJ953D52CQ763,SK7HAT742DACKJ842|rh||ah|Board%205|sv|2|pg||",
+    "url": "https://www.bridgebase.com/tools/handviewer.html?lin=qx|o1|md|1SQ2HK6DKQJ743CAT9,SJ65HJ953D52CQ763,SK7HAT742DACKJ842|rh||ah|Board%205|sv|2|pg||"
+  },
+  {
+    "board": 6,
+    "dealer": "E",
+    "vulnerability": "Both",
+    "lin_string": "qx|o1|md|2SQJ9742H6DAT95CJ5,SAHKT74D632C98743,S83HAJ95DKJ7CAK62|rh||ah|Board%206|sv|3|pg||",
+    "url": "https://www.bridgebase.com/tools/handviewer.html?lin=qx|o1|md|2SQJ9742H6DAT95CJ5,SAHKT74D632C98743,S83HAJ95DKJ7CAK62|rh||ah|Board%206|sv|3|pg||"
+  },
+  {
+    "board": 7,
+    "dealer": "S",
+    "vulnerability": "None",
+    "lin_string": "qx|o1|md|3SQT54HD9874CJT942,S86HQJT643DQ2CK63,SAJ32HK52DKT65CA7|rh||ah|Board%207|sv|0|pg||",
+    "url": "https://www.bridgebase.com/tools/handviewer.html?lin=qx|o1|md|3SQT54HD9874CJT942,S86HQJT643DQ2CK63,SAJ32HK52DKT65CA7|rh||ah|Board%207|sv|0|pg||"
+  },
+  {
+    "board": 8,
+    "dealer": "W",
+    "vulnerability": "N-S",
+    "lin_string": "qx|o1|md|4SKQ65HQ6DQ73CT874,S983H72DT865CAJ93,SJT72HKJDK942CK52|rh||ah|Board%208|sv|1|pg||",
+    "url": "https://www.bridgebase.com/tools/handviewer.html?lin=qx|o1|md|4SKQ65HQ6DQ73CT874,S983H72DT865CAJ93,SJT72HKJDK942CK52|rh||ah|Board%208|sv|1|pg||"
+  },
+  {
+    "board": 9,
+    "dealer": "N",
+    "vulnerability": "Both",
+    "lin_string": "qx|o1|md|1SAQT8HKT762DCKT43,SQJHQ87642D5CQJ95,SA983HAKJD9762CA8|rh||ah|Board%209|sv|3|pg||",
+    "url": "https://www.bridgebase.com/tools/handviewer.html?lin=qx|o1|md|1SAQT8HKT762DCKT43,SQJHQ87642D5CQJ95,SA983HAKJD9762CA8|rh||ah|Board%209|sv|3|pg||"
+  },
+  {
+    "board": 10,
+    "dealer": "E",
+    "vulnerability": "None",
+    "lin_string": "qx|o1|md|2S873HAJ876DQ985CT,SJ954HKQDAT76CJ85,SAQ6HT5432DKCA643|rh||ah|Board%2010|sv|0|pg||",
+    "url": "https://www.bridgebase.com/tools/handviewer.html?lin=qx|o1|md|2S873HAJ876DQ985CT,SJ954HKQDAT76CJ85,SAQ6HT5432DKCA643|rh||ah|Board%2010|sv|0|pg||"
+  },
+  {
+    "board": 11,
+    "dealer": "N",
+    "vulnerability": "None",
+    "lin_string": "qx|o1|md|1S875H73DA832CQJT9,SKJ2HKQJ654DQ6C64,SQT3HAT92D54C8752|rh||ah|Board%2011|sv|0|pg||",
+    "url": "https://www.bridgebase.com/tools/handviewer.html?lin=qx|o1|md|1S875H73DA832CQJT9,SKJ2HKQJ654DQ6C64,SQT3HAT92D54C8752|rh||ah|Board%2011|sv|0|pg||"
+  },
+  {
+    "board": 12,
+    "dealer": "E",
+    "vulnerability": "N-S",
+    "lin_string": "qx|o1|md|2SQJ93HQT5DAT94CA3,SA752HA4DJ2CKQT94,ST8HJ98763D86CJ85|rh||ah|Board%2012|sv|1|pg||",
+    "url": "https://www.bridgebase.com/tools/handviewer.html?lin=qx|o1|md|2SQJ93HQT5DAT94CA3,SA752HA4DJ2CKQT94,ST8HJ98763D86CJ85|rh||ah|Board%2012|sv|1|pg||"
+  },
+  {
+    "board": 13,
+    "dealer": "S",
+    "vulnerability": "E-W",
+    "lin_string": "qx|o1|md|3SA864HA42DJ2CAKT8,ST5HJ5DKQT54CJ752,S3HKQ87D98763C643|rh||ah|Board%2013|sv|2|pg||",
+    "url": "https://www.bridgebase.com/tools/handviewer.html?lin=qx|o1|md|3SA864HA42DJ2CAKT8,ST5HJ5DKQT54CJ752,S3HKQ87D98763C643|rh||ah|Board%2013|sv|2|pg||"
+  },
+  {
+    "board": 14,
+    "dealer": "W",
+    "vulnerability": "Both",
+    "lin_string": "qx|o1|md|4SKJT962HKDJT2CQ32,S43H62DKQ95CAK974,SA7HQJT8DA763CT86|rh||ah|Board%2014|sv|3|pg||",
+    "url": "https://www.bridgebase.com/tools/handviewer.html?lin=qx|o1|md|4SKJT962HKDJT2CQ32,S43H62DKQ95CAK974,SA7HQJT8DA763CT86|rh||ah|Board%2014|sv|3|pg||"
+  },
+  {
+    "board": 15,
+    "dealer": "N",
+    "vulnerability": "E-W",
+    "lin_string": "qx|o1|md|1SQ65HAKQ3DKT8CJ83,SJ7HT54D963CK9654,SAT82H98DAJ542CT2|rh||ah|Board%2015|sv|2|pg||",
+    "url": "https://www.bridgebase.com/tools/handviewer.html?lin=qx|o1|md|1SQ65HAKQ3DKT8CJ83,SJ7HT54D963CK9654,SAT82H98DAJ542CT2|rh||ah|Board%2015|sv|2|pg||"
+  },
+  {
+    "board": 16,
+    "dealer": "E",
+    "vulnerability": "Both",
+    "lin_string": "qx|o1|md|2SK764HT753DJ32C84,SA53HA2D97654CAJ9,SQJT82H984DAT8C32|rh||ah|Board%2016|sv|3|pg||",
+    "url": "https://www.bridgebase.com/tools/handviewer.html?lin=qx|o1|md|2SK764HT753DJ32C84,SA53HA2D97654CAJ9,SQJT82H984DAT8C32|rh||ah|Board%2016|sv|3|pg||"
+  },
+  {
+    "board": 17,
+    "dealer": "S",
+    "vulnerability": "None",
+    "lin_string": "qx|o1|md|3SAKQ8HKT7DJ97532C,S63HQ9862DACJ8742,S752HJ4DKQ86CAQ63|rh||ah|Board%2017|sv|0|pg||",
+    "url": "https://www.bridgebase.com/tools/handviewer.html?lin=qx|o1|md|3SAKQ8HKT7DJ97532C,S63HQ9862DACJ8742,S752HJ4DKQ86CAQ63|rh||ah|Board%2017|sv|0|pg||"
+  },
+  {
+    "board": 18,
+    "dealer": "W",
+    "vulnerability": "N-S",
+    "lin_string": "qx|o1|md|4SAQJ7HT5DT843CT92,S83HKJ862DAQJ5C76,SKT9652HQ4DK62CQ4|rh||ah|Board%2018|sv|1|pg||",
+    "url": "https://www.bridgebase.com/tools/handviewer.html?lin=qx|o1|md|4SAQJ7HT5DT843CT92,S83HKJ862DAQJ5C76,SKT9652HQ4DK62CQ4|rh||ah|Board%2018|sv|1|pg||"
+  },
+  {
+    "board": 19,
+    "dealer": "N",
+    "vulnerability": "Both",
+    "lin_string": "qx|o1|md|1S872HK7DAK872C853,SHAQ843D63CJT9642,SAJT95H52DQJ94CK7|rh||ah|Board%2019|sv|3|pg||",
+    "url": "https://www.bridgebase.com/tools/handviewer.html?lin=qx|o1|md|1S872HK7DAK872C853,SHAQ843D63CJT9642,SAJT95H52DQJ94CK7|rh||ah|Board%2019|sv|3|pg||"
+  },
+  {
+    "board": 20,
+    "dealer": "E",
+    "vulnerability": "None",
+    "lin_string": "qx|o1|md|2SA52HJ7DT62CJT983,SK93HAKQ83DQ8CA72,SQHT542DAJ754CK65|rh||ah|Board%2020|sv|0|pg||",
+    "url": "https://www.bridgebase.com/tools/handviewer.html?lin=qx|o1|md|2SA52HJ7DT62CJT983,SK93HAKQ83DQ8CA72,SQHT542DAJ754CK65|rh||ah|Board%2020|sv|0|pg||"
+  },
+  {
+    "board": 21,
+    "dealer": "N",
+    "vulnerability": "None",
+    "lin_string": "qx|o1|md|1S76HQT953DJ983CA8,SAJ8432HA7DA2CJ73,SQ9HJ862D74CKQT62|rh||ah|Board%2021|sv|0|pg||",
+    "url": "https://www.bridgebase.com/tools/handviewer.html?lin=qx|o1|md|1S76HQT953DJ983CA8,SAJ8432HA7DA2CJ73,SQ9HJ862D74CKQT62|rh||ah|Board%2021|sv|0|pg||"
+  },
+  {
+    "board": 22,
+    "dealer": "E",
+    "vulnerability": "N-S",
+    "lin_string": "qx|o1|md|2SK7HT42DAKQT62CQT,S9832H65D9854CJ74,SAJ5HJ83DJCK98632|rh||ah|Board%2022|sv|1|pg||",
+    "url": "https://www.bridgebase.com/tools/handviewer.html?lin=qx|o1|md|2SK7HT42DAKQT62CQT,S9832H65D9854CJ74,SAJ5HJ83DJCK98632|rh||ah|Board%2022|sv|1|pg||"
+  },
+  {
+    "board": 23,
+    "dealer": "S",
+    "vulnerability": "E-W",
+    "lin_string": "qx|o1|md|3SKQ9842HJT9D64CAK,SAJ5HKQ632D8CQT87,S6HA75DAKT7CJ6432|rh||ah|Board%2023|sv|2|pg||",
+    "url": "https://www.bridgebase.com/tools/handviewer.html?lin=qx|o1|md|3SKQ9842HJT9D64CAK,SAJ5HKQ632D8CQT87,S6HA75DAKT7CJ6432|rh||ah|Board%2023|sv|2|pg||"
+  },
+  {
+    "board": 24,
+    "dealer": "W",
+    "vulnerability": "Both",
+    "lin_string": "qx|o1|md|4SA873H75DAQJ8CJ95,SJTHAJD65432CAQT7,SQ5HKT863DK9C8642|rh||ah|Board%2024|sv|3|pg||",
+    "url": "https://www.bridgebase.com/tools/handviewer.html?lin=qx|o1|md|4SA873H75DAQJ8CJ95,SJTHAJD65432CAQT7,SQ5HKT863DK9C8642|rh||ah|Board%2024|sv|3|pg||"
+  },
+  {
+    "board": 25,
+    "dealer": "N",
+    "vulnerability": "E-W",
+    "lin_string": "qx|o1|md|1SQ853H764DJ83CAJ4,SKJ96HT52DQ4CQ863,SATHA8DKT975CKT72|rh||ah|Board%2025|sv|2|pg||",
+    "url": "https://www.bridgebase.com/tools/handviewer.html?lin=qx|o1|md|1SQ853H764DJ83CAJ4,SKJ96HT52DQ4CQ863,SATHA8DKT975CKT72|rh||ah|Board%2025|sv|2|pg||"
+  },
+  {
+    "board": 26,
+    "dealer": "E",
+    "vulnerability": "Both",
+    "lin_string": "qx|o1|md|2SAJTHJ73D752CKQ87,SK864HQ64DKQ96C62,S732HKT852DAJT3C9|rh||ah|Board%2026|sv|3|pg||",
+    "url": "https://www.bridgebase.com/tools/handviewer.html?lin=qx|o1|md|2SAJTHJ73D752CKQ87,SK864HQ64DKQ96C62,S732HKT852DAJT3C9|rh||ah|Board%2026|sv|3|pg||"
+  },
+  {
+    "board": 27,
+    "dealer": "S",
+    "vulnerability": "None",
+    "lin_string": "qx|o1|md|3S32HA65D62CQT8653,SKQ5HKJT92DAT95C9,SAJ94HQ83DKQ74CK4|rh||ah|Board%2027|sv|0|pg||",
+    "url": "https://www.bridgebase.com/tools/handviewer.html?lin=qx|o1|md|3S32HA65D62CQT8653,SKQ5HKJT92DAT95C9,SAJ94HQ83DKQ74CK4|rh||ah|Board%2027|sv|0|pg||"
+  },
+  {
+    "board": 28,
+    "dealer": "W",
+    "vulnerability": "N-S",
+    "lin_string": "qx|o1|md|4ST65HQ6DQ875CQT97,SAJ72HA92D932CJ54,SKQHT87543DT4CAK3|rh||ah|Board%2028|sv|1|pg||",
+    "url": "https://www.bridgebase.com/tools/handviewer.html?lin=qx|o1|md|4ST65HQ6DQ875CQT97,SAJ72HA92D932CJ54,SKQHT87543DT4CAK3|rh||ah|Board%2028|sv|1|pg||"
+  },
+  {
+    "board": 29,
+    "dealer": "N",
+    "vulnerability": "Both",
+    "lin_string": "qx|o1|md|1ST753HKQ75DTCA864,SAJ98HAJ943D873C7,SK62H8DAQ65CKQ932|rh||ah|Board%2029|sv|3|pg||",
+    "url": "https://www.bridgebase.com/tools/handviewer.html?lin=qx|o1|md|1ST753HKQ75DTCA864,SAJ98HAJ943D873C7,SK62H8DAQ65CKQ932|rh||ah|Board%2029|sv|3|pg||"
+  },
+  {
+    "board": 30,
+    "dealer": "E",
+    "vulnerability": "None",
+    "lin_string": "qx|o1|md|2SKJ6H876DA876CJ96,SAQ8HKJ9DJ52CAQ43,S973HAQ532DKQ4CK7|rh||ah|Board%2030|sv|0|pg||",
+    "url": "https://www.bridgebase.com/tools/handviewer.html?lin=qx|o1|md|2SKJ6H876DA876CJ96,SAQ8HKJ9DJ52CAQ43,S973HAQ532DKQ4CK7|rh||ah|Board%2030|sv|0|pg||"
+  }
+]

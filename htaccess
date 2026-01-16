@@ -1,0 +1,17 @@
+# Cache kontrol - HTML dosyaları cache'lenmesin
+<FilesMatch "\.html?$">
+    Header set Cache-Control "no-cache, no-store, must-revalidate, max-age=0"
+    Header set Pragma "no-cache"
+    Header set Expires "0"
+</FilesMatch>
+
+# CSS ve JS dosyaları 1 haftaya kadar cache'lenebilir
+<FilesMatch "\.(css|js|xlsx)$">
+    Header set Cache-Control "public, max-age=604800"
+</FilesMatch>
+
+# Genel cache kontrol
+Header set Cache-Control "no-cache, no-store, must-revalidate"
+Header set Pragma "no-cache"
+Header set Expires "0"
+

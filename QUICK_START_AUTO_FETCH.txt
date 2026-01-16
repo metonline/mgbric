@@ -1,0 +1,129 @@
+# Automatic Tournament Data Fetcher - Quick Reference
+
+## 3 Ways to Automate Data Fetching
+
+### 1️⃣ EASIEST: Guided Setup
+```bash
+python setup_auto_fetch.py
+```
+This opens an interactive menu to set up Windows Task Scheduler automatically.
+
+---
+
+### 2️⃣ SIMPLE: Manual Check/Fetch
+```bash
+# Check for new data (no download)
+python auto_fetch_tournaments.py --check
+
+# Actually fetch and update
+python auto_fetch_tournaments.py
+
+# See all available dates
+python auto_fetch_tournaments.py --list
+```
+
+---
+
+### 3️⃣ BACKGROUND: Continuous Scheduler
+```bash
+# Install schedule package first
+pip install schedule
+
+# Run in background (checks daily at noon, every 6 hours)
+python background_fetch_scheduler.py
+
+# Or specify custom time (6:00 PM, every 8 hours)
+python background_fetch_scheduler.py 18:00 8
+```
+
+---
+
+## Files Created
+
+| File | Purpose |
+|------|---------|
+| `auto_fetch_tournaments.py` | Main automatic fetcher - checks for new dates and fetches them |
+| `setup_auto_fetch.py` | Interactive setup wizard for Windows Task Scheduler |
+| `background_fetch_scheduler.py` | Background scheduler (alternative to Windows Task Scheduler) |
+| `AUTOMATIC_FETCH_README.md` | Complete documentation with troubleshooting |
+
+---
+
+## What It Does
+
+1. **Scans** Vugraph calendar for all dates with events
+2. **Checks** which dates are missing from your database  
+3. **Fetches** data for missing dates only
+4. **Updates** database with new records
+5. **Prevents** duplicates by removing old data first
+
+---
+
+## Example: Set Up Daily Auto-Fetch
+
+**Option A: Windows Task Scheduler (No extra installation)**
+```bash
+python setup_auto_fetch.py
+# Choose option 1, press Enter for default midnight time
+```
+
+**Option B: Background Python Scheduler**
+```bash
+pip install schedule
+python background_fetch_tournaments.py 12:00
+# Runs at noon every day
+```
+
+---
+
+## Current Status
+
+✅ **30 dates** are in your database (Dec 1-31, 2025)
+✅ **All available** tournament data has been fetched
+✅ **Data is accurate** - both NS and EW sections properly parsed
+
+**Next new data will be automatically fetched** when:
+- You set up automatic fetching (above)
+- January 2026 dates become available on Vugraph calendar
+- Or run manually: `python auto_fetch_tournaments.py`
+
+---
+
+## Commands Reference
+
+| Command | Result |
+|---------|--------|
+| `python auto_fetch_tournaments.py` | Fetch all new/missing data |
+| `python auto_fetch_tournaments.py --check` | Check for updates without fetching |
+| `python auto_fetch_tournaments.py --list` | List all dates and their status |
+| `python vugraph_fetcher.py 25.12.2025` | Fetch specific date manually |
+| `python setup_auto_fetch.py` | Interactive setup wizard |
+| `python background_fetch_scheduler.py` | Run continuous background scheduler |
+| `python background_fetch_scheduler.py 14:00 4` | Daily at 2:00 PM, every 4 hours |
+
+---
+
+## Key Features
+
+🎯 **Automatic date detection** - Knows which dates have events  
+🎯 **Smart updating** - Only fetches new dates  
+🎯 **Duplicate prevention** - Removes old records before adding  
+🎯 **Proper parsing** - Correctly handles NS and EW sections  
+🎯 **Error handling** - Continues if one date fails  
+🎯 **Data validation** - Checks database integrity  
+
+---
+
+## Recommended Setup
+
+For most users, run this once:
+```bash
+python setup_auto_fetch.py
+```
+Choose option 1, then the tool handles everything automatically.
+
+**Result:** New tournament data fetched daily automatically!
+
+---
+
+For more details, see `AUTOMATIC_FETCH_README.md`

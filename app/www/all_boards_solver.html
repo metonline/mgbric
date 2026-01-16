@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Boards - Bridge Solver with DD Tables</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #2a5f2a;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1800px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            background-color: #1a3a0f;
+            color: white;
+            padding: 20px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 5px;
+        }
+        
+        .controls {
+            background-color: white;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .controls button {
+            padding: 10px 20px;
+            background-color: #1a5490;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            margin: 5px;
+            font-size: 14px;
+        }
+        
+        .controls button:hover {
+            background-color: #0d3567;
+        }
+        
+        .boards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(550px, 1fr));
+            gap: 15px;
+        }
+        
+        .board-container {
+            background-color: white;
+            border: 2px solid #333;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+        
+        .board-header {
+            background-color: #1a5490;
+            color: white;
+            padding: 8px;
+            font-weight: bold;
+            font-size: 14px;
+            text-align: center;
+        }
+        
+        .solver-iframe {
+            width: 100%;
+            height: 800px;
+            border: none;
+            display: block;
+            background-color: white;
+        }
+        
+        .status {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+            border-radius: 4px;
+            display: none;
+            text-align: center;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🌉 PAZAR SIMULTANEE - All 30 Boards with Bridge Solver</h1>
+            <p>Event #404377 • 04-01-2026 • Bridge Solver Graphics with DD Tables</p>
+        </div>
+        
+        <div class="controls">
+            <button onclick="copyAllLinks()">📋 Copy All Board Links</button>
+            <button onclick="downloadLinks()">⬇️ Download All Links</button>
+        </div>
+        
+        <div id="status" class="status"></div>
+        
+        <div class="boards-grid" id="boardsContainer"></div>
+    </div>
+
+    <script>
+        let allBoards = {};
+        let allLinUrls = {};
+
+        async function loadDatabase() {
+            try {
+                const response = await fetch('/hands_database.json');
+                allBoards = await response.json();
+                generateAllBoards();
+            } catch (error) {
+                console.error('Error loading database:', error);
+                document.getElementById('status').innerHTML = '❌ Error loading database';
+                document.getElementById('status').style.display = 'block';
+            }
+        }
+
+        function generateLIN(boardNum, boardData) {
+            const n = boardData.N || {};
+            const s = boardData.S || {};
+            const e = boardData.E || {};
+            const w = boardData.W || {};
+            
+            const nHand = 'S' + (n.S || '-') + 'H' + (n.H || '-') + 'D' + (n.D || '-') + 'C' + (n.C || '-');
+            const eHand = 'S' + (e.S || '-') + 'H' + (e.H || '-') + 'D' + (e.D || '-') + 'C' + (e.C || '-');
+            const sHand = 'S' + (s.S || '-') + 'H' + (s.H || '-') + 'D' + (s.D || '-') + 'C' + (s.C || '-');
+            const wHand = 'S' + (w.S || '-') + 'H' + (w.H || '-') + 'D' + (w.D || '-') + 'C' + (w.C || '-');
+            
+            const dealer = ((boardNum - 1) % 4) + 1;
+            const vulnPattern = [0, 1, 2, 3, 1, 2, 3, 0, 2, 3, 0, 1, 3, 0, 1, 2];
+            const vuln = vulnPattern[(boardNum - 1) % 16];
+            
+            const lin = `qx|o1|md|${dealer}${sHand},${wHand},${nHand},${eHand}|rh||ah|Board%20${boardNum}|sv|${vuln}|pg||`;
+            return lin;
+        }
+
+        function generateAllBoards() {
+            const container = document.getElementById('boardsContainer');
+            container.innerHTML = '';
+            
+            for (let i = 1; i <= 30; i++) {
+                const boardData = allBoards[String(i)];
+                if (!boardData) continue;
+                
+                const lin = generateLIN(i, boardData);
+                
+                // Try with jago.io bridge solver - accepts LIN format
+                // Format: https://www.jago.io/?l=<lin_data>
+                const solverUrl = `https://www.jago.io/?l=${encodeURIComponent(lin)}`;
+                allLinUrls[i] = solverUrl;
+                
+                const boardDiv = document.createElement('div');
+                boardDiv.className = 'board-container';
+                
+                // Create iframe with bridge solver
+                const iframe = document.createElement('iframe');
+                iframe.className = 'solver-iframe';
+                iframe.src = solverUrl;
+                iframe.setAttribute('sandbox', 'allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-presentation');
+                iframe.setAttribute('allow', 'clipboard-write');
+                iframe.style.display = 'block';
+                
+                const header = document.createElement('div');
+                header.className = 'board-header';
+                header.textContent = `Board ${i}`;
+                
+                boardDiv.appendChild(header);
+                boardDiv.appendChild(iframe);
+                container.appendChild(boardDiv);
+            }
+            
+            showStatus('✅ All 30 boards loading in Bridge Solver with DD tables...', 3000);
+        }
+
+        function copyAllLinks() {
+            let allLinks = '';
+            for (let i = 1; i <= 30; i++) {
+                if (allLinUrls[i]) {
+                    allLinks += `Board ${i}: ${allLinUrls[i]}\n\n`;
+                }
+            }
+            
+            navigator.clipboard.writeText(allLinks).then(() => {
+                showStatus('✅ All 30 board links copied!', 2000);
+            });
+        }
+
+        function downloadLinks() {
+            let content = 'PAZAR SIMULTANEE - All Board Links (Bridge Solver)\nEvent #404377 • 04-01-2026\n\n';
+            
+            for (let i = 1; i <= 30; i++) {
+                if (allLinUrls[i]) {
+                    content += `Board ${i}:\n${allLinUrls[i]}\n\n`;
+                }
+            }
+            
+            const element = document.createElement('a');
+            element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(content));
+            element.setAttribute('download', 'BRIC_Tournament_Board_Links_Solver.txt');
+            element.style.display = 'none';
+            document.body.appendChild(element);
+            element.click();
+            document.body.removeChild(element);
+            
+            showStatus('✅ Links downloaded!', 1500);
+        }
+
+        function showStatus(message, duration) {
+            const status = document.getElementById('status');
+            status.innerHTML = message;
+            status.style.display = 'block';
+            if (duration) {
+                setTimeout(() => {
+                    status.style.display = 'none';
+                }, duration);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', loadDatabase);
+    </script>
+</body>
+</html>

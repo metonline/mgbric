@@ -1,0 +1,77 @@
+{
+  "header": {
+    "title": "Tournament Performance Analysis - Hoşgörü",
+    "subtitle": "Analyse The Results! Measure Your Performance!"
+  },
+  "filters": {
+    "title": "📊 Analyse The Results",
+    "playerSearch": "🔍 Search Player",
+    "playerSearchPlaceholder": "Enter player name...",
+    "date": {
+      "select": "Select Date",
+      "currentMonth": "📅 This Month",
+      "currentYear": "📅 This Year",
+      "last3Years": "📅 Last 3 Years",
+      "since2020": "📅 Since 2020"
+    },
+    "player": {
+      "title": "👤 Show Player Performance",
+      "name": "Enter Player Name",
+      "placeholder": "Type name...",
+      "currentMonth": "📅 This Month",
+      "currentYear": "📅 This Year",
+      "last3Years": "📅 Last 3 Years",
+      "since2020": "📅 Since 2020"
+    }
+  },
+  "stats": {
+    "title": "Player's Statistics",
+    "played": "# of Games Played",
+    "firstPlace": "# of Championships",
+    "avgScore": "Score Average",
+    "avgScoreMin": "Average Score (min. 3 games)",
+    "championships": "The Number of Championships",
+    "partners": "# of Various Partners",
+    "mostPlayedPartner": "The Mostly Played Partner",
+    "bestScorePartner": "The Partner with The Best Score"
+  },
+  "pagination": {
+    "prev": "◀ Previous",
+    "next": "Next ▶"
+  },
+  "results": {
+    "back": "Back",
+    "tournamentName": "Tournament Name",
+    "northSouth": "🧭 North-South",
+    "eastWest": "🧭 East-West",
+    "northSouthResults": "North-South Results",
+    "eastWestResults": "East-West Results",
+    "databaseUpdated": "Database updated (55223 records)",
+    "databaseLoading": "Database loading...",
+    "backupLoading": "Database empty, loading backup...",
+    "backupLoaded": "Backup database loaded",
+    "databaseLoadFailed": "No database could be loaded. Please check database.json or database_temp.json file.",
+    "databaseLoadError": "Failed to load database"
+  },
+  "rankings": {
+    "todayChampions": "Champions of The Day",
+    "statistics": "Statistics",
+    "champions": "The Champions",
+    "topChampions": "Top Champions",
+    "times": "times",
+    "scoreAverage": "Score Average",
+    "scoreAverageMin": "Average Score (min. 3 games)"
+  },
+  "modal": {
+    "tournamentsAndResults": "Tournaments & Results",
+    "monthResults": "Results of The Month",
+    "yearResults": "Results of the Year",
+    "last3YearsResults": "Results of the Last 3 Years",
+    "since2020Results": "Results Since 2020",
+    "exportExcel": "Transfer Data to Excel",
+    "date": "Date",
+    "partner": "Partner",
+    "score": "Score"
+  },
+  "title": "Tournament Analysis Panel"
+}

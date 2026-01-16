@@ -1856,61 +1856,6 @@ function closeGlobalStatsModal() {
     currentGlobalPage = 1;
 }
 
-// ===== BRIDGE HANDS FUNCTIONS =====
-
-function viewBridgeHandsForDate() {
-    const dateInput = document.getElementById('selectedDate');
-    const selectedDate = dateInput.value;
-    
-    if (!selectedDate) {
-        alert('Lütfen bir tarih seçiniz / Please select a date');
-        return;
-    }
-    
-    // Convert YYYY-MM-DD to DD.MM.YYYY
-    const [year, month, day] = selectedDate.split('-');
-    const turkishDate = `${day}.${month}.${year}`;
-    
-    // Open hands viewer with date parameter
-    const handsUrl = `hands_viewer.html?date=${turkishDate}`;
-    window.open(handsUrl, '_blank');
-}
-
-function viewAllBridgeHands() {
-    // Open hands viewer without date parameter (show all)
-    const handsUrl = 'hands_viewer.html';
-    window.open(handsUrl, '_blank');
-}
-
-function exportHandsAsJSON() {
-    // Try to load hands database
-    fetch('hands_database.json')
-        .then(response => {
-            if (!response.ok) {
-                alert('Turnuva elleri verisi bulunamadı / Bridge hands data not found');
-                return null;
-            }
-            return response.json();
-        })
-        .then(data => {
-            if (!data) return;
-            
-            // Create download
-            const dataStr = JSON.stringify(data, null, 2);
-            const blob = new Blob([dataStr], { type: 'application/json' });
-            const url = URL.createObjectURL(blob);
-            const link = document.createElement('a');
-            link.href = url;
-            link.download = `hands_database_${new Date().toISOString().slice(0,10)}.json`;
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            URL.revokeObjectURL(url);
-        })
-        .catch(error => {
-            console.error('Error exporting hands:', error);
-            alert('İndir başarısız / Download failed');
-        });
-}
-
 console.log('✓ script.js yüklendi - Tüm fonksiyonlar hazır');
+
+

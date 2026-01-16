@@ -13,7 +13,7 @@ import hmac
 import hashlib
 import subprocess
 from datetime import datetime
-from flask import Flask, request, jsonify, send_file
+from flask import Flask, request, jsonify
 
 # Add current directory to path for imports
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -221,21 +221,16 @@ def health_check():
 
 @app.route('/', methods=['GET'])
 def index():
-    """Serve the main index.html file"""
-    index_path = os.path.join(REPO_PATH, 'index.html')
-    if os.path.exists(index_path):
-        return send_file(index_path, mimetype='text/html')
-    else:
-        # Fallback to API info if index.html not found
-        return jsonify({
-            'service': 'GitHub Webhook Server',
-            'version': '1.0',
-            'endpoints': {
-                'webhook': 'POST /webhook - Handle GitHub webhooks',
-                'health': 'GET /health - Health check',
-                'status': 'GET /status - Server status'
-            }
-        }), 200
+    """Index endpoint"""
+    return jsonify({
+        'service': 'GitHub Webhook Server',
+        'version': '1.0',
+        'endpoints': {
+            'webhook': 'POST /webhook - Handle GitHub webhooks',
+            'health': 'GET /health - Health check',
+            'status': 'GET /status - Server status'
+        }
+    }), 200
 
 @app.route('/status', methods=['GET'])
 def status():
@@ -246,33 +241,6 @@ def status():
         'webhook_configured': bool(WEBHOOK_SECRET != 'your-webhook-secret-here'),
         'timestamp': datetime.now().isoformat()
     }), 200
-
-@app.route('/<path:filename>')
-def serve_static(filename):
-    """Serve static files (CSS, JS, JSON, etc.)"""
-    file_path = os.path.join(REPO_PATH, filename)
-    
-    # Security: prevent directory traversal
-    if not os.path.abspath(file_path).startswith(os.path.abspath(REPO_PATH)):
-        return jsonify({'error': 'Not found'}), 404
-    
-    if os.path.exists(file_path) and os.path.isfile(file_path):
-        mime_types = {
-            '.css': 'text/css',
-            '.js': 'application/javascript',
-            '.json': 'application/json',
-            '.html': 'text/html',
-            '.png': 'image/png',
-            '.jpg': 'image/jpeg',
-            '.jpeg': 'image/jpeg',
-            '.gif': 'image/gif',
-            '.svg': 'image/svg+xml'
-        }
-        ext = os.path.splitext(filename)[1].lower()
-        mime_type = mime_types.get(ext, 'application/octet-stream')
-        return send_file(file_path, mimetype=mime_type)
-    
-    return jsonify({'error': 'Not found'}), 404
 
 if __name__ == '__main__':
     print(f"\n{'='*60}")

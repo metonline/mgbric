@@ -1,0 +1,67 @@
+{
+  "name": "Hoşgörü Turnuva Analiz Paneli",
+  "short_name": "Turnuva Analizi",
+  "description": "Turnuva sonuçlarını analiz edin ve performansınızı ölçün!",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#1e3c72",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect fill='%231e3c72' width='192' height='192'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-size='80' fill='white' font-weight='bold'>TA</text></svg>",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect fill='%231e3c72' width='512' height='512'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-size='200' fill='white' font-weight='bold'>TA</text></svg>",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect fill='%231e3c72' width='192' height='192' rx='45'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-size='80' fill='white' font-weight='bold'>TA</text></svg>",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ],
+  "categories": ["sports", "productivity"],
+  "screenshots": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 540 720'><rect fill='%23f8f9fa' width='540' height='720'/><rect fill='%231e3c72' width='540' height='100'/><text x='270' y='50' text-anchor='middle' font-size='24' fill='white' font-weight='bold'>Turnuva Analizi</text></svg>",
+      "sizes": "540x720",
+      "type": "image/svg+xml",
+      "form_factor": "narrow"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Oyuncu Arama",
+      "short_name": "Oyuncu",
+      "description": "Oyuncu performansını ara",
+      "url": "/index.html#player",
+      "icons": [
+        {
+          "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'><circle cx='48' cy='30' r='15' fill='%231e3c72'/><path d='M48 50 Q30 60 25 80 L71 80 Q66 60 48 50' fill='%231e3c72'/></svg>",
+          "sizes": "96x96",
+          "type": "image/svg+xml"
+        }
+      ]
+    },
+    {
+      "name": "Tarih Filtresi",
+      "short_name": "Tarih",
+      "description": "Tarih aralığına göre filtrele",
+      "url": "/index.html#date",
+      "icons": [
+        {
+          "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'><rect x='20' y='20' width='56' height='56' rx='5' fill='none' stroke='%231e3c72' stroke-width='3'/><line x1='30' y1='20' x2='30' y2='30' stroke='%231e3c72' stroke-width='2'/><line x1='66' y1='20' x2='66' y2='30' stroke='%231e3c72' stroke-width='2'/><line x1='20' y1='40' x2='76' y2='40' stroke='%231e3c72' stroke-width='2'/></svg>",
+          "sizes": "96x96",
+          "type": "image/svg+xml"
+        }
+      ]
+    }
+  ]
+}

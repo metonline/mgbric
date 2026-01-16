@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tournament Boards - BBO with Hands & DD Tables</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f0f0;
+            padding: 20px;
+        }
+        
+        .boards-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 40px;
+            max-width: 1800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .board {
+            background: white;
+            border: 2px solid #333;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            page-break-inside: avoid;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        .board-title {
+            background: linear-gradient(135deg, #1a5490 0%, #0d3567 100%);
+            color: white;
+            padding: 15px;
+            font-weight: bold;
+            font-size: 12px;
+            text-align: center;
+            border-bottom: 2px solid #0d3567;
+        }
+        
+        .board-content {
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+        
+        /* BBO Iframe Section */
+        .bbo-section {
+            margin-bottom: 0;
+            flex-shrink: 0;
+        }
+        
+        .bbo-iframe-wrapper {
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            overflow: hidden;
+            aspect-ratio: 4 / 5;
+            width: 100%;
+            height: auto;
+        }
+        
+        .bbo-iframe-wrapper iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+        }
+        
+
+        /* DD Table Section */
+        .dd-section {
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 10px;
+            overflow-x: auto;
+            flex-shrink: 0;
+            min-height: 150px;
+        }
+        
+        .dd-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+        }
+        
+        .dd-table th {
+            color: black;
+            padding: 6px;
+            font-weight: bold;
+            text-align: center;
+            border: 1px solid #ddd;
+            font-size: 16px;
+        }
+        
+        .suit-spades, .suit-clubs {
+            color: black;
+            font-size: 18px;
+        }
+        
+        .suit-hearts, .suit-diamonds {
+            color: #d32f2f;
+            font-size: 18px;
+        }
+        
+        .dd-table td {
+            border: 1px solid #ddd;
+            padding: 6px;
+            text-align: center;
+        }
+        
+        .dd-table tr:nth-child(even) td {
+            background: none;
+        }
+        
+        .dd-row-label {
+            font-weight: bold;
+            background: #e8e8e8;
+            color: #333;
+        }
+        
+        @media (max-width: 1400px) {
+            .boards-grid {
+                grid-template-columns: 2fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .boards-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="boards-grid" id="boardsContainer"></div>
+
+    <script>
+        let allBoards = {};
+        let allDDTables = {};
+
+        async function loadDatabase() {
+            try {
+                const [boardsRes, ddRes] = await Promise.all([
+                    fetch('/hands_database.json'),
+                    fetch('/dd_tables.json').catch(() => null)
+                ]);
+                
+                allBoards = await boardsRes.json();
+                if (ddRes) {
+                    allDDTables = await ddRes.json();
+                }
+                
+                generateAllBoards();
+            } catch (error) {
+                console.error('Error loading database:', error);
+            }
+        }
+
+        function generateLIN(boardNum, boardData) {
+            const n = boardData.N || {};
+            const s = boardData.S || {};
+            const e = boardData.E || {};
+            const w = boardData.W || {};
+            
+            const nHand = 'S' + (n.S || '-') + 'H' + (n.H || '-') + 'D' + (n.D || '-') + 'C' + (n.C || '-');
+            const eHand = 'S' + (e.S || '-') + 'H' + (e.H || '-') + 'D' + (e.D || '-') + 'C' + (e.C || '-');
+            const sHand = 'S' + (s.S || '-') + 'H' + (s.H || '-') + 'D' + (s.D || '-') + 'C' + (s.C || '-');
+            const wHand = 'S' + (w.S || '-') + 'H' + (w.H || '-') + 'D' + (w.D || '-') + 'C' + (w.C || '-');
+            
+            const dealer = ((boardNum - 1) % 4) + 1;
+            const vulnPattern = [0, 1, 2, 3, 1, 2, 3, 0, 2, 3, 0, 1, 3, 0, 1, 2];
+            const vuln = vulnPattern[(boardNum - 1) % 16];
+            
+            const lin = `qx|o1|md|${dealer}${sHand},${wHand},${nHand},${eHand}|rh||ah|Board%20${boardNum}|sv|${vuln}|pg||`;
+            return lin;
+        }
+
+        function generateAllBoards() {
+            const container = document.getElementById('boardsContainer');
+            container.innerHTML = '';
+            
+            for (let i = 1; i <= 30; i++) {
+                const boardData = allBoards[String(i)];
+                if (!boardData) continue;
+                
+                const lin = generateLIN(i, boardData);
+                const bboUrl = `https://www.bridgebase.com/tools/handviewer.html?lin=${encodeURIComponent(lin)}`;
+                
+                const dealer = ((i - 1) % 4) + 1;
+                const dealerNames = ['N', 'E', 'S', 'W'];
+                const dealerName = dealerNames[dealer - 1];
+                
+                const vulnPattern = [0, 1, 2, 3, 1, 2, 3, 0, 2, 3, 0, 1, 3, 0, 1, 2];
+                const vulnNum = vulnPattern[(i - 1) % 16];
+                const vulnNames = ['None', 'N/S', 'E/W', 'Both'];
+                const vulnName = vulnNames[vulnNum];
+                
+                const n = boardData.N || {};
+                const e = boardData.E || {};
+                const s = boardData.S || {};
+                const w = boardData.W || {};
+                
+                const ddData = allDDTables[String(i)];
+                const tricks = ddData ? ddData.NS_tricks : [0,0,0,0,0];
+                
+                const boardViewer = document.createElement('div');
+                boardViewer.className = 'board';
+                
+                let html = `
+                    <div class="board-title">
+                        Board ${i} • Dealer: ${dealerName} • Vulnerability: ${vulnName}
+                    </div>
+                    
+                    <div class="board-content">
+                        <!-- BBO Section -->
+                        <div class="bbo-section">
+                            <div class="bbo-iframe-wrapper">
+                                <iframe 
+                                    src="${bboUrl}"
+                                    allow="clipboard-write"
+                                    sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-presentation"
+                                ></iframe>
+                            </div>
+                        </div>
+                        
+                        
+                        <!-- DD Table -->
+                        <div class="dd-section">
+                            <table class="dd-table">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th><span class="suit-spades">♠</span></th>
+                                        <th><span class="suit-hearts">♥</span></th>
+                                        <th><span class="suit-diamonds">♦</span></th>
+                                        <th><span class="suit-clubs">♣</span></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="dd-row-label">North</td>
+                                        <td>${tricks[0]}</td>
+                                        <td>${tricks[1]}</td>
+                                        <td>${tricks[2]}</td>
+                                        <td>${tricks[3]}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="dd-row-label">South</td>
+                                        <td>${tricks[0]}</td>
+                                        <td>${tricks[1]}</td>
+                                        <td>${tricks[2]}</td>
+                                        <td>${tricks[3]}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="dd-row-label">East</td>
+                                        <td>${13 - tricks[0]}</td>
+                                        <td>${13 - tricks[1]}</td>
+                                        <td>${13 - tricks[2]}</td>
+                                        <td>${13 - tricks[3]}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="dd-row-label">West</td>
+                                        <td>${13 - tricks[0]}</td>
+                                        <td>${13 - tricks[1]}</td>
+                                        <td>${13 - tricks[2]}</td>
+                                        <td>${13 - tricks[3]}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                `;
+                
+                boardViewer.innerHTML = html;
+                container.appendChild(boardViewer);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', loadDatabase);
+    </script>
+</body>
+</html>

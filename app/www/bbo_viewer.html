@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BBO Hand Viewer - Tournament Boards</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            background-color: #1a5490;
+            color: white;
+            padding: 20px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+        
+        .header h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        
+        .controls {
+            background-color: white;
+            padding: 20px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .board-selector {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .board-selector label {
+            font-weight: bold;
+        }
+        
+        .board-selector select {
+            padding: 8px 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        
+        .board-buttons {
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+        }
+        
+        .board-buttons button {
+            padding: 8px 12px;
+            border: 1px solid #ccc;
+            background-color: white;
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 12px;
+            transition: all 0.2s;
+        }
+        
+        .board-buttons button:hover {
+            background-color: #1a5490;
+            color: white;
+            border-color: #1a5490;
+        }
+        
+        .board-buttons button.active {
+            background-color: #1a5490;
+            color: white;
+            border-color: #1a5490;
+        }
+        
+        .viewer-wrapper {
+            background-color: white;
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .bbo-iframe {
+            width: 100%;
+            height: 900px;
+            border: none;
+            display: block;
+        }
+        
+        .info {
+            background-color: #e8f4f8;
+            padding: 15px;
+            border-left: 4px solid #1a5490;
+            margin-top: 20px;
+            border-radius: 4px;
+        }
+        
+        .info p {
+            color: #333;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>PAZAR SİMULTANE - BBO Hand Viewer</h1>
+            <p>Event #404377 • 04-01-2026 • 30 Boards from Vugraph</p>
+        </div>
+        
+        <div class="controls">
+            <div class="board-selector">
+                <label for="boardSelect">Select Board:</label>
+                <select id="boardSelect">
+                    <option value="">-- Choose Board (1-30) --</option>
+                </select>
+            </div>
+            
+            <div class="board-buttons" id="boardButtons"></div>
+        </div>
+        
+        <div class="viewer-wrapper">
+            <iframe 
+                id="bboViewer" 
+                class="bbo-iframe"
+                allow="clipboard-write"
+            ></iframe>
+        </div>
+
+        <div class="info">
+            <p><strong>BBO Link:</strong></p>
+            <p style="word-break: break-all; font-family: monospace; font-size: 12px; background-color: white; padding: 10px; border-radius: 3px; border: 1px solid #ccc;">
+                <span id="linLink"></span>
+            </p>
+            <button id="copyBtn" style="margin-top: 10px; padding: 8px 16px; background-color: #1a5490; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold;">
+                Copy Link to Clipboard
+            </button>
+        </div>
+        
+        <div class="info">
+            <p><strong>How to use:</strong></p>
+            <p>1. Select a board from the dropdown or click a board number (1-30)</p>
+            <p>2. The BridgeBase hand viewer will display with the hands and Double Dummy analysis</p>
+            <p>3. Use the viewer controls to analyze the board</p>
+        </div>
+    </div>
+    
+    <script>
+        let allBoards = {};
+        let currentBoard = 1;
+        
+        async function loadDatabase() {
+            try {
+                const response = await fetch('/hands_database.json');
+                const data = await response.json();
+                allBoards = data;
+                console.log('Loaded boards:', Object.keys(allBoards).length);
+                initializeBoard();
+            } catch (error) {
+                console.error('Error loading database:', error);
+            }
+        }
+        
+        function initializeBoard() {
+            const select = document.getElementById('boardSelect');
+            for (let i = 1; i <= 30; i++) {
+                const option = document.createElement('option');
+                option.value = i;
+                option.textContent = `Board ${i}`;
+                select.appendChild(option);
+            }
+            
+            const buttonsContainer = document.getElementById('boardButtons');
+            for (let i = 1; i <= 30; i++) {
+                const button = document.createElement('button');
+                button.textContent = i;
+                button.dataset.board = i;
+                button.addEventListener('click', function() {
+                    loadBoard(i);
+                });
+                buttonsContainer.appendChild(button);
+            }
+            
+            select.addEventListener('change', function() {
+                if (this.value) {
+                    loadBoard(parseInt(this.value));
+                }
+            });
+            
+            loadBoard(1);
+        }
+        
+        function loadBoard(boardNum) {
+            currentBoard = boardNum;
+            
+            document.getElementById('boardSelect').value = boardNum;
+            document.querySelectorAll('.board-buttons button').forEach(btn => {
+                btn.classList.remove('active');
+                if (parseInt(btn.dataset.board) === boardNum) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            const boardData = allBoards[String(boardNum)];
+            if (!boardData) {
+                console.error(`Board ${boardNum} not found`);
+                return;
+            }
+            
+            const lin = generateLIN(boardNum, boardData);
+            const bbUrl = `https://www.bridgebase.com/tools/handviewer.html?lin=${encodeURIComponent(lin)}`;
+            console.log(`Loading Board ${boardNum} with LIN:`, lin.substring(0, 100));
+            
+            document.getElementById('bboViewer').src = bbUrl;
+            
+            // Display the LIN link
+            document.getElementById('linLink').textContent = bbUrl;
+        }
+        
+        function generateLIN(boardNum, boardData) {
+            const n = boardData.N || {};
+            const s = boardData.S || {};
+            const e = boardData.E || {};
+            const w = boardData.W || {};
+            
+            // Build hand strings: S<cards>H<cards>D<cards>C<cards>
+            const nHand = 'S' + (n.S || '-') + 'H' + (n.H || '-') + 'D' + (n.D || '-') + 'C' + (n.C || '-');
+            const eHand = 'S' + (e.S || '-') + 'H' + (e.H || '-') + 'D' + (e.D || '-') + 'C' + (e.C || '-');
+            const sHand = 'S' + (s.S || '-') + 'H' + (s.H || '-') + 'D' + (s.D || '-') + 'C' + (s.C || '-');
+            const wHand = 'S' + (w.S || '-') + 'H' + (w.H || '-') + 'D' + (w.D || '-') + 'C' + (w.C || '-');
+            
+            // Dealer: 1=N, 2=E, 3=S, 4=W
+            const dealer = ((boardNum - 1) % 4) + 1;
+            
+            // Vulnerability
+            const vulnPattern = [0, 1, 2, 3, 1, 2, 3, 0, 2, 3, 0, 1, 3, 0, 1, 2];
+            const vuln = vulnPattern[(boardNum - 1) % 16];
+            
+            // LIN format: qx|o1|md|<dealer><S>,<W>,<N>,<E>|rh||ah|Board%20<board>|sv|<vuln>|pg||
+            const lin = `qx|o1|md|${dealer}${sHand},${wHand},${nHand},${eHand}|rh||ah|Board%20${boardNum}|sv|${vuln}|pg||`;
+            
+            return lin;
+        }
+        
+        document.getElementById('copyBtn').addEventListener('click', function() {
+            const linLink = document.getElementById('linLink').textContent;
+            navigator.clipboard.writeText(linLink).then(() => {
+                const originalText = this.textContent;
+                this.textContent = 'Copied!';
+                setTimeout(() => {
+                    this.textContent = originalText;
+                }, 2000);
+            });
+        });
+        
+        document.addEventListener('DOMContentLoaded', loadDatabase);
+    </script>
+</body>
+</html>
