@@ -16,6 +16,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy application files
 COPY . .
 
+# Verify database file exists
+RUN ls -lh database.json && wc -l database.json
+
 # Expose port
 EXPOSE 8080
 
