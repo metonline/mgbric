@@ -4,11 +4,13 @@ primary_region = "ams"
 # Free tier configuration - single machine
 min_machines_running = 1
 
+# Force rebuild timestamp: 2026-01-16 18:30:00
 [build]
   dockerfile = "Dockerfile"
 
 [env]
   FLASK_ENV = "production"
+  BUILD_TIME = "2026-01-16-18-30"
 
 [http_service]
   internal_port = 8080
