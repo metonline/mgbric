@@ -317,35 +317,44 @@ function filterBySelectedDate() {
         alert('Lütfen bir tarih seçin');
         return;
     }
-    // selectedDate format: YYYY-MM-DD
+    // selectedDate format from HTML date input: YYYY-MM-DD
     const [year, month, day] = selectedDateInput.value.split('-');
-    const filterDate = `${String(day).padStart(2, '0')}.${String(month).padStart(2, '0')}.${year}`;
-    console.log(`🔍 Seçilen tarih: ${filterDate}`);
+    
+    // Try both 4-digit and 2-digit year formats
+    const filterDate4Digit = `${String(day).padStart(2, '0')}.${String(month).padStart(2, '0')}.${year}`;
+    const filterDate2Digit = `${String(day).padStart(2, '0')}.${String(month).padStart(2, '0')}.${year.slice(-2)}`;
+    
+    console.log(`🔍 Seçilen tarih (4-digit): ${filterDate4Digit}`);
+    console.log(`🔍 Seçilen tarih (2-digit): ${filterDate2Digit}`);
     console.log(`📊 Toplam kayıt: ${allData.length}`);
     console.log(`📋 İlk 3 kayıt:`, allData.slice(0, 3));
-    const filtered = allData.filter(record => {
+    
+    // Try to find matching records with either format
+    let filtered = allData.filter(record => {
         const recordDate = record.Tarih;
-        return recordDate === filterDate;
+        return recordDate === filterDate4Digit || recordDate === filterDate2Digit;
     });
-    console.log(`✅ Filtrelenen kayıt: ${filtered.length}`);
-    console.log(`🔎 Arama kriterleri - filterDate: "${filterDate}"`);
+    
+    console.log(`✅ Filtrelenen kayıt (4-digit match): ${filtered.length}`);
+    
     if (filtered.length === 0) {
-        // Veritabanındaki benzersiz tarihleri göster (ilk 10)
+        // If no match, show available dates for debugging
         const uniqueDates = [...new Set(allData.map(r => r.Tarih))];
         console.warn(`⚠️ Tarih eşleşmedi. Veritabanındaki tarihler:`, uniqueDates.slice(0, 10));
-        alert(`${filterDate} tarihinde kayıt bulunamadı.\n\nVeritabanındaki tarihler:\n${uniqueDates.slice(0, 5).join('\n')}`);
+        alert(`${filterDate4Digit} tarihinde kayıt bulunamadı.\n\nVeritabanındaki tarihler (ilk 5):\n${uniqueDates.slice(0, 5).join('\n')}`);
         return;
     }
+    
     // Farklı turnuva isimlerini bul
     const uniqueTournaments = [...new Set(filtered.map(r => r.Turnuva || ''))];
     if (uniqueTournaments.length > 1) {
         // Kullanıcıya seçim sun
         showTournamentSelectModal(uniqueTournaments, function(selectedTournament) {
             const tournamentData = filtered.filter(r => (r.Turnuva || '') === selectedTournament);
-            openGlobalStatsModal(tournamentData, `Seçilen Tarih: ${filterDate} - ${selectedTournament}`);
+            openGlobalStatsModal(tournamentData, `Seçilen Tarih: ${filterDate4Digit} - ${selectedTournament}`);
         });
     } else {
-        openGlobalStatsModal(filtered, `Seçilen Tarih: ${filterDate}${uniqueTournaments[0] ? ' - ' + uniqueTournaments[0] : ''}`);
+        openGlobalStatsModal(filtered, `Seçilen Tarih: ${filterDate4Digit}${uniqueTournaments[0] ? ' - ' + uniqueTournaments[0] : ''}`);
     }
 // Turnuva seçimi modalı fonksiyonları
 function showTournamentSelectModal(tournamentList, onSelect) {
