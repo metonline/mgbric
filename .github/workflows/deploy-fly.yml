@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - main
-  workflow_dispatch:  # Allow manual trigger
+  workflow_dispatch:
 
 jobs:
   deploy:
@@ -12,23 +12,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       
-      - name: Install Fly CLI via apt
+      - name: Deploy to Fly.io using Docker
         run: |
-          sudo apt-get update
-          sudo apt-get install -y bsdmainutils gpg
-          curl -fsSL https://apt.fury.io/caddy/KEY.gpg | sudo gpg --yes --dearmor -o /usr/share/keyrings/caddy-fury.gpg
-          echo "deb [signed-by=/usr/share/keyrings/caddy-fury.gpg] https://apt.fury.io/caddy/ any main" | sudo tee /etc/apt/sources.list.d/caddy-fury.list
-          # Actually, let's just download the binary
-          cd /tmp
-          wget https://github.com/superfly/flyctl/releases/download/v0.1.100/flyctl_0.1.100_linux_x86_64.tar.gz || wget https://github.com/superfly/flyctl/releases/latest/download/flyctl_linux_x86_64.tar.gz
-          tar xzf flyctl*.tar.gz
-          sudo mv flyctl /usr/local/bin/
-          flyctl version
-      
-      - name: Deploy to Fly.io
-        run: |
-          echo "Starting deployment..."
-          /usr/local/bin/flyctl deploy --remote-only --app mgbric -v
-          echo "✓ Deployment completed"
+          echo "Deploying with Fly.io remote builder..."
+          # Use Fly.io's standalone deploy
+          curl -L https://fly.io/install.sh | sh
+          export PATH="$HOME/.fly/bin:$PATH"
+          flyctl deploy --remote-only --app mgbric
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
