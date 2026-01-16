@@ -13,7 +13,7 @@ import hmac
 import hashlib
 import subprocess
 from datetime import datetime
-from flask import Flask, request, jsonify, send_file, send_from_directory
+from flask import Flask, request, jsonify, send_file, send_from_directory, Response
 
 # Add current directory to path for imports
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -241,12 +241,17 @@ def serve_database():
     """Serve database.json with no-cache headers to ensure fresh data"""
     try:
         db_path = os.path.join(REPO_PATH, 'database.json')
-        # Load fresh from disk every time
-        with open(db_path, 'r', encoding='utf-8') as f:
-            data = json.load(f)
         
-        response = jsonify(data)
-        # Set aggressively no-cache headers to force fresh load
+        def generate():
+            """Stream file in chunks"""
+            with open(db_path, 'rb') as f:
+                while True:
+                    chunk = f.read(8192)  # 8KB chunks
+                    if not chunk:
+                        break
+                    yield chunk
+        
+        response = Response(generate(), mimetype='application/json')
         response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate, max-age=0, private'
         response.headers['Pragma'] = 'no-cache'
         response.headers['Expires'] = '0'
@@ -259,27 +264,27 @@ def serve_database():
 
 @app.route('/api/data', methods=['GET'])
 def serve_database_api():
-    """API endpoint for database - stream response for large files"""
+    """API endpoint - stream large file without loading to memory"""
     try:
         db_path = os.path.join(REPO_PATH, 'database.json')
         
-        # For large files, just serve the raw database.json directly
-        # Let the client handle it
-        response = send_file(
-            db_path,
-            mimetype='application/json',
-            cache_timeout=0,
-            as_attachment=False
-        )
+        def generate():
+            """Stream file in chunks"""
+            with open(db_path, 'rb') as f:
+                while True:
+                    chunk = f.read(8192)  # 8KB chunks
+                    if not chunk:
+                        break
+                    yield chunk
         
-        # Set aggressively no-cache headers
+        response = Response(generate(), mimetype='application/json')
         response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate, max-age=0, private'
         response.headers['Pragma'] = 'no-cache'
         response.headers['Expires'] = '0'
         return response
     except Exception as e:
         print(f"[{datetime.now()}] Error serving API: {e}")
-        return jsonify({'error': f'Could not load database: {str(e)}', 'records': []}), 500
+        return jsonify({'error': f'Could not load database: {str(e)}'}), 500
 
 @app.route('/<path:filename>', methods=['GET'])
 def serve_static(filename):
