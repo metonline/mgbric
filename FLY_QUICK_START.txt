@@ -1,0 +1,151 @@
+╔════════════════════════════════════════════════════════════════════════════╗
+║                    🚀 BRIC on Fly.io - QUICK START                         ║
+╚════════════════════════════════════════════════════════════════════════════╝
+
+📦 FILES CREATED:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ Dockerfile
+   └─ Container configuration for Fly.io
+
+✅ fly.toml
+   └─ Fly.io deployment settings
+
+✅ .dockerignore
+   └─ Files to exclude from Docker build
+
+✅ FLY_DEPLOY.md
+   └─ Complete deployment guide
+
+
+🎯 3-STEP DEPLOYMENT:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+STEP 1️⃣  Install Fly CLI (2 min)
+   → Download: https://fly.io/docs/getting-started/installing-flyctl/
+   → Or PowerShell: choco install flyctl
+
+STEP 2️⃣  Sign Up/Login (1 min)
+   → Run: flyctl auth signup
+   → Or: flyctl auth login
+
+STEP 3️⃣  Deploy (2 min)
+   → cd C:\Users\metin\Desktop\BRIC
+   → flyctl launch
+   → Answer prompts
+   → Done! 🎉
+
+
+🌐 YOUR LIVE URL:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+https://bric-tournament.fly.dev
+(or custom name you choose)
+
+
+✨ WHY FLY.IO:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ Free tier - No credit card required to start
+✅ Fast - Global deployment (your app is everywhere)
+✅ Python/Flask ready - Perfect for webhook_server.py
+✅ Docker-based - Simple, clean deployment
+✅ GitHub integration - Auto-deploy on push
+✅ Persistent storage - 1GB free volume for database.json
+✅ Scales easily - Add more power when needed
+✅ European region - Close to Turkey (fast)
+
+
+📋 QUICK SETUP GUIDE:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+# 1. Install CLI
+Download from: https://fly.io/docs/getting-started/installing-flyctl/
+
+# 2. Sign up
+flyctl auth signup
+
+# 3. Launch from BRIC directory
+cd C:\Users\metin\Desktop\BRIC
+flyctl launch
+
+# When prompted:
+# - App name: bric-tournament
+# - Region: ams (Amsterdam - close to Turkey)
+# - Postgres: no
+# - Deploy: yes
+
+# 4. Wait 2-3 minutes for deployment
+# 5. Visit your URL (shown in terminal)
+
+
+🔧 CONFIGURATION DETAILS:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Dockerfile:
+  - Base image: Python 3.11 slim
+  - Port: 8080
+  - Server: Gunicorn (2 workers)
+  - Health check: Every 30 seconds
+
+fly.toml:
+  - App name: bric-tournament
+  - Region: ams (Amsterdam, EU)
+  - Memory: 512MB
+  - CPU: 1 shared core
+  - Storage: 1GB persistent volume
+
+
+📊 PERFORMANCE:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Speed: ⚡⚡⚡ Very fast (globally deployed)
+Uptime: 99.9% SLA
+Cost: Free tier covers small apps
+Scaling: Easy - add resources anytime
+
+
+🆘 TROUBLESHOOTING:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+App won't start?
+  → flyctl logs
+  → Check for error messages
+
+Need to redeploy?
+  → flyctl deploy
+
+Want to view logs?
+  → flyctl logs
+
+Want to check status?
+  → flyctl status
+
+Want to scale up?
+  → flyctl scale count 2
+
+
+📚 USEFUL COMMANDS:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+flyctl deploy          - Redeploy your app
+flyctl logs            - View live logs
+flyctl status          - Show app status
+flyctl scale count 2   - Run 2 instances
+flyctl secrets set KEY=VALUE  - Set environment variables
+flyctl destroy         - Delete the app
+
+
+✨ NEXT STEP:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. Download Fly CLI: https://fly.io/docs/getting-started/installing-flyctl/
+2. Run: flyctl auth signup
+3. cd to your BRIC directory
+4. Run: flyctl launch
+5. Answer the prompts
+6. Your app is live! 🎉
+
+═════════════════════════════════════════════════════════════════════════════
+Status: ✅ READY FOR FLY.IO | Repository: github.com/metonline/mgbric
+═════════════════════════════════════════════════════════════════════════════
