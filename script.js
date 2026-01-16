@@ -1230,12 +1230,40 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             .then(apiData => {
                 // Extract records from API response
-                let data = apiData.records || apiData;
+                let data;
+                
+                // Handle different response formats
+                if (apiData.records) {
+                    // New format: has .records property
+                    data = apiData.records;
+                } else if (apiData.legacy_records || apiData.events) {
+                    // Dict format with legacy_records and events - convert to array
+                    data = [];
+                    if (apiData.legacy_records && Array.isArray(apiData.legacy_records)) {
+                        data.push(...apiData.legacy_records);
+                    }
+                    if (apiData.events) {
+                        for (let eventId in apiData.events) {
+                            let event = apiData.events[eventId];
+                            if (event.results) {
+                                if (Array.isArray(event.results.NS)) data.push(...event.results.NS);
+                                if (Array.isArray(event.results.EW)) data.push(...event.results.EW);
+                            }
+                        }
+                    }
+                } else if (Array.isArray(apiData)) {
+                    // Already array format
+                    data = apiData;
+                } else {
+                    // Unknown format
+                    data = [];
+                }
                 
                 if (!Array.isArray(data) || data.length === 0) {
                     throw new Error('API returned empty data');
                 }
                 
+                console.log(`✅ API loaded ${data.length} records`);
                 allData = data;
                 updateFileInfo();
                 databaseReady = true;
@@ -1254,40 +1282,40 @@ document.addEventListener('DOMContentLoaded', function() {
                         return response.json();
                     })
                     .then(data => {
-                        if (!Array.isArray(data) || data.length === 0) {
-                            if (fallbackFile) {
-                                document.getElementById('fileInfo').innerHTML = '<span style="color:orange;">⚠️ Veritabanı boş, yedek yükleniyor...</span>';
-                                fetch(fallbackUrl)
-                                    .then(r => r.json())
-                                    .then(fallbackData => {
-                                        if (Array.isArray(fallbackData) && fallbackData.length > 0) {
-                                            allData = fallbackData;
-                                            updateFileInfo();
-                                            databaseReady = true;
-                                            initializePlayerSearch();
-                                            if (queuedModalOpen) {
-                                                openGlobalStatsModal(...queuedModalOpen);
-                                                queuedModalOpen = null;
-                                            }
-                                        } else {
-                                            document.getElementById('fileInfo').innerHTML = '<span style="color:red;">❌ Hiçbir veritabanı yüklenemedi. Lütfen database.json veya database_temp.json dosyasını kontrol edin.</span>';
-                                            allData = [];
-                                            databaseReady = false;
+                        // Convert dict format to array if needed
+                        let arrayData = data;
+                        if (!Array.isArray(data)) {
+                            if (data.legacy_records || data.events) {
+                                arrayData = [];
+                                if (data.legacy_records && Array.isArray(data.legacy_records)) {
+                                    arrayData.push(...data.legacy_records);
+                                }
+                                if (data.events) {
+                                    for (let eventId in data.events) {
+                                        let event = data.events[eventId];
+                                        if (event.results) {
+                                            if (Array.isArray(event.results.NS)) arrayData.push(...event.results.NS);
+                                            if (Array.isArray(event.results.EW)) arrayData.push(...event.results.EW);
                                         }
-                                    })
-                                    .catch(() => {
-                                        document.getElementById('fileInfo').innerHTML = '<span style="color:red;">❌ Hiçbir veritabanı yüklenemedi. Lütfen database.json veya database_temp.json dosyasını kontrol edin.</span>';
-                                        allData = [];
-                                        databaseReady = false;
-                                    });
-                                return;
-                            } else {
-                                throw new Error('Database is empty');
+                                    }
+                                }
                             }
-                        } else {
-                            allData = data;
-                            updateFileInfo();
-                            databaseReady = true;
+                        }
+                        
+                        if (!Array.isArray(arrayData) || arrayData.length === 0) {
+                            throw new Error('Database is empty');
+                        }
+                        
+                        console.log(`✅ File loaded ${arrayData.length} records`);
+                        allData = arrayData;
+                        updateFileInfo();
+                        databaseReady = true;
+                        initializePlayerSearch();
+                        if (queuedModalOpen) {
+                            openGlobalStatsModal(...queuedModalOpen);
+                            queuedModalOpen = null;
+                        }
+                    })
                             initializePlayerSearch();
                             if (queuedModalOpen) {
                                 openGlobalStatsModal(...queuedModalOpen);

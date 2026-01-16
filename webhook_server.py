@@ -264,39 +264,24 @@ def serve_database():
 
 @app.route('/api/data', methods=['GET'])
 def serve_database_api():
-    """API endpoint - convert dict format to array format for compatibility"""
+    """API endpoint - serve database without loading to memory"""
     try:
         db_path = os.path.join(REPO_PATH, 'database.json')
         
-        # Load and parse database
-        with open(db_path, 'r', encoding='utf-8') as f:
-            data = json.load(f)
+        # Stream file directly - don't parse in memory to avoid OOM
+        def generate():
+            """Stream file in chunks"""
+            with open(db_path, 'rb') as f:
+                while True:
+                    chunk = f.read(8192)  # 8KB chunks
+                    if not chunk:
+                        break
+                    yield chunk
         
-        # Convert to array format for script.js compatibility
-        records = []
-        
-        if isinstance(data, dict):
-            # Add legacy records first
-            if 'legacy_records' in data:
-                records.extend(data.get('legacy_records', []))
-                print(f"[{datetime.now()}] Added {len(data['legacy_records'])} legacy records")
-            
-            # Add new records from events
-            if 'events' in data:
-                for event_id, event_data in data.get('events', {}).items():
-                    if 'results' in event_data:
-                        records.extend(event_data['results'].get('NS', []))
-                        records.extend(event_data['results'].get('EW', []))
-                print(f"[{datetime.now()}] Added {len([r for e in data.get('events', {}).values() for r in e.get('results', {}).get('NS', []) + e.get('results', {}).get('EW', [])])} new records from events")
-        else:
-            # Already array format
-            records = data if isinstance(data, list) else []
-        
-        response = jsonify(records)
+        response = Response(generate(), mimetype='application/json')
         response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate, max-age=0, private'
         response.headers['Pragma'] = 'no-cache'
         response.headers['Expires'] = '0'
-        print(f"[{datetime.now()}] Serving {len(records)} total records via /api/data")
         return response
     except Exception as e:
         print(f"[{datetime.now()}] Error serving API: {e}")
