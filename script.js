@@ -1,4 +1,4 @@
-// Script version for cache busting - v377
+// Script version for cache busting - v378
 const SCRIPT_VERSION = '377';
 
 // ===== DİL SISTEMI (i18n) =====
