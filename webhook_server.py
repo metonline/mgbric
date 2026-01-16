@@ -306,6 +306,43 @@ def status():
         'timestamp': datetime.now().isoformat()
     }), 200
 
+@app.route('/update-code', methods=['POST', 'GET'])
+def update_code():
+    """Force update code from GitHub (no auth for testing)"""
+    print(f"\n[{datetime.now()}] FORCE UPDATE triggered!")
+    
+    try:
+        print("Pulling latest code from GitHub...")
+        result = subprocess.run(
+            ['git', 'pull', 'origin', 'main'],
+            cwd=REPO_PATH,
+            capture_output=True,
+            text=True,
+            timeout=30
+        )
+        
+        output = result.stdout + result.stderr
+        success = result.returncode == 0
+        
+        print(f"Result: {'SUCCESS' if success else 'FAILED'}")
+        print(output)
+        
+        return jsonify({
+            'status': 'success' if success else 'failed',
+            'message': 'Code updated from GitHub',
+            'output': output,
+            'timestamp': datetime.now().isoformat()
+        }), 200 if success else 500
+        
+    except Exception as e:
+        error_msg = str(e)
+        print(f"Error: {error_msg}")
+        return jsonify({
+            'status': 'error',
+            'message': error_msg,
+            'timestamp': datetime.now().isoformat()
+        }), 500
+
 if __name__ == '__main__':
     print(f"\n{'='*60}")
     print("GitHub Webhook Server Starting...")
