@@ -13,14 +13,14 @@ import hmac
 import hashlib
 import subprocess
 from datetime import datetime
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_file, send_from_directory
 
 # Add current directory to path for imports
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from vugraph_fetcher import VugraphDataFetcher
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='.', static_url_path='')
 
 # Configuration
 WEBHOOK_SECRET = os.environ.get('GITHUB_WEBHOOK_SECRET', 'your-webhook-secret-here')
@@ -221,16 +221,20 @@ def health_check():
 
 @app.route('/', methods=['GET'])
 def index():
-    """Index endpoint"""
-    return jsonify({
-        'service': 'GitHub Webhook Server',
-        'version': '1.0',
-        'endpoints': {
-            'webhook': 'POST /webhook - Handle GitHub webhooks',
-            'health': 'GET /health - Health check',
-            'status': 'GET /status - Server status'
-        }
-    }), 200
+    """Serve index.html"""
+    try:
+        return send_file('index.html')
+    except:
+        return send_from_directory('.', 'index.html')
+
+@app.route('/<path:filename>', methods=['GET'])
+def serve_static(filename):
+    """Serve static files"""
+    try:
+        return send_from_directory('.', filename)
+    except:
+        # If file not found, return 404
+        return jsonify({'error': 'Not found'}), 404
 
 @app.route('/status', methods=['GET'])
 def status():
