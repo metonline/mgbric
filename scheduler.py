@@ -37,10 +37,10 @@ class DatabaseScheduler:
             
             fetcher = VugraphDataFetcher()
             
-            # Get dates to fetch (last 3 days + next 7 days)
+            # Get dates to fetch (last 10 days)
             today = datetime.now()
-            start_date_obj = today - timedelta(days=3)
-            end_date_obj = today + timedelta(days=7)
+            start_date_obj = today - timedelta(days=10)
+            end_date_obj = today
             
             print(f"[{datetime.now()}] Fetching tournaments from {start_date_obj.strftime('%d.%m.%Y')} to {end_date_obj.strftime('%d.%m.%Y')}")
             
