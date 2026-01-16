@@ -721,14 +721,25 @@ function filterBySelectedDate() {
     
     console.log(`🔍 Seçilen tarih: ${filterDate}`);
     console.log(`📊 Toplam kayıt: ${allData.length}`);
+    
+    // Debug: Show sample dates from database
+    if (allData.length > 0) {
+        const sampleDates = [...new Set(allData.slice(0, 100).map(r => r.Tarih))];
+        console.log(`📅 Veritabanında örnek tarihler: ${sampleDates.join(', ')}`);
+    }
+    
     const filtered = allData.filter(record => record.Tarih === filterDate);
     console.log(`✅ Filtrelenen kayıt: ${filtered.length}`);
+    console.log(`📋 Filtrelenen ilk 3 kayıt:`, filtered.slice(0, 3));
+    
     if (filtered.length === 0) {
         alert(`${filterDate} tarihinde kayıt bulunamadı`);
         return;
     }
     // Farklı turnuva isimlerini bul
     const uniqueTournaments = [...new Set(filtered.map(r => r.Turnuva || ''))];
+    console.log(`🎯 Bulunan turnuvalar: ${uniqueTournaments.join(', ')}`);
+    
     if (uniqueTournaments.length > 1) {
         // Kullanıcıya seçim sun
         showTournamentSelectModal(uniqueTournaments, function(selectedTournament) {
