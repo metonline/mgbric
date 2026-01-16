@@ -1,0 +1,4 @@
+# Force rebuild marker
+# This file is updated to trigger container rebuild on Fly.io
+REBUILD_TIMESTAMP=2026-01-16T23:00:00Z
+VERSION=379
