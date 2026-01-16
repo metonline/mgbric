@@ -1,9 +1,2154 @@
 {
   "version": "2.0",
-  "last_updated": "2026-01-16T20:47:31.887498",
-  "events": {},
+  "last_updated": "2026-01-16T21:08:07.931119",
+  "events": {
+    "event_405128": {
+      "id": "405128",
+      "name": "Salý Sonuçları (13.01.2026 14:00)",
+      "date": "13.01.2026",
+      "results": {
+        "NS": [
+          {
+            "Sıra": 1,
+            "Tarih": "13.01.2026",
+            "Oyuncu 1": "AYKUT ÇAKICI",
+            "Oyuncu 2": "ASLIHAN NUR ŞEN",
+            "Skor": 62.21,
+            "Direction": "NS",
+            "Turnuva": "Salý Sonuçları (13.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405128"
+          },
+          {
+            "Sıra": 2,
+            "Tarih": "13.01.2026",
+            "Oyuncu 1": "CANAN TÜRKDOĞAN",
+            "Oyuncu 2": "OKŞAN VEDA HALEFOĞLU",
+            "Skor": 59.45,
+            "Direction": "NS",
+            "Turnuva": "Salý Sonuçları (13.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405128"
+          },
+          {
+            "Sıra": 3,
+            "Tarih": "13.01.2026",
+            "Oyuncu 1": "NİLGÜN ERBAŞ",
+            "Oyuncu 2": "BÜLENT TORUN",
+            "Skor": 59.3,
+            "Direction": "NS",
+            "Turnuva": "Salý Sonuçları (13.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405128"
+          },
+          {
+            "Sıra": 4,
+            "Tarih": "13.01.2026",
+            "Oyuncu 1": "MEHMET SALİM KUMBARACI",
+            "Oyuncu 2": "İLYAS FATİH COŞKUN",
+            "Skor": 57.65,
+            "Direction": "NS",
+            "Turnuva": "Salý Sonuçları (13.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405128"
+          },
+          {
+            "Sıra": 5,
+            "Tarih": "13.01.2026",
+            "Oyuncu 1": "BERNA YÜTMEN",
+            "Oyuncu 2": "CAHİDE ÖZKAN",
+            "Skor": 55.43,
+            "Direction": "NS",
+            "Turnuva": "Salý Sonuçları (13.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405128"
+          },
+          {
+            "Sıra": 6,
+            "Tarih": "13.01.2026",
+            "Oyuncu 1": "DİANA KUYUMCU",
+            "Oyuncu 2": "AYLİN GÜVENTAŞ",
+            "Skor": 55.04,
+            "Direction": "NS",
+            "Turnuva": "Salý Sonuçları (13.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405128"
+          },
+          {
+            "Sıra": 7,
+            "Tarih": "13.01.2026",
+            "Oyuncu 1": "NAHİDE BERKİZ ARKUN",
+            "Oyuncu 2": "ÇELA KAZADO",
+            "Skor": 54.82,
+            "Direction": "NS",
+            "Turnuva": "Salý Sonuçları (13.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405128"
+          },
+          {
+            "Sıra": 8,
+            "Tarih": "13.01.2026",
+            "Oyuncu 1": "BÜLENT ERGUN",
+            "Oyuncu 2": "YUSUF SOHTORİK",
+            "Skor": 54.73,
+            "Direction": "NS",
+            "Turnuva": "Salý Sonuçları (13.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405128"
+          },
+          {
+            "Sıra": 9,
+            "Tarih": "13.01.2026",
+            "Oyuncu 1": "ASLI AKYÜZ",
+            "Oyuncu 2": "ÜMİT KUTLUK",
+            "Skor": 54.61,
+            "Direction": "NS",
+            "Turnuva": "Salý Sonuçları (13.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405128"
+          },
+          {
+            "Sıra": 10,
+            "Tarih": "13.01.2026",
+            "Oyuncu 1": "İHSAN OĞUZ",
+            "Oyuncu 2": "BELKIS HASON",
+            "Skor": 52.78,
+            "Direction": "NS",
+            "Turnuva": "Salý Sonuçları (13.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405128"
+          },
+          {
+            "Sıra": 11,
+            "Tarih": "13.01.2026",
+            "Oyuncu 1": "MEHMET REHA TOLUN",
+            "Oyuncu 2": "ALİ DEHA ŞEN",
+            "Skor": 52.01,
+            "Direction": "NS",
+            "Turnuva": "Salý Sonuçları (13.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405128"
+          },
+          {
+            "Sıra": 12,
+            "Tarih": "13.01.2026",
+            "Oyuncu 1": "BAHAR YEŞİM UZTÜRK",
+            "Oyuncu 2": "RESMİYE REZZAN BİRGEN",
+            "Skor": 51.21,
+            "Direction": "NS",
+            "Turnuva": "Salý Sonuçları (13.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405128"
+          },
+          {
+            "Sıra": 13,
+            "Tarih": "13.01.2026",
+            "Oyuncu 1": "YURDAGÜL HAVSA",
+            "Oyuncu 2": "ONUR ERTEKİN",
+            "Skor": 49.9,
+            "Direction": "NS",
+            "Turnuva": "Salý Sonuçları (13.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405128"
+          },
+          {
+            "Sıra": 14,
+            "Tarih": "13.01.2026",
+            "Oyuncu 1": "TEKSİN ERTEN",
+            "Oyuncu 2": "FETHİYE EMİNE YALÇIN",
+            "Skor": 49.87,
+            "Direction": "NS",
+            "Turnuva": "Salý Sonuçları (13.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405128"
+          },
+          {
+            "Sıra": 15,
+            "Tarih": "13.01.2026",
+            "Oyuncu 1": "YILMAZ TURTURA",
+            "Oyuncu 2": "ŞÜKRÜ AZMİ ARNA",
+            "Skor": 49.25,
+            "Direction": "NS",
+            "Turnuva": "Salý Sonuçları (13.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405128"
+          },
+          {
+            "Sıra": 16,
+            "Tarih": "13.01.2026",
+            "Oyuncu 1": "NALAN AKPUL",
+            "Oyuncu 2": "KARSEL FİGEN ERTEKİN",
+            "Skor": 48.97,
+            "Direction": "NS",
+            "Turnuva": "Salý Sonuçları (13.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405128"
+          },
+          {
+            "Sıra": 17,
+            "Tarih": "13.01.2026",
+            "Oyuncu 1": "ATİLLA SERTGÖZ",
+            "Oyuncu 2": "MEHMET MÜKRİM HATİPOĞLU",
+            "Skor": 48.5,
+            "Direction": "NS",
+            "Turnuva": "Salý Sonuçları (13.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405128"
+          },
+          {
+            "Sıra": 18,
+            "Tarih": "13.01.2026",
+            "Oyuncu 1": "ZEYNEP ALP",
+            "Oyuncu 2": "NEDİME DE TARANTO",
+            "Skor": 47.7,
+            "Direction": "NS",
+            "Turnuva": "Salý Sonuçları (13.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405128"
+          },
+          {
+            "Sıra": 19,
+            "Tarih": "13.01.2026",
+            "Oyuncu 1": "SERHAN TURGUT",
+            "Oyuncu 2": "HALUK KOLÇAK",
+            "Skor": 47.52,
+            "Direction": "NS",
+            "Turnuva": "Salý Sonuçları (13.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405128"
+          },
+          {
+            "Sıra": 20,
+            "Tarih": "13.01.2026",
+            "Oyuncu 1": "PELİN ÜLGER",
+            "Oyuncu 2": "HAMİT NACİ DEMİRBAŞ",
+            "Skor": 47.44,
+            "Direction": "NS",
+            "Turnuva": "Salý Sonuçları (13.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405128"
+          },
+          {
+            "Sıra": 21,
+            "Tarih": "13.01.2026",
+            "Oyuncu 1": "TALHA ÜNSAL",
+            "Oyuncu 2": "YASİN YÜCER",
+            "Skor": 46.81,
+            "Direction": "NS",
+            "Turnuva": "Salý Sonuçları (13.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405128"
+          },
+          {
+            "Sıra": 22,
+            "Tarih": "13.01.2026",
+            "Oyuncu 1": "HÜLYA DEMİRAĞ",
+            "Oyuncu 2": "NACİYE MÜLAY YUMRUKÇAL",
+            "Skor": 45.1,
+            "Direction": "NS",
+            "Turnuva": "Salý Sonuçları (13.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405128"
+          },
+          {
+            "Sıra": 23,
+            "Tarih": "13.01.2026",
+            "Oyuncu 1": "YÜKSEL ULUFER",
+            "Oyuncu 2": "HALİL ZAFER ERDİNÇ",
+            "Skor": 43.14,
+            "Direction": "NS",
+            "Turnuva": "Salý Sonuçları (13.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405128"
+          },
+          {
+            "Sıra": 24,
+            "Tarih": "13.01.2026",
+            "Oyuncu 1": "SAİM BOZDOĞAN",
+            "Oyuncu 2": "HALUK YETİŞEN",
+            "Skor": 40.96,
+            "Direction": "NS",
+            "Turnuva": "Salý Sonuçları (13.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405128"
+          },
+          {
+            "Sıra": 25,
+            "Tarih": "13.01.2026",
+            "Oyuncu 1": "AYŞE KANTARCI",
+            "Oyuncu 2": "ALİME NİL ÜLGEN",
+            "Skor": 39.84,
+            "Direction": "NS",
+            "Turnuva": "Salý Sonuçları (13.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405128"
+          },
+          {
+            "Sıra": 26,
+            "Tarih": "13.01.2026",
+            "Oyuncu 1": "YAŞAR KARATOPRAK",
+            "Oyuncu 2": "CAVİT AYHAN",
+            "Skor": 39.17,
+            "Direction": "NS",
+            "Turnuva": "Salý Sonuçları (13.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405128"
+          },
+          {
+            "Sıra": 27,
+            "Tarih": "13.01.2026",
+            "Oyuncu 1": "ITIR DEMİR",
+            "Oyuncu 2": "YAHYA KÜÇÜKKILIÇ",
+            "Skor": 38.44,
+            "Direction": "NS",
+            "Turnuva": "Salý Sonuçları (13.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405128"
+          }
+        ],
+        "EW": [
+          {
+            "Sıra": 1,
+            "Tarih": "13.01.2026",
+            "Oyuncu 1": "CÜNEYT ELER",
+            "Oyuncu 2": "EKREM SERDAR",
+            "Skor": 65.45,
+            "Direction": "EW",
+            "Turnuva": "Salý Sonuçları (13.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405128"
+          },
+          {
+            "Sıra": 2,
+            "Tarih": "13.01.2026",
+            "Oyuncu 1": "ZEKİ TAŞPINAR",
+            "Oyuncu 2": "HALİME CAN",
+            "Skor": 63.27,
+            "Direction": "EW",
+            "Turnuva": "Salý Sonuçları (13.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405128"
+          },
+          {
+            "Sıra": 3,
+            "Tarih": "13.01.2026",
+            "Oyuncu 1": "HÜLYA TUNAVELİOĞLU",
+            "Oyuncu 2": "BEDİA ALACAKAPTAN",
+            "Skor": 60.55,
+            "Direction": "EW",
+            "Turnuva": "Salý Sonuçları (13.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405128"
+          },
+          {
+            "Sıra": 4,
+            "Tarih": "13.01.2026",
+            "Oyuncu 1": "MEHMET GÜVEN DALKILIÇ",
+            "Oyuncu 2": "SERDAR ERDEM",
+            "Skor": 59.7,
+            "Direction": "EW",
+            "Turnuva": "Salý Sonuçları (13.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405128"
+          },
+          {
+            "Sıra": 5,
+            "Tarih": "13.01.2026",
+            "Oyuncu 1": "FİKRİ UĞUR",
+            "Oyuncu 2": "MEHMET EMİROĞLU",
+            "Skor": 59.35,
+            "Direction": "EW",
+            "Turnuva": "Salý Sonuçları (13.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405128"
+          },
+          {
+            "Sıra": 6,
+            "Tarih": "13.01.2026",
+            "Oyuncu 1": "SELİM UYGUR KILIÇ",
+            "Oyuncu 2": "Salim ÇOPUR",
+            "Skor": 58.23,
+            "Direction": "EW",
+            "Turnuva": "Salý Sonuçları (13.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405128"
+          },
+          {
+            "Sıra": 7,
+            "Tarih": "13.01.2026",
+            "Oyuncu 1": "HADİ ŞENYUVA",
+            "Oyuncu 2": "CİHAN VATANSEVER",
+            "Skor": 58.1,
+            "Direction": "EW",
+            "Turnuva": "Salý Sonuçları (13.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405128"
+          },
+          {
+            "Sıra": 8,
+            "Tarih": "13.01.2026",
+            "Oyuncu 1": "OJENİ TÜRÜSEL",
+            "Oyuncu 2": "ZEYNEP SERAP IŞIM",
+            "Skor": 57.01,
+            "Direction": "EW",
+            "Turnuva": "Salý Sonuçları (13.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405128"
+          },
+          {
+            "Sıra": 9,
+            "Tarih": "13.01.2026",
+            "Oyuncu 1": "AYŞE KUTLAY",
+            "Oyuncu 2": "ÖZGÜR ÖDEN",
+            "Skor": 56.32,
+            "Direction": "EW",
+            "Turnuva": "Salý Sonuçları (13.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405128"
+          },
+          {
+            "Sıra": 10,
+            "Tarih": "13.01.2026",
+            "Oyuncu 1": "MUSTAFA IŞIKLAR",
+            "Oyuncu 2": "MEHMET KAYA",
+            "Skor": 56.29,
+            "Direction": "EW",
+            "Turnuva": "Salý Sonuçları (13.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405128"
+          },
+          {
+            "Sıra": 11,
+            "Tarih": "13.01.2026",
+            "Oyuncu 1": "REFİK KUMAŞ",
+            "Oyuncu 2": "ERDEN ÜSTÜNSOY",
+            "Skor": 56.09,
+            "Direction": "EW",
+            "Turnuva": "Salý Sonuçları (13.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405128"
+          },
+          {
+            "Sıra": 12,
+            "Tarih": "13.01.2026",
+            "Oyuncu 1": "MUSTAFA KEMAL SARAL",
+            "Oyuncu 2": "MEHMET SEDAT CENGİZ",
+            "Skor": 55.48,
+            "Direction": "EW",
+            "Turnuva": "Salý Sonuçları (13.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405128"
+          },
+          {
+            "Sıra": 13,
+            "Tarih": "13.01.2026",
+            "Oyuncu 1": "ÖMER GÜNEŞ",
+            "Oyuncu 2": "KADİR KARAKAŞ",
+            "Skor": 54.08,
+            "Direction": "EW",
+            "Turnuva": "Salý Sonuçları (13.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405128"
+          },
+          {
+            "Sıra": 14,
+            "Tarih": "13.01.2026",
+            "Oyuncu 1": "VOLKAN DENİZCİ",
+            "Oyuncu 2": "CEMAL ERDOĞAN",
+            "Skor": 53.9,
+            "Direction": "EW",
+            "Turnuva": "Salý Sonuçları (13.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405128"
+          },
+          {
+            "Sıra": 15,
+            "Tarih": "13.01.2026",
+            "Oyuncu 1": "HAKAN YOLSAL",
+            "Oyuncu 2": "MEHMET FAİK KURANOĞLU",
+            "Skor": 52.89,
+            "Direction": "EW",
+            "Turnuva": "Salý Sonuçları (13.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405128"
+          },
+          {
+            "Sıra": 16,
+            "Tarih": "13.01.2026",
+            "Oyuncu 1": "FATMA DİCLE TOKER",
+            "Oyuncu 2": "FÜSUN KURMUŞ",
+            "Skor": 52.36,
+            "Direction": "EW",
+            "Turnuva": "Salý Sonuçları (13.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405128"
+          },
+          {
+            "Sıra": 17,
+            "Tarih": "13.01.2026",
+            "Oyuncu 1": "ÜMRAN DEMİROĞLU",
+            "Oyuncu 2": "ENGİN GÖKDENİZ",
+            "Skor": 49.96,
+            "Direction": "EW",
+            "Turnuva": "Salý Sonuçları (13.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405128"
+          },
+          {
+            "Sıra": 18,
+            "Tarih": "13.01.2026",
+            "Oyuncu 1": "FİLİZ OLMUŞ",
+            "Oyuncu 2": "ANN CLARE TAHİNCİOĞLU",
+            "Skor": 49.91,
+            "Direction": "EW",
+            "Turnuva": "Salý Sonuçları (13.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405128"
+          },
+          {
+            "Sıra": 19,
+            "Tarih": "13.01.2026",
+            "Oyuncu 1": "OYA ZEYNEP DEMİREL",
+            "Oyuncu 2": "METE KUTLAY",
+            "Skor": 47.59,
+            "Direction": "EW",
+            "Turnuva": "Salý Sonuçları (13.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405128"
+          },
+          {
+            "Sıra": 20,
+            "Tarih": "13.01.2026",
+            "Oyuncu 1": "MAHMUT BİRIŞIK",
+            "Oyuncu 2": "AYDAN AKMAN",
+            "Skor": 46.89,
+            "Direction": "EW",
+            "Turnuva": "Salý Sonuçları (13.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405128"
+          },
+          {
+            "Sıra": 21,
+            "Tarih": "13.01.2026",
+            "Oyuncu 1": "TUNA AKYÜREK",
+            "Oyuncu 2": "MURAT ATAÇ",
+            "Skor": 45.89,
+            "Direction": "EW",
+            "Turnuva": "Salý Sonuçları (13.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405128"
+          },
+          {
+            "Sıra": 22,
+            "Tarih": "13.01.2026",
+            "Oyuncu 1": "MEHMET ARDA DAĞCIOĞLU",
+            "Oyuncu 2": "ESRA ÖZTEMİR",
+            "Skor": 45.77,
+            "Direction": "EW",
+            "Turnuva": "Salý Sonuçları (13.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405128"
+          },
+          {
+            "Sıra": 23,
+            "Tarih": "13.01.2026",
+            "Oyuncu 1": "SERHAT ACARLAR",
+            "Oyuncu 2": "METİN SARAÇOĞLU",
+            "Skor": 44.3,
+            "Direction": "EW",
+            "Turnuva": "Salý Sonuçları (13.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405128"
+          },
+          {
+            "Sıra": 24,
+            "Tarih": "13.01.2026",
+            "Oyuncu 1": "FATMA GÜZİDE TOSUN",
+            "Oyuncu 2": "TÜLAY ERTAN",
+            "Skor": 44.03,
+            "Direction": "EW",
+            "Turnuva": "Salý Sonuçları (13.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405128"
+          },
+          {
+            "Sıra": 25,
+            "Tarih": "13.01.2026",
+            "Oyuncu 1": "MUSTAFA TURUNÇ",
+            "Oyuncu 2": "ZÜLKÜF TEOMAN HAZNECİ",
+            "Skor": 43.55,
+            "Direction": "EW",
+            "Turnuva": "Salý Sonuçları (13.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405128"
+          },
+          {
+            "Sıra": 26,
+            "Tarih": "13.01.2026",
+            "Oyuncu 1": "FÜSUN GÖLGE",
+            "Oyuncu 2": "ÖMER LEVENT ILGAR",
+            "Skor": 42.66,
+            "Direction": "EW",
+            "Turnuva": "Salý Sonuçları (13.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405128"
+          },
+          {
+            "Sıra": 27,
+            "Tarih": "13.01.2026",
+            "Oyuncu 1": "ZEYNEP SADİYE YATMAZ",
+            "Oyuncu 2": "ALİ KÜÇÜKÇAĞLAYAN",
+            "Skor": 39.47,
+            "Direction": "EW",
+            "Turnuva": "Salý Sonuçları (13.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405128"
+          },
+          {
+            "Sıra": 28,
+            "Tarih": "13.01.2026",
+            "Oyuncu 1": "NAZMİYE FÜSUN TOKSÖZ",
+            "Oyuncu 2": "YASEMİN KARAGÜL",
+            "Skor": 39.31,
+            "Direction": "EW",
+            "Turnuva": "Salý Sonuçları (13.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405128"
+          },
+          {
+            "Sıra": 29,
+            "Tarih": "13.01.2026",
+            "Oyuncu 1": "BETÜL ÖKTEM",
+            "Oyuncu 2": "MELEK TARGAN",
+            "Skor": 38.18,
+            "Direction": "EW",
+            "Turnuva": "Salý Sonuçları (13.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405128"
+          },
+          {
+            "Sıra": 30,
+            "Tarih": "13.01.2026",
+            "Oyuncu 1": "SERKAN ÜNAL",
+            "Oyuncu 2": "FİKRET  GÜNEŞ",
+            "Skor": 37.41,
+            "Direction": "EW",
+            "Turnuva": "Salý Sonuçları (13.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405128"
+          }
+        ]
+      }
+    },
+    "event_405007": {
+      "id": "405007",
+      "name": "Çarþamba Sonuçları (14.01.2026 14:00)",
+      "date": "14.01.2026",
+      "results": {
+        "NS": [
+          {
+            "Sıra": 1,
+            "Tarih": "14.01.2026",
+            "Oyuncu 1": "BAHAR YEŞİLTAN",
+            "Oyuncu 2": "MELEK TARGAN",
+            "Skor": 63.36,
+            "Direction": "NS",
+            "Turnuva": "Çarþamba Sonuçları (14.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405007"
+          },
+          {
+            "Sıra": 2,
+            "Tarih": "14.01.2026",
+            "Oyuncu 1": "YAHYA KÜÇÜKKILIÇ",
+            "Oyuncu 2": "ÜMRAN DEMİROĞLU",
+            "Skor": 61.94,
+            "Direction": "NS",
+            "Turnuva": "Çarþamba Sonuçları (14.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405007"
+          },
+          {
+            "Sıra": 3,
+            "Tarih": "14.01.2026",
+            "Oyuncu 1": "ZEYNEP SERAP IŞIM",
+            "Oyuncu 2": "ÖZGÜR ÖDEN",
+            "Skor": 59.66,
+            "Direction": "NS",
+            "Turnuva": "Çarþamba Sonuçları (14.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405007"
+          },
+          {
+            "Sıra": 4,
+            "Tarih": "14.01.2026",
+            "Oyuncu 1": "TAN ÇİMEN",
+            "Oyuncu 2": "ŞENOL SÜNGET",
+            "Skor": 58.52,
+            "Direction": "NS",
+            "Turnuva": "Çarþamba Sonuçları (14.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405007"
+          },
+          {
+            "Sıra": 5,
+            "Tarih": "14.01.2026",
+            "Oyuncu 1": "BERNA YÜTMEN",
+            "Oyuncu 2": "ASLIHAN NUR ŞEN",
+            "Skor": 56.44,
+            "Direction": "NS",
+            "Turnuva": "Çarþamba Sonuçları (14.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405007"
+          },
+          {
+            "Sıra": 6,
+            "Tarih": "14.01.2026",
+            "Oyuncu 1": "ERDEN ÜSTÜNSOY",
+            "Oyuncu 2": "REFİK KUMAŞ",
+            "Skor": 55.98,
+            "Direction": "NS",
+            "Turnuva": "Çarþamba Sonuçları (14.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405007"
+          },
+          {
+            "Sıra": 7,
+            "Tarih": "14.01.2026",
+            "Oyuncu 1": "MEHMET SALİM KUMBARACI",
+            "Oyuncu 2": "MEHMET MÜKRİM HATİPOĞLU",
+            "Skor": 55.06,
+            "Direction": "NS",
+            "Turnuva": "Çarþamba Sonuçları (14.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405007"
+          },
+          {
+            "Sıra": 8,
+            "Tarih": "14.01.2026",
+            "Oyuncu 1": "MEHMET EMİROĞLU",
+            "Oyuncu 2": "FİKRİ UĞUR",
+            "Skor": 55.03,
+            "Direction": "NS",
+            "Turnuva": "Çarþamba Sonuçları (14.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405007"
+          },
+          {
+            "Sıra": 9,
+            "Tarih": "14.01.2026",
+            "Oyuncu 1": "ERAN SÜZER",
+            "Oyuncu 2": "ONUR ERTEKİN",
+            "Skor": 54.02,
+            "Direction": "NS",
+            "Turnuva": "Çarþamba Sonuçları (14.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405007"
+          },
+          {
+            "Sıra": 10,
+            "Tarih": "14.01.2026",
+            "Oyuncu 1": "TEKSİN ERTEN",
+            "Oyuncu 2": "CAHİDE ÖZKAN",
+            "Skor": 53.16,
+            "Direction": "NS",
+            "Turnuva": "Çarþamba Sonuçları (14.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405007"
+          },
+          {
+            "Sıra": 11,
+            "Tarih": "14.01.2026",
+            "Oyuncu 1": "ADİL İLKER ERKMAN",
+            "Oyuncu 2": "ATİLLA SERTGÖZ",
+            "Skor": 52.43,
+            "Direction": "NS",
+            "Turnuva": "Çarþamba Sonuçları (14.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405007"
+          },
+          {
+            "Sıra": 12,
+            "Tarih": "14.01.2026",
+            "Oyuncu 1": "ENGİN GÖKDENİZ",
+            "Oyuncu 2": "BÜLENT ERGUN",
+            "Skor": 51.24,
+            "Direction": "NS",
+            "Turnuva": "Çarþamba Sonuçları (14.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405007"
+          },
+          {
+            "Sıra": 13,
+            "Tarih": "14.01.2026",
+            "Oyuncu 1": "AYŞE FEZAL GÖNİN",
+            "Oyuncu 2": "AYKUT ÇAKICI",
+            "Skor": 50.86,
+            "Direction": "NS",
+            "Turnuva": "Çarþamba Sonuçları (14.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405007"
+          },
+          {
+            "Sıra": 14,
+            "Tarih": "14.01.2026",
+            "Oyuncu 1": "HÜSEYİN ÇAĞRI SELÇUK",
+            "Oyuncu 2": "ZEYNEP ÇEVİK",
+            "Skor": 48.85,
+            "Direction": "NS",
+            "Turnuva": "Çarþamba Sonuçları (14.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405007"
+          },
+          {
+            "Sıra": 15,
+            "Tarih": "14.01.2026",
+            "Oyuncu 1": "BAHAR YEŞİM UZTÜRK",
+            "Oyuncu 2": "SELİM UYGUR KILIÇ",
+            "Skor": 48.74,
+            "Direction": "NS",
+            "Turnuva": "Çarþamba Sonuçları (14.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405007"
+          },
+          {
+            "Sıra": 16,
+            "Tarih": "14.01.2026",
+            "Oyuncu 1": "OLGUN  ALTUNTAŞ",
+            "Oyuncu 2": "ÖMER LEVENT ILGAR",
+            "Skor": 48.36,
+            "Direction": "NS",
+            "Turnuva": "Çarþamba Sonuçları (14.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405007"
+          },
+          {
+            "Sıra": 17,
+            "Tarih": "14.01.2026",
+            "Oyuncu 1": "CİHAN VATANSEVER",
+            "Oyuncu 2": "HADİ ŞENYUVA",
+            "Skor": 48.31,
+            "Direction": "NS",
+            "Turnuva": "Çarþamba Sonuçları (14.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405007"
+          },
+          {
+            "Sıra": 18,
+            "Tarih": "14.01.2026",
+            "Oyuncu 1": "RAUF TEMİZEL",
+            "Oyuncu 2": "ALİCAN DEMİRDEN",
+            "Skor": 47.77,
+            "Direction": "NS",
+            "Turnuva": "Çarþamba Sonuçları (14.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405007"
+          },
+          {
+            "Sıra": 19,
+            "Tarih": "14.01.2026",
+            "Oyuncu 1": "TALHA ÜNSAL",
+            "Oyuncu 2": "MUAMMER KANTARCI",
+            "Skor": 46.97,
+            "Direction": "NS",
+            "Turnuva": "Çarþamba Sonuçları (14.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405007"
+          },
+          {
+            "Sıra": 20,
+            "Tarih": "14.01.2026",
+            "Oyuncu 1": "MEHMET SEDAT CENGİZ",
+            "Oyuncu 2": "AYŞE YILDIZ FENMAN",
+            "Skor": 46.36,
+            "Direction": "NS",
+            "Turnuva": "Çarþamba Sonuçları (14.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405007"
+          },
+          {
+            "Sıra": 21,
+            "Tarih": "14.01.2026",
+            "Oyuncu 1": "NERMİN TAŞLITARLA",
+            "Oyuncu 2": "YILDIRIM ALEL",
+            "Skor": 45.34,
+            "Direction": "NS",
+            "Turnuva": "Çarþamba Sonuçları (14.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405007"
+          },
+          {
+            "Sıra": 22,
+            "Tarih": "14.01.2026",
+            "Oyuncu 1": "NİLGÜN ERBAŞ",
+            "Oyuncu 2": "MİTHAT ERBAŞ",
+            "Skor": 42.24,
+            "Direction": "NS",
+            "Turnuva": "Çarþamba Sonuçları (14.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405007"
+          },
+          {
+            "Sıra": 23,
+            "Tarih": "14.01.2026",
+            "Oyuncu 1": "ZÜLKÜF TEOMAN HAZNECİ",
+            "Oyuncu 2": "BETÜL ÖKTEM",
+            "Skor": 41.42,
+            "Direction": "NS",
+            "Turnuva": "Çarþamba Sonuçları (14.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405007"
+          },
+          {
+            "Sıra": 24,
+            "Tarih": "14.01.2026",
+            "Oyuncu 1": "HANDAN TURUNÇ",
+            "Oyuncu 2": "YASEMİN KARAGÜL",
+            "Skor": 41.31,
+            "Direction": "NS",
+            "Turnuva": "Çarþamba Sonuçları (14.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405007"
+          },
+          {
+            "Sıra": 25,
+            "Tarih": "14.01.2026",
+            "Oyuncu 1": "BELKIS HASON",
+            "Oyuncu 2": "NACİYE MÜLAY YUMRUKÇAL",
+            "Skor": 39.15,
+            "Direction": "NS",
+            "Turnuva": "Çarþamba Sonuçları (14.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405007"
+          },
+          {
+            "Sıra": 26,
+            "Tarih": "14.01.2026",
+            "Oyuncu 1": "İLKNUR BURSA",
+            "Oyuncu 2": "Mehmet İsmet SARIBUDAK",
+            "Skor": 37.99,
+            "Direction": "NS",
+            "Turnuva": "Çarþamba Sonuçları (14.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405007"
+          }
+        ],
+        "EW": [
+          {
+            "Sıra": 1,
+            "Tarih": "14.01.2026",
+            "Oyuncu 1": "MUZAFFER BAL",
+            "Oyuncu 2": "MEHMET FAİK KURANOĞLU",
+            "Skor": 62.75,
+            "Direction": "EW",
+            "Turnuva": "Çarþamba Sonuçları (14.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405007"
+          },
+          {
+            "Sıra": 2,
+            "Tarih": "14.01.2026",
+            "Oyuncu 1": "MEMET ALİ TOPRAK",
+            "Oyuncu 2": "OKŞAN VEDA HALEFOĞLU",
+            "Skor": 61.51,
+            "Direction": "EW",
+            "Turnuva": "Çarþamba Sonuçları (14.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405007"
+          },
+          {
+            "Sıra": 3,
+            "Tarih": "14.01.2026",
+            "Oyuncu 1": "ENDER AKSÜYEK",
+            "Oyuncu 2": "VOLKAN DENİZCİ",
+            "Skor": 56.84,
+            "Direction": "EW",
+            "Turnuva": "Çarþamba Sonuçları (14.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405007"
+          },
+          {
+            "Sıra": 4,
+            "Tarih": "14.01.2026",
+            "Oyuncu 1": "OSMAN BALABAN",
+            "Oyuncu 2": "YILMAZ TURTURA",
+            "Skor": 56.76,
+            "Direction": "EW",
+            "Turnuva": "Çarþamba Sonuçları (14.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405007"
+          },
+          {
+            "Sıra": 5,
+            "Tarih": "14.01.2026",
+            "Oyuncu 1": "MEHMET KAYA",
+            "Oyuncu 2": "YILMAZ AKTEN",
+            "Skor": 54.45,
+            "Direction": "EW",
+            "Turnuva": "Çarþamba Sonuçları (14.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405007"
+          },
+          {
+            "Sıra": 6,
+            "Tarih": "14.01.2026",
+            "Oyuncu 1": "SEVİL NUHOĞLU",
+            "Oyuncu 2": "EŞREF ŞİRİN",
+            "Skor": 53.99,
+            "Direction": "EW",
+            "Turnuva": "Çarþamba Sonuçları (14.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405007"
+          },
+          {
+            "Sıra": 7,
+            "Tarih": "14.01.2026",
+            "Oyuncu 1": "NEŞET İLKER TAŞTEPE",
+            "Oyuncu 2": "HAMİT NACİ DEMİRBAŞ",
+            "Skor": 53.84,
+            "Direction": "EW",
+            "Turnuva": "Çarþamba Sonuçları (14.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405007"
+          },
+          {
+            "Sıra": 8,
+            "Tarih": "14.01.2026",
+            "Oyuncu 1": "SİNAN FATİH MOTUGAN",
+            "Oyuncu 2": "HAKAN YOLSAL",
+            "Skor": 53.15,
+            "Direction": "EW",
+            "Turnuva": "Çarþamba Sonuçları (14.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405007"
+          },
+          {
+            "Sıra": 9,
+            "Tarih": "14.01.2026",
+            "Oyuncu 1": "VELİ İZZET ÇIĞIRGAN",
+            "Oyuncu 2": "MEHMET AKİF BAŞARANLAR",
+            "Skor": 52.56,
+            "Direction": "EW",
+            "Turnuva": "Çarþamba Sonuçları (14.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405007"
+          },
+          {
+            "Sıra": 10,
+            "Tarih": "14.01.2026",
+            "Oyuncu 1": "ŞÜKRÜ AZMİ ARNA",
+            "Oyuncu 2": "MEHMET EMİN ÇOPUR",
+            "Skor": 50.67,
+            "Direction": "EW",
+            "Turnuva": "Çarþamba Sonuçları (14.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405007"
+          },
+          {
+            "Sıra": 11,
+            "Tarih": "14.01.2026",
+            "Oyuncu 1": "METİN SARAÇOĞLU",
+            "Oyuncu 2": "TÜLAY TATARKA",
+            "Skor": 50.64,
+            "Direction": "EW",
+            "Turnuva": "Çarþamba Sonuçları (14.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405007"
+          },
+          {
+            "Sıra": 12,
+            "Tarih": "14.01.2026",
+            "Oyuncu 1": "KADİR KARAKAŞ",
+            "Oyuncu 2": "AYŞE KANTARCI",
+            "Skor": 50.15,
+            "Direction": "EW",
+            "Turnuva": "Çarþamba Sonuçları (14.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405007"
+          },
+          {
+            "Sıra": 13,
+            "Tarih": "14.01.2026",
+            "Oyuncu 1": "ZEYNEP SADİYE YATMAZ",
+            "Oyuncu 2": "SERPİL FIRIL",
+            "Skor": 49.1,
+            "Direction": "EW",
+            "Turnuva": "Çarþamba Sonuçları (14.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405007"
+          },
+          {
+            "Sıra": 14,
+            "Tarih": "14.01.2026",
+            "Oyuncu 1": "BÜLENT TORUN",
+            "Oyuncu 2": "MUHİTTİN KIZILKAN",
+            "Skor": 49.02,
+            "Direction": "EW",
+            "Turnuva": "Çarþamba Sonuçları (14.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405007"
+          },
+          {
+            "Sıra": 15,
+            "Tarih": "14.01.2026",
+            "Oyuncu 1": "SAİM BOZDOĞAN",
+            "Oyuncu 2": "HÜLYA DEMİRAĞ",
+            "Skor": 48.84,
+            "Direction": "EW",
+            "Turnuva": "Çarþamba Sonuçları (14.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405007"
+          },
+          {
+            "Sıra": 16,
+            "Tarih": "14.01.2026",
+            "Oyuncu 1": "YAŞAR KARATOPRAK",
+            "Oyuncu 2": "CAVİT AYHAN",
+            "Skor": 48.83,
+            "Direction": "EW",
+            "Turnuva": "Çarþamba Sonuçları (14.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405007"
+          },
+          {
+            "Sıra": 17,
+            "Tarih": "14.01.2026",
+            "Oyuncu 1": "HALİME CAN",
+            "Oyuncu 2": "EKREM SERDAR",
+            "Skor": 47.34,
+            "Direction": "EW",
+            "Turnuva": "Çarþamba Sonuçları (14.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405007"
+          },
+          {
+            "Sıra": 18,
+            "Tarih": "14.01.2026",
+            "Oyuncu 1": "YASİN YÜCER",
+            "Oyuncu 2": "ÖZCAN AKSU",
+            "Skor": 47.01,
+            "Direction": "EW",
+            "Turnuva": "Çarþamba Sonuçları (14.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405007"
+          },
+          {
+            "Sıra": 19,
+            "Tarih": "14.01.2026",
+            "Oyuncu 1": "GÜLCE ŞUKAL",
+            "Oyuncu 2": "ZEYNEP DENİZLİ",
+            "Skor": 46.58,
+            "Direction": "EW",
+            "Turnuva": "Çarþamba Sonuçları (14.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405007"
+          },
+          {
+            "Sıra": 20,
+            "Tarih": "14.01.2026",
+            "Oyuncu 1": "BEDİA ALACAKAPTAN",
+            "Oyuncu 2": "Salim ÇOPUR",
+            "Skor": 45.82,
+            "Direction": "EW",
+            "Turnuva": "Çarþamba Sonuçları (14.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405007"
+          },
+          {
+            "Sıra": 21,
+            "Tarih": "14.01.2026",
+            "Oyuncu 1": "MAHMUT BİRIŞIK",
+            "Oyuncu 2": "ASLI AKYÜZ",
+            "Skor": 45.28,
+            "Direction": "EW",
+            "Turnuva": "Çarþamba Sonuçları (14.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405007"
+          },
+          {
+            "Sıra": 22,
+            "Tarih": "14.01.2026",
+            "Oyuncu 1": "HATİCE KÜÇÜKÇALIK",
+            "Oyuncu 2": "DİDEM  TOKER",
+            "Skor": 45.2,
+            "Direction": "EW",
+            "Turnuva": "Çarþamba Sonuçları (14.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405007"
+          },
+          {
+            "Sıra": 23,
+            "Tarih": "14.01.2026",
+            "Oyuncu 1": "HANDAN DÖKMECİ",
+            "Oyuncu 2": "NİLÜFER EKEN",
+            "Skor": 44.4,
+            "Direction": "EW",
+            "Turnuva": "Çarþamba Sonuçları (14.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405007"
+          },
+          {
+            "Sıra": 24,
+            "Tarih": "14.01.2026",
+            "Oyuncu 1": "NAZMİYE FÜSUN TOKSÖZ",
+            "Oyuncu 2": "DİLEK DEMİREL",
+            "Skor": 43.37,
+            "Direction": "EW",
+            "Turnuva": "Çarþamba Sonuçları (14.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405007"
+          },
+          {
+            "Sıra": 25,
+            "Tarih": "14.01.2026",
+            "Oyuncu 1": "Reşat DİNÇER",
+            "Oyuncu 2": "HİKMET ALBAYRAK",
+            "Skor": 31.89,
+            "Direction": "EW",
+            "Turnuva": "Çarþamba Sonuçları (14.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405007"
+          }
+        ]
+      }
+    },
+    "event_405061": {
+      "id": "405061",
+      "name": "Perþembe Sonuçları (15.01.2026 14:00)",
+      "date": "15.01.2026",
+      "results": {
+        "NS": [
+          {
+            "Sıra": 1,
+            "Tarih": "15.01.2026",
+            "Oyuncu 1": "CAN ÖZKARDEŞLER",
+            "Oyuncu 2": "MEHMET ERTUNÇ ÖZEN",
+            "Skor": 61.61,
+            "Direction": "NS",
+            "Turnuva": "Perþembe Sonuçları (15.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405061"
+          },
+          {
+            "Sıra": 2,
+            "Tarih": "15.01.2026",
+            "Oyuncu 1": "METİN BAĞCI",
+            "Oyuncu 2": "İSMAİL KANDEMİR",
+            "Skor": 61.28,
+            "Direction": "NS",
+            "Turnuva": "Perþembe Sonuçları (15.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405061"
+          },
+          {
+            "Sıra": 3,
+            "Tarih": "15.01.2026",
+            "Oyuncu 1": "CEMAL ERDOĞAN",
+            "Oyuncu 2": "VOLKAN DENİZCİ",
+            "Skor": 60.31,
+            "Direction": "NS",
+            "Turnuva": "Perþembe Sonuçları (15.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405061"
+          },
+          {
+            "Sıra": 4,
+            "Tarih": "15.01.2026",
+            "Oyuncu 1": "MİŞEL BOVETE",
+            "Oyuncu 2": "HALUK KOLÇAK",
+            "Skor": 59.45,
+            "Direction": "NS",
+            "Turnuva": "Perþembe Sonuçları (15.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405061"
+          },
+          {
+            "Sıra": 5,
+            "Tarih": "15.01.2026",
+            "Oyuncu 1": "ÖZLEN ASLANMARTİN BAĞCI",
+            "Oyuncu 2": "KADİR KARAKAŞ",
+            "Skor": 58.43,
+            "Direction": "NS",
+            "Turnuva": "Perþembe Sonuçları (15.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405061"
+          },
+          {
+            "Sıra": 6,
+            "Tarih": "15.01.2026",
+            "Oyuncu 1": "YILMAZ AKTEN",
+            "Oyuncu 2": "MEHMET KAYA",
+            "Skor": 56.96,
+            "Direction": "NS",
+            "Turnuva": "Perþembe Sonuçları (15.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405061"
+          },
+          {
+            "Sıra": 7,
+            "Tarih": "15.01.2026",
+            "Oyuncu 1": "ZEYNEP ALP",
+            "Oyuncu 2": "NİLGÜN KOTAN",
+            "Skor": 56.1,
+            "Direction": "NS",
+            "Turnuva": "Perþembe Sonuçları (15.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405061"
+          },
+          {
+            "Sıra": 8,
+            "Tarih": "15.01.2026",
+            "Oyuncu 1": "ÜMİT ARAT",
+            "Oyuncu 2": "ŞÜKRÜ AZMİ ARNA",
+            "Skor": 55.48,
+            "Direction": "NS",
+            "Turnuva": "Perþembe Sonuçları (15.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405061"
+          },
+          {
+            "Sıra": 9,
+            "Tarih": "15.01.2026",
+            "Oyuncu 1": "BÜLENT ÇUVALCIOĞLU",
+            "Oyuncu 2": "YASİN YÜCER",
+            "Skor": 55.38,
+            "Direction": "NS",
+            "Turnuva": "Perþembe Sonuçları (15.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405061"
+          },
+          {
+            "Sıra": 10,
+            "Tarih": "15.01.2026",
+            "Oyuncu 1": "YAVUZ KÖSE",
+            "Oyuncu 2": "AYDIN SARICA",
+            "Skor": 52.91,
+            "Direction": "NS",
+            "Turnuva": "Perþembe Sonuçları (15.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405061"
+          },
+          {
+            "Sıra": 11,
+            "Tarih": "15.01.2026",
+            "Oyuncu 1": "DİLEK DEMİREL",
+            "Oyuncu 2": "MELEK TARGAN",
+            "Skor": 52.6,
+            "Direction": "NS",
+            "Turnuva": "Perþembe Sonuçları (15.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405061"
+          },
+          {
+            "Sıra": 12,
+            "Tarih": "15.01.2026",
+            "Oyuncu 1": "CAVİT AYHAN",
+            "Oyuncu 2": "METİN SARAÇOĞLU",
+            "Skor": 51.72,
+            "Direction": "NS",
+            "Turnuva": "Perþembe Sonuçları (15.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405061"
+          },
+          {
+            "Sıra": 13,
+            "Tarih": "15.01.2026",
+            "Oyuncu 1": "İSMET NADİR",
+            "Oyuncu 2": "HİDAYET DENİZ SAYDAN",
+            "Skor": 48.96,
+            "Direction": "NS",
+            "Turnuva": "Perþembe Sonuçları (15.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405061"
+          },
+          {
+            "Sıra": 14,
+            "Tarih": "15.01.2026",
+            "Oyuncu 1": "OSMAN BALABAN",
+            "Oyuncu 2": "TURHAN ERGUN AMASYALI",
+            "Skor": 48.67,
+            "Direction": "NS",
+            "Turnuva": "Perþembe Sonuçları (15.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405061"
+          },
+          {
+            "Sıra": 15,
+            "Tarih": "15.01.2026",
+            "Oyuncu 1": "BAHAR YEŞİM UZTÜRK",
+            "Oyuncu 2": "RESMİYE REZZAN BİRGEN",
+            "Skor": 47.79,
+            "Direction": "NS",
+            "Turnuva": "Perþembe Sonuçları (15.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405061"
+          },
+          {
+            "Sıra": 16,
+            "Tarih": "15.01.2026",
+            "Oyuncu 1": "ZAFER ŞENGÜL",
+            "Oyuncu 2": "CAVİDE İSTANBULLU",
+            "Skor": 47.27,
+            "Direction": "NS",
+            "Turnuva": "Perþembe Sonuçları (15.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405061"
+          },
+          {
+            "Sıra": 17,
+            "Tarih": "15.01.2026",
+            "Oyuncu 1": "CANAN TÜRKDOĞAN",
+            "Oyuncu 2": "ŞENOL SÜNGET",
+            "Skor": 45.01,
+            "Direction": "NS",
+            "Turnuva": "Perþembe Sonuçları (15.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405061"
+          },
+          {
+            "Sıra": 18,
+            "Tarih": "15.01.2026",
+            "Oyuncu 1": "Barbaros UZUNER",
+            "Oyuncu 2": "SELİM UYGUR KILIÇ",
+            "Skor": 43.63,
+            "Direction": "NS",
+            "Turnuva": "Perþembe Sonuçları (15.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405061"
+          },
+          {
+            "Sıra": 19,
+            "Tarih": "15.01.2026",
+            "Oyuncu 1": "NİLGÜN GÜLSOY",
+            "Oyuncu 2": "CAN BARLAS İŞBAŞAR",
+            "Skor": 41.04,
+            "Direction": "NS",
+            "Turnuva": "Perþembe Sonuçları (15.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405061"
+          },
+          {
+            "Sıra": 20,
+            "Tarih": "15.01.2026",
+            "Oyuncu 1": "VELİ İZZET ÇIĞIRGAN",
+            "Oyuncu 2": "ÇİĞDEM YÜCEL",
+            "Skor": 40.65,
+            "Direction": "NS",
+            "Turnuva": "Perþembe Sonuçları (15.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405061"
+          },
+          {
+            "Sıra": 21,
+            "Tarih": "15.01.2026",
+            "Oyuncu 1": "MUSTAFA TURUNÇ",
+            "Oyuncu 2": "REŞAT DİNÇER",
+            "Skor": 39.83,
+            "Direction": "NS",
+            "Turnuva": "Perþembe Sonuçları (15.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405061"
+          },
+          {
+            "Sıra": 22,
+            "Tarih": "15.01.2026",
+            "Oyuncu 1": "Handan UZUNER",
+            "Oyuncu 2": "NEYDAN BUĞDANOĞLU",
+            "Skor": 38.79,
+            "Direction": "NS",
+            "Turnuva": "Perþembe Sonuçları (15.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405061"
+          },
+          {
+            "Sıra": 23,
+            "Tarih": "15.01.2026",
+            "Oyuncu 1": "HANDAN TURUNÇ",
+            "Oyuncu 2": "SAADET TERZİ",
+            "Skor": 36.29,
+            "Direction": "NS",
+            "Turnuva": "Perþembe Sonuçları (15.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405061"
+          }
+        ],
+        "EW": [
+          {
+            "Sıra": 1,
+            "Tarih": "15.01.2026",
+            "Oyuncu 1": "MEHMET EMİN ÇOPUR",
+            "Oyuncu 2": "ADİL İLKER ERKMAN",
+            "Skor": 62.14,
+            "Direction": "EW",
+            "Turnuva": "Perþembe Sonuçları (15.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405061"
+          },
+          {
+            "Sıra": 2,
+            "Tarih": "15.01.2026",
+            "Oyuncu 1": "BİLGEHAN HAMİT IŞIKOĞLU",
+            "Oyuncu 2": "ASLIHAN NUR ŞEN",
+            "Skor": 61.14,
+            "Direction": "EW",
+            "Turnuva": "Perþembe Sonuçları (15.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405061"
+          },
+          {
+            "Sıra": 3,
+            "Tarih": "15.01.2026",
+            "Oyuncu 1": "TİJEN HALAÇOĞLU",
+            "Oyuncu 2": "ESER PEKÖZ",
+            "Skor": 59.77,
+            "Direction": "EW",
+            "Turnuva": "Perþembe Sonuçları (15.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405061"
+          },
+          {
+            "Sıra": 4,
+            "Tarih": "15.01.2026",
+            "Oyuncu 1": "HAMİT NACİ DEMİRBAŞ",
+            "Oyuncu 2": "MEHMET SEDAT CENGİZ",
+            "Skor": 58.99,
+            "Direction": "EW",
+            "Turnuva": "Perþembe Sonuçları (15.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405061"
+          },
+          {
+            "Sıra": 5,
+            "Tarih": "15.01.2026",
+            "Oyuncu 1": "CEMİL ATABEYLİ",
+            "Oyuncu 2": "YAVUZ İZDEŞ",
+            "Skor": 56.47,
+            "Direction": "EW",
+            "Turnuva": "Perþembe Sonuçları (15.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405061"
+          },
+          {
+            "Sıra": 6,
+            "Tarih": "15.01.2026",
+            "Oyuncu 1": "ATİLLA BEKYEL",
+            "Oyuncu 2": "MEHMET LÜTFULLAH ÖNDER",
+            "Skor": 56.13,
+            "Direction": "EW",
+            "Turnuva": "Perþembe Sonuçları (15.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405061"
+          },
+          {
+            "Sıra": 7,
+            "Tarih": "15.01.2026",
+            "Oyuncu 1": "KAMİL SEZAİ ATAV",
+            "Oyuncu 2": "MUSTAFA FARUK BENGİSU",
+            "Skor": 55.38,
+            "Direction": "EW",
+            "Turnuva": "Perþembe Sonuçları (15.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405061"
+          },
+          {
+            "Sıra": 8,
+            "Tarih": "15.01.2026",
+            "Oyuncu 1": "BİLGEHAN BAHRİYELİ",
+            "Oyuncu 2": "AYLİN GÜVENTAŞ",
+            "Skor": 53.55,
+            "Direction": "EW",
+            "Turnuva": "Perþembe Sonuçları (15.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405061"
+          },
+          {
+            "Sıra": 9,
+            "Tarih": "15.01.2026",
+            "Oyuncu 1": "BÜLENT TORUN",
+            "Oyuncu 2": "MUHİTTİN KIZILKAN",
+            "Skor": 53.02,
+            "Direction": "EW",
+            "Turnuva": "Perþembe Sonuçları (15.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405061"
+          },
+          {
+            "Sıra": 10,
+            "Tarih": "15.01.2026",
+            "Oyuncu 1": "METE KUTLAY",
+            "Oyuncu 2": "OYA ZEYNEP DEMİREL",
+            "Skor": 52.86,
+            "Direction": "EW",
+            "Turnuva": "Perþembe Sonuçları (15.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405061"
+          },
+          {
+            "Sıra": 11,
+            "Tarih": "15.01.2026",
+            "Oyuncu 1": "FERDA HİLAL VARDAR",
+            "Oyuncu 2": "MURAT ATAÇ",
+            "Skor": 51.11,
+            "Direction": "EW",
+            "Turnuva": "Perþembe Sonuçları (15.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405061"
+          },
+          {
+            "Sıra": 12,
+            "Tarih": "15.01.2026",
+            "Oyuncu 1": "Salim ÇOPUR",
+            "Oyuncu 2": "YAHYA KÜÇÜKKILIÇ",
+            "Skor": 49.7,
+            "Direction": "EW",
+            "Turnuva": "Perþembe Sonuçları (15.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405061"
+          },
+          {
+            "Sıra": 13,
+            "Tarih": "15.01.2026",
+            "Oyuncu 1": "İSMAİL KOCAOĞLU",
+            "Oyuncu 2": "HACI İBRAHİM KURUGÜL",
+            "Skor": 49.37,
+            "Direction": "EW",
+            "Turnuva": "Perþembe Sonuçları (15.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405061"
+          },
+          {
+            "Sıra": 14,
+            "Tarih": "15.01.2026",
+            "Oyuncu 1": "FÜSUN EMİNE UZER",
+            "Oyuncu 2": "HALUK YETİŞEN",
+            "Skor": 48.0,
+            "Direction": "EW",
+            "Turnuva": "Perþembe Sonuçları (15.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405061"
+          },
+          {
+            "Sıra": 15,
+            "Tarih": "15.01.2026",
+            "Oyuncu 1": "YASEMİN ERENGİL",
+            "Oyuncu 2": "SEVİL NUHOĞLU",
+            "Skor": 47.54,
+            "Direction": "EW",
+            "Turnuva": "Perþembe Sonuçları (15.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405061"
+          },
+          {
+            "Sıra": 16,
+            "Tarih": "15.01.2026",
+            "Oyuncu 1": "TALHA ÜNSAL",
+            "Oyuncu 2": "TEKSİN ERTEN",
+            "Skor": 46.81,
+            "Direction": "EW",
+            "Turnuva": "Perþembe Sonuçları (15.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405061"
+          },
+          {
+            "Sıra": 17,
+            "Tarih": "15.01.2026",
+            "Oyuncu 1": "SİNAN FATİH MOTUGAN",
+            "Oyuncu 2": "YURDAGÜL HAVSA",
+            "Skor": 43.17,
+            "Direction": "EW",
+            "Turnuva": "Perþembe Sonuçları (15.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405061"
+          },
+          {
+            "Sıra": 18,
+            "Tarih": "15.01.2026",
+            "Oyuncu 1": "ZEYNEP SADİYE YATMAZ",
+            "Oyuncu 2": "FETHİYE EMİNE YALÇIN",
+            "Skor": 41.05,
+            "Direction": "EW",
+            "Turnuva": "Perþembe Sonuçları (15.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405061"
+          },
+          {
+            "Sıra": 19,
+            "Tarih": "15.01.2026",
+            "Oyuncu 1": "BETÜL ÖKTEM",
+            "Oyuncu 2": "BAHAR YEŞİLTAN",
+            "Skor": 40.74,
+            "Direction": "EW",
+            "Turnuva": "Perþembe Sonuçları (15.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405061"
+          },
+          {
+            "Sıra": 20,
+            "Tarih": "15.01.2026",
+            "Oyuncu 1": "YILMAZ TURTURA",
+            "Oyuncu 2": "NİLGÜN DERELİ",
+            "Skor": 39.43,
+            "Direction": "EW",
+            "Turnuva": "Perþembe Sonuçları (15.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405061"
+          },
+          {
+            "Sıra": 21,
+            "Tarih": "15.01.2026",
+            "Oyuncu 1": "TÜLAY ERTAN",
+            "Oyuncu 2": "NAZMİYE FÜSUN TOKSÖZ",
+            "Skor": 36.96,
+            "Direction": "EW",
+            "Turnuva": "Perþembe Sonuçları (15.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405061"
+          },
+          {
+            "Sıra": 22,
+            "Tarih": "15.01.2026",
+            "Oyuncu 1": "HİKMET ALBAYRAK",
+            "Oyuncu 2": "ZÜLKÜF TEOMAN HAZNECİ",
+            "Skor": 36.67,
+            "Direction": "EW",
+            "Turnuva": "Perþembe Sonuçları (15.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405061"
+          }
+        ]
+      }
+    },
+    "event_405123": {
+      "id": "405123",
+      "name": "CUMA Sonuçları (16.01.2026 14:00)",
+      "date": "16.01.2026",
+      "results": {
+        "NS": [
+          {
+            "Sıra": 1,
+            "Tarih": "16.01.2026",
+            "Oyuncu 1": "LEVENT DİNÇEL",
+            "Oyuncu 2": "ESRA SÖNMEZ",
+            "Skor": 63.46,
+            "Direction": "NS",
+            "Turnuva": "CUMA Sonuçları (16.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405123"
+          },
+          {
+            "Sıra": 2,
+            "Tarih": "16.01.2026",
+            "Oyuncu 1": "SİNAN FATİH MOTUGAN",
+            "Oyuncu 2": "ŞÜKRÜ AZMİ ARNA",
+            "Skor": 59.7,
+            "Direction": "NS",
+            "Turnuva": "CUMA Sonuçları (16.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405123"
+          },
+          {
+            "Sıra": 3,
+            "Tarih": "16.01.2026",
+            "Oyuncu 1": "SEVİL NUHOĞLU",
+            "Oyuncu 2": "SERKAN ÜNAL",
+            "Skor": 57.83,
+            "Direction": "NS",
+            "Turnuva": "CUMA Sonuçları (16.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405123"
+          },
+          {
+            "Sıra": 4,
+            "Tarih": "16.01.2026",
+            "Oyuncu 1": "YAHYA KÜÇÜKKILIÇ",
+            "Oyuncu 2": "CEMAL ERDOĞAN",
+            "Skor": 57.71,
+            "Direction": "NS",
+            "Turnuva": "CUMA Sonuçları (16.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405123"
+          },
+          {
+            "Sıra": 5,
+            "Tarih": "16.01.2026",
+            "Oyuncu 1": "MEHMET FAİK KURANOĞLU",
+            "Oyuncu 2": "MUZAFFER BAL",
+            "Skor": 56.57,
+            "Direction": "NS",
+            "Turnuva": "CUMA Sonuçları (16.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405123"
+          },
+          {
+            "Sıra": 6,
+            "Tarih": "16.01.2026",
+            "Oyuncu 1": "KADİR ŞAHİN",
+            "Oyuncu 2": "HÜSEYİN PEKPERGEL",
+            "Skor": 55.29,
+            "Direction": "NS",
+            "Turnuva": "CUMA Sonuçları (16.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405123"
+          },
+          {
+            "Sıra": 7,
+            "Tarih": "16.01.2026",
+            "Oyuncu 1": "AYŞE YILDIZ FENMAN",
+            "Oyuncu 2": "MEHMET SEDAT CENGİZ",
+            "Skor": 55.22,
+            "Direction": "NS",
+            "Turnuva": "CUMA Sonuçları (16.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405123"
+          },
+          {
+            "Sıra": 8,
+            "Tarih": "16.01.2026",
+            "Oyuncu 1": "EKREM SERDAR",
+            "Oyuncu 2": "HALİME CAN",
+            "Skor": 53.91,
+            "Direction": "NS",
+            "Turnuva": "CUMA Sonuçları (16.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405123"
+          },
+          {
+            "Sıra": 9,
+            "Tarih": "16.01.2026",
+            "Oyuncu 1": "YILMAZ TURTURA",
+            "Oyuncu 2": "TURHAN ERGUN AMASYALI",
+            "Skor": 53.53,
+            "Direction": "NS",
+            "Turnuva": "CUMA Sonuçları (16.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405123"
+          },
+          {
+            "Sıra": 10,
+            "Tarih": "16.01.2026",
+            "Oyuncu 1": "TEKSİN ERTEN",
+            "Oyuncu 2": "FETHİYE EMİNE YALÇIN",
+            "Skor": 52.92,
+            "Direction": "NS",
+            "Turnuva": "CUMA Sonuçları (16.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405123"
+          },
+          {
+            "Sıra": 11,
+            "Tarih": "16.01.2026",
+            "Oyuncu 1": "BERNA YÜTMEN",
+            "Oyuncu 2": "BÜLENT TORUN",
+            "Skor": 51.79,
+            "Direction": "NS",
+            "Turnuva": "CUMA Sonuçları (16.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405123"
+          },
+          {
+            "Sıra": 12,
+            "Tarih": "16.01.2026",
+            "Oyuncu 1": "BEDİA ALACAKAPTAN",
+            "Oyuncu 2": "HÜLYA TUNAVELİOĞLU",
+            "Skor": 50.93,
+            "Direction": "NS",
+            "Turnuva": "CUMA Sonuçları (16.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405123"
+          },
+          {
+            "Sıra": 13,
+            "Tarih": "16.01.2026",
+            "Oyuncu 1": "MEHMET AKİF BAŞARANLAR",
+            "Oyuncu 2": "MUAMMER KANTARCI",
+            "Skor": 50.38,
+            "Direction": "NS",
+            "Turnuva": "CUMA Sonuçları (16.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405123"
+          },
+          {
+            "Sıra": 14,
+            "Tarih": "16.01.2026",
+            "Oyuncu 1": "ÖZCAN AKSU",
+            "Oyuncu 2": "YASİN YÜCER",
+            "Skor": 49.96,
+            "Direction": "NS",
+            "Turnuva": "CUMA Sonuçları (16.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405123"
+          },
+          {
+            "Sıra": 15,
+            "Tarih": "16.01.2026",
+            "Oyuncu 1": "DAVİT PİNHAS",
+            "Oyuncu 2": "OYA BAYÜLKEM",
+            "Skor": 49.35,
+            "Direction": "NS",
+            "Turnuva": "CUMA Sonuçları (16.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405123"
+          },
+          {
+            "Sıra": 16,
+            "Tarih": "16.01.2026",
+            "Oyuncu 1": "ASLI AKYÜZ",
+            "Oyuncu 2": "FATMA DİCLE TOKER",
+            "Skor": 48.98,
+            "Direction": "NS",
+            "Turnuva": "CUMA Sonuçları (16.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405123"
+          },
+          {
+            "Sıra": 17,
+            "Tarih": "16.01.2026",
+            "Oyuncu 1": "REYHAN GÜNER",
+            "Oyuncu 2": "CANAN TÜRKDOĞAN",
+            "Skor": 48.4,
+            "Direction": "NS",
+            "Turnuva": "CUMA Sonuçları (16.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405123"
+          },
+          {
+            "Sıra": 18,
+            "Tarih": "16.01.2026",
+            "Oyuncu 1": "CAHİDE ÖZKAN",
+            "Oyuncu 2": "NEVİN ARSLAN",
+            "Skor": 47.45,
+            "Direction": "NS",
+            "Turnuva": "CUMA Sonuçları (16.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405123"
+          },
+          {
+            "Sıra": 19,
+            "Tarih": "16.01.2026",
+            "Oyuncu 1": "OSMAN BALABAN",
+            "Oyuncu 2": "HAMİT NACİ DEMİRBAŞ",
+            "Skor": 47.36,
+            "Direction": "NS",
+            "Turnuva": "CUMA Sonuçları (16.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405123"
+          },
+          {
+            "Sıra": 20,
+            "Tarih": "16.01.2026",
+            "Oyuncu 1": "NERMİN TAŞLITARLA",
+            "Oyuncu 2": "AYKUT ÇAKICI",
+            "Skor": 46.73,
+            "Direction": "NS",
+            "Turnuva": "CUMA Sonuçları (16.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405123"
+          },
+          {
+            "Sıra": 21,
+            "Tarih": "16.01.2026",
+            "Oyuncu 1": "MURAT ATAÇ",
+            "Oyuncu 2": "FİKRİ UĞUR",
+            "Skor": 45.68,
+            "Direction": "NS",
+            "Turnuva": "CUMA Sonuçları (16.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405123"
+          },
+          {
+            "Sıra": 22,
+            "Tarih": "16.01.2026",
+            "Oyuncu 1": "OSMAN ULUKAN BİRGİN",
+            "Oyuncu 2": "MEHMET SERDAR KARAALP",
+            "Skor": 45.33,
+            "Direction": "NS",
+            "Turnuva": "CUMA Sonuçları (16.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405123"
+          },
+          {
+            "Sıra": 23,
+            "Tarih": "16.01.2026",
+            "Oyuncu 1": "ÜMRAN DEMİROĞLU",
+            "Oyuncu 2": "ENGİN GÖKDENİZ",
+            "Skor": 44.57,
+            "Direction": "NS",
+            "Turnuva": "CUMA Sonuçları (16.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405123"
+          },
+          {
+            "Sıra": 24,
+            "Tarih": "16.01.2026",
+            "Oyuncu 1": "İHSAN OĞUZ",
+            "Oyuncu 2": "BELKIS HASON",
+            "Skor": 44.34,
+            "Direction": "NS",
+            "Turnuva": "CUMA Sonuçları (16.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405123"
+          },
+          {
+            "Sıra": 25,
+            "Tarih": "16.01.2026",
+            "Oyuncu 1": "ZEYNEP DENİZLİ",
+            "Oyuncu 2": "GÜLCE ŞUKAL",
+            "Skor": 41.12,
+            "Direction": "NS",
+            "Turnuva": "CUMA Sonuçları (16.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405123"
+          },
+          {
+            "Sıra": 26,
+            "Tarih": "16.01.2026",
+            "Oyuncu 1": "NİLÜFER TAN",
+            "Oyuncu 2": "ŞEBNEM KÖKBUDAK",
+            "Skor": 40.2,
+            "Direction": "NS",
+            "Turnuva": "CUMA Sonuçları (16.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405123"
+          },
+          {
+            "Sıra": 27,
+            "Tarih": "16.01.2026",
+            "Oyuncu 1": "ÇAĞLA AKYÜREK",
+            "Oyuncu 2": "ELVAN AKGÜN",
+            "Skor": 31.27,
+            "Direction": "NS",
+            "Turnuva": "CUMA Sonuçları (16.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405123"
+          }
+        ],
+        "EW": [
+          {
+            "Sıra": 1,
+            "Tarih": "16.01.2026",
+            "Oyuncu 1": "OKŞAN VEDA HALEFOĞLU",
+            "Oyuncu 2": "MEMET ALİ TOPRAK",
+            "Skor": 64.88,
+            "Direction": "EW",
+            "Turnuva": "CUMA Sonuçları (16.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405123"
+          },
+          {
+            "Sıra": 2,
+            "Tarih": "16.01.2026",
+            "Oyuncu 1": "ESRA ÖZTEMİR",
+            "Oyuncu 2": "ATİLLA SERTGÖZ",
+            "Skor": 60.77,
+            "Direction": "EW",
+            "Turnuva": "CUMA Sonuçları (16.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405123"
+          },
+          {
+            "Sıra": 3,
+            "Tarih": "16.01.2026",
+            "Oyuncu 1": "ÜMİT ARAT",
+            "Oyuncu 2": "AYLİN GÜVENTAŞ",
+            "Skor": 60.01,
+            "Direction": "EW",
+            "Turnuva": "CUMA Sonuçları (16.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405123"
+          },
+          {
+            "Sıra": 4,
+            "Tarih": "16.01.2026",
+            "Oyuncu 1": "YUSUF SOHTORİK",
+            "Oyuncu 2": "BÜLENT ERGUN",
+            "Skor": 59.04,
+            "Direction": "EW",
+            "Turnuva": "CUMA Sonuçları (16.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405123"
+          },
+          {
+            "Sıra": 5,
+            "Tarih": "16.01.2026",
+            "Oyuncu 1": "FATMA GÜZİDE TOSUN",
+            "Oyuncu 2": "FÜSUN GÖLGE",
+            "Skor": 57.47,
+            "Direction": "EW",
+            "Turnuva": "CUMA Sonuçları (16.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405123"
+          },
+          {
+            "Sıra": 6,
+            "Tarih": "16.01.2026",
+            "Oyuncu 1": "MEHMET GÜVEN DALKILIÇ",
+            "Oyuncu 2": "SERDAR ERDEM",
+            "Skor": 57.46,
+            "Direction": "EW",
+            "Turnuva": "CUMA Sonuçları (16.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405123"
+          },
+          {
+            "Sıra": 7,
+            "Tarih": "16.01.2026",
+            "Oyuncu 1": "MUSTAFA KEMAL SARAL",
+            "Oyuncu 2": "BEDİİ MELİH KOTAN",
+            "Skor": 55.28,
+            "Direction": "EW",
+            "Turnuva": "CUMA Sonuçları (16.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405123"
+          },
+          {
+            "Sıra": 8,
+            "Tarih": "16.01.2026",
+            "Oyuncu 1": "CAN BARLAS İŞBAŞAR",
+            "Oyuncu 2": "KADİR KARAKAŞ",
+            "Skor": 55.27,
+            "Direction": "EW",
+            "Turnuva": "CUMA Sonuçları (16.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405123"
+          },
+          {
+            "Sıra": 9,
+            "Tarih": "16.01.2026",
+            "Oyuncu 1": "BİLGEHAN BAHRİYELİ",
+            "Oyuncu 2": "NİLGÜN KOTAN",
+            "Skor": 53.76,
+            "Direction": "EW",
+            "Turnuva": "CUMA Sonuçları (16.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405123"
+          },
+          {
+            "Sıra": 10,
+            "Tarih": "16.01.2026",
+            "Oyuncu 1": "ZEYNEP ALP",
+            "Oyuncu 2": "İSMAİL KANDEMİR",
+            "Skor": 53.27,
+            "Direction": "EW",
+            "Turnuva": "CUMA Sonuçları (16.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405123"
+          },
+          {
+            "Sıra": 11,
+            "Tarih": "16.01.2026",
+            "Oyuncu 1": "ASLIHAN NUR ŞEN",
+            "Oyuncu 2": "AYŞE KUTLAY",
+            "Skor": 52.88,
+            "Direction": "EW",
+            "Turnuva": "CUMA Sonuçları (16.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405123"
+          },
+          {
+            "Sıra": 12,
+            "Tarih": "16.01.2026",
+            "Oyuncu 1": "CİHAN VATANSEVER",
+            "Oyuncu 2": "TALHA ÜNSAL",
+            "Skor": 51.91,
+            "Direction": "EW",
+            "Turnuva": "CUMA Sonuçları (16.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405123"
+          },
+          {
+            "Sıra": 13,
+            "Tarih": "16.01.2026",
+            "Oyuncu 1": "VOLKAN DENİZCİ",
+            "Oyuncu 2": "ZEYNEP ÇEVİK",
+            "Skor": 51.49,
+            "Direction": "EW",
+            "Turnuva": "CUMA Sonuçları (16.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405123"
+          },
+          {
+            "Sıra": 14,
+            "Tarih": "16.01.2026",
+            "Oyuncu 1": "ÖZLEM AYDIN",
+            "Oyuncu 2": "Handan UZUNER",
+            "Skor": 51.41,
+            "Direction": "EW",
+            "Turnuva": "CUMA Sonuçları (16.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405123"
+          },
+          {
+            "Sıra": 15,
+            "Tarih": "16.01.2026",
+            "Oyuncu 1": "HALE KARTAL",
+            "Oyuncu 2": "MAHMUT BİRIŞIK",
+            "Skor": 51.11,
+            "Direction": "EW",
+            "Turnuva": "CUMA Sonuçları (16.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405123"
+          },
+          {
+            "Sıra": 16,
+            "Tarih": "16.01.2026",
+            "Oyuncu 1": "ÖMER GÜNEŞ",
+            "Oyuncu 2": "ALİ KÜÇÜKÇAĞLAYAN",
+            "Skor": 50.93,
+            "Direction": "EW",
+            "Turnuva": "CUMA Sonuçları (16.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405123"
+          },
+          {
+            "Sıra": 17,
+            "Tarih": "16.01.2026",
+            "Oyuncu 1": "SAİM BOZDOĞAN",
+            "Oyuncu 2": "HALUK YETİŞEN",
+            "Skor": 50.69,
+            "Direction": "EW",
+            "Turnuva": "CUMA Sonuçları (16.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405123"
+          },
+          {
+            "Sıra": 18,
+            "Tarih": "16.01.2026",
+            "Oyuncu 1": "RAMAZAN MESUT TUNCA",
+            "Oyuncu 2": "MEHMET SALİM KUMBARACI",
+            "Skor": 50.29,
+            "Direction": "EW",
+            "Turnuva": "CUMA Sonuçları (16.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405123"
+          },
+          {
+            "Sıra": 19,
+            "Tarih": "16.01.2026",
+            "Oyuncu 1": "TAMER BİROL DALAK",
+            "Oyuncu 2": "ALİYE UĞUR",
+            "Skor": 49.61,
+            "Direction": "EW",
+            "Turnuva": "CUMA Sonuçları (16.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405123"
+          },
+          {
+            "Sıra": 20,
+            "Tarih": "16.01.2026",
+            "Oyuncu 1": "FERDA HİLAL VARDAR",
+            "Oyuncu 2": "AYSUN ŞENOCAK",
+            "Skor": 47.53,
+            "Direction": "EW",
+            "Turnuva": "CUMA Sonuçları (16.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405123"
+          },
+          {
+            "Sıra": 21,
+            "Tarih": "16.01.2026",
+            "Oyuncu 1": "KAYHAN ÇAVUŞOĞLU",
+            "Oyuncu 2": "OSMAN METE ALTAN",
+            "Skor": 47.26,
+            "Direction": "EW",
+            "Turnuva": "CUMA Sonuçları (16.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405123"
+          },
+          {
+            "Sıra": 22,
+            "Tarih": "16.01.2026",
+            "Oyuncu 1": "ÇİĞDEM YÜCEL",
+            "Oyuncu 2": "AYLİN AYTEN",
+            "Skor": 46.91,
+            "Direction": "EW",
+            "Turnuva": "CUMA Sonuçları (16.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405123"
+          },
+          {
+            "Sıra": 23,
+            "Tarih": "16.01.2026",
+            "Oyuncu 1": "METE KUTLAY",
+            "Oyuncu 2": "OYA ZEYNEP DEMİREL",
+            "Skor": 46.3,
+            "Direction": "EW",
+            "Turnuva": "CUMA Sonuçları (16.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405123"
+          },
+          {
+            "Sıra": 24,
+            "Tarih": "16.01.2026",
+            "Oyuncu 1": "MUSTAFA FARUK BENGİSU",
+            "Oyuncu 2": "AYŞE ARKUNLAR",
+            "Skor": 46.29,
+            "Direction": "EW",
+            "Turnuva": "CUMA Sonuçları (16.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405123"
+          },
+          {
+            "Sıra": 25,
+            "Tarih": "16.01.2026",
+            "Oyuncu 1": "GAYE UYGUR",
+            "Oyuncu 2": "MEHMET MÜKRİM HATİPOĞLU",
+            "Skor": 45.97,
+            "Direction": "EW",
+            "Turnuva": "CUMA Sonuçları (16.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405123"
+          },
+          {
+            "Sıra": 26,
+            "Tarih": "16.01.2026",
+            "Oyuncu 1": "ZEYNEP SADİYE YATMAZ",
+            "Oyuncu 2": "Salim ÇOPUR",
+            "Skor": 45.1,
+            "Direction": "EW",
+            "Turnuva": "CUMA Sonuçları (16.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405123"
+          },
+          {
+            "Sıra": 27,
+            "Tarih": "16.01.2026",
+            "Oyuncu 1": "MELİHA BURCU KİNEŞ",
+            "Oyuncu 2": "YURDAGÜL HAVSA",
+            "Skor": 44.72,
+            "Direction": "EW",
+            "Turnuva": "CUMA Sonuçları (16.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405123"
+          },
+          {
+            "Sıra": 28,
+            "Tarih": "16.01.2026",
+            "Oyuncu 1": "HANDAN TURUNÇ",
+            "Oyuncu 2": "MUHSİN ZOR",
+            "Skor": 44.48,
+            "Direction": "EW",
+            "Turnuva": "CUMA Sonuçları (16.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405123"
+          },
+          {
+            "Sıra": 29,
+            "Tarih": "16.01.2026",
+            "Oyuncu 1": "HÜLYA ÇETİNKAYA",
+            "Oyuncu 2": "KENAN KUŞ",
+            "Skor": 41.15,
+            "Direction": "EW",
+            "Turnuva": "CUMA Sonuçları (16.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405123"
+          },
+          {
+            "Sıra": 30,
+            "Tarih": "16.01.2026",
+            "Oyuncu 1": "CAVİDE İSTANBULLU",
+            "Oyuncu 2": "HÜLYA DEMİRAĞ",
+            "Skor": 37.39,
+            "Direction": "EW",
+            "Turnuva": "CUMA Sonuçları (16.01.2026 14:00)",
+            "Link": "https://clubs.vugraph.com/hosgoru/eventresults.php?event=405123"
+          }
+        ]
+      }
+    }
+  },
   "metadata": {
-    "total_tournaments": 0,
+    "total_tournaments": 4,
     "total_boards": 0
   }
 }
