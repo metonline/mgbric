@@ -259,43 +259,19 @@ def serve_database():
 
 @app.route('/api/data', methods=['GET'])
 def serve_database_api():
-    """API endpoint for database - always fresh"""
+    """API endpoint for database - stream response for large files"""
     try:
         db_path = os.path.join(REPO_PATH, 'database.json')
-        # Load fresh from disk every time
-        with open(db_path, 'r', encoding='utf-8') as f:
-            data = json.load(f)
         
-        # Handle both old and new database formats
-        if isinstance(data, dict) and 'events' in data:
-            # New format: extract records from events
-            records = []
-            for event_id, event_data in data.get('events', {}).items():
-                if 'results' in event_data:
-                    ns_results = event_data['results'].get('NS', [])
-                    ew_results = event_data['results'].get('EW', [])
-                    records.extend(ns_results)
-                    records.extend(ew_results)
-            
-            response_data = {
-                'records': records,
-                'count': len(records),
-                'events_count': len(data.get('events', {})),
-                'timestamp': datetime.now().isoformat(),
-                'last_updated': data.get('last_updated'),
-                'version': 2
-            }
-        else:
-            # Old format (array of records)
-            records = data if isinstance(data, list) else []
-            response_data = {
-                'records': records,
-                'count': len(records),
-                'timestamp': datetime.now().isoformat(),
-                'version': 1
-            }
+        # For large files, just serve the raw database.json directly
+        # Let the client handle it
+        response = send_file(
+            db_path,
+            mimetype='application/json',
+            cache_timeout=0,
+            as_attachment=False
+        )
         
-        response = jsonify(response_data)
         # Set aggressively no-cache headers
         response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate, max-age=0, private'
         response.headers['Pragma'] = 'no-cache'
