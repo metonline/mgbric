@@ -62,14 +62,31 @@
         }
         
         .board-header {
-            display: flex;
-            justify-content: space-between;
+            display: grid;
+            grid-template-columns: 60px 1fr 200px;
             align-items: center;
-            margin-bottom: 10px;
-            padding-bottom: 8px;
+            margin-bottom: 8px;
+            padding: 4px 0;
             border-bottom: 1px solid #ccc;
+            gap: 8px;
+        }
+        
+        .board-header-left {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .board-header-center {
+            text-align: center;
+            font-size: 1.1rem;
             font-weight: bold;
-            gap: 10px;
+        }
+        
+        .board-header-right {
+            text-align: right;
+            font-size: 0.9rem;
+            color: #333;
         }
         
         .vuln-indicator {
@@ -89,6 +106,7 @@
             user-select: none;
             -webkit-user-select: none;
             touch-action: manipulation;
+            flex-shrink: 0;
         }
         
         .vuln-indicator:hover {
@@ -123,21 +141,8 @@
         .vuln-red { background: #e74c3c; color: white; }
         .vuln-white { background: white; }
 
-        .board-header-left,
-        .board-header-center,
-        .board-header-right {
-            flex: 1;
-            text-align: center;
-            font-size: 0.95rem;
-        }
-        
         .board-number {
             font-size: 1.1rem;
-        }
-        
-        .board-metadata {
-            font-size: 0.9rem;
-            color: #333;
         }
         
         .board-content {
@@ -424,8 +429,8 @@
                                 <div class="vuln-quad vuln-quad-s ${getVulnColor('S', hand.vulnerability)}">S</div>
                             </div>
                         </div>
-                        <div class="board-header-center"><span class="board-number">Board ${hand.id}</span></div>
-                        <div class="board-header-right">Dealer: ${hand.dealer || '-'} | Vuln: ${hand.vulnerability || '-'}</div>
+                        <div class="board-header-center">Board ${hand.id}</div>
+                        <div class="board-header-right">Dealer: ${hand.dealer} | Vuln: ${hand.vulnerability}</div>
                     </div>
                     <div class="board-content">
                         <div class="bbo-viewer ${getVulnClass(hand.vulnerability)}">
