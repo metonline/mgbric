@@ -18,7 +18,11 @@ from flask import Flask, request, jsonify, send_file, send_from_directory, Respo
 # Add current directory to path for imports
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-from vugraph_fetcher import VugraphDataFetcher
+try:
+    from vugraph_fetcher import VugraphDataFetcher
+except ImportError:
+    VugraphDataFetcher = None
+    print("Warning: vugraph_fetcher not found, Vugraph features disabled")
 
 app = Flask(__name__, static_folder='.', static_url_path='')
 
@@ -66,6 +70,10 @@ def update_database_from_vugraph():
     """Update database from Vugraph API"""
     try:
         print(f"[{datetime.now()}] Starting Vugraph data update...")
+        
+        if not VugraphDataFetcher:
+            print(f"[{datetime.now()}] Vugraph fetcher not available, skipping update")
+            return False
         
         fetcher = VugraphDataFetcher()
         
@@ -344,12 +352,13 @@ def update_code():
         }), 500
 
 if __name__ == '__main__':
+    port = int(os.environ.get('PORT', 5000))
     print(f"\n{'='*60}")
     print("GitHub Webhook Server Starting...")
     print(f"{'='*60}")
     print(f"Repository Path: {REPO_PATH}")
     print(f"Webhook Secret Configured: {bool(WEBHOOK_SECRET != 'your-webhook-secret-here')}")
-    print(f"Server Address: http://0.0.0.0:5000")
+    print(f"Server Address: http://0.0.0.0:{port}")
     print(f"{'='*60}\n")
     
-    app.run(host='0.0.0.0', port=5000, debug=False)
+    app.run(host='0.0.0.0', port=port, debug=False)

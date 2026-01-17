@@ -1,0 +1,27 @@
+name: Manual Deploy Trigger
+
+on:
+  workflow_dispatch:
+    inputs:
+      debug:
+        description: 'Enable debug logging'
+        required: false
+        default: 'false'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      
+      - name: Setup Fly CLI
+        uses: superfly/flyctl-actions/setup@master
+      
+      - name: Deploy
+        run: |
+          echo "🚀 Starting deployment to Fly.io..."
+          echo "FLY_API_TOKEN length: ${#FLY_API_TOKEN}"
+          flyctl deploy -a mgbric --remote-only
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}

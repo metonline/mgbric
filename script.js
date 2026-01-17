@@ -1234,6 +1234,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 allData = data;
                 updateFileInfo();
                 databaseReady = true;
+                setDefaultDateToLatest();  // Set latest date as default in input
                 initializePlayerSearch();
                 if (queuedModalOpen) {
                     openGlobalStatsModal(...queuedModalOpen);
@@ -1277,6 +1278,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         allData = arrayData;
                         updateFileInfo();
                         databaseReady = true;
+                        setDefaultDateToLatest();  // Set latest date as default in input
                         initializePlayerSearch();
                         if (queuedModalOpen) {
                             openGlobalStatsModal(...queuedModalOpen);
@@ -2331,6 +2333,28 @@ if (document.readyState === 'loading') {
 
 // ===== DATE PICKER CALENDAR =====
 let currentPickerMonth = new Date();
+
+// Set the latest database date as default in the date input
+function setDefaultDateToLatest() {
+    const selectedDateInput = document.getElementById('selectedDate');
+    if (selectedDateInput && !selectedDateInput.value && allData && allData.length > 0) {
+        const dates = allData
+            .filter(r => r.Tarih && /^\d{2}\.\d{2}\.\d{4}$/.test(r.Tarih))
+            .map(r => {
+                const [day, month, year] = r.Tarih.split('.');
+                return { 
+                    date: new Date(parseInt(year), parseInt(month) - 1, parseInt(day)),
+                    str: r.Tarih 
+                };
+            })
+            .sort((a, b) => b.date - a.date);
+        
+        if (dates.length > 0) {
+            selectedDateInput.value = dates[0].str;
+            console.log(`✅ Default date set to: ${dates[0].str}`);
+        }
+    }
+}
 
 function openDatePicker() {
     // Set calendar to show current month
