@@ -1,1 +1,1 @@
-web: gunicorn -w 1 -b 0.0.0.0:$PORT app:app --timeout 120 --access-logfile - --error-logfile -
+web: gunicorn -w 1 -b 0.0.0.0:8000 app:app --timeout 120
