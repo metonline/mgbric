@@ -62,16 +62,25 @@
         }
         
         .board-header {
-            text-align: center;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             margin-bottom: 10px;
             padding-bottom: 8px;
             border-bottom: 1px solid #ccc;
             font-weight: bold;
         }
         
+        .board-header-left,
+        .board-header-center,
+        .board-header-right {
+            flex: 1;
+            text-align: center;
+            font-size: 0.95rem;
+        }
+        
         .board-number {
             font-size: 1.1rem;
-            margin-bottom: 4px;
         }
         
         .board-metadata {
@@ -299,10 +308,9 @@
                 
                 let html = `
                     <div class="board-header">
-                        <div>
-                            <div class="board-number">Board ${hand.id}</div>
-                            <div class="board-metadata">Dealer: ${hand.dealer || '-'} | Vuln: ${hand.vulnerability || '-'}</div>
-                        </div>
+                        <div class="board-header-left"><span class="board-number">Board ${hand.id}</span></div>
+                        <div class="board-header-center">Dealer: ${hand.dealer || '-'}</div>
+                        <div class="board-header-right">Vuln: ${hand.vulnerability || '-'}</div>
                     </div>
                     <div class="board-content">
                         <div class="bbo-viewer">
