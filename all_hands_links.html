@@ -16,6 +16,7 @@
             background: #1a472a;
             padding: 20px;
             min-height: 100vh;
+            color: white;
         }
 
         .container {
@@ -148,6 +149,7 @@
 <body>
     <div class="container">
         <h1>♠ All Bridge Hands - DD Analysis ♠</h1>
+        <div id="loadingMsg" style="color: white; text-align: center; font-size: 1.1rem; margin: 20px 0;">Loading hands data...</div>
         <div class="hands-grid" id="handsGrid"></div>
         <div class="stats">
             Displaying <strong id="totalBoards">0</strong> boards
@@ -162,12 +164,13 @@
             .then(response => response.json())
             .then(data => {
                 handsData = data;
+                document.getElementById('loadingMsg').style.display = 'none';
                 renderAllHands();
                 updateStats();
             })
             .catch(error => {
                 console.error('Error loading hands database:', error);
-                document.getElementById('handsGrid').innerHTML = '<p style="color: white; grid-column: 1/-1; text-align: center;">Error loading hands data</p>';
+                document.getElementById('loadingMsg').innerHTML = '<p style="color: red; font-size: 1.2rem;">Error loading hands data: ' + error.message + '</p>';
             });
 
         function renderAllHands() {
