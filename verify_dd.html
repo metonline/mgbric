@@ -398,7 +398,7 @@
             
             // BBO format: qx|o1|md|{dealer}{N},{E},{S}|rh||ah|{board_name}|sv|{vuln_code}|pg||
             // Note: West hand is omitted - BBO calculates it from remaining cards
-            const boardName = `Board%20${boardId}`;
+            const boardName = `Board ${boardId}`;
             return `qx|o1|md|${dealer}${nHand},${eHand},${sHand}|rh||ah|${boardName}|sv|${vulnCode}|pg||`;
         }
         
