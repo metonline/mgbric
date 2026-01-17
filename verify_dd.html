@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DD Analysis Verification Tool</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 30px;
+        }
+        
+        .board-selector {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .board-selector label {
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .board-selector select {
+            padding: 10px 15px;
+            border: 2px solid #667eea;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        
+        .board-selector select:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        .verification-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        .card {
+            background: #f8f9fa;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+        }
+        
+        .card h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .hand-info {
+            font-size: 14px;
+            line-height: 1.8;
+            color: #555;
+        }
+        
+        .hand-info strong {
+            color: #333;
+        }
+        
+        .lin-box {
+            background: #e7f3ff;
+            border: 1px solid #667eea;
+            border-radius: 6px;
+            padding: 12px;
+            margin-top: 15px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            word-break: break-all;
+            color: #333;
+        }
+        
+        .dd-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            background: white;
+        }
+        
+        .dd-table th,
+        .dd-table td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #ddd;
+            font-size: 14px;
+        }
+        
+        .dd-table th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-weight: 600;
+        }
+        
+        .dd-table td {
+            font-weight: 500;
+        }
+        
+        .dd-table tbody tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        .player-name {
+            font-weight: 600;
+            background: #f0f4ff;
+            color: #667eea;
+        }
+        
+        .suit-nt { background: #fff3cd; }
+        .suit-s { background: #d1e7f5; }
+        .suit-h { background: #f5d1d1; }
+        .suit-d { background: #e8d5f2; }
+        .suit-c { background: #d1f5d1; }
+        
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-secondary {
+            background: #e0e0e0;
+            color: #333;
+        }
+        
+        .btn-secondary:hover {
+            background: #d0d0d0;
+        }
+        
+        .instruction {
+            background: #e7f3ff;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #555;
+            line-height: 1.6;
+        }
+        
+        .verification-steps {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .verification-steps li {
+            margin: 8px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .verification-steps li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔍 DD Analysis Verification</h1>
+            <p>Verify Double Dummy results by comparing with online solvers</p>
+        </div>
+        
+        <div class="content">
+            <div class="board-selector">
+                <label for="boardSelect">Select Board:</label>
+                <select id="boardSelect" onchange="loadBoard()">
+                    <option value="">Loading boards...</option>
+                </select>
+            </div>
+            
+            <div id="verificationContainer" style="display: none;">
+                <div class="verification-grid">
+                    <!-- Left: Our Calculated DD Values -->
+                    <div class="card">
+                        <h3>📊 Our DD Analysis</h3>
+                        <table class="dd-table">
+                            <thead>
+                                <tr>
+                                    <th>Player</th>
+                                    <th class="suit-nt">NT</th>
+                                    <th class="suit-s">♠</th>
+                                    <th class="suit-h">♥</th>
+                                    <th class="suit-d">♦</th>
+                                    <th class="suit-c">♣</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="player-name">N</td>
+                                    <td class="suit-nt" id="ntn">-</td>
+                                    <td class="suit-s" id="sn">-</td>
+                                    <td class="suit-h" id="hn">-</td>
+                                    <td class="suit-d" id="dn">-</td>
+                                    <td class="suit-c" id="cn">-</td>
+                                </tr>
+                                <tr>
+                                    <td class="player-name">E</td>
+                                    <td class="suit-nt" id="nte">-</td>
+                                    <td class="suit-s" id="se">-</td>
+                                    <td class="suit-h" id="he">-</td>
+                                    <td class="suit-d" id="de">-</td>
+                                    <td class="suit-c" id="ce">-</td>
+                                </tr>
+                                <tr>
+                                    <td class="player-name">S</td>
+                                    <td class="suit-nt" id="nts">-</td>
+                                    <td class="suit-s" id="ss">-</td>
+                                    <td class="suit-h" id="hs">-</td>
+                                    <td class="suit-d" id="ds">-</td>
+                                    <td class="suit-c" id="cs">-</td>
+                                </tr>
+                                <tr>
+                                    <td class="player-name">W</td>
+                                    <td class="suit-nt" id="ntw">-</td>
+                                    <td class="suit-s" id="sw">-</td>
+                                    <td class="suit-h" id="hw">-</td>
+                                    <td class="suit-d" id="dw">-</td>
+                                    <td class="suit-c" id="cw">-</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <!-- Right: Hand Details & Verification Links -->
+                    <div class="card">
+                        <h3>🃏 Hand Details</h3>
+                        <div class="hand-info">
+                            <p><strong>Date:</strong> <span id="boardDate">-</span></p>
+                            <p><strong>Tournament:</strong> <span id="boardTournament">-</span></p>
+                            <p><strong>Dealer:</strong> <span id="boardDealer">-</span></p>
+                            <p><strong>Vulnerability:</strong> <span id="boardVuln">-</span></p>
+                            <p><strong>Board ID:</strong> <span id="boardId">-</span></p>
+                        </div>
+                        
+                        <div class="lin-box" id="linBox">LIN will appear here</div>
+                        
+                        <div class="action-buttons">
+                            <a class="btn btn-primary" id="bboLink" href="#" target="_blank">
+                                🌐 Verify in BBO
+                            </a>
+                            <a class="btn btn-primary" id="solverLink" href="#" target="_blank">
+                                🔧 Verify in Bridge Solver
+                            </a>
+                            <button class="btn btn-secondary" onclick="copyLIN()">
+                                📋 Copy LIN
+                            </button>
+                        </div>
+                        
+                        <div class="instruction">
+                            <strong>How to Verify:</strong>
+                            <ol class="verification-steps">
+                                <li>Click "Verify in BBO" or "Verify in Bridge Solver"</li>
+                                <li>Find the "Double Dummy Analysis" section</li>
+                                <li>Compare the tricks values with our DD Analysis table</li>
+                                <li>Values should match exactly or be very close (±1)</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        let handsData = {};
+        let currentLIN = '';
+        
+        async function loadHandsDatabase() {
+            try {
+                const response = await fetch('/hands_database.json');
+                handsData = await response.json();
+                populateBoardSelector();
+            } catch (error) {
+                alert('Failed to load hands database: ' + error.message);
+            }
+        }
+        
+        function populateBoardSelector() {
+            const select = document.getElementById('boardSelect');
+            select.innerHTML = '<option value="">Select a board...</option>';
+            
+            const boardsByDate = {};
+            Object.entries(handsData).forEach(([boardId, hand]) => {
+                const date = hand.date || 'Unknown';
+                if (!boardsByDate[date]) {
+                    boardsByDate[date] = [];
+                }
+                boardsByDate[date].push({id: boardId, hand: hand});
+            });
+            
+            Object.keys(boardsByDate).sort().reverse().forEach(date => {
+                const dateGroup = document.createElement('optgroup');
+                dateGroup.label = date;
+                
+                boardsByDate[date].forEach(({id, hand}) => {
+                    const option = document.createElement('option');
+                    option.value = id;
+                    option.textContent = `Board ${id} - ${hand.tournament?.substring(0, 40) || 'Unknown'}`;
+                    dateGroup.appendChild(option);
+                });
+                
+                select.appendChild(dateGroup);
+            });
+        }
+        
+        function generateLIN(hand) {
+            const dealerMap = {'N': 1, 'E': 2, 'S': 3, 'W': 4};
+            const vulnMap = {'None': '-', 'NS': 'N', 'EW': 'E', 'Both': 'B'};
+            
+            const dealer = dealerMap[hand.dealer];
+            const vuln = vulnMap[hand.vulnerability];
+            
+            const nHand = `${hand.N.S}.${hand.N.H}.${hand.N.D}.${hand.N.C}`;
+            const eHand = `${hand.E.S}.${hand.E.H}.${hand.E.D}.${hand.E.C}`;
+            const sHand = `${hand.S.S}.${hand.S.H}.${hand.S.D}.${hand.S.C}`;
+            const wHand = `${hand.W.S}.${hand.W.H}.${hand.W.D}.${hand.W.C}`;
+            
+            return `pn=N,E,S,W|md=${dealer}${nHand},${eHand},${sHand},${wHand}|sv=${vuln}`;
+        }
+        
+        function loadBoard() {
+            const select = document.getElementById('boardSelect');
+            const boardId = select.value;
+            
+            if (!boardId) {
+                document.getElementById('verificationContainer').style.display = 'none';
+                return;
+            }
+            
+            const hand = handsData[boardId];
+            if (!hand) {
+                alert('Board not found');
+                return;
+            }
+            
+            // Update hand details
+            document.getElementById('boardDate').textContent = hand.date || 'N/A';
+            document.getElementById('boardTournament').textContent = hand.tournament || 'N/A';
+            document.getElementById('boardDealer').textContent = hand.dealer || 'N/A';
+            document.getElementById('boardVuln').textContent = hand.vulnerability || 'N/A';
+            document.getElementById('boardId').textContent = boardId;
+            
+            // Generate LIN
+            currentLIN = generateLIN(hand);
+            const encodedLin = encodeURIComponent(currentLIN);
+            
+            // Update links
+            document.getElementById('bboLink').href = `https://www.bridgebase.com/tools/handviewer.html?lin=${encodedLin}`;
+            document.getElementById('solverLink').href = `https://dds.bridgewebs.com/bsol_standalone/ddummy.html?lin=${encodedLin}`;
+            
+            // Update LIN display
+            document.getElementById('linBox').textContent = currentLIN;
+            
+            // Update DD Analysis
+            if (hand.dd_analysis) {
+                const dd = hand.dd_analysis;
+                document.getElementById('ntn').textContent = dd.NTN || '-';
+                document.getElementById('sn').textContent = dd.SN || '-';
+                document.getElementById('hn').textContent = dd.HN || '-';
+                document.getElementById('dn').textContent = dd.DN || '-';
+                document.getElementById('cn').textContent = dd.CN || '-';
+                
+                document.getElementById('nte').textContent = dd.NTE || '-';
+                document.getElementById('se').textContent = dd.SE || '-';
+                document.getElementById('he').textContent = dd.HE || '-';
+                document.getElementById('de').textContent = dd.DE || '-';
+                document.getElementById('ce').textContent = dd.CE || '-';
+                
+                document.getElementById('nts').textContent = dd.NTS || '-';
+                document.getElementById('ss').textContent = dd.SS || '-';
+                document.getElementById('hs').textContent = dd.HS || '-';
+                document.getElementById('ds').textContent = dd.DS || '-';
+                document.getElementById('cs').textContent = dd.CS || '-';
+                
+                document.getElementById('ntw').textContent = dd.NTW || '-';
+                document.getElementById('sw').textContent = dd.SW || '-';
+                document.getElementById('hw').textContent = dd.HW || '-';
+                document.getElementById('dw').textContent = dd.DW || '-';
+                document.getElementById('cw').textContent = dd.CW || '-';
+            }
+            
+            document.getElementById('verificationContainer').style.display = 'block';
+        }
+        
+        function copyLIN() {
+            navigator.clipboard.writeText(currentLIN).then(() => {
+                alert('LIN copied to clipboard!');
+            });
+        }
+        
+        // Initialize
+        loadHandsDatabase();
+    </script>
+</body>
+</html>

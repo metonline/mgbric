@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BBO Hand Viewer with DD Analysis</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 30px;
+        }
+        
+        .board-selector {
+            margin-bottom: 30px;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .board-selector label {
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .board-selector select {
+            padding: 10px 15px;
+            border: 2px solid #667eea;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            background: white;
+        }
+        
+        .board-selector select:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        .board-info {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .board-info p {
+            margin: 5px 0;
+            font-size: 14px;
+            color: #555;
+        }
+        
+        .board-info strong {
+            color: #333;
+        }
+        
+        .viewer-container {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        
+        .bbo-section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border: 2px solid #e0e0e0;
+        }
+        
+        .bbo-section h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .bbo-iframe {
+            width: 100%;
+            height: 800px;
+            border: none;
+            border-radius: 6px;
+            background: white;
+        }
+        
+        .dd-section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border: 2px solid #e0e0e0;
+        }
+        
+        .dd-section h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .dd-table-wrapper {
+            overflow-x: auto;
+        }
+        
+        .dd-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+        
+        .dd-table th,
+        .dd-table td {
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #ddd;
+            font-weight: 500;
+        }
+        
+        .dd-table th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .dd-table td {
+            font-size: 16px;
+            color: #333;
+        }
+        
+        .dd-table tbody tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        .dd-table tbody tr:hover {
+            background: #e8eef8;
+        }
+        
+        .dd-table .player-cell {
+            font-weight: 600;
+            background: #f0f4ff;
+            color: #667eea;
+            width: 60px;
+        }
+        
+        .suit-nt { background: #fff3cd; }
+        .suit-spade { background: #d1e7f5; }
+        .suit-heart { background: #f5d1d1; }
+        .suit-diamond { background: #e8d5f2; }
+        .suit-club { background: #d1f5d1; }
+        
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 6px;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .lin-info {
+            background: #e7f3ff;
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 15px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .lin-info p {
+            font-size: 12px;
+            color: #555;
+            margin: 5px 0;
+            word-break: break-all;
+        }
+        
+        .lin-info code {
+            background: white;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 11px;
+        }
+        
+        .hand-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 25px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .hand-seat {
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+        }
+        
+        .hand-seat.north {
+            grid-column: 2;
+            border-color: #667eea;
+            background: #f0f4ff;
+        }
+        
+        .hand-seat.south {
+            grid-column: 2;
+            grid-row: 3;
+            border-color: #667eea;
+            background: #f0f4ff;
+        }
+        
+        .hand-seat.west {
+            grid-column: 1;
+            grid-row: 2;
+            border-color: #764ba2;
+            background: #faf7ff;
+        }
+        
+        .hand-seat.east {
+            grid-column: 3;
+            grid-row: 2;
+            border-color: #764ba2;
+            background: #faf7ff;
+        }
+        
+        .hand-seat h4 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .hand-seat.north h4,
+        .hand-seat.south h4 {
+            color: #667eea;
+        }
+        
+        .hand-seat.west h4,
+        .hand-seat.east h4 {
+            color: #764ba2;
+        }
+        
+        .hand-cards {
+            text-align: left;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+        
+        .hand-cards .suit {
+            display: block;
+            margin: 5px 0;
+            padding: 5px 8px;
+            border-radius: 4px;
+        }
+        
+        .hand-cards .suit-spade {
+            background: #d1e7f5;
+            color: #003d82;
+        }
+        
+        .hand-cards .suit-heart {
+            background: #f5d1d1;
+            color: #820000;
+        }
+        
+        .hand-cards .suit-diamond {
+            background: #e8d5f2;
+            color: #5a0080;
+        }
+        
+        .hand-cards .suit-club {
+            background: #d1f5d1;
+            color: #008200;
+        }
+        
+        .suit-symbol {
+            font-weight: bold;
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🌐 BBO Hand Viewer with DD Analysis</h1>
+            <p>Browse hands and verify Double Dummy results</p>
+        </div>
+        
+        <div class="content">
+            <div class="board-selector">
+                <label for="boardSelect">Select Board:</label>
+                <select id="boardSelect" onchange="loadBoard()">
+                    <option value="">Loading boards...</option>
+                </select>
+            </div>
+            
+            <div id="boardInfo" class="board-info" style="display: none;">
+                <p><strong>Date:</strong> <span id="boardDate"></span></p>
+                <p><strong>Tournament:</strong> <span id="boardTournament"></span></p>
+                <p><strong>Dealer:</strong> <span id="boardDealer"></span> | <strong>Vulnerability:</strong> <span id="boardVuln"></span></p>
+            </div>
+            
+            <div id="errorContainer"></div>
+            
+            <div id="viewerContainer" class="viewer-container" style="display: none;">
+                <!-- BBO Section -->
+                <div class="bbo-section">
+                    <h3>🎯 BBO Hand Viewer</h3>
+                    <p id="bboLink" style="margin-bottom: 15px;">
+                        <a id="bboUrl" href="#" target="_blank" style="color: #667eea; text-decoration: none; font-weight: 600;">
+                            ➔ Click here to open in BBO (new tab)
+                        </a>
+                    </p>
+                    <iframe id="bboIframe" class="bbo-iframe"></iframe>
+                </div>
+                
+                <!-- DD Analysis Section -->
+                <div class="dd-section">
+                    <h3>📊 Double Dummy Analysis</h3>
+                    <div class="dd-table-wrapper">
+                        <table class="dd-table">
+                            <thead>
+                                <tr>
+                                    <th>Player</th>
+                                    <th class="suit-nt">NT</th>
+                                    <th class="suit-spade">♠</th>
+                                    <th class="suit-heart">♥</th>
+                                    <th class="suit-diamond">♦</th>
+                                    <th class="suit-club">♣</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="player-cell">North</td>
+                                    <td class="suit-nt" id="ntn">-</td>
+                                    <td class="suit-spade" id="sn">-</td>
+                                    <td class="suit-heart" id="hn">-</td>
+                                    <td class="suit-diamond" id="dn">-</td>
+                                    <td class="suit-club" id="cn">-</td>
+                                </tr>
+                                <tr>
+                                    <td class="player-cell">East</td>
+                                    <td class="suit-nt" id="nte">-</td>
+                                    <td class="suit-spade" id="se">-</td>
+                                    <td class="suit-heart" id="he">-</td>
+                                    <td class="suit-diamond" id="de">-</td>
+                                    <td class="suit-club" id="ce">-</td>
+                                </tr>
+                                <tr>
+                                    <td class="player-cell">South</td>
+                                    <td class="suit-nt" id="nts">-</td>
+                                    <td class="suit-spade" id="ss">-</td>
+                                    <td class="suit-heart" id="hs">-</td>
+                                    <td class="suit-diamond" id="ds">-</td>
+                                    <td class="suit-club" id="cs">-</td>
+                                </tr>
+                                <tr>
+                                    <td class="player-cell">West</td>
+                                    <td class="suit-nt" id="ntw">-</td>
+                                    <td class="suit-spade" id="sw">-</td>
+                                    <td class="suit-heart" id="hw">-</td>
+                                    <td class="suit-diamond" id="dw">-</td>
+                                    <td class="suit-club" id="cw">-</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="lin-info" id="linInfo" style="display: none;">
+                        <p><strong>LIN Format (for verification):</strong></p>
+                        <p><code id="linCode"></code></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        let handsData = {};
+        
+        // Load hands database
+        async function loadHandsDatabase() {
+            try {
+                const response = await fetch('/hands_database.json');
+                handsData = await response.json();
+                populateBoardSelector();
+            } catch (error) {
+                showError('Failed to load hands database: ' + error.message);
+            }
+        }
+        
+        function populateBoardSelector() {
+            const select = document.getElementById('boardSelect');
+            select.innerHTML = '<option value="">Select a board...</option>';
+            
+            // Get unique dates and boards
+            const boardsByDate = {};
+            Object.entries(handsData).forEach(([boardId, hand]) => {
+                const date = hand.date || 'Unknown';
+                if (!boardsByDate[date]) {
+                    boardsByDate[date] = [];
+                }
+                boardsByDate[date].push({id: boardId, hand: hand});
+            });
+            
+            // Sort and add to selector
+            Object.keys(boardsByDate).sort().reverse().forEach(date => {
+                const dateGroup = document.createElement('optgroup');
+                dateGroup.label = date;
+                
+                boardsByDate[date].forEach(({id, hand}) => {
+                    const option = document.createElement('option');
+                    option.value = id;
+                    option.textContent = `Board ${id} - ${hand.tournament?.substring(0, 40) || 'Unknown'}`;
+                    dateGroup.appendChild(option);
+                });
+                
+                select.appendChild(dateGroup);
+            });
+        }
+        
+        function generateLIN(hand) {
+            const dealerMap = {'N': 1, 'E': 2, 'S': 3, 'W': 4};
+            const vulnMap = {'None': '-', 'NS': 'N', 'EW': 'E', 'Both': 'B'};
+            
+            const dealer = dealerMap[hand.dealer];
+            const vuln = vulnMap[hand.vulnerability];
+            
+            const nHand = `${hand.N.S}.${hand.N.H}.${hand.N.D}.${hand.N.C}`;
+            const eHand = `${hand.E.S}.${hand.E.H}.${hand.E.D}.${hand.E.C}`;
+            const sHand = `${hand.S.S}.${hand.S.H}.${hand.S.D}.${hand.S.C}`;
+            const wHand = `${hand.W.S}.${hand.W.H}.${hand.W.D}.${hand.W.C}`;
+            
+            return `pn=N,E,S,W|md=${dealer}${nHand},${eHand},${sHand},${wHand}|sv=${vuln}`;
+        }
+        
+        function displayHandCards(hand) {
+            const suitSymbols = {
+                'S': '♠',
+                'H': '♥',
+                'D': '♦',
+                'C': '♣'
+            };
+            
+            const suitClasses = {
+                'S': 'suit-spade',
+                'H': 'suit-heart',
+                'D': 'suit-diamond',
+                'C': 'suit-club'
+            };
+            
+            function formatHand(cards) {
+                const suits = ['S', 'H', 'D', 'C'];
+                let html = '';
+                suits.forEach(suit => {
+                    const suitCards = cards[suit] || '';
+                    if (suitCards) {
+                        html += `<span class="suit ${suitClasses[suit]}"><span class="suit-symbol">${suitSymbols[suit]}</span>${suitCards}</span>`;
+                    }
+                });
+                return html;
+            }
+            
+            document.getElementById('northCards').innerHTML = formatHand(hand.N);
+            document.getElementById('southCards').innerHTML = formatHand(hand.S);
+            document.getElementById('eastCards').innerHTML = formatHand(hand.E);
+            document.getElementById('westCards').innerHTML = formatHand(hand.W);
+        }
+        
+        function loadBoard() {
+            const select = document.getElementById('boardSelect');
+            const boardId = select.value;
+            
+            if (!boardId) {
+                document.getElementById('viewerContainer').style.display = 'none';
+                document.getElementById('boardInfo').style.display = 'none';
+                document.getElementById('errorContainer').innerHTML = '';
+                return;
+            }
+            
+            const hand = handsData[boardId];
+            if (!hand) {
+                showError('Board not found');
+                return;
+            }
+            
+            // Update board info
+            document.getElementById('boardDate').textContent = hand.date || 'N/A';
+            document.getElementById('boardTournament').textContent = hand.tournament || 'N/A';
+            document.getElementById('boardDealer').textContent = hand.dealer || 'N/A';
+            document.getElementById('boardVuln').textContent = hand.vulnerability || 'N/A';
+            document.getElementById('boardInfo').style.display = 'block';
+            
+            // Generate LIN and load BBO
+            const lin = generateLIN(hand);
+            const encodedLin = encodeURIComponent(lin);
+            const bboUrl = `https://www.bridgebase.com/tools/handviewer.html?lin=${encodedLin}`;
+            
+            // Set link for new tab
+            document.getElementById('bboUrl').href = bboUrl;
+            document.getElementById('bboUrl').textContent = '➔ Click here to open in BBO (new tab)';
+            
+            // Also try iframe (may not work due to CORS)
+            document.getElementById('bboIframe').src = bboUrl;
+            
+            // Update DD Analysis
+            if (hand.dd_analysis) {
+                const dd = hand.dd_analysis;
+                document.getElementById('ntn').textContent = dd.NTN || '-';
+                document.getElementById('sn').textContent = dd.SN || '-';
+                document.getElementById('hn').textContent = dd.HN || '-';
+                document.getElementById('dn').textContent = dd.DN || '-';
+                document.getElementById('cn').textContent = dd.CN || '-';
+                
+                document.getElementById('nte').textContent = dd.NTE || '-';
+                document.getElementById('se').textContent = dd.SE || '-';
+                document.getElementById('he').textContent = dd.HE || '-';
+                document.getElementById('de').textContent = dd.DE || '-';
+                document.getElementById('ce').textContent = dd.CE || '-';
+                
+                document.getElementById('nts').textContent = dd.NTS || '-';
+                document.getElementById('ss').textContent = dd.SS || '-';
+                document.getElementById('hs').textContent = dd.HS || '-';
+                document.getElementById('ds').textContent = dd.DS || '-';
+                document.getElementById('cs').textContent = dd.CS || '-';
+                
+                document.getElementById('ntw').textContent = dd.NTW || '-';
+                document.getElementById('sw').textContent = dd.SW || '-';
+                document.getElementById('hw').textContent = dd.HW || '-';
+                document.getElementById('dw').textContent = dd.DW || '-';
+                document.getElementById('cw').textContent = dd.CW || '-';
+                
+                document.getElementById('linCode').textContent = lin;
+                document.getElementById('linInfo').style.display = 'block';
+            } else {
+                document.getElementById('linInfo').style.display = 'none';
+            }
+            
+            document.getElementById('viewerContainer').style.display = 'flex';
+            document.getElementById('errorContainer').innerHTML = '';
+        }
+        
+        function showError(message) {
+            document.getElementById('errorContainer').innerHTML = `<div class="error">${message}</div>`;
+        }
+        
+        // Initialize
+        loadHandsDatabase();
+    </script>
+</body>
+</html>
