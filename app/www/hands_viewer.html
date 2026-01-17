@@ -219,6 +219,42 @@
             height: auto;
         }
 
+        .solver-tabs {
+            display: flex;
+            gap: 0;
+            background: #f5f5f5;
+            border-bottom: 2px solid #667eea;
+            flex-shrink: 0;
+            padding: 0;
+            margin: 0;
+        }
+
+        .solver-tab {
+            padding: 0.5rem 1rem;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #666;
+            transition: all 0.3s ease;
+            flex: 1;
+            text-align: center;
+            border-bottom: 3px solid transparent;
+            margin-bottom: -2px;
+        }
+
+        .solver-tab.active {
+            background: white;
+            color: #667eea;
+            border-bottom-color: #667eea;
+        }
+
+        .solver-tab:hover {
+            background: white;
+            color: #764ba2;
+        }
+
         .hand-iframe-container {
             flex: 1;
             background: white;
@@ -228,6 +264,11 @@
             pointer-events: none;
             margin: 0;
             padding: 0;
+            display: none;
+        }
+
+        .hand-iframe-container.active {
+            display: flex;
         }
 
         .hand-iframe-container iframe {
@@ -834,15 +875,16 @@
             const dealer = boardData.dealer || 'N';
             const vulnerability = boardData.vulnerability || 'None';
 
-            // Generate LIN format for BBO
+            // Generate LIN format for both solvers
             const lin = handToLIN(boardData);
             const bboURL = `https://www.bridgebase.com/tools/handviewer.html?bbo=y&lin=${lin}`;
+            const bridgeSolverURL = `https://dds.bridgewebs.com/bsol_standalone/ddummy.html?lin=${lin}`;
 
             // Get DD analysis and generate table HTML
             const ddAnalysis = boardData.dd_analysis || null;
             const ddTable = createDDAnalysisTable(ddAnalysis);
 
-            // Create card with info header + BBO viewer + DD table
+            // Create card with solver tabs + content panels + DD table
             card.innerHTML = `
                 <div class="hand-info">
                     <div class="hand-info-item">
@@ -858,15 +900,29 @@
                         <div class="hand-info-value">${translateVulnerability(vulnerability)}</div>
                     </div>
                 </div>
-                <div class="hand-card-content">
-                    <div class="hand-iframe-container">
-                        <iframe 
-                            src="${bboURL}"
-                            allow="clipboard-read; clipboard-write"
-                            title="BBO Hand Viewer - Board ${boardNum}"
-                            style="width: 100%; height: 100%;">
-                        </iframe>
-                    </div>
+                <div class="solver-tabs">
+                    <button class="solver-tab active" data-solver="bbo">
+                        🌐 BBO Viewer
+                    </button>
+                    <button class="solver-tab" data-solver="bridge">
+                        🔧 Bridge Solver
+                    </button>
+                </div>
+                <div class="hand-iframe-container active" data-solver="bbo">
+                    <iframe 
+                        src="${bboURL}"
+                        allow="clipboard-read; clipboard-write"
+                        title="BBO Hand Viewer - Board ${boardNum}"
+                        style="width: 100%; height: 100%;">
+                    </iframe>
+                </div>
+                <div class="hand-iframe-container" data-solver="bridge">
+                    <iframe 
+                        src="${bridgeSolverURL}"
+                        allow="clipboard-read; clipboard-write"
+                        title="Bridge Solver - Board ${boardNum}"
+                        style="width: 100%; height: 100%;">
+                    </iframe>
                 </div>
                 <div class="dd-panel-header">
                     <h3>Double Dummy Analysis</h3>
@@ -875,6 +931,26 @@
                     ${ddTable}
                 </div>
             `;
+
+            // Add solver tab switching functionality
+            card.querySelectorAll('.solver-tab').forEach(tab => {
+                tab.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const solver = tab.dataset.solver;
+                    
+                    // Update active tab
+                    card.querySelectorAll('.solver-tab').forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    
+                    // Update active iframe container
+                    card.querySelectorAll('.hand-iframe-container').forEach(container => {
+                        container.classList.remove('active');
+                    });
+                    card.querySelector(`.hand-iframe-container[data-solver="${solver}"]`).classList.add('active');
+                    
+                    console.log(`Switched to ${solver} solver for board ${boardNum}`);
+                });
+            });
 
             // Store board data for later access
             boardDataStore[boardNum] = boardData;
@@ -959,7 +1035,21 @@
         }
 
         function handToLIN(boardData) {
-            const hands = boardData.hands || {};
+            // Support both formats:
+            // 1. Nested: boardData.hands = {North: {...}, South: {...}, ...}
+            // 2. Flat: boardData = {N: {...}, S: {...}, E: {...}, W: {...}, ...}
+            
+            let hands = boardData.hands || {};
+            
+            // If hands is empty but we have direct N/S/E/W, use those
+            if (Object.keys(hands).length === 0 && (boardData.N || boardData.S || boardData.E || boardData.W)) {
+                hands = {
+                    'North': boardData.N,
+                    'South': boardData.S,
+                    'East': boardData.E,
+                    'West': boardData.W
+                };
+            }
 
             const formatHand = (playerHand) => {
                 if (!playerHand) return 'SDHC';
@@ -999,6 +1089,14 @@
             
             console.log('Opening BBO:', bboURL);
             window.open(bboURL, '_blank');
+        }
+
+        function openBridgeSolverNewTab(boardNum, boardData) {
+            const lin = handToLIN(boardData);
+            const bridgeSolverURL = `https://dds.bridgewebs.com/bsol_standalone/ddummy.html?lin=${lin}`;
+            
+            console.log('Opening Bridge Solver:', bridgeSolverURL);
+            window.open(bridgeSolverURL, '_blank');
         }
 
         // Initialize
