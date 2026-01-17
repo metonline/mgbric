@@ -387,20 +387,20 @@
 
             let html = '<table>';
             
-            // Header with players
+            // Header with suits (left to right: C, D, H, S, NT)
             html += '<tr>';
-            html += '<th style="text-align: left; width: 35px;">Suit</th>';
-            players.forEach(p => {
-                html += `<th>${p}</th>`;
+            html += '<th style="text-align: center; width: 30px;">P</th>';
+            suits.forEach(suit => {
+                html += `<th class="suit-${suit.key}">${suit.symbol}</th>`;
             });
             html += '</tr>';
             
-            // Suit rows
-            suits.forEach(suit => {
+            // Player rows (N, S, E, W top-down)
+            players.forEach(player => {
                 html += '<tr>';
-                html += `<td class="suit-name suit-${suit.key}">${suit.symbol}</td>`;
+                html += `<td class="suit-name" style="text-align: center; font-weight: bold;">${player}</td>`;
                 
-                players.forEach(player => {
+                suits.forEach(suit => {
                     const key = suit.key + player;
                     const value = dd[key] || '-';
                     const isMaking = parseInt(value) >= 10;
