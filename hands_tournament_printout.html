@@ -45,19 +45,24 @@
         
         .boards-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(550px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
             margin-bottom: 20px;
+            max-width: 100%;
         }
         
         .board-card {
             background: white;
-            padding: 15px;
+            padding: 12px;
             border: 1px solid #ccc;
             page-break-inside: avoid;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
         }
         
         .board-header {
+            text-align: center;
             margin-bottom: 10px;
             padding-bottom: 8px;
             border-bottom: 1px solid #ccc;
@@ -66,55 +71,62 @@
         
         .board-number {
             font-size: 1.1rem;
+            margin-bottom: 4px;
         }
         
         .board-metadata {
-            font-size: 0.85rem;
-            color: #666;
-            margin-top: 4px;
+            font-size: 0.9rem;
+            color: #333;
         }
         
         .board-content {
-            display: flex;
-            gap: 15px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 8px;
+            flex: 1;
         }
         
         .bbo-viewer {
-            flex: 1;
-            min-width: 0;
+            width: 100%;
         }
         
         .bbo-frame {
             width: 100%;
-            height: 300px;
+            height: auto;
+            aspect-ratio: 4 / 3;
             border: 1px solid #ddd;
         }
         
         .dd-table-simple {
-            flex: 0 0 auto;
+            width: 100%;
             border: 1px solid #333;
+            display: flex;
+            justify-content: center;
+            padding: 4px;
         }
         
         .dd-table-simple table {
             border-collapse: collapse;
             font-family: Arial, sans-serif;
-            font-size: 0.85rem;
+            width: auto;
         }
         
         .dd-table-simple th {
             background: white;
             border: 1px solid #333;
-            padding: 4px 6px;
+            padding: 5px 7px;
             text-align: center;
             font-weight: bold;
+            font-size: 0.85rem;
         }
         
         .dd-table-simple td {
             border: 1px solid #333;
-            padding: 4px 6px;
+            padding: 5px 7px;
             text-align: center;
-            width: 30px;
-            height: 30px;
+            min-width: 32px;
+            font-size: 0.85rem;
+            font-weight: bold;
         }
         
         .suit-C { color: #000; font-weight: bold; }
@@ -137,13 +149,15 @@
             font-weight: bold;
         }
         
-        @media (max-width: 1024px) {
+        @media (max-width: 1280px) {
+            .boards-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
             .boards-grid {
                 grid-template-columns: 1fr;
-            }
-            
-            .board-content {
-                flex-direction: column;
             }
         }
         
@@ -172,10 +186,6 @@
 <body>
     <div class="container">
         <h1>Bridge Tournament Hands</h1>
-
-        <div class="controls">
-            <button onclick="window.print()">Print Tournament</button>
-        </div>
 
         <div id="loading" class="loading" style="display:none;">Loading tournament data...</div>
         <div id="error" class="error" style="display:none;"></div>
@@ -250,7 +260,6 @@
             
             // Header
             html += '<tr>';
-            html += '<th style="width: 25px;">P</th>';
             suits.forEach(suit => {
                 html += `<th class="suit-${suit.key}">${suit.symbol}</th>`;
             });
@@ -259,7 +268,7 @@
             // Rows
             players.forEach(player => {
                 html += '<tr>';
-                html += `<td style="font-weight: bold;">${player}</td>`;
+                html += `<td style="font-weight: bold; text-align: center; width: 25px;">${player}</td>`;
                 
                 suits.forEach(suit => {
                     const key = suit.key + player;
