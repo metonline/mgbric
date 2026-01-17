@@ -27,9 +27,31 @@
     "dealer": "N",
     "vulnerability": "None",
     "event_id": "276369",
-    "tournament": "Çarşamba GÜNDÜZ Sonuçları (01-01-2020 14:00)",
+    "tournament": "\u00c3\u2021ar\u00c5\u0178amba G\u00c3\u0153ND\u00c3\u0153Z Sonu\u00c3\u00a7lar\u00c4\u00b1 (01-01-2020 14:00)",
     "date": "01.01.2020",
-    "board_in_event": 1
+    "board_in_event": 1,
+    "dd_analysis": {
+      "NTN": 9,
+      "NTE": 6,
+      "NTS": 5,
+      "NTW": 6,
+      "SN": 9,
+      "SE": 7,
+      "SS": 4,
+      "SW": 5,
+      "HN": 9,
+      "HE": 5,
+      "HS": 5,
+      "HW": 7,
+      "DN": 9,
+      "DE": 5,
+      "DS": 6,
+      "DW": 6,
+      "CN": 9,
+      "CE": 7,
+      "CS": 5,
+      "CW": 5
+    }
   },
   "2": {
     "N": {
@@ -59,9 +81,31 @@
     "dealer": "E",
     "vulnerability": "NS",
     "event_id": "276369",
-    "tournament": "Çarşamba GÜNDÜZ Sonuçları (01-01-2020 14:00)",
+    "tournament": "\u00c3\u2021ar\u00c5\u0178amba G\u00c3\u0153ND\u00c3\u0153Z Sonu\u00c3\u00a7lar\u00c4\u00b1 (01-01-2020 14:00)",
     "date": "01.01.2020",
-    "board_in_event": 2
+    "board_in_event": 2,
+    "dd_analysis": {
+      "NTN": 4,
+      "NTE": 7,
+      "NTS": 10,
+      "NTW": 4,
+      "SN": 3,
+      "SE": 7,
+      "SS": 10,
+      "SW": 4,
+      "HN": 4,
+      "HE": 6,
+      "HS": 10,
+      "HW": 5,
+      "DN": 3,
+      "DE": 8,
+      "DS": 9,
+      "DW": 4,
+      "CN": 5,
+      "CE": 7,
+      "CS": 10,
+      "CW": 3
+    }
   },
   "3": {
     "N": {
@@ -91,9 +135,31 @@
     "dealer": "S",
     "vulnerability": "EW",
     "event_id": "276369",
-    "tournament": "Çarşamba GÜNDÜZ Sonuçları (01-01-2020 14:00)",
+    "tournament": "\u00c3\u2021ar\u00c5\u0178amba G\u00c3\u0153ND\u00c3\u0153Z Sonu\u00c3\u00a7lar\u00c4\u00b1 (01-01-2020 14:00)",
     "date": "01.01.2020",
-    "board_in_event": 3
+    "board_in_event": 3,
+    "dd_analysis": {
+      "NTN": 7,
+      "NTE": 8,
+      "NTS": 5,
+      "NTW": 6,
+      "SN": 8,
+      "SE": 8,
+      "SS": 4,
+      "SW": 6,
+      "HN": 6,
+      "HE": 8,
+      "HS": 6,
+      "HW": 6,
+      "DN": 7,
+      "DE": 8,
+      "DS": 4,
+      "DW": 6,
+      "CN": 7,
+      "CE": 7,
+      "CS": 5,
+      "CW": 6
+    }
   },
   "4": {
     "N": {
@@ -123,9 +189,31 @@
     "dealer": "W",
     "vulnerability": "Both",
     "event_id": "276369",
-    "tournament": "Çarşamba GÜNDÜZ Sonuçları (01-01-2020 14:00)",
+    "tournament": "\u00c3\u2021ar\u00c5\u0178amba G\u00c3\u0153ND\u00c3\u0153Z Sonu\u00c3\u00a7lar\u00c4\u00b1 (01-01-2020 14:00)",
     "date": "01.01.2020",
-    "board_in_event": 4
+    "board_in_event": 4,
+    "dd_analysis": {
+      "NTN": 5,
+      "NTE": 8,
+      "NTS": 6,
+      "NTW": 6,
+      "SN": 4,
+      "SE": 7,
+      "SS": 6,
+      "SW": 8,
+      "HN": 5,
+      "HE": 8,
+      "HS": 6,
+      "HW": 5,
+      "DN": 6,
+      "DE": 9,
+      "DS": 5,
+      "DW": 4,
+      "CN": 4,
+      "CE": 7,
+      "CS": 7,
+      "CW": 6
+    }
   },
   "5": {
     "N": {
@@ -155,9 +243,31 @@
     "dealer": "N",
     "vulnerability": "None",
     "event_id": "276369",
-    "tournament": "Çarşamba GÜNDÜZ Sonuçları (01-01-2020 14:00)",
+    "tournament": "\u00c3\u2021ar\u00c5\u0178amba G\u00c3\u0153ND\u00c3\u0153Z Sonu\u00c3\u00a7lar\u00c4\u00b1 (01-01-2020 14:00)",
     "date": "01.01.2020",
-    "board_in_event": 5
+    "board_in_event": 5,
+    "dd_analysis": {
+      "NTN": 6,
+      "NTE": 7,
+      "NTS": 5,
+      "NTW": 7,
+      "SN": 5,
+      "SE": 6,
+      "SS": 5,
+      "SW": 8,
+      "HN": 7,
+      "HE": 7,
+      "HS": 5,
+      "HW": 6,
+      "DN": 6,
+      "DE": 7,
+      "DS": 5,
+      "DW": 7,
+      "CN": 6,
+      "CE": 7,
+      "CS": 5,
+      "CW": 7
+    }
   },
   "6": {
     "N": {
@@ -187,9 +297,31 @@
     "dealer": "E",
     "vulnerability": "NS",
     "event_id": "276369",
-    "tournament": "Çarşamba GÜNDÜZ Sonuçları (01-01-2020 14:00)",
+    "tournament": "\u00c3\u2021ar\u00c5\u0178amba G\u00c3\u0153ND\u00c3\u0153Z Sonu\u00c3\u00a7lar\u00c4\u00b1 (01-01-2020 14:00)",
     "date": "01.01.2020",
-    "board_in_event": 6
+    "board_in_event": 6,
+    "dd_analysis": {
+      "NTN": 5,
+      "NTE": 10,
+      "NTS": 5,
+      "NTW": 5,
+      "SN": 5,
+      "SE": 9,
+      "SS": 5,
+      "SW": 5,
+      "HN": 5,
+      "HE": 10,
+      "HS": 4,
+      "HW": 6,
+      "DN": 4,
+      "DE": 10,
+      "DS": 7,
+      "DW": 4,
+      "CN": 5,
+      "CE": 11,
+      "CS": 4,
+      "CW": 5
+    }
   },
   "7": {
     "N": {
@@ -219,9 +351,31 @@
     "dealer": "S",
     "vulnerability": "EW",
     "event_id": "276369",
-    "tournament": "Çarşamba GÜNDÜZ Sonuçları (01-01-2020 14:00)",
+    "tournament": "\u00c3\u2021ar\u00c5\u0178amba G\u00c3\u0153ND\u00c3\u0153Z Sonu\u00c3\u00a7lar\u00c4\u00b1 (01-01-2020 14:00)",
     "date": "01.01.2020",
-    "board_in_event": 7
+    "board_in_event": 7,
+    "dd_analysis": {
+      "NTN": 9,
+      "NTE": 7,
+      "NTS": 6,
+      "NTW": 4,
+      "SN": 8,
+      "SE": 7,
+      "SS": 5,
+      "SW": 5,
+      "HN": 10,
+      "HE": 8,
+      "HS": 5,
+      "HW": 3,
+      "DN": 9,
+      "DE": 6,
+      "DS": 7,
+      "DW": 3,
+      "CN": 9,
+      "CE": 6,
+      "CS": 6,
+      "CW": 4
+    }
   },
   "8": {
     "N": {
@@ -251,9 +405,31 @@
     "dealer": "W",
     "vulnerability": "Both",
     "event_id": "276369",
-    "tournament": "Çarşamba GÜNDÜZ Sonuçları (01-01-2020 14:00)",
+    "tournament": "\u00c3\u2021ar\u00c5\u0178amba G\u00c3\u0153ND\u00c3\u0153Z Sonu\u00c3\u00a7lar\u00c4\u00b1 (01-01-2020 14:00)",
     "date": "01.01.2020",
-    "board_in_event": 8
+    "board_in_event": 8,
+    "dd_analysis": {
+      "NTN": 6,
+      "NTE": 5,
+      "NTS": 6,
+      "NTW": 8,
+      "SN": 7,
+      "SE": 3,
+      "SS": 6,
+      "SW": 9,
+      "HN": 5,
+      "HE": 5,
+      "HS": 6,
+      "HW": 9,
+      "DN": 5,
+      "DE": 6,
+      "DS": 5,
+      "DW": 8,
+      "CN": 6,
+      "CE": 5,
+      "CS": 7,
+      "CW": 6
+    }
   },
   "9": {
     "N": {
@@ -283,9 +459,31 @@
     "dealer": "N",
     "vulnerability": "None",
     "event_id": "276369",
-    "tournament": "Çarşamba GÜNDÜZ Sonuçları (01-01-2020 14:00)",
+    "tournament": "\u00c3\u2021ar\u00c5\u0178amba G\u00c3\u0153ND\u00c3\u0153Z Sonu\u00c3\u00a7lar\u00c4\u00b1 (01-01-2020 14:00)",
     "date": "01.01.2020",
-    "board_in_event": 9
+    "board_in_event": 9,
+    "dd_analysis": {
+      "NTN": 7,
+      "NTE": 6,
+      "NTS": 7,
+      "NTW": 5,
+      "SN": 7,
+      "SE": 6,
+      "SS": 7,
+      "SW": 4,
+      "HN": 7,
+      "HE": 6,
+      "HS": 7,
+      "HW": 5,
+      "DN": 7,
+      "DE": 5,
+      "DS": 7,
+      "DW": 5,
+      "CN": 7,
+      "CE": 6,
+      "CS": 6,
+      "CW": 5
+    }
   },
   "10": {
     "N": {
@@ -315,9 +513,31 @@
     "dealer": "E",
     "vulnerability": "NS",
     "event_id": "276369",
-    "tournament": "Çarşamba GÜNDÜZ Sonuçları (01-01-2020 14:00)",
+    "tournament": "\u00c3\u2021ar\u00c5\u0178amba G\u00c3\u0153ND\u00c3\u0153Z Sonu\u00c3\u00a7lar\u00c4\u00b1 (01-01-2020 14:00)",
     "date": "01.01.2020",
-    "board_in_event": 10
+    "board_in_event": 10,
+    "dd_analysis": {
+      "NTN": 5,
+      "NTE": 5,
+      "NTS": 7,
+      "NTW": 8,
+      "SN": 5,
+      "SE": 5,
+      "SS": 8,
+      "SW": 6,
+      "HN": 5,
+      "HE": 4,
+      "HS": 7,
+      "HW": 8,
+      "DN": 5,
+      "DE": 5,
+      "DS": 6,
+      "DW": 9,
+      "CN": 4,
+      "CE": 5,
+      "CS": 7,
+      "CW": 8
+    }
   },
   "11": {
     "N": {
@@ -347,9 +567,31 @@
     "dealer": "S",
     "vulnerability": "EW",
     "event_id": "276369",
-    "tournament": "Çarşamba GÜNDÜZ Sonuçları (01-01-2020 14:00)",
+    "tournament": "\u00c3\u2021ar\u00c5\u0178amba G\u00c3\u0153ND\u00c3\u0153Z Sonu\u00c3\u00a7lar\u00c4\u00b1 (01-01-2020 14:00)",
     "date": "01.01.2020",
-    "board_in_event": 11
+    "board_in_event": 11,
+    "dd_analysis": {
+      "NTN": 6,
+      "NTE": 8,
+      "NTS": 4,
+      "NTW": 7,
+      "SN": 6,
+      "SE": 9,
+      "SS": 4,
+      "SW": 6,
+      "HN": 6,
+      "HE": 8,
+      "HS": 4,
+      "HW": 7,
+      "DN": 6,
+      "DE": 7,
+      "DS": 4,
+      "DW": 7,
+      "CN": 6,
+      "CE": 7,
+      "CS": 4,
+      "CW": 8
+    }
   },
   "12": {
     "N": {
@@ -379,9 +621,31 @@
     "dealer": "W",
     "vulnerability": "Both",
     "event_id": "276369",
-    "tournament": "Çarşamba GÜNDÜZ Sonuçları (01-01-2020 14:00)",
+    "tournament": "\u00c3\u2021ar\u00c5\u0178amba G\u00c3\u0153ND\u00c3\u0153Z Sonu\u00c3\u00a7lar\u00c4\u00b1 (01-01-2020 14:00)",
     "date": "01.01.2020",
-    "board_in_event": 12
+    "board_in_event": 12,
+    "dd_analysis": {
+      "NTN": 6,
+      "NTE": 4,
+      "NTS": 9,
+      "NTW": 6,
+      "SN": 5,
+      "SE": 4,
+      "SS": 10,
+      "SW": 6,
+      "HN": 6,
+      "HE": 4,
+      "HS": 9,
+      "HW": 5,
+      "DN": 5,
+      "DE": 4,
+      "DS": 9,
+      "DW": 6,
+      "CN": 7,
+      "CE": 3,
+      "CS": 8,
+      "CW": 6
+    }
   },
   "13": {
     "N": {
@@ -411,9 +675,31 @@
     "dealer": "N",
     "vulnerability": "None",
     "event_id": "276369",
-    "tournament": "Çarşamba GÜNDÜZ Sonuçları (01-01-2020 14:00)",
+    "tournament": "\u00c3\u2021ar\u00c5\u0178amba G\u00c3\u0153ND\u00c3\u0153Z Sonu\u00c3\u00a7lar\u00c4\u00b1 (01-01-2020 14:00)",
     "date": "01.01.2020",
-    "board_in_event": 13
+    "board_in_event": 13,
+    "dd_analysis": {
+      "NTN": 7,
+      "NTE": 5,
+      "NTS": 7,
+      "NTW": 6,
+      "SN": 8,
+      "SE": 4,
+      "SS": 7,
+      "SW": 6,
+      "HN": 6,
+      "HE": 6,
+      "HS": 6,
+      "HW": 6,
+      "DN": 6,
+      "DE": 5,
+      "DS": 7,
+      "DW": 6,
+      "CN": 7,
+      "CE": 5,
+      "CS": 7,
+      "CW": 5
+    }
   },
   "14": {
     "N": {
@@ -443,9 +729,31 @@
     "dealer": "E",
     "vulnerability": "NS",
     "event_id": "276369",
-    "tournament": "Çarşamba GÜNDÜZ Sonuçları (01-01-2020 14:00)",
+    "tournament": "\u00c3\u2021ar\u00c5\u0178amba G\u00c3\u0153ND\u00c3\u0153Z Sonu\u00c3\u00a7lar\u00c4\u00b1 (01-01-2020 14:00)",
     "date": "01.01.2020",
-    "board_in_event": 14
+    "board_in_event": 14,
+    "dd_analysis": {
+      "NTN": 5,
+      "NTE": 8,
+      "NTS": 6,
+      "NTW": 7,
+      "SN": 4,
+      "SE": 8,
+      "SS": 6,
+      "SW": 8,
+      "HN": 5,
+      "HE": 7,
+      "HS": 6,
+      "HW": 7,
+      "DN": 5,
+      "DE": 8,
+      "DS": 6,
+      "DW": 6,
+      "CN": 6,
+      "CE": 8,
+      "CS": 5,
+      "CW": 6
+    }
   },
   "15": {
     "N": {
@@ -475,9 +783,31 @@
     "dealer": "S",
     "vulnerability": "EW",
     "event_id": "276369",
-    "tournament": "Çarşamba GÜNDÜZ Sonuçları (01-01-2020 14:00)",
+    "tournament": "\u00c3\u2021ar\u00c5\u0178amba G\u00c3\u0153ND\u00c3\u0153Z Sonu\u00c3\u00a7lar\u00c4\u00b1 (01-01-2020 14:00)",
     "date": "01.01.2020",
-    "board_in_event": 15
+    "board_in_event": 15,
+    "dd_analysis": {
+      "NTN": 5,
+      "NTE": 9,
+      "NTS": 7,
+      "NTW": 5,
+      "SN": 5,
+      "SE": 9,
+      "SS": 8,
+      "SW": 3,
+      "HN": 5,
+      "HE": 9,
+      "HS": 6,
+      "HW": 6,
+      "DN": 4,
+      "DE": 10,
+      "DS": 7,
+      "DW": 5,
+      "CN": 5,
+      "CE": 8,
+      "CS": 7,
+      "CW": 5
+    }
   },
   "16": {
     "N": {
@@ -507,9 +837,31 @@
     "dealer": "W",
     "vulnerability": "Both",
     "event_id": "276369",
-    "tournament": "Çarşamba GÜNDÜZ Sonuçları (01-01-2020 14:00)",
+    "tournament": "\u00c3\u2021ar\u00c5\u0178amba G\u00c3\u0153ND\u00c3\u0153Z Sonu\u00c3\u00a7lar\u00c4\u00b1 (01-01-2020 14:00)",
     "date": "01.01.2020",
-    "board_in_event": 16
+    "board_in_event": 16,
+    "dd_analysis": {
+      "NTN": 6,
+      "NTE": 7,
+      "NTS": 7,
+      "NTW": 5,
+      "SN": 6,
+      "SE": 7,
+      "SS": 5,
+      "SW": 6,
+      "HN": 5,
+      "HE": 7,
+      "HS": 7,
+      "HW": 5,
+      "DN": 7,
+      "DE": 6,
+      "DS": 8,
+      "DW": 4,
+      "CN": 5,
+      "CE": 7,
+      "CS": 7,
+      "CW": 5
+    }
   },
   "17": {
     "N": {
@@ -539,9 +891,31 @@
     "dealer": "N",
     "vulnerability": "None",
     "event_id": "276369",
-    "tournament": "Çarşamba GÜNDÜZ Sonuçları (01-01-2020 14:00)",
+    "tournament": "\u00c3\u2021ar\u00c5\u0178amba G\u00c3\u0153ND\u00c3\u0153Z Sonu\u00c3\u00a7lar\u00c4\u00b1 (01-01-2020 14:00)",
     "date": "01.01.2020",
-    "board_in_event": 17
+    "board_in_event": 17,
+    "dd_analysis": {
+      "NTN": 7,
+      "NTE": 5,
+      "NTS": 7,
+      "NTW": 7,
+      "SN": 6,
+      "SE": 6,
+      "SS": 7,
+      "SW": 6,
+      "HN": 7,
+      "HE": 5,
+      "HS": 7,
+      "HW": 6,
+      "DN": 7,
+      "DE": 5,
+      "DS": 7,
+      "DW": 7,
+      "CN": 8,
+      "CE": 3,
+      "CS": 6,
+      "CW": 8
+    }
   },
   "18": {
     "N": {
@@ -571,9 +945,31 @@
     "dealer": "E",
     "vulnerability": "NS",
     "event_id": "276369",
-    "tournament": "Çarşamba GÜNDÜZ Sonuçları (01-01-2020 14:00)",
+    "tournament": "\u00c3\u2021ar\u00c5\u0178amba G\u00c3\u0153ND\u00c3\u0153Z Sonu\u00c3\u00a7lar\u00c4\u00b1 (01-01-2020 14:00)",
     "date": "01.01.2020",
-    "board_in_event": 18
+    "board_in_event": 18,
+    "dd_analysis": {
+      "NTN": 8,
+      "NTE": 7,
+      "NTS": 7,
+      "NTW": 3,
+      "SN": 7,
+      "SE": 7,
+      "SS": 8,
+      "SW": 2,
+      "HN": 9,
+      "HE": 7,
+      "HS": 5,
+      "HW": 3,
+      "DN": 7,
+      "DE": 6,
+      "DS": 8,
+      "DW": 3,
+      "CN": 8,
+      "CE": 7,
+      "CS": 6,
+      "CW": 4
+    }
   },
   "19": {
     "N": {
@@ -603,9 +999,31 @@
     "dealer": "S",
     "vulnerability": "EW",
     "event_id": "276369",
-    "tournament": "Çarşamba GÜNDÜZ Sonuçları (01-01-2020 14:00)",
+    "tournament": "\u00c3\u2021ar\u00c5\u0178amba G\u00c3\u0153ND\u00c3\u0153Z Sonu\u00c3\u00a7lar\u00c4\u00b1 (01-01-2020 14:00)",
     "date": "01.01.2020",
-    "board_in_event": 19
+    "board_in_event": 19,
+    "dd_analysis": {
+      "NTN": 8,
+      "NTE": 5,
+      "NTS": 7,
+      "NTW": 6,
+      "SN": 8,
+      "SE": 5,
+      "SS": 6,
+      "SW": 7,
+      "HN": 8,
+      "HE": 5,
+      "HS": 6,
+      "HW": 6,
+      "DN": 8,
+      "DE": 5,
+      "DS": 7,
+      "DW": 5,
+      "CN": 8,
+      "CE": 4,
+      "CS": 8,
+      "CW": 5
+    }
   },
   "20": {
     "N": {
@@ -635,9 +1053,31 @@
     "dealer": "W",
     "vulnerability": "Both",
     "event_id": "276369",
-    "tournament": "Çarşamba GÜNDÜZ Sonuçları (01-01-2020 14:00)",
+    "tournament": "\u00c3\u2021ar\u00c5\u0178amba G\u00c3\u0153ND\u00c3\u0153Z Sonu\u00c3\u00a7lar\u00c4\u00b1 (01-01-2020 14:00)",
     "date": "01.01.2020",
-    "board_in_event": 20
+    "board_in_event": 20,
+    "dd_analysis": {
+      "NTN": 7,
+      "NTE": 7,
+      "NTS": 7,
+      "NTW": 5,
+      "SN": 8,
+      "SE": 7,
+      "SS": 6,
+      "SW": 4,
+      "HN": 6,
+      "HE": 8,
+      "HS": 6,
+      "HW": 5,
+      "DN": 7,
+      "DE": 7,
+      "DS": 7,
+      "DW": 5,
+      "CN": 7,
+      "CE": 6,
+      "CS": 8,
+      "CW": 5
+    }
   },
   "21": {
     "N": {
@@ -667,9 +1107,31 @@
     "dealer": "N",
     "vulnerability": "None",
     "event_id": "276369",
-    "tournament": "Çarşamba GÜNDÜZ Sonuçları (01-01-2020 14:00)",
+    "tournament": "\u00c3\u2021ar\u00c5\u0178amba G\u00c3\u0153ND\u00c3\u0153Z Sonu\u00c3\u00a7lar\u00c4\u00b1 (01-01-2020 14:00)",
     "date": "01.01.2020",
-    "board_in_event": 21
+    "board_in_event": 21,
+    "dd_analysis": {
+      "NTN": 6,
+      "NTE": 8,
+      "NTS": 5,
+      "NTW": 5,
+      "SN": 5,
+      "SE": 8,
+      "SS": 5,
+      "SW": 6,
+      "HN": 7,
+      "HE": 8,
+      "HS": 5,
+      "HW": 4,
+      "DN": 5,
+      "DE": 9,
+      "DS": 5,
+      "DW": 4,
+      "CN": 6,
+      "CE": 7,
+      "CS": 5,
+      "CW": 5
+    }
   },
   "22": {
     "N": {
@@ -699,9 +1161,31 @@
     "dealer": "E",
     "vulnerability": "NS",
     "event_id": "276369",
-    "tournament": "Çarşamba GÜNDÜZ Sonuçları (01-01-2020 14:00)",
+    "tournament": "\u00c3\u2021ar\u00c5\u0178amba G\u00c3\u0153ND\u00c3\u0153Z Sonu\u00c3\u00a7lar\u00c4\u00b1 (01-01-2020 14:00)",
     "date": "01.01.2020",
-    "board_in_event": 22
+    "board_in_event": 22,
+    "dd_analysis": {
+      "NTN": 6,
+      "NTE": 9,
+      "NTS": 4,
+      "NTW": 6,
+      "SN": 5,
+      "SE": 9,
+      "SS": 4,
+      "SW": 6,
+      "HN": 5,
+      "HE": 9,
+      "HS": 3,
+      "HW": 7,
+      "DN": 6,
+      "DE": 9,
+      "DS": 4,
+      "DW": 6,
+      "CN": 7,
+      "CE": 8,
+      "CS": 4,
+      "CW": 5
+    }
   },
   "23": {
     "N": {
@@ -731,9 +1215,31 @@
     "dealer": "S",
     "vulnerability": "EW",
     "event_id": "276369",
-    "tournament": "Çarşamba GÜNDÜZ Sonuçları (01-01-2020 14:00)",
+    "tournament": "\u00c3\u2021ar\u00c5\u0178amba G\u00c3\u0153ND\u00c3\u0153Z Sonu\u00c3\u00a7lar\u00c4\u00b1 (01-01-2020 14:00)",
     "date": "01.01.2020",
-    "board_in_event": 23
+    "board_in_event": 23,
+    "dd_analysis": {
+      "NTN": 5,
+      "NTE": 8,
+      "NTS": 7,
+      "NTW": 5,
+      "SN": 5,
+      "SE": 7,
+      "SS": 7,
+      "SW": 5,
+      "HN": 5,
+      "HE": 9,
+      "HS": 6,
+      "HW": 5,
+      "DN": 4,
+      "DE": 8,
+      "DS": 8,
+      "DW": 4,
+      "CN": 5,
+      "CE": 8,
+      "CS": 6,
+      "CW": 5
+    }
   },
   "24": {
     "N": {
@@ -763,9 +1269,31 @@
     "dealer": "W",
     "vulnerability": "Both",
     "event_id": "276369",
-    "tournament": "Çarşamba GÜNDÜZ Sonuçları (01-01-2020 14:00)",
+    "tournament": "\u00c3\u2021ar\u00c5\u0178amba G\u00c3\u0153ND\u00c3\u0153Z Sonu\u00c3\u00a7lar\u00c4\u00b1 (01-01-2020 14:00)",
     "date": "01.01.2020",
-    "board_in_event": 24
+    "board_in_event": 24,
+    "dd_analysis": {
+      "NTN": 3,
+      "NTE": 7,
+      "NTS": 7,
+      "NTW": 8,
+      "SN": 4,
+      "SE": 7,
+      "SS": 7,
+      "SW": 7,
+      "HN": 2,
+      "HE": 7,
+      "HS": 7,
+      "HW": 8,
+      "DN": 2,
+      "DE": 7,
+      "DS": 7,
+      "DW": 8,
+      "CN": 4,
+      "CE": 6,
+      "CS": 7,
+      "CW": 8
+    }
   },
   "25": {
     "N": {
@@ -795,9 +1323,31 @@
     "dealer": "N",
     "vulnerability": "None",
     "event_id": "276369",
-    "tournament": "Çarşamba GÜNDÜZ Sonuçları (01-01-2020 14:00)",
+    "tournament": "\u00c3\u2021ar\u00c5\u0178amba G\u00c3\u0153ND\u00c3\u0153Z Sonu\u00c3\u00a7lar\u00c4\u00b1 (01-01-2020 14:00)",
     "date": "01.01.2020",
-    "board_in_event": 25
+    "board_in_event": 25,
+    "dd_analysis": {
+      "NTN": 7,
+      "NTE": 7,
+      "NTS": 4,
+      "NTW": 8,
+      "SN": 6,
+      "SE": 8,
+      "SS": 4,
+      "SW": 8,
+      "HN": 7,
+      "HE": 6,
+      "HS": 3,
+      "HW": 9,
+      "DN": 6,
+      "DE": 7,
+      "DS": 5,
+      "DW": 8,
+      "CN": 9,
+      "CE": 6,
+      "CS": 4,
+      "CW": 7
+    }
   },
   "26": {
     "N": {
@@ -827,9 +1377,31 @@
     "dealer": "E",
     "vulnerability": "NS",
     "event_id": "276369",
-    "tournament": "Çarşamba GÜNDÜZ Sonuçları (01-01-2020 14:00)",
+    "tournament": "\u00c3\u2021ar\u00c5\u0178amba G\u00c3\u0153ND\u00c3\u0153Z Sonu\u00c3\u00a7lar\u00c4\u00b1 (01-01-2020 14:00)",
     "date": "01.01.2020",
-    "board_in_event": 26
+    "board_in_event": 26,
+    "dd_analysis": {
+      "NTN": 4,
+      "NTE": 7,
+      "NTS": 9,
+      "NTW": 5,
+      "SN": 4,
+      "SE": 7,
+      "SS": 10,
+      "SW": 4,
+      "HN": 4,
+      "HE": 7,
+      "HS": 9,
+      "HW": 4,
+      "DN": 4,
+      "DE": 6,
+      "DS": 9,
+      "DW": 6,
+      "CN": 3,
+      "CE": 7,
+      "CS": 8,
+      "CW": 6
+    }
   },
   "27": {
     "N": {
@@ -859,9 +1431,31 @@
     "dealer": "S",
     "vulnerability": "EW",
     "event_id": "276369",
-    "tournament": "Çarşamba GÜNDÜZ Sonuçları (01-01-2020 14:00)",
+    "tournament": "\u00c3\u2021ar\u00c5\u0178amba G\u00c3\u0153ND\u00c3\u0153Z Sonu\u00c3\u00a7lar\u00c4\u00b1 (01-01-2020 14:00)",
     "date": "01.01.2020",
-    "board_in_event": 27
+    "board_in_event": 27,
+    "dd_analysis": {
+      "NTN": 5,
+      "NTE": 8,
+      "NTS": 6,
+      "NTW": 6,
+      "SN": 5,
+      "SE": 8,
+      "SS": 6,
+      "SW": 5,
+      "HN": 5,
+      "HE": 7,
+      "HS": 5,
+      "HW": 7,
+      "DN": 5,
+      "DE": 7,
+      "DS": 7,
+      "DW": 6,
+      "CN": 4,
+      "CE": 9,
+      "CS": 6,
+      "CW": 6
+    }
   },
   "28": {
     "N": {
@@ -891,9 +1485,31 @@
     "dealer": "W",
     "vulnerability": "Both",
     "event_id": "276369",
-    "tournament": "Çarşamba GÜNDÜZ Sonuçları (01-01-2020 14:00)",
+    "tournament": "\u00c3\u2021ar\u00c5\u0178amba G\u00c3\u0153ND\u00c3\u0153Z Sonu\u00c3\u00a7lar\u00c4\u00b1 (01-01-2020 14:00)",
     "date": "01.01.2020",
-    "board_in_event": 28
+    "board_in_event": 28,
+    "dd_analysis": {
+      "NTN": 5,
+      "NTE": 5,
+      "NTS": 9,
+      "NTW": 6,
+      "SN": 6,
+      "SE": 6,
+      "SS": 8,
+      "SW": 5,
+      "HN": 4,
+      "HE": 4,
+      "HS": 9,
+      "HW": 7,
+      "DN": 5,
+      "DE": 5,
+      "DS": 9,
+      "DW": 5,
+      "CN": 4,
+      "CE": 5,
+      "CS": 10,
+      "CW": 6
+    }
   },
   "29": {
     "N": {
@@ -923,9 +1539,31 @@
     "dealer": "N",
     "vulnerability": "None",
     "event_id": "276369",
-    "tournament": "Çarşamba GÜNDÜZ Sonuçları (01-01-2020 14:00)",
+    "tournament": "\u00c3\u2021ar\u00c5\u0178amba G\u00c3\u0153ND\u00c3\u0153Z Sonu\u00c3\u00a7lar\u00c4\u00b1 (01-01-2020 14:00)",
     "date": "01.01.2020",
-    "board_in_event": 29
+    "board_in_event": 29,
+    "dd_analysis": {
+      "NTN": 7,
+      "NTE": 4,
+      "NTS": 6,
+      "NTW": 9,
+      "SN": 7,
+      "SE": 5,
+      "SS": 5,
+      "SW": 9,
+      "HN": 6,
+      "HE": 3,
+      "HS": 7,
+      "HW": 9,
+      "DN": 7,
+      "DE": 4,
+      "DS": 6,
+      "DW": 9,
+      "CN": 8,
+      "CE": 4,
+      "CS": 6,
+      "CW": 8
+    }
   },
   "30": {
     "N": {
@@ -955,9 +1593,31 @@
     "dealer": "E",
     "vulnerability": "NS",
     "event_id": "276369",
-    "tournament": "Çarşamba GÜNDÜZ Sonuçları (01-01-2020 14:00)",
+    "tournament": "\u00c3\u2021ar\u00c5\u0178amba G\u00c3\u0153ND\u00c3\u0153Z Sonu\u00c3\u00a7lar\u00c4\u00b1 (01-01-2020 14:00)",
     "date": "01.01.2020",
-    "board_in_event": 30
+    "board_in_event": 30,
+    "dd_analysis": {
+      "NTN": 6,
+      "NTE": 7,
+      "NTS": 7,
+      "NTW": 5,
+      "SN": 5,
+      "SE": 8,
+      "SS": 6,
+      "SW": 5,
+      "HN": 7,
+      "HE": 6,
+      "HS": 7,
+      "HW": 4,
+      "DN": 5,
+      "DE": 8,
+      "DS": 7,
+      "DW": 5,
+      "CN": 6,
+      "CE": 6,
+      "CS": 7,
+      "CW": 5
+    }
   },
   "31": {
     "N": {
@@ -987,9 +1647,31 @@
     "dealer": "N",
     "vulnerability": "None",
     "event_id": "309162",
-    "tournament": "TBF simultane Sonuçları (01-01-2022 14:30)",
+    "tournament": "TBF simultane Sonu\u00c3\u00a7lar\u00c4\u00b1 (01-01-2022 14:30)",
     "date": "01.01.2022",
-    "board_in_event": 1
+    "board_in_event": 1,
+    "dd_analysis": {
+      "NTN": 6,
+      "NTE": 6,
+      "NTS": 9,
+      "NTW": 5,
+      "SN": 6,
+      "SE": 7,
+      "SS": 8,
+      "SW": 4,
+      "HN": 7,
+      "HE": 5,
+      "HS": 9,
+      "HW": 4,
+      "DN": 6,
+      "DE": 6,
+      "DS": 10,
+      "DW": 4,
+      "CN": 5,
+      "CE": 5,
+      "CS": 8,
+      "CW": 7
+    }
   },
   "32": {
     "N": {
@@ -1019,9 +1701,31 @@
     "dealer": "E",
     "vulnerability": "NS",
     "event_id": "309162",
-    "tournament": "TBF simultane Sonuçları (01-01-2022 14:30)",
+    "tournament": "TBF simultane Sonu\u00c3\u00a7lar\u00c4\u00b1 (01-01-2022 14:30)",
     "date": "01.01.2022",
-    "board_in_event": 2
+    "board_in_event": 2,
+    "dd_analysis": {
+      "NTN": 7,
+      "NTE": 7,
+      "NTS": 7,
+      "NTW": 5,
+      "SN": 6,
+      "SE": 7,
+      "SS": 7,
+      "SW": 5,
+      "HN": 7,
+      "HE": 7,
+      "HS": 6,
+      "HW": 5,
+      "DN": 8,
+      "DE": 6,
+      "DS": 8,
+      "DW": 4,
+      "CN": 6,
+      "CE": 8,
+      "CS": 6,
+      "CW": 5
+    }
   },
   "33": {
     "N": {
@@ -1051,9 +1755,31 @@
     "dealer": "S",
     "vulnerability": "EW",
     "event_id": "309162",
-    "tournament": "TBF simultane Sonuçları (01-01-2022 14:30)",
+    "tournament": "TBF simultane Sonu\u00c3\u00a7lar\u00c4\u00b1 (01-01-2022 14:30)",
     "date": "01.01.2022",
-    "board_in_event": 3
+    "board_in_event": 3,
+    "dd_analysis": {
+      "NTN": 6,
+      "NTE": 5,
+      "NTS": 8,
+      "NTW": 7,
+      "SN": 6,
+      "SE": 5,
+      "SS": 7,
+      "SW": 7,
+      "HN": 6,
+      "HE": 5,
+      "HS": 8,
+      "HW": 7,
+      "DN": 6,
+      "DE": 5,
+      "DS": 8,
+      "DW": 6,
+      "CN": 6,
+      "CE": 4,
+      "CS": 9,
+      "CW": 7
+    }
   },
   "34": {
     "N": {
@@ -1083,9 +1809,31 @@
     "dealer": "W",
     "vulnerability": "Both",
     "event_id": "309162",
-    "tournament": "TBF simultane Sonuçları (01-01-2022 14:30)",
+    "tournament": "TBF simultane Sonu\u00c3\u00a7lar\u00c4\u00b1 (01-01-2022 14:30)",
     "date": "01.01.2022",
-    "board_in_event": 4
+    "board_in_event": 4,
+    "dd_analysis": {
+      "NTN": 6,
+      "NTE": 8,
+      "NTS": 4,
+      "NTW": 8,
+      "SN": 6,
+      "SE": 8,
+      "SS": 4,
+      "SW": 8,
+      "HN": 6,
+      "HE": 7,
+      "HS": 5,
+      "HW": 8,
+      "DN": 5,
+      "DE": 9,
+      "DS": 3,
+      "DW": 8,
+      "CN": 7,
+      "CE": 7,
+      "CS": 4,
+      "CW": 8
+    }
   },
   "35": {
     "N": {
@@ -1115,9 +1863,31 @@
     "dealer": "N",
     "vulnerability": "None",
     "event_id": "309162",
-    "tournament": "TBF simultane Sonuçları (01-01-2022 14:30)",
+    "tournament": "TBF simultane Sonu\u00c3\u00a7lar\u00c4\u00b1 (01-01-2022 14:30)",
     "date": "01.01.2022",
-    "board_in_event": 5
+    "board_in_event": 5,
+    "dd_analysis": {
+      "NTN": 7,
+      "NTE": 7,
+      "NTS": 5,
+      "NTW": 6,
+      "SN": 7,
+      "SE": 7,
+      "SS": 5,
+      "SW": 5,
+      "HN": 8,
+      "HE": 7,
+      "HS": 5,
+      "HW": 5,
+      "DN": 7,
+      "DE": 6,
+      "DS": 5,
+      "DW": 6,
+      "CN": 6,
+      "CE": 7,
+      "CS": 4,
+      "CW": 7
+    }
   },
   "36": {
     "N": {
@@ -1147,9 +1917,31 @@
     "dealer": "E",
     "vulnerability": "NS",
     "event_id": "309162",
-    "tournament": "TBF simultane Sonuçları (01-01-2022 14:30)",
+    "tournament": "TBF simultane Sonu\u00c3\u00a7lar\u00c4\u00b1 (01-01-2022 14:30)",
     "date": "01.01.2022",
-    "board_in_event": 6
+    "board_in_event": 6,
+    "dd_analysis": {
+      "NTN": 6,
+      "NTE": 8,
+      "NTS": 6,
+      "NTW": 5,
+      "SN": 5,
+      "SE": 8,
+      "SS": 6,
+      "SW": 5,
+      "HN": 6,
+      "HE": 7,
+      "HS": 7,
+      "HW": 5,
+      "DN": 6,
+      "DE": 8,
+      "DS": 6,
+      "DW": 4,
+      "CN": 6,
+      "CE": 8,
+      "CS": 5,
+      "CW": 5
+    }
   },
   "37": {
     "N": {
@@ -1179,9 +1971,31 @@
     "dealer": "S",
     "vulnerability": "EW",
     "event_id": "309162",
-    "tournament": "TBF simultane Sonuçları (01-01-2022 14:30)",
+    "tournament": "TBF simultane Sonu\u00c3\u00a7lar\u00c4\u00b1 (01-01-2022 14:30)",
     "date": "01.01.2022",
-    "board_in_event": 7
+    "board_in_event": 7,
+    "dd_analysis": {
+      "NTN": 7,
+      "NTE": 6,
+      "NTS": 6,
+      "NTW": 6,
+      "SN": 8,
+      "SE": 6,
+      "SS": 5,
+      "SW": 5,
+      "HN": 8,
+      "HE": 6,
+      "HS": 5,
+      "HW": 6,
+      "DN": 6,
+      "DE": 5,
+      "DS": 7,
+      "DW": 7,
+      "CN": 6,
+      "CE": 6,
+      "CS": 7,
+      "CW": 5
+    }
   },
   "38": {
     "N": {
@@ -1211,9 +2025,31 @@
     "dealer": "W",
     "vulnerability": "Both",
     "event_id": "309162",
-    "tournament": "TBF simultane Sonuçları (01-01-2022 14:30)",
+    "tournament": "TBF simultane Sonu\u00c3\u00a7lar\u00c4\u00b1 (01-01-2022 14:30)",
     "date": "01.01.2022",
-    "board_in_event": 8
+    "board_in_event": 8,
+    "dd_analysis": {
+      "NTN": 8,
+      "NTE": 5,
+      "NTS": 6,
+      "NTW": 6,
+      "SN": 8,
+      "SE": 6,
+      "SS": 5,
+      "SW": 5,
+      "HN": 9,
+      "HE": 5,
+      "HS": 6,
+      "HW": 5,
+      "DN": 8,
+      "DE": 4,
+      "DS": 6,
+      "DW": 7,
+      "CN": 7,
+      "CE": 4,
+      "CS": 7,
+      "CW": 7
+    }
   },
   "39": {
     "N": {
@@ -1243,9 +2079,31 @@
     "dealer": "N",
     "vulnerability": "None",
     "event_id": "309162",
-    "tournament": "TBF simultane Sonuçları (01-01-2022 14:30)",
+    "tournament": "TBF simultane Sonu\u00c3\u00a7lar\u00c4\u00b1 (01-01-2022 14:30)",
     "date": "01.01.2022",
-    "board_in_event": 9
+    "board_in_event": 9,
+    "dd_analysis": {
+      "NTN": 5,
+      "NTE": 5,
+      "NTS": 8,
+      "NTW": 7,
+      "SN": 4,
+      "SE": 6,
+      "SS": 8,
+      "SW": 7,
+      "HN": 5,
+      "HE": 3,
+      "HS": 8,
+      "HW": 8,
+      "DN": 5,
+      "DE": 5,
+      "DS": 8,
+      "DW": 7,
+      "CN": 5,
+      "CE": 6,
+      "CS": 8,
+      "CW": 6
+    }
   },
   "40": {
     "N": {
@@ -1275,9 +2133,31 @@
     "dealer": "E",
     "vulnerability": "NS",
     "event_id": "309162",
-    "tournament": "TBF simultane Sonuçları (01-01-2022 14:30)",
+    "tournament": "TBF simultane Sonu\u00c3\u00a7lar\u00c4\u00b1 (01-01-2022 14:30)",
     "date": "01.01.2022",
-    "board_in_event": 10
+    "board_in_event": 10,
+    "dd_analysis": {
+      "NTN": 5,
+      "NTE": 8,
+      "NTS": 6,
+      "NTW": 6,
+      "SN": 3,
+      "SE": 8,
+      "SS": 7,
+      "SW": 6,
+      "HN": 5,
+      "HE": 8,
+      "HS": 5,
+      "HW": 6,
+      "DN": 6,
+      "DE": 8,
+      "DS": 4,
+      "DW": 6,
+      "CN": 5,
+      "CE": 7,
+      "CS": 7,
+      "CW": 6
+    }
   },
   "41": {
     "N": {
@@ -1307,9 +2187,31 @@
     "dealer": "S",
     "vulnerability": "EW",
     "event_id": "309162",
-    "tournament": "TBF simultane Sonuçları (01-01-2022 14:30)",
+    "tournament": "TBF simultane Sonu\u00c3\u00a7lar\u00c4\u00b1 (01-01-2022 14:30)",
     "date": "01.01.2022",
-    "board_in_event": 11
+    "board_in_event": 11,
+    "dd_analysis": {
+      "NTN": 6,
+      "NTE": 5,
+      "NTS": 7,
+      "NTW": 7,
+      "SN": 5,
+      "SE": 5,
+      "SS": 8,
+      "SW": 6,
+      "HN": 6,
+      "HE": 5,
+      "HS": 7,
+      "HW": 7,
+      "DN": 5,
+      "DE": 5,
+      "DS": 7,
+      "DW": 7,
+      "CN": 7,
+      "CE": 5,
+      "CS": 6,
+      "CW": 7
+    }
   },
   "42": {
     "N": {
@@ -1339,9 +2241,31 @@
     "dealer": "W",
     "vulnerability": "Both",
     "event_id": "309162",
-    "tournament": "TBF simultane Sonuçları (01-01-2022 14:30)",
+    "tournament": "TBF simultane Sonu\u00c3\u00a7lar\u00c4\u00b1 (01-01-2022 14:30)",
     "date": "01.01.2022",
-    "board_in_event": 12
+    "board_in_event": 12,
+    "dd_analysis": {
+      "NTN": 7,
+      "NTE": 10,
+      "NTS": 5,
+      "NTW": 4,
+      "SN": 7,
+      "SE": 10,
+      "SS": 5,
+      "SW": 4,
+      "HN": 6,
+      "HE": 10,
+      "HS": 5,
+      "HW": 4,
+      "DN": 7,
+      "DE": 10,
+      "DS": 5,
+      "DW": 3,
+      "CN": 7,
+      "CE": 9,
+      "CS": 5,
+      "CW": 5
+    }
   },
   "43": {
     "N": {
@@ -1371,9 +2295,31 @@
     "dealer": "N",
     "vulnerability": "None",
     "event_id": "309162",
-    "tournament": "TBF simultane Sonuçları (01-01-2022 14:30)",
+    "tournament": "TBF simultane Sonu\u00c3\u00a7lar\u00c4\u00b1 (01-01-2022 14:30)",
     "date": "01.01.2022",
-    "board_in_event": 13
+    "board_in_event": 13,
+    "dd_analysis": {
+      "NTN": 6,
+      "NTE": 4,
+      "NTS": 7,
+      "NTW": 8,
+      "SN": 6,
+      "SE": 4,
+      "SS": 6,
+      "SW": 8,
+      "HN": 6,
+      "HE": 3,
+      "HS": 8,
+      "HW": 7,
+      "DN": 7,
+      "DE": 4,
+      "DS": 7,
+      "DW": 7,
+      "CN": 5,
+      "CE": 4,
+      "CS": 6,
+      "CW": 9
+    }
   },
   "44": {
     "N": {
@@ -1403,9 +2349,31 @@
     "dealer": "E",
     "vulnerability": "NS",
     "event_id": "309162",
-    "tournament": "TBF simultane Sonuçları (01-01-2022 14:30)",
+    "tournament": "TBF simultane Sonu\u00c3\u00a7lar\u00c4\u00b1 (01-01-2022 14:30)",
     "date": "01.01.2022",
-    "board_in_event": 14
+    "board_in_event": 14,
+    "dd_analysis": {
+      "NTN": 8,
+      "NTE": 7,
+      "NTS": 3,
+      "NTW": 7,
+      "SN": 8,
+      "SE": 7,
+      "SS": 2,
+      "SW": 7,
+      "HN": 8,
+      "HE": 6,
+      "HS": 3,
+      "HW": 7,
+      "DN": 8,
+      "DE": 7,
+      "DS": 3,
+      "DW": 6,
+      "CN": 8,
+      "CE": 7,
+      "CS": 3,
+      "CW": 7
+    }
   },
   "45": {
     "N": {
@@ -1435,9 +2403,31 @@
     "dealer": "S",
     "vulnerability": "EW",
     "event_id": "309162",
-    "tournament": "TBF simultane Sonuçları (01-01-2022 14:30)",
+    "tournament": "TBF simultane Sonu\u00c3\u00a7lar\u00c4\u00b1 (01-01-2022 14:30)",
     "date": "01.01.2022",
-    "board_in_event": 15
+    "board_in_event": 15,
+    "dd_analysis": {
+      "NTN": 4,
+      "NTE": 7,
+      "NTS": 8,
+      "NTW": 6,
+      "SN": 4,
+      "SE": 6,
+      "SS": 8,
+      "SW": 6,
+      "HN": 3,
+      "HE": 7,
+      "HS": 8,
+      "HW": 6,
+      "DN": 4,
+      "DE": 7,
+      "DS": 8,
+      "DW": 5,
+      "CN": 4,
+      "CE": 7,
+      "CS": 7,
+      "CW": 6
+    }
   },
   "46": {
     "N": {
@@ -1467,9 +2457,31 @@
     "dealer": "W",
     "vulnerability": "Both",
     "event_id": "309162",
-    "tournament": "TBF simultane Sonuçları (01-01-2022 14:30)",
+    "tournament": "TBF simultane Sonu\u00c3\u00a7lar\u00c4\u00b1 (01-01-2022 14:30)",
     "date": "01.01.2022",
-    "board_in_event": 16
+    "board_in_event": 16,
+    "dd_analysis": {
+      "NTN": 7,
+      "NTE": 5,
+      "NTS": 7,
+      "NTW": 7,
+      "SN": 5,
+      "SE": 5,
+      "SS": 7,
+      "SW": 8,
+      "HN": 8,
+      "HE": 4,
+      "HS": 7,
+      "HW": 6,
+      "DN": 7,
+      "DE": 5,
+      "DS": 6,
+      "DW": 7,
+      "CN": 7,
+      "CE": 5,
+      "CS": 7,
+      "CW": 7
+    }
   },
   "47": {
     "N": {
@@ -1499,9 +2511,31 @@
     "dealer": "N",
     "vulnerability": "None",
     "event_id": "309162",
-    "tournament": "TBF simultane Sonuçları (01-01-2022 14:30)",
+    "tournament": "TBF simultane Sonu\u00c3\u00a7lar\u00c4\u00b1 (01-01-2022 14:30)",
     "date": "01.01.2022",
-    "board_in_event": 17
+    "board_in_event": 17,
+    "dd_analysis": {
+      "NTN": 7,
+      "NTE": 4,
+      "NTS": 7,
+      "NTW": 8,
+      "SN": 8,
+      "SE": 4,
+      "SS": 7,
+      "SW": 7,
+      "HN": 6,
+      "HE": 4,
+      "HS": 7,
+      "HW": 8,
+      "DN": 6,
+      "DE": 4,
+      "DS": 7,
+      "DW": 9,
+      "CN": 7,
+      "CE": 4,
+      "CS": 7,
+      "CW": 8
+    }
   },
   "48": {
     "N": {
@@ -1531,9 +2565,31 @@
     "dealer": "E",
     "vulnerability": "NS",
     "event_id": "309162",
-    "tournament": "TBF simultane Sonuçları (01-01-2022 14:30)",
+    "tournament": "TBF simultane Sonu\u00c3\u00a7lar\u00c4\u00b1 (01-01-2022 14:30)",
     "date": "01.01.2022",
-    "board_in_event": 18
+    "board_in_event": 18,
+    "dd_analysis": {
+      "NTN": 5,
+      "NTE": 8,
+      "NTS": 6,
+      "NTW": 6,
+      "SN": 4,
+      "SE": 8,
+      "SS": 6,
+      "SW": 7,
+      "HN": 5,
+      "HE": 9,
+      "HS": 5,
+      "HW": 5,
+      "DN": 6,
+      "DE": 8,
+      "DS": 5,
+      "DW": 5,
+      "CN": 4,
+      "CE": 7,
+      "CS": 7,
+      "CW": 7
+    }
   },
   "49": {
     "N": {
@@ -1563,9 +2619,31 @@
     "dealer": "S",
     "vulnerability": "EW",
     "event_id": "309162",
-    "tournament": "TBF simultane Sonuçları (01-01-2022 14:30)",
+    "tournament": "TBF simultane Sonu\u00c3\u00a7lar\u00c4\u00b1 (01-01-2022 14:30)",
     "date": "01.01.2022",
-    "board_in_event": 19
+    "board_in_event": 19,
+    "dd_analysis": {
+      "NTN": 6,
+      "NTE": 4,
+      "NTS": 8,
+      "NTW": 7,
+      "SN": 6,
+      "SE": 4,
+      "SS": 7,
+      "SW": 7,
+      "HN": 7,
+      "HE": 4,
+      "HS": 8,
+      "HW": 6,
+      "DN": 5,
+      "DE": 5,
+      "DS": 8,
+      "DW": 6,
+      "CN": 6,
+      "CE": 3,
+      "CS": 8,
+      "CW": 8
+    }
   },
   "50": {
     "N": {
@@ -1595,9 +2673,31 @@
     "dealer": "W",
     "vulnerability": "Both",
     "event_id": "309162",
-    "tournament": "TBF simultane Sonuçları (01-01-2022 14:30)",
+    "tournament": "TBF simultane Sonu\u00c3\u00a7lar\u00c4\u00b1 (01-01-2022 14:30)",
     "date": "01.01.2022",
-    "board_in_event": 20
+    "board_in_event": 20,
+    "dd_analysis": {
+      "NTN": 5,
+      "NTE": 7,
+      "NTS": 5,
+      "NTW": 9,
+      "SN": 6,
+      "SE": 6,
+      "SS": 5,
+      "SW": 9,
+      "HN": 4,
+      "HE": 7,
+      "HS": 6,
+      "HW": 9,
+      "DN": 5,
+      "DE": 7,
+      "DS": 5,
+      "DW": 9,
+      "CN": 4,
+      "CE": 8,
+      "CS": 4,
+      "CW": 9
+    }
   },
   "51": {
     "N": {
@@ -1627,9 +2727,31 @@
     "dealer": "N",
     "vulnerability": "None",
     "event_id": "309162",
-    "tournament": "TBF simultane Sonuçları (01-01-2022 14:30)",
+    "tournament": "TBF simultane Sonu\u00c3\u00a7lar\u00c4\u00b1 (01-01-2022 14:30)",
     "date": "01.01.2022",
-    "board_in_event": 21
+    "board_in_event": 21,
+    "dd_analysis": {
+      "NTN": 7,
+      "NTE": 7,
+      "NTS": 4,
+      "NTW": 6,
+      "SN": 5,
+      "SE": 8,
+      "SS": 4,
+      "SW": 6,
+      "HN": 9,
+      "HE": 7,
+      "HS": 4,
+      "HW": 4,
+      "DN": 7,
+      "DE": 6,
+      "DS": 4,
+      "DW": 7,
+      "CN": 7,
+      "CE": 6,
+      "CS": 4,
+      "CW": 7
+    }
   },
   "52": {
     "N": {
@@ -1659,9 +2781,31 @@
     "dealer": "E",
     "vulnerability": "NS",
     "event_id": "309162",
-    "tournament": "TBF simultane Sonuçları (01-01-2022 14:30)",
+    "tournament": "TBF simultane Sonu\u00c3\u00a7lar\u00c4\u00b1 (01-01-2022 14:30)",
     "date": "01.01.2022",
-    "board_in_event": 22
+    "board_in_event": 22,
+    "dd_analysis": {
+      "NTN": 10,
+      "NTE": 6,
+      "NTS": 3,
+      "NTW": 6,
+      "SN": 10,
+      "SE": 6,
+      "SS": 2,
+      "SW": 6,
+      "HN": 10,
+      "HE": 5,
+      "HS": 3,
+      "HW": 7,
+      "DN": 9,
+      "DE": 7,
+      "DS": 3,
+      "DW": 6,
+      "CN": 11,
+      "CE": 5,
+      "CS": 4,
+      "CW": 5
+    }
   },
   "53": {
     "N": {
@@ -1691,9 +2835,31 @@
     "dealer": "S",
     "vulnerability": "EW",
     "event_id": "309162",
-    "tournament": "TBF simultane Sonuçları (01-01-2022 14:30)",
+    "tournament": "TBF simultane Sonu\u00c3\u00a7lar\u00c4\u00b1 (01-01-2022 14:30)",
     "date": "01.01.2022",
-    "board_in_event": 23
+    "board_in_event": 23,
+    "dd_analysis": {
+      "NTN": 6,
+      "NTE": 5,
+      "NTS": 7,
+      "NTW": 6,
+      "SN": 6,
+      "SE": 5,
+      "SS": 7,
+      "SW": 5,
+      "HN": 6,
+      "HE": 5,
+      "HS": 6,
+      "HW": 7,
+      "DN": 6,
+      "DE": 4,
+      "DS": 8,
+      "DW": 6,
+      "CN": 6,
+      "CE": 5,
+      "CS": 7,
+      "CW": 6
+    }
   },
   "54": {
     "N": {
@@ -1723,9 +2889,31 @@
     "dealer": "W",
     "vulnerability": "Both",
     "event_id": "309162",
-    "tournament": "TBF simultane Sonuçları (01-01-2022 14:30)",
+    "tournament": "TBF simultane Sonu\u00c3\u00a7lar\u00c4\u00b1 (01-01-2022 14:30)",
     "date": "01.01.2022",
-    "board_in_event": 24
+    "board_in_event": 24,
+    "dd_analysis": {
+      "NTN": 6,
+      "NTE": 8,
+      "NTS": 8,
+      "NTW": 3,
+      "SN": 6,
+      "SE": 8,
+      "SS": 8,
+      "SW": 3,
+      "HN": 5,
+      "HE": 8,
+      "HS": 8,
+      "HW": 4,
+      "DN": 6,
+      "DE": 8,
+      "DS": 7,
+      "DW": 3,
+      "CN": 6,
+      "CE": 8,
+      "CS": 8,
+      "CW": 2
+    }
   },
   "55": {
     "N": {
@@ -1755,9 +2943,31 @@
     "dealer": "N",
     "vulnerability": "None",
     "event_id": "309162",
-    "tournament": "TBF simultane Sonuçları (01-01-2022 14:30)",
+    "tournament": "TBF simultane Sonu\u00c3\u00a7lar\u00c4\u00b1 (01-01-2022 14:30)",
     "date": "01.01.2022",
-    "board_in_event": 25
+    "board_in_event": 25,
+    "dd_analysis": {
+      "NTN": 9,
+      "NTE": 6,
+      "NTS": 5,
+      "NTW": 6,
+      "SN": 8,
+      "SE": 7,
+      "SS": 5,
+      "SW": 5,
+      "HN": 9,
+      "HE": 5,
+      "HS": 6,
+      "HW": 5,
+      "DN": 9,
+      "DE": 6,
+      "DS": 4,
+      "DW": 7,
+      "CN": 9,
+      "CE": 6,
+      "CS": 4,
+      "CW": 7
+    }
   },
   "56": {
     "N": {
@@ -1787,9 +2997,31 @@
     "dealer": "E",
     "vulnerability": "NS",
     "event_id": "309162",
-    "tournament": "TBF simultane Sonuçları (01-01-2022 14:30)",
+    "tournament": "TBF simultane Sonu\u00c3\u00a7lar\u00c4\u00b1 (01-01-2022 14:30)",
     "date": "01.01.2022",
-    "board_in_event": 26
+    "board_in_event": 26,
+    "dd_analysis": {
+      "NTN": 9,
+      "NTE": 7,
+      "NTS": 6,
+      "NTW": 3,
+      "SN": 9,
+      "SE": 7,
+      "SS": 6,
+      "SW": 3,
+      "HN": 8,
+      "HE": 7,
+      "HS": 6,
+      "HW": 3,
+      "DN": 10,
+      "DE": 6,
+      "DS": 6,
+      "DW": 2,
+      "CN": 9,
+      "CE": 7,
+      "CS": 6,
+      "CW": 3
+    }
   },
   "57": {
     "N": {
@@ -1819,9 +3051,31 @@
     "dealer": "S",
     "vulnerability": "EW",
     "event_id": "309162",
-    "tournament": "TBF simultane Sonuçları (01-01-2022 14:30)",
+    "tournament": "TBF simultane Sonu\u00c3\u00a7lar\u00c4\u00b1 (01-01-2022 14:30)",
     "date": "01.01.2022",
-    "board_in_event": 27
+    "board_in_event": 27,
+    "dd_analysis": {
+      "NTN": 6,
+      "NTE": 6,
+      "NTS": 6,
+      "NTW": 7,
+      "SN": 6,
+      "SE": 6,
+      "SS": 6,
+      "SW": 7,
+      "HN": 6,
+      "HE": 5,
+      "HS": 7,
+      "HW": 7,
+      "DN": 6,
+      "DE": 6,
+      "DS": 6,
+      "DW": 6,
+      "CN": 6,
+      "CE": 6,
+      "CS": 5,
+      "CW": 8
+    }
   },
   "58": {
     "N": {
@@ -1851,9 +3105,31 @@
     "dealer": "W",
     "vulnerability": "Both",
     "event_id": "309162",
-    "tournament": "TBF simultane Sonuçları (01-01-2022 14:30)",
+    "tournament": "TBF simultane Sonu\u00c3\u00a7lar\u00c4\u00b1 (01-01-2022 14:30)",
     "date": "01.01.2022",
-    "board_in_event": 28
+    "board_in_event": 28,
+    "dd_analysis": {
+      "NTN": 6,
+      "NTE": 7,
+      "NTS": 6,
+      "NTW": 7,
+      "SN": 5,
+      "SE": 8,
+      "SS": 6,
+      "SW": 7,
+      "HN": 5,
+      "HE": 7,
+      "HS": 6,
+      "HW": 8,
+      "DN": 7,
+      "DE": 7,
+      "DS": 6,
+      "DW": 6,
+      "CN": 6,
+      "CE": 6,
+      "CS": 6,
+      "CW": 7
+    }
   },
   "59": {
     "N": {
@@ -1883,9 +3159,31 @@
     "dealer": "N",
     "vulnerability": "None",
     "event_id": "309162",
-    "tournament": "TBF simultane Sonuçları (01-01-2022 14:30)",
+    "tournament": "TBF simultane Sonu\u00c3\u00a7lar\u00c4\u00b1 (01-01-2022 14:30)",
     "date": "01.01.2022",
-    "board_in_event": 29
+    "board_in_event": 29,
+    "dd_analysis": {
+      "NTN": 6,
+      "NTE": 6,
+      "NTS": 7,
+      "NTW": 6,
+      "SN": 5,
+      "SE": 7,
+      "SS": 6,
+      "SW": 6,
+      "HN": 6,
+      "HE": 5,
+      "HS": 6,
+      "HW": 7,
+      "DN": 6,
+      "DE": 6,
+      "DS": 7,
+      "DW": 5,
+      "CN": 6,
+      "CE": 5,
+      "CS": 8,
+      "CW": 6
+    }
   },
   "60": {
     "N": {
@@ -1915,9 +3213,31 @@
     "dealer": "E",
     "vulnerability": "NS",
     "event_id": "309162",
-    "tournament": "TBF simultane Sonuçları (01-01-2022 14:30)",
+    "tournament": "TBF simultane Sonu\u00c3\u00a7lar\u00c4\u00b1 (01-01-2022 14:30)",
     "date": "01.01.2022",
-    "board_in_event": 30
+    "board_in_event": 30,
+    "dd_analysis": {
+      "NTN": 5,
+      "NTE": 5,
+      "NTS": 7,
+      "NTW": 8,
+      "SN": 6,
+      "SE": 5,
+      "SS": 7,
+      "SW": 7,
+      "HN": 4,
+      "HE": 5,
+      "HS": 7,
+      "HW": 9,
+      "DN": 5,
+      "DE": 5,
+      "DS": 7,
+      "DW": 8,
+      "CN": 5,
+      "CE": 5,
+      "CS": 7,
+      "CW": 7
+    }
   },
   "61": {
     "N": {
@@ -1947,9 +3267,31 @@
     "dealer": "N",
     "vulnerability": "None",
     "event_id": "357499",
-    "tournament": "Pazartesi Sonuçları (01-01-2024 14:00)",
+    "tournament": "Pazartesi Sonu\u00c3\u00a7lar\u00c4\u00b1 (01-01-2024 14:00)",
     "date": "01.01.2024",
-    "board_in_event": 1
+    "board_in_event": 1,
+    "dd_analysis": {
+      "NTN": 8,
+      "NTE": 7,
+      "NTS": 6,
+      "NTW": 4,
+      "SN": 9,
+      "SE": 7,
+      "SS": 6,
+      "SW": 3,
+      "HN": 7,
+      "HE": 7,
+      "HS": 7,
+      "HW": 4,
+      "DN": 7,
+      "DE": 7,
+      "DS": 5,
+      "DW": 5,
+      "CN": 8,
+      "CE": 7,
+      "CS": 6,
+      "CW": 3
+    }
   },
   "62": {
     "N": {
@@ -1979,9 +3321,31 @@
     "dealer": "E",
     "vulnerability": "NS",
     "event_id": "357499",
-    "tournament": "Pazartesi Sonuçları (01-01-2024 14:00)",
+    "tournament": "Pazartesi Sonu\u00c3\u00a7lar\u00c4\u00b1 (01-01-2024 14:00)",
     "date": "01.01.2024",
-    "board_in_event": 2
+    "board_in_event": 2,
+    "dd_analysis": {
+      "NTN": 4,
+      "NTE": 10,
+      "NTS": 6,
+      "NTW": 5,
+      "SN": 3,
+      "SE": 10,
+      "SS": 6,
+      "SW": 5,
+      "HN": 4,
+      "HE": 10,
+      "HS": 5,
+      "HW": 5,
+      "DN": 3,
+      "DE": 10,
+      "DS": 6,
+      "DW": 5,
+      "CN": 5,
+      "CE": 9,
+      "CS": 7,
+      "CW": 4
+    }
   },
   "63": {
     "N": {
@@ -2011,9 +3375,31 @@
     "dealer": "S",
     "vulnerability": "EW",
     "event_id": "357499",
-    "tournament": "Pazartesi Sonuçları (01-01-2024 14:00)",
+    "tournament": "Pazartesi Sonu\u00c3\u00a7lar\u00c4\u00b1 (01-01-2024 14:00)",
     "date": "01.01.2024",
-    "board_in_event": 3
+    "board_in_event": 3,
+    "dd_analysis": {
+      "NTN": 6,
+      "NTE": 4,
+      "NTS": 7,
+      "NTW": 8,
+      "SN": 5,
+      "SE": 4,
+      "SS": 7,
+      "SW": 8,
+      "HN": 6,
+      "HE": 4,
+      "HS": 7,
+      "HW": 8,
+      "DN": 7,
+      "DE": 3,
+      "DS": 6,
+      "DW": 8,
+      "CN": 6,
+      "CE": 4,
+      "CS": 7,
+      "CW": 8
+    }
   },
   "64": {
     "N": {
@@ -2043,9 +3429,31 @@
     "dealer": "W",
     "vulnerability": "Both",
     "event_id": "357499",
-    "tournament": "Pazartesi Sonuçları (01-01-2024 14:00)",
+    "tournament": "Pazartesi Sonu\u00c3\u00a7lar\u00c4\u00b1 (01-01-2024 14:00)",
     "date": "01.01.2024",
-    "board_in_event": 4
+    "board_in_event": 4,
+    "dd_analysis": {
+      "NTN": 8,
+      "NTE": 7,
+      "NTS": 5,
+      "NTW": 5,
+      "SN": 8,
+      "SE": 7,
+      "SS": 4,
+      "SW": 6,
+      "HN": 7,
+      "HE": 7,
+      "HS": 6,
+      "HW": 5,
+      "DN": 10,
+      "DE": 7,
+      "DS": 4,
+      "DW": 4,
+      "CN": 7,
+      "CE": 7,
+      "CS": 5,
+      "CW": 5
+    }
   },
   "65": {
     "N": {
@@ -2075,9 +3483,31 @@
     "dealer": "N",
     "vulnerability": "None",
     "event_id": "357499",
-    "tournament": "Pazartesi Sonuçları (01-01-2024 14:00)",
+    "tournament": "Pazartesi Sonu\u00c3\u00a7lar\u00c4\u00b1 (01-01-2024 14:00)",
     "date": "01.01.2024",
-    "board_in_event": 5
+    "board_in_event": 5,
+    "dd_analysis": {
+      "NTN": 6,
+      "NTE": 7,
+      "NTS": 8,
+      "NTW": 4,
+      "SN": 6,
+      "SE": 7,
+      "SS": 8,
+      "SW": 4,
+      "HN": 7,
+      "HE": 6,
+      "HS": 8,
+      "HW": 4,
+      "DN": 6,
+      "DE": 7,
+      "DS": 8,
+      "DW": 4,
+      "CN": 5,
+      "CE": 8,
+      "CS": 8,
+      "CW": 4
+    }
   },
   "66": {
     "N": {
@@ -2107,9 +3537,31 @@
     "dealer": "E",
     "vulnerability": "NS",
     "event_id": "357499",
-    "tournament": "Pazartesi Sonuçları (01-01-2024 14:00)",
+    "tournament": "Pazartesi Sonu\u00c3\u00a7lar\u00c4\u00b1 (01-01-2024 14:00)",
     "date": "01.01.2024",
-    "board_in_event": 6
+    "board_in_event": 6,
+    "dd_analysis": {
+      "NTN": 8,
+      "NTE": 5,
+      "NTS": 5,
+      "NTW": 7,
+      "SN": 8,
+      "SE": 4,
+      "SS": 5,
+      "SW": 7,
+      "HN": 7,
+      "HE": 5,
+      "HS": 5,
+      "HW": 7,
+      "DN": 9,
+      "DE": 5,
+      "DS": 4,
+      "DW": 6,
+      "CN": 7,
+      "CE": 5,
+      "CS": 5,
+      "CW": 7
+    }
   },
   "67": {
     "N": {
@@ -2139,9 +3591,31 @@
     "dealer": "S",
     "vulnerability": "EW",
     "event_id": "357499",
-    "tournament": "Pazartesi Sonuçları (01-01-2024 14:00)",
+    "tournament": "Pazartesi Sonu\u00c3\u00a7lar\u00c4\u00b1 (01-01-2024 14:00)",
     "date": "01.01.2024",
-    "board_in_event": 7
+    "board_in_event": 7,
+    "dd_analysis": {
+      "NTN": 6,
+      "NTE": 6,
+      "NTS": 6,
+      "NTW": 8,
+      "SN": 6,
+      "SE": 5,
+      "SS": 7,
+      "SW": 8,
+      "HN": 7,
+      "HE": 5,
+      "HS": 6,
+      "HW": 8,
+      "DN": 6,
+      "DE": 5,
+      "DS": 5,
+      "DW": 9,
+      "CN": 5,
+      "CE": 8,
+      "CS": 6,
+      "CW": 7
+    }
   },
   "68": {
     "N": {
@@ -2171,9 +3645,31 @@
     "dealer": "W",
     "vulnerability": "Both",
     "event_id": "357499",
-    "tournament": "Pazartesi Sonuçları (01-01-2024 14:00)",
+    "tournament": "Pazartesi Sonu\u00c3\u00a7lar\u00c4\u00b1 (01-01-2024 14:00)",
     "date": "01.01.2024",
-    "board_in_event": 8
+    "board_in_event": 8,
+    "dd_analysis": {
+      "NTN": 8,
+      "NTE": 6,
+      "NTS": 5,
+      "NTW": 6,
+      "SN": 8,
+      "SE": 5,
+      "SS": 6,
+      "SW": 6,
+      "HN": 9,
+      "HE": 6,
+      "HS": 4,
+      "HW": 6,
+      "DN": 7,
+      "DE": 6,
+      "DS": 5,
+      "DW": 7,
+      "CN": 8,
+      "CE": 7,
+      "CS": 5,
+      "CW": 5
+    }
   },
   "69": {
     "N": {
@@ -2203,9 +3699,31 @@
     "dealer": "N",
     "vulnerability": "None",
     "event_id": "357499",
-    "tournament": "Pazartesi Sonuçları (01-01-2024 14:00)",
+    "tournament": "Pazartesi Sonu\u00c3\u00a7lar\u00c4\u00b1 (01-01-2024 14:00)",
     "date": "01.01.2024",
-    "board_in_event": 9
+    "board_in_event": 9,
+    "dd_analysis": {
+      "NTN": 6,
+      "NTE": 6,
+      "NTS": 9,
+      "NTW": 4,
+      "SN": 6,
+      "SE": 5,
+      "SS": 10,
+      "SW": 4,
+      "HN": 6,
+      "HE": 6,
+      "HS": 8,
+      "HW": 5,
+      "DN": 7,
+      "DE": 6,
+      "DS": 8,
+      "DW": 4,
+      "CN": 5,
+      "CE": 6,
+      "CS": 10,
+      "CW": 3
+    }
   },
   "70": {
     "N": {
@@ -2235,9 +3753,31 @@
     "dealer": "E",
     "vulnerability": "NS",
     "event_id": "357499",
-    "tournament": "Pazartesi Sonuçları (01-01-2024 14:00)",
+    "tournament": "Pazartesi Sonu\u00c3\u00a7lar\u00c4\u00b1 (01-01-2024 14:00)",
     "date": "01.01.2024",
-    "board_in_event": 10
+    "board_in_event": 10,
+    "dd_analysis": {
+      "NTN": 8,
+      "NTE": 6,
+      "NTS": 5,
+      "NTW": 7,
+      "SN": 8,
+      "SE": 7,
+      "SS": 4,
+      "SW": 7,
+      "HN": 8,
+      "HE": 6,
+      "HS": 5,
+      "HW": 7,
+      "DN": 9,
+      "DE": 5,
+      "DS": 5,
+      "DW": 6,
+      "CN": 7,
+      "CE": 5,
+      "CS": 6,
+      "CW": 8
+    }
   },
   "71": {
     "N": {
@@ -2267,9 +3807,31 @@
     "dealer": "S",
     "vulnerability": "EW",
     "event_id": "357499",
-    "tournament": "Pazartesi Sonuçları (01-01-2024 14:00)",
+    "tournament": "Pazartesi Sonu\u00c3\u00a7lar\u00c4\u00b1 (01-01-2024 14:00)",
     "date": "01.01.2024",
-    "board_in_event": 11
+    "board_in_event": 11,
+    "dd_analysis": {
+      "NTN": 5,
+      "NTE": 9,
+      "NTS": 7,
+      "NTW": 5,
+      "SN": 4,
+      "SE": 8,
+      "SS": 8,
+      "SW": 5,
+      "HN": 4,
+      "HE": 9,
+      "HS": 7,
+      "HW": 5,
+      "DN": 6,
+      "DE": 8,
+      "DS": 6,
+      "DW": 6,
+      "CN": 6,
+      "CE": 10,
+      "CS": 6,
+      "CW": 4
+    }
   },
   "72": {
     "N": {
@@ -2299,9 +3861,31 @@
     "dealer": "W",
     "vulnerability": "Both",
     "event_id": "357499",
-    "tournament": "Pazartesi Sonuçları (01-01-2024 14:00)",
+    "tournament": "Pazartesi Sonu\u00c3\u00a7lar\u00c4\u00b1 (01-01-2024 14:00)",
     "date": "01.01.2024",
-    "board_in_event": 12
+    "board_in_event": 12,
+    "dd_analysis": {
+      "NTN": 5,
+      "NTE": 6,
+      "NTS": 9,
+      "NTW": 5,
+      "SN": 5,
+      "SE": 6,
+      "SS": 8,
+      "SW": 5,
+      "HN": 5,
+      "HE": 6,
+      "HS": 9,
+      "HW": 5,
+      "DN": 4,
+      "DE": 6,
+      "DS": 10,
+      "DW": 4,
+      "CN": 5,
+      "CE": 5,
+      "CS": 8,
+      "CW": 6
+    }
   },
   "73": {
     "N": {
@@ -2331,9 +3915,31 @@
     "dealer": "N",
     "vulnerability": "None",
     "event_id": "357499",
-    "tournament": "Pazartesi Sonuçları (01-01-2024 14:00)",
+    "tournament": "Pazartesi Sonu\u00c3\u00a7lar\u00c4\u00b1 (01-01-2024 14:00)",
     "date": "01.01.2024",
-    "board_in_event": 13
+    "board_in_event": 13,
+    "dd_analysis": {
+      "NTN": 7,
+      "NTE": 5,
+      "NTS": 9,
+      "NTW": 5,
+      "SN": 7,
+      "SE": 5,
+      "SS": 9,
+      "SW": 5,
+      "HN": 7,
+      "HE": 5,
+      "HS": 9,
+      "HW": 5,
+      "DN": 7,
+      "DE": 5,
+      "DS": 8,
+      "DW": 5,
+      "CN": 6,
+      "CE": 5,
+      "CS": 10,
+      "CW": 5
+    }
   },
   "74": {
     "N": {
@@ -2363,9 +3969,31 @@
     "dealer": "E",
     "vulnerability": "NS",
     "event_id": "357499",
-    "tournament": "Pazartesi Sonuçları (01-01-2024 14:00)",
+    "tournament": "Pazartesi Sonu\u00c3\u00a7lar\u00c4\u00b1 (01-01-2024 14:00)",
     "date": "01.01.2024",
-    "board_in_event": 14
+    "board_in_event": 14,
+    "dd_analysis": {
+      "NTN": 7,
+      "NTE": 6,
+      "NTS": 6,
+      "NTW": 7,
+      "SN": 8,
+      "SE": 6,
+      "SS": 5,
+      "SW": 7,
+      "HN": 7,
+      "HE": 6,
+      "HS": 6,
+      "HW": 7,
+      "DN": 6,
+      "DE": 5,
+      "DS": 6,
+      "DW": 8,
+      "CN": 7,
+      "CE": 7,
+      "CS": 6,
+      "CW": 6
+    }
   },
   "75": {
     "N": {
@@ -2395,9 +4023,31 @@
     "dealer": "S",
     "vulnerability": "EW",
     "event_id": "357499",
-    "tournament": "Pazartesi Sonuçları (01-01-2024 14:00)",
+    "tournament": "Pazartesi Sonu\u00c3\u00a7lar\u00c4\u00b1 (01-01-2024 14:00)",
     "date": "01.01.2024",
-    "board_in_event": 15
+    "board_in_event": 15,
+    "dd_analysis": {
+      "NTN": 6,
+      "NTE": 9,
+      "NTS": 6,
+      "NTW": 5,
+      "SN": 5,
+      "SE": 8,
+      "SS": 7,
+      "SW": 5,
+      "HN": 6,
+      "HE": 10,
+      "HS": 6,
+      "HW": 4,
+      "DN": 5,
+      "DE": 9,
+      "DS": 6,
+      "DW": 5,
+      "CN": 7,
+      "CE": 8,
+      "CS": 5,
+      "CW": 5
+    }
   },
   "76": {
     "N": {
@@ -2427,9 +4077,31 @@
     "dealer": "W",
     "vulnerability": "Both",
     "event_id": "357499",
-    "tournament": "Pazartesi Sonuçları (01-01-2024 14:00)",
+    "tournament": "Pazartesi Sonu\u00c3\u00a7lar\u00c4\u00b1 (01-01-2024 14:00)",
     "date": "01.01.2024",
-    "board_in_event": 16
+    "board_in_event": 16,
+    "dd_analysis": {
+      "NTN": 7,
+      "NTE": 6,
+      "NTS": 6,
+      "NTW": 6,
+      "SN": 7,
+      "SE": 7,
+      "SS": 6,
+      "SW": 5,
+      "HN": 6,
+      "HE": 5,
+      "HS": 6,
+      "HW": 7,
+      "DN": 7,
+      "DE": 6,
+      "DS": 6,
+      "DW": 6,
+      "CN": 7,
+      "CE": 5,
+      "CS": 6,
+      "CW": 6
+    }
   },
   "77": {
     "N": {
@@ -2459,9 +4131,31 @@
     "dealer": "N",
     "vulnerability": "None",
     "event_id": "357499",
-    "tournament": "Pazartesi Sonuçları (01-01-2024 14:00)",
+    "tournament": "Pazartesi Sonu\u00c3\u00a7lar\u00c4\u00b1 (01-01-2024 14:00)",
     "date": "01.01.2024",
-    "board_in_event": 17
+    "board_in_event": 17,
+    "dd_analysis": {
+      "NTN": 6,
+      "NTE": 5,
+      "NTS": 8,
+      "NTW": 7,
+      "SN": 5,
+      "SE": 4,
+      "SS": 9,
+      "SW": 7,
+      "HN": 5,
+      "HE": 5,
+      "HS": 9,
+      "HW": 7,
+      "DN": 6,
+      "DE": 6,
+      "DS": 7,
+      "DW": 7,
+      "CN": 8,
+      "CE": 4,
+      "CS": 7,
+      "CW": 7
+    }
   },
   "78": {
     "N": {
@@ -2491,9 +4185,31 @@
     "dealer": "E",
     "vulnerability": "NS",
     "event_id": "357499",
-    "tournament": "Pazartesi Sonuçları (01-01-2024 14:00)",
+    "tournament": "Pazartesi Sonu\u00c3\u00a7lar\u00c4\u00b1 (01-01-2024 14:00)",
     "date": "01.01.2024",
-    "board_in_event": 18
+    "board_in_event": 18,
+    "dd_analysis": {
+      "NTN": 5,
+      "NTE": 4,
+      "NTS": 6,
+      "NTW": 10,
+      "SN": 5,
+      "SE": 4,
+      "SS": 6,
+      "SW": 10,
+      "HN": 6,
+      "HE": 3,
+      "HS": 5,
+      "HW": 11,
+      "DN": 5,
+      "DE": 4,
+      "DS": 7,
+      "DW": 9,
+      "CN": 4,
+      "CE": 5,
+      "CS": 6,
+      "CW": 10
+    }
   },
   "79": {
     "N": {
@@ -2523,9 +4239,31 @@
     "dealer": "S",
     "vulnerability": "EW",
     "event_id": "357499",
-    "tournament": "Pazartesi Sonuçları (01-01-2024 14:00)",
+    "tournament": "Pazartesi Sonu\u00c3\u00a7lar\u00c4\u00b1 (01-01-2024 14:00)",
     "date": "01.01.2024",
-    "board_in_event": 19
+    "board_in_event": 19,
+    "dd_analysis": {
+      "NTN": 8,
+      "NTE": 6,
+      "NTS": 6,
+      "NTW": 5,
+      "SN": 8,
+      "SE": 5,
+      "SS": 6,
+      "SW": 5,
+      "HN": 8,
+      "HE": 6,
+      "HS": 6,
+      "HW": 5,
+      "DN": 8,
+      "DE": 6,
+      "DS": 6,
+      "DW": 5,
+      "CN": 8,
+      "CE": 6,
+      "CS": 6,
+      "CW": 5
+    }
   },
   "80": {
     "N": {
@@ -2555,9 +4293,31 @@
     "dealer": "W",
     "vulnerability": "Both",
     "event_id": "357499",
-    "tournament": "Pazartesi Sonuçları (01-01-2024 14:00)",
+    "tournament": "Pazartesi Sonu\u00c3\u00a7lar\u00c4\u00b1 (01-01-2024 14:00)",
     "date": "01.01.2024",
-    "board_in_event": 20
+    "board_in_event": 20,
+    "dd_analysis": {
+      "NTN": 9,
+      "NTE": 3,
+      "NTS": 9,
+      "NTW": 4,
+      "SN": 9,
+      "SE": 3,
+      "SS": 9,
+      "SW": 4,
+      "HN": 9,
+      "HE": 4,
+      "HS": 8,
+      "HW": 3,
+      "DN": 9,
+      "DE": 2,
+      "DS": 9,
+      "DW": 5,
+      "CN": 9,
+      "CE": 2,
+      "CS": 10,
+      "CW": 4
+    }
   },
   "81": {
     "N": {
@@ -2587,9 +4347,31 @@
     "dealer": "N",
     "vulnerability": "None",
     "event_id": "357499",
-    "tournament": "Pazartesi Sonuçları (01-01-2024 14:00)",
+    "tournament": "Pazartesi Sonu\u00c3\u00a7lar\u00c4\u00b1 (01-01-2024 14:00)",
     "date": "01.01.2024",
-    "board_in_event": 21
+    "board_in_event": 21,
+    "dd_analysis": {
+      "NTN": 4,
+      "NTE": 8,
+      "NTS": 10,
+      "NTW": 4,
+      "SN": 3,
+      "SE": 8,
+      "SS": 10,
+      "SW": 5,
+      "HN": 4,
+      "HE": 7,
+      "HS": 11,
+      "HW": 4,
+      "DN": 4,
+      "DE": 9,
+      "DS": 9,
+      "DW": 3,
+      "CN": 4,
+      "CE": 7,
+      "CS": 10,
+      "CW": 4
+    }
   },
   "82": {
     "N": {
@@ -2619,9 +4401,31 @@
     "dealer": "E",
     "vulnerability": "NS",
     "event_id": "357499",
-    "tournament": "Pazartesi Sonuçları (01-01-2024 14:00)",
+    "tournament": "Pazartesi Sonu\u00c3\u00a7lar\u00c4\u00b1 (01-01-2024 14:00)",
     "date": "01.01.2024",
-    "board_in_event": 22
+    "board_in_event": 22,
+    "dd_analysis": {
+      "NTN": 7,
+      "NTE": 7,
+      "NTS": 5,
+      "NTW": 6,
+      "SN": 6,
+      "SE": 6,
+      "SS": 5,
+      "SW": 8,
+      "HN": 7,
+      "HE": 6,
+      "HS": 5,
+      "HW": 6,
+      "DN": 8,
+      "DE": 7,
+      "DS": 5,
+      "DW": 4,
+      "CN": 7,
+      "CE": 8,
+      "CS": 4,
+      "CW": 5
+    }
   },
   "83": {
     "N": {
@@ -2651,9 +4455,31 @@
     "dealer": "S",
     "vulnerability": "EW",
     "event_id": "357499",
-    "tournament": "Pazartesi Sonuçları (01-01-2024 14:00)",
+    "tournament": "Pazartesi Sonu\u00c3\u00a7lar\u00c4\u00b1 (01-01-2024 14:00)",
     "date": "01.01.2024",
-    "board_in_event": 23
+    "board_in_event": 23,
+    "dd_analysis": {
+      "NTN": 5,
+      "NTE": 8,
+      "NTS": 8,
+      "NTW": 5,
+      "SN": 4,
+      "SE": 9,
+      "SS": 8,
+      "SW": 5,
+      "HN": 4,
+      "HE": 8,
+      "HS": 8,
+      "HW": 5,
+      "DN": 5,
+      "DE": 8,
+      "DS": 7,
+      "DW": 5,
+      "CN": 6,
+      "CE": 7,
+      "CS": 9,
+      "CW": 4
+    }
   },
   "84": {
     "N": {
@@ -2683,9 +4509,31 @@
     "dealer": "W",
     "vulnerability": "Both",
     "event_id": "357499",
-    "tournament": "Pazartesi Sonuçları (01-01-2024 14:00)",
+    "tournament": "Pazartesi Sonu\u00c3\u00a7lar\u00c4\u00b1 (01-01-2024 14:00)",
     "date": "01.01.2024",
-    "board_in_event": 24
+    "board_in_event": 24,
+    "dd_analysis": {
+      "NTN": 7,
+      "NTE": 7,
+      "NTS": 4,
+      "NTW": 8,
+      "SN": 8,
+      "SE": 6,
+      "SS": 4,
+      "SW": 7,
+      "HN": 6,
+      "HE": 7,
+      "HS": 4,
+      "HW": 8,
+      "DN": 7,
+      "DE": 7,
+      "DS": 3,
+      "DW": 9,
+      "CN": 7,
+      "CE": 7,
+      "CS": 4,
+      "CW": 8
+    }
   },
   "85": {
     "N": {
@@ -2715,9 +4563,31 @@
     "dealer": "N",
     "vulnerability": "None",
     "event_id": "357499",
-    "tournament": "Pazartesi Sonuçları (01-01-2024 14:00)",
+    "tournament": "Pazartesi Sonu\u00c3\u00a7lar\u00c4\u00b1 (01-01-2024 14:00)",
     "date": "01.01.2024",
-    "board_in_event": 25
+    "board_in_event": 25,
+    "dd_analysis": {
+      "NTN": 6,
+      "NTE": 8,
+      "NTS": 7,
+      "NTW": 5,
+      "SN": 7,
+      "SE": 7,
+      "SS": 6,
+      "SW": 5,
+      "HN": 5,
+      "HE": 9,
+      "HS": 8,
+      "HW": 4,
+      "DN": 5,
+      "DE": 8,
+      "DS": 7,
+      "DW": 5,
+      "CN": 6,
+      "CE": 7,
+      "CS": 7,
+      "CW": 5
+    }
   },
   "86": {
     "N": {
@@ -2747,9 +4617,31 @@
     "dealer": "E",
     "vulnerability": "NS",
     "event_id": "357499",
-    "tournament": "Pazartesi Sonuçları (01-01-2024 14:00)",
+    "tournament": "Pazartesi Sonu\u00c3\u00a7lar\u00c4\u00b1 (01-01-2024 14:00)",
     "date": "01.01.2024",
-    "board_in_event": 26
+    "board_in_event": 26,
+    "dd_analysis": {
+      "NTN": 7,
+      "NTE": 8,
+      "NTS": 6,
+      "NTW": 5,
+      "SN": 5,
+      "SE": 8,
+      "SS": 7,
+      "SW": 6,
+      "HN": 7,
+      "HE": 7,
+      "HS": 6,
+      "HW": 5,
+      "DN": 8,
+      "DE": 7,
+      "DS": 6,
+      "DW": 4,
+      "CN": 7,
+      "CE": 9,
+      "CS": 5,
+      "CW": 4
+    }
   },
   "87": {
     "N": {
@@ -2779,9 +4671,31 @@
     "dealer": "S",
     "vulnerability": "EW",
     "event_id": "357499",
-    "tournament": "Pazartesi Sonuçları (01-01-2024 14:00)",
+    "tournament": "Pazartesi Sonu\u00c3\u00a7lar\u00c4\u00b1 (01-01-2024 14:00)",
     "date": "01.01.2024",
-    "board_in_event": 27
+    "board_in_event": 27,
+    "dd_analysis": {
+      "NTN": 7,
+      "NTE": 6,
+      "NTS": 7,
+      "NTW": 6,
+      "SN": 7,
+      "SE": 6,
+      "SS": 7,
+      "SW": 6,
+      "HN": 7,
+      "HE": 6,
+      "HS": 7,
+      "HW": 6,
+      "DN": 6,
+      "DE": 5,
+      "DS": 7,
+      "DW": 7,
+      "CN": 8,
+      "CE": 6,
+      "CS": 6,
+      "CW": 5
+    }
   },
   "88": {
     "N": {
@@ -2811,9 +4725,31 @@
     "dealer": "W",
     "vulnerability": "Both",
     "event_id": "357499",
-    "tournament": "Pazartesi Sonuçları (01-01-2024 14:00)",
+    "tournament": "Pazartesi Sonu\u00c3\u00a7lar\u00c4\u00b1 (01-01-2024 14:00)",
     "date": "01.01.2024",
-    "board_in_event": 28
+    "board_in_event": 28,
+    "dd_analysis": {
+      "NTN": 7,
+      "NTE": 5,
+      "NTS": 7,
+      "NTW": 7,
+      "SN": 7,
+      "SE": 5,
+      "SS": 7,
+      "SW": 7,
+      "HN": 7,
+      "HE": 5,
+      "HS": 7,
+      "HW": 6,
+      "DN": 7,
+      "DE": 5,
+      "DS": 7,
+      "DW": 7,
+      "CN": 7,
+      "CE": 5,
+      "CS": 7,
+      "CW": 7
+    }
   },
   "89": {
     "N": {
@@ -2843,9 +4779,31 @@
     "dealer": "N",
     "vulnerability": "None",
     "event_id": "357499",
-    "tournament": "Pazartesi Sonuçları (01-01-2024 14:00)",
+    "tournament": "Pazartesi Sonu\u00c3\u00a7lar\u00c4\u00b1 (01-01-2024 14:00)",
     "date": "01.01.2024",
-    "board_in_event": 29
+    "board_in_event": 29,
+    "dd_analysis": {
+      "NTN": 7,
+      "NTE": 8,
+      "NTS": 5,
+      "NTW": 6,
+      "SN": 7,
+      "SE": 8,
+      "SS": 5,
+      "SW": 5,
+      "HN": 7,
+      "HE": 8,
+      "HS": 5,
+      "HW": 5,
+      "DN": 7,
+      "DE": 8,
+      "DS": 4,
+      "DW": 7,
+      "CN": 6,
+      "CE": 8,
+      "CS": 5,
+      "CW": 6
+    }
   },
   "90": {
     "N": {
@@ -2875,9 +4833,31 @@
     "dealer": "E",
     "vulnerability": "NS",
     "event_id": "357499",
-    "tournament": "Pazartesi Sonuçları (01-01-2024 14:00)",
+    "tournament": "Pazartesi Sonu\u00c3\u00a7lar\u00c4\u00b1 (01-01-2024 14:00)",
     "date": "01.01.2024",
-    "board_in_event": 30
+    "board_in_event": 30,
+    "dd_analysis": {
+      "NTN": 5,
+      "NTE": 8,
+      "NTS": 6,
+      "NTW": 6,
+      "SN": 6,
+      "SE": 7,
+      "SS": 6,
+      "SW": 5,
+      "HN": 5,
+      "HE": 7,
+      "HS": 7,
+      "HW": 5,
+      "DN": 5,
+      "DE": 9,
+      "DS": 5,
+      "DW": 5,
+      "CN": 4,
+      "CE": 8,
+      "CS": 5,
+      "CW": 8
+    }
   },
   "91": {
     "N": {
@@ -2907,9 +4887,31 @@
     "dealer": "N",
     "vulnerability": "None",
     "event_id": "404155",
-    "tournament": "Perþembe Sonuçları (01.01.2026 14:00)",
+    "tournament": "Per\u00c3\u00beembe Sonu\u00c3\u00a7lar\u00c4\u00b1 (01.01.2026 14:00)",
     "date": "01.01.2026",
-    "board_in_event": 1
+    "board_in_event": 1,
+    "dd_analysis": {
+      "NTN": 7,
+      "NTE": 5,
+      "NTS": 8,
+      "NTW": 5,
+      "SN": 6,
+      "SE": 6,
+      "SS": 8,
+      "SW": 5,
+      "HN": 7,
+      "HE": 4,
+      "HS": 8,
+      "HW": 5,
+      "DN": 8,
+      "DE": 5,
+      "DS": 8,
+      "DW": 4,
+      "CN": 7,
+      "CE": 4,
+      "CS": 8,
+      "CW": 6
+    }
   },
   "92": {
     "N": {
@@ -2939,9 +4941,31 @@
     "dealer": "E",
     "vulnerability": "NS",
     "event_id": "404155",
-    "tournament": "Perþembe Sonuçları (01.01.2026 14:00)",
+    "tournament": "Per\u00c3\u00beembe Sonu\u00c3\u00a7lar\u00c4\u00b1 (01.01.2026 14:00)",
     "date": "01.01.2026",
-    "board_in_event": 2
+    "board_in_event": 2,
+    "dd_analysis": {
+      "NTN": 5,
+      "NTE": 6,
+      "NTS": 7,
+      "NTW": 7,
+      "SN": 4,
+      "SE": 6,
+      "SS": 7,
+      "SW": 8,
+      "HN": 6,
+      "HE": 5,
+      "HS": 7,
+      "HW": 6,
+      "DN": 5,
+      "DE": 7,
+      "DS": 6,
+      "DW": 6,
+      "CN": 4,
+      "CE": 6,
+      "CS": 7,
+      "CW": 7
+    }
   },
   "93": {
     "N": {
@@ -2971,9 +4995,31 @@
     "dealer": "S",
     "vulnerability": "EW",
     "event_id": "404155",
-    "tournament": "Perþembe Sonuçları (01.01.2026 14:00)",
+    "tournament": "Per\u00c3\u00beembe Sonu\u00c3\u00a7lar\u00c4\u00b1 (01.01.2026 14:00)",
     "date": "01.01.2026",
-    "board_in_event": 3
+    "board_in_event": 3,
+    "dd_analysis": {
+      "NTN": 6,
+      "NTE": 6,
+      "NTS": 7,
+      "NTW": 7,
+      "SN": 6,
+      "SE": 6,
+      "SS": 5,
+      "SW": 8,
+      "HN": 5,
+      "HE": 7,
+      "HS": 8,
+      "HW": 5,
+      "DN": 7,
+      "DE": 4,
+      "DS": 7,
+      "DW": 8,
+      "CN": 5,
+      "CE": 6,
+      "CS": 8,
+      "CW": 7
+    }
   },
   "94": {
     "N": {
@@ -3003,9 +5049,31 @@
     "dealer": "W",
     "vulnerability": "Both",
     "event_id": "404155",
-    "tournament": "Perþembe Sonuçları (01.01.2026 14:00)",
+    "tournament": "Per\u00c3\u00beembe Sonu\u00c3\u00a7lar\u00c4\u00b1 (01.01.2026 14:00)",
     "date": "01.01.2026",
-    "board_in_event": 4
+    "board_in_event": 4,
+    "dd_analysis": {
+      "NTN": 5,
+      "NTE": 6,
+      "NTS": 8,
+      "NTW": 7,
+      "SN": 5,
+      "SE": 6,
+      "SS": 7,
+      "SW": 7,
+      "HN": 5,
+      "HE": 5,
+      "HS": 8,
+      "HW": 7,
+      "DN": 4,
+      "DE": 6,
+      "DS": 9,
+      "DW": 6,
+      "CN": 5,
+      "CE": 6,
+      "CS": 8,
+      "CW": 7
+    }
   },
   "95": {
     "N": {
@@ -3035,9 +5103,31 @@
     "dealer": "N",
     "vulnerability": "None",
     "event_id": "404155",
-    "tournament": "Perþembe Sonuçları (01.01.2026 14:00)",
+    "tournament": "Per\u00c3\u00beembe Sonu\u00c3\u00a7lar\u00c4\u00b1 (01.01.2026 14:00)",
     "date": "01.01.2026",
-    "board_in_event": 5
+    "board_in_event": 5,
+    "dd_analysis": {
+      "NTN": 5,
+      "NTE": 6,
+      "NTS": 8,
+      "NTW": 7,
+      "SN": 5,
+      "SE": 5,
+      "SS": 8,
+      "SW": 7,
+      "HN": 6,
+      "HE": 5,
+      "HS": 8,
+      "HW": 6,
+      "DN": 4,
+      "DE": 6,
+      "DS": 8,
+      "DW": 7,
+      "CN": 4,
+      "CE": 7,
+      "CS": 8,
+      "CW": 7
+    }
   },
   "96": {
     "N": {
@@ -3067,9 +5157,31 @@
     "dealer": "E",
     "vulnerability": "NS",
     "event_id": "404155",
-    "tournament": "Perþembe Sonuçları (01.01.2026 14:00)",
+    "tournament": "Per\u00c3\u00beembe Sonu\u00c3\u00a7lar\u00c4\u00b1 (01.01.2026 14:00)",
     "date": "01.01.2026",
-    "board_in_event": 6
+    "board_in_event": 6,
+    "dd_analysis": {
+      "NTN": 9,
+      "NTE": 7,
+      "NTS": 3,
+      "NTW": 6,
+      "SN": 9,
+      "SE": 7,
+      "SS": 2,
+      "SW": 6,
+      "HN": 9,
+      "HE": 6,
+      "HS": 2,
+      "HW": 7,
+      "DN": 8,
+      "DE": 6,
+      "DS": 5,
+      "DW": 5,
+      "CN": 9,
+      "CE": 8,
+      "CS": 2,
+      "CW": 5
+    }
   },
   "97": {
     "N": {
@@ -3099,9 +5211,31 @@
     "dealer": "S",
     "vulnerability": "EW",
     "event_id": "404155",
-    "tournament": "Perþembe Sonuçları (01.01.2026 14:00)",
+    "tournament": "Per\u00c3\u00beembe Sonu\u00c3\u00a7lar\u00c4\u00b1 (01.01.2026 14:00)",
     "date": "01.01.2026",
-    "board_in_event": 7
+    "board_in_event": 7,
+    "dd_analysis": {
+      "NTN": 6,
+      "NTE": 6,
+      "NTS": 7,
+      "NTW": 6,
+      "SN": 7,
+      "SE": 7,
+      "SS": 5,
+      "SW": 6,
+      "HN": 5,
+      "HE": 5,
+      "HS": 9,
+      "HW": 5,
+      "DN": 6,
+      "DE": 5,
+      "DS": 7,
+      "DW": 6,
+      "CN": 6,
+      "CE": 6,
+      "CS": 6,
+      "CW": 7
+    }
   },
   "98": {
     "N": {
@@ -3131,9 +5265,31 @@
     "dealer": "W",
     "vulnerability": "Both",
     "event_id": "404155",
-    "tournament": "Perþembe Sonuçları (01.01.2026 14:00)",
+    "tournament": "Per\u00c3\u00beembe Sonu\u00c3\u00a7lar\u00c4\u00b1 (01.01.2026 14:00)",
     "date": "01.01.2026",
-    "board_in_event": 8
+    "board_in_event": 8,
+    "dd_analysis": {
+      "NTN": 5,
+      "NTE": 4,
+      "NTS": 6,
+      "NTW": 10,
+      "SN": 5,
+      "SE": 3,
+      "SS": 6,
+      "SW": 11,
+      "HN": 4,
+      "HE": 5,
+      "HS": 6,
+      "HW": 10,
+      "DN": 5,
+      "DE": 4,
+      "DS": 5,
+      "DW": 10,
+      "CN": 5,
+      "CE": 4,
+      "CS": 7,
+      "CW": 9
+    }
   },
   "99": {
     "N": {
@@ -3163,9 +5319,31 @@
     "dealer": "N",
     "vulnerability": "None",
     "event_id": "404155",
-    "tournament": "Perþembe Sonuçları (01.01.2026 14:00)",
+    "tournament": "Per\u00c3\u00beembe Sonu\u00c3\u00a7lar\u00c4\u00b1 (01.01.2026 14:00)",
     "date": "01.01.2026",
-    "board_in_event": 9
+    "board_in_event": 9,
+    "dd_analysis": {
+      "NTN": 7,
+      "NTE": 7,
+      "NTS": 7,
+      "NTW": 5,
+      "SN": 7,
+      "SE": 6,
+      "SS": 8,
+      "SW": 5,
+      "HN": 7,
+      "HE": 7,
+      "HS": 7,
+      "HW": 5,
+      "DN": 8,
+      "DE": 7,
+      "DS": 6,
+      "DW": 5,
+      "CN": 6,
+      "CE": 7,
+      "CS": 7,
+      "CW": 5
+    }
   },
   "100": {
     "N": {
@@ -3195,8 +5373,30 @@
     "dealer": "E",
     "vulnerability": "NS",
     "event_id": "404155",
-    "tournament": "Perþembe Sonuçları (01.01.2026 14:00)",
+    "tournament": "Per\u00c3\u00beembe Sonu\u00c3\u00a7lar\u00c4\u00b1 (01.01.2026 14:00)",
     "date": "01.01.2026",
-    "board_in_event": 10
+    "board_in_event": 10,
+    "dd_analysis": {
+      "NTN": 5,
+      "NTE": 5,
+      "NTS": 8,
+      "NTW": 7,
+      "SN": 6,
+      "SE": 4,
+      "SS": 8,
+      "SW": 6,
+      "HN": 5,
+      "HE": 4,
+      "HS": 8,
+      "HW": 8,
+      "DN": 5,
+      "DE": 5,
+      "DS": 7,
+      "DW": 7,
+      "CN": 4,
+      "CE": 6,
+      "CS": 8,
+      "CW": 6
+    }
   }
 }
