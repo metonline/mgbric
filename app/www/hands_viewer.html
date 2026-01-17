@@ -758,15 +758,26 @@
                 // Get all hands/boards
                 let boards = [];
                 
-                // Navigate the nested structure: data.events.hosgoru_04_01_2026.boards
-                if (data.events && data.events.hosgoru_04_01_2026) {
-                    const event = data.events.hosgoru_04_01_2026;
-                    if (event.boards && typeof event.boards === 'object') {
-                        // Convert boards object to array (boards are keyed by board number like "11", "12", etc.)
-                        boards = Object.entries(event.boards).map(([key, hand]) => ({
-                            num: parseInt(key) || parseInt(hand.board_number) || 0,
+                // Check if it's flat structure (board numbers as keys)
+                if (typeof data === 'object' && !Array.isArray(data)) {
+                    // Check if first value has N/S/E/W (hand data)
+                    const firstKey = Object.keys(data)[0];
+                    if (firstKey && data[firstKey] && (data[firstKey].N || data[firstKey].hands)) {
+                        // Flat structure: convert to array
+                        boards = Object.entries(data).map(([key, hand]) => ({
+                            num: parseInt(key) || 0,
                             data: hand
                         }));
+                    }
+                    // Try nested structure
+                    else if (data.events && Object.keys(data.events).length > 0) {
+                        const firstEvent = Object.values(data.events)[0];
+                        if (firstEvent.boards) {
+                            boards = Object.entries(firstEvent.boards).map(([key, hand]) => ({
+                                num: parseInt(key) || 0,
+                                data: hand
+                            }));
+                        }
                     }
                 }
 
@@ -783,6 +794,8 @@
                     grid.innerHTML = '<div class="error">No hands found</div>';
                     return;
                 }
+
+                console.log('Loaded ' + boards.length + ' boards');
 
                 // Show first hand after a brief delay
                 setTimeout(() => showHand(0), 200);
