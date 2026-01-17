@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bridge Hands - Tournament Printout</title>
+    <meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="expires" content="0">
+    <title>Turnuva Elleri - Tournament Hands</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
@@ -62,31 +65,51 @@
         }
         
         .board-header {
-            display: grid;
-            grid-template-columns: 60px 1fr 200px;
+            display: flex;
+            justify-content: space-between;
             align-items: center;
             margin-bottom: 8px;
             padding: 4px 0;
             border-bottom: 1px solid #ccc;
-            gap: 8px;
+            font-size: 0.9rem;
         }
         
         .board-header-left {
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            flex: 1;
+            text-align: left;
         }
         
         .board-header-center {
+            flex: 1;
             text-align: center;
             font-size: 1.1rem;
             font-weight: bold;
         }
         
         .board-header-right {
+            flex: 1;
             text-align: right;
-            font-size: 0.9rem;
-            color: #333;
+        }
+        
+        .board-content {
+            display: grid;
+            grid-template-columns: 70px 1fr;
+            gap: 8px;
+            flex: 1;
+            align-items: flex-start;
+        }
+        
+        .board-vuln-left {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+        
+        .bbo-viewer {
+            width: 100%;
+            padding: 8px;
+            border-radius: 4px;
         }
         
         .vuln-indicator {
@@ -140,23 +163,6 @@
         
         .vuln-red { background: #e74c3c; color: white; }
         .vuln-white { background: white; }
-
-        .board-number {
-            font-size: 1.1rem;
-        }
-        
-        .board-content {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 8px;
-            flex: 1;
-        }
-        
-        .bbo-viewer {
-            width: 100%;
-            padding: 8px;
-            border-radius: 4px;
-        }
         
         .bbo-viewer.vuln-none {
             background: #e8f5e9;
@@ -273,7 +279,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>Bridge Tournament Hands</h1>
+        <h1>🌉 Turnuva Elleri / Tournament Hands</h1>
 
         <div id="loading" class="loading" style="display:none;">Loading tournament data...</div>
         <div id="error" class="error" style="display:none;"></div>
@@ -420,7 +426,12 @@
                 
                 let html = `
                     <div class="board-header">
-                        <div class="board-header-left">
+                        <div class="board-header-left">Vuln: ${hand.vulnerability}</div>
+                        <div class="board-header-center">Board ${hand.id}</div>
+                        <div class="board-header-right">Dealer: ${hand.dealer}</div>
+                    </div>
+                    <div class="board-content">
+                        <div class="board-vuln-left">
                             <div class="vuln-indicator">
                                 <div class="vuln-quad vuln-quad-n ${getVulnColor('N', hand.vulnerability)}">N</div>
                                 <div class="vuln-quad vuln-quad-e ${getVulnColor('E', hand.vulnerability)}">E</div>
@@ -429,15 +440,13 @@
                                 <div class="vuln-quad vuln-quad-s ${getVulnColor('S', hand.vulnerability)}">S</div>
                             </div>
                         </div>
-                        <div class="board-header-center">Board ${hand.id}</div>
-                        <div class="board-header-right">Dealer: ${hand.dealer} | Vuln: ${hand.vulnerability}</div>
-                    </div>
-                    <div class="board-content">
-                        <div class="bbo-viewer ${getVulnClass(hand.vulnerability)}">
-                            <iframe class="bbo-frame" src="https://www.bridgebase.com/tools/handviewer.html?lin=${encoded}"></iframe>
-                        </div>
-                        <div class="dd-table-simple">
-                            ${createDDTable(hand)}
+                        <div>
+                            <div class="bbo-viewer ${getVulnClass(hand.vulnerability)}">
+                                <iframe class="bbo-frame" src="https://www.bridgebase.com/tools/handviewer.html?lin=${encoded}"></iframe>
+                            </div>
+                            <div class="dd-table-simple">
+                                ${createDDTable(hand)}
+                            </div>
                         </div>
                     </div>
                 `;
