@@ -339,7 +339,7 @@ def main():
         print(f"\n[OK] Data for {tarih} successfully updated!")
         return 0
     else:
-        print(f"\n✗ Failed to fetch data for {tarih}")
+        print(f"\n[FAILED] Failed to fetch data for {tarih}")
         return 1
 
 
