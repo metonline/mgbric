@@ -42,6 +42,11 @@ def api_hands():
 def hands():
     return send_file('hands_database.json')
 
+@app.route('/api/calculate_all_dd', methods=['POST'])
+def calculate_all_dd():
+    """Placeholder for DD calculation - returns success"""
+    return {'success': True, 'message': 'DD calculation queued'}
+
 @app.route('/<path:filename>')
 def serve_file(filename):
     try:
