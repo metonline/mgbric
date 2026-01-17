@@ -1,0 +1,44 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Start Bridge Hands Server",
+            "type": "shell",
+            "command": "${command:python.interpreterPath}",
+            "args": ["dev_server.py"],
+            "cwd": "${workspaceFolder}",
+            "isBackground": true,
+            "problemMatcher": {
+                "pattern": {
+                    "regexp": "^.*$",
+                    "line": 0
+                },
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": "^🌐 Bridge Hands",
+                    "endsPattern": "^✓ Server stopped"
+                }
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "new",
+                "group": "server"
+            },
+            "runOptions": {
+                "runOn": "folderOpen"
+            }
+        },
+        {
+            "label": "Open Bridge Hands Viewer",
+            "type": "shell",
+            "command": "start http://localhost:5000/hands_bbo_view.html",
+            "windows": {
+                "command": "start http://localhost:5000/hands_bbo_view.html"
+            },
+            "presentation": {
+                "reveal": "silent"
+            },
+            "dependsOn": ["Start Bridge Hands Server"]
+        }
+    ]
+}
