@@ -429,29 +429,36 @@
             // Update DD Analysis
             if (hand.dd_analysis) {
                 const dd = hand.dd_analysis;
-                document.getElementById('ntn').textContent = dd.NTN || '-';
-                document.getElementById('sn').textContent = dd.SN || '-';
-                document.getElementById('hn').textContent = dd.HN || '-';
-                document.getElementById('dn').textContent = dd.DN || '-';
-                document.getElementById('cn').textContent = dd.CN || '-';
                 
-                document.getElementById('nte').textContent = dd.NTE || '-';
-                document.getElementById('se').textContent = dd.SE || '-';
-                document.getElementById('he').textContent = dd.HE || '-';
-                document.getElementById('de').textContent = dd.DE || '-';
-                document.getElementById('ce').textContent = dd.CE || '-';
+                // Helper function to display tricks (show "-" if < 7)
+                const formatTricks = (value) => {
+                    if (!value) return '-';
+                    return value < 7 ? '-' : value;
+                };
                 
-                document.getElementById('nts').textContent = dd.NTS || '-';
-                document.getElementById('ss').textContent = dd.SS || '-';
-                document.getElementById('hs').textContent = dd.HS || '-';
-                document.getElementById('ds').textContent = dd.DS || '-';
-                document.getElementById('cs').textContent = dd.CS || '-';
+                document.getElementById('ntn').textContent = formatTricks(dd.NTN);
+                document.getElementById('sn').textContent = formatTricks(dd.SN);
+                document.getElementById('hn').textContent = formatTricks(dd.HN);
+                document.getElementById('dn').textContent = formatTricks(dd.DN);
+                document.getElementById('cn').textContent = formatTricks(dd.CN);
                 
-                document.getElementById('ntw').textContent = dd.NTW || '-';
-                document.getElementById('sw').textContent = dd.SW || '-';
-                document.getElementById('hw').textContent = dd.HW || '-';
-                document.getElementById('dw').textContent = dd.DW || '-';
-                document.getElementById('cw').textContent = dd.CW || '-';
+                document.getElementById('nte').textContent = formatTricks(dd.NTE);
+                document.getElementById('se').textContent = formatTricks(dd.SE);
+                document.getElementById('he').textContent = formatTricks(dd.HE);
+                document.getElementById('de').textContent = formatTricks(dd.DE);
+                document.getElementById('ce').textContent = formatTricks(dd.CE);
+                
+                document.getElementById('nts').textContent = formatTricks(dd.NTS);
+                document.getElementById('ss').textContent = formatTricks(dd.SS);
+                document.getElementById('hs').textContent = formatTricks(dd.HS);
+                document.getElementById('ds').textContent = formatTricks(dd.DS);
+                document.getElementById('cs').textContent = formatTricks(dd.CS);
+                
+                document.getElementById('ntw').textContent = formatTricks(dd.NTW);
+                document.getElementById('sw').textContent = formatTricks(dd.SW);
+                document.getElementById('hw').textContent = formatTricks(dd.HW);
+                document.getElementById('dw').textContent = formatTricks(dd.DW);
+                document.getElementById('cw').textContent = formatTricks(dd.CW);
             }
             
             document.getElementById('verificationContainer').style.display = 'block';
