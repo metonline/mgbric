@@ -332,11 +332,11 @@ def main():
         print(f"\n{'='*60}")
         print("WARNINGS/ERRORS:")
         for error in fetcher.errors:
-            print(f"  ⚠ {error}")
+            print(f"  [WARNING] {error}")
         print(f"{'='*60}")
     
     if success:
-        print(f"\n✓ Data for {tarih} successfully updated!")
+        print(f"\n[OK] Data for {tarih} successfully updated!")
         return 0
     else:
         print(f"\n✗ Failed to fetch data for {tarih}")
