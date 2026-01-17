@@ -269,20 +269,20 @@
                                     <td class="suit-c" id="cn">-</td>
                                 </tr>
                                 <tr>
-                                    <td class="player-name">E</td>
-                                    <td class="suit-nt" id="nte">-</td>
-                                    <td class="suit-s" id="se">-</td>
-                                    <td class="suit-h" id="he">-</td>
-                                    <td class="suit-d" id="de">-</td>
-                                    <td class="suit-c" id="ce">-</td>
-                                </tr>
-                                <tr>
                                     <td class="player-name">S</td>
                                     <td class="suit-nt" id="nts">-</td>
                                     <td class="suit-s" id="ss">-</td>
                                     <td class="suit-h" id="hs">-</td>
                                     <td class="suit-d" id="ds">-</td>
                                     <td class="suit-c" id="cs">-</td>
+                                </tr>
+                                <tr>
+                                    <td class="player-name">E</td>
+                                    <td class="suit-nt" id="nte">-</td>
+                                    <td class="suit-s" id="se">-</td>
+                                    <td class="suit-h" id="he">-</td>
+                                    <td class="suit-d" id="de">-</td>
+                                    <td class="suit-c" id="ce">-</td>
                                 </tr>
                                 <tr>
                                     <td class="player-name">W</td>
@@ -382,15 +382,23 @@
             const dealerMap = {'N': 1, 'E': 2, 'S': 3, 'W': 4};
             const vulnMap = {'None': '-', 'NS': 'N', 'EW': 'E', 'Both': 'B'};
             
-            const dealer = dealerMap[hand.dealer];
-            const vuln = vulnMap[hand.vulnerability];
+            const dealer = dealerMap[hand.dealer] || 1;  // Default to North as dealer
+            const vuln = vulnMap[hand.vulnerability] || '-';
             
-            const nHand = `${hand.N.S}.${hand.N.H}.${hand.N.D}.${hand.N.C}`;
-            const eHand = `${hand.E.S}.${hand.E.H}.${hand.E.D}.${hand.E.C}`;
-            const sHand = `${hand.S.S}.${hand.S.H}.${hand.S.D}.${hand.S.C}`;
-            const wHand = `${hand.W.S}.${hand.W.H}.${hand.W.D}.${hand.W.C}`;
+            // New format: hands are stored as LIN strings like "S63HAKT54DA93CAQ7"
+            // Old format: hands were objects like {"S":"63", "H":"AKT54", "D":"A93", "C":"AQ7"}
+            const getNHand = () => typeof hand.N === 'string' ? hand.N : `${hand.N.S}.${hand.N.H}.${hand.N.D}.${hand.N.C}`;
+            const getEHand = () => typeof hand.E === 'string' ? hand.E : `${hand.E.S}.${hand.E.H}.${hand.E.D}.${hand.E.C}`;
+            const getSHand = () => typeof hand.S === 'string' ? hand.S : `${hand.S.S}.${hand.S.H}.${hand.S.D}.${hand.S.C}`;
+            const getWHand = () => typeof hand.W === 'string' ? hand.W : `${hand.W.S}.${hand.W.H}.${hand.W.D}.${hand.W.C}`;
             
-            return `pn=N,E,S,W|md=${dealer}${nHand},${eHand},${sHand},${wHand}|sv=${vuln}`;
+            const nHand = getNHand();
+            const eHand = getEHand();
+            const sHand = getSHand();
+            const wHand = getWHand();
+            
+            // Format: md|{dealer}{hand1},{hand2},{hand3},{hand4}|
+            return `pn=N,E,S,W|md|${dealer}${nHand},${eHand},${sHand},${wHand}|sv|${vuln}`;
         }
         
         function loadBoard() {
