@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bridge Hands - Test</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: Arial, sans-serif;
+            background: #1a472a;
+            padding: 20px;
+            color: white;
+        }
+        h1 {
+            color: white;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .hands-grid {
+            display: grid;
+            gap: 15px;
+            grid-template-columns: repeat(3, 1fr);
+            max-width: 1800px;
+            margin: 0 auto;
+        }
+        @media (max-width: 1200px) {
+            .hands-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 768px) {
+            .hands-grid { grid-template-columns: 1fr; }
+        }
+        .card {
+            background: white;
+            color: #333;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+        .card strong { color: #2d5a3d; }
+        .buttons {
+            display: flex;
+            gap: 8px;
+            margin-top: 10px;
+        }
+        button {
+            flex: 1;
+            padding: 8px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            color: white;
+        }
+        .bbo { background: #1976d2; }
+        .bbo:hover { background: #1565c0; }
+        .solver { background: #388e3c; }
+        .solver:hover { background: #2e7d32; }
+    </style>
+</head>
+<body>
+    <h1>♠ All Bridge Hands ♠</h1>
+    <div class="hands-grid" id="grid"></div>
+
+    <script>
+        // Hardcoded test data
+        const testHands = {
+            "1": { "N": "SAT73HAQ6DKJ7CK83", "E": "SK8542H4DQ2CAJ965", "S": "S96HJ82DA8543CT72", "dealer": "N", "vulnerability": "None" },
+            "2": { "N": "SKQ965H7D542CKQT94", "E": "SA8432HKQ963DKC6", "S": "SJ7H8542DQJ96CJ73", "dealer": "E", "vulnerability": "NS" },
+            "3": { "N": "S62HQ984DQ53CK964", "E": "SKJ753HAD8762CAJ82", "S": "SA984HJT632DJ94CT", "dealer": "S", "vulnerability": "EW" }
+        };
+
+        const grid = document.getElementById('grid');
+        Object.entries(testHands).forEach(([id, hand]) => {
+            const dealerMap = {'N':1,'E':2,'S':3};
+            const vulnMap = {'None':0,'NS':1,'EW':2,'Both':3};
+            const lin = `qx|o1|md|${dealerMap[hand.dealer]}${hand.N},${hand.E},${hand.S}|rh||ah|Board ${id}|sv|${vulnMap[hand.vulnerability]}|pg||`;
+            const encoded = encodeURIComponent(lin);
+            const bbUrl = `https://www.bridgebase.com/tools/handviewer.html?lin=${encoded}`;
+            const solUrl = `https://dds.bridgewebs.com/bsol_standalone/ddummy.html?lin=${encoded}`;
+            
+            grid.innerHTML += `
+                <div class="card">
+                    <strong>Board ${id}</strong><br>
+                    Dealer: ${hand.dealer} | Vuln: ${hand.vulnerability}<br>
+                    <small>N: ${hand.N.slice(0, 12)}... | E: ${hand.E.slice(0, 12)}... | S: ${hand.S.slice(0, 12)}...</small>
+                    <div class="buttons">
+                        <button class="bbo" onclick="window.open('${bbUrl}', '_blank')">BBO</button>
+                        <button class="solver" onclick="window.open('${solUrl}', '_blank')">Solver</button>
+                    </div>
+                </div>
+            `;
+        });
+    </script>
+</body>
+</html>

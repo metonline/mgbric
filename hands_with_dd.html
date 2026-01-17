@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bridge Hands with DD Analysis</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a472a 0%, #0f2818 100%);
+            color: #333;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .controls {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 25px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        input, select, button {
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+        button {
+            background: #2d5a3d;
+            color: white;
+            cursor: pointer;
+            border: none;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: #1f3f2a;
+        }
+        .hands-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .hand-card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            border-left: 5px solid #2d5a3d;
+        }
+        .board-header {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #2d5a3d;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 10px;
+        }
+        .hand-display {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .hand-section {
+            background: #f9f9f9;
+            padding: 12px;
+            border-radius: 4px;
+            border: 1px solid #e0e0e0;
+        }
+        .hand-player {
+            font-weight: bold;
+            color: #2d5a3d;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+        .hand-cards {
+            font-family: monospace;
+            line-height: 1.6;
+            font-size: 0.9rem;
+        }
+        .suit {
+            display: block;
+            margin: 4px 0;
+        }
+        .suit-symbol {
+            margin-right: 4px;
+        }
+        .info-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            padding: 10px;
+            background: #f5f5f5;
+            border-radius: 4px;
+        }
+        .info-label {
+            color: #666;
+            font-weight: 600;
+        }
+        .info-value {
+            color: #333;
+        }
+        .dd-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 0.85rem;
+        }
+        .dd-table th, .dd-table td {
+            padding: 8px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+        .dd-table th {
+            background: #2d5a3d;
+            color: white;
+            font-weight: bold;
+        }
+        .dd-table tr:nth-child(odd) {
+            background: #f9f9f9;
+        }
+        .dd-table tr:hover {
+            background: #f0f0f0;
+        }
+        .suit-header {
+            background: #e8f4e8;
+            font-weight: bold;
+            color: #2d5a3d;
+        }
+        .tricks-cell {
+            font-weight: 600;
+            color: #1976d2;
+        }
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        .action-buttons a {
+            flex: 1;
+            padding: 8px;
+            text-align: center;
+            background: #1976d2;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            transition: background 0.3s;
+        }
+        .action-buttons a:hover {
+            background: #1565c0;
+        }
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        .pagination button {
+            padding: 8px 12px;
+            min-width: 40px;
+        }
+        .pagination button.active {
+            background: #1565c0;
+        }
+        .pagination button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        .loading {
+            text-align: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+        .error {
+            background: #fee;
+            color: #c00;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 15px 0;
+            border-left: 4px solid #c00;
+        }
+        @media (max-width: 768px) {
+            .hands-grid {
+                grid-template-columns: 1fr;
+            }
+            .hand-display {
+                grid-template-columns: 1fr;
+            }
+            h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>♠ Bridge Hands with DD Analysis ♠</h1>
+        
+        <div class="controls">
+            <input type="number" id="boardSearch" placeholder="Enter board number" min="1">
+            <button onclick="searchBoard()">Search</button>
+            <select id="pageSize">
+                <option value="10">10 per page</option>
+                <option value="20" selected>20 per page</option>
+                <option value="50">50 per page</option>
+            </select>
+            <button onclick="location.reload()">Reset</button>
+        </div>
+
+        <div id="loading" class="loading" style="display:none;">Loading hands data...</div>
+        <div id="error" class="error" style="display:none;"></div>
+        <div id="handsContainer" class="hands-grid"></div>
+        <div id="pagination" class="pagination"></div>
+    </div>
+
+    <script>
+        let allHands = {};
+        let currentPage = 1;
+        let pageSize = 20;
+        let displayHands = [];
+
+        async function loadHands() {
+            document.getElementById('loading').style.display = 'block';
+            try {
+                const response = await fetch('/api/hands');
+                if (!response.ok) throw new Error('Failed to load hands');
+                allHands = await response.json();
+                displayHands = Object.entries(allHands).map(([id, hand]) => ({ id, ...hand }));
+                pageSize = parseInt(document.getElementById('pageSize').value) || 20;
+                renderPage();
+                document.getElementById('loading').style.display = 'none';
+            } catch (error) {
+                document.getElementById('error').textContent = 'Error: ' + error.message;
+                document.getElementById('error').style.display = 'block';
+                document.getElementById('loading').style.display = 'none';
+            }
+        }
+
+        function renderPage() {
+            const start = (currentPage - 1) * pageSize;
+            const end = start + pageSize;
+            const pageHands = displayHands.slice(start, end);
+            
+            const container = document.getElementById('handsContainer');
+            container.innerHTML = pageHands.map(hand => createHandCard(hand)).join('');
+            
+            renderPagination();
+        }
+
+        function createHandCard(hand) {
+            const lin = generateLIN(hand);
+            const encoded = encodeURIComponent(lin);
+            
+            return `
+                <div class="hand-card">
+                    <div class="board-header">Board ${hand.id}</div>
+                    
+                    <div class="info-row">
+                        <div><span class="info-label">Dealer:</span> <span class="info-value">${hand.dealer}</span></div>
+                        <div><span class="info-label">Vuln:</span> <span class="info-value">${hand.vulnerability}</span></div>
+                    </div>
+                    <div class="info-row">
+                        <div><span class="info-label">Event:</span> <span class="info-value">${hand.event_id || '-'}</span></div>
+                        <div><span class="info-label">Date:</span> <span class="info-value">${hand.date || '-'}</span></div>
+                    </div>
+
+                    <div class="hand-display">
+                        <div class="hand-section">
+                            <div class="hand-player">♠ North</div>
+                            <div class="hand-cards">${formatHandDisplay(hand.N)}</div>
+                        </div>
+                        <div class="hand-section">
+                            <div class="hand-player">♥ East</div>
+                            <div class="hand-cards">${formatHandDisplay(hand.E)}</div>
+                        </div>
+                        <div class="hand-section">
+                            <div class="hand-player">♦ South</div>
+                            <div class="hand-cards">${formatHandDisplay(hand.S)}</div>
+                        </div>
+                        <div class="hand-section">
+                            <div class="hand-player">♣ West</div>
+                            <div class="hand-cards">${formatHandDisplay(hand.W)}</div>
+                        </div>
+                    </div>
+
+                    ${hand.dd_analysis ? createDDTable(hand.dd_analysis) : '<p style="color: #999;">No DD data</p>'}
+
+                    <div class="action-buttons">
+                        <a href="https://www.bridgebase.com/tools/handviewer.html?lin=${encoded}" target="_blank">BBO Viewer</a>
+                        <a href="https://dds.bridgewebs.com/bsol_standalone/ddummy.html?lin=${encoded}" target="_blank">DD Solver</a>
+                    </div>
+                </div>
+            `;
+        }
+
+        function formatHandDisplay(hand) {
+            if (!hand) return '-';
+            const suits = { 'S': '♠', 'H': '♥', 'D': '♦', 'C': '♣' };
+            let result = '';
+            let currentSuit = '';
+            
+            for (let char of hand) {
+                if (suits[char]) {
+                    if (result) result += '</span>';
+                    result += `<span class="suit"><span class="suit-symbol">${suits[char]}</span>`;
+                } else {
+                    result += char;
+                }
+            }
+            if (result) result += '</span>';
+            return result;
+        }
+
+        function createDDTable(dd) {
+            const suits = [
+                { name: 'NT', key: 'NT' },
+                { name: 'Spades', key: 'S' },
+                { name: 'Hearts', key: 'H' },
+                { name: 'Diamonds', key: 'D' },
+                { name: 'Clubs', key: 'C' }
+            ];
+            
+            let html = `<table class="dd-table">
+                <thead>
+                    <tr class="suit-header">
+                        <th>Contract</th>
+                        <th>N</th>
+                        <th>E</th>
+                        <th>S</th>
+                        <th>W</th>
+                    </tr>
+                </thead>
+                <tbody>`;
+            
+            suits.forEach(suit => {
+                const n = dd[suit.key + 'N'] || '-';
+                const e = dd[suit.key + 'E'] || '-';
+                const s = dd[suit.key + 'S'] || '-';
+                const w = dd[suit.key + 'W'] || '-';
+                html += `
+                    <tr>
+                        <td><strong>${suit.name}</strong></td>
+                        <td class="tricks-cell">${n}</td>
+                        <td class="tricks-cell">${e}</td>
+                        <td class="tricks-cell">${s}</td>
+                        <td class="tricks-cell">${w}</td>
+                    </tr>
+                `;
+            });
+            
+            html += '</tbody></table>';
+            return html;
+        }
+
+        function generateLIN(hand) {
+            const dealerMap = {'N':1,'E':2,'S':3,'W':4};
+            const vulnMap = {'None':0,'NS':1,'EW':2,'Both':3};
+            const dealer = dealerMap[hand.dealer] || 1;
+            const vuln = vulnMap[hand.vulnerability] || 0;
+            return `qx|o1|md|${dealer}${hand.N},${hand.E},${hand.S}|rh||ah|Board ${hand.id}|sv|${vuln}|pg||`;
+        }
+
+        function renderPagination() {
+            const totalPages = Math.ceil(displayHands.length / pageSize);
+            const paginationDiv = document.getElementById('pagination');
+            let html = '';
+            
+            for (let i = 1; i <= totalPages; i++) {
+                html += `<button ${i === currentPage ? 'class="active"' : ''} onclick="goToPage(${i})">${i}</button>`;
+            }
+            paginationDiv.innerHTML = html;
+        }
+
+        function goToPage(page) {
+            currentPage = page;
+            renderPage();
+            window.scrollTo(0, 0);
+        }
+
+        function searchBoard() {
+            const boardId = document.getElementById('boardSearch').value.trim();
+            if (!boardId) {
+                currentPage = 1;
+                displayHands = Object.entries(allHands).map(([id, hand]) => ({ id, ...hand }));
+            } else {
+                displayHands = Object.entries(allHands)
+                    .filter(([id]) => id.includes(boardId))
+                    .map(([id, hand]) => ({ id, ...hand }));
+            }
+            currentPage = 1;
+            renderPage();
+        }
+
+        document.getElementById('pageSize').addEventListener('change', (e) => {
+            pageSize = parseInt(e.target.value);
+            currentPage = 1;
+            renderPage();
+        });
+
+        loadHands();
+    </script>
+</body>
+</html>

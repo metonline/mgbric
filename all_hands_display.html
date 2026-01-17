@@ -12,14 +12,14 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: Arial, sans-serif;
+            background: #1a472a;
             padding: 20px;
             min-height: 100vh;
         }
 
         .container {
-            max-width: 1600px;
+            max-width: 1800px;
             margin: 0 auto;
         }
 
@@ -39,11 +39,10 @@
         }
 
         /* Tablet: 2 columns */
-        @media (max-width: 1024px) {
+        @media (max-width: 1200px) {
             .hands-grid {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 15px;
-                padding: 10px;
             }
         }
 
@@ -52,153 +51,126 @@
             .hands-grid {
                 grid-template-columns: 1fr;
                 gap: 15px;
-                padding: 0;
             }
 
             h1 {
                 font-size: 1.5rem;
                 margin-bottom: 20px;
             }
-
-            body {
-                padding: 10px;
-            }
         }
 
         .hand-card {
             background: white;
-            border-radius: 12px;
+            border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             cursor: pointer;
             display: flex;
             flex-direction: column;
-            height: 600px;
+            height: 500px;
+            border: 2px solid #333;
         }
 
-        @media (max-width: 1024px) {
+        @media (max-width: 1200px) {
             .hand-card {
-                height: 550px;
+                height: 450px;
             }
         }
 
         @media (max-width: 768px) {
             .hand-card {
-                height: 500px;
+                height: auto;
+                aspect-ratio: auto;
             }
         }
 
         .hand-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
         }
 
-        .hand-header {
-            padding: 12px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-shrink: 0;
-            border-bottom: 3px solid #555;
-        }
-
-        .board-number {
-            font-size: 1.3rem;
-            font-weight: bold;
-        }
-
-        .board-meta {
-            font-size: 0.85rem;
-            opacity: 0.9;
-        }
-
-        .hand-details {
+        .board-header {
             padding: 10px;
-            background: #f9f9f9;
-            font-size: 0.85rem;
-            border-bottom: 1px solid #e0e0e0;
+            background: #2d5a3d;
+            color: white;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.1rem;
             flex-shrink: 0;
-        }
-
-        .detail-row {
-            display: flex;
-            justify-content: space-between;
-            margin: 3px 0;
-            line-height: 1.3;
-        }
-
-        .detail-label {
-            font-weight: 600;
-            color: #667eea;
-            min-width: 70px;
-        }
-
-        .detail-value {
-            color: #333;
-            text-align: right;
-            flex: 1;
+            border-bottom: 1px solid #1a472a;
         }
 
         .hand-content {
             display: flex;
             flex: 1;
             min-height: 0;
-            overflow: hidden;
+            background: #1a472a;
         }
 
-        .hands-display {
-            flex: 1;
+        /* BBO Style Layout */
+        .bbo-layout {
+            position: relative;
+            width: 100%;
+            height: 100%;
             display: grid;
             grid-template-columns: 1fr 1fr;
             grid-template-rows: 1fr 1fr;
-            gap: 1px;
-            background: #ddd;
-            padding: 1px;
-            min-height: 0;
-            overflow: hidden;
+            gap: 2px;
+            padding: 2px;
+            background: #333;
+            flex: 1;
         }
 
         .hand-position {
             background: white;
+            padding: 8px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 8px;
-            font-size: 0.75rem;
-            min-height: 0;
-            overflow: hidden;
             position: relative;
+            overflow: hidden;
+            min-height: 0;
         }
 
-        .position-name {
+        .position-label {
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            background: #4a90e2;
+            color: white;
+            width: 18px;
+            height: 18px;
+            border-radius: 2px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-weight: bold;
-            color: #667eea;
-            margin-bottom: 3px;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
         }
 
         .hand-suits {
-            font-family: 'Courier New', monospace;
+            font-family: Arial, sans-serif;
             font-size: 0.7rem;
-            line-height: 1.2;
+            line-height: 1.3;
             text-align: center;
+            margin-top: 8px;
+            width: 100%;
         }
 
-        .suit-row {
+        .suit-line {
             display: flex;
-            gap: 2px;
+            gap: 3px;
             align-items: center;
             justify-content: center;
+            margin: 2px 0;
         }
 
         .suit-symbol {
-            min-width: 8px;
-            text-align: center;
+            font-size: 0.85rem;
             font-weight: bold;
+            min-width: 10px;
         }
 
         .suit-symbol.spade {
@@ -218,115 +190,111 @@
         }
 
         .cards {
-            font-size: 0.65rem;
-            word-break: break-all;
-            line-height: 1;
-            max-height: 35px;
-            overflow: hidden;
+            font-size: 0.68rem;
+            font-weight: 500;
+            letter-spacing: -0.5px;
         }
 
+        /* DD Panel - BBO Style */
         .dd-panel {
-            flex: 1;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40%;
+            height: 100px;
+            background: white;
+            border: 1px solid #333;
             display: flex;
             flex-direction: column;
-            border-left: 2px solid #e0e0e0;
-            background: #f5f5f5;
-            min-height: 0;
-            padding: 8px;
-            overflow: auto;
+            padding: 4px;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.1);
         }
 
         .dd-title {
-            font-size: 0.8rem;
+            font-size: 0.65rem;
             font-weight: bold;
-            color: #667eea;
             text-align: center;
-            margin-bottom: 6px;
+            color: #333;
+            margin-bottom: 2px;
             flex-shrink: 0;
         }
 
         .dd-table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 0.65rem;
-            flex: 1;
+            font-size: 0.6rem;
             font-family: 'Courier New', monospace;
+            flex: 1;
+            overflow: auto;
         }
 
         .dd-table th,
         .dd-table td {
-            border: 1px solid #ddd;
-            padding: 2px;
+            border: 1px solid #999;
+            padding: 1px;
             text-align: center;
-            height: 18px;
-            line-height: 18px;
+            height: 15px;
+            line-height: 15px;
         }
 
         .dd-table th {
-            background: #667eea;
-            color: white;
+            background: #e8e8e8;
             font-weight: bold;
-            font-size: 0.6rem;
+            font-size: 0.55rem;
         }
 
-        .dd-table tr:nth-child(odd) {
+        .dd-table td {
             background: white;
         }
 
-        .dd-table tr:nth-child(even) {
-            background: #fafafa;
+        .meta-info {
+            padding: 8px;
+            background: #f5f5f5;
+            font-size: 0.75rem;
+            flex-shrink: 0;
+            border-top: 1px solid #ddd;
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .meta-item {
+            display: flex;
+            gap: 4px;
+        }
+
+        .meta-label {
+            font-weight: bold;
+            color: #333;
         }
 
         .solver-links {
-            padding: 10px;
+            padding: 8px;
             display: flex;
-            gap: 8px;
+            gap: 6px;
             flex-shrink: 0;
-            border-top: 1px solid #e0e0e0;
-            background: white;
+            border-top: 1px solid #ddd;
+            background: #f0f0f0;
         }
 
         .solver-link {
             flex: 1;
-            padding: 8px 10px;
-            border: 2px solid #667eea;
+            padding: 6px;
+            border: 1px solid #4a90e2;
             background: white;
-            color: #667eea;
+            color: #4a90e2;
             text-decoration: none;
-            border-radius: 6px;
-            font-size: 0.8rem;
+            border-radius: 3px;
+            font-size: 0.75rem;
             font-weight: bold;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
             text-align: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
 
         .solver-link:hover {
-            background: #667eea;
-            color: white;
-            transform: scale(1.05);
-        }
-
-        .solver-link.bbo {
-            border-color: #ff9800;
-            color: #ff9800;
-        }
-
-        .solver-link.bbo:hover {
-            background: #ff9800;
-            color: white;
-        }
-
-        .solver-link.bridge {
-            border-color: #4caf50;
-            color: #4caf50;
-        }
-
-        .solver-link.bridge:hover {
-            background: #4caf50;
+            background: #4a90e2;
             color: white;
         }
 
@@ -334,7 +302,7 @@
             text-align: center;
             color: white;
             margin-top: 20px;
-            font-size: 1.1rem;
+            font-size: 1rem;
         }
 
         .stats strong {
@@ -389,39 +357,34 @@
             const encodedLin = encodeURIComponent(lin);
 
             card.innerHTML = `
-                <div class="hand-header">
-                    <div class="board-number">Board ${boardId}</div>
-                    <div class="board-meta">${hand.dealer} | ${hand.vulnerability}</div>
-                </div>
-
-                <div class="hand-details">
-                    <div class="detail-row">
-                        <span class="detail-label">Tournament:</span>
-                        <span class="detail-value">${hand.tournament || 'N/A'}</span>
-                    </div>
-                    <div class="detail-row">
-                        <span class="detail-label">Date:</span>
-                        <span class="detail-value">${hand.date || 'N/A'}</span>
-                    </div>
+                <div class="board-header">
+                    Board ${boardId}
                 </div>
 
                 <div class="hand-content">
-                    <div class="hands-display">
+                    <div class="bbo-layout">
                         ${createHandPosition('N', hand.N)}
                         ${createHandPosition('E', hand.E)}
                         ${createHandPosition('S', hand.S)}
                         ${createHandPosition('W', hand.W)}
                     </div>
+                    ${createDDPanel(hand.dd_analysis)}
+                </div>
 
-                    <div class="dd-panel">
-                        <div class="dd-title">DD Analysis</div>
-                        ${createDDTable(hand.dd_analysis)}
+                <div class="meta-info">
+                    <div class="meta-item">
+                        <span class="meta-label">Dealer:</span>
+                        <span>${hand.dealer}</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Vuln:</span>
+                        <span>${hand.vulnerability}</span>
                     </div>
                 </div>
 
                 <div class="solver-links">
-                    <a href="https://www.bridgebase.com/tools/handviewer.html?lin=${encodedLin}" target="_blank" class="solver-link bbo" title="View in BBO Handviewer">BBO</a>
-                    <a href="https://dds.bridgewebs.com/bsol_standalone/ddummy.html?lin=${encodedLin}" target="_blank" class="solver-link bridge" title="View in Bridge Solver">Solver</a>
+                    <a href="https://www.bridgebase.com/tools/handviewer.html?lin=${encodedLin}" target="_blank" class="solver-link">BBO</a>
+                    <a href="https://dds.bridgewebs.com/bsol_standalone/ddummy.html?lin=${encodedLin}" target="_blank" class="solver-link">Solver</a>
                 </div>
             `;
 
@@ -429,15 +392,15 @@
         }
 
         function createHandPosition(position, hand) {
-            if (!hand) return '<div class="hand-position"><div class="position-name">-</div></div>';
+            if (!hand) return `<div class="hand-position"></div>`;
 
             const suits = parseLINHand(hand);
 
             return `
                 <div class="hand-position">
-                    <div class="position-name">${position}</div>
+                    <div class="position-label">${position}</div>
                     <div class="hand-suits">
-                        ${suits.map(suit => `<div class="suit-row"><span class="suit-symbol">${suit.symbol}</span><span class="cards">${suit.cards}</span></div>`).join('')}
+                        ${suits.map(suit => `<div class="suit-line"><span class="suit-symbol ${suit.suitClass}">${suit.symbol}</span><span class="cards">${suit.cards}</span></div>`).join('')}
                     </div>
                 </div>
             `;
@@ -447,79 +410,76 @@
             // LIN format: S{spades}H{hearts}D{diamonds}C{clubs}
             const suits = [];
             const suitOrder = [
-                { name: 'Spades', symbol: '♠', pattern: /S([A-Z0-9]*)/ },
-                { name: 'Hearts', symbol: '♥', pattern: /H([A-Z0-9]*)/ },
-                { name: 'Diamonds', symbol: '♦', pattern: /D([A-Z0-9]*)/ },
-                { name: 'Clubs', symbol: '♣', pattern: /C([A-Z0-9]*)/ }
+                { name: 'Spades', symbol: '♠', pattern: /S([A-Z0-9]*)/, suitClass: 'spade' },
+                { name: 'Hearts', symbol: '♥', pattern: /H([A-Z0-9]*)/, suitClass: 'heart' },
+                { name: 'Diamonds', symbol: '♦', pattern: /D([A-Z0-9]*)/, suitClass: 'diamond' },
+                { name: 'Clubs', symbol: '♣', pattern: /C([A-Z0-9]*)/, suitClass: 'club' }
             ];
 
             suitOrder.forEach(suit => {
                 const match = linHand.match(suit.pattern);
-                const cards = match ? match[1] : '-';
+                const cards = match ? match[1] : '';
                 suits.push({
                     symbol: suit.symbol,
-                    cards: cards || '-'
+                    cards: cards || '-',
+                    suitClass: suit.suitClass
                 });
             });
 
             return suits;
         }
 
-        function createDDTable(ddAnalysis) {
+        function createDDPanel(ddAnalysis) {
             if (!ddAnalysis) {
-                return '<p style="text-align: center; color: #999;">No DD data</p>';
+                return '<div class="dd-panel"><p style="text-align: center; color: #999;">No DD</p></div>';
             }
 
-            // Create a simplified DD table showing tricks for each suit and player
+            // Create a BBO-style DD table
             return `
-                <table class="dd-table">
-                    <thead>
-                        <tr>
-                            <th>Suit</th>
-                            <th>N</th>
-                            <th>S</th>
-                            <th>E</th>
-                            <th>W</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>NT</td>
-                            <td>${ddAnalysis.NTN || '-'}</td>
-                            <td>${ddAnalysis.NTS || '-'}</td>
-                            <td>${ddAnalysis.NTE || '-'}</td>
-                            <td>${ddAnalysis.NTW || '-'}</td>
-                        </tr>
-                        <tr>
-                            <td>♠</td>
-                            <td>${ddAnalysis.SN || '-'}</td>
-                            <td>${ddAnalysis.SS || '-'}</td>
-                            <td>${ddAnalysis.SE || '-'}</td>
-                            <td>${ddAnalysis.SW || '-'}</td>
-                        </tr>
-                        <tr>
-                            <td>♥</td>
-                            <td>${ddAnalysis.HN || '-'}</td>
-                            <td>${ddAnalysis.HS || '-'}</td>
-                            <td>${ddAnalysis.HE || '-'}</td>
-                            <td>${ddAnalysis.HW || '-'}</td>
-                        </tr>
-                        <tr>
-                            <td>♦</td>
-                            <td>${ddAnalysis.DN || '-'}</td>
-                            <td>${ddAnalysis.DS || '-'}</td>
-                            <td>${ddAnalysis.DE || '-'}</td>
-                            <td>${ddAnalysis.DW || '-'}</td>
-                        </tr>
-                        <tr>
-                            <td>♣</td>
-                            <td>${ddAnalysis.CN || '-'}</td>
-                            <td>${ddAnalysis.CS || '-'}</td>
-                            <td>${ddAnalysis.CE || '-'}</td>
-                            <td>${ddAnalysis.CW || '-'}</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="dd-panel">
+                    <div class="dd-title">DD Analysis</div>
+                    <table class="dd-table">
+                        <thead>
+                            <tr>
+                                <th>♠</th>
+                                <th>♥</th>
+                                <th>♦</th>
+                                <th>♣</th>
+                                <th>NT</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>${ddAnalysis.SN || '-'}</td>
+                                <td>${ddAnalysis.HN || '-'}</td>
+                                <td>${ddAnalysis.DN || '-'}</td>
+                                <td>${ddAnalysis.CN || '-'}</td>
+                                <td>${ddAnalysis.NTN || '-'}</td>
+                            </tr>
+                            <tr>
+                                <td>${ddAnalysis.SS || '-'}</td>
+                                <td>${ddAnalysis.HS || '-'}</td>
+                                <td>${ddAnalysis.DS || '-'}</td>
+                                <td>${ddAnalysis.CS || '-'}</td>
+                                <td>${ddAnalysis.NTS || '-'}</td>
+                            </tr>
+                            <tr>
+                                <td>${ddAnalysis.SE || '-'}</td>
+                                <td>${ddAnalysis.HE || '-'}</td>
+                                <td>${ddAnalysis.DE || '-'}</td>
+                                <td>${ddAnalysis.CE || '-'}</td>
+                                <td>${ddAnalysis.NTE || '-'}</td>
+                            </tr>
+                            <tr>
+                                <td>${ddAnalysis.SW || '-'}</td>
+                                <td>${ddAnalysis.HW || '-'}</td>
+                                <td>${ddAnalysis.DW || '-'}</td>
+                                <td>${ddAnalysis.CW || '-'}</td>
+                                <td>${ddAnalysis.NTW || '-'}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             `;
         }
 

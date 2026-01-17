@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bridge Hands Results</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: Arial, sans-serif;
+            background: #1a472a;
+            padding: 20px;
+            color: white;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2rem;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        th, td {
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+        th {
+            background: #2d5a3d;
+            color: white;
+            font-weight: bold;
+        }
+        tr:hover {
+            background: #f5f5f5;
+        }
+        .board-link {
+            color: #1976d2;
+            cursor: pointer;
+            font-weight: bold;
+            text-decoration: underline;
+        }
+        .board-link:hover {
+            color: #1565c0;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+        }
+        .modal-content {
+            background: #f9f9f9;
+            margin: 5% auto;
+            padding: 30px;
+            border: 1px solid #888;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 600px;
+            color: #333;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close:hover {
+            color: black;
+        }
+        .hand-display {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        .hand-row {
+            display: flex;
+            justify-content: space-around;
+            margin: 10px 0;
+            font-family: monospace;
+        }
+        .hand-col {
+            flex: 1;
+            text-align: center;
+        }
+        .hand-col strong {
+            display: block;
+            margin-bottom: 5px;
+            color: #2d5a3d;
+        }
+        .button-group {
+            text-align: center;
+            margin-top: 20px;
+        }
+        a {
+            display: inline-block;
+            margin: 0 10px;
+            padding: 8px 16px;
+            background: #1976d2;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        a:hover {
+            background: #1565c0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>♠ Bridge Tournament Hands ♠</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Board</th>
+                    <th>Dealer</th>
+                    <th>Vulnerability</th>
+                    <th>Event ID</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody id="resultsTable"></tbody>
+        </table>
+    </div>
+
+    <!-- Modal for hand details -->
+    <div id="handModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Board <span id="boardNum"></span></h2>
+            <div class="hand-display">
+                <div class="hand-row">
+                    <div class="hand-col">
+                        <strong>North</strong>
+                        <div id="handN"></div>
+                    </div>
+                </div>
+                <div class="hand-row">
+                    <div class="hand-col">
+                        <strong>West</strong>
+                        <div id="handW"></div>
+                    </div>
+                    <div class="hand-col">
+                        <strong>East</strong>
+                        <div id="handE"></div>
+                    </div>
+                </div>
+                <div class="hand-row">
+                    <div class="hand-col">
+                        <strong>South</strong>
+                        <div id="handS"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="button-group">
+                <a href="#" id="bboLink" target="_blank">View in BBO</a>
+                <a href="#" id="solverLink" target="_blank">DD Analysis</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let allHands = {};
+        const modal = document.getElementById('handModal');
+        const closeBtn = document.querySelector('.close');
+        const resultsTable = document.getElementById('resultsTable');
+
+        // Load hands from database
+        async function loadHands() {
+            try {
+                const response = await fetch('/api/hands');
+                allHands = await response.json();
+                populateTable();
+            } catch (error) {
+                console.error('Error loading hands:', error);
+                resultsTable.innerHTML = '<tr><td colspan="5">Error loading hands data</td></tr>';
+            }
+        }
+
+        function populateTable() {
+            Object.entries(allHands).slice(0, 100).forEach(([id, hand]) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td><span class="board-link" onclick="openBoard('${id}')">${id}</span></td>
+                    <td>${hand.dealer}</td>
+                    <td>${hand.vulnerability}</td>
+                    <td>${hand.event_id || '-'}</td>
+                    <td>${hand.date || '-'}</td>
+                `;
+                resultsTable.appendChild(row);
+            });
+        }
+
+        function openBoard(boardId) {
+            const hand = allHands[boardId];
+            if (!hand) return;
+            
+            document.getElementById('boardNum').textContent = boardId;
+            document.getElementById('handN').textContent = formatHand(hand.N);
+            document.getElementById('handE').textContent = formatHand(hand.E);
+            document.getElementById('handS').textContent = formatHand(hand.S);
+            document.getElementById('handW').textContent = formatHand(hand.W);
+            
+            // Generate links
+            const lin = generateLIN(hand, boardId);
+            const encoded = encodeURIComponent(lin);
+            document.getElementById('bboLink').href = `https://www.bridgebase.com/tools/handviewer.html?lin=${encoded}`;
+            document.getElementById('solverLink').href = `https://dds.bridgewebs.com/bsol_standalone/ddummy.html?lin=${encoded}`;
+            
+            modal.style.display = 'block';
+        }
+
+        function formatHand(hand) {
+            if (!hand) return '-';
+            const suits = { 'S': '♠', 'H': '♥', 'D': '♦', 'C': '♣' };
+            let result = '';
+            let currentSuit = '';
+            for (let char of hand) {
+                if (suits[char]) {
+                    if (result) result += '<br>';
+                    result += suits[char] + ' ';
+                } else {
+                    result += char;
+                }
+            }
+            return result;
+        }
+
+        function generateLIN(hand, boardId) {
+            const dealerMap = {'N':1,'E':2,'S':3,'W':4};
+            const vulnMap = {'None':0,'NS':1,'EW':2,'Both':3};
+            const dealer = dealerMap[hand.dealer] || 1;
+            const vuln = vulnMap[hand.vulnerability] || 0;
+            return `qx|o1|md|${dealer}${hand.N},${hand.E},${hand.S}|rh||ah|Board ${boardId}|sv|${vuln}|pg||`;
+        }
+
+        closeBtn.onclick = () => modal.style.display = 'none';
+        window.onclick = (e) => { if (e.target === modal) modal.style.display = 'none'; };
+        
+        // Load hands on page load
+        loadHands();
+    </script>
+</body>
+</html>
