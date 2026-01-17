@@ -391,16 +391,15 @@
             const getNHand = () => typeof hand.N === 'string' ? hand.N : `${hand.N.S}.${hand.N.H}.${hand.N.D}.${hand.N.C}`;
             const getEHand = () => typeof hand.E === 'string' ? hand.E : `${hand.E.S}.${hand.E.H}.${hand.E.D}.${hand.E.C}`;
             const getSHand = () => typeof hand.S === 'string' ? hand.S : `${hand.S.S}.${hand.S.H}.${hand.S.D}.${hand.S.C}`;
-            const getWHand = () => typeof hand.W === 'string' ? hand.W : `${hand.W.S}.${hand.W.H}.${hand.W.D}.${hand.W.C}`;
             
             const nHand = getNHand();
             const eHand = getEHand();
             const sHand = getSHand();
-            const wHand = getWHand();
             
-            // BBO format: qx|o1|md|{dealer}{hands}|rh||ah|{board_name}|sv|{vuln_code}|pg||
+            // BBO format: qx|o1|md|{dealer}{N},{E},{S}|rh||ah|{board_name}|sv|{vuln_code}|pg||
+            // Note: West hand is omitted - BBO calculates it from remaining cards
             const boardName = `Board%20${boardId}`;
-            return `qx|o1|md|${dealer}${nHand},${eHand},${sHand},${wHand}|rh||ah|${boardName}|sv|${vulnCode}|pg||`;
+            return `qx|o1|md|${dealer}${nHand},${eHand},${sHand}|rh||ah|${boardName}|sv|${vulnCode}|pg||`;
         }
         
         function loadBoard() {
