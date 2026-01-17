@@ -25,6 +25,7 @@ class VugraphDataFetcher:
         """Fetch all tournaments from Vugraph calendar"""
         try:
             response = requests.get(f"{self.BASE_URL}/calendar.php", timeout=30)
+            response.encoding = 'iso-8859-9'  # Turkish encoding
             response.raise_for_status()
             return response.text
         except Exception as e:
@@ -88,6 +89,7 @@ class VugraphDataFetcher:
         
         try:
             response = requests.get(url, timeout=30)
+            response.encoding = 'utf-8'  # Ensure UTF-8 decoding
             response.raise_for_status()
             
             soup = BeautifulSoup(response.content, 'html.parser')
