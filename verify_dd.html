@@ -378,12 +378,13 @@
             });
         }
         
-        function generateLIN(hand) {
+        function generateLIN(hand, boardId) {
             const dealerMap = {'N': 1, 'E': 2, 'S': 3, 'W': 4};
-            const vulnMap = {'None': '-', 'NS': 'N', 'EW': 'E', 'Both': 'B'};
+            // BBO uses numeric vulnerability codes: 0=None, 1=NS, 2=EW, 3=Both
+            const vulnMap = {'None': 0, 'NS': 1, 'EW': 2, 'Both': 3};
             
             const dealer = dealerMap[hand.dealer] || 1;  // Default to North as dealer
-            const vuln = vulnMap[hand.vulnerability] || '-';
+            const vulnCode = vulnMap[hand.vulnerability] !== undefined ? vulnMap[hand.vulnerability] : 0;
             
             // New format: hands are stored as LIN strings like "S63HAKT54DA93CAQ7"
             // Old format: hands were objects like {"S":"63", "H":"AKT54", "D":"A93", "C":"AQ7"}
@@ -397,8 +398,9 @@
             const sHand = getSHand();
             const wHand = getWHand();
             
-            // Format: md|{dealer}{hand1},{hand2},{hand3},{hand4}|
-            return `pn=N,E,S,W|md|${dealer}${nHand},${eHand},${sHand},${wHand}|sv|${vuln}`;
+            // BBO format: qx|o1|md|{dealer}{hands}|rh||ah|{board_name}|sv|{vuln_code}|pg||
+            const boardName = `Board%20${boardId}`;
+            return `qx|o1|md|${dealer}${nHand},${eHand},${sHand},${wHand}|rh||ah|${boardName}|sv|${vulnCode}|pg||`;
         }
         
         function loadBoard() {
@@ -424,7 +426,7 @@
             document.getElementById('boardId').textContent = boardId;
             
             // Generate LIN
-            currentLIN = generateLIN(hand);
+            currentLIN = generateLIN(hand, boardId);
             const encodedLin = encodeURIComponent(currentLIN);
             
             // Update links
