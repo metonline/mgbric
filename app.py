@@ -31,6 +31,17 @@ def api_data():
 def database():
     return send_file('database.json')
 
+@app.route('/api/hands')
+def api_hands():
+    try:
+        return send_file('hands_database.json')
+    except:
+        return send_file('hands_database.json')
+
+@app.route('/hands_database.json')
+def hands():
+    return send_file('hands_database.json')
+
 @app.route('/<path:filename>')
 def serve_file(filename):
     try:
