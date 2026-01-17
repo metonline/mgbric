@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Bridge Hands - DD Analysis</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #1a472a;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1800px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: white;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2rem;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .hands-grid {
+            display: grid;
+            gap: 15px;
+            grid-template-columns: repeat(3, 1fr);
+            margin-bottom: 40px;
+        }
+
+        @media (max-width: 1200px) {
+            .hands-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hands-grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+        }
+
+        .hand-card {
+            background: white;
+            border: 2px solid #333;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .hand-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+        }
+
+        .board-number {
+            background: #2d5a3d;
+            color: white;
+            padding: 8px;
+            border-radius: 4px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        .hand-details {
+            flex: 1;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .hand-details p {
+            margin: 5px 0;
+            color: #333;
+        }
+
+        .hand-details strong {
+            color: #2d5a3d;
+        }
+
+        .link-buttons {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .link-btn {
+            flex: 1;
+            min-width: 120px;
+            padding: 8px;
+            border: none;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            font-size: 0.85rem;
+            transition: background 0.3s ease;
+        }
+
+        .bbo-btn {
+            background: #1976d2;
+            color: white;
+        }
+
+        .bbo-btn:hover {
+            background: #1565c0;
+        }
+
+        .solver-btn {
+            background: #388e3c;
+            color: white;
+        }
+
+        .solver-btn:hover {
+            background: #2e7d32;
+        }
+
+        .stats {
+            text-align: center;
+            color: white;
+            margin-top: 20px;
+            font-size: 1rem;
+        }
+
+        .stats strong {
+            color: #ffeb3b;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>♠ All Bridge Hands - DD Analysis ♠</h1>
+        <div class="hands-grid" id="handsGrid"></div>
+        <div class="stats">
+            Displaying <strong id="totalBoards">0</strong> boards
+        </div>
+    </div>
+
+    <script>
+        let handsData = {};
+
+        // Fetch hands database
+        fetch('/hands_database.json')
+            .then(response => response.json())
+            .then(data => {
+                handsData = data;
+                renderAllHands();
+                updateStats();
+            })
+            .catch(error => {
+                console.error('Error loading hands database:', error);
+                document.getElementById('handsGrid').innerHTML = '<p style="color: white; grid-column: 1/-1; text-align: center;">Error loading hands data</p>';
+            });
+
+        function renderAllHands() {
+            const grid = document.getElementById('handsGrid');
+            grid.innerHTML = '';
+
+            const boardIds = Object.keys(handsData).sort((a, b) => parseInt(a) - parseInt(b));
+
+            boardIds.forEach(boardId => {
+                const hand = handsData[boardId];
+                const card = createHandCard(boardId, hand);
+                grid.appendChild(card);
+            });
+        }
+
+        function createHandCard(boardId, hand) {
+            const card = document.createElement('div');
+            card.className = 'hand-card';
+
+            const lin = generateLIN(hand, boardId);
+            const encodedLin = encodeURIComponent(lin);
+            
+            const bboUrl = `https://www.bridgebase.com/tools/handviewer.html?lin=${encodedLin}`;
+            const solverUrl = `https://dds.bridgewebs.com/bsol_standalone/ddummy.html?lin=${encodedLin}`;
+
+            // Extract hand details for display
+            const nHand = formatHand(hand.N || '-');
+            const eHand = formatHand(hand.E || '-');
+            const sHand = formatHand(hand.S || '-');
+            const dealer = hand.dealer || 'N';
+            const vuln = hand.vulnerability || 'None';
+
+            card.innerHTML = `
+                <div class="board-number">Board ${boardId}</div>
+                <div class="hand-details">
+                    <p><strong>Dealer:</strong> ${dealer}</p>
+                    <p><strong>Vuln:</strong> ${vuln}</p>
+                    <p><strong>N:</strong> ${nHand}</p>
+                    <p><strong>E:</strong> ${eHand}</p>
+                    <p><strong>S:</strong> ${sHand}</p>
+                </div>
+                <div class="link-buttons">
+                    <a href="${bboUrl}" target="_blank" class="link-btn bbo-btn">BBO</a>
+                    <a href="${solverUrl}" target="_blank" class="link-btn solver-btn">DD Solver</a>
+                </div>
+            `;
+
+            return card;
+        }
+
+        function formatHand(hand) {
+            if (!hand || hand === '-') return '-';
+            // Parse LIN format (e.g., SAT73HAQ6DKJ7CK83)
+            const suits = {
+                'S': '♠',
+                'H': '♥',
+                'D': '♦',
+                'C': '♣'
+            };
+            
+            let formatted = '';
+            let currentSuit = '';
+            
+            for (let char of hand) {
+                if (suits[char]) {
+                    if (formatted) formatted += ' ';
+                    formatted += suits[char] + ' ';
+                    currentSuit = char;
+                } else {
+                    formatted += char;
+                }
+            }
+            return formatted || '-';
+        }
+
+        function generateLIN(hand, boardId) {
+            const dealerMap = {'N': 1, 'E': 2, 'S': 3, 'W': 4};
+            const vulnMap = {'None': 0, 'NS': 1, 'EW': 2, 'Both': 3};
+
+            const dealer = dealerMap[hand.dealer] || 1;
+            const vulnCode = vulnMap[hand.vulnerability] !== undefined ? vulnMap[hand.vulnerability] : 0;
+
+            const nHand = typeof hand.N === 'string' ? hand.N : '-';
+            const eHand = typeof hand.E === 'string' ? hand.E : '-';
+            const sHand = typeof hand.S === 'string' ? hand.S : '-';
+
+            const boardName = `Board ${boardId}`;
+            return `qx|o1|md|${dealer}${nHand},${eHand},${sHand}|rh||ah|${boardName}|sv|${vulnCode}|pg||`;
+        }
+
+        function updateStats() {
+            document.getElementById('totalBoards').textContent = Object.keys(handsData).length;
+        }
+    </script>
+</body>
+</html>
