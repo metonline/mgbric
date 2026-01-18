@@ -3,10 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate">
-    <meta http-equiv="pragma" content="no-cache">
-    <meta http-equiv="expires" content="0">
-    <title>Turnuva Elleri - Tournament Hands</title>
+    <title>Bridge Hands - Tournament Printout</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
@@ -68,42 +65,37 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 8px;
-            padding: 4px 0;
+            margin-bottom: 10px;
+            padding-bottom: 8px;
             border-bottom: 1px solid #ccc;
-            font-size: 0.9rem;
-        }
-        
-        .board-header-left {
-            flex: 1;
-            text-align: left;
-        }
-        
-        .board-header-center {
-            flex: 1;
-            text-align: center;
-            font-size: 1.1rem;
             font-weight: bold;
+            gap: 10px;
         }
         
+
+
+        .board-header-left,
+        .board-header-center,
         .board-header-right {
             flex: 1;
-            text-align: right;
+            text-align: center;
+            font-size: 0.95rem;
+        }
+        
+        .board-number {
+            font-size: 1.1rem;
+        }
+        
+        .board-metadata {
+            font-size: 0.9rem;
+            color: #333;
         }
         
         .board-content {
             display: grid;
-            grid-template-columns: 70px 1fr;
+            grid-template-columns: 1fr;
             gap: 8px;
             flex: 1;
-            align-items: flex-start;
-        }
-        
-        .board-vuln-left {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100%;
         }
         
         .bbo-viewer {
@@ -111,8 +103,6 @@
             padding: 8px;
             border-radius: 4px;
         }
-        
-        /* Vulnerability indicator removed */
         
         .bbo-viewer.vuln-none {
             background: #e8f5e9;
@@ -229,7 +219,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>🌉 Turnuva Elleri</h1>
+        <h1>Turnuva Elleri</h1>
 
         <div id="loading" class="loading" style="display:none;">Loading tournament data...</div>
         <div id="error" class="error" style="display:none;"></div>
