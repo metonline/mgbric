@@ -67,6 +67,67 @@
         .date-filter button:hover {
             background: #555;
         }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            overflow: auto;
+        }
+
+        .modal.show {
+            display: block;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #888;
+            border-radius: 8px;
+            width: 95%;
+            max-width: 1400px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #333;
+        }
+
+        .modal-header h2 {
+            font-size: 1.5rem;
+            margin: 0;
+        }
+
+        .modal-close {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #999;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            line-height: 1;
+        }
+
+        .modal-close:hover {
+            color: #333;
+        }
         
         button {
             padding: 8px 15px;
@@ -82,6 +143,15 @@
         }
         
         .boards-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+            max-width: 100%;
+        }
+
+        /* Hide boards grid on main page, show only in modal */
+        #boardsGrid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 15px;
@@ -257,6 +327,7 @@
 </head>
 <body>
     <div class="container">
+    <div class="container">
         <h1>Turnuva Elleri</h1>
 
         <div class="date-filter">
@@ -269,9 +340,19 @@
         <div id="loading" class="loading" style="display:none;">Loading tournament data...</div>
         <div id="error" class="error" style="display:none;"></div>
 
-        <div class="boards-grid" id="boardsGrid"></div>
-
         <div class="stats" id="stats"></div>
+    </div>
+
+    <!-- Modal for filtered results -->
+    <div id="resultsModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Turnuva Elleri</h2>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="boards-grid" id="boardsGrid"></div>
+            <div class="stats" id="modalStats"></div>
+        </div>
     </div>
 
     <script>
@@ -437,7 +518,7 @@
             if (filteredHands.length > 0) {
                 statsText += ` (Filtered from ${allHands.length})`;
             }
-            document.getElementById('stats').textContent = statsText;
+            document.getElementById('modalStats').textContent = statsText;
         }
 
         function filterByDate() {
@@ -459,15 +540,37 @@
             if (filteredHands.length === 0) {
                 alert(`No hands found for date: ${turkishDate} / Bu tarihte oyun bulunamadı: ${turkishDate}`);
                 filteredHands = [];
+                return;
             }
 
+            // Update modal title with date
+            document.getElementById('modalTitle').textContent = `Turnuva Elleri - ${turkishDate}`;
+            
+            // Render and show modal
             renderAllBoards();
+            openModal();
         }
 
         function clearFilter() {
             document.getElementById('dateInput').value = '';
             filteredHands = [];
-            renderAllBoards();
+            closeModal();
+        }
+
+        function openModal() {
+            document.getElementById('resultsModal').classList.add('show');
+        }
+
+        function closeModal() {
+            document.getElementById('resultsModal').classList.remove('show');
+        }
+
+        // Close modal when clicking outside the modal content
+        window.onclick = function(event) {
+            const modal = document.getElementById('resultsModal');
+            if (event.target === modal) {
+                closeModal();
+            }
         }
 
         function toggleCompact() {
