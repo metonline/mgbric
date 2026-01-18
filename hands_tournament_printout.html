@@ -29,6 +29,44 @@
             text-align: center;
             margin-bottom: 20px;
         }
+
+        .date-filter {
+            text-align: center;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .date-filter label {
+            font-weight: bold;
+            margin-right: 10px;
+            font-size: 1rem;
+        }
+
+        .date-filter input[type="date"] {
+            padding: 8px 12px;
+            font-size: 1rem;
+            border: 1px solid #999;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .date-filter button {
+            padding: 8px 15px;
+            margin-left: 10px;
+            background: #333;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .date-filter button:hover {
+            background: #555;
+        }
         
         button {
             padding: 8px 15px;
@@ -221,6 +259,13 @@
     <div class="container">
         <h1>Turnuva Elleri</h1>
 
+        <div class="date-filter">
+            <label for="dateInput">Tarih Seçin / Select Date:</label>
+            <input type="date" id="dateInput">
+            <button onclick="filterByDate()">Filtrele / Filter</button>
+            <button onclick="clearFilter()" style="background: #666; margin-left: 5px;">Temizle / Clear</button>
+        </div>
+
         <div id="loading" class="loading" style="display:none;">Loading tournament data...</div>
         <div id="error" class="error" style="display:none;"></div>
 
@@ -231,6 +276,7 @@
 
     <script>
         let allHands = [];
+        let filteredHands = [];
         let boardResults = {};
 
         function getVulnColor(player, vuln) {
@@ -357,7 +403,9 @@
             const grid = document.getElementById('boardsGrid');
             grid.innerHTML = '';
 
-            allHands.forEach((hand, index) => {
+            const handsToDisplay = filteredHands.length > 0 ? filteredHands : allHands;
+
+            handsToDisplay.forEach((hand, index) => {
                 const card = document.createElement('div');
                 card.className = 'board-card';
                 
@@ -384,7 +432,42 @@
                 grid.appendChild(card);
             });
 
-            document.getElementById('stats').textContent = `Total: ${allHands.length} boards`;
+            const displayCount = handsToDisplay.length;
+            let statsText = `Total: ${displayCount} boards`;
+            if (filteredHands.length > 0) {
+                statsText += ` (Filtered from ${allHands.length})`;
+            }
+            document.getElementById('stats').textContent = statsText;
+        }
+
+        function filterByDate() {
+            const dateInput = document.getElementById('dateInput').value;
+            if (!dateInput) {
+                alert('Please select a date / Lütfen bir tarih seçin');
+                return;
+            }
+
+            // Convert date input (YYYY-MM-DD) to Turkish format (DD.MM.YYYY)
+            const [year, month, day] = dateInput.split('-');
+            const turkishDate = `${day}.${month}.${year}`;
+
+            // Filter hands by date
+            filteredHands = allHands.filter(hand => {
+                return hand.date && hand.date.trim() === turkishDate.trim();
+            });
+
+            if (filteredHands.length === 0) {
+                alert(`No hands found for date: ${turkishDate} / Bu tarihte oyun bulunamadı: ${turkishDate}`);
+                filteredHands = [];
+            }
+
+            renderAllBoards();
+        }
+
+        function clearFilter() {
+            document.getElementById('dateInput').value = '';
+            filteredHands = [];
+            renderAllBoards();
         }
 
         function toggleCompact() {
