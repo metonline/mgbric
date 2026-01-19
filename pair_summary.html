@@ -122,19 +122,26 @@
             border-radius: 6px;
         }
         .back-link:hover { background: #2a5298; }
+        .player-header {
+            display: flex;
+            justify-content: center;
+            align-items: baseline;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
         .player-names {
             font-size: 1.3em;
             font-weight: bold;
-            margin-bottom: 5px;
         }
         .pair-info {
-            font-size: 0.95em;
-            opacity: 0.9;
+            font-size: 1.3em;
+            font-weight: bold;
         }
         .tournament-date {
-            font-size: 0.9em;
-            opacity: 0.8;
-            margin-top: 5px;
+            font-size: 0.95em;
+            opacity: 0.85;
+            margin-top: 8px;
+            text-align: center;
         }
         @media (max-width: 600px) {
             body { padding: 10px; }
@@ -162,8 +169,10 @@
 <body>
     <div class="container">
         <div class="header">
-            <div class="player-names" id="playerNames">Yükleniyor...</div>
-            <div class="pair-info" id="pairInfo"></div>
+            <div class="player-header">
+                <span class="player-names" id="playerNames">Yükleniyor...</span>
+                <span class="pair-info" id="pairInfo"></span>
+            </div>
             <div class="tournament-date" id="tournamentDate"></div>
         </div>
         <div class="content" id="content">
@@ -240,9 +249,9 @@
 
         function formatStdDev(value) {
             if (value === null || value === undefined || isNaN(value)) return '—';
-            // +/- %26 (TR) veya +/- 26% (EN) formatı
+            // (+/-) %26 formatı
             const formatted = value.toFixed(1).replace('.', ',');
-            return '+/- %' + formatted;
+            return '(+/-) %' + formatted;
         }
 
         // URL parametrelerini al
@@ -305,8 +314,8 @@
                 document.getElementById('playerNames').textContent = 'Çift Özeti';
             }
             
-            // Çift bilgisi
-            document.getElementById('pairInfo').textContent = `(${pairNum} ${direction})`;
+            // Yön bilgisi (oyuncu isimlerinin yanında aynı yazı karakteriyle)
+            document.getElementById('pairInfo').textContent = `(${direction})`;
             
             // Turnuva tarihi - event ID'den hesapla veya API'den al
             const tournamentDate = data.tournament_date || '';
