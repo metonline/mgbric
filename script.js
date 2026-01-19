@@ -1,5 +1,5 @@
-// Script version for cache busting - v422
-const SCRIPT_VERSION = '422';
+// Script version for cache busting - v423
+const SCRIPT_VERSION = '423';
 
 // ===== DİL SISTEMI (i18n) =====
 let translations = {};
@@ -3338,14 +3338,27 @@ async function openPairSummaryModal(eventId, pairNum, direction, pairNames) {
         let html = `
             <div style="padding: 15px;">
                 <div style="background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                    <table style="width: 100%; border-collapse: collapse; font-size: 0.9em;">
+                    <table style="width: 100%; border-collapse: collapse; font-size: 0.85em;">
                         <thead>
                             <tr style="background: #1e3c72; color: white;">
-                                <th style="padding: 12px 8px; text-align: center; width: 50px;">Bord</th>
-                                <th style="padding: 12px 8px; text-align: left;">Rakip</th>
-                                <th style="padding: 12px 8px; text-align: center; width: 100px;">Kontrat</th>
-                                <th style="padding: 12px 8px; text-align: center; width: 70px;">Sonuç</th>
-                                <th style="padding: 12px 8px; text-align: center; width: 70px;">Skor</th>
+                                <th style="padding: 10px 6px; text-align: center; width: 45px;">Bord</th>
+                                <th style="padding: 10px 6px; text-align: center;">Kontrat</th>
+                                <th style="padding: 10px 6px; text-align: center;">Dek</th>
+                                <th style="padding: 10px 6px; text-align: center;">Sonuç</th>
+                                <th style="padding: 10px 6px; text-align: center;">Atak</th>
+                                <th style="padding: 10px 6px; text-align: center;" colspan="2">Skor</th>
+                                <th style="padding: 10px 6px; text-align: center;" colspan="2">%</th>
+                            </tr>
+                            <tr style="background: #2a5298; color: white; font-size: 0.85em;">
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th style="padding: 4px;">K-G</th>
+                                <th style="padding: 4px;">D-B</th>
+                                <th style="padding: 4px;">K-G</th>
+                                <th style="padding: 4px;">D-B</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -3354,23 +3367,50 @@ async function openPairSummaryModal(eventId, pairNum, direction, pairNames) {
         if (data.results && data.results.length > 0) {
             data.results.forEach((row, idx) => {
                 const bgColor = idx % 2 === 0 ? '#ffffff' : '#f8f9fa';
-                const resultInt = parseInt(row.result) || 0;
-                const resultColor = resultInt >= 0 ? '#16a34a' : '#dc2626';
-                const scoreFloat = parseFloat(row.score) || 0;
-                const scoreColor = scoreFloat >= 50 ? '#16a34a' : '#dc2626';
+                
+                // Determine if positive for this direction
+                const pctNS = parseFloat(row.percent_ns) || 0;
+                const pctEW = parseFloat(row.percent_ew) || 0;
+                const myPct = direction === 'NS' ? pctNS : pctEW;
+                const pctColor = myPct >= 50 ? '#16a34a' : '#dc2626';
+                
+                // Format result display (=, +1, -1, etc.)
+                let resultDisplay = row.result || '';
+                let resultColor = '#374151';
+                if (resultDisplay === '=') {
+                    resultColor = '#16a34a';
+                } else if (resultDisplay.startsWith('+')) {
+                    resultColor = '#16a34a';
+                } else if (resultDisplay.startsWith('-')) {
+                    resultColor = '#dc2626';
+                }
+                
+                // Contract color based on suit
+                let contractColor = '#374151';
+                if (row.contract) {
+                    if (row.contract.includes('♠')) contractColor = '#1e3a8a';
+                    else if (row.contract.includes('♥')) contractColor = '#dc2626';
+                    else if (row.contract.includes('♦')) contractColor = '#ea580c';
+                    else if (row.contract.includes('♣')) contractColor = '#16a34a';
+                    else if (row.contract.includes('NT') || row.contract.includes('SA')) contractColor = '#7c3aed';
+                }
                 
                 html += `
                     <tr style="background: ${bgColor}; border-bottom: 1px solid #e5e7eb;">
-                        <td style="padding: 10px 8px; text-align: center; font-weight: bold; color: #1e3c72;">${row.board}</td>
-                        <td style="padding: 10px 8px; text-align: left; color: #374151;">${row.opponent}</td>
-                        <td style="padding: 10px 8px; text-align: center; font-weight: 600; color: #6366f1;">${row.contract_display || '?'}</td>
-                        <td style="padding: 10px 8px; text-align: center; font-weight: bold; color: ${resultColor};">${row.result}</td>
-                        <td style="padding: 10px 8px; text-align: center; font-weight: bold; color: ${scoreColor};">${row.score}</td>
+                        <td style="padding: 8px 6px; text-align: center; font-weight: bold; color: #1e3c72;">${row.board}</td>
+                        <td style="padding: 8px 6px; text-align: center; font-weight: 600; color: ${contractColor};">${row.contract || '-'}</td>
+                        <td style="padding: 8px 6px; text-align: center; color: #374151;">${row.declarer || '-'}</td>
+                        <td style="padding: 8px 6px; text-align: center; font-weight: bold; color: ${resultColor};">${resultDisplay || '-'}</td>
+                        <td style="padding: 8px 6px; text-align: center; color: #6b7280; font-size: 0.9em;">${row.lead || '-'}</td>
+                        <td style="padding: 8px 6px; text-align: center; ${row.score_ns ? 'font-weight:bold;color:#16a34a;' : 'color:#999;'}">${row.score_ns || '-'}</td>
+                        <td style="padding: 8px 6px; text-align: center; ${row.score_ew ? 'font-weight:bold;color:#dc2626;' : 'color:#999;'}">${row.score_ew || '-'}</td>
+                        <td style="padding: 8px 6px; text-align: center; ${pctNS >= 50 ? 'font-weight:bold;color:#16a34a;' : 'color:#999;'}">${row.percent_ns || '-'}</td>
+                        <td style="padding: 8px 6px; text-align: center; ${pctEW >= 50 ? 'font-weight:bold;color:#dc2626;' : 'color:#999;'}">${row.percent_ew || '-'}</td>
                     </tr>
                 `;
             });
         } else {
-            html += `<tr><td colspan="5" style="padding: 30px; text-align: center; color: #999;">Sonuç bulunamadı</td></tr>`;
+            html += `<tr><td colspan="9" style="padding: 30px; text-align: center; color: #999;">Sonuç bulunamadı</td></tr>`;
         }
         
         html += `
@@ -3378,8 +3418,8 @@ async function openPairSummaryModal(eventId, pairNum, direction, pairNames) {
                     </table>
                 </div>
                 
-                <div style="margin-top: 15px; padding: 12px; background: #e0e7ff; border-radius: 8px; font-size: 0.85em; color: #4338ca;">
-                    <strong>💡 Not:</strong> Kontrat bilgisi skor değerinden tahmin edilmektedir. Tam doğruluk için orijinal kayıtlara başvurunuz.
+                <div style="margin-top: 15px; padding: 10px; background: #f0fdf4; border-radius: 8px; font-size: 0.8em; color: #166534; border: 1px solid #bbf7d0;">
+                    <strong>📊 Bilgi:</strong> Kontrat, deklaran, sonuç ve atak bilgileri Vugraph board detaylarından alınmıştır.
                 </div>
             </div>
         `;

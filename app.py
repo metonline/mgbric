@@ -269,7 +269,7 @@ def cron_update():
 @app.route('/api/pair-summary', methods=['GET'])
 def api_pair_summary():
     """
-    Fetch pair summary from Vugraph for a specific event, pair, and direction
+    Fetch pair summary from Vugraph boarddetails for a specific event, pair, and direction
     
     Query params:
         event: Event ID (e.g., 405278)
@@ -277,7 +277,13 @@ def api_pair_summary():
         direction: NS or EW
         section: Section letter (default: A)
     
-    Returns board-by-board results with contract info calculated from score
+    Returns board-by-board results with:
+        - contract (e.g., 4♥)
+        - declarer (N, S, E, W)
+        - result (=, +1, -1, etc.)
+        - lead (e.g., ♦6)
+        - score_ns, score_ew
+        - percent_ns, percent_ew
     """
     import requests
     from bs4 import BeautifulSoup
@@ -291,62 +297,119 @@ def api_pair_summary():
         return jsonify({'error': 'Missing event or pair parameter'}), 400
     
     try:
-        # Fetch pair summary from Vugraph
-        url = f"https://clubs.vugraph.com/hosgoru/pairsummary.php?event={event_id}&section={section}&pair={pair_num}&direction={direction}"
-        
-        response = requests.get(url, timeout=30)
-        response.encoding = 'utf-8'
-        
-        soup = BeautifulSoup(response.content, 'html.parser')
-        
-        # Get pair names from page title (h4)
-        pair_names = ""
-        h4 = soup.find('h4')
-        if h4:
-            text = h4.get_text(strip=True)
-            if 'Çift Özeti' in text:
-                pair_names = text.replace('Çift Özeti', '').strip()
-        
-        # Find the main results table
-        tables = soup.find_all('table')
         results = []
         
-        if len(tables) >= 2:
-            main_table = tables[1]  # Second table has the data
-            rows = main_table.find_all('tr')
+        # Fetch each board's details (boards 1-30)
+        for board_num in range(1, 31):
+            url = f"https://clubs.vugraph.com/hosgoru/boarddetails.php?event={event_id}&section={section}&pair={pair_num}&direction={direction}&board={board_num}"
             
-            for row in rows[1:]:  # Skip header
-                cells = row.find_all('td')
-                if len(cells) >= 4:
-                    board = cells[0].get_text(strip=True)
-                    opponent = cells[1].get_text(strip=True)
-                    result_score = cells[2].get_text(strip=True)
-                    mp_score = cells[3].get_text(strip=True)
+            try:
+                response = requests.get(url, timeout=10)
+                response.encoding = 'iso-8859-9'  # Turkish encoding
+                
+                soup = BeautifulSoup(response.content, 'html.parser')
+                
+                # Find the highlighted row (class="fantastic" for the requesting pair's result)
+                fantastic_row = soup.find('td', class_='fantastic')
+                
+                if fantastic_row:
+                    row = fantastic_row.find_parent('tr')
+                    cells = row.find_all('td', class_='fantastic')
                     
-                    # Parse result score to int
-                    try:
-                        result_int = int(result_score)
-                    except:
-                        result_int = 0
-                    
-                    # Estimate contract from score (simplified)
-                    contract_info = estimate_contract_from_score(result_int, direction)
-                    
-                    results.append({
-                        'board': board,
-                        'opponent': opponent,
-                        'result': result_score,
-                        'score': mp_score,
-                        'contract': contract_info.get('contract', '?'),
-                        'declarer': contract_info.get('declarer', '?'),
-                        'contract_display': contract_info.get('display', '?')
-                    })
+                    if len(cells) >= 8:
+                        # Parse contract (e.g., "4<img>H")
+                        contract_cell = cells[0]
+                        contract = parse_contract_cell(contract_cell)
+                        
+                        # Declarer
+                        declarer = cells[1].get_text(strip=True)
+                        
+                        # Result (=, +1, -1, -2, etc.)
+                        result = cells[2].get_text(strip=True)
+                        
+                        # Lead (e.g., "D6" -> ♦6)
+                        lead_cell = cells[3]
+                        lead = parse_lead_cell(lead_cell)
+                        
+                        # Scores - cells[4] is NS, cells[5] is EW
+                        score_ns = cells[4].get_text(strip=True) if not cells[4].find('img') else ''
+                        score_ew = cells[5].get_text(strip=True) if not cells[5].find('img') else ''
+                        
+                        # Percentages - cells[6] is NS%, cells[7] is EW%
+                        pct_ns = cells[6].get_text(strip=True) if not cells[6].find('img') else ''
+                        pct_ew = cells[7].get_text(strip=True) if not cells[7].find('img') else ''
+                        
+                        results.append({
+                            'board': board_num,
+                            'contract': contract,
+                            'declarer': declarer,
+                            'result': result,
+                            'lead': lead,
+                            'score_ns': score_ns,
+                            'score_ew': score_ew,
+                            'percent_ns': pct_ns,
+                            'percent_ew': pct_ew
+                        })
+                else:
+                    # Try finding in results class (non-highlighted)
+                    results_rows = soup.find_all('tr')
+                    for rrow in results_rows:
+                        cells = rrow.find_all('td', class_='results')
+                        if len(cells) >= 8:
+                            # This is a valid result row
+                            contract = parse_contract_cell(cells[0])
+                            declarer = cells[1].get_text(strip=True)
+                            result = cells[2].get_text(strip=True)
+                            lead = parse_lead_cell(cells[3])
+                            
+                            score_ns = cells[4].get_text(strip=True) if not cells[4].find('img') else ''
+                            score_ew = cells[5].get_text(strip=True) if not cells[5].find('img') else ''
+                            pct_ns = cells[6].get_text(strip=True) if not cells[6].find('img') else ''
+                            pct_ew = cells[7].get_text(strip=True) if not cells[7].find('img') else ''
+                            
+                            results.append({
+                                'board': board_num,
+                                'contract': contract,
+                                'declarer': declarer,
+                                'result': result,
+                                'lead': lead,
+                                'score_ns': score_ns,
+                                'score_ew': score_ew,
+                                'percent_ns': pct_ns,
+                                'percent_ew': pct_ew
+                            })
+                            break  # Only first row for this pair
+                            
+            except Exception as e:
+                # Skip boards that fail to load
+                continue
+        
+        # Get pair names from first board page title
+        pair_names = ""
+        try:
+            url = f"https://clubs.vugraph.com/hosgoru/boarddetails.php?event={event_id}&section={section}&pair={pair_num}&direction={direction}&board=1"
+            response = requests.get(url, timeout=10)
+            response.encoding = 'iso-8859-9'
+            soup = BeautifulSoup(response.content, 'html.parser')
+            h3 = soup.find('h3')
+            if h3:
+                text = h3.get_text(strip=True)
+                # Extract names: "... ZÜLKÜF TEOMAN HAZNECI - HIKMET ALBAYRAK ... Bord 1"
+                if '...' in text:
+                    parts = text.split('...')
+                    if len(parts) >= 2:
+                        pair_names = parts[1].strip()
+                        if 'Bord' in pair_names:
+                            pair_names = pair_names.split('Bord')[0].strip()
+        except:
+            pass
         
         return jsonify({
             'success': True,
             'pair_names': pair_names,
             'direction': direction,
             'event_id': event_id,
+            'pair_num': pair_num,
             'results': results
         })
         
@@ -354,89 +417,36 @@ def api_pair_summary():
         return jsonify({'error': str(e)}), 500
 
 
-def estimate_contract_from_score(score, pair_direction):
-    """
-    Estimate the likely contract and declarer from the result score.
-    This is a heuristic based on common bridge scoring.
-    
-    Score patterns:
-    - Positive for NS: NS made contract or set EW
-    - Negative for NS: EW made contract or NS went down
-    
-    Common scores:
-    - 420: 4♠/4♥ made, not vul
-    - 620: 4♠/4♥ made, vul
-    - 430: 3NT+1, not vul
-    - 400: 3NT made, not vul
-    - 600: 3NT made, vul
-    - 110/140: Partial in major
-    - 90/110/130: Partial in minor
-    - 50/100: 1 down
-    """
-    
-    # Determine who likely declared based on score sign and pair direction
-    if pair_direction == 'NS':
-        if score > 0:
-            # NS positive: NS made or EW went down
-            declarer = 'NS'
-        else:
-            # NS negative: EW made or NS went down
-            declarer = 'EW'
-    else:  # EW
-        if score > 0:
-            declarer = 'EW'
-        else:
-            declarer = 'NS'
-    
-    abs_score = abs(score)
-    contract = '?'
-    
-    # Major game scores
-    if abs_score in [420, 450, 480, 510]:
-        contract = '4♠/♥'
-    elif abs_score in [620, 650, 680, 710]:
-        contract = '4♠/♥'
-    # NT game scores
-    elif abs_score in [400, 430, 460, 490]:
-        contract = '3NT'
-    elif abs_score in [600, 630, 660, 690]:
-        contract = '3NT'
-    # Minor game scores
-    elif abs_score in [400, 920, 1370, 1390]:
-        contract = '5♣/♦'
-    # Slam scores
-    elif abs_score >= 980 and abs_score <= 1020:
-        contract = '6♠/♥'
-    elif abs_score >= 1430 and abs_score <= 1470:
-        contract = '6♠/♥'
-    elif abs_score >= 990 and abs_score <= 1020:
-        contract = '6NT'
-    elif abs_score >= 1500:
-        contract = '7x'
-    # Partial scores - majors
-    elif abs_score in [110, 140, 170, 200]:
-        contract = '2♠/♥'
-    elif abs_score in [80, 50]:
-        contract = '1♠/♥'
-    # Partial scores - minors
-    elif abs_score in [90, 110, 130]:
-        contract = '2♣/♦'
-    # Down scores
-    elif abs_score in [50, 100, 150, 200, 250, 300]:
-        contract = 'Down'
-    elif abs_score in [100, 200, 300, 500, 800, 1100]:
-        contract = 'Down (Vul)'
-    # Common partials
-    elif abs_score in [120, 150, 180]:
-        contract = '2-3♠/♥'
-    
-    display = f"{contract} ({declarer})" if contract != '?' else '?'
-    
-    return {
-        'contract': contract,
-        'declarer': declarer,
-        'display': display
-    }
+def parse_contract_cell(cell):
+    """Parse contract cell with suit image (e.g., '4<img src="h.gif">') -> '4♥'"""
+    text = cell.get_text(strip=True)
+    img = cell.find('img')
+    if img:
+        alt = img.get('alt', '').upper()
+        src = img.get('src', '').lower()
+        suit = ''
+        if 's' in alt or 's.gif' in src:
+            suit = '♠'
+        elif 'h' in alt or 'h.gif' in src:
+            suit = '♥'
+        elif 'd' in alt or 'd.gif' in src:
+            suit = '♦'
+        elif 'c' in alt or 'c.gif' in src:
+            suit = '♣'
+        return text + suit
+    return text
+
+
+def parse_lead_cell(cell):
+    """Parse lead cell (e.g., 'D6') -> '♦6'"""
+    text = cell.get_text(strip=True)
+    if len(text) >= 2:
+        suit_char = text[0].upper()
+        card = text[1:]
+        suit_map = {'S': '♠', 'H': '♥', 'D': '♦', 'C': '♣'}
+        if suit_char in suit_map:
+            return suit_map[suit_char] + card
+    return text
 
 
 # ============================================================
