@@ -155,15 +155,25 @@ def webhook_status():
         
         hands_count = len(hands_data)
         
-        # Get latest dates
-        if isinstance(db_data, dict) and 'legacy_records' in db_data:
-            dates = set(r.get('Tarih', '') for r in db_data['legacy_records'])
-        elif isinstance(db_data, list):
-            dates = set(r.get('Tarih', '') for r in db_data if isinstance(r, dict))
-        else:
-            dates = set()
+        # Get latest dates (properly sorted by date)
+        def parse_date(d):
+            try:
+                parts = d.split('.')
+                return (int(parts[2]), int(parts[1]), int(parts[0]))
+            except:
+                return (0, 0, 0)
         
-        hands_dates = set(h.get('Tarih', '') for h in hands_data)
+        if isinstance(db_data, dict) and 'legacy_records' in db_data:
+            dates = [r.get('Tarih', '') for r in db_data['legacy_records'] if r.get('Tarih')]
+        elif isinstance(db_data, list):
+            dates = [r.get('Tarih', '') for r in db_data if isinstance(r, dict) and r.get('Tarih')]
+        else:
+            dates = []
+        
+        hands_dates = [h.get('Tarih', '') for h in hands_data if h.get('Tarih')]
+        
+        latest_score = max(dates, key=parse_date) if dates else None
+        latest_hands = max(hands_dates, key=parse_date) if hands_dates else None
         
         return jsonify({
             'status': 'ok',
@@ -171,8 +181,8 @@ def webhook_status():
                 'scores': score_count,
                 'hands': hands_count,
                 'last_updated': last_updated,
-                'latest_score_date': max(dates) if dates else None,
-                'latest_hands_date': max(hands_dates) if hands_dates else None
+                'latest_score_date': latest_score,
+                'latest_hands_date': latest_hands
             }
         })
     except Exception as e:
