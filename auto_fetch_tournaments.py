@@ -26,7 +26,7 @@ class AutoTournamentFetcher:
     def get_available_dates_from_calendar(self):
         """
         Extract all dates that have events from the calendar
-        Returns list of dates with events
+        Returns list of dates with events - dynamically detects month/year
         """
         try:
             response = requests.get(f"{self.BASE_URL}/calendar.php", timeout=10)
@@ -38,6 +38,33 @@ class AutoTournamentFetcher:
         
         soup = BeautifulSoup(html, 'html.parser')
         dates_with_events = []
+        
+        # Try to detect current month/year from calendar header
+        # Look for month/year in page title or header
+        current_month = datetime.now().month
+        current_year = datetime.now().year
+        
+        # Try to extract from calendar header
+        header = soup.find('th', colspan=True) or soup.find('td', class_='banner')
+        if header:
+            header_text = header.get_text(strip=True).lower()
+            # Turkish month names
+            months_tr = {'ocak': 1, 'şubat': 2, 'mart': 3, 'nisan': 4, 'mayıs': 5, 'haziran': 6,
+                        'temmuz': 7, 'ağustos': 8, 'eylül': 9, 'ekim': 10, 'kasım': 11, 'aralık': 12}
+            # English month names
+            months_en = {'january': 1, 'february': 2, 'march': 3, 'april': 4, 'may': 5, 'june': 6,
+                        'july': 7, 'august': 8, 'september': 9, 'october': 10, 'november': 11, 'december': 12}
+            
+            for month_name, month_num in {**months_tr, **months_en}.items():
+                if month_name in header_text:
+                    current_month = month_num
+                    break
+            
+            # Look for year
+            import re
+            year_match = re.search(r'20\d{2}', header_text)
+            if year_match:
+                current_year = int(year_match.group())
         
         # Find all day cells in calendar grid
         day_cells = soup.find_all('td', class_='days')
@@ -64,8 +91,8 @@ class AutoTournamentFetcher:
                     break
             
             if has_events:
-                # Date format: DD.MM.YYYY (assuming December 2025)
-                dates_with_events.append(f"{day:02d}.12.2025")
+                # Date format: DD.MM.YYYY with detected month/year
+                dates_with_events.append(f"{day:02d}.{current_month:02d}.{current_year}")
         
         return dates_with_events
     

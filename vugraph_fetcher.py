@@ -238,7 +238,7 @@ class VugraphDataFetcher:
             if records:
                 ns_count = len([r for r in records if r.get('Direction') == 'NS'])
                 ew_count = len([r for r in records if r.get('Direction') == 'EW'])
-                print(f"   ✓ Parsed {len(records)} records (NS: {ns_count}, EW: {ew_count})")
+                print(f"   [OK] Parsed {len(records)} records (NS: {ns_count}, EW: {ew_count})")
                 
                 # Store in new format
                 event_key = f"event_{event['id']}"
@@ -264,11 +264,25 @@ class VugraphDataFetcher:
         data['last_updated'] = datetime.now().isoformat()
         data['metadata']['total_tournaments'] = len(data['events'])
         
+        # Add records to legacy_records as well
+        if 'legacy_records' not in data:
+            data['legacy_records'] = []
+        
+        # Add new records to legacy_records (avoid duplicates)
+        existing_legacy = set()
+        for r in data['legacy_records']:
+            key = (r.get('Tarih'), r.get('Oyuncu 1'), r.get('Oyuncu 2'), r.get('Direction'))
+            existing_legacy.add(key)
+        
+        for record in self.records_added:
+            key = (record.get('Tarih'), record.get('Oyuncu 1'), record.get('Oyuncu 2'), record.get('Direction'))
+            if key not in existing_legacy:
+                data['legacy_records'].append(record)
+        
         # Save database (UTF-8 without BOM)
         try:
             with open(self.DB_FILE, 'w', encoding='utf-8') as f:
                 json.dump(data, f, ensure_ascii=False, indent=2)
-
             print(f"\n   ✓ Database saved successfully")
         except Exception as e:
             self.errors.append(f"Failed to save database: {e}")

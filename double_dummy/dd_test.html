@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DD Test</title>
+    <style>
+        body { font-family: Arial; padding: 20px; background: #f0f0f0; }
+        .card { background: white; padding: 20px; margin: 10px 0; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        table { border-collapse: collapse; margin: 10px 0; }
+        th, td { border: 1px solid #ddd; padding: 8px 12px; text-align: center; }
+        th { background: #1e3c72; color: white; }
+        .red { color: red; }
+        .suit { font-size: 1.2em; }
+    </style>
+</head>
+<body>
+    <h1>🃏 Double Dummy Test</h1>
+    <div id="status">Yükleniyor...</div>
+    <div id="content"></div>
+    
+    <script>
+        async function load() {
+            try {
+                const response = await fetch('/api/hands');
+                const data = await response.json();
+                
+                document.getElementById('status').innerHTML = `<b>✅ ${data.length} el yüklendi</b>`;
+                
+                // İlk 5 eli göster
+                let html = '';
+                data.slice(0, 5).forEach(board => {
+                    const dd = board.dd_analysis;
+                    html += `
+                        <div class="card">
+                            <h3>Board ${board.board} - ${board.date}</h3>
+                            <p><b>North:</b> ${board.N}</p>
+                            <p><b>South:</b> ${board.S}</p>
+                            <p><b>East:</b> ${board.E}</p>
+                            <p><b>West:</b> ${board.W}</p>
+                            
+                            <h4>Double Dummy:</h4>
+                            ${dd ? renderDD(dd) : '<p style="color:red">DD verisi yok!</p>'}
+                        </div>
+                    `;
+                });
+                
+                document.getElementById('content').innerHTML = html;
+                
+            } catch (err) {
+                document.getElementById('status').innerHTML = `<b style="color:red">❌ Hata: ${err.message}</b>`;
+            }
+        }
+        
+        function renderDD(dd) {
+            const positions = ['N', 'S', 'E', 'W'];
+            const suits = [
+                {k: 'C', s: '♣', c: ''},
+                {k: 'D', s: '♦', c: 'red'},
+                {k: 'H', s: '♥', c: 'red'},
+                {k: 'S', s: '♠', c: ''},
+                {k: 'NT', s: 'NT', c: ''}
+            ];
+            
+            let html = '<table><thead><tr><th></th>';
+            suits.forEach(s => {
+                html += `<th class="suit ${s.c}">${s.s}</th>`;
+            });
+            html += '</tr></thead><tbody>';
+            
+            positions.forEach(pos => {
+                html += `<tr><td><b>${pos}</b></td>`;
+                suits.forEach(s => {
+                    const val = dd[pos]?.[s.k] ?? '-';
+                    html += `<td>${val}</td>`;
+                });
+                html += '</tr>';
+            });
+            
+            html += '</tbody></table>';
+            return html;
+        }
+        
+        load();
+    </script>
+</body>
+</html>

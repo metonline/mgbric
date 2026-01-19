@@ -46,6 +46,28 @@ function getTranslation(keyPath) {
     return value || keyPath;
 }
 
+// ===== EL MAPPING HELPER =====
+// Database'deki field isimleri rotated - dealer'a göre mapping değişir (clockwise rotation)
+function getMappedHands(h, dealerLetter) {
+    const dealerIndex = {'N': 0, 'E': 1, 'S': 2, 'W': 3}[dealerLetter] || 0;
+    const fields = ['h.S', 'h.N', 'h.W', 'h.E']; // rotation 0 mapping (N dealer)
+    
+    // Clockwise rotation uygula
+    const rotated = [
+        fields[(0 - dealerIndex + 4) % 4],  // N
+        fields[(1 - dealerIndex + 4) % 4],  // E
+        fields[(2 - dealerIndex + 4) % 4],  // S
+        fields[(3 - dealerIndex + 4) % 4]   // W
+    ];
+    
+    return {
+        'N': h[rotated[0].split('.')[1]],
+        'E': h[rotated[1].split('.')[1]],
+        'S': h[rotated[2].split('.')[1]],
+        'W': h[rotated[3].split('.')[1]]
+    };
+}
+
 // Dosya bilgisini göster (dil değişiklikleri için dinamik)
 function formatNumber(num) {
     /**Format number with thousands separator based on current language*/
@@ -661,7 +683,8 @@ function loadDatabase(period) {
         'since2020': `2020'den Beri (01.01.2020 - 31.12.${year})`
     };
 
-    // TARIH ARILIGI: 2 sayfa modal aç
+    // TARIH ARILIGI: 2 sayfa modal aç (İstatistikler, Sonuçlar)
+    console.log('🔔 openRangeModal2Pages çağrılmak üzere:', globalModalData.length, 'kayıt');
     openRangeModal2Pages(globalModalData, labels[period], period);
 }
 
@@ -711,10 +734,10 @@ function filterBySelectedDate() {
         // Kullanıcıya seçim sun
         showTournamentSelectModal(uniqueTournaments, function(selectedTournament) {
             const tournamentData = filtered.filter(r => (r.Turnuva || '') === selectedTournament);
-            openGlobalStatsModal(tournamentData, `Seçilen Tarih: ${filterDate} - ${selectedTournament}`);
+            showMobileModal(tournamentData, filterDate);
         });
     } else {
-        openGlobalStatsModal(filtered, `Seçilen Tarih: ${filterDate}${uniqueTournaments[0] ? ' - ' + uniqueTournaments[0] : ''}`);
+        showMobileModal(filtered, filterDate);
     }
 // Turnuva seçimi modalı fonksiyonları
 function showTournamentSelectModal(tournamentList, onSelect) {
@@ -750,6 +773,10 @@ function openGlobalRangeModal(data, filterLabel) {
     window.globalRangeData = data;
     window.globalRangeData = data;
     window.currentRangeTab = 1;
+    // Eğer modalType set edilmemişse, default olarak 'range-filter'
+    if (!window.modalType) {
+        window.modalType = 'range-filter';
+    }
     
     // Remove old modal if exists
     let modal = document.getElementById('globalRangeModal');
@@ -863,6 +890,7 @@ function openGlobalRangeModal(data, filterLabel) {
         border-radius: 5px;
         cursor: pointer;
         font-weight: bold;
+        visibility: visible;
     `;
     
     const spacer = document.createElement('div');
@@ -880,6 +908,7 @@ function openGlobalRangeModal(data, filterLabel) {
         border-radius: 5px;
         cursor: pointer;
         font-weight: bold;
+        visibility: visible;
     `;
     
     navDiv.appendChild(prevBtn);
@@ -898,7 +927,7 @@ function openGlobalRangeModal(data, filterLabel) {
     
     const pageIndicator = document.createElement('span');
     pageIndicator.id = 'rangePageIndicator';
-    pageIndicator.textContent = 'Sayfa 1/2';
+    pageIndicator.textContent = 'Sayfa 1/4';
     pageIndicator.style.cssText = `
         font-weight: bold;
         color: #667eea;
@@ -920,6 +949,9 @@ function openGlobalRangeModal(data, filterLabel) {
     
     console.log('✅ Dynamic modal created and displayed');
     
+    // Initialize swipe navigation for 4 pages
+    initGlobalRangeSwipe();
+    
     // Render first page
     showGlobalRangeTab(1);
     console.log('✓ Global Range Modal açıldı:', data.length, 'kayıt');
@@ -933,11 +965,90 @@ function closeGlobalRangeModal() {
     }
 }
 
+// Toggle hands details visibility
+function toggleHandsDetails(date) {
+    const handsDiv = document.getElementById(`hands-${date}`);
+    if (handsDiv) {
+        handsDiv.style.display = handsDiv.style.display === 'none' ? 'block' : 'none';
+    }
+}
+
+// ===== GLOBAL RANGE SWIPE NAVIGATION (4 PAGES) =====
+function initGlobalRangeSwipe() {
+    const modal = document.getElementById('globalRangeModal');
+    if (!modal) {
+        console.warn('⚠️ globalRangeModal bulunamadı');
+        return;
+    }
+    
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let touchEndX = 0;
+    let touchEndY = 0;
+    let isSwiping = false;
+    
+    console.log('✓ Global Range Swipe navigation initialized');
+    
+    modal.addEventListener('touchstart', (e) => {
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+        isSwiping = true;
+    });
+    
+    modal.addEventListener('touchmove', (e) => {
+        if (!isSwiping) return;
+        // Prevent default scroll behavior during swipe
+        if (Math.abs(e.touches[0].clientX - touchStartX) > 10) {
+            e.preventDefault();
+        }
+    });
+    
+    modal.addEventListener('touchend', (e) => {
+        if (!isSwiping) return;
+        isSwiping = false;
+        
+        touchEndX = e.changedTouches[0].clientX;
+        touchEndY = e.changedTouches[0].clientY;
+        handleGlobalRangeSwipe();
+    });
+    
+    function handleGlobalRangeSwipe() {
+        const swipeThreshold = 40;
+        const verticalThreshold = 40;
+        
+        const diffX = touchStartX - touchEndX;
+        const diffY = Math.abs(touchStartY - touchEndY);
+        
+        // Vertical movement daha fazla ise (scroll) swipe olarak sayma
+        if (diffY > verticalThreshold) {
+            console.log('⚠️ Vertical movement detected, ignoring swipe');
+            return;
+        }
+        
+        // Minimum horizontal movement gerekli
+        if (Math.abs(diffX) < swipeThreshold) {
+            console.log('⚠️ Swipe too small, ignoring');
+            return;
+        }
+        
+        // Sola swipe (diffX positive) → Sonraki sayfa
+        if (diffX > swipeThreshold) {
+            console.log('🔄 Sola swipe - Sonraki sayfa');
+            showGlobalRangeTab(window.currentRangeTab + 1);
+        }
+        // Sağa swipe (diffX negative) → Önceki sayfa
+        else if (diffX < -swipeThreshold) {
+            console.log('🔄 Sağa swipe - Önceki sayfa');
+            showGlobalRangeTab(window.currentRangeTab - 1);
+        }
+    }
+}
+
 function showGlobalRangeTab(tabNum) {
     try {
-        // Boundary check
+        // Boundary check - 4 sayfaya çıkardık
         if (tabNum < 1) tabNum = 1;
-        if (tabNum > 2) tabNum = 2;
+        if (tabNum > 4) tabNum = 4;
         
         window.currentRangeTab = tabNum;
         
@@ -959,157 +1070,213 @@ function showGlobalRangeTab(tabNum) {
             return;
         }
     
-    // Update page indicator
-    if (pageIndicator) pageIndicator.textContent = `Sayfa ${tabNum}/2`;
+    // Update page indicator - 4 sayfa göster
+    if (pageIndicator) pageIndicator.textContent = `Sayfa ${tabNum}/4`;
     
     // Update button visibility
     if (prevBtn) prevBtn.style.visibility = tabNum > 1 ? 'visible' : 'hidden';
-    if (nextBtn) nextBtn.style.visibility = tabNum < 2 ? 'visible' : 'hidden';
+    if (nextBtn) nextBtn.style.visibility = tabNum < 4 ? 'visible' : 'hidden';
     
     if (tabNum === 1) {
-        // Sayfa 1: İstatistikler (Top 3 1.lik + Top 3 Skor Ortalaması)
-        console.log('📄 Tab 1 başladı');
-        if (title) title.textContent = '📊 İstatistikler';
+        // Sayfa 1: Modalun türüne göre farklı içerik
+        console.log('📄 Tab 1 başladı, modalType:', window.modalType);
         
-        // Top 3 En Çok 1.lik Kazananlar
-        const firstPlaceStats = {};
-        data.forEach(row => {
-            if (parseInt(row['Sıra']) === 1) {
+        if (window.modalType === 'date-picker') {
+            // TARİH SEÇİCİ: Günün Şampiyonları (1.likler)
+            if (title) title.textContent = '🏆 Günün Şampiyonları';
+            
+            const champions = data.filter(row => parseInt(row['Sıra']) === 1);
+            
+            let html = '<div style="display:flex;flex-direction:column;gap:10px;max-height:100%;overflow-y:auto;">';
+            
+            if (champions.length === 0) {
+                html += '<p style="text-align:center;color:#999;padding:20px;">Şampiyon bulunamadı</p>';
+            } else {
+                champions.forEach((record, idx) => {
+                    html += `
+                        <div style="padding:12px;background:#f8f9fa;border-left:4px solid #ffc107;border-radius:6px;">
+                            <div style="font-weight:bold;color:#1e3c72;margin-bottom:5px;">
+                                🥇 ${idx + 1}. ${record['Oyuncu 1']} & ${record['Oyuncu 2']}
+                            </div>
+                            <div style="font-size:0.85em;color:#666;">
+                                📊 %${record['Skor']} | 🎯 ${record['Turnuva Adı'] || 'Bilinmeyen'}
+                            </div>
+                        </div>
+                    `;
+                });
+            }
+            
+            html += '</div>';
+            contentArea.innerHTML = html;
+            
+        } else {
+            // RANGE FİLTRELER: İstatistikler (Top 1.likler + Top Skor Ortalaması)
+            if (title) title.textContent = '📊 İstatistikler';
+            
+            // Top 3 1.lik Kazananlar
+            const firstPlaceStats = {};
+            data.forEach(row => {
+                if (parseInt(row['Sıra']) === 1) {
+                    const p1 = normalizeText(row['Oyuncu 1'].trim());
+                    const p2 = normalizeText(row['Oyuncu 2'].trim());
+                    firstPlaceStats[p1] = (firstPlaceStats[p1] || 0) + 1;
+                    firstPlaceStats[p2] = (firstPlaceStats[p2] || 0) + 1;
+                }
+            });
+            
+            const topFirstPlace = Object.entries(firstPlaceStats)
+                .sort((a, b) => b[1] - a[1])
+                .slice(0, 3);
+            
+            // Top 3 Skor Ortalaması
+            const playerScores = {};
+            data.forEach(row => {
                 const p1 = normalizeText(row['Oyuncu 1'].trim());
                 const p2 = normalizeText(row['Oyuncu 2'].trim());
-                firstPlaceStats[p1] = (firstPlaceStats[p1] || 0) + 1;
-                firstPlaceStats[p2] = (firstPlaceStats[p2] || 0) + 1;
+                const score = parseFloat(row['Skor']) || 0;
+                
+                if (!playerScores[p1]) playerScores[p1] = { total: 0, count: 0 };
+                if (!playerScores[p2]) playerScores[p2] = { total: 0, count: 0 };
+                
+                playerScores[p1].total += score;
+                playerScores[p1].count += 1;
+                playerScores[p2].total += score;
+                playerScores[p2].count += 1;
+            });
+            
+            const topAvgScore = Object.entries(playerScores)
+                .map(([name, stats]) => ({name, avg: (stats.total / stats.count).toFixed(2)}))
+                .sort((a, b) => parseFloat(b.avg) - parseFloat(a.avg))
+                .slice(0, 3);
+            
+            let html = '<div style="display:grid;grid-template-columns:1fr 1fr;gap:15px;">';
+        
+            // Top 3 1.lik Kazananlar
+            html += '<div style="background:#fff5e6;border-radius:8px;padding:15px;">';
+            html += '<div style="color:#d97706;font-weight:bold;font-size:0.95em;text-align:center;margin-bottom:12px;">🏆 En Çok 1.lik Kazananlar</div>';
+            
+            if (topFirstPlace.length === 0) {
+                html += '<div style="color:#999;text-align:center;padding:20px;">Veri yok</div>';
+            } else {
+                html += '<div style="display:flex;flex-direction:column;gap:8px;">';
+                topFirstPlace.forEach((item, idx) => {
+                    html += '<div style="background:white;padding:10px;border-radius:6px;border-left:3px solid #d97706;">';
+                    html += `<div style="display:flex;justify-content:space-between;align-items:center;">`;
+                    html += `<div style="font-weight:bold;color:#1e3c72;font-size:0.85em;">${idx+1}. ${item[0]}</div>`;
+                    html += `<div style="background:#fef3c7;color:#d97706;font-weight:bold;padding:4px 8px;border-radius:4px;font-size:0.8em;">${item[1]} ×</div>`;
+                    html += '</div></div>';
+                });
+                html += '</div>';
             }
-        });
-        
-        const topFirstPlace = Object.entries(firstPlaceStats)
-            .sort((a, b) => b[1] - a[1])
-            .slice(0, 3);
-        
-        console.log('📊 topFirstPlace:', topFirstPlace.length);
-        // Top 3 Skor Ortalaması En Yüksek
-        const playerScores = {};
-        data.forEach(row => {
-            const p1 = normalizeText(row['Oyuncu 1'].trim());
-            const p2 = normalizeText(row['Oyuncu 2'].trim());
-            const score = parseFloat(row['Skor']) || 0;
-            
-            if (!playerScores[p1]) playerScores[p1] = { total: 0, count: 0 };
-            if (!playerScores[p2]) playerScores[p2] = { total: 0, count: 0 };
-            
-            playerScores[p1].total += score;
-            playerScores[p1].count += 1;
-            playerScores[p2].total += score;
-            playerScores[p2].count += 1;
-        });
-        
-        const topAvgScore = Object.entries(playerScores)
-            .map(([name, stats]) => ({name, avg: (stats.total / stats.count).toFixed(2)}))
-            .sort((a, b) => parseFloat(b.avg) - parseFloat(a.avg))
-            .slice(0, 3);
-        
-        let html = '<div style="display:grid;grid-template-columns:1fr 1fr;gap:15px;">';
-        
-        // Top 3 1.lik Kazananlar
-        html += '<div style="background:#fff5e6;border-radius:8px;padding:15px;">';
-        html += '<div style="color:#d97706;font-weight:bold;font-size:0.95em;text-align:center;margin-bottom:12px;">🏆 En Çok 1.lik Kazananlar</div>';
-        
-        if (topFirstPlace.length === 0) {
-            html += '<div style="color:#999;text-align:center;padding:20px;">Veri yok</div>';
-        } else {
-            html += '<div style="display:flex;flex-direction:column;gap:8px;">';
-            topFirstPlace.forEach((item, idx) => {
-                html += '<div style="background:white;padding:10px;border-radius:6px;border-left:3px solid #d97706;">';
-                html += `<div style="display:flex;justify-content:space-between;align-items:center;">`;
-                html += `<div style="font-weight:bold;color:#1e3c72;font-size:0.85em;">${idx+1}. ${item[0]}</div>`;
-                html += `<div style="background:#fef3c7;color:#d97706;font-weight:bold;padding:4px 8px;border-radius:4px;font-size:0.8em;">${item[1]} ×</div>`;
-                html += '</div></div>';
-            });
             html += '</div>';
+            
+            // Top 3 Skor Ortalaması
+            html += '<div style="background:#f0fdf4;border-radius:8px;padding:15px;">';
+            html += '<div style="color:#16a34a;font-weight:bold;font-size:0.95em;text-align:center;margin-bottom:12px;">📈 Skor Ortalaması En Yüksek</div>';
+            
+            if (topAvgScore.length === 0) {
+                html += '<div style="color:#999;text-align:center;padding:20px;">Veri yok</div>';
+            } else {
+                html += '<div style="display:flex;flex-direction:column;gap:8px;">';
+                topAvgScore.forEach((item, idx) => {
+                    html += '<div style="background:white;padding:10px;border-radius:6px;border-left:3px solid #16a34a;">';
+                    html += `<div style="display:flex;justify-content:space-between;align-items:center;">`;
+                    html += `<div style="font-weight:bold;color:#1e3c72;font-size:0.85em;">${idx+1}. ${item.name}</div>`;
+                    html += `<div style="background:#dcfce7;color:#16a34a;font-weight:bold;padding:4px 8px;border-radius:4px;font-size:0.8em;">% ${item.avg}</div>`;
+                    html += '</div></div>';
+                });
+                html += '</div>';
+            }
+            html += '</div></div>';
+            
+            contentArea.innerHTML = html;
         }
-        html += '</div>';
-        
-        // Top 3 Skor Ortalaması
-        html += '<div style="background:#f0fdf4;border-radius:8px;padding:15px;">';
-        html += '<div style="color:#16a34a;font-weight:bold;font-size:0.95em;text-align:center;margin-bottom:12px;">📈 Skor Ortalaması En Yüksek</div>';
-        
-        if (topAvgScore.length === 0) {
-            html += '<div style="color:#999;text-align:center;padding:20px;">Veri yok</div>';
-        } else {
-            html += '<div style="display:flex;flex-direction:column;gap:8px;">';
-            topAvgScore.forEach((item, idx) => {
-                html += '<div style="background:white;padding:10px;border-radius:6px;border-left:3px solid #16a34a;">';
-                html += `<div style="display:flex;justify-content:space-between;align-items:center;">`;
-                html += `<div style="font-weight:bold;color:#1e3c72;font-size:0.85em;">${idx+1}. ${item.name}</div>`;
-                html += `<div style="background:#dcfce7;color:#16a34a;font-weight:bold;padding:4px 8px;border-radius:4px;font-size:0.8em;">% ${item.avg}</div>`;
-                html += '</div></div>';
-            });
-            html += '</div>';
-        }
-        html += '</div></div>';
-        
-        console.log('📄 Tab 1 HTML uzunluğu:', html.length);
-        contentArea.innerHTML = html;
-        console.log('✅ Tab 1 HTML set edildi');
         
     } else if (tabNum === 2) {
-        // Sayfa 2: Turnuva Sonuçları (Tarih | NS-1 | Oyuncu 1 | Oyuncu 2 | % Skor)
-        if (title) title.textContent = '🎯 Turnuva Sonuçları';
-        
-        // Excel'e aktar fonksiyonu
-        const exportToExcel = () => {
-            try {
-                const sorted = [...data].sort((a, b) => {
-                    const dateA = a['Tarih'].split('.').reverse().join('-');
-                    const dateB = b['Tarih'].split('.').reverse().join('-');
-                    return dateB.localeCompare(dateA);
+        // Sayfa 2: Modalun türüne göre farklı içerik
+        if (window.modalType === 'date-picker') {
+            // TARİH SEÇİCİ: NS Skor Sıralaması
+            if (title) title.textContent = '🎲 NS Skor Sıralaması';
+            
+            const nsList = data.filter(row => row['Direction'] === 'NS').sort((a, b) => parseFloat(b['Skor']) - parseFloat(a['Skor']));
+            
+            let html = '<div style="display:flex;flex-direction:column;gap:8px;max-height:100%;overflow-y:auto;">';
+            
+            if (nsList.length === 0) {
+                html += '<p style="text-align:center;color:#999;padding:20px;">NS sonuç bulunamadı</p>';
+            } else {
+                nsList.forEach((record, idx) => {
+                    html += `
+                        <div style="padding:10px;background:#f8f9fa;border-left:4px solid #3b82f6;border-radius:6px;display:flex;justify-content:space-between;align-items:center;">
+                            <div>
+                                <div style="font-weight:bold;color:#1e3c72;font-size:0.9em;">${idx + 1}. ${record['Oyuncu 1']} & ${record['Oyuncu 2']}</div>
+                            </div>
+                            <div style="font-weight:bold;color:#3b82f6;font-size:1em;">%${record['Skor']}</div>
+                        </div>
+                    `;
                 });
-                
-                let csv = 'Tarih\tSıra\tOyuncu 1\tOyuncu 2\tSkor\n';
-                sorted.forEach(row => {
-                    const tarihParts = row['Tarih'].split('.');
-                    const tarihFormat = tarihParts[0] + '.' + tarihParts[1] + '.' + (tarihParts[2].length > 2 ? tarihParts[2].slice(-2) : tarihParts[2]);
-                    csv += `${tarihFormat}\t${row['Sıra']}\t${row['Oyuncu 1']}\t${row['Oyuncu 2']}\t${row['Skor']}\n`;
-                });
-                
-                const blob = new Blob([csv], {type: 'text/plain'});
-                const url = URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = 'turnuva_sonuclari.txt';
-                a.click();
-                URL.revokeObjectURL(url);
-                alert('✅ Veriler indirildi! Excel\'e yapıştırabilirsiniz.');
-            } catch (e) {
-                alert('Hata: ' + e.message);
             }
-        };
-        
-        // Verileri tarihine göre sırala (eskiden yeniye)
-        const sorted = [...data].sort((a, b) => {
-            const dateA = a['Tarih'].split('.').reverse().join('-');
-            const dateB = b['Tarih'].split('.').reverse().join('-');
-            return dateB.localeCompare(dateA);
-        });
-        
-        let html = '<div style="display:flex;flex-direction:column;gap:12px;">';
-        
-        // Excel Export Butonu
-        html += '<button onclick="window.exportGlobalResults()" style="padding:10px;background:#10b981;color:white;border:none;border-radius:6px;font-weight:bold;cursor:pointer;margin-bottom:8px;">📥 Excel\'e Aktar</button>';
-        
-        // Başlık
-        html += '<div style="display:grid;grid-template-columns:80px 60px 1fr 1fr 80px;gap:10px;padding:12px;background:#667eea;color:white;border-radius:8px;font-weight:bold;font-size:0.85em;position:sticky;top:0;z-index:10;">';
-        html += '<div style="text-align:center;">📅 Tarih</div>';
-        html += '<div style="text-align:center;">🎯 Sıra</div>';
-        html += '<div style="text-align:center;">👤 Oyuncu 1</div>';
-        html += '<div style="text-align:center;">👤 Oyuncu 2</div>';
-        html += '<div style="text-align:center;">📊 Skor</div>';
-        html += '</div>';
-        
-        // Satırlar
-        if (sorted.length === 0) {
-            html += '<div style="text-align:center;color:#999;padding:20px;">Sonuç bulunamadı</div>';
+            
+            html += '</div>';
+            contentArea.innerHTML = html;
+            
         } else {
+            // GLOBAL FİLTRELER: Turnuva Sonuçları (Tarih | NS-1 | Oyuncu 1 | Oyuncu 2 | % Skor)
+            if (title) title.textContent = '🎯 Turnuva Sonuçları';
+            // Excel'e aktar fonksiyonu
+            const exportToExcel = () => {
+                try {
+                    const sorted = [...data].sort((a, b) => {
+                        const dateA = a['Tarih'].split('.').reverse().join('-');
+                        const dateB = b['Tarih'].split('.').reverse().join('-');
+                        return dateB.localeCompare(dateA);
+                    });
+                    
+                    let csv = 'Tarih\tSıra\tOyuncu 1\tOyuncu 2\tSkor\n';
+                    sorted.forEach(row => {
+                        const tarihParts = row['Tarih'].split('.');
+                        const tarihFormat = tarihParts[0] + '.' + tarihParts[1] + '.' + (tarihParts[2].length > 2 ? tarihParts[2].slice(-2) : tarihParts[2]);
+                        csv += `${tarihFormat}\t${row['Sıra']}\t${row['Oyuncu 1']}\t${row['Oyuncu 2']}\t${row['Skor']}\n`;
+                    });
+                    
+                    const blob = new Blob([csv], {type: 'text/plain'});
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'turnuva_sonuclari.txt';
+                    a.click();
+                    URL.revokeObjectURL(url);
+                    alert('✅ Veriler indirildi! Excel\'e yapıştırabilirsiniz.');
+                } catch (e) {
+                    alert('Hata: ' + e.message);
+                }
+            };
+            
+            // Verileri tarihine göre sırala (eskiden yeniye)
+            const sorted = [...data].sort((a, b) => {
+                const dateA = a['Tarih'].split('.').reverse().join('-');
+                const dateB = b['Tarih'].split('.').reverse().join('-');
+                return dateB.localeCompare(dateA);
+            });
+            
+            let html = '<div style="display:flex;flex-direction:column;gap:12px;">';
+            
+            // Excel Export Butonu
+            html += '<button onclick="window.exportGlobalResults()" style="padding:10px;background:#10b981;color:white;border:none;border-radius:6px;font-weight:bold;cursor:pointer;margin-bottom:8px;">📥 Excel\'e Aktar</button>';
+            
+            // Başlık
+            html += '<div style="display:grid;grid-template-columns:80px 60px 1fr 1fr 80px;gap:10px;padding:12px;background:#667eea;color:white;border-radius:8px;font-weight:bold;font-size:0.85em;position:sticky;top:0;z-index:10;">';
+            html += '<div style="text-align:center;">📅 Tarih</div>';
+            html += '<div style="text-align:center;">🎯 Sıra</div>';
+            html += '<div style="text-align:center;">👤 Oyuncu 1</div>';
+            html += '<div style="text-align:center;">👤 Oyuncu 2</div>';
+            html += '<div style="text-align:center;">📊 Skor</div>';
+            html += '</div>';
+            
+            // Satırlar
+            if (sorted.length === 0) {
+                html += '<div style="text-align:center;color:#999;padding:20px;">Sonuç bulunamadı</div>';
+            } else {
             sorted.forEach(row => {
                 const tarihParts = row['Tarih'].split('.');
                 const tarihFormat = tarihParts[0] + '.' + tarihParts[1] + '.' + (tarihParts[2].length > 2 ? tarihParts[2].slice(-2) : tarihParts[2]);
@@ -1131,6 +1298,44 @@ function showGlobalRangeTab(tabNum) {
         
         // Export fonksiyonunu window'a bağla
         window.exportGlobalResults = exportToExcel;
+        }
+    } else if (tabNum === 3) {
+        if (window.modalType === 'date-picker') {
+            // DATE PICKER: EW Sıralama
+            if (title) title.textContent = '🎯 EW Sıralama';
+            const ewList = data.filter(row => row['Direction'] === 'EW')
+                .sort((a, b) => parseFloat(b['Skor']) - parseFloat(a['Skor']));
+            
+            let html = '<div style="display:flex;flex-direction:column;gap:10px;padding:8px;">';
+            
+            if (ewList.length === 0) {
+                html += '<div style="text-align:center;color:#999;padding:40px;">Bu tarihe ait EW verisi bulunamadı</div>';
+            } else {
+                ewList.forEach((row, idx) => {
+                    const score = parseFloat(row['Skor']) || 0;
+                    const scoreColor = score >= 50 ? '#16a34a' : '#dc2626';
+                    
+                    html += '<div style="display:grid;grid-template-columns:50px 1fr 1fr 80px;gap:8px;padding:10px;background:' + (idx % 2 === 0 ? '#f9fafb' : 'white') + ';border:1px solid #e5e7eb;border-radius:6px;align-items:center;">';
+                    html += `<div style="font-weight:bold;color:#667eea;text-align:center;">${idx + 1}.</div>`;
+                    html += `<div style="color:#374151;font-weight:500;font-size:0.9em;">${row['Oyuncu 1']}</div>`;
+                    html += `<div style="color:#374151;font-weight:500;font-size:0.9em;">${row['Oyuncu 2']}</div>`;
+                    html += `<div style="text-align:center;font-weight:bold;color:${scoreColor};">% ${score.toFixed(2)}</div>`;
+                    html += '</div>';
+                });
+            }
+            
+            html += '</div>';
+            contentArea.innerHTML = html;
+        } else {
+            // GLOBAL FİLTRELER: Ek İstatistikler (Placeholder)
+            if (title) title.textContent = '📈 Ek İstatistikler';
+            contentArea.innerHTML = '<div style="text-align:center;color:#999;padding:40px;"><p>Bu sayfa gelecek güncellemeler için ayrılmıştır.</p></div>';
+        }
+    } else if (tabNum === 4) {
+        // Sayfa 4: Placeholder
+        if (title) title.textContent = '📋 Sayfası';
+        let html = '<div style="text-align:center;color:#999;padding:40px;"><p>Bu sayfa gelecek güncellemeler için ayrılmıştır.</p></div>';
+        contentArea.innerHTML = html;
     }
     } catch (error) {
         console.error('❌ showGlobalRangeTab error:', error);
@@ -1139,9 +1344,10 @@ function showGlobalRangeTab(tabNum) {
 
 // ===== MODAL OPENING =====
 function openGlobalStatsModal(data, filterLabel) {
-    // BELİRLİ TARIH: 3 sayfa modal aç
-    window.dailyModalData = data;
-    showMobileModal(data);
+    // BELİRLİ TARIH: 4 sayfa modal aç (İstatistikler, Sonuçlar, Ek İstatistikler, Kişi Performansı)
+    window.globalRangeData = data;
+    window.modalType = 'date-picker';  // Bu flag'i kullan, showGlobalRangeTab'da içeriği değiştir
+    openGlobalRangeModal(data, filterLabel);
 }
 
 // ===== MODAL CLOSING =====
@@ -1184,54 +1390,34 @@ document.addEventListener('DOMContentLoaded', function() {
     // Auto-copy temp database if main is empty or invalid
     // Use Flask endpoints for database loading
     function tryLoadDatabase(mainFile, fallbackFile) {
-        // Try new API endpoint first (always fresh data)
-        let apiUrl = './api/data?v=' + Date.now();
+        // Load data from JSON file directly
         let mainUrl = './database.json?v=' + Date.now();
         let fallbackUrl = './database_temp.json?v=' + Date.now();
         
-        // Try API endpoint first
-        fetch(apiUrl)
+        // Try main file first
+        fetch(mainUrl)
             .then(response => {
-                if (!response.ok) throw new Error('API endpoint failed');
+                if (!response.ok) throw new Error('Database file not found');
                 return response.json();
             })
-            .then(apiData => {
-                // Extract records from API response
-                let data;
-                
-                // Handle different response formats
-                if (apiData.records) {
-                    // New format: has .records property
-                    data = apiData.records;
-                } else if (apiData.legacy_records || apiData.events) {
-                    // Dict format with legacy_records and events - convert to array
-                    data = [];
-                    if (apiData.legacy_records && Array.isArray(apiData.legacy_records)) {
-                        data.push(...apiData.legacy_records);
+            .then(data => {
+                // Convert dict format to array if needed
+                let arrayData = data;
+                if (!Array.isArray(data)) {
+                    if (data.legacy_records) {
+                        // Use legacy_records only (don't mix with events)
+                        arrayData = data.legacy_records;
+                    } else if (data.records) {
+                        arrayData = data.records;
                     }
-                    if (apiData.events) {
-                        for (let eventId in apiData.events) {
-                            let event = apiData.events[eventId];
-                            if (event.results) {
-                                if (Array.isArray(event.results.NS)) data.push(...event.results.NS);
-                                if (Array.isArray(event.results.EW)) data.push(...event.results.EW);
-                            }
-                        }
-                    }
-                } else if (Array.isArray(apiData)) {
-                    // Already array format
-                    data = apiData;
-                } else {
-                    // Unknown format
-                    data = [];
                 }
                 
-                if (!Array.isArray(data) || data.length === 0) {
-                    throw new Error('API returned empty data');
+                if (!Array.isArray(arrayData) || arrayData.length === 0) {
+                    throw new Error('Database is empty');
                 }
                 
-                console.log(`✅ API loaded ${data.length} records`);
-                allData = data;
+                console.log(`✅ File loaded ${arrayData.length} records`);
+                allData = arrayData;
                 updateFileInfo();
                 databaseReady = true;
                 setDefaultDateToLatest();  // Set latest date as default in input
@@ -1241,55 +1427,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     queuedModalOpen = null;
                 }
             })
-            .catch(apiErr => {
-                // Fall back to direct JSON file
-                console.warn('API endpoint failed, trying direct file:', apiErr.message);
-                fetch(mainUrl)
-                    .then(response => {
-                        if (!response.ok) throw new Error('Database file not found');
-                        return response.json();
-                    })
-                    .then(data => {
-                        // Convert dict format to array if needed
-                        let arrayData = data;
-                        if (!Array.isArray(data)) {
-                            if (data.legacy_records || data.events) {
-                                arrayData = [];
-                                if (data.legacy_records && Array.isArray(data.legacy_records)) {
-                                    arrayData.push(...data.legacy_records);
-                                }
-                                if (data.events) {
-                                    for (let eventId in data.events) {
-                                        let event = data.events[eventId];
-                                        if (event.results) {
-                                            if (Array.isArray(event.results.NS)) arrayData.push(...event.results.NS);
-                                            if (Array.isArray(event.results.EW)) arrayData.push(...event.results.EW);
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                        
-                        if (!Array.isArray(arrayData) || arrayData.length === 0) {
-                            throw new Error('Database is empty');
-                        }
-                        
-                        console.log(`✅ File loaded ${arrayData.length} records`);
-                        allData = arrayData;
-                        updateFileInfo();
-                        databaseReady = true;
-                        setDefaultDateToLatest();  // Set latest date as default in input
-                        initializePlayerSearch();
-                        if (queuedModalOpen) {
-                            openGlobalStatsModal(...queuedModalOpen);
-                            queuedModalOpen = null;
-                        }
-                    })
-                    .catch(err => {
-                        document.getElementById('fileInfo').innerHTML = `<span style='color:red;'>❌ Hiçbir veritabanı yüklenemedi: ${err.message}</span>`;
-                        allData = [];
-                        databaseReady = false;
-                    });
+            .catch(err => {
+                document.getElementById('fileInfo').innerHTML = `<span style='color:red;'>❌ Hiçbir veritabanı yüklenemedi: ${err.message}</span>`;
+                allData = [];
+                databaseReady = false;
             });
     }
     tryLoadDatabase('database.json', 'database_temp.json');
@@ -1649,7 +1790,7 @@ function show2PageTab(tabNum) {
 
 // ===== MOBİL MODAL FONKSİYONLARI =====
 
-function showMobileModal(data) {
+function showMobileModal(data, filterDate) {
     console.log('showMobileModal çağrıldı, veri:', data ? data.length : 'NULL');
     if (!data || data.length === 0) {
         console.warn('⚠️ showMobileModal: Veri boş!');
@@ -1659,6 +1800,7 @@ function showMobileModal(data) {
     
     window.currentDailyTab = 1;
     window.dailyModalData = data;
+    window.dailyModalDate = filterDate;
     console.log('window.dailyModalData set:', data.length, 'satır');
     
     // Desktop bölümlerini gizle
@@ -1689,7 +1831,7 @@ function showMobileModal(data) {
 function showDailyResultTab(tabNum) {
     // Sınırları kontrol et
     if (tabNum < 1) tabNum = 1;
-    if (tabNum > 3) tabNum = 3;
+    if (tabNum > 4) tabNum = 4;
     
     window.currentDailyTab = tabNum;
     
@@ -1712,7 +1854,7 @@ function showDailyResultTab(tabNum) {
     
     // Butonların görünürlüğünü kontrol et
     if (prevBtn) prevBtn.style.visibility = tabNum > 1 ? 'visible' : 'hidden';
-    if (nextBtn) nextBtn.style.visibility = tabNum < 3 ? 'visible' : 'hidden';
+    if (nextBtn) nextBtn.style.visibility = tabNum < 4 ? 'visible' : 'hidden';
     
     if (tabNum === 1) {
         // Tab 1: Şampiyonlar
@@ -1836,7 +1978,157 @@ function showDailyResultTab(tabNum) {
         } else {
             console.error('❌ dailyResultsContent element bulunamadı!');
         }
+    } else if (tabNum === 4) {
+        // Tab 4: Turnuva Elleri
+        const displayDate = window.dailyModalDate || window.selectedDate || '17.01.2026';
+        if (header) header.textContent = `🎴 Turnuva Elleri (${displayDate})`;
+        
+        // openHandsModal fonksiyonunu çağır
+        const selectedDate = displayDate;
+        fetch('/hands_database.json')
+            .then(r => r.json())
+            .then(handsData => {
+                const hands = handsData.filter(h => h.date === selectedDate);
+                
+                if (hands.length === 0) {
+                    if (contentArea) contentArea.innerHTML = `<div style='text-align:center;color:#999;'>Bu tarih için el bulunamadı</div>`;
+                    return;
+                }
+                
+                // Sort all hands by board number and remove duplicates (keep first occurrence)
+                const seenBoards = new Set();
+                const uniqueHands = hands.filter(h => {
+                    if (seenBoards.has(h.board)) {
+                        return false;
+                    }
+                    seenBoards.add(h.board);
+                    return true;
+                });
+                const sortedHands = uniqueHands.sort((a, b) => a.board - b.board);
+                
+                // Store all hands globally for modal access
+                window.allHandsTab4 = sortedHands;
+                
+                let html = `<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); gap: 15px;">`;
+                
+                sortedHands.forEach((h, index) => {
+                        const dealerLetters = ['N', 'E', 'S', 'W'];
+                        const dealerLetter = dealerLetters[(h.board - 1) % 4];
+                        const dealerMap = {'N':'1','E':'2','S':'3','W':'4'};
+                        const vulnMap = {'None':'0','NS':'1','EW':'2','Both':'3'};
+                        const d = dealerMap[dealerLetter] || '1';
+                        const v = vulnMap[h.vulnerability] || '0';
+                        
+                        // Get hands with rotation based on dealer
+                        const mappedFields = getMappedHands(h, dealerLetter);
+                        
+                        // Convert hand string to LIN format (Spades.Hearts.Diamonds.Clubs)
+                        const hands = {
+                            'N': `S${mappedFields.N?.split('.')[0] || ''}H${mappedFields.N?.split('.')[1] || ''}D${mappedFields.N?.split('.')[2] || ''}C${mappedFields.N?.split('.')[3] || ''}`,
+                            'E': `S${mappedFields.E?.split('.')[0] || ''}H${mappedFields.E?.split('.')[1] || ''}D${mappedFields.E?.split('.')[2] || ''}C${mappedFields.E?.split('.')[3] || ''}`,
+                            'S': `S${mappedFields.S?.split('.')[0] || ''}H${mappedFields.S?.split('.')[1] || ''}D${mappedFields.S?.split('.')[2] || ''}C${mappedFields.S?.split('.')[3] || ''}`,
+                            'W': `S${mappedFields.W?.split('.')[0] || ''}H${mappedFields.W?.split('.')[1] || ''}D${mappedFields.W?.split('.')[2] || ''}C${mappedFields.W?.split('.')[3] || ''}`
+                        };
+                        console.log(`Board ${h.board} (Dealer: ${dealerLetter}) - N: ${hands.N} | E: ${hands.E} | S: ${hands.S} | W: ${hands.W}`);
+                        
+                        // Order hands starting from dealer, but only output 3 hands (BBO calculates 4th)
+                        const dealerOrder = {'N': ['N', 'E', 'S'], 'E': ['E', 'S', 'W'], 'S': ['S', 'W', 'N'], 'W': ['W', 'N', 'E']};
+                        const orderedHands = dealerOrder[dealerLetter] || ['N', 'E', 'S'];
+                        const handString = orderedHands.map(pos => hands[pos]).join(',');
+                        
+                        const lin = `qx|o1|md|${d}${handString},|rh||ah|Board ${h.board}|sv|${v}|pg||`;
+                        const iframeUrl = `https://www.bridgebase.com/tools/handviewer.html?bbo=y&lin=${encodeURIComponent(lin)}`;
+                        
+                        // DD tables disabled
+                        let ddTableHtml = '';
+                        
+                        html += `<div style="background: white; padding: 12px; border-radius: 6px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); cursor: pointer;" onclick="openHandCardModalByIndex(${index})" title="Detaylı görmek için tıklayın">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; font-size: 0.9rem; color: #666;">
+                                <span><strong>Dealer:</strong> ${dealerLetter}</span>
+                                <span style="font-weight: bold; color: #1e3c72;">Board ${h.board}</span>
+                                <span><strong>Vuln:</strong> ${h.vulnerability}</span>
+                            </div>
+                            
+                            <iframe src="${iframeUrl}" style="width: 100%; height: 320px; border: 1px solid #ddd; border-radius: 4px;" onclick="event.stopPropagation();"></iframe>
+                        </div>`;
+                });
+                
+                html += `</div>`;
+                if (contentArea) contentArea.innerHTML = html;
+            })
+            .catch(e => {
+                if (contentArea) contentArea.innerHTML = `<div style='color: red;'>Hata: ${e.message}</div>`;
+            });
     }
+}
+
+// ===== EL KARTI MODAL FONKSIYONLARI =====
+function openHandCardModalByIndex(index) {
+    if (!window.allHandsTab4 || !window.allHandsTab4[index]) {
+        console.error('Hand data not found at index:', index);
+        return;
+    }
+    
+    const handData = window.allHandsTab4[index];
+    openHandCardModal(handData);
+}
+
+function openHandCardModal(handData) {
+    const modal = document.getElementById('handsModal');
+    const header = modal.querySelector('h2');
+    const content = document.getElementById('handsModalContent');
+    
+    if (!modal || !content) {
+        console.error('❌ Modal elements not found');
+        return;
+    }
+    
+    console.log('✅ Opening hand card modal for board:', handData.board);
+    console.log('DD Analysis data:', JSON.stringify(handData.dd_analysis));
+    
+    // Modal başlığını güncelle
+    if (header) {
+        header.textContent = `🎴 Board ${handData.board} - Detaylı Görüntüleme`;
+    }
+    
+    // createHandCard fonksiyonunu çağır ve sonucunu modal'da göster
+    const cardHtml = createHandCard(handData);
+    console.log('Card HTML generated, length:', cardHtml.length);
+    content.innerHTML = cardHtml;
+    
+    modal.style.display = 'block';
+    console.log('✅ Modal displayed');
+    
+    // Force DD table colors - Use setProperty with !important
+    const fixColors = () => {
+        const allCells = content.querySelectorAll('td[data-suit]');
+        console.log('Found cells with data-suit:', allCells.length);
+        
+        allCells.forEach(cell => {
+            const suit = cell.getAttribute('data-suit');
+            
+            if (suit === 'heart' || suit === 'diamond') {
+                // Red for hearts and diamonds - FORCE with setProperty
+                cell.style.setProperty('color', '#e41e3f', 'important');
+                cell.style.setProperty('background-color', '#ffccdd', 'important');
+                // Also remove any conflicting inline style attribute
+                cell.setAttribute('style', cell.getAttribute('style') + '; color: #e41e3f !important; background-color: #ffccdd !important;');
+                console.log('✅ Set', suit, 'to RED');
+            } else if (suit === 'spade' || suit === 'club') {
+                // Black for spades and clubs - FORCE with setProperty
+                cell.style.setProperty('color', '#000', 'important');
+                cell.style.setProperty('background-color', '#f0f0f0', 'important');
+                cell.setAttribute('style', cell.getAttribute('style') + '; color: #000 !important; background-color: #f0f0f0 !important;');
+                console.log('✅ Set', suit, 'to BLACK');
+            }
+        });
+    };
+    
+    // Run multiple times to ensure it sticks
+    fixColors();
+    setTimeout(fixColors, 5);
+    setTimeout(fixColors, 15);
+    setTimeout(fixColors, 50);
 }
 
 // ===== OYUNCU PERFORMANS MODAL FONKSIYONLARI =====
@@ -2232,19 +2524,33 @@ function checkForNewData() {
     fetch(checkUrl)
         .then(response => response.json())
         .then(newData => {
+            let convertedData = newData;
+            
+            // Convert dict format to array if needed
             if (!Array.isArray(newData)) {
+                if (newData.legacy_records) {
+                    // Use legacy_records only (don't mix with events)
+                    convertedData = newData.legacy_records;
+                } else if (newData.records) {
+                    convertedData = newData.records;
+                } else {
+                    convertedData = [];
+                }
+            }
+            
+            if (!Array.isArray(convertedData) || convertedData.length === 0) {
                 console.warn('⚠️ Veri geçersiz format');
                 return;
             }
             
-            const newSize = newData.length;
+            const newSize = convertedData.length;
             
             // Eğer veri sayısı değiştiyse güncelle
             if (newSize !== currentSize) {
                 console.log(`🔄 Yeni veri bulundu! ${currentSize} → ${newSize} kayıt`);
                 
                 // Database'i güncelle
-                allData = newData;
+                allData = convertedData;
                 
                 // LocalStorage'a güncelleme zamanını kaydet
                 localStorage.setItem(lastUpdateKey, new Date().toISOString());
@@ -2613,3 +2919,300 @@ function closeHandsModal() {
         modal.style.display = 'none';
     }
 }
+
+function openHandsModal() {
+    const modal = document.getElementById('handsModal');
+    const content = document.getElementById('handsModalContent');
+    
+    if (!modal) return;
+    
+    // Load hands data
+    const displayDate = window.dailyModalDate || window.selectedDate || '17.01.2026';
+    fetch('/hands_database.json')
+        .then(r => r.json())
+        .then(data => {
+            const hands = data.filter(h => h.date === displayDate);
+            
+            // Group by pair
+            const pairMap = {};
+            hands.forEach(h => {
+                if (!pairMap[h.pair]) {
+                    pairMap[h.pair] = { ns: [], ew: [] };
+                }
+                if (h.direction === 'NS') {
+                    pairMap[h.pair].ns.push(h);
+                } else {
+                    pairMap[h.pair].ew.push(h);
+                }
+            });
+            
+            let html = `<style>
+                @media print {
+                    #handsModal { display: block !important; background: white !important; }
+                    #handsModal > div { background: white !important; }
+                    #handsModal > div > div { display: none; }
+                    #handsModalContent { display: block !important; }
+                    .hands-print-wrapper { display: block !important; }
+                    .hands-pair-group { page-break-inside: avoid; break-inside: avoid; }
+                    .hands-card { page-break-inside: avoid; break-inside: avoid; }
+                    .print-button { display: none; }
+                    .export-button { display: none; }
+                    .hands-card a { display: none !important; }
+                }
+            </style>
+            <div class="hands-print-wrapper">
+                <div style="text-align: center; margin-bottom: 20px; print:display:none;">
+                    <p style="font-size: 1.1rem; color: #28a745;">✓ ${hands.length} el, ${Object.keys(pairMap).length} çift</p>
+                    <button onclick="window.print()" class="print-button" style="padding: 8px 20px; background: #28a745; color: white; border: none; border-radius: 3px; cursor: pointer; font-weight: bold; margin-right: 10px;">🖨️ Yazdır</button>
+                    <button onclick="downloadHands27()" class="export-button" style="padding: 8px 20px; background: #17a2b8; color: white; border: none; border-radius: 3px; cursor: pointer; font-weight: bold;">⬇️ İndir (TXT)</button>
+                </div>`;
+            
+            Object.keys(pairMap).sort().forEach(pairName => {
+                const pairData = pairMap[pairName];
+                const allBoards = [...pairData.ns, ...pairData.ew];
+                
+                html += `<div class="hands-pair-group" style="margin-bottom: 30px; background: #f9f9f9; padding: 20px; border-radius: 8px; border-left: 4px solid #1e3c72;">
+                    <h3 style="color: #1e3c72; margin: 0 0 15px 0; font-size: 1.1em;">👥 ${pairName}</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 15px;">`;
+                
+                allBoards.forEach(h => {
+                    const dealerLetters = ['N', 'E', 'S', 'W'];
+                    const dealerLetter = dealerLetters[(h.board - 1) % 4];
+                    const dealerMap = {'N':'1','E':'2','S':'3','W':'4'};
+                    const vulnMap = {'None':'0','NS':'1','EW':'2','Both':'3'};
+                    const d = dealerMap[dealerLetter] || '1';
+                    const v = vulnMap[h.vulnerability] || '0';
+                    
+                    // Get hands with rotation based on dealer
+                    const mappedFields = getMappedHands(h, dealerLetter);
+                    
+                    // Convert hand string to LIN format (Spades.Hearts.Diamonds.Clubs)
+                    const hands = {
+                        'N': `S${mappedFields.N.split('.')[0]}H${mappedFields.N.split('.')[1]}D${mappedFields.N.split('.')[2]}C${mappedFields.N.split('.')[3]}`,
+                        'E': `S${mappedFields.E.split('.')[0]}H${mappedFields.E.split('.')[1]}D${mappedFields.E.split('.')[2]}C${mappedFields.E.split('.')[3]}`,
+                        'S': `S${mappedFields.S.split('.')[0]}H${mappedFields.S.split('.')[1]}D${mappedFields.S.split('.')[2]}C${mappedFields.S.split('.')[3]}`,
+                        'W': `S${mappedFields.W.split('.')[0]}H${mappedFields.W.split('.')[1]}D${mappedFields.W.split('.')[2]}C${mappedFields.W.split('.')[3]}`
+                    };
+                    
+                    // Order hands starting from dealer, but only output 3 hands (BBO calculates 4th)
+                    const dealerOrder = {'N': ['N', 'E', 'S'], 'E': ['E', 'S', 'W'], 'S': ['S', 'W', 'N'], 'W': ['W', 'N', 'E']};
+                    const orderedHands = dealerOrder[dealerLetter] || ['N', 'E', 'S'];
+                    const handString = orderedHands.map(pos => hands[pos]).join(',');
+                    
+                    const lin = `qx|o1|md|${d}${handString},|rh||ah|Board ${h.board}|sv|${v}|pg||`;
+                    const url = `https://www.bridgebase.com/tools/handviewer.html?lin=${encodeURIComponent(lin)}`;
+                    const iframeUrl = `https://www.bridgebase.com/tools/handviewer.html?bbo=y&lin=${encodeURIComponent(lin)}`;
+                    
+                    const borderColor = h.direction === 'NS' ? '#007bff' : '#dc3545';
+                    
+                    let ddTableHtml = '';
+                    if (h.dd_analysis && Object.keys(h.dd_analysis).length > 0) {
+                        ddTableHtml = `<div style="margin-top: 10px; border-top: 1px solid #ddd; padding-top: 10px;">
+                            <table style="width: 100%; border-collapse: collapse; font-size: 0.75rem; font-family: monospace;">
+                                <tr style="background: #f5f5f5;">
+                                    <td style="border: 1px solid #ccc; padding: 3px; text-align: center; width: 20%;"></td>
+                                    <td style="border: 1px solid #ccc; padding: 3px; text-align: center; width: 20%; font-weight: bold;">♠</td>
+                                    <td style="border: 1px solid #ccc; padding: 3px; text-align: center; width: 20%; font-weight: bold;">♥</td>
+                                    <td style="border: 1px solid #ccc; padding: 3px; text-align: center; width: 20%; font-weight: bold;">♦</td>
+                                    <td style="border: 1px solid #ccc; padding: 3px; text-align: center; width: 20%; font-weight: bold;">NT</td>
+                                </tr>
+                                <tr>
+                                    <td style="border: 1px solid #ccc; padding: 3px; text-align: center; font-weight: bold;">N</td>
+                                    <td style="border: 1px solid #ccc; padding: 3px; text-align: center;">${h.dd_analysis['SN'] || '-'}</td>
+                                    <td style="border: 1px solid #ccc; padding: 3px; text-align: center;">${h.dd_analysis['HN'] || '-'}</td>
+                                    <td style="border: 1px solid #ccc; padding: 3px; text-align: center;">${h.dd_analysis['DN'] || '-'}</td>
+                                    <td style="border: 1px solid #ccc; padding: 3px; text-align: center;">${h.dd_analysis['NTN'] || '-'}</td>
+                                </tr>
+                                <tr>
+                                    <td style="border: 1px solid #ccc; padding: 3px; text-align: center; font-weight: bold;">S</td>
+                                    <td style="border: 1px solid #ccc; padding: 3px; text-align: center;">${h.dd_analysis['SS'] || '-'}</td>
+                                    <td style="border: 1px solid #ccc; padding: 3px; text-align: center;">${h.dd_analysis['HS'] || '-'}</td>
+                                    <td style="border: 1px solid #ccc; padding: 3px; text-align: center;">${h.dd_analysis['DS'] || '-'}</td>
+                                    <td style="border: 1px solid #ccc; padding: 3px; text-align: center;">${h.dd_analysis['NTS'] || '-'}</td>
+                                </tr>
+                                <tr>
+                                    <td style="border: 1px solid #ccc; padding: 3px; text-align: center; font-weight: bold;">E</td>
+                                    <td style="border: 1px solid #ccc; padding: 3px; text-align: center;">${h.dd_analysis['SE'] || '-'}</td>
+                                    <td style="border: 1px solid #ccc; padding: 3px; text-align: center;">${h.dd_analysis['HE'] || '-'}</td>
+                                    <td style="border: 1px solid #ccc; padding: 3px; text-align: center;">${h.dd_analysis['DE'] || '-'}</td>
+                                    <td style="border: 1px solid #ccc; padding: 3px; text-align: center;">${h.dd_analysis['NTE'] || '-'}</td>
+                                </tr>
+                                <tr>
+                                    <td style="border: 1px solid #ccc; padding: 3px; text-align: center; font-weight: bold;">W</td>
+                                    <td style="border: 1px solid #ccc; padding: 3px; text-align: center;">${h.dd_analysis['SW'] || '-'}</td>
+                                    <td style="border: 1px solid #ccc; padding: 3px; text-align: center;">${h.dd_analysis['HW'] || '-'}</td>
+                                    <td style="border: 1px solid #ccc; padding: 3px; text-align: center;">${h.dd_analysis['DW'] || '-'}</td>
+                                    <td style="border: 1px solid #ccc; padding: 3px; text-align: center;">${h.dd_analysis['NTW'] || '-'}</td>
+                                </tr>
+                            </table>
+                        </div>`;
+                    }
+                    
+                    html += `<div class="hands-card" style="background: white; padding: 12px; border-radius: 4px; box-shadow: 0 1px 2px rgba(0,0,0,0.1); border-left: 4px solid ${borderColor}; page-break-inside: avoid;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                            <h4 style="margin: 0; color: ${borderColor}; font-size: 1rem;">Tahta ${h.board}</h4>
+                            <span style="background: ${borderColor}; color: white; padding: 2px 8px; border-radius: 3px; font-size: 0.8em; font-weight: bold;">${h.direction}</span>
+                        </div>
+                        <p style="font-size: 0.85rem; color: #666; margin: 5px 0;"><strong>Dealer:</strong> ${dealerLetter} | <strong>Vuln:</strong> ${h.vulnerability}</p>
+                        <p style="font-size: 0.85rem; color: #666; margin: 5px 0;"><strong>Score:</strong> ${h.score.toFixed(2)}</p>
+                        <div style="background: #f5f5f5; padding: 8px; margin: 8px 0; border-radius: 3px; font-family: monospace; font-size: 0.8rem; line-height: 1.4; page-break-inside: avoid;">
+                            <div>♠ ${h.N}</div>
+                            <div>♥ ${h.S}</div>
+                            <div>♦ ${h.E}</div>
+                        </div>
+                        ${ddTableHtml}
+                        <a href="${url}" target="_blank" style="display: inline-block; padding: 6px 12px; background: #007bff; color: white; text-decoration: none; border-radius: 3px; font-size: 0.85rem; margin-top: 8px;">🔗 BBO</a>
+                    </div>`;
+                });
+                
+                html += '</div></div>';
+            });
+            
+            html += '</div>';
+            content.innerHTML = html;
+            modal.style.display = 'block';
+        })
+        .catch(e => {
+            content.innerHTML = `<p style="color: red;">Hata: ${e.message}</p>`;
+            modal.style.display = 'block';
+        });
+}
+
+function downloadHands27() {
+    const textDate = window.dailyModalDate || window.selectedDate || '17.01.2026';
+    fetch('/hands_database.json')
+        .then(r => r.json())
+        .then(data => {
+            const hands = data.filter(h => h.date === textDate).sort((a, b) => a.board - b.board);
+            
+            let txt = '═══════════════════════════════════════════════════════════════════\n';
+            txt += `                   ${textDate} TÜM ELLERİ (${hands.length} TAHTA)\n`;
+            txt += '═══════════════════════════════════════════════════════════════════\n\n';
+            
+            hands.forEach((h, idx) => {
+                txt += `TAHTA ${h.board}\n`;
+                txt += `───────────────────────────────────────────────────────────────────\n`;
+                txt += `Çift: ${h.pair} | Yön: ${h.direction} | Score: ${h.score.toFixed(2)}\n`;
+                txt += `Dealer: ${dealerLetter} | Vuln: ${h.vulnerability}\n`;
+                txt += `\n`;
+                txt += `  ♠ NORTH (Kuzey):\n`;
+                txt += `    ${h.N}\n`;
+                txt += `\n`;
+                txt += `  ♥ SOUTH (Güney):\n`;
+                txt += `    ${h.S}\n`;
+                txt += `\n`;
+                txt += `  ♦ EAST (Doğu):\n`;
+                txt += `    ${h.E}\n`;
+                txt += `\n`;
+                txt += `  ♣ WEST (Batı):\n`;
+                txt += `    ${h.W}\n`;
+                txt += `\n`;
+                
+                // DD Table
+                if (h.dd_analysis && Object.keys(h.dd_analysis).length > 0) {
+                    txt += `  📊 DOUBLE DUMMY ANALYSIS (Trick Sayıları):\n`;
+                    txt += `\n`;
+                    txt += `     NT   ♠   ♥   ♦   ♣\n`;
+                    txt += `    ─────────────────────\n`;
+                    
+                    const seats = ['N', 'E', 'S', 'W'];
+                    seats.forEach(seat => {
+                        const nt = h.dd_analysis[`NT${seat}`] || '-';
+                        const s = h.dd_analysis[`S${seat}`] || '-';
+                        const h_suit = h.dd_analysis[`H${seat}`] || '-';
+                        const d = h.dd_analysis[`D${seat}`] || '-';
+                        const c = h.dd_analysis[`C${seat}`] || '-';
+                        txt += `  ${seat}:   ${String(nt).padStart(2)}  ${String(s).padStart(2)}  ${String(h_suit).padStart(2)}  ${String(d).padStart(2)}  ${String(c).padStart(2)}\n`;
+                    });
+                    txt += `\n`;
+                }
+                
+                // LIN for BBO
+                const dealerLetters = ['N', 'E', 'S', 'W'];
+                const dealerLetter = dealerLetters[(h.board - 1) % 4];
+                const dealerMap = {'N':'1','E':'2','S':'3','W':'4'};
+                const vulnMap = {'None':'0','NS':'1','EW':'2','Both':'3'};
+                const d = dealerMap[dealerLetter] || '1';
+                const v = vulnMap[h.vulnerability] || '0';
+                
+                // Get hands with rotation based on dealer
+                const mappedHandsLIN = getMappedHands(h, dealerLetter);
+                
+                // Convert hand string to LIN format (Spades.Hearts.Diamonds.Clubs)
+                const handsLIN = {
+                    'N': `S${mappedHandsLIN.N.split('.')[0]}H${mappedHandsLIN.N.split('.')[1]}D${mappedHandsLIN.N.split('.')[2]}C${mappedHandsLIN.N.split('.')[3]}`,
+                    'E': `S${mappedHandsLIN.E.split('.')[0]}H${mappedHandsLIN.E.split('.')[1]}D${mappedHandsLIN.E.split('.')[2]}C${mappedHandsLIN.E.split('.')[3]}`,
+                    'S': `S${mappedHandsLIN.S.split('.')[0]}H${mappedHandsLIN.S.split('.')[1]}D${mappedHandsLIN.S.split('.')[2]}C${mappedHandsLIN.S.split('.')[3]}`,
+                    'W': `S${mappedHandsLIN.W.split('.')[0]}H${mappedHandsLIN.W.split('.')[1]}D${mappedHandsLIN.W.split('.')[2]}C${mappedHandsLIN.W.split('.')[3]}`
+                };
+                
+                // Order hands starting from dealer, but only output 3 hands (BBO calculates 4th)
+                const dealerOrder = {'N': ['N', 'E', 'S'], 'E': ['E', 'S', 'W'], 'S': ['S', 'W', 'N'], 'W': ['W', 'N', 'E']};
+                const orderedHandsLIN = dealerOrder[h.dealer] || ['N', 'E', 'S'];
+                const handStringLIN = orderedHandsLIN.map(pos => handsLIN[pos]).join(',');
+                const lin = `qx|o1|md|${d}${handStringLIN},|rh||ah|Board ${h.board}|sv|${v}|pg||`;
+                
+                txt += `BBO Link:\n`;
+                txt += `https://www.bridgebase.com/tools/handviewer.html?lin=${encodeURIComponent(lin)}\n`;
+                txt += `\n`;
+                txt += `═══════════════════════════════════════════════════════════════════\n\n`;
+            });
+            
+            txt += `ÖZET:\n`;
+            txt += `Toplam: ${hands.length} el\n`;
+            txt += `Tarih: 17.01.2026\n`;
+            txt += `Dışa aktarma: ${new Date().toLocaleString('tr-TR')}\n`;
+            
+            // Download
+            const blob = new Blob([txt], { type: 'text/plain; charset=utf-8' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = '27_Tahta_17_01_2026.txt';
+            link.click();
+        })
+        .catch(e => alert('Hata: ' + e.message));
+}
+
+function createHandCard(h) {
+    const dealerLetters = ['N', 'E', 'S', 'W'];
+    const dealerLetter = dealerLetters[(h.board - 1) % 4];
+    const dealerMap = {'N':'1','E':'2','S':'3','W':'4'};
+    const vulnMap = {'None':'0','NS':'1','EW':'2','Both':'3'};
+    const d = dealerMap[dealerLetter] || '1';
+    const v = vulnMap[h.vulnerability] || '0';
+    
+    console.log('createHandCard called with:', {board: h.board, dd_analysis: h.dd_analysis, hasDD: h.dd_analysis && Object.keys(h.dd_analysis).length > 0});
+    
+    // Get hands with rotation based on dealer
+    const mappedHandsCard = getMappedHands(h, dealerLetter);
+    
+    // Convert hand string to LIN format (Spades.Hearts.Diamonds.Clubs)
+    const handsLIN = {
+        'N': `S${mappedHandsCard.N.split('.')[0]}H${mappedHandsCard.N.split('.')[1]}D${mappedHandsCard.N.split('.')[2]}C${mappedHandsCard.N.split('.')[3]}`,
+        'E': `S${mappedHandsCard.E.split('.')[0]}H${mappedHandsCard.E.split('.')[1]}D${mappedHandsCard.E.split('.')[2]}C${mappedHandsCard.E.split('.')[3]}`,
+        'S': `S${mappedHandsCard.S.split('.')[0]}H${mappedHandsCard.S.split('.')[1]}D${mappedHandsCard.S.split('.')[2]}C${mappedHandsCard.S.split('.')[3]}`,
+        'W': `S${mappedHandsCard.W.split('.')[0]}H${mappedHandsCard.W.split('.')[1]}D${mappedHandsCard.W.split('.')[2]}C${mappedHandsCard.W.split('.')[3]}`
+    };
+    
+    // Order hands starting from dealer, but only output 3 hands (BBO calculates 4th)
+    const dealerOrder = {'N': ['N', 'E', 'S'], 'E': ['E', 'S', 'W'], 'S': ['S', 'W', 'N'], 'W': ['W', 'N', 'E']};
+    const orderedHandsLIN = dealerOrder[dealerLetter] || ['N', 'E', 'S'];
+    const handStringLIN = orderedHandsLIN.map(pos => handsLIN[pos]).join(',');
+    
+    const lin = `qx|o1|md|${d}${handStringLIN},|rh||ah|Board ${h.board}|sv|${v}|pg||`;
+    const iframeUrl = `https://www.bridgebase.com/tools/handviewer.html?lin=${encodeURIComponent(lin)}`;
+    
+    // DD table disabled - removed from modal display
+    let ddTableHtml = '';
+    
+    return `<div style="background: white; padding: 12px; border-radius: 4px; box-sizing: border-box;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; font-size: 0.85rem; color: #666;">
+            <span><strong>Dealer:</strong> ${dealerLetter}</span>
+            <span style="font-weight: bold; color: #1e3c72;">Board ${h.board}</span>
+            <span><strong>Vuln:</strong> ${h.vulnerability}</span>
+        </div>
+        
+        <iframe src="${iframeUrl}" style="width: 100%; height: 320px; border: 1px solid #ddd; border-radius: 4px;"></iframe>
+    </div>`;
+}
+
