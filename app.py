@@ -27,25 +27,42 @@ def safe_send_file(filename):
 
 
 def run_update_async(update_type='all'):
-    """Run the scheduled update script asynchronously"""
+    """Run the full update pipeline asynchronously
+    
+    Pipeline steps:
+    1. scores   - Fetch tournament scores from Vugraph
+    2. hands    - Fetch board hands from Vugraph
+    3. dd       - Calculate Double Dummy analysis
+    4. analysis - Update site statistics
+    """
     try:
-        script_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'scheduled_update.py')
+        # Use full_update_pipeline.py for complete workflow
+        script_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'full_update_pipeline.py')
         
         if update_type == 'scores':
-            cmd = ['python', script_path, '--scores-only']
+            cmd = ['python', script_path, '--step', 'scores']
         elif update_type == 'hands':
-            cmd = ['python', script_path, '--hands-only']
+            cmd = ['python', script_path, '--step', 'hands']
+        elif update_type == 'dd':
+            cmd = ['python', script_path, '--step', 'dd']
+        elif update_type == 'analysis':
+            cmd = ['python', script_path, '--step', 'analysis']
         else:
+            # Run full pipeline: scores → hands → dd → analysis
             cmd = ['python', script_path]
         
-        result = subprocess.run(cmd, capture_output=True, text=True, timeout=600)
-        print(f"[UPDATE] Completed with return code: {result.returncode}")
+        print(f"[PIPELINE] Starting: {' '.join(cmd)}")
+        result = subprocess.run(cmd, capture_output=True, text=True, timeout=1200)  # 20 min timeout
+        print(f"[PIPELINE] Completed with return code: {result.returncode}")
         if result.stdout:
-            print(f"[UPDATE] Output: {result.stdout[-500:]}")
+            # Log last 1000 chars of output
+            print(f"[PIPELINE] Output:\n{result.stdout[-1000:]}")
         if result.stderr:
-            print(f"[UPDATE] Errors: {result.stderr[-500:]}")
+            print(f"[PIPELINE] Errors:\n{result.stderr[-500:]}")
+    except subprocess.TimeoutExpired:
+        print(f"[PIPELINE] Timeout after 1200 seconds")
     except Exception as e:
-        print(f"[UPDATE] Error running update: {e}")
+        print(f"[PIPELINE] Error running update: {e}")
 
 @app.route('/')
 def index():
@@ -108,7 +125,13 @@ def webhook_update():
     Usage:
         POST /api/webhook/update
         Headers: X-Webhook-Secret: <secret>
-        Body (optional): {"type": "all" | "scores" | "hands"}
+        Body (optional): {"type": "all" | "scores" | "hands" | "dd" | "analysis"}
+    
+    Pipeline (type=all):
+        1. scores   - Fetch tournament scores from Vugraph calendar
+        2. hands    - Fetch board hands from Vugraph boarddetails
+        3. dd       - Calculate Double Dummy analysis (endplay)
+        4. analysis - Update site statistics and reports
     """
     # Verify secret
     provided_secret = request.headers.get('X-Webhook-Secret', '')
@@ -119,8 +142,8 @@ def webhook_update():
     data = request.get_json(silent=True) or {}
     update_type = data.get('type', 'all')
     
-    if update_type not in ['all', 'scores', 'hands']:
-        return jsonify({'error': 'Invalid type. Use: all, scores, or hands'}), 400
+    if update_type not in ['all', 'scores', 'hands', 'dd', 'analysis']:
+        return jsonify({'error': 'Invalid type. Use: all, scores, hands, dd, or analysis'}), 400
     
     # Run update in background thread
     thread = threading.Thread(target=run_update_async, args=(update_type,))
@@ -129,14 +152,15 @@ def webhook_update():
     
     return jsonify({
         'success': True,
-        'message': f'Update triggered ({update_type})',
+        'message': f'Pipeline triggered ({update_type})',
+        'pipeline_steps': ['scores', 'hands', 'dd', 'analysis'] if update_type == 'all' else [update_type],
         'timestamp': __import__('datetime').datetime.now().isoformat()
     })
 
 
 @app.route('/api/webhook/status', methods=['GET'])
 def webhook_status():
-    """Check the last update status and database info"""
+    """Check the last update status and database info including DD analysis"""
     try:
         # Get database stats
         with open('database.json', 'r', encoding='utf-8') as f:
@@ -149,11 +173,18 @@ def webhook_status():
         if isinstance(db_data, dict):
             score_count = len(db_data.get('legacy_records', []))
             last_updated = db_data.get('last_updated', 'Unknown')
+            metadata = db_data.get('metadata', {})
         else:
             score_count = len(db_data)
             last_updated = 'Unknown'
+            metadata = {}
         
         hands_count = len(hands_data)
+        
+        # Count hands with DD analysis
+        hands_with_dd = len([h for h in hands_data if h.get('dd_analysis')])
+        hands_with_optimum = len([h for h in hands_data if h.get('optimum')])
+        hands_with_lott = len([h for h in hands_data if h.get('lott')])
         
         # Get latest dates (properly sorted by date)
         def parse_date(d):
@@ -170,19 +201,36 @@ def webhook_status():
         else:
             dates = []
         
-        hands_dates = [h.get('Tarih', '') for h in hands_data if h.get('Tarih')]
+        # Get hands dates (check both formats)
+        hands_dates = []
+        for h in hands_data:
+            d = h.get('date') or h.get('Tarih', '')
+            if d:
+                hands_dates.append(d)
         
         latest_score = max(dates, key=parse_date) if dates else None
         latest_hands = max(hands_dates, key=parse_date) if hands_dates else None
+        
+        # Unique tournament dates
+        unique_dates = set(hands_dates)
         
         return jsonify({
             'status': 'ok',
             'database': {
                 'scores': score_count,
                 'hands': hands_count,
+                'hands_with_dd': hands_with_dd,
+                'hands_with_optimum': hands_with_optimum,
+                'hands_with_lott': hands_with_lott,
+                'unique_tournament_dates': len(unique_dates),
                 'last_updated': last_updated,
                 'latest_score_date': latest_score,
                 'latest_hands_date': latest_hands
+            },
+            'metadata': metadata,
+            'pipeline': {
+                'steps': ['scores', 'hands', 'dd', 'analysis'],
+                'description': 'Full pipeline: Vugraph scores → Vugraph hands → DD analysis → Site stats'
             }
         })
     except Exception as e:

@@ -1,2 +1,4 @@
 Flask==2.3.3
-Werkzeug==2.3.7
+Werkzeug==2.3.7requests>=2.28.0
+beautifulsoup4>=4.11.0
+endplay>=0.5.0
