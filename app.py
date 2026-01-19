@@ -216,6 +216,181 @@ def cron_update():
     })
 
 
+# ============== PAIR SUMMARY ENDPOINT ==============
+
+@app.route('/api/pair-summary', methods=['GET'])
+def api_pair_summary():
+    """
+    Fetch pair summary from Vugraph for a specific event, pair, and direction
+    
+    Query params:
+        event: Event ID (e.g., 405278)
+        pair: Pair number (e.g., 12)
+        direction: NS or EW
+        section: Section letter (default: A)
+    
+    Returns board-by-board results with contract info calculated from score
+    """
+    import requests
+    from bs4 import BeautifulSoup
+    
+    event_id = request.args.get('event')
+    pair_num = request.args.get('pair')
+    direction = request.args.get('direction', 'NS')
+    section = request.args.get('section', 'A')
+    
+    if not event_id or not pair_num:
+        return jsonify({'error': 'Missing event or pair parameter'}), 400
+    
+    try:
+        # Fetch pair summary from Vugraph
+        url = f"https://clubs.vugraph.com/hosgoru/pairsummary.php?event={event_id}&section={section}&pair={pair_num}&direction={direction}"
+        
+        response = requests.get(url, timeout=30)
+        response.encoding = 'utf-8'
+        
+        soup = BeautifulSoup(response.content, 'html.parser')
+        
+        # Get pair names from page title (h4)
+        pair_names = ""
+        h4 = soup.find('h4')
+        if h4:
+            text = h4.get_text(strip=True)
+            if 'Çift Özeti' in text:
+                pair_names = text.replace('Çift Özeti', '').strip()
+        
+        # Find the main results table
+        tables = soup.find_all('table')
+        results = []
+        
+        if len(tables) >= 2:
+            main_table = tables[1]  # Second table has the data
+            rows = main_table.find_all('tr')
+            
+            for row in rows[1:]:  # Skip header
+                cells = row.find_all('td')
+                if len(cells) >= 4:
+                    board = cells[0].get_text(strip=True)
+                    opponent = cells[1].get_text(strip=True)
+                    result_score = cells[2].get_text(strip=True)
+                    mp_score = cells[3].get_text(strip=True)
+                    
+                    # Parse result score to int
+                    try:
+                        result_int = int(result_score)
+                    except:
+                        result_int = 0
+                    
+                    # Estimate contract from score (simplified)
+                    contract_info = estimate_contract_from_score(result_int, direction)
+                    
+                    results.append({
+                        'board': board,
+                        'opponent': opponent,
+                        'result': result_score,
+                        'score': mp_score,
+                        'contract': contract_info.get('contract', '?'),
+                        'declarer': contract_info.get('declarer', '?'),
+                        'contract_display': contract_info.get('display', '?')
+                    })
+        
+        return jsonify({
+            'success': True,
+            'pair_names': pair_names,
+            'direction': direction,
+            'event_id': event_id,
+            'results': results
+        })
+        
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
+def estimate_contract_from_score(score, pair_direction):
+    """
+    Estimate the likely contract and declarer from the result score.
+    This is a heuristic based on common bridge scoring.
+    
+    Score patterns:
+    - Positive for NS: NS made contract or set EW
+    - Negative for NS: EW made contract or NS went down
+    
+    Common scores:
+    - 420: 4♠/4♥ made, not vul
+    - 620: 4♠/4♥ made, vul
+    - 430: 3NT+1, not vul
+    - 400: 3NT made, not vul
+    - 600: 3NT made, vul
+    - 110/140: Partial in major
+    - 90/110/130: Partial in minor
+    - 50/100: 1 down
+    """
+    
+    # Determine who likely declared based on score sign and pair direction
+    if pair_direction == 'NS':
+        if score > 0:
+            # NS positive: NS made or EW went down
+            declarer = 'NS'
+        else:
+            # NS negative: EW made or NS went down
+            declarer = 'EW'
+    else:  # EW
+        if score > 0:
+            declarer = 'EW'
+        else:
+            declarer = 'NS'
+    
+    abs_score = abs(score)
+    contract = '?'
+    
+    # Major game scores
+    if abs_score in [420, 450, 480, 510]:
+        contract = '4♠/♥'
+    elif abs_score in [620, 650, 680, 710]:
+        contract = '4♠/♥'
+    # NT game scores
+    elif abs_score in [400, 430, 460, 490]:
+        contract = '3NT'
+    elif abs_score in [600, 630, 660, 690]:
+        contract = '3NT'
+    # Minor game scores
+    elif abs_score in [400, 920, 1370, 1390]:
+        contract = '5♣/♦'
+    # Slam scores
+    elif abs_score >= 980 and abs_score <= 1020:
+        contract = '6♠/♥'
+    elif abs_score >= 1430 and abs_score <= 1470:
+        contract = '6♠/♥'
+    elif abs_score >= 990 and abs_score <= 1020:
+        contract = '6NT'
+    elif abs_score >= 1500:
+        contract = '7x'
+    # Partial scores - majors
+    elif abs_score in [110, 140, 170, 200]:
+        contract = '2♠/♥'
+    elif abs_score in [80, 50]:
+        contract = '1♠/♥'
+    # Partial scores - minors
+    elif abs_score in [90, 110, 130]:
+        contract = '2♣/♦'
+    # Down scores
+    elif abs_score in [50, 100, 150, 200, 250, 300]:
+        contract = 'Down'
+    elif abs_score in [100, 200, 300, 500, 800, 1100]:
+        contract = 'Down (Vul)'
+    # Common partials
+    elif abs_score in [120, 150, 180]:
+        contract = '2-3♠/♥'
+    
+    display = f"{contract} ({declarer})" if contract != '?' else '?'
+    
+    return {
+        'contract': contract,
+        'declarer': declarer,
+        'display': display
+    }
+
+
 # ============================================================
 
 @app.route('/<path:filename>')

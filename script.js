@@ -1,5 +1,5 @@
-// Script version for cache busting - v379
-const SCRIPT_VERSION = '379';
+// Script version for cache busting - v422
+const SCRIPT_VERSION = '422';
 
 // ===== DİL SISTEMI (i18n) =====
 let translations = {};
@@ -1206,12 +1206,20 @@ function showGlobalRangeTab(tabNum) {
                 html += '<p style="text-align:center;color:#999;padding:20px;">NS sonuç bulunamadı</p>';
             } else {
                 nsList.forEach((record, idx) => {
+                    // Extract event ID from Link
+                    const eventId = extractEventIdFromLink(record['Link']);
+                    const pairNum = record['Sıra'];
+                    const pairNames = `${record['Oyuncu 1']} & ${record['Oyuncu 2']}`;
+                    
                     html += `
                         <div style="padding:10px;background:#f8f9fa;border-left:4px solid #3b82f6;border-radius:6px;display:flex;justify-content:space-between;align-items:center;">
-                            <div>
+                            <div style="flex:1;">
                                 <div style="font-weight:bold;color:#1e3c72;font-size:0.9em;">${idx + 1}. ${record['Oyuncu 1']} & ${record['Oyuncu 2']}</div>
                             </div>
-                            <div style="font-weight:bold;color:#3b82f6;font-size:1em;">%${record['Skor']}</div>
+                            <div style="display:flex;align-items:center;gap:10px;">
+                                ${eventId ? `<button onclick="openPairSummaryModal('${eventId}', '${pairNum}', 'NS', '${pairNames.replace(/'/g, "\\'")}'); event.stopPropagation();" style="background:#6366f1;color:white;border:none;padding:4px 8px;border-radius:4px;cursor:pointer;font-size:0.75em;" title="Çift Özeti">📋</button>` : ''}
+                                <div style="font-weight:bold;color:#3b82f6;font-size:1em;">%${record['Skor']}</div>
+                            </div>
                         </div>
                     `;
                 });
@@ -1315,10 +1323,16 @@ function showGlobalRangeTab(tabNum) {
                     const score = parseFloat(row['Skor']) || 0;
                     const scoreColor = score >= 50 ? '#16a34a' : '#dc2626';
                     
-                    html += '<div style="display:grid;grid-template-columns:50px 1fr 1fr 80px;gap:8px;padding:10px;background:' + (idx % 2 === 0 ? '#f9fafb' : 'white') + ';border:1px solid #e5e7eb;border-radius:6px;align-items:center;">';
+                    // Extract event ID from Link
+                    const eventId = extractEventIdFromLink(row['Link']);
+                    const pairNum = row['Sıra'];
+                    const pairNames = `${row['Oyuncu 1']} & ${row['Oyuncu 2']}`;
+                    
+                    html += '<div style="display:grid;grid-template-columns:50px 1fr 1fr 50px 80px;gap:8px;padding:10px;background:' + (idx % 2 === 0 ? '#f9fafb' : 'white') + ';border:1px solid #e5e7eb;border-radius:6px;align-items:center;">';
                     html += `<div style="font-weight:bold;color:#667eea;text-align:center;">${idx + 1}.</div>`;
                     html += `<div style="color:#374151;font-weight:500;font-size:0.9em;">${row['Oyuncu 1']}</div>`;
                     html += `<div style="color:#374151;font-weight:500;font-size:0.9em;">${row['Oyuncu 2']}</div>`;
+                    html += `<div style="text-align:center;">${eventId ? `<button onclick="openPairSummaryModal('${eventId}', '${pairNum}', 'EW', '${pairNames.replace(/'/g, "\\'")}'); event.stopPropagation();" style="background:#6366f1;color:white;border:none;padding:4px 8px;border-radius:4px;cursor:pointer;font-size:0.75em;" title="Çift Özeti">📋</button>` : ''}</div>`;
                     html += `<div style="text-align:center;font-weight:bold;color:${scoreColor};">% ${score.toFixed(2)}</div>`;
                     html += '</div>';
                 });
@@ -3215,4 +3229,184 @@ function createHandCard(h) {
         <iframe src="${iframeUrl}" style="width: 100%; height: 320px; border: 1px solid #ddd; border-radius: 4px;"></iframe>
     </div>`;
 }
+
+
+// ===== PAIR SUMMARY MODAL =====
+// Shows board-by-board results for a pair including contract and declarer info
+
+async function openPairSummaryModal(eventId, pairNum, direction, pairNames) {
+    console.log(`📋 Opening pair summary: event=${eventId}, pair=${pairNum}, direction=${direction}`);
+    
+    // Create modal
+    let modal = document.getElementById('pairSummaryModal');
+    if (modal) modal.remove();
+    
+    modal = document.createElement('div');
+    modal.id = 'pairSummaryModal';
+    modal.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.6);
+        z-index: 99999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    `;
+    
+    const innerDiv = document.createElement('div');
+    innerDiv.style.cssText = `
+        width: 95%;
+        max-width: 800px;
+        max-height: 90%;
+        background: white;
+        border-radius: 12px;
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+        overflow: hidden;
+    `;
+    
+    // Header
+    const header = document.createElement('div');
+    header.style.cssText = `
+        padding: 15px 20px;
+        background: linear-gradient(135deg, #1e3c72, #2a5298);
+        color: white;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-shrink: 0;
+    `;
+    
+    header.innerHTML = `
+        <div>
+            <h2 style="margin: 0; font-size: 1.2em;">📋 Çift Özeti</h2>
+            <div style="font-size: 0.85em; opacity: 0.9; margin-top: 4px;">${pairNames || 'Yükleniyor...'}</div>
+        </div>
+        <button onclick="closePairSummaryModal()" style="background: rgba(255,255,255,0.2); border: none; color: white; font-size: 1.3em; cursor: pointer; padding: 5px 12px; border-radius: 6px;">✕</button>
+    `;
+    
+    // Content
+    const content = document.createElement('div');
+    content.id = 'pairSummaryContent';
+    content.style.cssText = `
+        flex: 1;
+        overflow-y: auto;
+        padding: 0;
+        background: #f8f9fa;
+    `;
+    
+    content.innerHTML = `
+        <div style="display: flex; justify-content: center; align-items: center; padding: 60px;">
+            <div style="text-align: center;">
+                <div style="width: 40px; height: 40px; border: 3px solid #1e3c72; border-top-color: transparent; border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 15px;"></div>
+                <div style="color: #666;">Veriler yükleniyor...</div>
+            </div>
+        </div>
+    `;
+    
+    innerDiv.appendChild(header);
+    innerDiv.appendChild(content);
+    modal.appendChild(innerDiv);
+    document.body.appendChild(modal);
+    document.body.style.overflow = 'hidden';
+    
+    // Close on backdrop click
+    modal.onclick = (e) => {
+        if (e.target === modal) closePairSummaryModal();
+    };
+    
+    // Fetch data
+    try {
+        const response = await fetch(`/api/pair-summary?event=${eventId}&pair=${pairNum}&direction=${direction}`);
+        const data = await response.json();
+        
+        if (data.error) {
+            content.innerHTML = `<div style="padding: 40px; text-align: center; color: #dc3545;">❌ Hata: ${data.error}</div>`;
+            return;
+        }
+        
+        // Update header with pair names
+        if (data.pair_names) {
+            header.querySelector('div > div').textContent = data.pair_names + ` (${direction})`;
+        }
+        
+        // Build results table
+        let html = `
+            <div style="padding: 15px;">
+                <div style="background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                    <table style="width: 100%; border-collapse: collapse; font-size: 0.9em;">
+                        <thead>
+                            <tr style="background: #1e3c72; color: white;">
+                                <th style="padding: 12px 8px; text-align: center; width: 50px;">Bord</th>
+                                <th style="padding: 12px 8px; text-align: left;">Rakip</th>
+                                <th style="padding: 12px 8px; text-align: center; width: 100px;">Kontrat</th>
+                                <th style="padding: 12px 8px; text-align: center; width: 70px;">Sonuç</th>
+                                <th style="padding: 12px 8px; text-align: center; width: 70px;">Skor</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+        `;
+        
+        if (data.results && data.results.length > 0) {
+            data.results.forEach((row, idx) => {
+                const bgColor = idx % 2 === 0 ? '#ffffff' : '#f8f9fa';
+                const resultInt = parseInt(row.result) || 0;
+                const resultColor = resultInt >= 0 ? '#16a34a' : '#dc2626';
+                const scoreFloat = parseFloat(row.score) || 0;
+                const scoreColor = scoreFloat >= 50 ? '#16a34a' : '#dc2626';
+                
+                html += `
+                    <tr style="background: ${bgColor}; border-bottom: 1px solid #e5e7eb;">
+                        <td style="padding: 10px 8px; text-align: center; font-weight: bold; color: #1e3c72;">${row.board}</td>
+                        <td style="padding: 10px 8px; text-align: left; color: #374151;">${row.opponent}</td>
+                        <td style="padding: 10px 8px; text-align: center; font-weight: 600; color: #6366f1;">${row.contract_display || '?'}</td>
+                        <td style="padding: 10px 8px; text-align: center; font-weight: bold; color: ${resultColor};">${row.result}</td>
+                        <td style="padding: 10px 8px; text-align: center; font-weight: bold; color: ${scoreColor};">${row.score}</td>
+                    </tr>
+                `;
+            });
+        } else {
+            html += `<tr><td colspan="5" style="padding: 30px; text-align: center; color: #999;">Sonuç bulunamadı</td></tr>`;
+        }
+        
+        html += `
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div style="margin-top: 15px; padding: 12px; background: #e0e7ff; border-radius: 8px; font-size: 0.85em; color: #4338ca;">
+                    <strong>💡 Not:</strong> Kontrat bilgisi skor değerinden tahmin edilmektedir. Tam doğruluk için orijinal kayıtlara başvurunuz.
+                </div>
+            </div>
+        `;
+        
+        content.innerHTML = html;
+        
+    } catch (error) {
+        content.innerHTML = `<div style="padding: 40px; text-align: center; color: #dc3545;">❌ Bağlantı hatası: ${error.message}</div>`;
+    }
+}
+
+function closePairSummaryModal() {
+    const modal = document.getElementById('pairSummaryModal');
+    if (modal) {
+        modal.remove();
+        document.body.style.overflow = 'auto';
+    }
+}
+
+// Helper to extract event ID from tournament link
+function extractEventIdFromLink(link) {
+    if (!link) return null;
+    const match = link.match(/event=(\d+)/);
+    return match ? match[1] : null;
+}
+
+// Make function globally available
+window.openPairSummaryModal = openPairSummaryModal;
+window.closePairSummaryModal = closePairSummaryModal;
 
