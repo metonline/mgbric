@@ -189,8 +189,8 @@
                 loading: 'Veriler yükleniyor...',
                 avgLabel: 'Ortalama',
                 stdDevLabel: 'Std. Sapma',
-                above50Label: '%50 Üzeri',
-                below50Label: '%50 Altı',
+                above50Label: 'Başarılı Board',
+                below50Label: 'Başarısız Board',
                 boardHeader: 'Bord',
                 contractHeader: 'Kontrat',
                 leadHeader: 'Atak',
@@ -211,8 +211,8 @@
                 loading: 'Loading data...',
                 avgLabel: 'Average',
                 stdDevLabel: 'Std. Dev.',
-                above50Label: 'Above 50%',
-                below50Label: 'Below 50%',
+                above50Label: 'Successful',
+                below50Label: 'Unsuccessful',
                 boardHeader: 'Board',
                 contractHeader: 'Contract',
                 leadHeader: 'Lead',
@@ -398,20 +398,49 @@
 
             results.forEach(r => {
                 const board = r.board || '?';
-                const contract = r.contract || '—';
+                let contract = r.contract || '—';
                 const declarer = r.declarer || '';
-                const result = r.result || '—';
-                const lead = r.lead || '—';
+                let result = r.result || '—';
+                let lead = r.lead || '—';
                 
-                // Direction'a göre skor ve yüzde al
-                const scoreStr = direction === 'NS' ? r.score_ns : r.score_ew;
+                // Oynanmayan eller için (-6, vb.) kontrol
+                const isUnplayed = contract === '-6' || contract.startsWith('-') || !contract || contract === '—';
+                if (isUnplayed) {
+                    contract = '—';
+                    result = '—';
+                    lead = '—';
+                }
+                
+                // Direction'a göre skor hesapla
+                // Eğer NS görüntüleniyor ve deklaran E veya W ise, skor NS için negatif olmalı
+                let scoreNum = 0;
                 const percentStr = direction === 'NS' ? r.percent_ns : r.percent_ew;
                 
-                const score = scoreStr || '—';
+                if (!isUnplayed) {
+                    if (direction === 'NS') {
+                        // NS görüntüleniyor
+                        if (r.score_ns) {
+                            scoreNum = parseInt(r.score_ns) || 0;
+                        } else if (r.score_ew) {
+                            // EW skoru var, NS için tersini al
+                            scoreNum = -(parseInt(r.score_ew) || 0);
+                        }
+                    } else {
+                        // EW görüntüleniyor
+                        if (r.score_ew) {
+                            scoreNum = parseInt(r.score_ew) || 0;
+                        } else if (r.score_ns) {
+                            // NS skoru var, EW için tersini al
+                            scoreNum = -(parseInt(r.score_ns) || 0);
+                        }
+                    }
+                }
+                
+                // Skor gösterimi: negatifse mutlak değer göster (renk kırmızı olacak)
+                const score = isUnplayed ? '—' : (scoreNum !== 0 ? Math.abs(scoreNum).toString() : '—');
                 const percent = percentStr || '—';
                 
-                // NS görüntüleniyorsa: pozitif=yeşil, negatif=kırmızı
-                const scoreNum = parseInt(scoreStr) || 0;
+                // Pozitif=yeşil, negatif=kırmızı (- işareti gösterilmeyecek ama renk kırmızı)
                 const scoreClass = scoreNum > 0 ? 'score-positive' : (scoreNum < 0 ? 'score-negative' : '');
                 
                 const pctNum = parseFloat(percentStr) || 0;
