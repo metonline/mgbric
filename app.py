@@ -393,28 +393,25 @@ def api_pair_summary():
             response.encoding = 'iso-8859-9'
             soup = BeautifulSoup(response.content, 'html.parser')
             
-            # Get pair names from h3
+            # Get pair names and date from h3
+            # Format: "PAZARTESİ 19-01-2026 14:00 ... ZÜLKÜF TEOMAN HAZNECİ - HİKMET ALBAYRAK ... Bord 1 Detayları"
             h3 = soup.find('h3')
             if h3:
                 text = h3.get_text(strip=True)
-                # Extract names: "... ZÜLKÜF TEOMAN HAZNECI - HIKMET ALBAYRAK ... Bord 1"
+                
+                # Extract names
                 if '...' in text:
                     parts = text.split('...')
                     if len(parts) >= 2:
                         pair_names = parts[1].strip()
                         if 'Bord' in pair_names:
                             pair_names = pair_names.split('Bord')[0].strip()
-            
-            # Get tournament date from h2 (format: "Çiftler Cuma Turnuvası - 17.01.2026")
-            h2 = soup.find('h2')
-            if h2:
-                h2_text = h2.get_text(strip=True)
-                # Extract date
+                
+                # Extract date from h3 (format: "PAZARTESİ 19-01-2026 14:00")
                 import re
-                date_match = re.search(r'(\d{2})\.(\d{2})\.(\d{4})', h2_text)
+                date_match = re.search(r'(\d{2})-(\d{2})-(\d{4})', text)
                 if date_match:
                     day, month, year = date_match.groups()
-                    # Format: "17 Ocak 2026 Cuma"
                     from datetime import datetime
                     try:
                         dt = datetime(int(year), int(month), int(day))
