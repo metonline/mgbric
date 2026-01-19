@@ -291,8 +291,9 @@
 
         function formatContract(contract) {
             if (!contract || contract === '—') return '—';
-            // Suitları renklendir
+            // N -> NT ve suitları renklendir
             return contract
+                .replace(/(\d)N([^T]|$)/g, '$1NT$2')  // 3N -> 3NT
                 .replace(/♠/g, '<span class="suit-spade">♠</span>')
                 .replace(/♥/g, '<span class="suit-heart">♥</span>')
                 .replace(/♦/g, '<span class="suit-diamond">♦</span>')
