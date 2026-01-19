@@ -384,13 +384,16 @@ def api_pair_summary():
                 # Skip boards that fail to load
                 continue
         
-        # Get pair names from first board page title
+        # Get pair names and tournament date from first board page
         pair_names = ""
+        tournament_date = ""
         try:
             url = f"https://clubs.vugraph.com/hosgoru/boarddetails.php?event={event_id}&section={section}&pair={pair_num}&direction={direction}&board=1"
             response = requests.get(url, timeout=10)
             response.encoding = 'iso-8859-9'
             soup = BeautifulSoup(response.content, 'html.parser')
+            
+            # Get pair names from h3
             h3 = soup.find('h3')
             if h3:
                 text = h3.get_text(strip=True)
@@ -401,12 +404,36 @@ def api_pair_summary():
                         pair_names = parts[1].strip()
                         if 'Bord' in pair_names:
                             pair_names = pair_names.split('Bord')[0].strip()
+            
+            # Get tournament date from h2 (format: "Çiftler Cuma Turnuvası - 17.01.2026")
+            h2 = soup.find('h2')
+            if h2:
+                h2_text = h2.get_text(strip=True)
+                # Extract date
+                import re
+                date_match = re.search(r'(\d{2})\.(\d{2})\.(\d{4})', h2_text)
+                if date_match:
+                    day, month, year = date_match.groups()
+                    # Format: "17 Ocak 2026 Cuma"
+                    from datetime import datetime
+                    try:
+                        dt = datetime(int(year), int(month), int(day))
+                        # Turkish day names
+                        day_names = ['Pazartesi', 'Salı', 'Çarşamba', 'Perşembe', 'Cuma', 'Cumartesi', 'Pazar']
+                        month_names = ['', 'Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 
+                                      'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık']
+                        day_name = day_names[dt.weekday()]
+                        month_name = month_names[int(month)]
+                        tournament_date = f"{int(day)} {month_name} {year} {day_name}"
+                    except:
+                        tournament_date = f"{day}.{month}.{year}"
         except:
             pass
         
         return jsonify({
             'success': True,
             'pair_names': pair_names,
+            'tournament_date': tournament_date,
             'direction': direction,
             'event_id': event_id,
             'pair_num': pair_num,

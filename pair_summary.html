@@ -122,22 +122,20 @@
             border-radius: 6px;
         }
         .back-link:hover { background: #2a5298; }
-        .lang-switch {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            display: flex;
-            gap: 8px;
+        .player-names {
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 5px;
         }
-        .lang-btn {
-            width: 32px;
-            height: 24px;
-            cursor: pointer;
-            opacity: 0.5;
-            transition: opacity 0.2s;
-            border-radius: 3px;
+        .pair-info {
+            font-size: 0.95em;
+            opacity: 0.9;
         }
-        .lang-btn.active { opacity: 1; }
+        .tournament-date {
+            font-size: 0.9em;
+            opacity: 0.8;
+            margin-top: 5px;
+        }
         @media (max-width: 600px) {
             body { padding: 10px; }
             table { font-size: 0.8em; }
@@ -164,12 +162,9 @@
 <body>
     <div class="container">
         <div class="header">
-            <div class="lang-switch">
-                <img src="TR_flag.png" class="lang-btn active" id="lang-tr" onclick="switchLang('tr')" title="Türkçe">
-                <img src="EN_flag.png" class="lang-btn" id="lang-en" onclick="switchLang('en')" title="English">
-            </div>
-            <h1 id="title">🃏 Çift Özeti</h1>
-            <div class="subtitle" id="subtitle">Yükleniyor...</div>
+            <div class="player-names" id="playerNames">Yükleniyor...</div>
+            <div class="pair-info" id="pairInfo"></div>
+            <div class="tournament-date" id="tournamentDate"></div>
         </div>
         <div class="content" id="content">
             <div class="loading">
@@ -245,24 +240,9 @@
 
         function formatStdDev(value) {
             if (value === null || value === undefined || isNaN(value)) return '—';
-            if (currentLang === 'tr') {
-                return value.toFixed(1).replace('.', ',');
-            } else {
-                return value.toFixed(1);
-            }
-        }
-
-        function switchLang(lang) {
-            currentLang = lang;
-            localStorage.setItem('pairSummaryLang', lang);
-            
-            document.getElementById('lang-tr').classList.toggle('active', lang === 'tr');
-            document.getElementById('lang-en').classList.toggle('active', lang === 'en');
-            document.getElementById('title').textContent = t('title');
-            
-            if (window.cachedData) {
-                renderResults(window.cachedData);
-            }
+            // +/- %26 (TR) veya +/- 26% (EN) formatı
+            const formatted = value.toFixed(1).replace('.', ',');
+            return '+/- %' + formatted;
         }
 
         // URL parametrelerini al
@@ -270,11 +250,6 @@
         const eventId = params.get('event');
         const pairNum = params.get('pair');
         const direction = params.get('direction') || 'NS';
-
-        // Initialize language
-        document.getElementById('lang-tr').classList.toggle('active', currentLang === 'tr');
-        document.getElementById('lang-en').classList.toggle('active', currentLang === 'en');
-        document.getElementById('title').textContent = t('title');
 
         if (!eventId || !pairNum) {
             document.getElementById('content').innerHTML = `
@@ -316,8 +291,30 @@
         }
 
         function renderResults(data) {
-            document.getElementById('subtitle').textContent = 
-                `Event: ${eventId} | ${t('pair')}: ${pairNum} ${direction}`;
+            // Oyuncu isimlerini göster
+            const pairNames = data.pair_names || '';
+            if (pairNames) {
+                // "ZÜLKÜF TEOMAN HAZNECI - HIKMET ALBAYRAK" -> "Zülküf Teoman Hazneci & Hikmet Albayrak"
+                const names = pairNames.split(' - ').map(name => {
+                    return name.split(' ').map(word => 
+                        word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+                    ).join(' ');
+                }).join(' & ');
+                document.getElementById('playerNames').textContent = names;
+            } else {
+                document.getElementById('playerNames').textContent = 'Çift Özeti';
+            }
+            
+            // Çift bilgisi
+            document.getElementById('pairInfo').textContent = `(${pairNum} ${direction})`;
+            
+            // Turnuva tarihi - event ID'den hesapla veya API'den al
+            const tournamentDate = data.tournament_date || '';
+            if (tournamentDate) {
+                document.getElementById('tournamentDate').textContent = tournamentDate;
+            } else {
+                document.getElementById('tournamentDate').textContent = '';
+            }
             
             const results = data.results || [];
             
@@ -437,14 +434,16 @@
                 }
                 
                 // Skor gösterimi: negatifse mutlak değer göster (renk kırmızı olacak)
+                // Oynanmayan boardlarda renk kodu yok
                 const score = isUnplayed ? '—' : (scoreNum !== 0 ? Math.abs(scoreNum).toString() : '—');
                 const percent = percentStr || '—';
                 
-                // Pozitif=yeşil, negatif=kırmızı (- işareti gösterilmeyecek ama renk kırmızı)
-                const scoreClass = scoreNum > 0 ? 'score-positive' : (scoreNum < 0 ? 'score-negative' : '');
+                // Oynanmamışsa renk yok, pozitif=yeşil, negatif=kırmızı
+                const scoreClass = isUnplayed ? '' : (scoreNum > 0 ? 'score-positive' : (scoreNum < 0 ? 'score-negative' : ''));
                 
                 const pctNum = parseFloat(percentStr) || 0;
-                const pctClass = pctNum >= 50 ? 'percent-good' : 'percent-bad';
+                // Oynanmamışsa yüzde için de renk yok
+                const pctClass = isUnplayed ? '' : (pctNum >= 50 ? 'percent-good' : 'percent-bad');
 
                 // Kontrat + Deklaran birleştir (örn: "4♥ N")
                 const contractWithDeclarer = contract !== '—' && declarer 
