@@ -1,0 +1,56 @@
+name: Scheduled Database Update
+
+on:
+  schedule:
+    # Tüm saatler UTC - Türkiye saati için 3 saat çıkarın
+    # Türkiye 10:00 = UTC 07:00
+    - cron: '0 7 * * *'      # 10:00 TR
+    - cron: '0 9 * * *'      # 12:00 TR
+    - cron: '0 13 * * *'     # 16:00 TR
+    - cron: '15 14 * * *'    # 17:15 TR
+    - cron: '20 14 * * *'    # 17:20 TR
+    - cron: '25 14 * * *'    # 17:25 TR
+    - cron: '30 14 * * *'    # 17:30 TR
+    - cron: '35 14 * * *'    # 17:35 TR
+    - cron: '40 14 * * *'    # 17:40 TR
+    - cron: '45 14 * * *'    # 17:45 TR
+    - cron: '50 14 * * *'    # 17:50 TR
+    - cron: '55 14 * * *'    # 17:55 TR
+    - cron: '0 15 * * *'     # 18:00 TR
+    - cron: '55 20 * * *'    # 23:55 TR
+  
+  workflow_dispatch:  # Manuel tetikleme butonu
+
+jobs:
+  update-database:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Trigger Railway Database Update
+        run: |
+          echo "🚀 Triggering Railway database update..."
+          
+          RESPONSE=$(curl -s -w "\n%{http_code}" -X POST \
+            "${{ secrets.RAILWAY_URL }}/api/webhook/update" \
+            -H "Content-Type: application/json" \
+            -H "X-Webhook-Secret: ${{ secrets.WEBHOOK_SECRET }}")
+          
+          HTTP_CODE=$(echo "$RESPONSE" | tail -n1)
+          BODY=$(echo "$RESPONSE" | sed '$d')
+          
+          echo "Response Code: $HTTP_CODE"
+          echo "Response Body: $BODY"
+          
+          if [ "$HTTP_CODE" -ge 200 ] && [ "$HTTP_CODE" -lt 300 ]; then
+            echo "✅ Update triggered successfully!"
+          else
+            echo "❌ Update failed with code $HTTP_CODE"
+            exit 1
+          fi
+
+      - name: Check Update Status
+        run: |
+          echo "📊 Checking database status..."
+          sleep 5
+          
+          curl -s "${{ secrets.RAILWAY_URL }}/api/webhook/status" | jq '.'
