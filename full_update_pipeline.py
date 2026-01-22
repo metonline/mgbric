@@ -925,7 +925,25 @@ def run_full_pipeline(step=None, force=False):
         dd_success, dd_count = run_dd_analysis(new_hands if step is None else None, force)
         success = success and dd_success
     
-    # Step 4: Site Analysis
+    # Step 4: Board Rankings
+    if step is None or step == 'rankings':
+        log_section("STEP 4: FETCHING BOARD RANKINGS")
+        try:
+            import subprocess
+            result = subprocess.run(
+                [sys.executable, 'fetch_missing_rankings.py', '--once'],
+                capture_output=True,
+                text=True,
+                timeout=600
+            )
+            if result.returncode == 0:
+                log("Board rankings updated successfully")
+            else:
+                log(f"Board rankings failed: {result.stderr}", "WARNING")
+        except Exception as e:
+            log(f"Board rankings error: {e}", "WARNING")
+    
+    # Step 5: Site Analysis
     if step is None or step == 'analysis':
         analysis_success = run_site_analysis()
         success = success and analysis_success
