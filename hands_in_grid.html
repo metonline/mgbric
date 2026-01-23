@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#1a1a2e">
+    <meta name="description" content="Hoşgörü Briç Kulübü - Ellerin Kılavuz Görünümü">
+    <title>Ellerin Kılavuz Görünümü</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: #fff;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #00d9ff;
+            margin-bottom: 10px;
+            font-size: 1.8em;
+        }
+        
+        .tournament-info {
+            text-align: center;
+            color: #aaa;
+            margin-bottom: 25px;
+            font-size: 0.95em;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #00d9ff;
+        }
+        
+        .error {
+            text-align: center;
+            padding: 20px;
+            color: #ff6b6b;
+            background: rgba(255,107,107,0.1);
+            border-radius: 8px;
+        }
+        
+        /* GRID LAYOUT */
+        .hands-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(520px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        @media (max-width: 1200px) {
+            .hands-grid {
+                grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hands-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* ===== BBO STYLE HAND DIAGRAM ===== */
+        .hand-diagram-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 25px;
+        }
+        
+        .mainDivStyle {
+            position: relative;
+            width: 500px;
+            height: 475px;
+            background: #c0c1c0;
+            border-radius: 4px;
+            overflow: visible;
+        }
+        
+        .handDivStyle {
+            position: absolute;
+            background: #cbcbcb;
+            width: 160px;
+            height: 124px;
+            font-size: 22px;
+        }
+        
+        .suitRowDivStyle {
+            position: relative;
+            height: 25px;
+            line-height: 25px;
+            white-space: nowrap;
+            padding-left: 5px;
+        }
+        
+        .suitSymbol {
+            display: inline-block;
+            width: 30px;
+            font-size: 30px;
+            text-align: center;
+            vertical-align: middle;
+        }
+        
+        .suitHolding {
+            display: inline-block;
+            font-size: 22px;
+            letter-spacing: 2px;
+            vertical-align: middle;
+            color: #000;
+        }
+        
+        .nameRowDivStyle {
+            position: absolute;
+            height: 30px;
+            line-height: 30px;
+            border: 1px solid white;
+            white-space: nowrap;
+            font-size: 18px;
+            font-weight: bold;
+            background: white;
+        }
+        
+        .nameInitial {
+            display: inline-block;
+            width: 30px;
+            text-align: center;
+            font-weight: bold;
+            color: #000;
+            font-size: 16px;
+        }
+        
+        .vulInnerDivStyle {
+            position: absolute;
+            background: white;
+            border: 3px solid #880000;
+            font-size: 42px;
+            font-weight: bold;
+            text-align: center;
+            width: 60px;
+            height: 60px;
+            line-height: 54px;
+        }
+        
+        .dealer-bg { background: #ffce00 !important; color: black !important; }
+        .vul-bg { background: #cb0000 !important; color: white !important; }
+        
+        /* Position Classes */
+        .pos-n-name { left: 170px; top: 5px; width: 160px; }
+        .pos-n-hand { left: 170px; top: 35px; }
+        .pos-w-name { left: 5px; top: 160px; width: 160px; }
+        .pos-w-hand { left: 5px; top: 190px; }
+        .pos-e-name { left: 335px; top: 160px; width: 160px; }
+        .pos-e-hand { left: 335px; top: 190px; }
+        .pos-s-name { left: 170px; top: 315px; width: 160px; }
+        .pos-s-hand { left: 170px; top: 345px; }
+        .pos-board { 
+            left: 220px; 
+            top: 215px;
+            width: 60px;
+            height: 60px;
+            background: white;
+            border: 2px solid #808080;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        /* Board Info - Left Side */
+        .board-info-left {
+            position: absolute;
+            left: 8px;
+            top: 8px;
+            font-size: 15px;
+            color: #333;
+            line-height: 1.6;
+            text-align: left;
+        }
+        
+        .board-info-left .date {
+            font-weight: bold;
+        }
+        
+        .board-info-left .dealer {
+            background: #ffce00;
+            color: black;
+            font-weight: bold;
+            padding: 1px 4px;
+            border-radius: 2px;
+            display: block;
+        }
+        
+        .board-info-left .vul {
+            background: white;
+            color: black;
+            font-weight: bold;
+            padding: 1px 4px;
+            border-radius: 2px;
+            display: block;
+            margin-top: 2px;
+        }
+        
+        .board-info-left .vul.vul-active {
+            background: #cb0000;
+            color: white;
+        }
+        
+        /* HCP Display */
+        .hcp-display {
+            position: absolute;
+            left: 335px;
+            top: 35px;
+            width: 160px;
+            font-size: 16px;
+            color: #333;
+            text-align: center;
+        }
+        
+        .hcp-display .hcp-north {
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .hcp-display .hcp-south {
+            text-align: center;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        
+        .hcp-display .hcp-middle {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 20px;
+            margin-top: 5px;
+        }
+        
+        .hcp-display .hcp-value {
+            font-weight: bold;
+            color: #000;
+            font-size: 18px;
+        }
+        
+        /* DD Table - BBO Style */
+        .bhDoubleDummy {
+            position: absolute;
+            padding: 5px 3px;
+            border: none;
+            background: #c0c1c0;
+            font-size: 10px;
+            width: auto;
+            min-width: 150px;
+            left: 1px;
+            bottom: 5px;
+            color: #000;
+            transform: scale(1);
+            transform-origin: bottom left;
+        }
+        
+        .bh-dd {
+            text-align: center;
+            border-collapse: collapse;
+            margin-bottom: 5px;
+            color: #000;
+        }
+        
+        .bh-dd th, .bh-dd td {
+            width: 26px;
+            height: 21px;
+            text-align: center;
+            color: #000;
+        }
+        
+        .bh-dd th {
+            font-weight: bold;
+            border: none;
+            color: #000;
+        }
+        
+        .bh-dd th:first-child {
+            width: 20px;
+        }
+        
+        .bh-dd td {
+            border: none;
+            background: #fff;
+            color: #000;
+        }
+        
+        .bh-dd td:first-child {
+            border: none;
+            font-weight: bold;
+            background: transparent;
+        }
+        
+        .bh-dd .suit-symbol {
+            font-size: 16px;
+        }
+        
+        .par-display {
+            font-size: 12px;
+            line-height: 1.4;
+            color: #000;
+        }
+        
+        .par-display strong {
+            display: block;
+        }
+        
+        /* Suit colors */
+        .suit-black { color: #000 !important; }
+        .suit-red { color: #cb0000 !important; }
+        
+        /* LoTT Display */
+        .lottDisplay {
+            position: absolute;
+            padding: 8px;
+            border: 1px solid #c0c1c0;
+            background: #c0c1c0;
+            color: #000;
+            font-size: 15px;
+            text-align: center;
+            min-width: 100px;
+            right: 25px;
+            bottom: 25px;
+            color: black;
+        }
+        
+        .lott-title {
+            font-weight: bold;
+            color: black;
+            margin-bottom: 3px;
+            font-size: 1.125em;
+        }
+        
+        .lott-value {
+            font-size: 35px;
+            font-weight: bold;
+            color: black;
+        }
+        
+        .lott-detail {
+            font-size: 12.5px;
+            color: black;
+            margin-top: 3px;
+        }
+        /* ===== END BBO STYLE ===== */
+        
+        /* Mobile wrapper for scaling */
+        .scale-wrapper {
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎴 Ellerin Kılavuz Görünümü</h1>
+        <div class="tournament-info">
+            <span id="tournament-name">Yükleniyor...</span> • 
+            <span id="board-count">0</span> El
+        </div>
+        
+        <div id="loading" class="loading">Elleri yükleniyor...</div>
+        <div id="error" class="error" style="display:none;"></div>
+        <div class="hands-grid" id="hands-grid"></div>
+    </div>
+
+    <script>
+        // Helper functions
+        function calculateHCP(hand) {
+            if (!hand || !hand.S) return 0;
+            let hcp = 0;
+            const cards = (hand.S || '') + (hand.H || '') + (hand.D || '') + (hand.C || '');
+            for (const c of cards) {
+                if (c === 'A') hcp += 4;
+                else if (c === 'K') hcp += 3;
+                else if (c === 'Q') hcp += 2;
+                else if (c === 'J') hcp += 1;
+            }
+            return hcp;
+        }
+
+        function parseHandString(handStr) {
+            const parts = handStr.split('.');
+            if (parts.length !== 4) return null;
+            return {
+                S: parts[0] || '-',
+                H: parts[1] || '-',
+                D: parts[2] || '-',
+                C: parts[3] || '-'
+            };
+        }
+
+        function formatSuitRow(suitSymbol, cards, isRed) {
+            const color = isRed ? 'suit-red' : 'suit-black';
+            return `
+                <div class="suitRowDivStyle">
+                    <span class="suitSymbol ${color}">${suitSymbol}</span>
+                    <span class="suitHolding">${cards || '-'}</span>
+                </div>
+            `;
+        }
+
+        function formatSuitWithColor(text) {
+            if (!text) return '';
+            return text
+                .replace(/♠/g, '<span class="suit-black">♠</span>')
+                .replace(/♣/g, '<span class="suit-black">♣</span>')
+                .replace(/♥/g, '<span class="suit-red">♥</span>')
+                .replace(/♦/g, '<span class="suit-red">♦</span>');
+        }
+
+        function renderDDTable(ddResult) {
+            if (!ddResult) return '';
+            
+            const suits = ['S', 'H', 'D', 'C', 'NT'];
+            const suitSymbols = {
+                'S': '<span class="suit-symbol suit-black">♠</span>',
+                'H': '<span class="suit-symbol suit-red">♥</span>',
+                'D': '<span class="suit-symbol suit-red">♦</span>',
+                'C': '<span class="suit-symbol suit-black">♣</span>',
+                'NT': 'NT'
+            };
+            
+            // Format tricks: 7+ shows as 1+, below 7 shows as dash
+            function formatTricks(tricks) {
+                if (tricks === undefined || tricks === null) return '-';
+                if (tricks >= 7) return tricks - 6;
+                return '-';
+            }
+            
+            let html = '<table class="bh-dd"><tr><th></th>';
+            suits.forEach(s => html += `<th>${suitSymbols[s]}</th>`);
+            html += '</tr>';
+            
+            ['N', 'S', 'E', 'W'].forEach(pos => {
+                html += `<tr><td>${pos}</td>`;
+                suits.forEach(suit => {
+                    // API returns nested format: ddResult.N.C, ddResult.N.D, etc.
+                    const tricks = ddResult[pos] ? ddResult[pos][suit] : undefined;
+                    html += `<td>${formatTricks(tricks)}</td>`;
+                });
+                html += '</tr>';
+            });
+            
+            html += '</table>';
+            return html;
+        }
+
+        function formatParText(text) {
+            if (!text) return '';
+            // Replace suit letters with colored symbols
+            return text
+                .replace(/S(?![a-z])/g, '<span class="suit-black">♠</span>')
+                .replace(/H(?![a-z])/g, '<span class="suit-red">♥</span>')
+                .replace(/D(?![a-z])/g, '<span class="suit-red">♦</span>')
+                .replace(/C(?![a-z])/g, '<span class="suit-black">♣</span>')
+                .replace(/♠/g, '<span class="suit-black">♠</span>')
+                .replace(/♥/g, '<span class="suit-red">♥</span>')
+                .replace(/♦/g, '<span class="suit-red">♦</span>')
+                .replace(/♣/g, '<span class="suit-black">♣</span>');
+        }
+
+        function renderHandDiagram(handData, boardNum, ddResult, optimum, lott) {
+            if (!handData) {
+                return '<div class="hand-diagram-container"><div style="color:#aaa;padding:20px;">El verisi bulunamadı</div></div>';
+            }
+
+            const handsObj = handData.hands || handData;
+            if (!handsObj || !handsObj.N) {
+                return '<div class="hand-diagram-container"><div style="color:#aaa;padding:20px;">El verisi bulunamadı</div></div>';
+            }
+
+            const n = parseHandString(handsObj.N);
+            const s = parseHandString(handsObj.S);
+            const e = parseHandString(handsObj.E);
+            const w = parseHandString(handsObj.W);
+
+            if (!n || !s || !e || !w) {
+                return '<div class="hand-diagram-container"><div style="color:#aaa;padding:20px;">El verisi geçersiz</div></div>';
+            }
+
+            const dealer = handData.dealer || 'N';
+            const vul = handData.vulnerability || 'None';
+            const date = handData.date || '';
+
+            const hcpN = calculateHCP(n);
+            const hcpS = calculateHCP(s);
+            const hcpE = calculateHCP(e);
+            const hcpW = calculateHCP(w);
+
+            const nDealerClass = dealer === 'N' ? 'dealer-bg' : '';
+            const sDealerClass = dealer === 'S' ? 'dealer-bg' : '';
+            const eDealerClass = dealer === 'E' ? 'dealer-bg' : '';
+            const wDealerClass = dealer === 'W' ? 'dealer-bg' : '';
+
+            // Vulnerability class
+            const isNSVul = vul && (vul.includes('NS') || vul.includes('Both') || vul === 'All');
+            const isEWVul = vul && (vul.includes('EW') || vul.includes('Both') || vul === 'All');
+            const nVulClass = isNSVul ? 'vul-bg' : '';
+            const sVulClass = isNSVul ? 'vul-bg' : '';
+            const eVulClass = isEWVul ? 'vul-bg' : '';
+            const wVulClass = isEWVul ? 'vul-bg' : '';
+
+            // Format optimum display clearly: "NS 10♥ +420"
+            let optimumDisplay = '';
+            if (optimum) {
+                const dir = optimum.declarer || '';
+                const contract = optimum.contract || '';
+                const score = optimum.score || '';
+                optimumDisplay = `${dir} ${contract} ${score > 0 ? '+' : ''}${score}`;
+            }
+            
+            const optimumTextColored = optimum && optimum.text ? formatParText(optimum.text) : 'N/A';
+
+            const ddTableHtml = ddResult ? `
+                <div class="bhDoubleDummy">
+                    ${renderDDTable(ddResult)}
+                    <div class="par-display">
+                        ${formatSuitWithColor(optimumDisplay)}
+                    </div>
+                </div>
+            ` : '<div class="bhDoubleDummy" style="color:red;text-align:center;padding:10px;">DD Verisi Yok</div>';
+
+            const nsFitSuit = lott && lott.ns_fit ? formatSuitWithColor(lott.ns_fit.suit || '?') : '?';
+            const ewFitSuit = lott && lott.ew_fit ? formatSuitWithColor(lott.ew_fit.suit || '?') : '?';
+
+            const lottHtml = lott ? `
+                <div class="lottDisplay">
+                    <div class="lott-title">LoTT</div>
+                    <div class="lott-value">${lott.total_tricks || '?'}</div>
+                    ${lott.ns_fit ? `
+                    <div class="lott-detail">
+                        NS ${nsFitSuit} (${lott.ns_fit.length || '?'})<br>
+                        EW ${ewFitSuit} (${lott.ew_fit?.length || '?'})
+                    </div>
+                    ` : ''}
+                </div>
+            ` : '';
+
+            return `
+                <div class="hand-diagram-container">
+                    <div class="scale-wrapper">
+                        <div class="mainDivStyle">
+                            <!-- Board Info - Left Side -->
+                            <div class="board-info-left">
+                                <div class="date">${date}</div>
+                                <div class="dealer">Dealer: ${dealer}</div>
+                                <div class="vul ${vul && vul.toLowerCase() !== 'none' && vul !== '-' ? 'vul-active' : ''}">Vul: ${vul}</div>
+                            </div>
+                            
+                            <!-- HCP Display - Right Side -->
+                            <div class="hcp-display">
+                                <div class="hcp-north"><span class="hcp-value">${hcpN}</span></div>
+                                <div class="hcp-middle">
+                                    <span class="hcp-value">${hcpW}</span>
+                                    <span class="hcp-value">${hcpE}</span>
+                                </div>
+                                <div class="hcp-south"><span class="hcp-value">${hcpS}</span></div>
+                            </div>
+                        
+                        <!-- North -->
+                        <div class="nameRowDivStyle pos-n-name ${nDealerClass} ${nVulClass}">
+                            <span class="nameInitial">N</span>
+                        </div>
+                        <div class="handDivStyle pos-n-hand">
+                            ${formatSuitRow('♠', n.S, false)}
+                            ${formatSuitRow('♥', n.H, true)}
+                            ${formatSuitRow('♦', n.D, true)}
+                            ${formatSuitRow('♣', n.C, false)}
+                        </div>
+                        
+                        <!-- West -->
+                        <div class="nameRowDivStyle pos-w-name ${wDealerClass} ${wVulClass}">
+                            <span class="nameInitial">W</span>
+                        </div>
+                        <div class="handDivStyle pos-w-hand">
+                            ${formatSuitRow('♠', w.S, false)}
+                            ${formatSuitRow('♥', w.H, true)}
+                            ${formatSuitRow('♦', w.D, true)}
+                            ${formatSuitRow('♣', w.C, false)}
+                        </div>
+                        
+                        <!-- Board Number -->
+                        <div class="vulInnerDivStyle pos-board">${boardNum}</div>
+                        
+                        <!-- East -->
+                        <div class="nameRowDivStyle pos-e-name ${eDealerClass} ${eVulClass}">
+                            <span class="nameInitial">E</span>
+                        </div>
+                        <div class="handDivStyle pos-e-hand">
+                            ${formatSuitRow('♠', e.S, false)}
+                            ${formatSuitRow('♥', e.H, true)}
+                            ${formatSuitRow('♦', e.D, true)}
+                            ${formatSuitRow('♣', e.C, false)}
+                        </div>
+                        
+                        <!-- South -->
+                        <div class="nameRowDivStyle pos-s-name ${sDealerClass} ${sVulClass}">
+                            <span class="nameInitial">S</span>
+                        </div>
+                        <div class="handDivStyle pos-s-hand">
+                            ${formatSuitRow('♠', s.S, false)}
+                            ${formatSuitRow('♥', s.H, true)}
+                            ${formatSuitRow('♦', s.D, true)}
+                            ${formatSuitRow('♣', s.C, false)}
+                        </div>
+                        
+                        ${ddTableHtml}
+                        ${lottHtml}
+                    </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Load hands from database
+        async function loadHands() {
+            try {
+                const response = await fetch('/hands_database.json');
+                if (!response.ok) throw new Error('Failed to load hands database');
+                
+                const database = await response.json();
+                document.getElementById('loading').style.display = 'none';
+
+                // Group by event and date
+                const groupedByDate = {};
+                database.forEach(entry => {
+                    const key = `${entry.date}`;
+                    if (!groupedByDate[key]) groupedByDate[key] = [];
+                    groupedByDate[key].push(entry);
+                });
+
+                // Get most recent date
+                const dates = Object.keys(groupedByDate).sort().reverse();
+                if (dates.length === 0) throw new Error('No hands found');
+
+                const currentDate = dates[0];
+                const hands = groupedByDate[currentDate];
+
+                // Update header
+                document.getElementById('tournament-name').textContent = currentDate;
+                document.getElementById('board-count').textContent = hands.length;
+
+                // Sort by board number
+                hands.sort((a, b) => a.board - b.board);
+
+                // Render hands
+                const grid = document.getElementById('hands-grid');
+                grid.innerHTML = '';
+
+                for (const hand of hands) {
+                    const handObj = {
+                        N: hand.N,
+                        E: hand.E,
+                        S: hand.S,
+                        W: hand.W,
+                        dealer: hand.dealer || 'N',
+                        vulnerability: hand.vulnerability || 'None',
+                        date: hand.date
+                    };
+
+                    // Get DD data from backend API (same as board_ranking.html does)
+                    let ddResult = null;
+                    let optimum = null;
+                    let lott = null;
+                    
+                    try {
+                        const apiResponse = await fetch(`/api/hand-data?event=${hand.event_id}&board=${hand.board}`);
+                        if (apiResponse.ok) {
+                            const apiData = await apiResponse.json();
+                            ddResult = apiData.dd_result;
+                            optimum = apiData.optimum;
+                            lott = apiData.lott;
+                        }
+                    } catch (e) {
+                        console.warn(`Failed to fetch DD data for board ${hand.board}:`, e);
+                    }
+
+                    console.log(`Board ${hand.board}:`, { ddResult, optimum, lott });
+
+                    const html = renderHandDiagram(handObj, hand.board, ddResult, optimum, lott);
+                    const div = document.createElement('div');
+                    div.innerHTML = html;
+                    grid.appendChild(div.firstElementChild);
+                }
+
+            } catch (error) {
+                console.error('Error loading hands:', error);
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('error').textContent = `Hata: ${error.message}`;
+                document.getElementById('error').style.display = 'block';
+            }
+        }
+
+        // Load on page load
+        window.addEventListener('load', loadHands);
+    </script>
+</body>
+</html>

@@ -337,6 +337,7 @@
         }
         
         .dealer-bg { background: #ffce00 !important; color: black !important; }
+        .vul-bg { background: #cb0000 !important; color: white !important; }
         
         /* Position Classes */
         .pos-n-name { left: 170px; top: 5px; width: 160px; }
@@ -440,14 +441,14 @@
         .bhDoubleDummy {
             position: absolute;
             padding: 5px;
-            border: 0px solid #808080;
+            border: none;
             background: #c0c1c0;
             font-size: 10px;
             width: 153px;
             left: 1px;
             bottom: 5px;
             color: #000;
-            transform: scale(0.95);
+            transform: scale(1);
             transform-origin: bottom left;
         }
         
@@ -476,7 +477,7 @@
         }
         
         .bh-dd td {
-            border: 2px solid #444;
+            border: none;
             background: #fff;
             color: #000;
         }
@@ -945,6 +946,23 @@
             const eDealerClass = dealer === 'E' ? 'dealer-bg' : '';
             const wDealerClass = dealer === 'W' ? 'dealer-bg' : '';
             
+            // Vulnerability class
+            const isNSVul = vul && (vul.includes('NS') || vul.includes('Both') || vul === 'All');
+            const isEWVul = vul && (vul.includes('EW') || vul.includes('Both') || vul === 'All');
+            const nVulClass = isNSVul ? 'vul-bg' : '';
+            const sVulClass = isNSVul ? 'vul-bg' : '';
+            const eVulClass = isEWVul ? 'vul-bg' : '';
+            const wVulClass = isEWVul ? 'vul-bg' : '';
+            
+            // Format optimum display clearly: "NS 10♥ +420"
+            let optimumDisplay = '';
+            if (optimum) {
+                const dir = optimum.declarer || '';
+                const contract = optimum.contract || '';
+                const score = optimum.score || '';
+                optimumDisplay = `${dir} ${contract} ${score > 0 ? '+' : ''}${score}`;
+            }
+            
             // Format optimum text with suit colors
             const optimumTextColored = optimum && optimum.text ? formatSuitWithColor(optimum.text) : '';
             
@@ -952,7 +970,7 @@
             const ddTableHtml = ddResult ? `
                 <div class="bhDoubleDummy">
                     ${renderDDTable(ddResult)}
-                    ${optimum ? `<div class="par-display"><strong>Par: ${optimum.score || ''}</strong> ${optimumTextColored}</div>` : ''}
+                    ${optimum ? `<div class="par-display">${formatSuitWithColor(optimumDisplay)}</div>` : ''}
                 </div>
             ` : '<div class="bhDoubleDummy" style="color:red;text-align:center;padding:10px;">DD Verisi Yok</div>';
             
@@ -967,8 +985,8 @@
                     <div class="lott-value">${lott.total_tricks || '?'}</div>
                     ${lott.ns_fit ? `
                     <div class="lott-detail">
-                        NS: ${nsFitSuit} (${lott.ns_fit.length || '?'})<br>
-                        EW: ${ewFitSuit} (${lott.ew_fit?.length || '?'})
+                        NS ${nsFitSuit} (${lott.ns_fit.length || '?'})<br>
+                        EW ${ewFitSuit} (${lott.ew_fit?.length || '?'})
                     </div>
                     ` : ''}
                 </div>
@@ -996,7 +1014,7 @@
                         </div>
                         
                         <!-- North -->
-                        <div class="nameRowDivStyle pos-n-name ${nDealerClass}">
+                        <div class="nameRowDivStyle pos-n-name ${nDealerClass} ${nVulClass}">
                             <span class="nameInitial">N</span>
                         </div>
                         <div class="handDivStyle pos-n-hand">
@@ -1007,7 +1025,7 @@
                         </div>
                         
                         <!-- West -->
-                        <div class="nameRowDivStyle pos-w-name ${wDealerClass}">
+                        <div class="nameRowDivStyle pos-w-name ${wDealerClass} ${wVulClass}">
                             <span class="nameInitial">W</span>
                         </div>
                         <div class="handDivStyle pos-w-hand">
@@ -1021,7 +1039,7 @@
                         <div class="vulInnerDivStyle pos-board">${boardNum}</div>
                         
                         <!-- East -->
-                        <div class="nameRowDivStyle pos-e-name ${eDealerClass}">
+                        <div class="nameRowDivStyle pos-e-name ${eDealerClass} ${eVulClass}">
                             <span class="nameInitial">E</span>
                         </div>
                         <div class="handDivStyle pos-e-hand">
@@ -1032,7 +1050,7 @@
                         </div>
                         
                         <!-- South -->
-                        <div class="nameRowDivStyle pos-s-name ${sDealerClass}">
+                        <div class="nameRowDivStyle pos-s-name ${sDealerClass} ${sVulClass}">
                             <span class="nameInitial">S</span>
                         </div>
                         <div class="handDivStyle pos-s-hand">

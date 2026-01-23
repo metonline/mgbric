@@ -86,19 +86,35 @@ def en():
 
 @app.route('/api/data')
 def api_data():
-    return safe_send_file('database.json')
+    try:
+        with open('database.json', encoding='utf-8') as f:
+            return jsonify(json.load(f))
+    except:
+        return safe_send_file('database.json')
 
 @app.route('/database.json')
 def database():
-    return safe_send_file('database.json')
+    try:
+        with open('database.json', encoding='utf-8') as f:
+            return jsonify(json.load(f))
+    except:
+        return safe_send_file('database.json')
 
 @app.route('/api/hands')
 def api_hands():
-    return safe_send_file('hands_database.json')
+    try:
+        with open('hands_database.json', encoding='utf-8') as f:
+            return jsonify(json.load(f))
+    except:
+        return safe_send_file('hands_database.json')
 
 @app.route('/hands_database.json')
 def hands():
-    return safe_send_file('hands_database.json')
+    try:
+        with open('hands_database.json', encoding='utf-8') as f:
+            return jsonify(json.load(f))
+    except:
+        return safe_send_file('hands_database.json')
 
 @app.route('/dd_viewer')
 @app.route('/dd_viewer.html')
