@@ -1,0 +1,301 @@
+[
+  {
+    "event_id": "405376",
+    "board": 1,
+    "date": "20.01.2026",
+    "dealer": "E",
+    "vulnerability": "NS",
+    "hands": {
+      "N": "A9",
+      "E": "AQJ3",
+      "S": "K9864",
+      "W": "76"
+    }
+  },
+  {
+    "event_id": "405376",
+    "board": 2,
+    "date": "20.01.2026",
+    "dealer": "S",
+    "vulnerability": "EW",
+    "hands": {
+      "N": "JT82",
+      "E": "AQT",
+      "S": "QJ96",
+      "W": "J6"
+    }
+  },
+  {
+    "event_id": "405376",
+    "board": 3,
+    "date": "20.01.2026",
+    "dealer": "W",
+    "vulnerability": "Both",
+    "hands": {
+      "N": "874",
+      "E": "AQT97",
+      "S": "92",
+      "W": "AQ8"
+    }
+  },
+  {
+    "event_id": "405376",
+    "board": 5,
+    "date": "20.01.2026",
+    "dealer": "E",
+    "vulnerability": "NS",
+    "hands": {
+      "N": "QJ3",
+      "E": "KJ",
+      "S": "QT974",
+      "W": "Q65"
+    }
+  },
+  {
+    "event_id": "405376",
+    "board": 6,
+    "date": "20.01.2026",
+    "dealer": "S",
+    "vulnerability": "EW",
+    "hands": {
+      "N": "J9876",
+      "E": "",
+      "S": "JT72",
+      "W": "9743"
+    }
+  },
+  {
+    "event_id": "405376",
+    "board": 7,
+    "date": "20.01.2026",
+    "dealer": "W",
+    "vulnerability": "Both",
+    "hands": {
+      "N": "K9732",
+      "E": "QT82",
+      "S": "7",
+      "W": "A74"
+    }
+  },
+  {
+    "event_id": "405376",
+    "board": 9,
+    "date": "20.01.2026",
+    "dealer": "E",
+    "vulnerability": "NS",
+    "hands": {
+      "N": "J74",
+      "E": "T95",
+      "S": "KQT76",
+      "W": "QJ"
+    }
+  },
+  {
+    "event_id": "405376",
+    "board": 10,
+    "date": "20.01.2026",
+    "dealer": "S",
+    "vulnerability": "EW",
+    "hands": {
+      "N": "T9",
+      "E": "65",
+      "S": "AK75",
+      "W": "AKQ32"
+    }
+  },
+  {
+    "event_id": "405376",
+    "board": 11,
+    "date": "20.01.2026",
+    "dealer": "W",
+    "vulnerability": "Both",
+    "hands": {
+      "N": "T8",
+      "E": "QT952",
+      "S": "AJT3",
+      "W": "76"
+    }
+  },
+  {
+    "event_id": "405376",
+    "board": 13,
+    "date": "20.01.2026",
+    "dealer": "E",
+    "vulnerability": "NS",
+    "hands": {
+      "N": "AKQJ42",
+      "E": "5",
+      "S": "Q42",
+      "W": "QT5"
+    }
+  },
+  {
+    "event_id": "405376",
+    "board": 14,
+    "date": "20.01.2026",
+    "dealer": "S",
+    "vulnerability": "EW",
+    "hands": {
+      "N": "KT2",
+      "E": "9742",
+      "S": "KJ862",
+      "W": "3"
+    }
+  },
+  {
+    "event_id": "405376",
+    "board": 15,
+    "date": "20.01.2026",
+    "dealer": "W",
+    "vulnerability": "Both",
+    "hands": {
+      "N": "KQT6",
+      "E": "K93",
+      "S": "T854",
+      "W": "T8"
+    }
+  },
+  {
+    "event_id": "405376",
+    "board": 17,
+    "date": "20.01.2026",
+    "dealer": "E",
+    "vulnerability": "NS",
+    "hands": {
+      "N": "J983",
+      "E": "QT",
+      "S": "A82",
+      "W": "T952"
+    }
+  },
+  {
+    "event_id": "405376",
+    "board": 18,
+    "date": "20.01.2026",
+    "dealer": "S",
+    "vulnerability": "EW",
+    "hands": {
+      "N": "64",
+      "E": "KJT87",
+      "S": "AKJ4",
+      "W": "Q3"
+    }
+  },
+  {
+    "event_id": "405376",
+    "board": 19,
+    "date": "20.01.2026",
+    "dealer": "W",
+    "vulnerability": "Both",
+    "hands": {
+      "N": "A9",
+      "E": "K",
+      "S": "643",
+      "W": "AT98763"
+    }
+  },
+  {
+    "event_id": "405376",
+    "board": 21,
+    "date": "20.01.2026",
+    "dealer": "E",
+    "vulnerability": "NS",
+    "hands": {
+      "N": "KQ875",
+      "E": "KT7",
+      "S": "AKT",
+      "W": "Q5"
+    }
+  },
+  {
+    "event_id": "405376",
+    "board": 22,
+    "date": "20.01.2026",
+    "dealer": "S",
+    "vulnerability": "EW",
+    "hands": {
+      "N": "432",
+      "E": "873",
+      "S": "J2",
+      "W": "AJ743"
+    }
+  },
+  {
+    "event_id": "405376",
+    "board": 23,
+    "date": "20.01.2026",
+    "dealer": "W",
+    "vulnerability": "Both",
+    "hands": {
+      "N": "4",
+      "E": "KJ64",
+      "S": "K82",
+      "W": "AKQ94"
+    }
+  },
+  {
+    "event_id": "405376",
+    "board": 25,
+    "date": "20.01.2026",
+    "dealer": "E",
+    "vulnerability": "NS",
+    "hands": {
+      "N": "K974",
+      "E": "Q74",
+      "S": "AJ72",
+      "W": "K7"
+    }
+  },
+  {
+    "event_id": "405376",
+    "board": 26,
+    "date": "20.01.2026",
+    "dealer": "S",
+    "vulnerability": "EW",
+    "hands": {
+      "N": "KQ9",
+      "E": "T542",
+      "S": "QT62",
+      "W": "96"
+    }
+  },
+  {
+    "event_id": "405376",
+    "board": 27,
+    "date": "20.01.2026",
+    "dealer": "W",
+    "vulnerability": "Both",
+    "hands": {
+      "N": "KQT652",
+      "E": "83",
+      "S": "983",
+      "W": "A7"
+    }
+  },
+  {
+    "event_id": "405376",
+    "board": 29,
+    "date": "20.01.2026",
+    "dealer": "E",
+    "vulnerability": "NS",
+    "hands": {
+      "N": "Q964",
+      "E": "JT86",
+      "S": "A8",
+      "W": "Q52"
+    }
+  },
+  {
+    "event_id": "405376",
+    "board": 30,
+    "date": "20.01.2026",
+    "dealer": "S",
+    "vulnerability": "EW",
+    "hands": {
+      "N": "Q4",
+      "E": "QT654",
+      "S": "K7",
+      "W": "QJ42"
+    }
+  }
+]

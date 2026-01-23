@@ -110,3 +110,959 @@
 [2026-01-19 18:01:59] [INFO] Status: ✓ SUCCESS
 [2026-01-19 18:01:59] [INFO] ============================================================
 
+[2026-01-22 03:45:09] [INFO] 
+============================================================
+[2026-01-22 03:45:09] [INFO] 🚀 BRIC FULL UPDATE PIPELINE
+[2026-01-22 03:45:09] [INFO] Started at 2026-01-22 03:45:09
+[2026-01-22 03:45:09] [INFO] ============================================================
+[2026-01-22 03:45:09] [INFO] ============================================================
+[2026-01-22 03:45:09] [INFO] STEP 1: UPDATING TOURNAMENT SCORES
+[2026-01-22 03:45:09] [INFO] ============================================================
+[2026-01-22 03:45:09] [INFO] Found 21 dates with events in calendar
+[2026-01-22 03:45:09] [INFO] Database has 1575 unique dates
+[2026-01-22 03:45:09] [INFO] Found 2 new date(s) to fetch: ['20.01.2026', '21.01.2026']
+[2026-01-22 03:45:09] [INFO] Fetching 20.01.2026: 1 event(s)
+[2026-01-22 03:45:10] [INFO]   Event 405376: 57 records (NS: 27, EW: 30)
+[2026-01-22 03:45:10] [INFO] Fetching 21.01.2026: 1 event(s)
+[2026-01-22 03:45:11] [INFO]   Event 405445: 57 records (NS: 27, EW: 30)
+[2026-01-22 03:45:12] [INFO] ✓ Score database saved (2 new events)
+[2026-01-22 03:45:12] [INFO] 
+============================================================
+[2026-01-22 03:45:12] [INFO] Pipeline completed at 2026-01-22 03:45:12
+[2026-01-22 03:45:12] [INFO] Status: ✓ SUCCESS
+[2026-01-22 03:45:12] [INFO] ============================================================
+
+[2026-01-22 03:45:56] [INFO] 
+============================================================
+[2026-01-22 03:45:56] [INFO] 🚀 BRIC FULL UPDATE PIPELINE
+[2026-01-22 03:45:56] [INFO] Started at 2026-01-22 03:45:56
+[2026-01-22 03:45:56] [INFO] ============================================================
+[2026-01-22 03:45:56] [INFO] ============================================================
+[2026-01-22 03:45:56] [INFO] STEP 2: UPDATING BOARD HANDS
+[2026-01-22 03:45:56] [INFO] ============================================================
+[2026-01-22 03:45:56] [INFO] Existing hands database: 1111 records
+[2026-01-22 03:45:57] [INFO] Found 2 date(s) needing hands
+[2026-01-22 03:45:57] [INFO] Fetching boards for 20.01.2026 (Event 405376)
+[2026-01-22 03:46:12] [INFO]   20.01.2026: 30 boards fetched
+[2026-01-22 03:46:12] [INFO] Fetching boards for 21.01.2026 (Event 405445)
+[2026-01-22 03:46:29] [INFO]   21.01.2026: 30 boards fetched
+[2026-01-22 03:46:29] [INFO] ✓ Hands database saved (60 new hands)
+[2026-01-22 03:46:29] [INFO] 
+============================================================
+[2026-01-22 03:46:29] [INFO] Pipeline completed at 2026-01-22 03:46:29
+[2026-01-22 03:46:29] [INFO] Status: ✓ SUCCESS
+[2026-01-22 03:46:29] [INFO] ============================================================
+
+[2026-01-22 03:46:49] [INFO] 
+============================================================
+[2026-01-22 03:46:49] [INFO] 🚀 BRIC FULL UPDATE PIPELINE
+[2026-01-22 03:46:49] [INFO] Started at 2026-01-22 03:46:49
+[2026-01-22 03:46:49] [INFO] ============================================================
+[2026-01-22 03:46:49] [INFO] ============================================================
+[2026-01-22 03:46:49] [INFO] STEP 3: RUNNING DD ANALYSIS
+[2026-01-22 03:46:49] [INFO] ============================================================
+[2026-01-22 03:46:50] [INFO] endplay library loaded successfully
+[2026-01-22 03:46:50] [INFO] Found 1170 hands without DD analysis
+[2026-01-22 03:46:51] [INFO]   Progress: 10/1170 (10 successful)
+[2026-01-22 03:46:52] [INFO]   Progress: 20/1170 (20 successful)
+[2026-01-22 03:46:53] [INFO]   Progress: 30/1170 (30 successful)
+[2026-01-22 03:46:53] [INFO]   Progress: 40/1170 (40 successful)
+[2026-01-22 03:46:54] [INFO]   Progress: 50/1170 (50 successful)
+[2026-01-22 03:46:55] [INFO]   Progress: 60/1170 (60 successful)
+[2026-01-22 03:46:56] [INFO]   Progress: 70/1170 (70 successful)
+[2026-01-22 03:46:57] [INFO]   Progress: 80/1170 (80 successful)
+[2026-01-22 03:46:58] [INFO]   Progress: 90/1170 (90 successful)
+[2026-01-22 03:46:59] [INFO]   Progress: 100/1170 (100 successful)
+[2026-01-22 03:46:59] [INFO]   Progress: 110/1170 (110 successful)
+[2026-01-22 03:47:00] [INFO]   Progress: 120/1170 (120 successful)
+[2026-01-22 03:47:00] [INFO]   Progress: 130/1170 (130 successful)
+[2026-01-22 03:47:01] [INFO]   Progress: 140/1170 (140 successful)
+[2026-01-22 03:47:02] [INFO]   Progress: 150/1170 (150 successful)
+[2026-01-22 03:47:03] [INFO]   Progress: 160/1170 (160 successful)
+[2026-01-22 03:47:04] [INFO]   Progress: 170/1170 (170 successful)
+[2026-01-22 03:47:05] [INFO]   Progress: 180/1170 (180 successful)
+[2026-01-22 03:47:06] [INFO]   Progress: 190/1170 (190 successful)
+[2026-01-22 03:47:07] [INFO]   Progress: 200/1170 (200 successful)
+[2026-01-22 03:47:08] [INFO]   Progress: 210/1170 (210 successful)
+[2026-01-22 03:47:09] [INFO]   Progress: 220/1170 (220 successful)
+[2026-01-22 03:47:09] [INFO]   Progress: 230/1170 (230 successful)
+[2026-01-22 03:47:10] [INFO]   Progress: 240/1170 (240 successful)
+[2026-01-22 03:47:10] [INFO]   Progress: 250/1170 (250 successful)
+[2026-01-22 03:47:11] [INFO]   Progress: 260/1170 (260 successful)
+[2026-01-22 03:47:12] [INFO]   Progress: 270/1170 (270 successful)
+[2026-01-22 03:47:13] [INFO]   Progress: 280/1170 (280 successful)
+[2026-01-22 03:47:13] [INFO]   Progress: 290/1170 (290 successful)
+[2026-01-22 03:47:14] [INFO]   Progress: 300/1170 (300 successful)
+[2026-01-22 03:47:15] [INFO]   Progress: 310/1170 (310 successful)
+[2026-01-22 03:47:16] [INFO]   Progress: 320/1170 (320 successful)
+[2026-01-22 03:47:17] [INFO]   Progress: 330/1170 (330 successful)
+[2026-01-22 03:47:18] [INFO]   Progress: 340/1170 (340 successful)
+[2026-01-22 03:47:19] [INFO]   Progress: 350/1170 (350 successful)
+[2026-01-22 03:47:21] [INFO]   Progress: 360/1170 (360 successful)
+[2026-01-22 03:47:22] [INFO]   Progress: 370/1170 (370 successful)
+[2026-01-22 03:47:23] [INFO]   Progress: 380/1170 (380 successful)
+[2026-01-22 03:47:24] [INFO]   Progress: 390/1170 (390 successful)
+[2026-01-22 03:47:28] [INFO]   Progress: 400/1170 (400 successful)
+[2026-01-22 03:47:29] [INFO]   Progress: 410/1170 (410 successful)
+[2026-01-22 03:47:31] [INFO]   Progress: 420/1170 (420 successful)
+[2026-01-22 03:47:32] [INFO]   Progress: 430/1170 (430 successful)
+[2026-01-22 03:47:33] [INFO]   Progress: 440/1170 (440 successful)
+[2026-01-22 03:47:34] [INFO]   Progress: 450/1170 (450 successful)
+[2026-01-22 03:47:35] [INFO]   Progress: 460/1170 (460 successful)
+[2026-01-22 03:47:36] [INFO]   Progress: 470/1170 (470 successful)
+[2026-01-22 03:47:37] [INFO]   Progress: 480/1170 (480 successful)
+[2026-01-22 03:47:38] [INFO]   Progress: 490/1170 (490 successful)
+[2026-01-22 03:47:38] [INFO]   Progress: 500/1170 (500 successful)
+[2026-01-22 03:47:40] [INFO]   Progress: 510/1170 (510 successful)
+[2026-01-22 03:47:41] [INFO]   Progress: 520/1170 (520 successful)
+[2026-01-22 03:47:42] [INFO]   Progress: 530/1170 (530 successful)
+[2026-01-22 03:47:42] [INFO]   Progress: 540/1170 (540 successful)
+[2026-01-22 03:47:43] [INFO]   Progress: 550/1170 (550 successful)
+[2026-01-22 03:47:45] [INFO]   Progress: 560/1170 (560 successful)
+[2026-01-22 03:47:46] [INFO]   Progress: 570/1170 (570 successful)
+[2026-01-22 03:47:46] [ERROR]   Board 5 (01.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:47:46] [ERROR]   Board 9 (01.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:47:46] [INFO]   Progress: 580/1170 (578 successful)
+[2026-01-22 03:47:47] [ERROR]   Board 15 (01.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:47:47] [INFO]   Progress: 590/1170 (587 successful)
+[2026-01-22 03:47:48] [INFO]   Progress: 600/1170 (597 successful)
+[2026-01-22 03:47:49] [INFO]   Progress: 610/1170 (607 successful)
+[2026-01-22 03:47:49] [ERROR]   Board 15 (02.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:47:49] [INFO]   Progress: 620/1170 (616 successful)
+[2026-01-22 03:47:50] [ERROR]   Board 23 (02.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:47:50] [ERROR]   Board 24 (02.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:47:51] [INFO]   Progress: 630/1170 (624 successful)
+[2026-01-22 03:47:51] [ERROR]   Board 3 (03.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:47:51] [ERROR]   Board 6 (03.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:47:52] [INFO]   Progress: 640/1170 (632 successful)
+[2026-01-22 03:47:52] [ERROR]   Board 17 (03.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:47:52] [ERROR]   Board 20 (03.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:47:53] [ERROR]   Board 30 (03.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:47:53] [ERROR]   Board 7 (04.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:47:53] [ERROR]   Board 9 (04.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:47:53] [INFO]   Progress: 670/1170 (657 successful)
+[2026-01-22 03:47:54] [ERROR]   Board 17 (04.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:47:54] [ERROR]   Board 19 (04.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:47:54] [INFO]   Progress: 680/1170 (665 successful)
+[2026-01-22 03:47:54] [INFO]   Progress: 690/1170 (675 successful)
+[2026-01-22 03:47:55] [ERROR]   Board 2 (05.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:47:55] [INFO]   Progress: 700/1170 (684 successful)
+[2026-01-22 03:47:55] [ERROR]   Board 12 (05.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:47:55] [ERROR]   Board 19 (05.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:47:56] [INFO]   Progress: 710/1170 (692 successful)
+[2026-01-22 03:47:56] [ERROR]   Board 28 (05.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:47:56] [ERROR]   Board 29 (05.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:47:56] [INFO]   Progress: 720/1170 (700 successful)
+[2026-01-22 03:47:57] [INFO]   Progress: 730/1170 (710 successful)
+[2026-01-22 03:47:57] [ERROR]   Board 11 (06.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:47:57] [ERROR]   Board 14 (06.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:47:58] [INFO]   Progress: 740/1170 (718 successful)
+[2026-01-22 03:47:58] [ERROR]   Board 25 (06.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:47:58] [ERROR]   Board 27 (06.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:47:59] [INFO]   Progress: 750/1170 (726 successful)
+[2026-01-22 03:47:59] [INFO]   Progress: 760/1170 (736 successful)
+[2026-01-22 03:48:00] [ERROR]   Board 15 (07.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:48:00] [ERROR]   Board 19 (07.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:48:00] [INFO]   Progress: 770/1170 (744 successful)
+[2026-01-22 03:48:00] [ERROR]   Board 24 (07.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:48:00] [ERROR]   Board 25 (07.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:48:00] [ERROR]   Board 26 (07.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:48:00] [ERROR]   Board 28 (07.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:48:00] [INFO]   Progress: 780/1170 (750 successful)
+[2026-01-22 03:48:00] [ERROR]   Board 2 (08.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:48:00] [ERROR]   Board 4 (08.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:48:00] [ERROR]   Board 5 (08.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:48:01] [INFO]   Progress: 790/1170 (757 successful)
+[2026-01-22 03:48:01] [ERROR]   Board 11 (08.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:48:01] [ERROR]   Board 15 (08.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:48:01] [INFO]   Progress: 800/1170 (765 successful)
+[2026-01-22 03:48:02] [ERROR]   Board 29 (08.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:48:02] [INFO]   Progress: 810/1170 (774 successful)
+[2026-01-22 03:48:02] [ERROR]   Board 1 (09.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:48:02] [INFO]   Progress: 820/1170 (783 successful)
+[2026-01-22 03:48:03] [INFO]   Progress: 830/1170 (793 successful)
+[2026-01-22 03:48:03] [ERROR]   Board 27 (09.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:48:04] [INFO]   Progress: 840/1170 (802 successful)
+[2026-01-22 03:48:04] [INFO]   Progress: 850/1170 (812 successful)
+[2026-01-22 03:48:05] [ERROR]   Board 18 (10.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:48:05] [ERROR]   Board 20 (10.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:48:05] [ERROR]   Board 24 (10.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:48:05] [ERROR]   Board 28 (10.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:48:05] [ERROR]   Board 30 (10.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:48:05] [ERROR]   Board 1 (11.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:48:05] [ERROR]   Board 4 (11.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:48:06] [ERROR]   Board 10 (11.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:48:06] [ERROR]   Board 12 (11.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:48:06] [INFO]   Progress: 890/1170 (843 successful)
+[2026-01-22 03:48:07] [ERROR]   Board 26 (11.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:48:07] [ERROR]   Board 27 (11.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:48:07] [INFO]   Progress: 900/1170 (851 successful)
+[2026-01-22 03:48:07] [ERROR]   Board 1 (12.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:48:07] [ERROR]   Board 9 (12.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:48:07] [ERROR]   Board 10 (12.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:48:08] [ERROR]   Board 14 (12.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:48:08] [ERROR]   Board 15 (12.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:48:08] [ERROR]   Board 18 (12.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:48:08] [INFO]   Progress: 920/1170 (865 successful)
+[2026-01-22 03:48:08] [ERROR]   Board 22 (12.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:48:09] [ERROR]   Board 26 (12.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:48:09] [INFO]   Progress: 930/1170 (873 successful)
+[2026-01-22 03:48:09] [ERROR]   Board 1 (13.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:48:09] [ERROR]   Board 9 (13.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:48:09] [INFO]   Progress: 940/1170 (881 successful)
+[2026-01-22 03:48:09] [ERROR]   Board 11 (13.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:48:09] [ERROR]   Board 13 (13.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:48:09] [ERROR]   Board 14 (13.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:48:10] [ERROR]   Board 20 (13.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:48:10] [ERROR]   Board 30 (13.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:48:10] [ERROR]   Board 2 (14.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:48:12] [INFO]   Progress: 970/1170 (905 successful)
+[2026-01-22 03:48:12] [ERROR]   Board 13 (14.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:48:12] [ERROR]   Board 14 (14.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:48:12] [INFO]   Progress: 980/1170 (913 successful)
+[2026-01-22 03:48:12] [ERROR]   Board 21 (14.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:48:12] [ERROR]   Board 22 (14.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:48:13] [ERROR]   Board 28 (14.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:48:13] [INFO]   Progress: 990/1170 (920 successful)
+[2026-01-22 03:48:13] [ERROR]   Board 2 (15.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:48:13] [ERROR]   Board 7 (15.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:48:14] [INFO]   Progress: 1000/1170 (928 successful)
+[2026-01-22 03:48:14] [ERROR]   Board 13 (15.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:48:14] [ERROR]   Board 19 (15.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:48:15] [INFO]   Progress: 1010/1170 (936 successful)
+[2026-01-22 03:48:15] [ERROR]   Board 21 (15.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:48:15] [ERROR]   Board 24 (15.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:48:15] [ERROR]   Board 25 (15.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:48:15] [ERROR]   Board 26 (15.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:48:15] [ERROR]   Board 28 (15.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:48:15] [INFO]   Progress: 1020/1170 (941 successful)
+[2026-01-22 03:48:15] [ERROR]   Board 2 (16.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:48:16] [ERROR]   Board 7 (16.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:48:16] [INFO]   Progress: 1030/1170 (949 successful)
+[2026-01-22 03:48:16] [INFO]   Progress: 1040/1170 (959 successful)
+[2026-01-22 03:48:17] [ERROR]   Board 23 (16.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:48:18] [ERROR]   Board 28 (16.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:48:18] [INFO]   Progress: 1050/1170 (967 successful)
+[2026-01-22 03:48:19] [ERROR]   Board 4 (18.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:48:19] [ERROR]   Board 5 (18.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:48:19] [INFO]   Progress: 1060/1170 (975 successful)
+[2026-01-22 03:48:19] [ERROR]   Board 12 (18.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:48:19] [ERROR]   Board 13 (18.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:48:19] [ERROR]   Board 14 (18.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:48:19] [ERROR]   Board 15 (18.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:48:20] [INFO]   Progress: 1070/1170 (981 successful)
+[2026-01-22 03:48:21] [INFO]   Progress: 1080/1170 (991 successful)
+[2026-01-22 03:48:22] [INFO]   Progress: 1090/1170 (1001 successful)
+[2026-01-22 03:48:23] [ERROR]   Board 20 (19.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:48:23] [ERROR]   Board 22 (19.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:48:23] [ERROR]   Board 23 (19.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:48:23] [ERROR]   Board 26 (19.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:48:24] [INFO]   Progress: 1110/1170 (1017 successful)
+[2026-01-22 03:48:24] [ERROR]   Board 6 (20.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:48:24] [ERROR]   Board 8 (20.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:48:25] [INFO]   Progress: 1120/1170 (1025 successful)
+[2026-01-22 03:48:25] [INFO]   Progress: 1130/1170 (1035 successful)
+[2026-01-22 03:48:26] [ERROR]   Board 25 (20.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:48:26] [ERROR]   Board 26 (20.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:48:26] [INFO]   Progress: 1140/1170 (1043 successful)
+[2026-01-22 03:48:26] [ERROR]   Board 1 (21.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:48:26] [ERROR]   Board 2 (21.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:48:27] [ERROR]   Board 5 (21.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:48:27] [ERROR]   Board 6 (21.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:48:27] [ERROR]   Board 7 (21.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:48:27] [ERROR]   Board 9 (21.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:48:27] [INFO]   Progress: 1150/1170 (1047 successful)
+[2026-01-22 03:48:27] [ERROR]   Board 14 (21.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 03:48:28] [INFO]   Progress: 1160/1170 (1056 successful)
+[2026-01-22 03:48:29] [INFO]   Progress: 1170/1170 (1066 successful)
+[2026-01-22 03:48:29] [INFO] ✓ DD analysis completed: 1066/1170 hands (99.3s)
+[2026-01-22 03:48:29] [INFO] 
+============================================================
+[2026-01-22 03:48:29] [INFO] Pipeline completed at 2026-01-22 03:48:29
+[2026-01-22 03:48:29] [INFO] Status: ✓ SUCCESS
+[2026-01-22 03:48:29] [INFO] ============================================================
+
+[2026-01-22 04:16:25] [INFO] 
+============================================================
+[2026-01-22 04:16:25] [INFO] 🚀 BRIC FULL UPDATE PIPELINE
+[2026-01-22 04:16:25] [INFO] Started at 2026-01-22 04:16:25
+[2026-01-22 04:16:25] [INFO] ============================================================
+[2026-01-22 04:16:25] [INFO] ============================================================
+[2026-01-22 04:16:25] [INFO] STEP 2: UPDATING BOARD HANDS
+[2026-01-22 04:16:25] [INFO] ============================================================
+[2026-01-22 04:16:25] [INFO] Existing hands database: 1171 records
+[2026-01-22 04:16:26] [INFO] ✓ Hands database is up to date!
+[2026-01-22 04:16:26] [INFO] 
+============================================================
+[2026-01-22 04:16:26] [INFO] Pipeline completed at 2026-01-22 04:16:26
+[2026-01-22 04:16:26] [INFO] Status: ✓ SUCCESS
+[2026-01-22 04:16:26] [INFO] ============================================================
+
+[2026-01-22 15:22:27] [INFO] 
+============================================================
+[2026-01-22 15:22:27] [INFO] 🚀 BRIC FULL UPDATE PIPELINE
+[2026-01-22 15:22:27] [INFO] Started at 2026-01-22 15:22:27
+[2026-01-22 15:22:27] [INFO] ============================================================
+[2026-01-22 15:22:27] [INFO] ============================================================
+[2026-01-22 15:22:27] [INFO] STEP 2: UPDATING BOARD HANDS
+[2026-01-22 15:22:27] [INFO] ============================================================
+[2026-01-22 15:22:27] [INFO] Existing hands database: 1111 records
+[2026-01-22 15:22:27] [INFO] Found 2 date(s) needing hands
+[2026-01-22 15:22:27] [INFO] Fetching boards for 20.01.2026 (Event 405376)
+[2026-01-22 15:22:44] [INFO]   20.01.2026: 30 boards fetched
+[2026-01-22 15:22:44] [INFO] Fetching boards for 21.01.2026 (Event 405445)
+[2026-01-22 15:23:07] [INFO]   21.01.2026: 30 boards fetched
+[2026-01-22 15:23:07] [INFO] ✓ Hands database saved (60 new hands)
+[2026-01-22 15:23:07] [INFO] 
+============================================================
+[2026-01-22 15:23:07] [INFO] Pipeline completed at 2026-01-22 15:23:07
+[2026-01-22 15:23:07] [INFO] Status: ✓ SUCCESS
+[2026-01-22 15:23:07] [INFO] ============================================================
+
+[2026-01-22 15:24:25] [INFO] 
+============================================================
+[2026-01-22 15:24:25] [INFO] 🚀 BRIC FULL UPDATE PIPELINE
+[2026-01-22 15:24:25] [INFO] Started at 2026-01-22 15:24:25
+[2026-01-22 15:24:25] [INFO] ============================================================
+[2026-01-22 15:24:25] [INFO] ============================================================
+[2026-01-22 15:24:25] [INFO] STEP 3: RUNNING DD ANALYSIS
+[2026-01-22 15:24:25] [INFO] ============================================================
+[2026-01-22 15:24:27] [INFO] endplay library loaded successfully
+[2026-01-22 15:24:27] [INFO] Found 1170 hands without DD analysis
+[2026-01-22 15:24:29] [INFO]   Progress: 10/1170 (10 successful)
+[2026-01-22 15:24:31] [INFO]   Progress: 20/1170 (20 successful)
+[2026-01-22 15:24:33] [INFO]   Progress: 30/1170 (30 successful)
+[2026-01-22 15:24:35] [INFO]   Progress: 40/1170 (40 successful)
+[2026-01-22 15:24:36] [INFO]   Progress: 50/1170 (50 successful)
+[2026-01-22 15:24:39] [INFO]   Progress: 60/1170 (60 successful)
+[2026-01-22 15:24:41] [INFO]   Progress: 70/1170 (70 successful)
+[2026-01-22 15:24:43] [INFO]   Progress: 80/1170 (80 successful)
+[2026-01-22 15:24:44] [INFO]   Progress: 90/1170 (90 successful)
+[2026-01-22 15:24:46] [INFO]   Progress: 100/1170 (100 successful)
+[2026-01-22 15:24:47] [INFO]   Progress: 110/1170 (110 successful)
+[2026-01-22 15:24:48] [INFO]   Progress: 120/1170 (120 successful)
+[2026-01-22 15:24:50] [INFO]   Progress: 130/1170 (130 successful)
+[2026-01-22 15:24:52] [INFO]   Progress: 140/1170 (140 successful)
+[2026-01-22 15:24:54] [INFO]   Progress: 150/1170 (150 successful)
+[2026-01-22 15:24:56] [INFO]   Progress: 160/1170 (160 successful)
+[2026-01-22 15:25:00] [INFO]   Progress: 170/1170 (170 successful)
+[2026-01-22 15:25:02] [INFO]   Progress: 180/1170 (180 successful)
+[2026-01-22 15:25:03] [INFO]   Progress: 190/1170 (190 successful)
+[2026-01-22 15:25:05] [INFO]   Progress: 200/1170 (200 successful)
+[2026-01-22 15:25:08] [INFO]   Progress: 210/1170 (210 successful)
+[2026-01-22 15:25:09] [INFO]   Progress: 220/1170 (220 successful)
+[2026-01-22 15:25:10] [INFO]   Progress: 230/1170 (230 successful)
+[2026-01-22 15:25:12] [INFO]   Progress: 240/1170 (240 successful)
+[2026-01-22 15:25:14] [INFO]   Progress: 250/1170 (250 successful)
+[2026-01-22 15:25:16] [INFO]   Progress: 260/1170 (260 successful)
+[2026-01-22 15:25:17] [INFO]   Progress: 270/1170 (270 successful)
+[2026-01-22 15:25:19] [INFO]   Progress: 280/1170 (280 successful)
+[2026-01-22 15:25:21] [INFO]   Progress: 290/1170 (290 successful)
+[2026-01-22 15:25:24] [INFO]   Progress: 300/1170 (300 successful)
+[2026-01-22 15:25:27] [INFO]   Progress: 310/1170 (310 successful)
+[2026-01-22 15:25:30] [INFO]   Progress: 320/1170 (320 successful)
+[2026-01-22 15:25:32] [INFO]   Progress: 330/1170 (330 successful)
+[2026-01-22 15:25:34] [INFO]   Progress: 340/1170 (340 successful)
+[2026-01-22 15:25:36] [INFO]   Progress: 350/1170 (350 successful)
+[2026-01-22 15:25:38] [INFO]   Progress: 360/1170 (360 successful)
+[2026-01-22 15:25:40] [INFO]   Progress: 370/1170 (370 successful)
+[2026-01-22 15:25:41] [INFO]   Progress: 380/1170 (380 successful)
+[2026-01-22 15:25:42] [INFO]   Progress: 390/1170 (390 successful)
+[2026-01-22 15:25:46] [INFO]   Progress: 400/1170 (400 successful)
+[2026-01-22 15:25:47] [INFO]   Progress: 410/1170 (410 successful)
+[2026-01-22 15:25:49] [INFO]   Progress: 420/1170 (420 successful)
+[2026-01-22 15:25:50] [INFO]   Progress: 430/1170 (430 successful)
+[2026-01-22 15:25:51] [INFO]   Progress: 440/1170 (440 successful)
+[2026-01-22 15:25:54] [INFO]   Progress: 450/1170 (450 successful)
+[2026-01-22 15:25:55] [INFO]   Progress: 460/1170 (460 successful)
+[2026-01-22 15:25:56] [INFO]   Progress: 470/1170 (470 successful)
+[2026-01-22 15:25:58] [INFO]   Progress: 480/1170 (480 successful)
+[2026-01-22 15:26:00] [INFO]   Progress: 490/1170 (490 successful)
+[2026-01-22 15:26:01] [INFO]   Progress: 500/1170 (500 successful)
+[2026-01-22 15:26:05] [INFO]   Progress: 510/1170 (510 successful)
+[2026-01-22 15:26:09] [INFO]   Progress: 520/1170 (520 successful)
+[2026-01-22 15:26:11] [INFO]   Progress: 530/1170 (530 successful)
+[2026-01-22 15:26:13] [INFO]   Progress: 540/1170 (540 successful)
+[2026-01-22 15:26:14] [INFO]   Progress: 550/1170 (550 successful)
+[2026-01-22 15:26:17] [INFO]   Progress: 560/1170 (560 successful)
+[2026-01-22 15:26:19] [INFO]   Progress: 570/1170 (570 successful)
+[2026-01-22 15:26:21] [ERROR]   Board 5 (01.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:26:21] [ERROR]   Board 9 (01.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:26:21] [INFO]   Progress: 580/1170 (578 successful)
+[2026-01-22 15:26:22] [ERROR]   Board 15 (01.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:26:23] [INFO]   Progress: 590/1170 (587 successful)
+[2026-01-22 15:26:25] [INFO]   Progress: 600/1170 (597 successful)
+[2026-01-22 15:26:25] [INFO]   Progress: 610/1170 (607 successful)
+[2026-01-22 15:26:26] [ERROR]   Board 15 (02.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:26:27] [INFO]   Progress: 620/1170 (616 successful)
+[2026-01-22 15:26:28] [ERROR]   Board 23 (02.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:26:28] [ERROR]   Board 24 (02.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:26:29] [INFO]   Progress: 630/1170 (624 successful)
+[2026-01-22 15:26:29] [ERROR]   Board 3 (03.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:26:29] [ERROR]   Board 6 (03.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:26:30] [INFO]   Progress: 640/1170 (632 successful)
+[2026-01-22 15:26:31] [ERROR]   Board 17 (03.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:26:31] [ERROR]   Board 20 (03.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:26:33] [ERROR]   Board 30 (03.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:26:34] [ERROR]   Board 7 (04.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:26:34] [ERROR]   Board 9 (04.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:26:35] [INFO]   Progress: 670/1170 (657 successful)
+[2026-01-22 15:26:36] [ERROR]   Board 17 (04.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:26:36] [ERROR]   Board 19 (04.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:26:36] [INFO]   Progress: 680/1170 (665 successful)
+[2026-01-22 15:26:38] [INFO]   Progress: 690/1170 (675 successful)
+[2026-01-22 15:26:39] [ERROR]   Board 2 (05.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:26:40] [INFO]   Progress: 700/1170 (684 successful)
+[2026-01-22 15:26:40] [ERROR]   Board 12 (05.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:26:41] [ERROR]   Board 19 (05.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:26:41] [INFO]   Progress: 710/1170 (692 successful)
+[2026-01-22 15:26:42] [ERROR]   Board 28 (05.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:26:42] [ERROR]   Board 29 (05.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:26:43] [INFO]   Progress: 720/1170 (700 successful)
+[2026-01-22 15:26:45] [INFO]   Progress: 730/1170 (710 successful)
+[2026-01-22 15:26:45] [ERROR]   Board 11 (06.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:26:45] [ERROR]   Board 14 (06.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:26:48] [INFO]   Progress: 740/1170 (718 successful)
+[2026-01-22 15:26:49] [ERROR]   Board 25 (06.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:26:49] [ERROR]   Board 27 (06.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:26:50] [INFO]   Progress: 750/1170 (726 successful)
+[2026-01-22 15:26:51] [INFO]   Progress: 760/1170 (736 successful)
+[2026-01-22 15:26:52] [ERROR]   Board 15 (07.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:26:52] [ERROR]   Board 19 (07.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:26:52] [INFO]   Progress: 770/1170 (744 successful)
+[2026-01-22 15:26:53] [ERROR]   Board 24 (07.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:26:53] [ERROR]   Board 25 (07.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:26:53] [ERROR]   Board 26 (07.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:26:53] [ERROR]   Board 28 (07.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:26:53] [INFO]   Progress: 780/1170 (750 successful)
+[2026-01-22 15:26:53] [ERROR]   Board 2 (08.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:26:53] [ERROR]   Board 4 (08.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:26:53] [ERROR]   Board 5 (08.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:26:54] [INFO]   Progress: 790/1170 (757 successful)
+[2026-01-22 15:26:54] [ERROR]   Board 11 (08.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:26:55] [ERROR]   Board 15 (08.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:26:55] [INFO]   Progress: 800/1170 (765 successful)
+[2026-01-22 15:26:56] [ERROR]   Board 29 (08.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:26:56] [INFO]   Progress: 810/1170 (774 successful)
+[2026-01-22 15:26:56] [ERROR]   Board 1 (09.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:26:57] [INFO]   Progress: 820/1170 (783 successful)
+[2026-01-22 15:26:59] [INFO]   Progress: 830/1170 (793 successful)
+[2026-01-22 15:27:00] [ERROR]   Board 27 (09.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:27:00] [INFO]   Progress: 840/1170 (802 successful)
+[2026-01-22 15:27:02] [INFO]   Progress: 850/1170 (812 successful)
+[2026-01-22 15:27:03] [ERROR]   Board 18 (10.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:27:03] [ERROR]   Board 20 (10.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:27:04] [ERROR]   Board 24 (10.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:27:04] [ERROR]   Board 28 (10.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:27:04] [ERROR]   Board 30 (10.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:27:04] [ERROR]   Board 1 (11.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:27:04] [ERROR]   Board 4 (11.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:27:05] [ERROR]   Board 10 (11.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:27:06] [ERROR]   Board 12 (11.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:27:08] [INFO]   Progress: 890/1170 (843 successful)
+[2026-01-22 15:27:09] [ERROR]   Board 26 (11.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:27:09] [ERROR]   Board 27 (11.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:27:10] [INFO]   Progress: 900/1170 (851 successful)
+[2026-01-22 15:27:10] [ERROR]   Board 1 (12.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:27:11] [ERROR]   Board 9 (12.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:27:11] [ERROR]   Board 10 (12.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:27:13] [ERROR]   Board 14 (12.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:27:13] [ERROR]   Board 15 (12.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:27:13] [ERROR]   Board 18 (12.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:27:14] [INFO]   Progress: 920/1170 (865 successful)
+[2026-01-22 15:27:15] [ERROR]   Board 22 (12.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:27:16] [ERROR]   Board 26 (12.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:27:17] [INFO]   Progress: 930/1170 (873 successful)
+[2026-01-22 15:27:17] [ERROR]   Board 1 (13.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:27:18] [ERROR]   Board 9 (13.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:27:19] [INFO]   Progress: 940/1170 (881 successful)
+[2026-01-22 15:27:19] [ERROR]   Board 11 (13.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:27:19] [ERROR]   Board 13 (13.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:27:19] [ERROR]   Board 14 (13.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:27:20] [ERROR]   Board 20 (13.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:27:21] [ERROR]   Board 30 (13.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:27:21] [ERROR]   Board 2 (14.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:27:25] [INFO]   Progress: 970/1170 (905 successful)
+[2026-01-22 15:27:26] [ERROR]   Board 13 (14.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:27:26] [ERROR]   Board 14 (14.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:27:26] [INFO]   Progress: 980/1170 (913 successful)
+[2026-01-22 15:27:26] [ERROR]   Board 21 (14.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:27:26] [ERROR]   Board 22 (14.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:27:28] [ERROR]   Board 28 (14.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:27:28] [INFO]   Progress: 990/1170 (920 successful)
+[2026-01-22 15:27:29] [ERROR]   Board 2 (15.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:27:30] [ERROR]   Board 7 (15.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:27:30] [INFO]   Progress: 1000/1170 (928 successful)
+[2026-01-22 15:27:31] [ERROR]   Board 13 (15.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:27:33] [ERROR]   Board 19 (15.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:27:33] [INFO]   Progress: 1010/1170 (936 successful)
+[2026-01-22 15:27:33] [ERROR]   Board 21 (15.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:27:34] [ERROR]   Board 24 (15.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:27:34] [ERROR]   Board 25 (15.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:27:34] [ERROR]   Board 26 (15.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:27:34] [ERROR]   Board 28 (15.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:27:35] [INFO]   Progress: 1020/1170 (941 successful)
+[2026-01-22 15:27:35] [ERROR]   Board 2 (16.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:27:36] [ERROR]   Board 7 (16.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:27:36] [INFO]   Progress: 1030/1170 (949 successful)
+[2026-01-22 15:27:37] [INFO]   Progress: 1040/1170 (959 successful)
+[2026-01-22 15:27:37] [ERROR]   Board 23 (16.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:27:40] [ERROR]   Board 28 (16.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:27:40] [INFO]   Progress: 1050/1170 (967 successful)
+[2026-01-22 15:27:42] [ERROR]   Board 4 (18.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:27:42] [ERROR]   Board 5 (18.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:27:44] [INFO]   Progress: 1060/1170 (975 successful)
+[2026-01-22 15:27:45] [ERROR]   Board 12 (18.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:27:45] [ERROR]   Board 13 (18.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:27:45] [ERROR]   Board 14 (18.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:27:45] [ERROR]   Board 15 (18.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:27:46] [INFO]   Progress: 1070/1170 (981 successful)
+[2026-01-22 15:27:48] [INFO]   Progress: 1080/1170 (991 successful)
+[2026-01-22 15:27:50] [INFO]   Progress: 1090/1170 (1001 successful)
+[2026-01-22 15:27:51] [ERROR]   Board 20 (19.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:27:52] [ERROR]   Board 22 (19.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:27:52] [ERROR]   Board 23 (19.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:27:52] [ERROR]   Board 26 (19.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:27:53] [INFO]   Progress: 1110/1170 (1017 successful)
+[2026-01-22 15:27:54] [ERROR]   Board 6 (20.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:27:54] [ERROR]   Board 8 (20.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:27:55] [INFO]   Progress: 1120/1170 (1025 successful)
+[2026-01-22 15:27:56] [INFO]   Progress: 1130/1170 (1035 successful)
+[2026-01-22 15:27:56] [ERROR]   Board 25 (20.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:27:56] [ERROR]   Board 26 (20.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:27:57] [INFO]   Progress: 1140/1170 (1043 successful)
+[2026-01-22 15:27:57] [ERROR]   Board 1 (21.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:27:57] [ERROR]   Board 2 (21.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:27:57] [ERROR]   Board 5 (21.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:27:57] [ERROR]   Board 6 (21.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:27:57] [ERROR]   Board 7 (21.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:27:57] [ERROR]   Board 9 (21.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:27:57] [INFO]   Progress: 1150/1170 (1047 successful)
+[2026-01-22 15:27:58] [ERROR]   Board 14 (21.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 15:27:59] [INFO]   Progress: 1160/1170 (1056 successful)
+[2026-01-22 15:28:00] [INFO]   Progress: 1170/1170 (1066 successful)
+[2026-01-22 15:28:00] [INFO] ✓ DD analysis completed: 1066/1170 hands (213.4s)
+[2026-01-22 15:28:00] [INFO] 
+============================================================
+[2026-01-22 15:28:00] [INFO] Pipeline completed at 2026-01-22 15:28:00
+[2026-01-22 15:28:00] [INFO] Status: ✓ SUCCESS
+[2026-01-22 15:28:00] [INFO] ============================================================
+
+[2026-01-22 15:48:37] [INFO] 
+============================================================
+[2026-01-22 15:48:37] [INFO] 🚀 BRIC FULL UPDATE PIPELINE
+[2026-01-22 15:48:37] [INFO] Started at 2026-01-22 15:48:37
+[2026-01-22 15:48:37] [INFO] ============================================================
+[2026-01-22 15:48:37] [INFO] ============================================================
+[2026-01-22 15:48:37] [INFO] STEP 2: UPDATING BOARD HANDS
+[2026-01-22 15:48:37] [INFO] ============================================================
+[2026-01-22 15:48:37] [INFO] Existing hands database: 1171 records
+[2026-01-22 15:48:38] [INFO] ✓ Hands database is up to date!
+[2026-01-22 15:48:38] [INFO] 
+============================================================
+[2026-01-22 15:48:38] [INFO] Pipeline completed at 2026-01-22 15:48:38
+[2026-01-22 15:48:38] [INFO] Status: ✓ SUCCESS
+[2026-01-22 15:48:38] [INFO] ============================================================
+
+[2026-01-22 16:25:08] [INFO] 
+============================================================
+[2026-01-22 16:25:08] [INFO] 🚀 BRIC FULL UPDATE PIPELINE
+[2026-01-22 16:25:08] [INFO] Started at 2026-01-22 16:25:08
+[2026-01-22 16:25:08] [INFO] ============================================================
+[2026-01-22 16:25:08] [INFO] ============================================================
+[2026-01-22 16:25:08] [INFO] STEP 2: UPDATING BOARD HANDS
+[2026-01-22 16:25:08] [INFO] ============================================================
+[2026-01-22 16:25:08] [INFO] Existing hands database: 571 records
+[2026-01-22 16:25:08] [INFO] Found 20 date(s) needing hands
+[2026-01-22 16:25:08] [INFO] Fetching boards for 01.01.2026 (Event 404155)
+[2026-01-22 16:25:26] [INFO]   01.01.2026: 30 boards fetched
+[2026-01-22 16:25:26] [INFO] Fetching boards for 02.01.2026 (Event 404197)
+[2026-01-22 16:25:46] [INFO]   02.01.2026: 30 boards fetched
+[2026-01-22 16:25:46] [INFO] Fetching boards for 03.01.2026 (Event 404275)
+[2026-01-22 16:26:07] [INFO]   03.01.2026: 30 boards fetched
+[2026-01-22 16:26:07] [INFO] Fetching boards for 04.01.2026 (Event 404377)
+[2026-01-22 16:26:25] [INFO]   04.01.2026: 30 boards fetched
+[2026-01-22 16:26:25] [INFO] Fetching boards for 05.01.2026 (Event 404426)
+[2026-01-22 16:26:46] [INFO]   05.01.2026: 30 boards fetched
+[2026-01-22 16:26:46] [INFO] Fetching boards for 06.01.2026 (Event 404498)
+[2026-01-22 16:27:03] [INFO]   06.01.2026: 30 boards fetched
+[2026-01-22 16:27:03] [INFO] Fetching boards for 07.01.2026 (Event 404562)
+[2026-01-22 16:27:21] [INFO]   07.01.2026: 30 boards fetched
+[2026-01-22 16:27:21] [INFO] Fetching boards for 08.01.2026 (Event 404628)
+[2026-01-22 16:27:41] [INFO]   08.01.2026: 30 boards fetched
+[2026-01-22 16:27:41] [INFO] Fetching boards for 09.01.2026 (Event 404691)
+[2026-01-22 16:28:00] [INFO]   09.01.2026: 30 boards fetched
+[2026-01-22 16:28:00] [INFO] Fetching boards for 10.01.2026 (Event 404854)
+[2026-01-22 16:28:19] [INFO]   10.01.2026: 30 boards fetched
+[2026-01-22 16:28:19] [INFO] Fetching boards for 11.01.2026 (Event 404821)
+[2026-01-22 16:28:40] [INFO]   11.01.2026: 30 boards fetched
+[2026-01-22 16:28:40] [INFO] Fetching boards for 12.01.2026 (Event 404876)
+[2026-01-22 16:28:58] [INFO]   12.01.2026: 30 boards fetched
+[2026-01-22 16:28:58] [INFO] Fetching boards for 13.01.2026 (Event 405128)
+[2026-01-22 16:29:16] [INFO]   13.01.2026: 30 boards fetched
+[2026-01-22 16:29:16] [INFO] Fetching boards for 14.01.2026 (Event 405007)
+[2026-01-22 16:29:44] [INFO]   14.01.2026: 30 boards fetched
+[2026-01-22 16:29:44] [INFO] Fetching boards for 15.01.2026 (Event 405061)
+[2026-01-22 16:30:04] [INFO]   15.01.2026: 30 boards fetched
+[2026-01-22 16:30:04] [INFO] Fetching boards for 16.01.2026 (Event 405123)
+[2026-01-22 16:30:24] [INFO]   16.01.2026: 30 boards fetched
+[2026-01-22 16:30:24] [INFO] Fetching boards for 17.01.2026 (Event 405204)
+[2026-01-22 16:30:48] [INFO]   17.01.2026: 30 boards fetched
+[2026-01-22 16:30:48] [INFO] Fetching boards for 18.01.2026 (Event 405278)
+[2026-01-22 16:31:06] [INFO]   18.01.2026: 30 boards fetched
+[2026-01-22 16:31:06] [INFO] Fetching boards for 19.01.2026 (Event 405315)
+[2026-01-22 16:31:27] [INFO]   19.01.2026: 30 boards fetched
+[2026-01-22 16:31:27] [INFO] Fetching boards for 20.01.2026 (Event 405376)
+[2026-01-22 16:31:52] [INFO]   20.01.2026: 30 boards fetched
+[2026-01-22 16:31:52] [INFO] ✓ Hands database saved (600 new hands)
+[2026-01-22 16:31:52] [INFO] 
+============================================================
+[2026-01-22 16:31:52] [INFO] Pipeline completed at 2026-01-22 16:31:52
+[2026-01-22 16:31:52] [INFO] Status: ✓ SUCCESS
+[2026-01-22 16:31:52] [INFO] ============================================================
+
+[2026-01-22 16:37:15] [INFO] 
+============================================================
+[2026-01-22 16:37:15] [INFO] 🚀 BRIC FULL UPDATE PIPELINE
+[2026-01-22 16:37:15] [INFO] Started at 2026-01-22 16:37:15
+[2026-01-22 16:37:15] [INFO] ============================================================
+[2026-01-22 16:37:15] [INFO] ============================================================
+[2026-01-22 16:37:15] [INFO] STEP 3: RUNNING DD ANALYSIS
+[2026-01-22 16:37:15] [INFO] ============================================================
+[2026-01-22 16:37:16] [INFO] endplay library loaded successfully
+[2026-01-22 16:37:16] [INFO] Found 1141 hands without DD analysis
+[2026-01-22 16:37:17] [INFO]   Progress: 10/1141 (10 successful)
+[2026-01-22 16:37:18] [INFO]   Progress: 20/1141 (20 successful)
+[2026-01-22 16:37:19] [INFO]   Progress: 30/1141 (30 successful)
+[2026-01-22 16:37:19] [INFO]   Progress: 40/1141 (40 successful)
+[2026-01-22 16:37:20] [INFO]   Progress: 50/1141 (50 successful)
+[2026-01-22 16:37:22] [INFO]   Progress: 60/1141 (60 successful)
+[2026-01-22 16:37:23] [INFO]   Progress: 70/1141 (70 successful)
+[2026-01-22 16:37:24] [INFO]   Progress: 80/1141 (80 successful)
+[2026-01-22 16:37:25] [INFO]   Progress: 90/1141 (90 successful)
+[2026-01-22 16:37:27] [INFO]   Progress: 100/1141 (100 successful)
+[2026-01-22 16:37:28] [INFO]   Progress: 110/1141 (110 successful)
+[2026-01-22 16:37:29] [INFO]   Progress: 120/1141 (120 successful)
+[2026-01-22 16:37:30] [INFO]   Progress: 130/1141 (130 successful)
+[2026-01-22 16:37:32] [INFO]   Progress: 140/1141 (140 successful)
+[2026-01-22 16:37:33] [INFO]   Progress: 150/1141 (150 successful)
+[2026-01-22 16:37:35] [INFO]   Progress: 160/1141 (160 successful)
+[2026-01-22 16:37:39] [INFO]   Progress: 170/1141 (170 successful)
+[2026-01-22 16:37:40] [INFO]   Progress: 180/1141 (180 successful)
+[2026-01-22 16:37:42] [INFO]   Progress: 190/1141 (190 successful)
+[2026-01-22 16:37:44] [INFO]   Progress: 200/1141 (200 successful)
+[2026-01-22 16:37:46] [INFO]   Progress: 210/1141 (210 successful)
+[2026-01-22 16:37:48] [INFO]   Progress: 220/1141 (220 successful)
+[2026-01-22 16:37:49] [INFO]   Progress: 230/1141 (230 successful)
+[2026-01-22 16:37:50] [INFO]   Progress: 240/1141 (240 successful)
+[2026-01-22 16:37:52] [INFO]   Progress: 250/1141 (250 successful)
+[2026-01-22 16:37:54] [INFO]   Progress: 260/1141 (260 successful)
+[2026-01-22 16:37:55] [INFO]   Progress: 270/1141 (270 successful)
+[2026-01-22 16:37:57] [INFO]   Progress: 280/1141 (280 successful)
+[2026-01-22 16:37:59] [INFO]   Progress: 290/1141 (290 successful)
+[2026-01-22 16:38:01] [INFO]   Progress: 300/1141 (300 successful)
+[2026-01-22 16:38:03] [INFO]   Progress: 310/1141 (310 successful)
+[2026-01-22 16:38:04] [INFO]   Progress: 320/1141 (320 successful)
+[2026-01-22 16:38:06] [INFO]   Progress: 330/1141 (330 successful)
+[2026-01-22 16:38:08] [INFO]   Progress: 340/1141 (340 successful)
+[2026-01-22 16:38:10] [INFO]   Progress: 350/1141 (350 successful)
+[2026-01-22 16:38:13] [INFO]   Progress: 360/1141 (360 successful)
+[2026-01-22 16:38:15] [INFO]   Progress: 370/1141 (370 successful)
+[2026-01-22 16:38:18] [INFO]   Progress: 380/1141 (380 successful)
+[2026-01-22 16:38:19] [INFO]   Progress: 390/1141 (390 successful)
+[2026-01-22 16:38:23] [INFO]   Progress: 400/1141 (400 successful)
+[2026-01-22 16:38:25] [INFO]   Progress: 410/1141 (410 successful)
+[2026-01-22 16:38:28] [INFO]   Progress: 420/1141 (420 successful)
+[2026-01-22 16:38:30] [INFO]   Progress: 430/1141 (430 successful)
+[2026-01-22 16:38:32] [INFO]   Progress: 440/1141 (440 successful)
+[2026-01-22 16:38:35] [INFO]   Progress: 450/1141 (450 successful)
+[2026-01-22 16:38:37] [INFO]   Progress: 460/1141 (460 successful)
+[2026-01-22 16:38:38] [INFO]   Progress: 470/1141 (470 successful)
+[2026-01-22 16:38:41] [INFO]   Progress: 480/1141 (480 successful)
+[2026-01-22 16:38:42] [INFO]   Progress: 490/1141 (490 successful)
+[2026-01-22 16:38:44] [INFO]   Progress: 500/1141 (500 successful)
+[2026-01-22 16:38:46] [INFO]   Progress: 510/1141 (510 successful)
+[2026-01-22 16:38:50] [INFO]   Progress: 520/1141 (520 successful)
+[2026-01-22 16:38:53] [INFO]   Progress: 530/1141 (530 successful)
+[2026-01-22 16:38:55] [INFO]   Progress: 540/1141 (540 successful)
+[2026-01-22 16:38:56] [ERROR]   Board 5 (01.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:38:57] [ERROR]   Board 9 (01.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:38:58] [ERROR]   Board 15 (01.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:39:00] [INFO]   Progress: 560/1141 (557 successful)
+[2026-01-22 16:39:02] [INFO]   Progress: 570/1141 (567 successful)
+[2026-01-22 16:39:05] [INFO]   Progress: 580/1141 (577 successful)
+[2026-01-22 16:39:06] [ERROR]   Board 15 (02.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:39:07] [INFO]   Progress: 590/1141 (586 successful)
+[2026-01-22 16:39:08] [ERROR]   Board 23 (02.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:39:08] [ERROR]   Board 24 (02.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:39:09] [INFO]   Progress: 600/1141 (594 successful)
+[2026-01-22 16:39:09] [ERROR]   Board 3 (03.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:39:09] [ERROR]   Board 6 (03.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:39:11] [INFO]   Progress: 610/1141 (602 successful)
+[2026-01-22 16:39:11] [ERROR]   Board 17 (03.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:39:12] [INFO]   Progress: 620/1141 (611 successful)
+[2026-01-22 16:39:12] [ERROR]   Board 20 (03.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:39:12] [INFO]   Progress: 630/1141 (620 successful)
+[2026-01-22 16:39:12] [ERROR]   Board 30 (03.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:39:13] [ERROR]   Board 7 (04.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:39:13] [ERROR]   Board 9 (04.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:39:14] [ERROR]   Board 17 (04.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:39:14] [ERROR]   Board 19 (04.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:39:15] [INFO]   Progress: 660/1141 (645 successful)
+[2026-01-22 16:39:16] [ERROR]   Board 2 (05.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:39:16] [INFO]   Progress: 670/1141 (654 successful)
+[2026-01-22 16:39:16] [ERROR]   Board 12 (05.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:39:17] [ERROR]   Board 19 (05.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:39:18] [ERROR]   Board 28 (05.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:39:18] [ERROR]   Board 29 (05.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:39:20] [INFO]   Progress: 700/1141 (680 successful)
+[2026-01-22 16:39:20] [ERROR]   Board 11 (06.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:39:20] [ERROR]   Board 14 (06.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:39:21] [INFO]   Progress: 710/1141 (688 successful)
+[2026-01-22 16:39:22] [ERROR]   Board 25 (06.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:39:22] [ERROR]   Board 27 (06.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:39:22] [INFO]   Progress: 720/1141 (696 successful)
+[2026-01-22 16:39:23] [INFO]   Progress: 730/1141 (706 successful)
+[2026-01-22 16:39:24] [ERROR]   Board 15 (07.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:39:24] [ERROR]   Board 19 (07.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:39:25] [ERROR]   Board 24 (07.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:39:25] [ERROR]   Board 25 (07.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:39:25] [ERROR]   Board 26 (07.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:39:25] [ERROR]   Board 28 (07.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:39:25] [INFO]   Progress: 750/1141 (720 successful)
+[2026-01-22 16:39:25] [ERROR]   Board 2 (08.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:39:25] [ERROR]   Board 4 (08.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:39:25] [ERROR]   Board 5 (08.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:39:26] [INFO]   Progress: 760/1141 (727 successful)
+[2026-01-22 16:39:27] [ERROR]   Board 11 (08.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:39:27] [ERROR]   Board 15 (08.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:39:27] [INFO]   Progress: 770/1141 (735 successful)
+[2026-01-22 16:39:28] [ERROR]   Board 29 (08.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:39:28] [ERROR]   Board 1 (09.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:39:29] [INFO]   Progress: 790/1141 (753 successful)
+[2026-01-22 16:39:31] [INFO]   Progress: 800/1141 (763 successful)
+[2026-01-22 16:39:32] [ERROR]   Board 27 (09.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:39:32] [INFO]   Progress: 810/1141 (772 successful)
+[2026-01-22 16:39:34] [INFO]   Progress: 820/1141 (782 successful)
+[2026-01-22 16:39:36] [ERROR]   Board 18 (10.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:39:36] [INFO]   Progress: 830/1141 (791 successful)
+[2026-01-22 16:39:36] [ERROR]   Board 20 (10.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:39:36] [ERROR]   Board 24 (10.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:39:37] [ERROR]   Board 28 (10.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:39:37] [INFO]   Progress: 840/1141 (798 successful)
+[2026-01-22 16:39:37] [ERROR]   Board 30 (10.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:39:37] [ERROR]   Board 1 (11.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:39:37] [ERROR]   Board 4 (11.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:39:38] [INFO]   Progress: 850/1141 (805 successful)
+[2026-01-22 16:39:38] [ERROR]   Board 10 (11.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:39:38] [ERROR]   Board 12 (11.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:39:39] [INFO]   Progress: 860/1141 (813 successful)
+[2026-01-22 16:39:40] [ERROR]   Board 26 (11.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:39:40] [ERROR]   Board 27 (11.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:39:40] [INFO]   Progress: 870/1141 (821 successful)
+[2026-01-22 16:39:40] [ERROR]   Board 1 (12.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:39:41] [ERROR]   Board 9 (12.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:39:41] [ERROR]   Board 10 (12.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:39:42] [ERROR]   Board 14 (12.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:39:42] [ERROR]   Board 15 (12.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:39:42] [ERROR]   Board 18 (12.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:39:42] [INFO]   Progress: 890/1141 (835 successful)
+[2026-01-22 16:39:43] [ERROR]   Board 22 (12.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:39:43] [ERROR]   Board 26 (12.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:39:44] [INFO]   Progress: 900/1141 (843 successful)
+[2026-01-22 16:39:44] [ERROR]   Board 1 (13.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:39:45] [ERROR]   Board 9 (13.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:39:45] [ERROR]   Board 11 (13.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:39:46] [ERROR]   Board 13 (13.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:39:46] [ERROR]   Board 14 (13.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:39:46] [INFO]   Progress: 920/1141 (858 successful)
+[2026-01-22 16:39:46] [ERROR]   Board 20 (13.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:39:48] [INFO]   Progress: 930/1141 (867 successful)
+[2026-01-22 16:39:48] [ERROR]   Board 30 (13.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:39:48] [ERROR]   Board 2 (14.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:39:53] [INFO]   Progress: 940/1141 (875 successful)
+[2026-01-22 16:39:53] [ERROR]   Board 13 (14.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:39:53] [ERROR]   Board 14 (14.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:39:54] [INFO]   Progress: 950/1141 (883 successful)
+[2026-01-22 16:39:54] [ERROR]   Board 21 (14.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:39:54] [ERROR]   Board 22 (14.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:39:55] [ERROR]   Board 28 (14.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:39:55] [INFO]   Progress: 960/1141 (890 successful)
+[2026-01-22 16:39:56] [ERROR]   Board 2 (15.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:39:57] [ERROR]   Board 7 (15.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:39:57] [INFO]   Progress: 970/1141 (898 successful)
+[2026-01-22 16:39:57] [ERROR]   Board 13 (15.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:39:59] [ERROR]   Board 19 (15.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:39:59] [ERROR]   Board 21 (15.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:40:00] [ERROR]   Board 24 (15.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:40:00] [ERROR]   Board 25 (15.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:40:00] [ERROR]   Board 26 (15.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:40:00] [ERROR]   Board 28 (15.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:40:00] [INFO]   Progress: 990/1141 (911 successful)
+[2026-01-22 16:40:00] [ERROR]   Board 2 (16.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:40:01] [ERROR]   Board 7 (16.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:40:01] [INFO]   Progress: 1000/1141 (919 successful)
+[2026-01-22 16:40:02] [INFO]   Progress: 1010/1141 (929 successful)
+[2026-01-22 16:40:02] [ERROR]   Board 23 (16.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:40:05] [ERROR]   Board 28 (16.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:40:05] [INFO]   Progress: 1020/1141 (937 successful)
+[2026-01-22 16:40:05] [ERROR]   Board 5 (17.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:40:05] [ERROR]   Board 8 (17.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:40:06] [INFO]   Progress: 1030/1141 (945 successful)
+[2026-01-22 16:40:06] [ERROR]   Board 15 (17.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:40:07] [INFO]   Progress: 1040/1141 (954 successful)
+[2026-01-22 16:40:07] [ERROR]   Board 20 (17.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:40:07] [ERROR]   Board 23 (17.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:40:07] [ERROR]   Board 24 (17.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:40:07] [INFO]   Progress: 1050/1141 (961 successful)
+[2026-01-22 16:40:08] [ERROR]   Board 4 (18.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:40:08] [ERROR]   Board 5 (18.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:40:09] [INFO]   Progress: 1060/1141 (969 successful)
+[2026-01-22 16:40:09] [ERROR]   Board 12 (18.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:40:09] [ERROR]   Board 13 (18.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:40:09] [ERROR]   Board 14 (18.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:40:09] [ERROR]   Board 15 (18.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:40:10] [INFO]   Progress: 1070/1141 (975 successful)
+[2026-01-22 16:40:12] [INFO]   Progress: 1080/1141 (985 successful)
+[2026-01-22 16:40:12] [INFO]   Progress: 1090/1141 (995 successful)
+[2026-01-22 16:40:14] [INFO]   Progress: 1100/1141 (1005 successful)
+[2026-01-22 16:40:14] [ERROR]   Board 20 (19.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:40:14] [ERROR]   Board 22 (19.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:40:14] [ERROR]   Board 23 (19.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:40:14] [ERROR]   Board 26 (19.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:40:16] [INFO]   Progress: 1110/1141 (1011 successful)
+[2026-01-22 16:40:17] [ERROR]   Board 6 (20.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:40:17] [ERROR]   Board 8 (20.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:40:17] [INFO]   Progress: 1120/1141 (1019 successful)
+[2026-01-22 16:40:19] [INFO]   Progress: 1130/1141 (1029 successful)
+[2026-01-22 16:40:19] [ERROR]   Board 25 (20.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:40:19] [ERROR]   Board 26 (20.01.2026): DD error - could not convert '-' to Rank
+[2026-01-22 16:40:20] [INFO]   Progress: 1140/1141 (1037 successful)
+[2026-01-22 16:40:20] [INFO]   Progress: 1141/1141 (1038 successful)
+[2026-01-22 16:40:20] [INFO] ✓ DD analysis completed: 1038/1141 hands (184.8s)
+[2026-01-22 16:40:20] [INFO] 
+============================================================
+[2026-01-22 16:40:20] [INFO] Pipeline completed at 2026-01-22 16:40:20
+[2026-01-22 16:40:20] [INFO] Status: ✓ SUCCESS
+[2026-01-22 16:40:20] [INFO] ============================================================
+
+[2026-01-23 01:28:18] [INFO] 
+============================================================
+[2026-01-23 01:28:18] [INFO] 🚀 BRIC FULL UPDATE PIPELINE
+[2026-01-23 01:28:18] [INFO] Started at 2026-01-23 01:28:18
+[2026-01-23 01:28:18] [INFO] ============================================================
+[2026-01-23 01:28:18] [INFO] ============================================================
+[2026-01-23 01:28:18] [INFO] STEP 2: UPDATING BOARD HANDS
+[2026-01-23 01:28:18] [INFO] ============================================================
+[2026-01-23 01:28:18] [INFO] Existing hands database: 30 records
+[2026-01-23 01:28:18] [INFO] Found 21 date(s) needing hands
+[2026-01-23 01:28:18] [INFO] Fetching boards for 01.01.2026 (Event 404155)
+[2026-01-23 01:28:36] [INFO]   01.01.2026: 30 boards fetched
+[2026-01-23 01:28:36] [INFO] Fetching boards for 02.01.2026 (Event 404197)
+[2026-01-23 01:28:54] [INFO]   02.01.2026: 30 boards fetched
+[2026-01-23 01:28:54] [INFO] Fetching boards for 03.01.2026 (Event 404275)
+[2026-01-23 01:29:09] [INFO]   03.01.2026: 30 boards fetched
+[2026-01-23 01:29:09] [INFO] Fetching boards for 04.01.2026 (Event 404377)
+[2026-01-23 01:29:25] [INFO]   04.01.2026: 30 boards fetched
+[2026-01-23 01:29:25] [INFO] Fetching boards for 05.01.2026 (Event 404426)
+[2026-01-23 01:29:46] [INFO]   05.01.2026: 30 boards fetched
+[2026-01-23 01:29:46] [INFO] Fetching boards for 06.01.2026 (Event 404498)
+[2026-01-23 01:30:05] [INFO]   06.01.2026: 30 boards fetched
+[2026-01-23 01:30:05] [INFO] Fetching boards for 07.01.2026 (Event 404562)
+[2026-01-23 01:30:21] [INFO]   07.01.2026: 30 boards fetched
+[2026-01-23 01:30:21] [INFO] Fetching boards for 08.01.2026 (Event 404628)
+[2026-01-23 01:30:50] [INFO]   08.01.2026: 30 boards fetched
+[2026-01-23 01:30:50] [INFO] Fetching boards for 09.01.2026 (Event 404691)
+[2026-01-23 01:31:11] [INFO]   09.01.2026: 30 boards fetched
+[2026-01-23 01:31:11] [INFO] Fetching boards for 10.01.2026 (Event 404854)
+[2026-01-23 01:31:27] [INFO]   10.01.2026: 30 boards fetched
+[2026-01-23 01:31:27] [INFO] Fetching boards for 11.01.2026 (Event 404821)
+[2026-01-23 01:31:44] [INFO]   11.01.2026: 30 boards fetched
+[2026-01-23 01:31:44] [INFO] Fetching boards for 12.01.2026 (Event 404876)
+[2026-01-23 01:32:05] [INFO]   12.01.2026: 30 boards fetched
+[2026-01-23 01:32:05] [INFO] Fetching boards for 13.01.2026 (Event 405128)
+[2026-01-23 01:32:25] [INFO]   13.01.2026: 30 boards fetched
+[2026-01-23 01:32:25] [INFO] Fetching boards for 14.01.2026 (Event 405007)
+[2026-01-23 01:32:41] [INFO]   14.01.2026: 30 boards fetched
+[2026-01-23 01:32:41] [INFO] Fetching boards for 15.01.2026 (Event 405061)
+[2026-01-23 01:32:58] [INFO]   15.01.2026: 30 boards fetched
+[2026-01-23 01:32:58] [INFO] Fetching boards for 16.01.2026 (Event 405123)
+[2026-01-23 01:33:28] [INFO]   16.01.2026: 30 boards fetched
+[2026-01-23 01:33:28] [INFO] Fetching boards for 17.01.2026 (Event 405204)
+[2026-01-23 01:33:48] [INFO]   17.01.2026: 30 boards fetched
+[2026-01-23 01:33:48] [INFO] Fetching boards for 18.01.2026 (Event 405278)
+[2026-01-23 01:34:04] [INFO]   18.01.2026: 30 boards fetched
+[2026-01-23 01:34:04] [INFO] Fetching boards for 19.01.2026 (Event 405315)
+[2026-01-23 01:34:32] [INFO]   19.01.2026: 30 boards fetched
+[2026-01-23 01:34:32] [INFO] Fetching boards for 21.01.2026 (Event 405445)
+[2026-01-23 01:35:05] [INFO]   21.01.2026: 30 boards fetched
+[2026-01-23 01:35:05] [INFO] Fetching boards for 22.01.2026 (Event 405535)
+[2026-01-23 01:35:32] [INFO]   22.01.2026: 30 boards fetched
+[2026-01-23 01:35:32] [INFO] ✓ Hands database saved (630 new hands)
+[2026-01-23 01:35:32] [INFO] 
+============================================================
+[2026-01-23 01:35:32] [INFO] Pipeline completed at 2026-01-23 01:35:32
+[2026-01-23 01:35:32] [INFO] Status: ✓ SUCCESS
+[2026-01-23 01:35:32] [INFO] ============================================================
+
+[2026-01-23 12:53:04] [INFO] 
+============================================================
+[2026-01-23 12:53:04] [INFO] 🚀 BRIC FULL UPDATE PIPELINE
+[2026-01-23 12:53:04] [INFO] Started at 2026-01-23 12:53:04
+[2026-01-23 12:53:04] [INFO] ============================================================
+[2026-01-23 12:53:04] [INFO] ============================================================
+[2026-01-23 12:53:04] [INFO] STEP 2: UPDATING BOARD HANDS
+[2026-01-23 12:53:04] [INFO] ============================================================
+[2026-01-23 12:53:04] [INFO] Existing hands database: 0 records
+[2026-01-23 12:53:05] [INFO] Found 22 date(s) needing hands
+[2026-01-23 12:53:05] [INFO] Fetching boards for 01.01.2026 (Event 404155)
+[2026-01-23 12:53:21] [INFO]   01.01.2026: 30 boards fetched
+[2026-01-23 12:53:21] [INFO] Fetching boards for 02.01.2026 (Event 404197)
+[2026-01-23 12:53:37] [INFO]   02.01.2026: 30 boards fetched
+[2026-01-23 12:53:37] [INFO] Fetching boards for 03.01.2026 (Event 404275)
+[2026-01-23 12:53:52] [INFO]   03.01.2026: 30 boards fetched
+[2026-01-23 12:53:52] [INFO] Fetching boards for 04.01.2026 (Event 404377)
+[2026-01-23 12:54:07] [INFO]   04.01.2026: 30 boards fetched
+[2026-01-23 12:54:07] [INFO] Fetching boards for 05.01.2026 (Event 404426)
+[2026-01-23 12:54:24] [INFO]   05.01.2026: 30 boards fetched
+[2026-01-23 12:54:24] [INFO] Fetching boards for 06.01.2026 (Event 404498)
+[2026-01-23 12:54:40] [INFO]   06.01.2026: 30 boards fetched
+[2026-01-23 12:54:40] [INFO] Fetching boards for 07.01.2026 (Event 404562)
+[2026-01-23 12:54:55] [INFO]   07.01.2026: 30 boards fetched
+[2026-01-23 12:54:55] [INFO] Fetching boards for 08.01.2026 (Event 404628)
+[2026-01-23 12:55:11] [INFO]   08.01.2026: 30 boards fetched
+[2026-01-23 12:55:11] [INFO] Fetching boards for 09.01.2026 (Event 404691)
+[2026-01-23 12:55:31] [INFO]   09.01.2026: 30 boards fetched
+[2026-01-23 12:55:31] [INFO] Fetching boards for 10.01.2026 (Event 404854)
+[2026-01-23 12:55:59] [INFO]   10.01.2026: 30 boards fetched
+[2026-01-23 12:55:59] [INFO] Fetching boards for 11.01.2026 (Event 404821)
+[2026-01-23 12:56:24] [INFO]   11.01.2026: 30 boards fetched
+[2026-01-23 12:56:24] [INFO] Fetching boards for 12.01.2026 (Event 404876)
+[2026-01-23 12:56:43] [INFO]   12.01.2026: 30 boards fetched
+[2026-01-23 12:56:43] [INFO] Fetching boards for 13.01.2026 (Event 405128)
+[2026-01-23 12:56:58] [INFO]   13.01.2026: 30 boards fetched
+[2026-01-23 12:56:58] [INFO] Fetching boards for 14.01.2026 (Event 405007)
+[2026-01-23 12:57:12] [INFO]   14.01.2026: 30 boards fetched
+[2026-01-23 12:57:12] [INFO] Fetching boards for 15.01.2026 (Event 405061)
+[2026-01-23 12:57:26] [INFO]   15.01.2026: 30 boards fetched
+[2026-01-23 12:57:26] [INFO] Fetching boards for 16.01.2026 (Event 405123)
+[2026-01-23 12:57:42] [INFO]   16.01.2026: 30 boards fetched
+[2026-01-23 12:57:42] [INFO] Fetching boards for 17.01.2026 (Event 405204)
+[2026-01-23 12:57:57] [INFO]   17.01.2026: 30 boards fetched
+[2026-01-23 12:57:57] [INFO] Fetching boards for 18.01.2026 (Event 405278)
+[2026-01-23 12:58:14] [INFO]   18.01.2026: 30 boards fetched
+[2026-01-23 12:58:14] [INFO] Fetching boards for 19.01.2026 (Event 405315)
+[2026-01-23 12:58:29] [INFO]   19.01.2026: 30 boards fetched
+[2026-01-23 12:58:29] [INFO] Fetching boards for 20.01.2026 (Event 405376)
+[2026-01-23 12:58:47] [INFO]   20.01.2026: 30 boards fetched
+[2026-01-23 12:58:47] [INFO] Fetching boards for 21.01.2026 (Event 405445)
+[2026-01-23 12:59:05] [INFO]   21.01.2026: 30 boards fetched
+[2026-01-23 12:59:05] [INFO] Fetching boards for 22.01.2026 (Event 405535)
+[2026-01-23 12:59:21] [INFO]   22.01.2026: 30 boards fetched
+[2026-01-23 12:59:21] [INFO] ✓ Hands database saved (660 new hands)
+[2026-01-23 12:59:21] [INFO] 
+============================================================
+[2026-01-23 12:59:21] [INFO] Pipeline completed at 2026-01-23 12:59:21
+[2026-01-23 12:59:21] [INFO] Status: ✓ SUCCESS
+[2026-01-23 12:59:21] [INFO] ============================================================
+

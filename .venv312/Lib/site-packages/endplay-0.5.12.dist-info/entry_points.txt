@@ -1,0 +1,4 @@
+[console_scripts]
+endplay-dealer=endplay.dealer.__main__:main
+endplay-interact=endplay.interact.__main__:main
+

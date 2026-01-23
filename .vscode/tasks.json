@@ -39,6 +39,90 @@
                 "reveal": "silent"
             },
             "dependsOn": ["Start Bridge Hands Server"]
+        },
+        {
+            "label": "Pipeline: Quick Update",
+            "type": "shell",
+            "command": "${command:python.interpreterPath}",
+            "args": ["scheduled_pipeline.py", "--quick"],
+            "cwd": "${workspaceFolder}",
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Pipeline: Full Update",
+            "type": "shell",
+            "command": "${command:python.interpreterPath}",
+            "args": ["scheduled_pipeline.py", "--full"],
+            "cwd": "${workspaceFolder}",
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Pipeline: Daemon Mode (30 min)",
+            "type": "shell",
+            "command": "${command:python.interpreterPath}",
+            "args": ["scheduled_pipeline.py", "--daemon", "--interval", "30"],
+            "cwd": "${workspaceFolder}",
+            "isBackground": true,
+            "problemMatcher": {
+                "pattern": {
+                    "regexp": "^.*$",
+                    "line": 0
+                },
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": "^.*QUICK UPDATE",
+                    "endsPattern": "^.*tamamlandı"
+                }
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "new",
+                "group": "pipeline"
+            }
+        },
+        {
+            "label": "Pipeline: Status",
+            "type": "shell",
+            "command": "${command:python.interpreterPath}",
+            "args": ["scheduled_pipeline.py", "--status"],
+            "cwd": "${workspaceFolder}",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Validate Data Integrity",
+            "type": "shell",
+            "command": "${command:python.interpreterPath}",
+            "args": ["unified_fetch.py", "--validate"],
+            "cwd": "${workspaceFolder}",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Event Registry Test",
+            "type": "shell",
+            "command": "${command:python.interpreterPath}",
+            "args": ["event_registry.py"],
+            "cwd": "${workspaceFolder}",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": []
         }
     ]
 }

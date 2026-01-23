@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bridge Hands - Exact Design</title>
+    <link rel="stylesheet" href="bbo-hands.css?v=1">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Courier New', monospace;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .header h1 {
+            font-size: 1.8em;
+            margin-bottom: 5px;
+        }
+        
+        .filter-section {
+            background: white;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            align-items: center;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .filter-section label {
+            font-weight: bold;
+            font-size: 13px;
+        }
+        
+        .filter-section select,
+        .filter-section input {
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            font-family: Arial, sans-serif;
+            font-size: 13px;
+        }
+        
+        .filter-section button {
+            padding: 8px 16px;
+            background: #1e3c72;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        .filter-section button:hover {
+            background: #2a5298;
+        }
+        
+        .boards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+            gap: 15px;
+        }
+        
+        /* EXACT BRIDGE HAND DIAGRAM */
+        .bridge-hand {
+            background: white;
+            border: 2px solid #666;
+            border-radius: 0;
+            padding: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            font-family: 'Courier New', monospace;
+            font-size: 11px;
+        }
+        
+        .hand-header {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 8px;
+            margin-bottom: 8px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid #ccc;
+            font-size: 10px;
+        }
+        
+        .header-left {
+            text-align: left;
+            line-height: 1.2;
+            color: #333;
+        }
+        
+        .header-left div {
+            margin: 2px 0;
+        }
+        
+        .header-center {
+            text-align: center;
+            font-weight: bold;
+            color: #1e3c72;
+            font-size: 11px;
+        }
+        
+        .header-right {
+            text-align: right;
+            line-height: 1.2;
+            color: #333;
+            font-weight: bold;
+        }
+        
+        .header-right div {
+            margin: 2px 0;
+        }
+        
+        .hand-layout {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 6px 0;
+        }
+        
+        .hand-layout td {
+            padding: 6px;
+            text-align: left;
+            vertical-align: middle;
+            border: 0;
+        }
+        
+        .hand-north {
+            text-align: center;
+            border-bottom: 1px solid #999;
+            font-weight: bold;
+            background: #ffeb99;
+            padding: 6px;
+            grid-column: 1/-1;
+        }
+        
+        .hand-south {
+            text-align: center;
+            border-top: 1px solid #999;
+            font-weight: bold;
+            background: #f0f0f0;
+            padding: 6px;
+            grid-column: 1/-1;
+        }
+        
+        .hand-west {
+            border-right: 1px solid #999;
+            text-align: right;
+            padding-right: 8px;
+            width: 35%;
+            font-size: 10px;
+            line-height: 1.3;
+        }
+        
+        .hand-center {
+            text-align: center;
+            width: 30%;
+            padding: 6px 2px;
+            position: relative;
+        }
+        
+        .hand-east {
+            border-left: 1px solid #999;
+            text-align: left;
+            padding-left: 8px;
+            width: 35%;
+            font-size: 10px;
+            line-height: 1.3;
+        }
+        
+        .hand-label {
+            font-weight: bold;
+            color: #1e3c72;
+            font-size: 10px;
+            margin-bottom: 2px;
+        }
+        
+        .hand-cards {
+            font-size: 10px;
+            line-height: 1.3;
+        }
+        
+        .board-number {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+        
+        .compass-display {
+            font-size: 9px;
+            line-height: 1.1;
+            color: #666;
+            margin-bottom: 2px;
+        }
+        
+        /* DD Table - Embedded in Center */
+        .dd-table-center {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 9px;
+            background: white;
+            margin: 3px 0;
+        }
+        
+        .dd-table-center thead {
+            background: #e8e8e8;
+        }
+        
+        .dd-table-center th {
+            padding: 2px 1px;
+            border: 1px solid #999;
+            font-weight: bold;
+            text-align: center;
+            height: 16px;
+        }
+        
+        .dd-table-center td {
+            padding: 2px 1px;
+            border: 1px solid #999;
+            text-align: center;
+            height: 16px;
+        }
+        
+        .dd-table-center .player-label {
+            font-weight: bold;
+            background: #e8e8e8;
+            width: 16px;
+        }
+        
+        .dd-table-center .suit-s { background: #f0f0f0; }
+        .dd-table-center .suit-h { background: #ffe6e6; color: #d32f2f; font-weight: bold; }
+        .dd-table-center .suit-d { background: #ffe6e6; color: #d32f2f; font-weight: bold; }
+        .dd-table-center .suit-c { background: #f0f0f0; }
+        .dd-table-center .suit-nt { background: #e8f5e9; color: #1b5e20; font-weight: bold; }
+        
+        .hand-footer {
+            display: flex;
+            gap: 8px;
+            padding: 6px 0;
+            font-size: 9px;
+            border-top: 1px solid #ccc;
+            margin-top: 6px;
+            justify-content: space-between;
+        }
+        
+        .footer-stat {
+            display: flex;
+            gap: 3px;
+            align-items: center;
+        }
+        
+        .footer-label {
+            font-weight: bold;
+            min-width: 25px;
+        }
+        
+        .lott-section {
+            text-align: right;
+        }
+        
+        .lott-label {
+            font-weight: bold;
+            font-size: 8px;
+        }
+        
+        .lott-value {
+            font-size: 16px;
+            font-weight: bold;
+            color: #d32f2f;
+            line-height: 1;
+        }
+        
+        .lott-detail {
+            font-size: 8px;
+            color: #666;
+            line-height: 1.1;
+        }
+        
+        @media (max-width: 768px) {
+            .boards-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎴 Bridge Hands with Embedded DD Solver</h1>
+            <p>Professional Design with Double Dummy Analysis in Center</p>
+        </div>
+        
+        <div class="filter-section">
+            <label>Event:</label>
+            <select id="eventFilter">
+                <option value="">All Events</option>
+                <option value="405278">405278</option>
+                <option value="405315">405315</option>
+                <option value="405376">405376</option>
+                <option value="405445">405445</option>
+            </select>
+            
+            <label>Board:</label>
+            <input type="number" id="boardFilter" placeholder="All" min="1" max="30" style="max-width: 70px;">
+            
+            <button onclick="applyFilters()">Load</button>
+        </div>
+        
+        <div class="boards-container" id="boardsContainer">
+            <div style="grid-column: 1/-1; text-align: center; padding: 40px; color: #999;">Loading...</div>
+        </div>
+    </div>
+    
+    <script src="dd-solver-ui.js"></script>
+    <script>
+        let boardData = {};
+        
+        async function initPage() {
+            try {
+                const res = await fetch('/board_results.json');
+                boardData = (await res.json()).boards || {};
+                await loadDDResults();
+                applyFilters();
+            } catch (error) {
+                document.getElementById('boardsContainer').innerHTML = 
+                    `<div style="grid-column: 1/-1; color: #d32f2f;">Error: ${error.message}</div>`;
+            }
+        }
+        
+        function getDealer(boardNum) {
+            return ['N', 'E', 'S', 'W'][(boardNum - 1) % 4];
+        }
+        
+        function getVuln(boardNum) {
+            const cycle = ((boardNum - 1) % 16);
+            if (cycle < 2) return "None";
+            if (cycle < 4) return "NS";
+            if (cycle < 6) return "EW";
+            return "Both";
+        }
+        
+        function createDDTable(ddData) {
+            if (!ddData || !ddData.tricks) return '';
+            
+            const tricks = ddData.tricks;
+            const suits = ['S', 'H', 'D', 'C', 'NT'];
+            const players = ['N', 'E', 'S', 'W'];
+            
+            let html = `<table class="dd-table-center"><thead><tr><th></th>`;
+            for (let s of suits) html += `<th class="suit-${s.toLowerCase()}">${s}</th>`;
+            html += `</tr></thead><tbody>`;
+            
+            for (let p of players) {
+                html += `<tr><td class="player-label">${p}</td>`;
+                for (let s of suits) {
+                    const val = tricks[p]?.[s] || '-';
+                    html += `<td class="suit-${s.toLowerCase()}">${val}</td>`;
+                }
+                html += `</tr>`;
+            }
+            
+            html += `</tbody></table>`;
+            return html;
+        }
+        
+        function createHandCard(key, board) {
+            const eventId = board.event_id;
+            const boardNum = board.board;
+            const hands = board.hands || {};
+            const ddData = getDDData(eventId, boardNum);
+            
+            const formatHand = (h) => h ? `${h.S||'.'}.${h.H||'.'}.${h.D||'.'}.${h.C||'.'}` : '';
+            
+            let nsNT = 0, ewNT = 0;
+            if (ddData?.tricks) {
+                nsNT = (ddData.tricks.N?.NT || 0) + (ddData.tricks.S?.NT || 0);
+                ewNT = (ddData.tricks.E?.NT || 0) + (ddData.tricks.W?.NT || 0);
+            }
+            const lott = nsNT + ewNT;
+            
+            return `<div class="bridge-hand">
+                <!-- Header: Date | Dealer | Vul -->
+                <div class="hand-header">
+                    <div class="header-left">
+                        <div><strong>21.01.2026</strong></div>
+                        <div>Dealer: <strong>${getDealer(boardNum)}</strong></div>
+                        <div>Vul: <strong>${getVuln(boardNum)}</strong></div>
+                    </div>
+                    <div class="header-center">N</div>
+                    <div class="header-right">
+                        <div>5</div>
+                        <div>12</div>
+                        <div>9</div>
+                    </div>
+                </div>
+                
+                <!-- Hand Diagram with Embedded DD Table in Center -->
+                <table class="hand-layout">
+                    <!-- North Hand (Yellow) -->
+                    <tr>
+                        <td colspan="3" class="hand-north">
+                            <div class="hand-label">N</div>
+                            <div class="hand-cards">${formatHand(hands.N).replace(/\./g, '')}</div>
+                        </td>
+                    </tr>
+                    
+                    <!-- West / Center (DD Table) / East -->
+                    <tr>
+                        <td class="hand-west">
+                            <div class="hand-label">W</div>
+                            <div class="hand-cards">
+                                ♠ ${hands.W?.S || ''}<br>
+                                ♥ ${hands.W?.H || ''}<br>
+                                ♦ ${hands.W?.D || ''}<br>
+                                ♣ ${hands.W?.C || ''}
+                            </div>
+                        </td>
+                        
+                        <td class="hand-center">
+                            <div class="board-number">${boardNum}</div>
+                            <div class="compass-display">N<br>W E<br>S</div>
+                            ${createDDTable(ddData)}
+                        </td>
+                        
+                        <td class="hand-east">
+                            <div class="hand-label">E</div>
+                            <div class="hand-cards">
+                                ♠ ${hands.E?.S || ''}<br>
+                                ♥ ${hands.E?.H || ''}<br>
+                                ♦ ${hands.E?.D || ''}<br>
+                                ♣ ${hands.E?.C || ''}
+                            </div>
+                        </td>
+                    </tr>
+                    
+                    <!-- South Hand (Gray) -->
+                    <tr>
+                        <td colspan="3" class="hand-south">
+                            <div class="hand-label">S</div>
+                            <div class="hand-cards">
+                                ♠ ${hands.S?.S || ''}<br>
+                                ♥ ${hands.S?.H || ''}<br>
+                                ♦ ${hands.S?.D || ''}<br>
+                                ♣ ${hands.S?.C || ''}
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                
+                <!-- Footer: Par | BD NT | LoTT -->
+                <div class="hand-footer">
+                    <div class="footer-stat">
+                        <span class="footer-label">Par:</span>
+                        <span>120</span>
+                    </div>
+                    <div class="footer-stat">
+                        <span class="footer-label">BD</span>
+                        <span>NT: 120</span>
+                    </div>
+                    <div class="lott-section">
+                        <div class="lott-label">LoTT</div>
+                        <div class="lott-value">${lott}</div>
+                        <div class="lott-detail">NS:${nsNT} EW:${ewNT}</div>
+                    </div>
+                </div>
+            </div>`;
+        }
+        
+        function applyFilters() {
+            const eventFilter = document.getElementById('eventFilter').value;
+            const boardFilter = document.getElementById('boardFilter').value;
+            
+            let html = '';
+            let count = 0;
+            
+            for (const [key, board] of Object.entries(boardData)) {
+                if (eventFilter && board.event_id !== eventFilter) continue;
+                if (boardFilter && board.board != boardFilter) continue;
+                html += createHandCard(key, board);
+                count++;
+            }
+            
+            if (count === 0) html = '<div style="grid-column: 1/-1; text-align: center; padding: 40px; color: #999;">No boards found</div>';
+            document.getElementById('boardsContainer').innerHTML = html;
+        }
+        
+        document.addEventListener('DOMContentLoaded', initPage);
+    </script>
+</body>
+</html>

@@ -474,10 +474,398 @@ def parse_lead_cell(cell):
 
 
 # ============================================================
+# HELPER FUNCTIONS
+# ============================================================
+
+def calculate_dealer_vul(board_num):
+    """Board numarasından dealer ve vulnerability hesapla"""
+    board_num = int(board_num)
+    # Dealer: NESW döngüsü
+    dealers = ['N', 'E', 'S', 'W']
+    dealer = dealers[(board_num - 1) % 4]
+    
+    # Vulnerability pattern: her 4 boardda bir kayar
+    vul_patterns = {
+        1: 'None', 2: 'NS', 3: 'EW', 4: 'Both',
+        5: 'NS', 6: 'EW', 7: 'Both', 8: 'None',
+        9: 'EW', 10: 'Both', 11: 'None', 12: 'NS',
+        13: 'Both', 14: 'None', 15: 'NS', 16: 'EW'
+    }
+    # Board 17-32 tekrar eder
+    normalized = ((board_num - 1) % 16) + 1
+    vul = vul_patterns.get(normalized, 'None')
+    
+    return dealer, vul
+
+def get_hand_from_database(event_id, board_num):
+    """hands_database.json veya database.json'dan el verisini çek"""
+    
+    # Önce database.json'dan event tarihini al
+    event_date = None
+    try:
+        with open('database.json', 'r', encoding='utf-8', errors='ignore') as f:
+            db = json.load(f)
+        event_key = f'event_{event_id}'
+        event_data = db.get('events', {}).get(event_key, {})
+        event_date = event_data.get('date', '')
+    except:
+        pass
+    
+    # hands_database.json'dan dene
+    try:
+        with open('hands_database.json', 'r', encoding='utf-8') as f:
+            hands_db = json.load(f)
+        
+        for hand in hands_db:
+            # Check board number first
+            if int(hand.get('board', 0)) != int(board_num):
+                continue
+            
+            # Check event_id (new format) or date match with event_date (old format)
+            has_event_id = str(hand.get('event_id')) == str(event_id)
+            has_date_match = event_date and hand.get('date', '') == event_date
+            
+            if not (has_event_id or has_date_match):
+                continue
+            
+            # Try to get hands from nested 'hands' dict (new format)
+            hands_dict = hand.get('hands', {})
+            if hands_dict:
+                n_hand = hands_dict.get('N', '')
+                e_hand = hands_dict.get('E', '')
+                s_hand = hands_dict.get('S', '')
+                w_hand = hands_dict.get('W', '')
+            else:
+                # Fallback to old format where hands are top-level
+                n_hand = hand.get('N', '')
+                e_hand = hand.get('E', '')
+                s_hand = hand.get('S', '')
+                w_hand = hand.get('W', '')
+            
+            # Check if we have all 4 hands
+            hands_count = sum(1 for h in [n_hand, e_hand, s_hand, w_hand] if h)
+            if hands_count < 4:
+                continue
+            
+            dealer = hand.get('dealer', '')
+            vul = hand.get('vulnerability', '')
+            
+            return {
+                'event_id': hand.get('event_id', event_id),
+                'board': hand.get('board'),
+                'date': hand.get('date'),
+                'hands': {
+                    'N': n_hand,
+                    'E': e_hand,
+                    'S': s_hand,
+                    'W': w_hand
+                },
+                'dealer': dealer,
+                'vulnerability': vul,
+                'dd_result': hand.get('dd_result'),
+                'optimum': hand.get('optimum'),
+                'lott': hand.get('lott')
+            }
+        
+        # If not found, return empty
+        return {}
+    except Exception as e:
+        pass
+    
+    return {}
+
+
+def get_dd_data(event_id, board_num):
+    """dd_results.json'dan DD analizi, optimum ve LoTT verilerini çek"""
+    try:
+        dd_file = os.path.join(os.path.dirname(__file__), 'double_dummy', 'dd_results.json')
+        with open(dd_file, 'r', encoding='utf-8') as f:
+            dd_data = json.load(f)
+        
+        # New structure: dict with 'boards' key
+        if isinstance(dd_data, dict) and 'boards' in dd_data:
+            boards = dd_data['boards']
+            key = f"{event_id}_{board_num}"
+            if key in boards:
+                board_dd = boards[key]
+                tricks = board_dd.get('tricks', {})
+                
+                # Calculate LoTT from tricks data
+                lott = None
+                if tricks:
+                    # Find best fit for each side
+                    ns_best = 0
+                    ew_best = 0
+                    ns_suit = ''
+                    ew_suit = ''
+                    
+                    for suit in ['S', 'H', 'D', 'C']:
+                        ns_tricks = max(tricks.get('N', {}).get(suit, 0), tricks.get('S', {}).get(suit, 0))
+                        ew_tricks = max(tricks.get('E', {}).get(suit, 0), tricks.get('W', {}).get(suit, 0))
+                        if ns_tricks > ns_best:
+                            ns_best = ns_tricks
+                            ns_suit = {'S': '♠', 'H': '♥', 'D': '♦', 'C': '♣'}[suit]
+                        if ew_tricks > ew_best:
+                            ew_best = ew_tricks
+                            ew_suit = {'S': '♠', 'H': '♥', 'D': '♦', 'C': '♣'}[suit]
+                    
+                    total = ns_best + ew_best
+                    lott = {
+                        'total_tricks': total,
+                        'ns_fit': {'suit': ns_suit, 'length': ns_best},
+                        'ew_fit': {'suit': ew_suit, 'length': ew_best}
+                    }
+                
+                return {
+                    'dd_result': tricks,
+                    'optimum': board_dd.get('optimum'),
+                    'lott': lott
+                }
+        
+        # Legacy: list structure
+        elif isinstance(dd_data, list):
+            for hand in dd_data:
+                if int(hand.get('board', 0)) == int(board_num):
+                    return {
+                        'dd_result': hand.get('dd_result') or hand.get('tricks'),
+                        'optimum': hand.get('optimum'),
+                        'lott': hand.get('lott')
+                    }
+        
+        return None
+    except Exception as e:
+        print(f"Error loading DD data: {e}")
+        import traceback
+        traceback.print_exc()
+        return None
+
+
+@app.route('/api/hand-data', methods=['GET'])
+def api_hand_data():
+    """El verisini ve DD analizini döndür"""
+    event_id = request.args.get('event')
+    board_num = request.args.get('board')
+    
+    if not event_id or not board_num:
+        return jsonify({'error': 'Missing event or board parameter'}), 400
+    
+    hand_data = get_hand_from_database(event_id, board_num)
+    
+    if hand_data:
+        # DD verilerini önce hand_data'dan al (hands_database.json'dan gelir)
+        dd_result = hand_data.get('dd_analysis')
+        optimum = hand_data.get('optimum')
+        lott = hand_data.get('lott')
+        
+        # Eğer DD yoksa dd_results.json'a bak (event_id bazlı)
+        if not dd_result:
+            dd_data = get_dd_data(event_id, board_num)
+            if dd_data:
+                dd_result = dd_data.get('dd_result')
+                optimum = dd_data.get('optimum')
+                lott = dd_data.get('lott')
+        
+        return jsonify({
+            'event': event_id,
+            'board': int(board_num),
+            'hand_data': hand_data,
+            'dd_result': dd_result,
+            'optimum': optimum,
+            'lott': lott
+        })
+    else:
+        return jsonify({'error': 'Hand not found'}), 404
+
+
+# ============================================================
+# PAIR RANKING API (aggregate across all boards)
+# ============================================================
+
+@app.route('/api/pair-ranking', methods=['GET'])
+def api_pair_ranking():
+    """
+    Çift sıralaması - tüm boardlarda oynanan tüm çiftlerin ortalama performansı
+    """
+    event_id = request.args.get('event')
+    
+    if not event_id:
+        return jsonify({'error': 'Missing event parameter'}), 400
+    
+    try:
+        # board_results.json'dan oku
+        board_results_path = os.path.join(os.path.dirname(__file__), 'board_results.json')
+        with open(board_results_path, 'r', encoding='utf-8') as f:
+            board_data = json.load(f)
+        
+        # Event bilgilerini al
+        event_info = board_data.get('events', {}).get(event_id, {})
+        tournament_name = event_info.get('name', '')
+        tournament_date = event_info.get('date', '')
+        
+        # Get the specific board results
+        board_key = f"{event_id}_{board_num}"
+        board_results = board_data.get('boards', {}).get(board_key, {})
+        results = board_results.get('results', []) if board_results else []
+        
+        # DEBUG
+        print(f"DEBUG: board_key={board_key}, found={len(results)} results")
+        if results:
+            print(f"DEBUG: First result: {results[0].get('pair_names')} - {results[0].get('percent')}%")
+            ayse_found = [r for r in results if 'AYŞE KUTLAY' in r.get('pair_names', '')]
+            if ayse_found:
+                print(f"DEBUG: AYŞE KUTLAY found: {ayse_found[0].get('percent')}%")
+        
+        # Just copy the results as-is and rank by score
+        ranked_results = [dict(r) for r in results]
+        ranked_results.sort(key=lambda x: x.get('percent', 0), reverse=True)
+        
+        # Add rank field
+        for rank, result in enumerate(ranked_results, 1):
+            result['rank'] = rank
+        
+        # Get hand data for this board
+        hand_data = get_hand_from_database(event_id, str(board_num))
+        
+        return jsonify({
+            'event': event_id,
+            'board': board_num,
+            'tournament_name': tournament_name or f'Event {event_id}',
+            'tournament_date': tournament_date,
+            'total_pairs': len(ranked_results),
+            'hand_data': hand_data,
+            'results': ranked_results
+        })
+        
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        return jsonify({'error': str(e)}), 500
+
+
+# BOARD RANKING API
+# ============================================================
+
+@app.route('/api/board-ranking', methods=['GET'])
+def api_board_ranking():
+    """
+    Board bazında kulüp sıralaması - sadece belirtilen board'un sonuçlarını döner
+    """
+    event_id = request.args.get('event')
+    board_num = request.args.get('board')
+    
+    if not event_id or not board_num:
+        return jsonify({'error': 'Missing event or board parameter'}), 400
+    
+    try:
+        board_num = int(board_num)
+        
+        # board_results.json'dan oku
+        board_results_path = os.path.join(os.path.dirname(__file__), 'board_results.json')
+        with open(board_results_path, 'r', encoding='utf-8') as f:
+            board_data = json.load(f)
+        
+        # Event bilgilerini al
+        event_info = board_data.get('events', {}).get(event_id, {})
+        tournament_name = event_info.get('name', '')
+        tournament_date = event_info.get('date', '')
+        
+        # Get the specific board results only
+        board_key = f"{event_id}_{board_num}"
+        board_results = board_data.get('boards', {}).get(board_key, {})
+        results = board_results.get('results', []) if board_results else []
+        
+        # Just copy the results as-is and rank by score
+        ranked_results = [dict(r) for r in results]
+        ranked_results.sort(key=lambda x: x.get('percent', 0), reverse=True)
+        
+        # Add rank field
+        for rank, result in enumerate(ranked_results, 1):
+            result['rank'] = rank
+        
+        # Get hand data for this board
+        hand_data = get_hand_from_database(event_id, str(board_num))
+        
+        return jsonify({
+            'event': event_id,
+            'board': board_num,
+            'tournament_name': tournament_name or f'Event {event_id}',
+            'tournament_date': tournament_date,
+            'total_pairs': len(ranked_results),
+            'hand_data': hand_data,
+            'results': ranked_results
+        })
+        
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        return jsonify({'error': str(e)}), 500
+        
+        # Tarih bilgisini hands_database'den al
+        if not tournament_date and hand_data:
+            tournament_date = hand_data.get('date', '')
+        
+        # ============================================================
 
 @app.route('/<path:filename>')
 def serve_file(filename):
     return safe_send_file(filename)
+
+@app.route('/api/pair-board-ranking')
+def pair_board_ranking():
+    """Get all boards a pair has played with their scores, ranked by percentage"""
+    try:
+        event_id = request.args.get('event', '405376')
+        pair_name = request.args.get('pair')
+        
+        if not pair_name:
+            return jsonify({'error': 'pair parameter required'}), 400
+        
+        # Load board results
+        board_results_path = os.path.join(os.path.dirname(__file__), 'board_results.json')
+        with open(board_results_path, 'r', encoding='utf-8') as f:
+            board_data = json.load(f)
+        
+        pair_boards = []
+        
+        # Search through all boards in the event
+        for board_key, board_info in board_data.get('boards', {}).items():
+            # Check if this board belongs to the event
+            if not board_key.startswith(f'{event_id}_'):
+                continue
+            
+            board_num = int(board_key.split('_')[1])
+            results = board_info.get('results', [])
+            
+            # Find this pair in this board's results
+            for result in results:
+                if result.get('pair_names') == pair_name:
+                    pair_boards.append({
+                        'board': board_num,
+                        'direction': result.get('direction'),
+                        'contract': result.get('contract'),
+                        'declarer': result.get('declarer'),
+                        'result': result.get('result'),
+                        'score': result.get('score'),
+                        'percent': result.get('percent', 0)
+                    })
+                    break
+        
+        # Sort by percentage (descending) and add rank
+        pair_boards.sort(key=lambda x: x.get('percent', 0), reverse=True)
+        for rank, board in enumerate(pair_boards, 1):
+            board['rank'] = rank
+        
+        return jsonify({
+            'event': event_id,
+            'pair': pair_name,
+            'total_boards': len(pair_boards),
+            'boards': pair_boards
+        })
+        
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        return jsonify({'error': str(e)}), 500
 
 @app.errorhandler(404)
 def not_found(e):

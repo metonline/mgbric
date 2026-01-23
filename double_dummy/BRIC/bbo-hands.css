@@ -1,0 +1,161 @@
+/* BBO Hand Display Styles */
+
+.bbo-hand-display {
+    background: #f5f5f5;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 15px;
+    margin: 10px 0;
+    font-family: 'Courier New', monospace;
+}
+
+.bbo-board-number {
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.bbo-hand-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 auto;
+}
+
+.bbo-hand-table td {
+    padding: 8px;
+    text-align: center;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.bbo-north {
+    border-bottom: 2px solid #999;
+    font-weight: bold;
+}
+
+.bbo-south {
+    border-top: 2px solid #999;
+    font-weight: bold;
+}
+
+.bbo-west {
+    border-right: 2px solid #999;
+    text-align: right;
+    padding-right: 15px;
+}
+
+.bbo-east {
+    border-left: 2px solid #999;
+    text-align: left;
+    padding-left: 15px;
+}
+
+.bbo-center {
+    text-align: center;
+    width: 40px;
+}
+
+.bbo-compass {
+    font-size: 12px;
+    font-weight: bold;
+    color: #666;
+    height: 16px;
+}
+
+.bbo-hands-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 15px;
+    padding: 15px;
+}
+
+/* Modal Styles */
+.hands-modal {
+    display: flex;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    align-items: center;
+    justify-content: center;
+}
+
+.hands-modal-content {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    max-width: 90%;
+    max-height: 90vh;
+    width: 900px;
+    display: flex;
+    flex-direction: column;
+}
+
+.hands-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid #eee;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 8px 8px 0 0;
+}
+
+.hands-modal-header h2 {
+    margin: 0;
+    font-size: 20px;
+}
+
+.hands-modal-close {
+    background: none;
+    border: none;
+    font-size: 28px;
+    cursor: pointer;
+    color: white;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hands-modal-close:hover {
+    opacity: 0.8;
+}
+
+.hands-modal-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .bbo-hand-table td {
+        font-size: 12px;
+        padding: 5px;
+    }
+    
+    .bbo-west {
+        padding-right: 8px;
+    }
+    
+    .bbo-east {
+        padding-left: 8px;
+    }
+    
+    .hands-modal-content {
+        width: 95%;
+        max-height: 95vh;
+    }
+    
+    .bbo-hands-container {
+        grid-template-columns: 1fr;
+    }
+}

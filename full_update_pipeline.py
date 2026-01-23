@@ -625,7 +625,26 @@ def run_dd_analysis(new_hands=None, force=False):
         return True, 0
     
     # DD analysis functions
+    def normalize_hand(hand_str):
+        """Convert '-' (void) to empty string for PBN format"""
+        if not hand_str:
+            return hand_str
+        suits = hand_str.split('.')
+        normalized = []
+        for suit in suits:
+            if suit == '-':
+                normalized.append('')  # Void = empty string
+            else:
+                normalized.append(suit)
+        return '.'.join(normalized)
+    
     def hand_to_pbn(n, s, e, w, dealer='N'):
+        # Normalize hands: convert '-' to '' for voids
+        n = normalize_hand(n)
+        s = normalize_hand(s)
+        e = normalize_hand(e)
+        w = normalize_hand(w)
+        
         if dealer == 'N':
             return f"N:{n} {e} {s} {w}"
         elif dealer == 'E':
@@ -710,7 +729,11 @@ def run_dd_analysis(new_hands=None, force=False):
     def count_suit(hand, suit_index):
         parts = hand.split('.')
         if suit_index < len(parts):
-            return len(parts[suit_index]) if parts[suit_index] != '-' else 0
+            suit = parts[suit_index]
+            # '-' or '' means void = 0 cards
+            if suit == '-' or suit == '':
+                return 0
+            return len(suit)
         return 0
     
     def calculate_lott(dd_result, n_hand, s_hand, e_hand, w_hand):
@@ -749,23 +772,25 @@ def run_dd_analysis(new_hands=None, force=False):
             }
         }
     
-    # Create ID to index mapping for updating
-    id_to_index = {h.get('id'): i for i, h in enumerate(hands_db)}
+    # Create ID to index mapping for updating (use event_id + Board as key)
+    def make_key(h):
+        return f"{h.get('event_id', h.get('id', ''))}_{h.get('Board', h.get('board', ''))}"
+    id_to_index = {make_key(h): i for i, h in enumerate(hands_db)}
     
     success_count = 0
     start_time = datetime.now()
     
     for i, hand in enumerate(hands_to_analyze):
-        board_num = hand.get('board', '?')
-        date = hand.get('date', 'Unknown')
-        hand_id = hand.get('id')
+        board_num = hand.get('Board', hand.get('board', '?'))
+        date = hand.get('Tarih', hand.get('date', 'Unknown'))
+        hand_key = make_key(hand)
         
         n = hand.get('N', '')
         s = hand.get('S', '')
         e = hand.get('E', '')
         w = hand.get('W', '')
-        dealer = hand.get('dealer', 'N')
-        vuln = hand.get('vulnerability', 'None')
+        dealer = hand.get('Dealer', hand.get('dealer', '')) or 'N'
+        vuln = hand.get('Vuln', hand.get('vulnerability', '')) or 'None'
         
         if not all([n, s, e, w]):
             log(f"  Board {board_num} ({date}): Missing hand data", "WARN")
@@ -789,9 +814,9 @@ def run_dd_analysis(new_hands=None, force=False):
             optimum = format_optimum(par_result)
             lott = calculate_lott(dd_result, n, s, e, w)
             
-            # Update hands_db
-            if hand_id in id_to_index:
-                idx = id_to_index[hand_id]
+            # Update hands_db using key
+            if hand_key in id_to_index:
+                idx = id_to_index[hand_key]
                 hands_db[idx]['dd_analysis'] = dd_result
                 hands_db[idx]['optimum'] = optimum
                 hands_db[idx]['lott'] = lott
@@ -925,25 +950,7 @@ def run_full_pipeline(step=None, force=False):
         dd_success, dd_count = run_dd_analysis(new_hands if step is None else None, force)
         success = success and dd_success
     
-    # Step 4: Board Rankings
-    if step is None or step == 'rankings':
-        log_section("STEP 4: FETCHING BOARD RANKINGS")
-        try:
-            import subprocess
-            result = subprocess.run(
-                [sys.executable, 'fetch_missing_rankings.py', '--once'],
-                capture_output=True,
-                text=True,
-                timeout=600
-            )
-            if result.returncode == 0:
-                log("Board rankings updated successfully")
-            else:
-                log(f"Board rankings failed: {result.stderr}", "WARNING")
-        except Exception as e:
-            log(f"Board rankings error: {e}", "WARNING")
-    
-    # Step 5: Site Analysis
+    # Step 4: Site Analysis
     if step is None or step == 'analysis':
         analysis_success = run_site_analysis()
         success = success and analysis_success

@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bridge Hands with Double Dummy Analysis</title>
+    <link rel="stylesheet" href="bbo-viewer.css?v=1">
+    <link rel="stylesheet" href="dd-solver-ui.css?v=1">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        .filter-panel {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        
+        .filter-panel label {
+            font-weight: bold;
+            color: #333;
+            margin-right: 8px;
+        }
+        
+        .filter-panel select,
+        .filter-panel input {
+            padding: 10px 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+            min-width: 150px;
+        }
+        
+        .filter-panel button {
+            padding: 10px 24px;
+            background: #1e3c72;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 14px;
+            transition: background 0.3s;
+        }
+        
+        .filter-panel button:hover {
+            background: #2a5298;
+        }
+        
+        .boards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(480px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .board-card {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+        }
+        
+        .board-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        /* Hand Diagram Styles - Embedded DD Table */
+        .hand-diagram-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #ccc;
+            font-size: 11px;
+        }
+        
+        .diagram-header-left {
+            flex: 1;
+        }
+        
+        .diagram-header-left div {
+            line-height: 1.3;
+            margin: 1px 0;
+        }
+        
+        .diagram-header-center {
+            flex: 0 0 50px;
+            text-align: center;
+            font-weight: bold;
+            color: #1e3c72;
+        }
+        
+        .diagram-header-right {
+            flex: 1;
+            text-align: right;
+        }
+        
+        .diagram-header-right div {
+            line-height: 1.3;
+            margin: 1px 0;
+        }
+        
+        /* Hand diagram table - Classic Bridge layout */
+        .hand-diagram-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 8px 0;
+            font-size: 11px;
+            line-height: 1.4;
+        }
+        
+        .hand-diagram-table td {
+            padding: 6px 4px;
+            text-align: left;
+            vertical-align: middle;
+            border: 0;
+        }
+        
+        .hand-diagram-table .hand-north {
+            text-align: center;
+            border-bottom: 1px solid #999;
+            padding: 6px 4px;
+            font-weight: bold;
+        }
+        
+        .hand-diagram-table .hand-south {
+            text-align: center;
+            border-top: 1px solid #999;
+            padding: 6px 4px;
+            font-weight: bold;
+        }
+        
+        .hand-diagram-table .hand-west {
+            border-right: 1px solid #999;
+            text-align: right;
+            padding-right: 8px;
+            width: 35%;
+        }
+        
+        .hand-diagram-table .hand-center {
+            text-align: center;
+            width: 30%;
+            font-weight: bold;
+            font-size: 14px;
+            color: #1e3c72;
+        }
+        
+        .hand-diagram-table .hand-east {
+            border-left: 1px solid #999;
+            text-align: left;
+            padding-left: 8px;
+            width: 35%;
+        }
+        
+        .hand-label {
+            font-weight: bold;
+            font-size: 10px;
+            color: #1e3c72;
+            margin-bottom: 2px;
+        }
+        
+        .hand-cards {
+            font-size: 11px;
+        }
+        
+        /* DD Table - Embedded in center */
+        .dd-table-embedded {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 10px;
+            margin: 8px 0;
+            background: white;
+        }
+        
+        .dd-table-embedded thead {
+            background: #e8e8e8;
+        }
+        
+        .dd-table-embedded th {
+            padding: 3px 2px;
+            border: 1px solid #999;
+            font-weight: bold;
+            text-align: center;
+            font-size: 9px;
+            height: 18px;
+        }
+        
+        .dd-table-embedded td {
+            padding: 2px 2px;
+            border: 1px solid #999;
+            text-align: center;
+            height: 18px;
+        }
+        
+        .dd-table-embedded .player-label {
+            font-weight: bold;
+            background: #e8e8e8;
+            width: 18px;
+        }
+        
+        .dd-table-embedded .suit-s { background: #f0f0f0; }
+        .dd-table-embedded .suit-h { background: #ffe6e6; color: #d32f2f; font-weight: bold; }
+        .dd-table-embedded .suit-d { background: #ffe6e6; color: #d32f2f; font-weight: bold; }
+        .dd-table-embedded .suit-c { background: #f0f0f0; }
+        .dd-table-embedded .suit-nt { background: #e8f5e9; color: #1b5e20; font-weight: bold; }
+        
+        .diagram-footer {
+            display: flex;
+            gap: 15px;
+            padding: 6px 0;
+            font-size: 10px;
+            border-top: 1px solid #ccc;
+            margin-top: 6px;
+            justify-content: space-between;
+        }
+        
+        .stat-item {
+            display: flex;
+            gap: 4px;
+            flex: 1;
+        }
+        
+        .stat-label {
+            font-weight: bold;
+            min-width: 30px;
+        }
+        
+        .lott-box {
+            text-align: right;
+            flex: 1;
+        }
+        
+        .lott-label {
+            font-weight: bold;
+            font-size: 9px;
+        }
+        
+        .lott-value {
+            font-size: 14px;
+            font-weight: bold;
+            color: #d32f2f;
+            line-height: 1;
+        }
+        
+        .lott-detail {
+            font-size: 8px;
+            color: #666;
+        }
+        
+        .load-status {
+            text-align: center;
+            padding: 40px;
+            color: white;
+            font-size: 1.1em;
+        }
+        
+        .loading-spinner {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-top: 3px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-right: 10px;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        @media (max-width: 768px) {
+            .boards-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .filter-panel {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .filter-panel select,
+            .filter-panel input,
+            .filter-panel button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎴 Hand Diagram with Double Dummy Analysis</h1>
+            <p>Optimal Play Results for Bridge Tournament Boards</p>
+        </div>
+        
+        <div class="filter-panel">
+            <div>
+                <label>Event:</label>
+                <select id="eventFilter">
+                    <option value="">All Events</option>
+                    <option value="405278">405278</option>
+                    <option value="405315">405315</option>
+                    <option value="405376">405376</option>
+                    <option value="405445">405445</option>
+                </select>
+            </div>
+            <div>
+                <label>Board Range:</label>
+                <input type="number" id="boardStart" placeholder="From" min="1" max="30" style="max-width: 80px;">
+                <span style="color: #999;">to</span>
+                <input type="number" id="boardEnd" placeholder="To" min="1" max="30" style="max-width: 80px;">
+            </div>
+            <button onclick="applyFilters()">Apply Filters</button>
+        </div>
+        
+        <div id="boardsContainer" class="boards-grid">
+            <div class="load-status">
+                <div class="loading-spinner"></div>
+                Loading boards and DD data...
+            </div>
+        </div>
+    </div>
+    
+    <script src="dd-solver-ui.js?v=1"></script>
+    <script>
+        // Global variables
+        let boardData = {};
+        let ddData = {};
+        
+        // Load both board and DD data
+        async function initializePage() {
+            try {
+                // Load board results
+                console.log('Loading board data...');
+                const boardResponse = await fetch('/board_results.json');
+                if (!boardResponse.ok) throw new Error('Failed to load boards');
+                const boardJson = await boardResponse.json();
+                boardData = boardJson.boards || {};
+                console.log(`✓ Loaded ${Object.keys(boardData).length} boards`);
+                
+                // Load DD results
+                console.log('Loading DD data...');
+                await loadDDResults();
+                ddData = ddResultsCache;
+                
+                // Display boards
+                displayBoards();
+            } catch (error) {
+                console.error('Error initializing page:', error);
+                document.getElementById('boardsContainer').innerHTML = 
+                    `<div class="load-status" style="color: #ff6b6b;">Error: ${error.message}</div>`;
+            }
+        }
+        
+        // Format hand for display
+        function formatHand(handObj) {
+            if (!handObj) return '';
+            const suits = ['S', 'H', 'D', 'C'];
+            const suitSymbols = { 'S': '♠', 'H': '♥', 'D': '♦', 'C': '♣' };
+            
+            return suits.map(suit => {
+                const cards = handObj[suit] || '';
+                return `${suitSymbols[suit]}${cards}`;
+            }).join(' ');
+        }
+        
+        // Create board card HTML
+        function createBoardCard(key, board) {
+            const eventId = board.event_id;
+            const boardNum = board.board;
+            const ddBoard = getDDData(eventId, boardNum);
+            
+            const dealerMap = { N: 'North', E: 'East', S: 'South', W: 'West' };
+            
+            let html = `<div class="board-card">
+                <div class="board-title">
+                    <h3>Board ${boardNum}</h3>
+                    <div class="board-meta">
+                        <span class="badge dealer">D: ${dealerMap[board.dealer] || board.dealer}</span>
+                        <span class="badge vuln">${board.vuln || 'N/A'}</span>
+                    </div>
+                </div>`;
+            
+            if (board.hands) {
+                html += `<div class="hand-display">
+                    <div><span class="label">♠N:</span> ${formatHand(board.hands.N)}</div>
+                    <div><span class="label">♥E:</span> ${formatHand(board.hands.E)}</div>
+                    <div><span class="label">♠S:</span> ${formatHand(board.hands.S)}</div>
+                    <div><span class="label">♥W:</span> ${formatHand(board.hands.W)}</div>
+                </div>`;
+            }
+            
+            if (ddBoard) {
+                html += createDDSummaryBadge(ddBoard);
+                html += createDDTricksTable(ddBoard);
+            } else {
+                html += '<div class="dd-unavailable">DD Analysis Not Available</div>';
+            }
+            
+            html += `</div>`;
+            return html;
+        }
+        
+        // Display boards with filters
+        function displayBoards() {
+            const eventFilter = document.getElementById('eventFilter').value;
+            const boardStart = parseInt(document.getElementById('boardStart').value) || 1;
+            const boardEnd = parseInt(document.getElementById('boardEnd').value) || 30;
+            
+            let html = '';
+            let count = 0;
+            
+            for (const [key, board] of Object.entries(boardData)) {
+                const eventId = board.event_id;
+                const boardNum = board.board;
+                
+                // Apply filters
+                if (eventFilter && eventId !== eventFilter) continue;
+                if (boardNum < boardStart || boardNum > boardEnd) continue;
+                
+                html += createBoardCard(key, board);
+                count++;
+            }
+            
+            if (count === 0) {
+                html = '<div class="load-status">No boards match the selected filters</div>';
+            }
+            
+            document.getElementById('boardsContainer').innerHTML = html;
+        }
+        
+        // Apply filter button handler
+        function applyFilters() {
+            displayBoards();
+        }
+        
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', initializePage);
+    </script>
+</body>
+</html>

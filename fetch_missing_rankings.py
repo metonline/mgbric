@@ -7,32 +7,25 @@ Usage:
     python fetch_missing_rankings.py           # Eksik tüm verileri çek
     python fetch_missing_rankings.py --once    # Sadece bir kez çalış
     python fetch_missing_rankings.py --daemon  # Arka planda 30 dakikada bir çalış
-    
-NOT: Bu script vugraph_utils.py modülünü kullanır.
-     Ortak fonksiyonlar orada tanımlıdır (DRY prensibi).
 """
 
 import json
 import time
+import requests
+from bs4 import BeautifulSoup
+import re
 from datetime import datetime
 from pathlib import Path
 import argparse
 import sys
-
-# Ortak modül - TÜM vugraph fonksiyonları için tek kaynak
-# NOT: get_event_info ve fetch_pair_result fonksiyonları artık vugraph_utils.py'den geliyor
-# Bu, kod duplikasyonunu önler ve tek kaynak (DRY) prensibiyle çalışır
-
-from vugraph_utils import (
-    get_event_info, 
-    fetch_pair_result,
-    fetch_board_all_results,
-    BASE_URL,
-    REQUEST_TIMEOUT
-)
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 BOARD_RESULTS_FILE = Path(__file__).parent / "board_results.json"
 HANDS_DATABASE_FILE = Path(__file__).parent / "hands_database.json"
+
+BASE_URL = "https://clubs.vugraph.com/hosgoru"
+REQUEST_TIMEOUT = 15
+MAX_WORKERS = 5
 
 
 def get_missing_events():
@@ -53,74 +46,281 @@ def get_missing_events():
     return missing
 
 
-def fetch_event_rankings(event_id, num_boards=30):
-    """Bir event'in tüm board'larının sıralamasını çek - pair bazlı"""
-    from concurrent.futures import ThreadPoolExecutor, as_completed
+def parse_contract(cell):
+    """Kontrat hücresini parse et"""
+    text = cell.get_text(strip=True)
+    # Suit codes'u sembolle değiştir
+    suit_map = {'S': '♠', 'H': '♥', 'D': '♦', 'C': '♣'}
+    for code, symbol in suit_map.items():
+        if code in text:
+            text = text.replace(code, symbol)
+    return text
+
+
+def get_event_info(event_id):
+    """Turnuva bilgilerini ve pair isimlerini al"""
+    try:
+        url = f'{BASE_URL}/eventresults.php?event={event_id}'
+        resp = requests.get(url, timeout=REQUEST_TIMEOUT)
+        resp.encoding = 'iso-8859-9'
+        soup = BeautifulSoup(resp.content, 'html.parser')
+        
+        # Turnuva adı
+        name = ''
+        h1 = soup.find('h1')
+        if h1:
+            name = h1.get_text(strip=True)
+        
+        # Pair sayısı ve isimleri
+        ns_pairs = 0
+        ew_pairs = 0
+        ns_pair_names = {}
+        ew_pair_names = {}
+        
+        # NS table
+        tables = soup.find_all('table')
+        for table in tables:
+            rows = table.find_all('tr')
+            for row in rows:
+                cells = row.find_all('td')
+                if len(cells) >= 2:
+                    # İlk hücre pair numarası mı?
+                    first_cell = cells[0].get_text(strip=True)
+                    if first_cell.isdigit():
+                        pair_num = int(first_cell)
+                        # Link içindeki isimler
+                        links = row.find_all('a')
+                        names = [l.get_text(strip=True) for l in links]
+                        if len(names) >= 2:
+                            pair_name = f"{names[0]} - {names[1]}"
+                            # NS veya EW bölümü?
+                            th = table.find('th')
+                            if th:
+                                th_text = th.get_text(strip=True).upper()
+                                if 'NS' in th_text or 'KUZEY' in th_text:
+                                    ns_pair_names[pair_num] = pair_name
+                                    ns_pairs = max(ns_pairs, pair_num)
+                                elif 'EW' in th_text or 'DOĞU' in th_text:
+                                    ew_pair_names[pair_num] = pair_name
+                                    ew_pairs = max(ew_pairs, pair_num)
+        
+        return {
+            'name': name,
+            'ns_pairs': ns_pairs if ns_pairs else 10,
+            'ew_pairs': ew_pairs if ew_pairs else 10,
+            'ns_pair_names': ns_pair_names,
+            'ew_pair_names': ew_pair_names
+        }
+    except Exception as e:
+        print(f"    Event info error: {e}")
+        return {'name': '', 'ns_pairs': 10, 'ew_pairs': 10, 'ns_pair_names': {}, 'ew_pair_names': {}}
+
+
+def fetch_pair_result(event_id, board_num, pair_num, direction, pair_names_dict):
+    """Bir çift için board sonucunu çeker (IMP ve MP formatlarını destekler)"""
+    try:
+        # Her zaman NS sayfasını kullan
+        url = f'{BASE_URL}/boarddetails.php?event={event_id}&section=A&pair={pair_num}&direction=NS&board={board_num}'
+        resp = requests.get(url, timeout=REQUEST_TIMEOUT)
+        resp.encoding = 'iso-8859-9'
+        soup = BeautifulSoup(resp.content, 'html.parser')
+        
+        # Page not found kontrolü
+        if 'Page not Found' in resp.text or 'Sayfa Bulunamadı' in resp.text:
+            return None
+        
+        # Pair ismini al
+        pair_names = ""
+        
+        # NS için h3'ten dene
+        if direction == 'NS':
+            h3 = soup.find('h3')
+            if h3:
+                h3_text = h3.get_text(strip=True)
+                match = re.search(r'\d{2}:\d{2}\s*\.\.\.\s*(.+?)\s*\.\.\.\s*(?:Bord|Masa)', h3_text)
+                if match:
+                    pair_names = match.group(1).strip()
+        
+        # Dict'ten al
+        if not pair_names and pair_names_dict and pair_num in pair_names_dict:
+            pair_names = pair_names_dict[pair_num]
+        
+        if not pair_names:
+            pair_names = f"Pair {pair_num}"
+        
+        # Results tablosunu bul
+        results_table = soup.find('table', class_='results')
+        if not results_table:
+            return None
+        
+        rows = results_table.find_all('tr')
+        if not rows:
+            return None
+        
+        # Format belirleme: başlık satırına bak
+        header_row = rows[0].find_all(['td', 'th'])
+        is_imp_format = False
+        for cell in header_row:
+            txt = cell.get_text(strip=True).upper()
+            if 'IMP' in txt:
+                is_imp_format = True
+                break
+        
+        # Highlighted satırı bul (fantastic, resultspecial, resultsimportant)
+        for row in rows:
+            cells = row.find_all('td')
+            if len(cells) >= 6:
+                cell_class = cells[0].get('class', [''])[0] if cells[0].get('class') else ''
+                if cell_class not in ['fantastic', 'resultspecial', 'resultsimportant']:
+                    continue
+                
+                if is_imp_format:
+                    # IMP Format: Kontrat, Dekleran, Sonuç, Atak?, Skor, IMP
+                    contract = parse_contract(cells[0])
+                    declarer = cells[1].get_text(strip=True)
+                    result_text = cells[2].get_text(strip=True)
+                    
+                    # Skor ve IMP'yi bul
+                    score = ''
+                    imp = 0
+                    for c in cells[3:]:
+                        txt = c.get_text(strip=True)
+                        if txt and txt.replace('-', '').replace('.', '').isdigit():
+                            if '.' in txt:
+                                imp = float(txt)
+                            elif not score:
+                                score = txt
+                    
+                    if direction == 'NS':
+                        return {
+                            'pair_names': pair_names,
+                            'direction': 'NS',
+                            'contract': contract,
+                            'declarer': declarer,
+                            'result': result_text,
+                            'lead': '',
+                            'score': score,
+                            'percent': imp  # IMP'de "percent" aslında IMP değeri
+                        }
+                    else:
+                        return {
+                            'pair_names': pair_names,
+                            'direction': 'EW',
+                            'contract': contract,
+                            'declarer': declarer,
+                            'result': result_text,
+                            'lead': '',
+                            'score': f"-{score}" if score and not score.startswith('-') else score,
+                            'percent': -imp
+                        }
+                else:
+                    # MP Format: Kontrat, Dekleran, Sonuç, Atak, SkorNS, SkorEW, %NS, %EW
+                    contract = parse_contract(cells[0])
+                    declarer = cells[1].get_text(strip=True)
+                    result_text = cells[2].get_text(strip=True)
+                    
+                    if len(cells) >= 8:
+                        lead = cells[3].get_text(strip=True)
+                        score_ns = cells[4].get_text(strip=True)
+                        score_ew = cells[5].get_text(strip=True)
+                        pct_ns = cells[6].get_text(strip=True)
+                        pct_ew = cells[7].get_text(strip=True)
+                    else:
+                        lead = ''
+                        score_ns = cells[3].get_text(strip=True) if len(cells) > 3 else ''
+                        score_ew = cells[4].get_text(strip=True) if len(cells) > 4 else ''
+                        pct_ns = cells[5].get_text(strip=True) if len(cells) > 5 else ''
+                        pct_ew = cells[6].get_text(strip=True) if len(cells) > 6 else ''
+                    
+                    try:
+                        pct = float(pct_ns) if direction == 'NS' else float(pct_ew)
+                    except:
+                        pct = 0
+                    
+                    if direction == 'NS':
+                        return {
+                            'pair_names': pair_names,
+                            'direction': 'NS',
+                            'contract': contract,
+                            'declarer': declarer,
+                            'result': result_text,
+                            'lead': lead,
+                            'score': score_ns if score_ns else f"-{score_ew}",
+                            'percent': pct
+                        }
+                    else:
+                        return {
+                            'pair_names': pair_names,
+                            'direction': 'EW',
+                            'contract': contract,
+                            'declarer': declarer,
+                            'result': result_text,
+                            'lead': lead,
+                            'score': score_ew if score_ew else f"-{score_ns}",
+                            'percent': 100 - pct if pct else 0
+                        }
+        
+        return None
+    except Exception as e:
+        return None
+
+
+def fetch_board_results(event_id, board_num, ns_pairs, ew_pairs, ns_pair_names, ew_pair_names):
+    """Bir board'un tüm sonuçlarını paralel olarak çeker"""
+    all_results = []
     
+    tasks = []
+    with ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
+        # NS çiftleri
+        for pair_num in range(1, ns_pairs + 1):
+            tasks.append(executor.submit(
+                fetch_pair_result, event_id, board_num, pair_num, 'NS', ns_pair_names
+            ))
+        
+        # EW çiftleri
+        for pair_num in range(1, ew_pairs + 1):
+            tasks.append(executor.submit(
+                fetch_pair_result, event_id, board_num, pair_num, 'EW', ew_pair_names
+            ))
+        
+        for future in as_completed(tasks):
+            result = future.result()
+            if result:
+                all_results.append(result)
+    
+    # Yüzdeye (veya IMP'ye) göre sırala
+    all_results.sort(key=lambda x: x.get('percent', 0), reverse=True)
+    for i, r in enumerate(all_results):
+        r['rank'] = i + 1
+    
+    return all_results
+
+
+def fetch_event_rankings(event_id, num_boards=30):
+    """Bir event'in tüm board'larının sıralamasını çek"""
     print(f"  Event bilgileri alınıyor...")
     info = get_event_info(event_id)
     print(f"    {info['name']} - NS:{info['ns_pairs']} EW:{info['ew_pairs']}")
-    
-    ns_pairs = info.get('ns_pairs', 0)
-    ew_pairs = info.get('ew_pairs', 0)
-    ns_pair_names = info.get('ns_pair_names', {})
-    ew_pair_names = info.get('ew_pair_names', {})
     
     event_results = {}
     
     for board_num in range(1, num_boards + 1):
         print(f"  Board {board_num}/{num_boards}...", end=' ', flush=True)
+        results = fetch_board_results(
+            event_id, board_num, 
+            info['ns_pairs'], info['ew_pairs'],
+            info.get('ns_pair_names', {}), info.get('ew_pair_names', {})
+        )
         
-        all_results = []
-        
-        # NS sonuçları - paralel (NS pair'leri için NS direction)
-        with ThreadPoolExecutor(max_workers=5) as executor:
-            futures = {}
-            for pair_num in range(1, ns_pairs + 1):
-                f = executor.submit(fetch_pair_result, event_id, board_num, pair_num, 'NS', 'A', ns_pair_names)
-                futures[f] = ('NS', pair_num)
-            
-            for future in as_completed(futures):
-                result = future.result()
-                if result:
-                    all_results.append(result)
-        
-        # EW sonuçları için: NS sayfasından EW skorlarını al
-        # Her NS pair'inin karşısında oturan EW pair'inin skoru tabloda var
-        # Ama hangi EW pair olduğunu bilemiyoruz...
-        # Çözüm: fetch_board_all_results'tan NS ve EW sonuçlarını al, 
-        # pair_names'i event info'dan eşleştir
-        
-        if all_results:
-            # fetch_board_all_results'tan EW sonuçlarını da al
-            all_board_results = fetch_board_all_results(event_id, board_num)
-            
-            # EW sonuçlarını ekle (pair_names olmadan)
-            ew_from_board = [r for r in all_board_results if r.get('direction') == 'EW']
-            
-            # EW pair isimlerini sırayla eşleştir (en iyi tahmin)
-            ew_pair_list = list(ew_pair_names.values())
-            for i, r in enumerate(ew_from_board):
-                if i < len(ew_pair_list):
-                    r['pair_names'] = ew_pair_list[i]
-                else:
-                    r['pair_names'] = f"EW Pair {i+1}"
-                all_results.append(r)
-            
-            # Tüm sonuçları yüzdeye göre sırala (NS+EW birlikte)
-            all_results.sort(key=lambda x: x.get('percent', 0), reverse=True)
-            
-            for i, r in enumerate(all_results):
-                r['rank'] = i + 1
-            
+        if results:
             key = f"{event_id}_{board_num}"
             event_results[key] = {
                 'event_id': event_id,
                 'board': board_num,
-                'results': all_results,
+                'results': results,
                 'fetched_at': datetime.now().isoformat()
             }
-            print(f"{len(all_results)} sonuç")
+            print(f"{len(results)} sonuç")
         else:
             print("veri yok")
         
@@ -135,11 +335,7 @@ def save_results(new_boards, event_info=None, event_id=None):
         with open(BOARD_RESULTS_FILE, 'r', encoding='utf-8') as f:
             existing = json.load(f)
     except:
-        existing = {}
-    
-    # Eski format kontrolü
-    if 'boards' not in existing:
-        existing = {'boards': existing, 'events': {}, 'updated_at': ''}
+        existing = {'boards': {}, 'events': {}, 'updated_at': ''}
     
     existing['boards'].update(new_boards)
     

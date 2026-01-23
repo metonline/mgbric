@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Çift Özeti</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        .header {
+            background: #1e3c72;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+        .header h1 { font-size: 1.5em; margin-bottom: 5px; }
+        .header .subtitle { opacity: 0.8; font-size: 0.95em; }
+        .content { padding: 20px; }
+        .loading {
+            text-align: center;
+            padding: 50px;
+            color: #666;
+        }
+        .loading .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #1e3c72;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .error {
+            background: #fee;
+            color: #c00;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9em;
+        }
+        th, td {
+            padding: 10px 8px;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+        }
+        th {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #1e3c72;
+            position: sticky;
+            top: 0;
+        }
+        tr:hover { background: #f5f8ff; }
+        .board-num { font-weight: bold; color: #1e3c72; }
+        .board-num-link {
+            font-weight: bold;
+            color: #1e3c72;
+            font-size: 1.15em;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s;
+            display: inline-block;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+        .board-num-link:hover {
+            background: #1e3c72;
+            color: white;
+            transform: scale(1.1);
+        }
+        .contract { font-weight: 600; white-space: nowrap; }
+        .suit-spade, .suit-club { color: #000; }
+        .suit-heart, .suit-diamond { color: #d32f2f; }
+        .score-positive { color: #2e7d32; font-weight: 600; }
+        .score-negative { color: #c62828; font-weight: 600; }
+        .percent-good { color: #2e7d32; }
+        .percent-bad { color: #c62828; }
+        .summary {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .summary-item {
+            text-align: center;
+            padding: 15px 10px;
+            background: white;
+            border-radius: 6px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 80px;
+        }
+        .summary-item .value {
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #1e3c72;
+        }
+        .summary-item .label {
+            font-size: 0.85em;
+            color: #666;
+            margin-top: 5px;
+        }
+        .close-btn {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            font-size: 1.4em;
+            cursor: pointer;
+            padding: 5px 12px;
+            border-radius: 6px;
+            transition: background 0.2s;
+        }
+        .close-btn:hover { background: rgba(255,255,255,0.3); }
+        .player-header {
+            display: flex;
+            justify-content: center;
+            align-items: baseline;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .page-title {
+            font-size: 1.1em;
+            font-weight: 600;
+            opacity: 0.9;
+            margin-bottom: 5px;
+        }
+        .player-names {
+            font-size: 1.3em;
+            font-weight: bold;
+        }
+        .pair-info {
+            font-size: 1.3em;
+            font-weight: bold;
+        }
+        .tournament-date {
+            font-size: 0.95em;
+            opacity: 0.85;
+            margin-top: 8px;
+            text-align: center;
+        }
+        @media (max-width: 600px) {
+            body { padding: 10px; }
+            table { font-size: 0.8em; }
+            th, td { padding: 6px 4px; }
+            .summary {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+                padding: 10px;
+                max-width: 100%;
+            }
+            .summary-item {
+                padding: 12px 8px;
+                min-height: 70px;
+            }
+            .summary-item .value {
+                font-size: 1.2em;
+            }
+            .summary-item .label {
+                font-size: 0.75em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <button class="close-btn" onclick="window.close()" title="Kapat">✕</button>
+            <div class="page-title">🃏 Çift Özeti</div>
+            <div class="player-header">
+                <span class="player-names" id="playerNames">Yükleniyor...</span>
+                <span class="pair-info" id="pairInfo"></span>
+            </div>
+            <div class="tournament-date" id="tournamentDate"></div>
+        </div>
+        <div class="content" id="content">
+            <div class="loading">
+                <div class="spinner"></div>
+                <div>Veriler yükleniyor...</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Dil ayarları
+        let currentLang = localStorage.getItem('pairSummaryLang') || 'tr';
+        
+        const translations = {
+            tr: {
+                title: '🃏 Çift Özeti',
+                loading: 'Veriler yükleniyor...',
+                avgLabel: 'Ortalama',
+                stdDevLabel: 'Std. Sapma',
+                above50Label: 'Başarılı Board',
+                below50Label: 'Başarısız Board',
+                boardHeader: 'Bord',
+                contractHeader: 'Kontrat',
+                leadHeader: 'Atak',
+                resultHeader: 'Sonuç',
+                scoreHeader: 'Skor',
+                percentHeader: '%',
+                backLink: '← Ana Sayfaya Dön',
+                noResults: 'Sonuç Bulunamadı',
+                noResultsMsg: 'Bu çift için board verisi bulunamadı.',
+                missingParams: 'Eksik Parametre',
+                missingParamsMsg: 'URL\'de event ve pair parametreleri gerekli.',
+                error: 'Hata',
+                board: 'board',
+                pair: 'Çift'
+            },
+            en: {
+                title: '🃏 Pair Summary',
+                loading: 'Loading data...',
+                avgLabel: 'Average',
+                stdDevLabel: 'Std. Dev.',
+                above50Label: 'Successful',
+                below50Label: 'Unsuccessful',
+                boardHeader: 'Board',
+                contractHeader: 'Contract',
+                leadHeader: 'Lead',
+                resultHeader: 'Result',
+                scoreHeader: 'Score',
+                percentHeader: '%',
+                backLink: '← Back to Home',
+                noResults: 'No Results Found',
+                noResultsMsg: 'No board data found for this pair.',
+                missingParams: 'Missing Parameters',
+                missingParamsMsg: 'event and pair parameters are required in URL.',
+                error: 'Error',
+                board: 'boards',
+                pair: 'Pair'
+            }
+        };
+
+        function t(key) {
+            return translations[currentLang][key] || key;
+        }
+
+        function formatPercent(value) {
+            if (value === null || value === undefined || isNaN(value)) return '—';
+            if (currentLang === 'tr') {
+                return '%' + value.toFixed(1).replace('.', ',');
+            } else {
+                return value.toFixed(1) + '%';
+            }
+        }
+
+        function formatStdDev(value) {
+            if (value === null || value === undefined || isNaN(value)) return '—';
+            // (+/-) %26 formatı
+            const formatted = value.toFixed(1).replace('.', ',');
+            return '(+/-) %' + formatted;
+        }
+
+        // URL parametrelerini al
+        const params = new URLSearchParams(window.location.search);
+        const eventId = params.get('event');
+        const pairNum = params.get('pair');
+        const direction = params.get('direction') || 'NS';
+        const namesFromUrl = params.get('names');
+        
+        // Eğer URL'de isim varsa hemen göster
+        if (namesFromUrl) {
+            document.getElementById('playerNames').textContent = decodeURIComponent(namesFromUrl);
+            document.getElementById('pairInfo').textContent = `(${direction})`;
+        }
+
+        if (!eventId || !pairNum) {
+            document.getElementById('content').innerHTML = `
+                <div class="error">
+                    <h3>❌ ${t('missingParams')}</h3>
+                    <p>${t('missingParamsMsg')}</p>
+                    <p>Örnek: ?event=405315&pair=1&direction=NS</p>
+                </div>
+            `;
+        } else {
+            loadPairSummary();
+        }
+
+        async function loadPairSummary() {
+            try {
+                const url = `/api/pair-summary?event=${eventId}&pair=${pairNum}&direction=${direction}`;
+                const response = await fetch(url);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+                
+                const data = await response.json();
+                
+                if (data.error) {
+                    throw new Error(data.error);
+                }
+                
+                window.cachedData = data;
+                renderResults(data);
+            } catch (err) {
+                document.getElementById('content').innerHTML = `
+                    <div class="error">
+                        <h3>❌ ${t('error')}</h3>
+                        <p>${err.message}</p>
+                    </div>
+                `;
+            }
+        }
+
+        function renderResults(data) {
+            // Oyuncu isimlerini göster
+            const pairNames = data.pair_names || '';
+            if (pairNames) {
+                // "ZÜLKÜF TEOMAN HAZNECI - HIKMET ALBAYRAK" -> "Zülküf Teoman Hazneci & Hikmet Albayrak"
+                const names = pairNames.split(' - ').map(name => {
+                    return name.split(' ').map(word => 
+                        word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+                    ).join(' ');
+                }).join(' & ');
+                document.getElementById('playerNames').textContent = names;
+            } else {
+                document.getElementById('playerNames').textContent = 'Çift Özeti';
+            }
+            
+            // Yön bilgisi (oyuncu isimlerinin yanında aynı yazı karakteriyle)
+            document.getElementById('pairInfo').textContent = `(${direction})`;
+            
+            // Turnuva tarihi - event ID'den hesapla veya API'den al
+            const tournamentDate = data.tournament_date || '';
+            window.currentTournamentDate = tournamentDate; // Görüntüleme için
+            window.currentTournamentDateDB = data.tournament_date_db || ''; // Board link için (dd.mm.yyyy format)
+            if (tournamentDate) {
+                document.getElementById('tournamentDate').textContent = tournamentDate;
+            } else {
+                document.getElementById('tournamentDate').textContent = '';
+            }
+            
+            // Sadece oynanan boardları filtrele (kontrat olan ve % değeri olan)
+            const allResults = data.results || [];
+            const results = allResults.filter(r => {
+                // Kontrat yoksa veya geçersizse atla
+                const contract = r.contract || '';
+                if (!contract || contract === '—' || contract === '-' || contract.match(/^-\d+$/)) {
+                    return false;
+                }
+                // Yüzde değeri yoksa atla
+                const pct = direction === 'NS' ? r.percent_ns : r.percent_ew;
+                if (!pct && pct !== '0' && pct !== 0) {
+                    return false;
+                }
+                return true;
+            });
+            
+            if (results.length === 0) {
+                document.getElementById('content').innerHTML = `
+                    <div class="error" style="background:#fff3cd;color:#856404;">
+                        <h3>⚠️ ${t('noResults')}</h3>
+                        <p>${t('noResultsMsg')}</p>
+                    </div>
+                `;
+                return;
+            }
+
+            // İstatistikleri hesapla
+            const percentages = [];
+            let above50Count = 0;
+            let below50Count = 0;
+
+            results.forEach(r => {
+                const pctStr = direction === 'NS' ? r.percent_ns : r.percent_ew;
+                const pct = parseFloat(pctStr) || 0;
+                
+                if (pct > 0 || pctStr) {
+                    percentages.push(pct);
+                    if (pct >= 50) {
+                        above50Count++;
+                    } else {
+                        below50Count++;
+                    }
+                }
+            });
+
+            const totalBoards = percentages.length;
+            const avgPercent = totalBoards > 0 ? percentages.reduce((a, b) => a + b, 0) / totalBoards : 0;
+            
+            // Standart sapma hesapla
+            let stdDev = 0;
+            if (totalBoards > 0) {
+                const squaredDiffs = percentages.map(p => Math.pow(p - avgPercent, 2));
+                const avgSquaredDiff = squaredDiffs.reduce((a, b) => a + b, 0) / totalBoards;
+                stdDev = Math.sqrt(avgSquaredDiff);
+            }
+
+            // HTML oluştur
+            let html = `
+                <div class="summary">
+                    <div class="summary-item">
+                        <div class="value">${formatPercent(avgPercent)}</div>
+                        <div class="label">${t('avgLabel')} (${totalBoards} ${t('board')})</div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="value">${formatStdDev(stdDev)}</div>
+                        <div class="label">${t('stdDevLabel')}</div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="value" style="color:#2e7d32;">${above50Count}</div>
+                        <div class="label">${t('above50Label')}</div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="value" style="color:#c62828;">${below50Count}</div>
+                        <div class="label">${t('below50Label')}</div>
+                    </div>
+                </div>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>${t('boardHeader')}</th>
+                            <th>${t('contractHeader')}</th>
+                            <th>${t('leadHeader')}</th>
+                            <th>${t('resultHeader')}</th>
+                            <th>${t('scoreHeader')}</th>
+                            <th>${t('percentHeader')}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+
+            results.forEach(r => {
+                const board = r.board || '?';
+                let contract = r.contract || '—';
+                const declarer = r.declarer || '';
+                let result = r.result || '—';
+                let lead = r.lead || '—';
+                
+                // Oynanmayan eller için (-6, vb.) kontrol
+                const isUnplayed = contract === '-6' || contract.startsWith('-') || !contract || contract === '—';
+                if (isUnplayed) {
+                    contract = '—';
+                    result = '—';
+                    lead = '—';
+                }
+                
+                // Direction'a göre skor hesapla
+                // Eğer NS görüntüleniyor ve deklaran E veya W ise, skor NS için negatif olmalı
+                let scoreNum = 0;
+                const percentStr = direction === 'NS' ? r.percent_ns : r.percent_ew;
+                
+                if (!isUnplayed) {
+                    if (direction === 'NS') {
+                        // NS görüntüleniyor
+                        if (r.score_ns) {
+                            scoreNum = parseInt(r.score_ns) || 0;
+                        } else if (r.score_ew) {
+                            // EW skoru var, NS için tersini al
+                            scoreNum = -(parseInt(r.score_ew) || 0);
+                        }
+                    } else {
+                        // EW görüntüleniyor
+                        if (r.score_ew) {
+                            scoreNum = parseInt(r.score_ew) || 0;
+                        } else if (r.score_ns) {
+                            // NS skoru var, EW için tersini al
+                            scoreNum = -(parseInt(r.score_ns) || 0);
+                        }
+                    }
+                }
+                
+                // Skor gösterimi: negatifse mutlak değer göster (renk kırmızı olacak)
+                // Oynanmayan boardlarda renk kodu yok
+                const score = isUnplayed ? '—' : (scoreNum !== 0 ? Math.abs(scoreNum).toString() : '—');
+                const percent = percentStr || '—';
+                
+                // Oynanmamışsa renk yok, pozitif=yeşil, negatif=kırmızı
+                const scoreClass = isUnplayed ? '' : (scoreNum > 0 ? 'score-positive' : (scoreNum < 0 ? 'score-negative' : ''));
+                
+                const pctNum = parseFloat(percentStr) || 0;
+                // Oynanmamışsa yüzde için de renk yok
+                const pctClass = isUnplayed ? '' : (pctNum >= 50 ? 'percent-good' : 'percent-bad');
+
+                // Kontrat + Deklaran birleştir (örn: "4♥ N")
+                const contractWithDeclarer = contract !== '—' && declarer 
+                    ? `${contract} ${declarer}` 
+                    : contract;
+
+                // Board numarası için tıklanabilir link oluştur
+                const boardLink = `<a href="board_ranking.html?date=${encodeURIComponent(window.currentTournamentDateDB || '')}&board=${board}" target="_blank" class="board-num-link" title="Board ${board} sıralamasını gör">${board}</a>`;
+
+                html += `
+                    <tr>
+                        <td>${boardLink}</td>
+                        <td class="contract">${formatContract(contractWithDeclarer)}</td>
+                        <td>${formatLead(lead)}</td>
+                        <td>${result}</td>
+                        <td class="${scoreClass}">${score}</td>
+                        <td class="${pctClass}">${percent}</td>
+                    </tr>
+                `;
+            });
+
+            html += `
+                    </tbody>
+                </table>
+            `;
+
+            document.getElementById('content').innerHTML = html;
+        }
+
+        function formatContract(contract) {
+            if (!contract || contract === '—') return '—';
+            // N -> NT (sadece sayıdan sonra gelen ve suit olmayan N)
+            return contract
+                .replace(/(\d)N(\s|$)/g, '$1NT$2')
+                .replace(/♠/g, '<span class="suit-spade">♠</span>')
+                .replace(/♥/g, '<span class="suit-heart">♥</span>')
+                .replace(/♦/g, '<span class="suit-diamond">♦</span>')
+                .replace(/♣/g, '<span class="suit-club">♣</span>');
+        }
+
+        function formatLead(lead) {
+            if (!lead || lead === '—') return '—';
+            return lead
+                .replace(/♠/g, '<span class="suit-spade">♠</span>')
+                .replace(/♥/g, '<span class="suit-heart">♥</span>')
+                .replace(/♦/g, '<span class="suit-diamond">♦</span>')
+                .replace(/♣/g, '<span class="suit-club">♣</span>');
+        }
+    </script>
+</body>
+</html>

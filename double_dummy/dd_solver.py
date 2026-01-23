@@ -28,6 +28,24 @@ except ImportError:
 HANDS_DB_PATH = Path(__file__).parent.parent / "hands_database.json"
 DD_RESULTS_PATH = Path(__file__).parent / "dd_results.json"
 
+def normalize_hand(hand_str):
+    """
+    El stringindeki '-' karakterlerini '' (boş) ile değiştir
+    '-' void (renkte kart yok) anlamına gelir
+    Input: "AKQ.-.JT98.A7632" -> "AKQ..JT98.A7632"
+    """
+    if not hand_str:
+        return hand_str
+    # Her suit'i ayrı işle
+    suits = hand_str.split('.')
+    normalized = []
+    for suit in suits:
+        if suit == '-':
+            normalized.append('')  # Void = empty string
+        else:
+            normalized.append(suit)
+    return '.'.join(normalized)
+
 def hand_to_pbn(n, s, e, w, dealer='N'):
     """
     El formatını PBN deal string'e çevir
@@ -39,7 +57,15 @@ def hand_to_pbn(n, s, e, w, dealer='N'):
     E dealer: E S W N
     S dealer: S W N E
     W dealer: W N E S
+    
+    NOT: '-' karakteri void (renkte kart yok) anlamına gelir
     """
+    # Normalize hands: convert '-' to '' for voids
+    n = normalize_hand(n)
+    s = normalize_hand(s)
+    e = normalize_hand(e)
+    w = normalize_hand(w)
+    
     if dealer == 'N':
         return f"N:{n} {e} {s} {w}"
     elif dealer == 'E':
@@ -127,7 +153,11 @@ def calculate_lott(dd_result, n_hand, s_hand, e_hand, w_hand):
         """El stringinden belirli rengin kartlarını say"""
         parts = hand.split('.')
         if suit_index < len(parts):
-            return len(parts[suit_index]) if parts[suit_index] != '-' else 0
+            suit = parts[suit_index]
+            # '-' veya '' void demektir = 0 kart
+            if suit == '-' or suit == '':
+                return 0
+            return len(suit)
         return 0
     
     # Her renk için fit uzunluklarını hesapla (0=S, 1=H, 2=D, 3=C)
@@ -233,10 +263,12 @@ def calculate_dd_for_hand(hand_data):
     Tek bir el için DD, optimum skor ve LoTT hesapla
     Returns: (dd_table, optimum, lott) tuple
     """
-    n = hand_data.get('N', '')
-    s = hand_data.get('S', '')
-    e = hand_data.get('E', '')
-    w = hand_data.get('W', '')
+    # Handle nested 'hands' structure
+    hands = hand_data.get('hands', hand_data)
+    n = hands.get('N', '')
+    s = hands.get('S', '')
+    e = hands.get('E', '')
+    w = hands.get('W', '')
     dealer = hand_data.get('dealer', 'N')
     vuln = hand_data.get('vulnerability', 'None')
     

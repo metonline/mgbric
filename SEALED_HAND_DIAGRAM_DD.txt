@@ -1,0 +1,154 @@
+========================================================================
+SEALED HAND DIAGRAM WITH DD & LoTT - 23.01.2026
+========================================================================
+
+DESIGN: BBO-Style Hand Diagram with embedded Double Dummy Table and LoTT
+
+CRITICAL FILES TO BACKUP:
+
+1. board_ranking.html
+   - BBO-style hand diagram with 4 hands positioned around board number
+   - DD table embedded bottom-left (5 suits x 4 players)
+   - LoTT display bottom-right showing total tricks
+   - Par score displayed below DD table
+   - HCP displayed for each hand
+   - Dealer highlighted in yellow, vulnerability shown
+   - Mobile responsive with scale wrapper
+   - URL params: eventId, board (or event, board)
+   - Status: SEALED, PRODUCTION-READY
+
+2. double_dummy/dd_solver.py
+   - Uses endplay library for DD calculation
+   - Calculates DD table, Par score, and LoTT
+   - Command: python double_dummy/dd_solver.py --date DD.MM.YYYY --update-db
+   - Supports nested 'hands' structure in database
+   - Status: SEALED, TESTED
+
+3. hands_database.json
+   - Contains all hand data with dd_analysis, optimum, lott fields
+   - 30 boards for event 405376 (20.01.2026) fully populated
+   - Status: SEALED DATA
+
+4. app.py
+   - /api/hand-data endpoint returns DD, optimum, lott
+   - get_dd_data() function reads from hands_database.json
+   - Fallback to double_dummy/dd_results.json
+   - Status: SEALED
+
+========================================================================
+KEY STYLING (board_ranking.html)
+========================================================================
+
+Hand Diagram Container:
+  - .mainDivStyle: 500x475px, background #c0c1c0
+  - .handDivStyle: 160x124px per hand position
+  - .pos-n-hand, .pos-s-hand, .pos-e-hand, .pos-w-hand positioning
+
+DD Table (Bottom-Left):
+  - .bhDoubleDummy: position absolute, left:1px, bottom:5px
+  - .bh-dd table: 5 columns (♠♥♦♣NT), 4 rows (N,E,S,W)
+  - Tricks shown as level (7+=1+, below 7 = dash)
+  - Par display below table
+
+LoTT Display (Bottom-Right):
+  - .lottDisplay: position absolute, right:25px, bottom:25px
+  - Shows total_tricks as main value (large font)
+  - NS/EW fit details below
+
+Suit Colors:
+  - .suit-black: ♠♣ in black
+  - .suit-red: ♥♦ in #cb0000
+
+Mobile Scaling:
+  - .scale-wrapper with transform: scale() for different screen sizes
+  - Breakpoints: 600px, 420px, 380px, 340px
+
+========================================================================
+DD SOLVER USAGE
+========================================================================
+
+Calculate DD for specific date:
+  python double_dummy/dd_solver.py --date 20.01.2026 --update-db
+
+Calculate DD for all hands:
+  python double_dummy/dd_solver.py --update-db
+
+Calculate for specific board:
+  python double_dummy/dd_solver.py --date 20.01.2026 --board 7
+
+Requirements:
+  pip install endplay
+
+========================================================================
+API ENDPOINTS
+========================================================================
+
+GET /api/hand-data?event=405376&board=7
+Returns:
+{
+  "event": "405376",
+  "board": 7,
+  "hand_data": {
+    "hands": {"N": "...", "E": "...", "S": "...", "W": "..."},
+    "dealer": "S",
+    "vulnerability": "Both",
+    "date": "20.01.2026"
+  },
+  "dd_result": {
+    "N": {"C": 7, "D": 8, "H": 9, "S": 5, "NT": 4},
+    ...
+  },
+  "optimum": {
+    "text": "NS 10♥; -100",
+    "score": -100
+  },
+  "lott": {
+    "total_tricks": 19,
+    "ns_fit": {"suit": "♥", "length": 9},
+    "ew_fit": {"suit": "♣", "length": 9}
+  }
+}
+
+========================================================================
+VERIFICATION (Board 7, Event 405376)
+========================================================================
+
+Date: 20.01.2026
+Dealer: S
+Vul: Both
+
+N: ♠A74 ♥K9732 ♦QT82 ♣7
+E: ♠KQ852 ♥J ♦J5 ♣AJT84
+S: ♠T96 ♥AQ86 ♦A76 ♣632
+W: ♠J3 ♥T54 ♦K943 ♣KQ95
+
+HCP: N=9, E=12, S=10, W=9
+
+DD Table:
+     ♣  ♦  ♥  ♠  NT
+  N   3  6  9  5   4
+  E  10  6  3  8   9
+  S   3  6  9  5   4
+  W  10  6  4  8   9
+
+Par: NS 10♥; -100
+LoTT: 19 (NS: ♥9, EW: ♣9)
+
+Status: ✅ VERIFIED & SEALED
+
+========================================================================
+DO NOT MODIFY WITHOUT BACKUP
+========================================================================
+
+These files are production-ready and sealed.
+Always backup before making changes.
+
+Backup command:
+  mkdir BRIC_BACKUP_20260123
+  copy board_ranking.html BRIC_BACKUP_20260123\
+  copy hands_database.json BRIC_BACKUP_20260123\
+  copy double_dummy\dd_solver.py BRIC_BACKUP_20260123\
+  copy app.py BRIC_BACKUP_20260123\
+  copy SEALED_HAND_DIAGRAM_DD.txt BRIC_BACKUP_20260123\
+
+========================================================================

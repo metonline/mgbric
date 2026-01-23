@@ -1,0 +1,300 @@
+/**
+ * DD Solver UI Styles
+ * Styling for Double Dummy tricks display on hand diagrams
+ */
+
+/* DD Section Styling */
+.dd-section {
+    margin-top: 20px;
+    padding: 15px;
+    background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+    border-radius: 8px;
+    border-left: 4px solid #1e3c72;
+}
+
+.dd-header {
+    margin-bottom: 12px;
+    text-align: center;
+}
+
+.dd-header h4 {
+    margin: 0 0 4px 0;
+    color: #1e3c72;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+.dd-header small {
+    color: #666;
+    font-size: 0.85em;
+}
+
+/* Summary Badge */
+.dd-summary-badge {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+    padding: 10px 15px;
+    background: white;
+    border-radius: 6px;
+    font-weight: bold;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.dd-ns-tricks {
+    background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 1.1em;
+}
+
+.dd-ew-tricks {
+    background: linear-gradient(135deg, #f44336 0%, #da190b 100%);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 1.1em;
+}
+
+.dd-separator {
+    color: #999;
+    font-size: 1.2em;
+}
+
+.dd-contract {
+    background: #1e3c72;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 0.95em;
+    margin-left: 5px;
+}
+
+/* Tricks Table */
+.dd-tricks-table-wrapper {
+    overflow-x: auto;
+}
+
+.dd-tricks-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.dd-tricks-table thead {
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    color: white;
+}
+
+.dd-tricks-table th {
+    padding: 10px 8px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 0.95em;
+}
+
+.dd-tricks-table th.dd-suit {
+    font-size: 1.1em;
+    width: 14%;
+}
+
+.dd-tricks-table td {
+    padding: 10px 8px;
+    text-align: center;
+    border: 1px solid #e0e0e0;
+    font-weight: 500;
+}
+
+/* Player rows */
+.dd-player-label {
+    background: #f5f5f5;
+    font-weight: bold;
+    color: #1e3c72;
+    width: 40px;
+}
+
+.dd-player-row:nth-child(odd) {
+    background: #fafafa;
+}
+
+.dd-player-row:nth-child(even) {
+    background: white;
+}
+
+.dd-player-N .dd-player-label::before {
+    content: '♠ ';
+}
+
+.dd-player-E .dd-player-label::before {
+    content: '♥ ';
+    color: #d32f2f;
+}
+
+.dd-player-S .dd-player-label::before {
+    content: '♠ ';
+}
+
+.dd-player-W .dd-player-label::before {
+    content: '♥ ';
+    color: #d32f2f;
+}
+
+/* Suit colors for cells */
+.dd-trick-cell.dd-suit-s {
+    background: #f0f0f0;
+    color: #000;
+}
+
+.dd-trick-cell.dd-suit-h {
+    background: #ffebee;
+    color: #d32f2f;
+}
+
+.dd-trick-cell.dd-suit-d {
+    background: #ffebee;
+    color: #d32f2f;
+}
+
+.dd-trick-cell.dd-suit-c {
+    background: #f0f0f0;
+    color: #000;
+}
+
+.dd-trick-cell.dd-suit-nt {
+    background: #e8f5e9;
+    color: #1b5e20;
+    font-weight: bold;
+}
+
+/* Suit headers */
+.dd-suit-s::after { content: ' ♠'; }
+.dd-suit-h::after { content: ' ♥'; color: #d32f2f; }
+.dd-suit-d::after { content: ' ♦'; color: #d32f2f; }
+.dd-suit-c::after { content: ' ♣'; }
+.dd-suit-nt::after { content: ' NT'; }
+
+/* Modal Styles */
+.dd-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    animation: fadeIn 0.2s ease-in;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.dd-modal-content {
+    background: white;
+    border-radius: 12px;
+    max-width: 600px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.dd-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    color: white;
+    border-radius: 12px 12px 0 0;
+}
+
+.dd-modal-header h2 {
+    margin: 0;
+    font-size: 1.3em;
+}
+
+.dd-modal-close {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    font-size: 1.5em;
+    cursor: pointer;
+    padding: 0 8px;
+    border-radius: 4px;
+    transition: background 0.2s;
+}
+
+.dd-modal-close:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.dd-modal-body {
+    padding: 20px;
+}
+
+.dd-modal-body hr {
+    margin: 15px 0;
+    border: none;
+    border-top: 1px solid #e0e0e0;
+}
+
+/* Unavailable message */
+.dd-unavailable {
+    padding: 20px;
+    text-align: center;
+    color: #999;
+    background: #f5f5f5;
+    border-radius: 6px;
+    font-style: italic;
+}
+
+/* Wrapper for hand + DD */
+.hand-with-dd-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .dd-tricks-table {
+        font-size: 0.9em;
+    }
+    
+    .dd-tricks-table th,
+    .dd-tricks-table td {
+        padding: 8px 6px;
+    }
+    
+    .dd-summary-badge {
+        flex-wrap: wrap;
+    }
+    
+    .dd-modal-content {
+        max-height: 90vh;
+    }
+}
+
+/* Print styles */
+@media print {
+    .dd-section {
+        page-break-inside: avoid;
+        border: 1px solid #ccc;
+    }
+    
+    .dd-tricks-table {
+        width: 100%;
+        font-size: 11px;
+    }
+}

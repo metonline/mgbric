@@ -1,0 +1,1184 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#1a1a2e">
+    <meta name="description" content="Hoşgörü Briç Kulübü - Board Bazında Sıralama">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect fill='%231e3c72' width='192' height='192'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-size='80' fill='white' font-weight='bold'>🎴</text></svg>">
+    <title>Board Bazında Kulüp Sıralaması</title>
+    <link rel="stylesheet" href="mobile.css">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: #fff;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #00d9ff;
+            margin-bottom: 10px;
+            font-size: 1.8em;
+        }
+        
+        .tournament-info {
+            text-align: center;
+            color: #aaa;
+            margin-bottom: 20px;
+            font-size: 0.95em;
+        }
+        
+        .controls {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 25px;
+            padding: 15px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+        }
+        
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        
+        .control-group label {
+            font-size: 0.85em;
+            color: #aaa;
+        }
+        
+        .control-group input, .control-group select {
+            padding: 10px 15px;
+            border: 1px solid #444;
+            border-radius: 6px;
+            background: #2a2a4a;
+            color: #fff;
+            font-size: 1em;
+            min-width: 120px;
+        }
+        
+        .control-group input:focus, .control-group select:focus {
+            outline: none;
+            border-color: #00d9ff;
+        }
+        
+        .btn {
+            padding: 10px 25px;
+            background: linear-gradient(135deg, #00d9ff, #0099cc);
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: bold;
+            align-self: flex-end;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,217,255,0.3);
+        }
+        
+        .btn:disabled {
+            background: #555;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .board-nav {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .board-nav button {
+            padding: 8px 15px;
+            background: #2a2a4a;
+            color: #fff;
+            border: 1px solid #444;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .board-nav button:hover {
+            background: #3a3a5a;
+            border-color: #00d9ff;
+        }
+        
+        .board-nav button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .board-number {
+            background: #00d9ff;
+            color: #000;
+            padding: 8px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #00d9ff;
+        }
+        
+        .loading::after {
+            content: '';
+            animation: dots 1.5s infinite;
+        }
+        
+        @keyframes dots {
+            0%, 20% { content: '.'; }
+            40% { content: '..'; }
+            60%, 100% { content: '...'; }
+        }
+        
+        .error {
+            text-align: center;
+            padding: 20px;
+            color: #ff6b6b;
+            background: rgba(255,107,107,0.1);
+            border-radius: 8px;
+        }
+        
+        .results-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #ffffff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        
+        .results-table th {
+            background: #1e3c72;
+            padding: 10px 6px;
+            text-align: center;
+            font-weight: 600;
+            color: #fff;
+            font-size: 0.85em;
+            border-bottom: 2px solid #2a5298;
+        }
+        
+        .results-table td {
+            padding: 8px 5px;
+            border-bottom: 1px solid #eee;
+            color: #000;
+            font-size: 0.85em;
+            text-align: center;
+        }
+        
+        .results-table tr:hover {
+            background: #f5f5f5;
+        }
+        
+        .results-table tr.ns-row {
+            background: #ffffff;
+        }
+        
+        .results-table tr.ew-row {
+            background: #ffffff;
+        }
+        
+        .rank-cell {
+            font-weight: bold;
+            text-align: center;
+            width: 50px;
+            color: #333;
+        }
+        
+        .rank-1 { color: #d4af37; font-size: 1.2em; }
+        .rank-2 { color: #808080; font-size: 1.1em; }
+        .rank-3 { color: #cd7f32; font-size: 1.05em; }
+        
+        .player-cell {
+            font-weight: 500;
+            color: #000;
+            text-align: left;
+            white-space: normal;
+            word-wrap: break-word;
+            max-width: 180px;
+            line-height: 1.3;
+        }
+        
+        .direction-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            font-weight: bold;
+            margin-left: 8px;
+        }
+        
+        .direction-ns {
+            background: #2196F3;
+            color: white;
+        }
+        
+        .direction-ew {
+            background: #FF9800;
+            color: white;
+        }
+        
+        .contract-cell {
+            font-weight: bold;
+            white-space: nowrap;
+            color: #000;
+        }
+        
+        .suit-red { color: #cb0000; }
+        .suit-black { color: #000; }
+        
+        /* ===== BBO STYLE HAND DIAGRAM ===== */
+        .hand-diagram-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 25px;
+        }
+        
+        .mainDivStyle {
+            position: relative;
+            width: 500px;
+            height: 475px;
+            background: #c0c1c0;
+            border-radius: 4px;
+            overflow: visible;
+        }
+        
+        .handDivStyle {
+            position: absolute;
+            background: #cbcbcb;
+            width: 160px;
+            height: 124px;
+            font-size: 22px;
+        }
+        
+        .suitRowDivStyle {
+            position: relative;
+            height: 25px;
+            line-height: 25px;
+            white-space: nowrap;
+            padding-left: 5px;
+        }
+        
+        .suitSymbol {
+            display: inline-block;
+            width: 30px;
+            font-size: 30px;
+            text-align: center;
+            vertical-align: middle;
+        }
+        
+        .suitHolding {
+            display: inline-block;
+            font-size: 22px;
+            letter-spacing: 2px;
+            vertical-align: middle;
+            color: #000;
+        }
+        
+        .nameRowDivStyle {
+            position: absolute;
+            height: 30px;
+            line-height: 30px;
+            border: 1px solid white;
+            white-space: nowrap;
+            font-size: 18px;
+            font-weight: bold;
+            background: white;
+        }
+        
+        .nameInitial {
+            display: inline-block;
+            width: 30px;
+            text-align: center;
+            font-weight: bold;
+            color: #000;
+            font-size: 16px;
+        }
+        
+        .vulInnerDivStyle {
+            position: absolute;
+            background: white;
+            border: 3px solid #880000;
+            font-size: 42px;
+            font-weight: bold;
+            text-align: center;
+            width: 60px;
+            height: 60px;
+            line-height: 54px;
+        }
+        
+        .dealer-bg { background: #ffce00 !important; color: black !important; }
+        
+        /* Position Classes */
+        .pos-n-name { left: 170px; top: 5px; width: 160px; }
+        .pos-n-hand { left: 170px; top: 35px; }
+        .pos-w-name { left: 5px; top: 160px; width: 160px; }
+        .pos-w-hand { left: 5px; top: 190px; }
+        .pos-e-name { left: 335px; top: 160px; width: 160px; }
+        .pos-e-hand { left: 335px; top: 190px; }
+        .pos-s-name { left: 170px; top: 315px; width: 160px; }
+        .pos-s-hand { left: 170px; top: 345px; }
+        .pos-board { left: 220px; top: 215px; }
+        
+        /* Board Info - Left Side */
+        .board-info-left {
+            position: absolute;
+            left: 8px;
+            top: 8px;
+            font-size: 15px;
+            color: #333;
+            line-height: 1.6;
+            text-align: left;
+        }
+        
+        .board-info-left .date {
+            font-weight: bold;
+        }
+        
+        .board-info-left .dealer {
+            background: #ffce00;
+            color: black;
+            font-weight: bold;
+            padding: 1px 4px;
+            border-radius: 2px;
+            display: block;
+        }
+        
+        .board-info-left .vul {
+            background: white;
+            color: black;
+            font-weight: bold;
+            padding: 1px 4px;
+            border-radius: 2px;
+            display: block;
+            margin-top: 2px;
+        }
+        
+        .board-info-left .vul.vul-active {
+            background: #cb0000;
+            color: white;
+        }
+        
+        /* HCP Display */
+        .hcp-display {
+            position: absolute;
+            left: 335px;
+            top: 35px;
+            width: 160px;
+            font-size: 16px;
+            color: #333;
+            text-align: center;
+        }
+        
+        .hcp-display .hcp-north {
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .hcp-display .hcp-south {
+            text-align: center;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        
+        .hcp-display .hcp-middle {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 20px;
+            margin-top: 5px;
+        }
+        
+        .hcp-display .hcp-value {
+            font-weight: bold;
+            color: #000;
+            font-size: 18px;
+        }
+        
+        /* DD Table - BBO Style */
+        .bhDoubleDummy {
+            position: absolute;
+            padding: 5px;
+            border: 0px solid #808080;
+            background: #c0c1c0;
+            font-size: 11px;
+            width: 161px;
+            left: 5px;
+            bottom: 5px;
+            color: #000;
+        }
+        
+        .bh-dd {
+            text-align: center;
+            border-collapse: collapse;
+            margin-bottom: 5px;
+            color: #000;
+        }
+        
+        .bh-dd th, .bh-dd td {
+            width: 28px;
+            height: 22px;
+            text-align: center;
+            color: #000;
+        }
+        
+        .bh-dd th {
+            font-weight: bold;
+            border: none;
+            color: #000;
+        }
+        
+        .bh-dd th:first-child {
+            width: 20px;
+        }
+        
+        .bh-dd td {
+            border: 2px solid #444;
+            background: #fff;
+            color: #000;
+        }
+        
+        .bh-dd td:first-child {
+            border: none;
+            font-weight: bold;
+            background: transparent;
+        }
+        
+        .bh-dd .suit-symbol {
+            font-size: 16px;
+        }
+        
+        .par-display {
+            font-size: 12px;
+            line-height: 1.4;
+            color: #000;
+        }
+        
+        .par-display strong {
+            display: block;
+        }
+        
+        /* Suit colors */
+        .suit-black { color: #000 !important; }
+        .suit-red { color: #cb0000 !important; }
+        
+        /* LoTT Display */
+        .lottDisplay {
+            position: absolute;
+            padding: 8px;
+            border: 1px solid #c0c1c0;
+            background: #c0c1c0;
+            color: #000;
+            font-size: 15px;
+            text-align: center;
+            min-width: 100px;
+            right: 5px;
+            bottom: 5px;
+            color: black;
+        }
+        
+        .lott-title {
+            font-weight: bold;
+            color: black;
+            margin-bottom: 3px;
+            font-size: 1.125em;
+        }
+        
+        .lott-value {
+            font-size: 35px;
+            font-weight: bold;
+            color: black;
+        }
+        
+        .lott-detail {
+            font-size: 12.5px;
+            color: black;
+            margin-top: 3px;
+        }
+        /* ===== END BBO STYLE ===== */
+        
+        .score-cell {
+            text-align: right;
+            font-weight: 500;
+            color: #000;
+        }
+        
+        .percent-cell {
+            text-align: right;
+            font-weight: bold;
+        }
+        
+        .percent-high { color: #2e7d32; }
+        .percent-low { color: #c62828; }
+        
+        .summary {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 8px;
+        }
+        
+        .summary-item {
+            text-align: center;
+        }
+        
+        .summary-label {
+            font-size: 0.85em;
+            color: #aaa;
+        }
+        
+        .summary-value {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #00d9ff;
+        }
+        
+        /* Mobile wrapper for scaling */
+        .scale-wrapper {
+            display: inline-block;
+        }
+        
+        @media (max-width: 600px) {
+            body {
+                padding: 0;
+                margin: 0;
+            }
+            
+            .container {
+                max-width: 100%;
+                padding: 0;
+                margin: 0;
+            }
+            
+            h1 {
+                font-size: 1em;
+                margin-bottom: 2px;
+                padding: 0 5px;
+            }
+            
+            .header-container {
+                margin-bottom: 3px;
+                padding: 0;
+            }
+            
+            .controls {
+                display: none;
+            }
+            
+            .board-nav {
+                gap: 5px;
+                margin-bottom: 5px;
+            }
+            
+            .board-nav button {
+                padding: 5px 10px;
+                font-size: 0.85em;
+            }
+            
+            .board-number {
+                padding: 5px 12px;
+                font-size: 0.95em;
+            }
+            
+            /* Hand diagram - scale wrapper approach */
+            .hand-diagram-container {
+                display: flex;
+                justify-content: center;
+                overflow: visible;
+                margin: 0;
+                padding: 0;
+            }
+            
+            .scale-wrapper {
+                transform: scale(0.78);
+                transform-origin: top center;
+                margin-bottom: -105px;
+            }
+            
+            /* Results Table */
+            .results-table {
+                font-size: 0.8em;
+                margin-top: 15px;
+            }
+            
+            .results-table th, .results-table td {
+                padding: 5px 3px;
+            }
+            
+            .results-table th:nth-child(2),
+            .results-table td:nth-child(2) {
+                max-width: 100px;
+                white-space: normal;
+                word-wrap: break-word;
+                text-align: left;
+            }
+            
+            .direction-badge {
+                margin-left: 2px;
+                padding: 1px 3px;
+                font-size: 0.7em;
+            }
+        }
+        
+        @media (max-width: 420px) {
+            .scale-wrapper {
+                transform: scale(0.72);
+                margin-bottom: -130px;
+            }
+        }
+        
+        @media (max-width: 380px) {
+            h1 { font-size: 0.9em; }
+            
+            .scale-wrapper {
+                transform: scale(0.66);
+                margin-bottom: -160px;
+            }
+            
+            .results-table { font-size: 0.75em; }
+        }
+        
+        @media (max-width: 340px) {
+            .scale-wrapper {
+                transform: scale(0.60);
+                margin-bottom: -188px;
+            }
+        }
+        
+        /* Safe area for notch phones */
+        @supports (padding-top: env(safe-area-inset-top)) {
+            body {
+                padding-top: env(safe-area-inset-top);
+                padding-bottom: env(safe-area-inset-bottom);
+                padding-left: env(safe-area-inset-left);
+                padding-right: env(safe-area-inset-right);
+            }
+        }
+        
+        .header-container {
+            position: relative;
+            margin-bottom: 15px;
+        }
+        
+        .close-btn {
+            position: absolute;
+            right: 0;
+            top: 0;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: #fff;
+            font-size: 1.3em;
+            cursor: pointer;
+            padding: 8px 14px;
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+        
+        .close-btn:hover {
+            background: rgba(255,255,255,0.2);
+            border-color: #00d9ff;
+            color: #00d9ff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header-container">
+            <button class="close-btn" onclick="window.close()" title="Kapat">✕</button>
+            <h1>🎴 Board Bazında Kulüp Sıralaması</h1>
+            <div class="tournament-info" id="tournamentInfo" style="display:none;"></div>
+        </div>
+        
+        <!-- Hidden inputs for JS compatibility -->
+        <input type="hidden" id="eventId" value="">
+        <input type="hidden" id="boardNum" value="1">
+        
+        <div class="board-nav" id="boardNav" style="display: none;">
+            <button onclick="changeBoard(-1)" id="prevBtn">◀ Önceki</button>
+            <span class="board-number" id="currentBoard">Board 1</span>
+            <button onclick="changeBoard(1)" id="nextBtn">Sonraki ▶</button>
+        </div>
+        
+        <div id="content"></div>
+    </div>
+    
+    <script>
+        let currentEventId = '';
+        let currentBoard = 1;
+        
+        function formatSuitWithColor(text) {
+            if (!text) return '';
+            return text
+                .replace(/♠/g, '<span class="suit-black">♠</span>')
+                .replace(/♣/g, '<span class="suit-black">♣</span>')
+                .replace(/♥/g, '<span class="suit-red">♥</span>')
+                .replace(/♦/g, '<span class="suit-red">♦</span>');
+        }
+        
+        function formatContract(contract) {
+            if (!contract) return '-';
+            return formatSuitWithColor(contract);
+        }
+        
+        function formatLead(lead) {
+            if (!lead) return '-';
+            return formatSuitWithColor(lead);
+        }
+        
+        function formatSuitRow(symbol, holding, isRed) {
+            const colorClass = isRed ? 'suit-red' : 'suit-black';
+            return `<div class="suitRowDivStyle"><span class="suitSymbol ${colorClass}">${symbol}</span><span class="suitHolding">${holding || '-'}</span></div>`;
+        }
+        
+        function calculateHCP(hand) {
+            if (!hand || !hand.S) return 0;
+            let hcp = 0;
+            const cards = (hand.S || '') + (hand.H || '') + (hand.D || '') + (hand.C || '');
+            for (const c of cards) {
+                if (c === 'A') hcp += 4;
+                else if (c === 'K') hcp += 3;
+                else if (c === 'Q') hcp += 2;
+                else if (c === 'J') hcp += 1;
+            }
+            return hcp;
+        }
+        
+        function renderDDTable(ddResult) {
+            if (!ddResult) return '';
+            
+            const suits = ['S', 'H', 'D', 'C', 'NT'];
+            const suitSymbols = {
+                'S': '<span class="suit-symbol suit-black">♠</span>',
+                'H': '<span class="suit-symbol suit-red">♥</span>',
+                'D': '<span class="suit-symbol suit-red">♦</span>',
+                'C': '<span class="suit-symbol suit-black">♣</span>',
+                'NT': 'NT'
+            };
+            
+            // Format tricks: 7+ shows as 1+, below 7 shows as dash
+            function formatTricks(tricks) {
+                if (tricks === undefined || tricks === null) return '-';
+                if (tricks >= 7) return tricks - 6;
+                return '-';
+            }
+            
+            let html = '<table class="bh-dd"><tr><th></th>';
+            suits.forEach(s => html += `<th>${suitSymbols[s]}</th>`);
+            html += '</tr>';
+            
+            ['N', 'S', 'E', 'W'].forEach(pos => {
+                html += `<tr><td>${pos}</td>`;
+                suits.forEach(suit => {
+                    // API returns nested format: ddResult.N.C, ddResult.N.D, etc.
+                    const tricks = ddResult[pos] ? ddResult[pos][suit] : undefined;
+                    html += `<td>${formatTricks(tricks)}</td>`;
+                });
+                html += '</tr>';
+            });
+            
+            html += '</table>';
+            return html;
+        }
+        
+        function renderHandDiagram(handData, boardNum, ddResult, optimum, lott) {
+            if (!handData || !handData.N || !handData.N.S) {
+                return '<div class="hand-diagram-container"><div style="color:#aaa;padding:20px;">El verisi bulunamadı</div></div>';
+            }
+            
+            const n = handData.N;
+            const s = handData.S;
+            const e = handData.E;
+            const w = handData.W;
+            const dealer = handData.dealer || 'N';
+            const vul = handData.vulnerability || 'None';
+            const date = handData.date || '';
+            
+            const hcpN = calculateHCP(n);
+            const hcpS = calculateHCP(s);
+            const hcpE = calculateHCP(e);
+            const hcpW = calculateHCP(w);
+            
+            // Dealer class
+            const nDealerClass = dealer === 'N' ? 'dealer-bg' : '';
+            const sDealerClass = dealer === 'S' ? 'dealer-bg' : '';
+            const eDealerClass = dealer === 'E' ? 'dealer-bg' : '';
+            const wDealerClass = dealer === 'W' ? 'dealer-bg' : '';
+            
+            // Format optimum text with suit colors
+            const optimumTextColored = optimum && optimum.text ? formatSuitWithColor(optimum.text) : '';
+            
+            // DD Table HTML
+            const ddTableHtml = ddResult ? `
+                <div class="bhDoubleDummy">
+                    ${renderDDTable(ddResult)}
+                    ${optimum ? `<div class="par-display"><strong>Par: ${optimum.score || ''}</strong> ${optimumTextColored}</div>` : ''}
+                </div>
+            ` : '';
+            
+            // Format LoTT suit symbols with colors
+            const nsFitSuit = lott && lott.ns_fit ? formatSuitWithColor(lott.ns_fit.suit || '?') : '?';
+            const ewFitSuit = lott && lott.ew_fit ? formatSuitWithColor(lott.ew_fit.suit || '?') : '?';
+            
+            // LoTT HTML - show total_tricks as main value, details show NS/EW fits
+            const lottHtml = lott ? `
+                <div class="lottDisplay">
+                    <div class="lott-title">LoTT</div>
+                    <div class="lott-value">${lott.total_tricks || '?'}</div>
+                    ${lott.ns_fit ? `
+                    <div class="lott-detail">
+                        NS: ${nsFitSuit} (${lott.ns_fit.length || '?'})<br>
+                        EW: ${ewFitSuit} (${lott.ew_fit?.length || '?'})
+                    </div>
+                    ` : ''}
+                </div>
+            ` : '';
+            
+            return `
+                <div class="hand-diagram-container">
+                    <div class="scale-wrapper">
+                        <div class="mainDivStyle">
+                            <!-- Board Info - Left Side -->
+                            <div class="board-info-left">
+                                <div class="date">${date}</div>
+                                <div class="dealer">Dealer: ${dealer}</div>
+                                <div class="vul ${vul && vul.toLowerCase() !== 'none' && vul !== '-' ? 'vul-active' : ''}">Vul: ${vul}</div>
+                            </div>
+                            
+                            <!-- HCP Display - Right Side -->
+                        <div class="hcp-display">
+                            <div class="hcp-north"><span class="hcp-value">${hcpN}</span></div>
+                            <div class="hcp-middle">
+                                <span class="hcp-value">${hcpW}</span>
+                                <span class="hcp-value">${hcpE}</span>
+                            </div>
+                            <div class="hcp-south"><span class="hcp-value">${hcpS}</span></div>
+                        </div>
+                        
+                        <!-- North -->
+                        <div class="nameRowDivStyle pos-n-name ${nDealerClass}">
+                            <span class="nameInitial">N</span>
+                        </div>
+                        <div class="handDivStyle pos-n-hand">
+                            ${formatSuitRow('♠', n.S, false)}
+                            ${formatSuitRow('♥', n.H, true)}
+                            ${formatSuitRow('♦', n.D, true)}
+                            ${formatSuitRow('♣', n.C, false)}
+                        </div>
+                        
+                        <!-- West -->
+                        <div class="nameRowDivStyle pos-w-name ${wDealerClass}">
+                            <span class="nameInitial">W</span>
+                        </div>
+                        <div class="handDivStyle pos-w-hand">
+                            ${formatSuitRow('♠', w.S, false)}
+                            ${formatSuitRow('♥', w.H, true)}
+                            ${formatSuitRow('♦', w.D, true)}
+                            ${formatSuitRow('♣', w.C, false)}
+                        </div>
+                        
+                        <!-- Board Number -->
+                        <div class="vulInnerDivStyle pos-board">${boardNum}</div>
+                        
+                        <!-- East -->
+                        <div class="nameRowDivStyle pos-e-name ${eDealerClass}">
+                            <span class="nameInitial">E</span>
+                        </div>
+                        <div class="handDivStyle pos-e-hand">
+                            ${formatSuitRow('♠', e.S, false)}
+                            ${formatSuitRow('♥', e.H, true)}
+                            ${formatSuitRow('♦', e.D, true)}
+                            ${formatSuitRow('♣', e.C, false)}
+                        </div>
+                        
+                        <!-- South -->
+                        <div class="nameRowDivStyle pos-s-name ${sDealerClass}">
+                            <span class="nameInitial">S</span>
+                        </div>
+                        <div class="handDivStyle pos-s-hand">
+                            ${formatSuitRow('♠', s.S, false)}
+                            ${formatSuitRow('♥', s.H, true)}
+                            ${formatSuitRow('♦', s.D, true)}
+                            ${formatSuitRow('♣', s.C, false)}
+                        </div>
+                        
+                        ${ddTableHtml}
+                        ${lottHtml}
+                    </div>
+                    </div>
+                </div>
+            `;
+        }
+        
+        async function loadRanking() {
+            const eventId = document.getElementById('eventId').value.trim();
+            const boardNum = document.getElementById('boardNum').value;
+            
+            if (!eventId) {
+                alert('Event ID giriniz');
+                return;
+            }
+            
+            currentEventId = eventId;
+            currentBoard = parseInt(boardNum);
+            
+            const content = document.getElementById('content');
+            const loadBtn = document.getElementById('loadBtn');
+            
+            if (loadBtn) loadBtn.disabled = true;
+            
+            // 1. Önce el verisini hızlıca yükle
+            let handResult = null;
+            try {
+                const handResponse = await fetch(`/api/hand-data?event=${eventId}&board=${boardNum}`);
+                handResult = await handResponse.json();
+                
+                if (handResult.hand_data) {
+                    // El diyagramını göster (DD ve LoTT dahil)
+                    let html = renderHandDiagram(
+                        handResult.hand_data, 
+                        currentBoard,
+                        handResult.dd_result,
+                        handResult.optimum,
+                        handResult.lott
+                    );
+                    html += '<div class="loading">Sıralama yükleniyor</div>';
+                    content.innerHTML = html;
+                    
+                    // Tournament info güncelle
+                    document.getElementById('tournamentInfo').textContent = 
+                        `Tarih: ${handResult.hand_data.date || ''}`;
+                    
+                    // Show navigation
+                    document.getElementById('boardNav').style.display = 'flex';
+                    document.getElementById('currentBoard').textContent = `Board ${currentBoard}`;
+                    document.getElementById('prevBtn').disabled = currentBoard <= 1;
+                    document.getElementById('nextBtn').disabled = currentBoard >= 30;
+                }
+            } catch (e) {
+                console.error('Hand data error:', e);
+            }
+            
+            // 2. Sonra ranking listesini yükle (yavaş)
+            try {
+                const response = await fetch(`/api/board-ranking?event=${eventId}&board=${boardNum}`);
+                const data = await response.json();
+                
+                if (data.error) {
+                    // Hata durumunda sadece el diyagramını göster
+                    if (handResult && handResult.hand_data) {
+                        content.innerHTML = renderHandDiagram(
+                            handResult.hand_data, 
+                            currentBoard,
+                            handResult.dd_result,
+                            handResult.optimum,
+                            handResult.lott
+                        ) + `<div class="error">Sıralama yüklenemedi: ${data.error}</div>`;
+                    } else {
+                        content.innerHTML = `<div class="error">Hata: ${data.error}</div>`;
+                    }
+                    return;
+                }
+                
+                // Update tournament info
+                document.getElementById('tournamentInfo').textContent = 
+                    `${data.tournament_name || 'Turnuva'} - ${data.tournament_date || ''}`;
+                
+                // Hand Diagram (DD ve LoTT dahil)
+                let html = renderHandDiagram(
+                    handResult ? handResult.hand_data : data.hand_data, 
+                    data.board,
+                    handResult ? handResult.dd_result : null,
+                    handResult ? handResult.optimum : null,
+                    handResult ? handResult.lott : null
+                );
+                
+                // Build results table
+                html += `
+                    <table class="results-table">
+                        <thead>
+                            <tr>
+                                <th>Sıra</th>
+                                <th>Oyuncular</th>
+                                <th>Kontrat</th>
+                                <th>Atak</th>
+                                <th>Sonuç</th>
+                                <th>Skor</th>
+                                <th>%</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                `;
+                
+                for (const r of data.results) {
+                    const rowClass = r.direction === 'NS' ? 'ns-row' : 'ew-row';
+                    const rankClass = r.rank <= 3 ? `rank-${r.rank}` : '';
+                    const dirBadge = `<span class="direction-badge direction-${r.direction.toLowerCase()}">${r.direction}</span>`;
+                    
+                    const score = r.score || '';
+                    const displayScore = score.startsWith('-') ? score.substring(1) : score;
+                    
+                    // Kontrat + Deklaran
+                    const contractDisplay = r.contract ? `${formatContract(r.contract)} ${r.declarer}` : '-';
+                    
+                    // Yüzde rengi: >= 50 yeşil, < 50 kırmızı
+                    const percentClass = r.percent >= 50 ? 'percent-high' : 'percent-low';
+                    
+                    html += `
+                        <tr class="${rowClass}">
+                            <td class="rank-cell ${rankClass}">${r.rank}</td>
+                            <td class="player-cell">${r.pair_names}${dirBadge}</td>
+                            <td class="contract-cell">${contractDisplay}</td>
+                            <td>${formatLead(r.lead)}</td>
+                            <td>${r.result || '='}</td>
+                            <td class="score-cell">${displayScore || '-'}</td>
+                            <td class="percent-cell ${percentClass}">${r.percent.toFixed(2)}%</td>
+                        </tr>
+                    `;
+                }
+                
+                html += '</tbody></table>';
+                
+                content.innerHTML = html;
+                
+            } catch (error) {
+                content.innerHTML = `<div class="error">Bağlantı hatası: ${error.message}</div>`;
+            } finally {
+                if (loadBtn) loadBtn.disabled = false;
+            }
+        }
+        
+        function changeBoard(delta) {
+            const newBoard = currentBoard + delta;
+            if (newBoard >= 1 && newBoard <= 30) {
+                document.getElementById('boardNum').value = newBoard;
+                loadRanking();
+            }
+        }
+        
+        // URL parametrelerinden yükle
+        window.onload = async function() {
+            const params = new URLSearchParams(window.location.search);
+            const content = document.getElementById('content');
+            
+            console.log('URL params:', Object.fromEntries(params));
+            
+            // Eğer date parametresi varsa, o tarihteki event'i bul
+            if (params.get('date') && !params.get('event')) {
+                const targetDate = params.get('date');
+                console.log('Looking for date:', targetDate);
+                
+                content.innerHTML = '<div class="loading">Turnuva aranıyor...</div>';
+                
+                try {
+                    const response = await fetch('/database.json');
+                    const db = await response.json();
+                    const records = db.legacy_records || [];
+                    
+                    console.log('Total records:', records.length);
+                    console.log('Sample dates:', records.slice(0, 3).map(r => r.Tarih));
+                    
+                    // Bu tarihteki ilk event'i bul
+                    const matchingRecord = records.find(r => r.Tarih === targetDate && r.Link);
+                    console.log('Matching record:', matchingRecord);
+                    
+                    if (matchingRecord && matchingRecord.Link) {
+                        const match = matchingRecord.Link.match(/event=(\d+)/);
+                        if (match) {
+                            document.getElementById('eventId').value = match[1];
+                            console.log('Found event:', match[1]);
+                        }
+                    } else {
+                        content.innerHTML = `<div class="error">❌ "${targetDate}" tarihi için turnuva bulunamadı.<br>Database format: dd.mm.yyyy (örn: 01.01.2026)</div>`;
+                        return;
+                    }
+                } catch (e) {
+                    console.error('Error loading database for date lookup:', e);
+                    content.innerHTML = `<div class="error">Database yüklenirken hata: ${e.message}</div>`;
+                    return;
+                }
+            }
+            
+            if (params.get('event')) {
+                document.getElementById('eventId').value = params.get('event');
+            }
+            if (params.get('board')) {
+                document.getElementById('boardNum').value = params.get('board');
+            }
+            
+            // Event ID varsa (URL'den veya date'den bulunmuşsa) yükle
+            const eventId = document.getElementById('eventId').value;
+            console.log('Final eventId:', eventId);
+            
+            if (eventId) {
+                loadRanking();
+            }
+            
+            // Service Worker kayıt
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register('sw.js')
+                    .then(reg => console.log('SW registered:', reg.scope))
+                    .catch(err => console.log('SW registration failed:', err));
+            }
+        };
+        
+        // Touch gestures for board navigation
+        let touchStartX = 0;
+        let touchEndX = 0;
+        
+        document.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+        
+        document.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        }, { passive: true });
+        
+        function handleSwipe() {
+            const diff = touchStartX - touchEndX;
+            const threshold = 80;
+            
+            if (Math.abs(diff) > threshold && currentEventId) {
+                if (diff > 0) {
+                    // Swipe left - next board
+                    changeBoard(1);
+                } else {
+                    // Swipe right - previous board
+                    changeBoard(-1);
+                }
+            }
+        }
+    </script>
+</body>
+</html>
