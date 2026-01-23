@@ -4,14 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bridge Hands Viewer</title>
-    <link rel="stylesheet" href="bbo-hands.css?v=1">
-    <link rel="stylesheet" href="bbo-viewer.css?v=1">
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
         body {
             font-family: Arial, sans-serif;
             background: #f5f5f5;
             padding: 20px;
         }
+        
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -20,10 +25,12 @@
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
+        
         h1 {
             color: #1e3c72;
-            margin-top: 0;
+            margin-bottom: 20px;
         }
+        
         .filters {
             margin: 20px 0;
             padding: 15px;
@@ -32,51 +39,120 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 15px;
+            border: 1px solid #ddd;
         }
+        
         .filter-group {
             display: flex;
             flex-direction: column;
         }
+        
         .filter-group label {
             font-weight: bold;
             margin-bottom: 5px;
             color: #333;
+            font-size: 14px;
         }
+        
         .filter-group select,
         .filter-group input {
             padding: 8px 12px;
             font-size: 14px;
             border: 1px solid #ddd;
             border-radius: 4px;
-            cursor: pointer;
+            background: white;
+            color: #333;
         }
-        .filter-group input {
-            cursor: text;
-        }
+        
         .hands-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
             gap: 20px;
+            margin-top: 20px;
         }
+        
+        .hand-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            background: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .hand-header {
+            border-bottom: 2px solid #1e3c72;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .board-info {
+            font-weight: bold;
+            color: #1e3c72;
+        }
+        
+        .board-num {
+            font-size: 16px;
+        }
+        
+        .dealer-info {
+            font-size: 12px;
+            color: #666;
+            margin-top: 3px;
+        }
+        
+        .hand-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .hand-table td {
+            padding: 8px;
+            text-align: left;
+            font-size: 13px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .hand-north, .hand-south {
+            background: #f0f8ff;
+        }
+        
+        .hand-east, .hand-west {
+            background: #fff8f0;
+        }
+        
+        .compass {
+            text-align: center;
+            font-weight: bold;
+            color: #1e3c72;
+            width: 30px;
+        }
+        
         .loading {
             text-align: center;
             padding: 40px;
             font-size: 18px;
             color: #666;
         }
+        
         .error {
             background: #fee;
             padding: 20px;
             border-radius: 4px;
             color: #c33;
             margin: 20px 0;
+            border-left: 4px solid #c33;
         }
+        
         .results-info {
-            padding: 10px;
+            padding: 12px;
             background: #e8f4f8;
             border-left: 4px solid #1e3c72;
-            margin: 10px 0;
+            margin: 15px 0;
             border-radius: 4px;
+            color: #333;
         }
     </style>
 </head>
@@ -99,16 +175,14 @@
             </div>
             <div class="filter-group">
                 <label for="boardInput">Board Number:</label>
-                <input type="number" id="boardInput" min="1" max="30" placeholder="Leave empty for all boards">
+                <input type="number" id="boardInput" min="1" max="30" placeholder="Leave empty for all">
             </div>
         </div>
         
         <div id="resultsInfo" class="results-info" style="display:none;"></div>
-        <div id="content" class="loading">Eli yükleniyor...</div>
+        <div id="content" class="loading">Loading hands...</div>
     </div>
 
-    <script src="bbo-hands.js?v=1"></script>
-    <script src="bbo-viewer.js?v=1"></script>
     <script>
         let allEvents = {};
         let allHands = [];
@@ -116,6 +190,7 @@
         // Load initial data
         async function initializeData() {
             try {
+                console.log('Initializing data...');
                 const [eventsResp, handsResp] = await Promise.all([
                     fetch('/database.json'),
                     fetch('/hands_database.json')
@@ -125,13 +200,16 @@
                 allEvents = db.events || {};
                 allHands = await handsResp.json();
                 
+                console.log('Events loaded:', Object.keys(allEvents).length);
+                console.log('Hands loaded:', allHands.length);
+                
                 loadDates();
                 applyFilters();
                 
             } catch (error) {
                 console.error('Error loading data:', error);
                 document.getElementById('content').innerHTML = 
-                    '<div class="error">Veri yüklenirken hata: ' + error.message + '</div>';
+                    '<div class="error">Error loading data: ' + error.message + '</div>';
             }
         }
         
@@ -179,7 +257,7 @@
                 sortedEvents.forEach(event => {
                     const option = document.createElement('option');
                     option.value = event.id;
-                    option.textContent = `${event.name} (${event.date})`;
+                    option.textContent = event.name + ' (' + event.date + ')';
                     eventSelect.appendChild(option);
                 });
             } else {
@@ -194,6 +272,31 @@
             }
             
             eventSelect.addEventListener('change', applyFilters);
+        }
+        
+        // Format hand in BBO style
+        function formatHandBBO(hand) {
+            if (!hand) return '';
+            const suits = ['S', 'H', 'D', 'C'];
+            const suitSymbols = {'S': '♠', 'H': '♥', 'D': '♦', 'C': '♣'};
+            let result = '';
+            for (let suit of suits) {
+                const cards = hand[suit] || '';
+                if (result) result += ' ';
+                result += suitSymbols[suit] + cards;
+            }
+            return result;
+        }
+        
+        // Parse PBN hand to object
+        function parsePBNHand(pbnString) {
+            const parts = pbnString.split('.');
+            return {
+                S: parts[0] || '-',
+                H: parts[1] || '-',
+                D: parts[2] || '-',
+                C: parts[3] || '-'
+            };
         }
         
         // Apply all filters
@@ -219,21 +322,21 @@
             
             // Update results info
             const resultsInfo = document.getElementById('resultsInfo');
-            let infoText = `Filters: `;
+            let infoText = 'Filters: ';
             let filters = [];
-            if (selectedDate) filters.push(`Date: ${selectedDate}`);
+            if (selectedDate) filters.push('Date: ' + selectedDate);
             if (selectedEvent) {
-                const event = allEvents[`event_${selectedEvent}`];
-                filters.push(`Event: ${event ? event.name : selectedEvent}`);
+                const event = allEvents['event_' + selectedEvent];
+                filters.push('Event: ' + (event ? event.name : selectedEvent));
             }
-            if (selectedBoard) filters.push(`Board: ${selectedBoard}`);
+            if (selectedBoard) filters.push('Board: ' + selectedBoard);
             
             if (filters.length === 0) {
                 infoText += 'None (showing all hands)';
                 resultsInfo.style.display = 'none';
             } else {
                 infoText += filters.join(' | ');
-                resultsInfo.innerHTML = infoText + ` - Found: ${filtered.length} hands`;
+                resultsInfo.innerHTML = infoText + ' - Found: ' + filtered.length + ' hands';
                 resultsInfo.style.display = 'block';
             }
             
@@ -244,7 +347,7 @@
         function displayHands(hands) {
             if (!hands || hands.length === 0) {
                 document.getElementById('content').innerHTML = 
-                    '<div class="error">Filtreler ile eşleşen el bulunamadı!</div>';
+                    '<div class="error">No hands match the selected filters!</div>';
                 return;
             }
             
@@ -266,29 +369,42 @@
                 const boardHands = boardsMap[boardNum];
                 if (boardHands.length > 0) {
                     const hand = boardHands[0]; // Use first occurrence
-                    const handObj = {
-                        N: hand.N,
-                        E: hand.E,
-                        S: hand.S,
-                        W: hand.W
-                    };
-                    html += createBBOHandHTML(boardNum, handObj, 0, hand.dealer, hand.vulnerability);
+                    const nHand = parsePBNHand(hand.N);
+                    const eHand = parsePBNHand(hand.E);
+                    const sHand = parsePBNHand(hand.S);
+                    const wHand = parsePBNHand(hand.W);
+                    
+                    html += `
+                        <div class="hand-card">
+                            <div class="hand-header">
+                                <div>
+                                    <div class="board-info board-num">Board ${boardNum}</div>
+                                    <div class="dealer-info">Dealer: ${hand.dealer} | ${hand.vulnerability}</div>
+                                </div>
+                            </div>
+                            <table class="hand-table">
+                                <tr>
+                                    <td colspan="3" class="hand-north">${formatHandBBO(nHand)}</td>
+                                </tr>
+                                <tr>
+                                    <td class="hand-west">${formatHandBBO(wHand)}</td>
+                                    <td class="compass">N<br>W E<br>S</td>
+                                    <td class="hand-east">${formatHandBBO(eHand)}</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3" class="hand-south">${formatHandBBO(sHand)}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    `;
                 }
             });
             
             html += '</div>';
             document.getElementById('content').innerHTML = html;
-            
-            // Add click handlers for BBO links
-            document.querySelectorAll('.bbo-open-btn').forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    window.open(btn.href, '_blank', 'width=900,height=600');
-                });
-            });
         }
         
-        // Add event listener to board input for live filtering
+        // Add event listeners
         document.getElementById('boardInput').addEventListener('change', applyFilters);
         document.getElementById('boardInput').addEventListener('input', applyFilters);
         
