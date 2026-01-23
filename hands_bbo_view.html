@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Event 405376 - Bridge Hands Viewer</title>
+    <title>Bridge Hands Viewer</title>
     <link rel="stylesheet" href="bbo-hands.css?v=1">
     <link rel="stylesheet" href="bbo-viewer.css?v=1">
     <style>
@@ -23,6 +23,23 @@
         h1 {
             color: #1e3c72;
             margin-top: 0;
+        }
+        .event-selector {
+            margin: 20px 0;
+            padding: 15px;
+            background: #f9f9f9;
+            border-radius: 4px;
+        }
+        .event-selector label {
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        .event-selector select {
+            padding: 8px 12px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
         }
         .hands-grid {
             display: grid;
@@ -46,27 +63,88 @@
 </head>
 <body>
     <div class="container">
-        <h1>Event 405376 - SALI Sonuçları (20.01.2026)</h1>
+        <h1>Bridge Hands Viewer</h1>
+        
+        <div class="event-selector">
+            <label for="eventSelect">Select Event:</label>
+            <select id="eventSelect">
+                <option value="">Loading events...</option>
+            </select>
+        </div>
+        
         <div id="content" class="loading">Eli yükleniyor...</div>
     </div>
 
     <script src="bbo-hands.js?v=1"></script>
     <script src="bbo-viewer.js?v=1"></script>
     <script>
-        async function loadHands() {
+        // Load available events
+        async function loadEvents() {
             try {
+                const response = await fetch('/database.json');
+                const db = await response.json();
+                const events = db.events || {};
+                
+                const select = document.getElementById('eventSelect');
+                select.innerHTML = '';
+                
+                // Sort events by date (newest first)
+                const sortedEvents = Object.entries(events).sort((a, b) => {
+                    const dateA = new Date(a[1].date.split('.').reverse().join('-'));
+                    const dateB = new Date(b[1].date.split('.').reverse().join('-'));
+                    return dateB - dateA;
+                });
+                
+                // Add first event as default
+                if (sortedEvents.length > 0) {
+                    sortedEvents.forEach(([key, event]) => {
+                        const option = document.createElement('option');
+                        option.value = event.id;
+                        option.textContent = `${event.name} (${event.date})`;
+                        select.appendChild(option);
+                    });
+                    
+                    // Load first event
+                    select.value = sortedEvents[0][1].id;
+                    loadHands(sortedEvents[0][1].id);
+                    
+                    // Add change listener
+                    select.addEventListener('change', (e) => {
+                        if (e.target.value) {
+                            loadHands(e.target.value);
+                        }
+                    });
+                } else {
+                    document.getElementById('content').innerHTML = 
+                        '<div class="error">Turnuva bulunamadı!</div>';
+                }
+            } catch (error) {
+                console.error('Error loading events:', error);
+                document.getElementById('content').innerHTML = 
+                    '<div class="error">Turnuva yüklenirken hata: ' + error.message + '</div>';
+            }
+        }
+        
+        // Load hands for selected event
+        async function loadHands(eventId) {
+            try {
+                document.getElementById('content').innerHTML = '<div class="loading">Eli yükleniyor...</div>';
+                
                 const response = await fetch('/hands_database.json');
                 const hands = await response.json();
                 
-                if (!hands || hands.length === 0) {
+                // Filter hands by event ID
+                const eventHands = hands.filter(h => h.event_id === eventId);
+                
+                if (!eventHands || eventHands.length === 0) {
                     document.getElementById('content').innerHTML = 
-                        '<div class="error">Eli bulunamadı!</div>';
+                        '<div class="error">Bu turnuva için el bulunamadı!</div>';
                     return;
                 }
                 
                 // Group hands by board number
                 const boardsMap = {};
-                hands.forEach(hand => {
+                eventHands.forEach(hand => {
                     const board = hand.board;
                     if (!boardsMap[board]) {
                         boardsMap[board] = [];
@@ -76,7 +154,8 @@
                 
                 // Display hands organized by board
                 let html = '<div class="hands-grid">';
-                for (let boardNum = 1; boardNum <= 30; boardNum++) {
+                const maxBoard = Math.max(...Object.keys(boardsMap).map(Number));
+                for (let boardNum = 1; boardNum <= maxBoard; boardNum++) {
                     const boardHands = boardsMap[boardNum] || [];
                     if (boardHands.length > 0) {
                         const hand = boardHands[0]; // Use first occurrence
@@ -107,8 +186,8 @@
             }
         }
         
-        // Load hands when page loads
-        window.addEventListener('DOMContentLoaded', loadHands);
+        // Load events when page loads
+        window.addEventListener('DOMContentLoaded', loadEvents);
     </script>
 </body>
 </html>
