@@ -1,0 +1,212 @@
+{
+  "1": {
+    "dealer": 1,
+    "hand1": "52.Q62.K9863.AJ3",
+    "hand2": "AT4.AJT53.Q75.52",
+    "hand3": "KQ983.974.4.Q764",
+    "lin": "md|152.Q62.K9863.AJ3,AT4.AJT53.Q75.52,KQ983.974.4.Q764|"
+  },
+  "2": {
+    "dealer": 2,
+    "hand1": "Q64.J762.-.AT9652",
+    "hand2": "2.QT93.AQT75.J73",
+    "hand3": "J73.A84.J642.KQ4",
+    "lin": "md|2Q64.J762.-.AT9652,2.QT93.AQT75.J73,J73.A84.J642.KQ4|"
+  },
+  "3": {
+    "dealer": 3,
+    "hand1": "4.KJ54.KT74.T732",
+    "hand2": "AT.T98762.J862.6",
+    "hand3": "QJ9763.Q.A53.Q95",
+    "lin": "md|34.KJ54.KT74.T732,AT.T98762.J862.6,QJ9763.Q.A53.Q95|"
+  },
+  "4": {
+    "dealer": 4,
+    "hand1": "92.T9.A974.QJ987",
+    "hand2": "AK.Q752.T6532.52",
+    "hand3": "QJ843.KJ3.QJ8.63",
+    "lin": "md|492.T9.A974.QJ987,AK.Q752.T6532.52,QJ843.KJ3.QJ8.63|"
+  },
+  "5": {
+    "dealer": 1,
+    "hand1": "JT5.2.KT54.T8762",
+    "hand2": "AKQ9743.T863.-.AK",
+    "hand3": "-.AJ974.AQ987.Q94",
+    "lin": "md|1JT5.2.KT54.T8762,AKQ9743.T863.-.AK,-.AJ974.AQ987.Q94|"
+  },
+  "6": {
+    "dealer": 2,
+    "hand1": "A932.T5.AKQT3.K5",
+    "hand2": "764.Q86.9642.872",
+    "hand3": "J8.AJ743.75.Q943",
+    "lin": "md|2A932.T5.AKQT3.K5,764.Q86.9642.872,J8.AJ743.75.Q943|"
+  },
+  "7": {
+    "dealer": 3,
+    "hand1": "Q732.KJ7.J9865.J",
+    "hand2": "AT5.AQ85.Q4.KT87",
+    "hand3": "K9.T942.K3.96532",
+    "lin": "md|3Q732.KJ7.J9865.J,AT5.AQ85.Q4.KT87,K9.T942.K3.96532|"
+  },
+  "8": {
+    "dealer": 4,
+    "hand1": "K2.Q9864.K6.T543",
+    "hand2": "T975.732.A5.KQ96",
+    "hand3": "QJ43.A.7432.AJ82",
+    "lin": "md|4K2.Q9864.K6.T543,T975.732.A5.KQ96,QJ43.A.7432.AJ82|"
+  },
+  "9": {
+    "dealer": 1,
+    "hand1": "872.K764.72.AK62",
+    "hand2": "QT.T85.AK65.J843",
+    "hand3": "KJ96.AQ92.T8.QT7",
+    "lin": "md|1872.K764.72.AK62,QT.T85.AK65.J843,KJ96.AQ92.T8.QT7|"
+  },
+  "10": {
+    "dealer": 2,
+    "hand1": "6.QJ986.984.QJ84",
+    "hand2": "AJ9874.AT4.K.T92",
+    "hand3": "QT2.K72.65.K7653",
+    "lin": "md|26.QJ986.984.QJ84,AJ9874.AT4.K.T92,QT2.K72.65.K7653|"
+  },
+  "11": {
+    "dealer": 3,
+    "hand1": "J9853.AT.T5.9754",
+    "hand2": "AQ42.95.AK72.T82",
+    "hand3": "K6.8763.Q843.QJ6",
+    "lin": "md|3J9853.AT.T5.9754,AQ42.95.AK72.T82,K6.8763.Q843.QJ6|"
+  },
+  "12": {
+    "dealer": 4,
+    "hand1": "Q4.AJ943.Q8.AK53",
+    "hand2": "K95.65.T9762.QT6",
+    "hand3": "AJT8.QT87.AK3.74",
+    "lin": "md|4Q4.AJ943.Q8.AK53,K95.65.T9762.QT6,AJT8.QT87.AK3.74|"
+  },
+  "13": {
+    "dealer": 1,
+    "hand1": "Q853.632.T64.A93",
+    "hand2": "T97.AQJ4.KQ82.K8",
+    "hand3": "A62.K9.A93.JT754",
+    "lin": "md|1Q853.632.T64.A93,T97.AQJ4.KQ82.K8,A62.K9.A93.JT754|"
+  },
+  "14": {
+    "dealer": 2,
+    "hand1": "J4.AQ9873.Q75.K9",
+    "hand2": "AQ82.-.8643.QJ542",
+    "hand3": "9763.J2.JT92.T73",
+    "lin": "md|2J4.AQ9873.Q75.K9,AQ82.-.8643.QJ542,9763.J2.JT92.T73|"
+  },
+  "15": {
+    "dealer": 3,
+    "hand1": "A9.Q62.KQJT84.85",
+    "hand2": "KJ763.954.7.KJT3",
+    "hand3": "QT85.T87.95.AQ92",
+    "lin": "md|3A9.Q62.KQJT84.85,KJ763.954.7.KJT3,QT85.T87.95.AQ92|"
+  },
+  "16": {
+    "dealer": 4,
+    "hand1": "AKT6.762.-.KT9852",
+    "hand2": "82.AK543.KT3.A76",
+    "hand3": "QJ753.Q.Q8752.Q4",
+    "lin": "md|4AKT6.762.-.KT9852,82.AK543.KT3.A76,QJ753.Q.Q8752.Q4|"
+  },
+  "17": {
+    "dealer": 1,
+    "hand1": "AQ82.AQ63.QJ87.A",
+    "hand2": "J3.J954.T642.QT3",
+    "hand3": "94.KT7.A953.KJ82",
+    "lin": "md|1AQ82.AQ63.QJ87.A,J3.J954.T642.QT3,94.KT7.A953.KJ82|"
+  },
+  "18": {
+    "dealer": 2,
+    "hand1": "QJ9.T74.J932.T42",
+    "hand2": "A753.J5.KT75.J96",
+    "hand3": "2.AQ9832.Q6.AKQ5",
+    "lin": "md|2QJ9.T74.J932.T42,A753.J5.KT75.J96,2.AQ9832.Q6.AKQ5|"
+  },
+  "19": {
+    "dealer": 3,
+    "hand1": "AQ98.T943.KJ98.8",
+    "hand2": "762.K8762.T.9732",
+    "hand3": "KT.Q5.7532.QJT54",
+    "lin": "md|3AQ98.T943.KJ98.8,762.K8762.T.9732,KT.Q5.7532.QJT54|"
+  },
+  "20": {
+    "dealer": 4,
+    "hand1": "J4.AKQ3.T92.A974",
+    "hand2": "AKT953.762.K73.T",
+    "hand3": "8762.98.QJ54.Q62",
+    "lin": "md|4J4.AKQ3.T92.A974,AKT953.762.K73.T,8762.98.QJ54.Q62|"
+  },
+  "21": {
+    "dealer": 1,
+    "hand1": "62.AK7532.AQT.AK",
+    "hand2": "AQ97.T94.K765.76",
+    "hand3": "KJT84.Q8.-.Q98543",
+    "lin": "md|162.AK7532.AQT.AK,AQ97.T94.K765.76,KJT84.Q8.-.Q98543|"
+  },
+  "22": {
+    "dealer": 2,
+    "hand1": "953.J74.Q54.AT83",
+    "hand2": "KQ8.K53.AJT9832.-",
+    "hand3": "AJ2.QT2.K76.KQ97",
+    "lin": "md|2953.J74.Q54.AT83,KQ8.K53.AJT9832.-,AJ2.QT2.K76.KQ97|"
+  },
+  "23": {
+    "dealer": 3,
+    "hand1": "QT432.KQ65.K764.-",
+    "hand2": "A.87.Q952.QT7532",
+    "hand3": "5.JT432.8.AJ9864",
+    "lin": "md|3QT432.KQ65.K764.-,A.87.Q952.QT7532,5.JT432.8.AJ9864|"
+  },
+  "24": {
+    "dealer": 4,
+    "hand1": "KQ962.AKJ5.5.865",
+    "hand2": "43.T874.AJT3.Q94",
+    "hand3": "85.Q962.KQ762.A7",
+    "lin": "md|4KQ962.AKJ5.5.865,43.T874.AJT3.Q94,85.Q962.KQ762.A7|"
+  },
+  "25": {
+    "dealer": 1,
+    "hand1": "J.QJT752.A865.J5",
+    "hand2": "7654.A64.73.Q874",
+    "hand3": "AT98.3.QJT94.A32",
+    "lin": "md|1J.QJT752.A865.J5,7654.A64.73.Q874,AT98.3.QJT94.A32|"
+  },
+  "26": {
+    "dealer": 2,
+    "hand1": "42.AJ84.QJ62.A42",
+    "hand2": "AQT75.T953.T95.5",
+    "hand3": "J98.762.K.KQJ963",
+    "lin": "md|242.AJ84.QJ62.A42,AQT75.T953.T95.5,J98.762.K.KQJ963|"
+  },
+  "27": {
+    "dealer": 3,
+    "hand1": "2.9.KJ8643.K7653",
+    "hand2": "J987.K3.AT97.A94",
+    "hand3": "AKQT.AT82.Q.QJT2",
+    "lin": "md|32.9.KJ8643.K7653,J987.K3.AT97.A94,AKQT.AT82.Q.QJT2|"
+  },
+  "28": {
+    "dealer": 4,
+    "hand1": "AJ6.K9.AQ2.T8532",
+    "hand2": "9732.732.9764.Q9",
+    "hand3": "KQ.AJT8654.JT.J4",
+    "lin": "md|4AJ6.K9.AQ2.T8532,9732.732.9764.Q9,KQ.AJT8654.JT.J4|"
+  },
+  "29": {
+    "dealer": 1,
+    "hand1": "82.KJ7632.AQT2.4",
+    "hand2": "KT4.A95.8.AKJ975",
+    "hand3": "J976.Q.KJ75.8632",
+    "lin": "md|182.KJ7632.AQT2.4,KT4.A95.8.AKJ975,J976.Q.KJ75.8632|"
+  },
+  "30": {
+    "dealer": 2,
+    "hand1": "T6.A983.AKT6.974",
+    "hand2": "K973.752.Q872.J2",
+    "hand3": "Q5.KQJT4.954.AK6",
+    "lin": "md|2T6.A983.AKT6.974,K973.752.Q872.J2,Q5.KQJT4.954.AK6|"
+  }
+}

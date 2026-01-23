@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event 405376 - Bridge Hands Viewer</title>
+    <link rel="stylesheet" href="bbo-hands.css?v=1">
+    <link rel="stylesheet" href="bbo-viewer.css?v=1">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #1e3c72;
+            margin-top: 0;
+        }
+        .hands-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 20px;
+        }
+        .loading {
+            text-align: center;
+            padding: 40px;
+            font-size: 18px;
+            color: #666;
+        }
+        .error {
+            background: #fee;
+            padding: 20px;
+            border-radius: 4px;
+            color: #c33;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Event 405376 - SALI Sonuçları (20.01.2026)</h1>
+        <div id="content" class="loading">Eli yükleniyor...</div>
+    </div>
+
+    <script src="bbo-hands.js?v=1"></script>
+    <script src="bbo-viewer.js?v=1"></script>
+    <script>
+        async function loadHands() {
+            try {
+                const response = await fetch('/hands_database.json');
+                const hands = await response.json();
+                
+                if (!hands || hands.length === 0) {
+                    document.getElementById('content').innerHTML = 
+                        '<div class="error">Eli bulunamadı!</div>';
+                    return;
+                }
+                
+                // Group hands by board number
+                const boardsMap = {};
+                hands.forEach(hand => {
+                    const board = hand.board;
+                    if (!boardsMap[board]) {
+                        boardsMap[board] = [];
+                    }
+                    boardsMap[board].push(hand);
+                });
+                
+                // Display hands organized by board
+                let html = '<div class="hands-grid">';
+                for (let boardNum = 1; boardNum <= 30; boardNum++) {
+                    const boardHands = boardsMap[boardNum] || [];
+                    if (boardHands.length > 0) {
+                        const hand = boardHands[0]; // Use first occurrence
+                        const handObj = {
+                            N: hand.N,
+                            E: hand.E,
+                            S: hand.S,
+                            W: hand.W
+                        };
+                        html += createBBOHandHTML(boardNum, handObj, 0, hand.dealer, hand.vulnerability);
+                    }
+                }
+                html += '</div>';
+                document.getElementById('content').innerHTML = html;
+                
+                // Add click handlers for BBO links
+                document.querySelectorAll('.bbo-open-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        window.open(btn.href, '_blank', 'width=900,height=600');
+                    });
+                });
+                
+            } catch (error) {
+                console.error('Error loading hands:', error);
+                document.getElementById('content').innerHTML = 
+                    '<div class="error">Eli yüklenirken hata: ' + error.message + '</div>';
+            }
+        }
+        
+        // Load hands when page loads
+        window.addEventListener('DOMContentLoaded', loadHands);
+    </script>
+</body>
+</html>

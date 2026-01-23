@@ -205,7 +205,7 @@ def build_hands_database():
         json.dump(hands_dict, f, indent=2, ensure_ascii=False)
     
     print("="*60)
-    print(f"✓ Saved complete hands database: {len(hands_list)} hands")
+    print(f"✓ Saved complete hands database: {len(hands_dict)} hands")
     print(f"  File: {HANDS_DB_PATH}")
     print("="*60 + "\n")
     

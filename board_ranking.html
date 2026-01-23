@@ -1255,7 +1255,7 @@
                 }
             }
             
-            let eventId = params.get('event') || params.get('eventId');
+            let eventId = params.get('event') || params.get('eventId') || '405376';
             if (eventId) {
                 document.getElementById('eventId').value = eventId;
             }
