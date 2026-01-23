@@ -199,6 +199,59 @@
             background: #f5f5f5;
         }
         
+        .hand-diagram {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            display: none;
+        }
+        
+        .hand-diagram.show {
+            display: block;
+        }
+        
+        .hand-diagram h3 {
+            color: #1e3c72;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .hand-table {
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+            border-collapse: collapse;
+        }
+        
+        .hand-table td {
+            padding: 12px;
+            text-align: center;
+            font-size: 13px;
+            font-family: 'Courier New', monospace;
+            border: 1px solid #ddd;
+        }
+        
+        .hand-north, .hand-south {
+            background: #e8f4ff;
+            color: #1e3c72;
+            font-weight: bold;
+        }
+        
+        .hand-east, .hand-west {
+            background: #ffe8f4;
+            color: #1e3c72;
+            font-weight: bold;
+        }
+        
+        .compass-center {
+            background: #f0f0f0;
+            font-weight: bold;
+            color: #333;
+            line-height: 1.6;
+        }
+        
         .results-table tr.ns-row {
             background: #ffffff;
         }
@@ -765,6 +818,24 @@
             <button onclick="changeBoard(1)" id="nextBtn">Sonraki ▶</button>
         </div>
         
+        <!-- Hand Diagram Display -->
+        <div class="hand-diagram" id="handDiagram">
+            <h3>Board <span id="diagramBoardNum"></span> - Hands</h3>
+            <table class="hand-table">
+                <tr>
+                    <td colspan="3" class="hand-north" id="handN"></td>
+                </tr>
+                <tr>
+                    <td class="hand-west" id="handW"></td>
+                    <td class="compass-center">N<br>W E<br>S</td>
+                    <td class="hand-east" id="handE"></td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="hand-south" id="handS"></td>
+                </tr>
+            </table>
+        </div>
+        
         <div id="content"></div>
     </div>
     
@@ -1050,6 +1121,53 @@
             `;
         }
         
+        // Parse PBN hand string to object
+        function parsePBNHand(pbnString) {
+            if (!pbnString) return {S: '-', H: '-', D: '-', C: '-'};
+            const parts = pbnString.split('.');
+            return {
+                S: parts[0] || '-',
+                H: parts[1] || '-',
+                D: parts[2] || '-',
+                C: parts[3] || '-'
+            };
+        }
+        
+        // Format hand in BBO style
+        function formatHandBBO(hand) {
+            if (!hand) return '-';
+            const suitSymbols = {'S': '♠', 'H': '♥', 'D': '♦', 'C': '♣'};
+            const suits = ['S', 'H', 'D', 'C'];
+            let result = '';
+            for (let suit of suits) {
+                const cards = hand[suit] || '-';
+                if (result) result += ' ';
+                result += suitSymbols[suit] + cards;
+            }
+            return result;
+        }
+        
+        // Display hands diagram
+        function displayHandDiagram(hand) {
+            if (!hand) {
+                document.getElementById('handDiagram').classList.remove('show');
+                return;
+            }
+            
+            const nHand = parsePBNHand(hand.N);
+            const eHand = parsePBNHand(hand.E);
+            const sHand = parsePBNHand(hand.S);
+            const wHand = parsePBNHand(hand.W);
+            
+            document.getElementById('diagramBoardNum').textContent = hand.board;
+            document.getElementById('handN').innerHTML = formatHandBBO(nHand);
+            document.getElementById('handE').innerHTML = formatHandBBO(eHand);
+            document.getElementById('handS').innerHTML = formatHandBBO(sHand);
+            document.getElementById('handW').innerHTML = formatHandBBO(wHand);
+            
+            document.getElementById('handDiagram').classList.add('show');
+        }
+        
         async function loadRanking() {
             const eventId = document.getElementById('eventId').value.trim();
             const boardNum = document.getElementById('boardNum').value;
@@ -1078,6 +1196,9 @@
                 console.log('lott:', handResult.lott);
                 
                 if (handResult.hand_data) {
+                    // Display hand diagram
+                    displayHandDiagram(handResult.hand_data);
+                    
                     // El diyagramını göster (DD ve LoTT dahil)
                     let html = renderHandDiagram(
                         handResult.hand_data, 
