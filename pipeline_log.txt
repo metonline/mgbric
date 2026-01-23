@@ -1066,3 +1066,62 @@
 [2026-01-23 12:59:21] [INFO] Status: ✓ SUCCESS
 [2026-01-23 12:59:21] [INFO] ============================================================
 
+[2026-01-23 14:13:31] [INFO] 
+============================================================
+[2026-01-23 14:13:31] [INFO] 🚀 BRIC FULL UPDATE PIPELINE
+[2026-01-23 14:13:31] [INFO] Started at 2026-01-23 14:13:31
+[2026-01-23 14:13:31] [INFO] ============================================================
+[2026-01-23 14:13:31] [INFO] ============================================================
+[2026-01-23 14:13:31] [INFO] STEP 2: UPDATING BOARD HANDS
+[2026-01-23 14:13:31] [INFO] ============================================================
+[2026-01-23 14:13:31] [INFO] Existing hands database: 30 records
+[2026-01-23 14:13:32] [INFO] Found 21 date(s) needing hands
+[2026-01-23 14:13:32] [INFO] Fetching boards for 01.01.2026 (Event 404155)
+[2026-01-23 14:13:47] [INFO]   01.01.2026: 30 boards fetched
+[2026-01-23 14:13:47] [INFO] Fetching boards for 02.01.2026 (Event 404197)
+[2026-01-23 14:14:01] [INFO]   02.01.2026: 30 boards fetched
+[2026-01-23 14:14:01] [INFO] Fetching boards for 03.01.2026 (Event 404275)
+[2026-01-23 14:14:15] [INFO]   03.01.2026: 30 boards fetched
+[2026-01-23 14:14:15] [INFO] Fetching boards for 04.01.2026 (Event 404377)
+[2026-01-23 14:14:30] [INFO]   04.01.2026: 30 boards fetched
+[2026-01-23 14:14:30] [INFO] Fetching boards for 05.01.2026 (Event 404426)
+[2026-01-23 14:14:45] [INFO]   05.01.2026: 30 boards fetched
+[2026-01-23 14:14:45] [INFO] Fetching boards for 06.01.2026 (Event 404498)
+[2026-01-23 14:15:01] [INFO]   06.01.2026: 30 boards fetched
+[2026-01-23 14:15:01] [INFO] Fetching boards for 07.01.2026 (Event 404562)
+[2026-01-23 14:15:16] [INFO]   07.01.2026: 30 boards fetched
+[2026-01-23 14:15:16] [INFO] Fetching boards for 08.01.2026 (Event 404628)
+[2026-01-23 14:15:30] [INFO]   08.01.2026: 30 boards fetched
+[2026-01-23 14:15:30] [INFO] Fetching boards for 09.01.2026 (Event 404691)
+[2026-01-23 14:15:49] [INFO]   09.01.2026: 30 boards fetched
+[2026-01-23 14:15:49] [INFO] Fetching boards for 10.01.2026 (Event 404854)
+[2026-01-23 14:16:07] [INFO]   10.01.2026: 30 boards fetched
+[2026-01-23 14:16:07] [INFO] Fetching boards for 11.01.2026 (Event 404821)
+[2026-01-23 14:16:22] [INFO]   11.01.2026: 30 boards fetched
+[2026-01-23 14:16:22] [INFO] Fetching boards for 12.01.2026 (Event 404876)
+[2026-01-23 14:16:39] [INFO]   12.01.2026: 30 boards fetched
+[2026-01-23 14:16:39] [INFO] Fetching boards for 13.01.2026 (Event 405128)
+[2026-01-23 14:16:56] [INFO]   13.01.2026: 30 boards fetched
+[2026-01-23 14:16:56] [INFO] Fetching boards for 14.01.2026 (Event 405007)
+[2026-01-23 14:17:14] [INFO]   14.01.2026: 30 boards fetched
+[2026-01-23 14:17:14] [INFO] Fetching boards for 15.01.2026 (Event 405061)
+[2026-01-23 14:17:28] [INFO]   15.01.2026: 30 boards fetched
+[2026-01-23 14:17:28] [INFO] Fetching boards for 16.01.2026 (Event 405123)
+[2026-01-23 14:17:43] [INFO]   16.01.2026: 30 boards fetched
+[2026-01-23 14:17:43] [INFO] Fetching boards for 17.01.2026 (Event 405204)
+[2026-01-23 14:17:58] [INFO]   17.01.2026: 30 boards fetched
+[2026-01-23 14:17:58] [INFO] Fetching boards for 18.01.2026 (Event 405278)
+[2026-01-23 14:18:13] [INFO]   18.01.2026: 30 boards fetched
+[2026-01-23 14:18:13] [INFO] Fetching boards for 19.01.2026 (Event 405315)
+[2026-01-23 14:18:27] [INFO]   19.01.2026: 30 boards fetched
+[2026-01-23 14:18:27] [INFO] Fetching boards for 20.01.2026 (Event 405376)
+[2026-01-23 14:18:41] [INFO]   20.01.2026: 30 boards fetched
+[2026-01-23 14:18:41] [INFO] Fetching boards for 21.01.2026 (Event 405445)
+[2026-01-23 14:18:58] [INFO]   21.01.2026: 30 boards fetched
+[2026-01-23 14:18:58] [INFO] ✓ Hands database saved (630 new hands)
+[2026-01-23 14:18:58] [INFO] 
+============================================================
+[2026-01-23 14:18:58] [INFO] Pipeline completed at 2026-01-23 14:18:58
+[2026-01-23 14:18:58] [INFO] Status: ✓ SUCCESS
+[2026-01-23 14:18:58] [INFO] ============================================================
+
