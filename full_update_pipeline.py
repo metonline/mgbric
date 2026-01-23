@@ -531,6 +531,7 @@ def update_hands(new_events=None):
                 
                 new_record = {
                     'id': next_id,
+                    'event_id': event_id,
                     'board': board_num,
                     'date': tarih,
                     'dealer': get_dealer_for_board(board_num),

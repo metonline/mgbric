@@ -36,7 +36,7 @@ CRITICAL FILES TO BACKUP:
    - Status: SEALED
 
 ========================================================================
-KEY STYLING (board_ranking.html)
+KEY STYLING (board_ranking.html) - Updated 23.01.2026
 ========================================================================
 
 Hand Diagram Container:
@@ -44,9 +44,14 @@ Hand Diagram Container:
   - .handDivStyle: 160x124px per hand position
   - .pos-n-hand, .pos-s-hand, .pos-e-hand, .pos-w-hand positioning
 
-DD Table (Bottom-Left):
+DD Table (Bottom-Left) - RESIZED TO 95%:
   - .bhDoubleDummy: position absolute, left:1px, bottom:5px
+  - width: 153px (was 161px)
+  - font-size: 10px (was 11px)
+  - transform: scale(0.95)
+  - transform-origin: bottom left
   - .bh-dd table: 5 columns (♠♥♦♣NT), 4 rows (N,E,S,W)
+  - .bh-dd th, td: width 26px (was 28px), height 21px (was 22px)
   - Tricks shown as level (7+=1+, below 7 = dash)
   - Par display below table
 

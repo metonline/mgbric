@@ -201,9 +201,8 @@ def build_hands_database():
     print(f"\n✓ Generated {estimated} estimated hands for missing boards\n")
     
     # Save complete database
-    hands_list = list(hands_dict.values())
     with open(HANDS_DB_PATH, 'w', encoding='utf-8') as f:
-        json.dump(hands_list, f, indent=2, ensure_ascii=False)
+        json.dump(hands_dict, f, indent=2, ensure_ascii=False)
     
     print("="*60)
     print(f"✓ Saved complete hands database: {len(hands_list)} hands")
