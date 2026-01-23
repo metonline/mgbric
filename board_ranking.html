@@ -739,6 +739,26 @@
         <input type="hidden" id="eventId" value="">
         <input type="hidden" id="boardNum" value="1">
         
+        <!-- Advanced Filters -->
+        <div class="controls" id="filterControls" style="display:none;">
+            <div class="control-group">
+                <label for="filterDate">Tarih:</label>
+                <select id="filterDate">
+                    <option value="">Tüm Tarihler</option>
+                </select>
+            </div>
+            <div class="control-group">
+                <label for="filterEvent">Turnuva:</label>
+                <select id="filterEvent">
+                    <option value="">Tüm Turnuvalar</option>
+                </select>
+            </div>
+            <div class="control-group">
+                <label for="filterBoard">Board:</label>
+                <input type="number" id="filterBoard" min="1" max="30" placeholder="1-30">
+            </div>
+        </div>
+        
         <div class="board-nav" id="boardNav" style="display: none;">
             <button onclick="changeBoard(-1)" id="prevBtn">◀ Önceki</button>
             <span class="board-number" id="currentBoard">Board 1</span>
@@ -751,6 +771,8 @@
     <script>
         let currentEventId = '';
         let currentBoard = 1;
+        let allEvents = {};
+        let allHands = [];
         
         function goBack() {
             if (window.history.length > 1) {
@@ -1264,6 +1286,9 @@
                 document.getElementById('boardNum').value = boardNum;
             }
             
+            // Initialize filters
+            initializeFilters();
+            
             // Event ID varsa (URL'den veya date'den bulunmuşsa) yükle
             console.log('Final eventId:', eventId);
             
@@ -1278,6 +1303,82 @@
                     .catch(err => console.log('SW registration failed:', err));
             }
         };
+        
+        // Initialize filters
+        async function initializeFilters() {
+            try {
+                const [eventsResp, handsResp] = await Promise.all([
+                    fetch('/database.json'),
+                    fetch('/hands_database.json')
+                ]);
+                
+                const db = await eventsResp.json();
+                allEvents = db.events || {};
+                allHands = await handsResp.json();
+                
+                // Populate date filter
+                const dates = new Set();
+                Object.values(allEvents).forEach(event => {
+                    dates.add(event.date);
+                });
+                
+                const sortedDates = Array.from(dates).sort((a, b) => {
+                    const [dA, mA, yA] = a.split('.');
+                    const [dB, mB, yB] = b.split('.');
+                    return new Date(yB, mB - 1, dB) - new Date(yA, mA - 1, dA);
+                });
+                
+                const dateSelect = document.getElementById('filterDate');
+                sortedDates.forEach(date => {
+                    const option = document.createElement('option');
+                    option.value = date;
+                    option.textContent = date;
+                    dateSelect.appendChild(option);
+                });
+                
+                // Populate event filter
+                Object.values(allEvents).forEach(event => {
+                    const option = document.createElement('option');
+                    option.value = event.id;
+                    option.textContent = `${event.name} (${event.date})`;
+                    document.getElementById('filterEvent').appendChild(option);
+                });
+                
+                // Add filter event listeners
+                document.getElementById('filterDate').addEventListener('change', applyFiltersToRanking);
+                document.getElementById('filterEvent').addEventListener('change', applyFiltersToRanking);
+                document.getElementById('filterBoard').addEventListener('change', applyFiltersToRanking);
+                document.getElementById('filterBoard').addEventListener('input', applyFiltersToRanking);
+                
+                // Show filters
+                document.getElementById('filterControls').style.display = 'flex';
+                
+            } catch (error) {
+                console.error('Error initializing filters:', error);
+            }
+        }
+        
+        // Apply filters to ranking
+        function applyFiltersToRanking() {
+            const selectedDate = document.getElementById('filterDate').value;
+            const selectedEvent = document.getElementById('filterEvent').value;
+            const selectedBoard = document.getElementById('filterBoard').value;
+            
+            // If event filter is used, set the event ID
+            if (selectedEvent) {
+                document.getElementById('eventId').value = selectedEvent;
+                currentEventId = selectedEvent;
+            }
+            
+            // If board filter is used, set the board
+            if (selectedBoard) {
+                document.getElementById('boardNum').value = selectedBoard;
+                currentBoard = parseInt(selectedBoard);
+            }
+            
+            // Load ranking with filters
+            loadRanking();
+        }
         
         // Touch gestures for board navigation
         let touchStartX = 0;

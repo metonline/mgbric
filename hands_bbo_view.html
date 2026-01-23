@@ -24,22 +24,34 @@
             color: #1e3c72;
             margin-top: 0;
         }
-        .event-selector {
+        .filters {
             margin: 20px 0;
             padding: 15px;
             background: #f9f9f9;
             border-radius: 4px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
         }
-        .event-selector label {
-            margin-right: 10px;
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+        }
+        .filter-group label {
             font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
         }
-        .event-selector select {
+        .filter-group select,
+        .filter-group input {
             padding: 8px 12px;
-            font-size: 16px;
+            font-size: 14px;
             border: 1px solid #ddd;
             border-radius: 4px;
             cursor: pointer;
+        }
+        .filter-group input {
+            cursor: text;
         }
         .hands-grid {
             display: grid;
@@ -59,135 +71,229 @@
             color: #c33;
             margin: 20px 0;
         }
+        .results-info {
+            padding: 10px;
+            background: #e8f4f8;
+            border-left: 4px solid #1e3c72;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Bridge Hands Viewer</h1>
+        <h1>Bridge Hands Viewer - Advanced Filtering</h1>
         
-        <div class="event-selector">
-            <label for="eventSelect">Select Event:</label>
-            <select id="eventSelect">
-                <option value="">Loading events...</option>
-            </select>
+        <div class="filters">
+            <div class="filter-group">
+                <label for="dateSelect">Select Date:</label>
+                <select id="dateSelect">
+                    <option value="">All Dates</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="eventSelect">Select Event:</label>
+                <select id="eventSelect">
+                    <option value="">All Events</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="boardInput">Board Number:</label>
+                <input type="number" id="boardInput" min="1" max="30" placeholder="Leave empty for all boards">
+            </div>
         </div>
         
+        <div id="resultsInfo" class="results-info" style="display:none;"></div>
         <div id="content" class="loading">Eli yükleniyor...</div>
     </div>
 
     <script src="bbo-hands.js?v=1"></script>
     <script src="bbo-viewer.js?v=1"></script>
     <script>
-        // Load available events
-        async function loadEvents() {
+        let allEvents = {};
+        let allHands = [];
+        
+        // Load initial data
+        async function initializeData() {
             try {
-                const response = await fetch('/database.json');
-                const db = await response.json();
-                const events = db.events || {};
+                const [eventsResp, handsResp] = await Promise.all([
+                    fetch('/database.json'),
+                    fetch('/hands_database.json')
+                ]);
                 
-                const select = document.getElementById('eventSelect');
-                select.innerHTML = '';
+                const db = await eventsResp.json();
+                allEvents = db.events || {};
+                allHands = await handsResp.json();
                 
-                // Sort events by date (newest first)
-                const sortedEvents = Object.entries(events).sort((a, b) => {
-                    const dateA = new Date(a[1].date.split('.').reverse().join('-'));
-                    const dateB = new Date(b[1].date.split('.').reverse().join('-'));
-                    return dateB - dateA;
-                });
+                loadDates();
+                applyFilters();
                 
-                // Add first event as default
-                if (sortedEvents.length > 0) {
-                    sortedEvents.forEach(([key, event]) => {
-                        const option = document.createElement('option');
-                        option.value = event.id;
-                        option.textContent = `${event.name} (${event.date})`;
-                        select.appendChild(option);
-                    });
-                    
-                    // Load first event
-                    select.value = sortedEvents[0][1].id;
-                    loadHands(sortedEvents[0][1].id);
-                    
-                    // Add change listener
-                    select.addEventListener('change', (e) => {
-                        if (e.target.value) {
-                            loadHands(e.target.value);
-                        }
-                    });
-                } else {
-                    document.getElementById('content').innerHTML = 
-                        '<div class="error">Turnuva bulunamadı!</div>';
-                }
             } catch (error) {
-                console.error('Error loading events:', error);
+                console.error('Error loading data:', error);
                 document.getElementById('content').innerHTML = 
-                    '<div class="error">Turnuva yüklenirken hata: ' + error.message + '</div>';
+                    '<div class="error">Veri yüklenirken hata: ' + error.message + '</div>';
             }
         }
         
-        // Load hands for selected event
-        async function loadHands(eventId) {
-            try {
-                document.getElementById('content').innerHTML = '<div class="loading">Eli yükleniyor...</div>';
-                
-                const response = await fetch('/hands_database.json');
-                const hands = await response.json();
-                
-                // Filter hands by event ID
-                const eventHands = hands.filter(h => h.event_id === eventId);
-                
-                if (!eventHands || eventHands.length === 0) {
-                    document.getElementById('content').innerHTML = 
-                        '<div class="error">Bu turnuva için el bulunamadı!</div>';
-                    return;
-                }
-                
-                // Group hands by board number
-                const boardsMap = {};
-                eventHands.forEach(hand => {
-                    const board = hand.board;
-                    if (!boardsMap[board]) {
-                        boardsMap[board] = [];
-                    }
-                    boardsMap[board].push(hand);
-                });
-                
-                // Display hands organized by board
-                let html = '<div class="hands-grid">';
-                const maxBoard = Math.max(...Object.keys(boardsMap).map(Number));
-                for (let boardNum = 1; boardNum <= maxBoard; boardNum++) {
-                    const boardHands = boardsMap[boardNum] || [];
-                    if (boardHands.length > 0) {
-                        const hand = boardHands[0]; // Use first occurrence
-                        const handObj = {
-                            N: hand.N,
-                            E: hand.E,
-                            S: hand.S,
-                            W: hand.W
-                        };
-                        html += createBBOHandHTML(boardNum, handObj, 0, hand.dealer, hand.vulnerability);
-                    }
-                }
-                html += '</div>';
-                document.getElementById('content').innerHTML = html;
-                
-                // Add click handlers for BBO links
-                document.querySelectorAll('.bbo-open-btn').forEach(btn => {
-                    btn.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        window.open(btn.href, '_blank', 'width=900,height=600');
-                    });
-                });
-                
-            } catch (error) {
-                console.error('Error loading hands:', error);
-                document.getElementById('content').innerHTML = 
-                    '<div class="error">Eli yüklenirken hata: ' + error.message + '</div>';
-            }
+        // Load unique dates from events
+        function loadDates() {
+            const dates = new Set();
+            Object.values(allEvents).forEach(event => {
+                dates.add(event.date);
+            });
+            
+            const sortedDates = Array.from(dates).sort((a, b) => {
+                const [dA, mA, yA] = a.split('.');
+                const [dB, mB, yB] = b.split('.');
+                return new Date(yB, mB - 1, dB) - new Date(yA, mA - 1, dA);
+            });
+            
+            const dateSelect = document.getElementById('dateSelect');
+            sortedDates.forEach(date => {
+                const option = document.createElement('option');
+                option.value = date;
+                option.textContent = date;
+                dateSelect.appendChild(option);
+            });
+            
+            dateSelect.addEventListener('change', () => {
+                loadEventsForDate();
+                applyFilters();
+            });
         }
         
-        // Load events when page loads
-        window.addEventListener('DOMContentLoaded', loadEvents);
+        // Load events for selected date
+        function loadEventsForDate() {
+            const selectedDate = document.getElementById('dateSelect').value;
+            const eventSelect = document.getElementById('eventSelect');
+            eventSelect.innerHTML = '<option value="">All Events</option>';
+            
+            if (!selectedDate) {
+                // Show all events sorted by date
+                const sortedEvents = Object.values(allEvents).sort((a, b) => {
+                    const [dA, mA, yA] = a.date.split('.');
+                    const [dB, mB, yB] = b.date.split('.');
+                    return new Date(yB, mB - 1, dB) - new Date(yA, mA - 1, dA);
+                });
+                
+                sortedEvents.forEach(event => {
+                    const option = document.createElement('option');
+                    option.value = event.id;
+                    option.textContent = `${event.name} (${event.date})`;
+                    eventSelect.appendChild(option);
+                });
+            } else {
+                // Show events for selected date
+                const eventsForDate = Object.values(allEvents).filter(e => e.date === selectedDate);
+                eventsForDate.forEach(event => {
+                    const option = document.createElement('option');
+                    option.value = event.id;
+                    option.textContent = event.name;
+                    eventSelect.appendChild(option);
+                });
+            }
+            
+            eventSelect.addEventListener('change', applyFilters);
+        }
+        
+        // Apply all filters
+        async function applyFilters() {
+            const selectedDate = document.getElementById('dateSelect').value;
+            const selectedEvent = document.getElementById('eventSelect').value;
+            const selectedBoard = document.getElementById('boardInput').value;
+            
+            // Filter hands
+            let filtered = allHands;
+            
+            if (selectedDate) {
+                filtered = filtered.filter(h => h.date === selectedDate);
+            }
+            
+            if (selectedEvent) {
+                filtered = filtered.filter(h => h.event_id === selectedEvent);
+            }
+            
+            if (selectedBoard) {
+                filtered = filtered.filter(h => h.board === parseInt(selectedBoard));
+            }
+            
+            // Update results info
+            const resultsInfo = document.getElementById('resultsInfo');
+            let infoText = `Filters: `;
+            let filters = [];
+            if (selectedDate) filters.push(`Date: ${selectedDate}`);
+            if (selectedEvent) {
+                const event = allEvents[`event_${selectedEvent}`];
+                filters.push(`Event: ${event ? event.name : selectedEvent}`);
+            }
+            if (selectedBoard) filters.push(`Board: ${selectedBoard}`);
+            
+            if (filters.length === 0) {
+                infoText += 'None (showing all hands)';
+                resultsInfo.style.display = 'none';
+            } else {
+                infoText += filters.join(' | ');
+                resultsInfo.innerHTML = infoText + ` - Found: ${filtered.length} hands`;
+                resultsInfo.style.display = 'block';
+            }
+            
+            displayHands(filtered);
+        }
+        
+        // Display filtered hands
+        function displayHands(hands) {
+            if (!hands || hands.length === 0) {
+                document.getElementById('content').innerHTML = 
+                    '<div class="error">Filtreler ile eşleşen el bulunamadı!</div>';
+                return;
+            }
+            
+            // Group hands by board number
+            const boardsMap = {};
+            hands.forEach(hand => {
+                const board = hand.board;
+                if (!boardsMap[board]) {
+                    boardsMap[board] = [];
+                }
+                boardsMap[board].push(hand);
+            });
+            
+            // Display hands organized by board
+            let html = '<div class="hands-grid">';
+            const boards = Object.keys(boardsMap).map(Number).sort((a, b) => a - b);
+            
+            boards.forEach(boardNum => {
+                const boardHands = boardsMap[boardNum];
+                if (boardHands.length > 0) {
+                    const hand = boardHands[0]; // Use first occurrence
+                    const handObj = {
+                        N: hand.N,
+                        E: hand.E,
+                        S: hand.S,
+                        W: hand.W
+                    };
+                    html += createBBOHandHTML(boardNum, handObj, 0, hand.dealer, hand.vulnerability);
+                }
+            });
+            
+            html += '</div>';
+            document.getElementById('content').innerHTML = html;
+            
+            // Add click handlers for BBO links
+            document.querySelectorAll('.bbo-open-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    window.open(btn.href, '_blank', 'width=900,height=600');
+                });
+            });
+        }
+        
+        // Add event listener to board input for live filtering
+        document.getElementById('boardInput').addEventListener('change', applyFilters);
+        document.getElementById('boardInput').addEventListener('input', applyFilters);
+        
+        // Initialize on page load
+        window.addEventListener('DOMContentLoaded', initializeData);
     </script>
 </body>
 </html>
