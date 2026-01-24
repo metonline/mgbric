@@ -527,9 +527,11 @@
                 container.appendChild(eventLabel);
                 container.appendChild(div.firstElementChild);
                 grid.appendChild(container);
+                
+                console.log(`Added hand: Event ${hand.event_id}, Board ${hand.board}`);
             }
             
-            // Update header
+            console.log(`Total hands added to grid: ${grid.children.length}`);
             const dateCount = new Set(handsToRender.map(h => h.date)).size;
             document.getElementById('tournament-name').textContent = `Events (${handsToRender.length} hands from ${dateCount} date(s))`;
             document.getElementById('board-count').textContent = handsToRender.length;
