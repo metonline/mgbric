@@ -264,7 +264,6 @@ function renderHandDiagram(handData, boardNum, ddResult, optimum, lott) {
                 <div class="mainDivStyle">
                     <!-- Board Info - Left Side -->
                     <div class="board-info-left">
-                        <div class="date">${date}</div>
                         <div class="dealer">Dealer: ${dealer}</div>
                         <div class="vul ${vulClass}" style="background-color: ${vulColor} !important; color: white !important; font-weight: bold;">Vuln: ${vul}</div>
                     </div>
