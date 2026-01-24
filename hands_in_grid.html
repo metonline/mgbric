@@ -481,6 +481,8 @@
         async function renderHands(handsToRender) {
             const grid = document.getElementById('hands-grid');
             grid.innerHTML = '';
+            
+            console.log(`Rendering ${handsToRender.length} hands`);
 
             for (const hand of handsToRender) {
                 const handObj = {
@@ -538,11 +540,13 @@
             const selectedDate = document.getElementById('date-filter').value;
             
             if (!selectedDate) {
+                console.log(`Showing all ${allHands.length} hands`);
                 renderHands(allHands);
                 return;
             }
             
             const filtered = allHands.filter(hand => hand.date === selectedDate);
+            console.log(`Filtered to ${filtered.length} hands for date ${selectedDate}`);
             renderHands(filtered);
         }
 
@@ -587,10 +591,13 @@
                 // Check if URL has a date parameter for auto-filtering
                 const params = new URLSearchParams(window.location.search);
                 const urlDate = params.get('date');
+                console.log(`URL date parameter: ${urlDate}, Available dates: ${allDates.join(', ')}`);
                 if (urlDate && allDates.includes(urlDate)) {
+                    console.log(`Auto-filtering to date: ${urlDate}`);
                     document.getElementById('date-filter').value = urlDate;
                     filterByDate();
                 } else {
+                    console.log(`No date filter applied, showing all ${allHands.length} hands`);
                     renderHands(allHands);
                 }
 
