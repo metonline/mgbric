@@ -269,13 +269,12 @@
         }
         
         .board-info-left .vul {
-            background: white;
-            color: black;
             font-weight: bold;
-            padding: 1px 4px;
+            padding: 2px 6px;
             border-radius: 2px;
             display: block;
             margin-top: 2px;
+            text-align: center;
         }
         
         .board-info-left .vul.vul-active {
@@ -525,9 +524,9 @@
                 const div = document.createElement('div');
                 div.innerHTML = baseHtml;
                 
-                // Add event label above the hand diagram
+                // Add event label above the hand diagram (HIDDEN)
                 const eventLabel = document.createElement('div');
-                eventLabel.style.cssText = 'text-align:center; font-weight:bold; color:#666; margin-bottom:5px; font-size:12px;';
+                eventLabel.style.cssText = 'text-align:center; font-weight:bold; color:#666; margin-bottom:5px; font-size:12px; display: none;';
                 eventLabel.textContent = `Event ${hand.event_id} | ${hand.date}`;
                 
                 const container = document.createElement('div');
