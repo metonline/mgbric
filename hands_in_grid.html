@@ -42,6 +42,65 @@
             font-size: 0.95em;
         }
         
+        /* Filter Section */
+        .filter-section {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 15px;
+            border-radius: 8px;
+        }
+        
+        .filter-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .filter-group label {
+            font-weight: 600;
+            color: #00d9ff;
+            font-size: 0.95em;
+        }
+        
+        .filter-group select {
+            padding: 8px 12px;
+            background: #2a3f5f;
+            color: #fff;
+            border: 2px solid #00d9ff;
+            border-radius: 4px;
+            font-size: 0.95em;
+            cursor: pointer;
+            min-width: 150px;
+        }
+        
+        .filter-group select:hover {
+            background: #3a4f6f;
+        }
+        
+        .filter-group select:focus {
+            outline: none;
+            border-color: #00ffff;
+        }
+        
+        .clear-filter {
+            padding: 8px 16px;
+            background: #ff6b6b;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.95em;
+        }
+        
+        .clear-filter:hover {
+            background: #ff5252;
+        }
+        
         .loading {
             text-align: center;
             padding: 40px;
@@ -378,6 +437,17 @@
             <span id="board-count">0</span> El
         </div>
         
+        <!-- Filter Section -->
+        <div class="filter-section" id="filter-section" style="display: none;">
+            <div class="filter-group">
+                <label for="date-filter">Tarih Filtresi:</label>
+                <select id="date-filter" onchange="filterByDate()">
+                    <option value="">-- Tüm Tarihleri Göster --</option>
+                </select>
+            </div>
+            <button class="clear-filter" onclick="clearFilters()">Filtreyi Temizle</button>
+        </div>
+        
         <div id="loading" class="loading">Elleri yükleniyor...</div>
         <div id="error" class="error" style="display:none;"></div>
         <div class="hands-grid" id="hands-grid"></div>
@@ -388,6 +458,10 @@
     <script>
         // Main page logic - card placement and diagram rendering functions are in card_placement.js
         // LIN generation functions are in lin_generator.js
+        
+        // Global variables for filtering
+        let allHands = [];
+        let allDates = [];
 
         function formatSuitWithColor(text) {
             if (!text) return '';
@@ -403,6 +477,81 @@
         // Hand diagram rendering is now in card_placement.js
         // Call: renderHandDiagram(handObj, boardNum, ddResult, optimum, lott)
 
+        // Render hands to grid
+        async function renderHands(handsToRender) {
+            const grid = document.getElementById('hands-grid');
+            grid.innerHTML = '';
+
+            for (const hand of handsToRender) {
+                const handObj = {
+                    N: hand.N,
+                    E: hand.E,
+                    S: hand.S,
+                    W: hand.W,
+                    dealer: hand.dealer || 'N',
+                    vulnerability: hand.vulnerability || 'None',
+                    date: hand.date || 'Unknown',
+                    event_id: hand.event_id || '?'
+                };
+
+                // Get DD data from backend API
+                let ddResult = null;
+                let optimum = null;
+                let lott = null;
+                
+                try {
+                    const apiResponse = await fetch(`/api/hand-data?event=${hand.event_id}&board=${hand.board}`);
+                    if (apiResponse.ok) {
+                        const apiData = await apiResponse.json();
+                        ddResult = apiData.dd_result;
+                        optimum = apiData.optimum;
+                        lott = apiData.lott;
+                    }
+                } catch (e) {
+                    console.warn(`Failed to fetch DD data for board ${hand.board}:`, e);
+                }
+
+                // Create custom HTML with event info
+                const baseHtml = renderHandDiagram(handObj, hand.board, ddResult, optimum, lott);
+                const div = document.createElement('div');
+                div.innerHTML = baseHtml;
+                
+                // Add event label above the hand diagram
+                const eventLabel = document.createElement('div');
+                eventLabel.style.cssText = 'text-align:center; font-weight:bold; color:#666; margin-bottom:5px; font-size:12px;';
+                eventLabel.textContent = `Event ${hand.event_id} | ${hand.date}`;
+                
+                const container = document.createElement('div');
+                container.appendChild(eventLabel);
+                container.appendChild(div.firstElementChild);
+                grid.appendChild(container);
+            }
+            
+            // Update header
+            const dateCount = new Set(handsToRender.map(h => h.date)).size;
+            document.getElementById('tournament-name').textContent = `Events (${handsToRender.length} hands from ${dateCount} date(s))`;
+            document.getElementById('board-count').textContent = handsToRender.length;
+        }
+
+        // Filter by selected date
+        function filterByDate() {
+            const selectedDate = document.getElementById('date-filter').value;
+            
+            if (!selectedDate) {
+                renderHands(allHands);
+                return;
+            }
+            
+            const filtered = allHands.filter(hand => hand.date === selectedDate);
+            renderHands(filtered);
+        }
+
+        // Clear all filters
+        function clearFilters() {
+            document.getElementById('date-filter').value = '';
+            renderHands(allHands);
+        }
+
         // Load hands from database
         async function loadHands() {
             try {
@@ -411,78 +560,38 @@
                 
                 const database = await response.json();
                 document.getElementById('loading').style.display = 'none';
+                document.getElementById('filter-section').style.display = 'flex';
 
-                // Show all hands with all events and dates
-                const filtered = database;
+                allHands = database;
 
-                if (filtered.length === 0) throw new Error('No hands found in database');
-
-                // Group by date
-                const byDate = {};
-                filtered.forEach(hand => {
-                    const date = hand.date || 'Unknown';
-                    if (!byDate[date]) byDate[date] = [];
-                    byDate[date].push(hand);
-                });
-
-                // Update header
-                const dateCount = Object.keys(byDate).length;
-                document.getElementById('tournament-name').textContent = `All Events (${filtered.length} hands from ${dateCount} dates)`;
-                document.getElementById('board-count').textContent = filtered.length;
+                if (allHands.length === 0) throw new Error('No hands found in database');
 
                 // Sort by event_id, then board number
-                filtered.sort((a, b) => {
+                allHands.sort((a, b) => {
                     if (a.event_id !== b.event_id) return a.event_id - b.event_id;
                     return a.board - b.board;
                 });
 
-                // Render hands
-                const grid = document.getElementById('hands-grid');
-                grid.innerHTML = '';
+                // Get unique dates sorted
+                allDates = [...new Set(allHands.map(h => h.date))].sort();
 
-                for (const hand of filtered) {
-                    const handObj = {
-                        N: hand.N,
-                        E: hand.E,
-                        S: hand.S,
-                        W: hand.W,
-                        dealer: hand.dealer || 'N',
-                        vulnerability: hand.vulnerability || 'None',
-                        date: hand.date || 'Unknown',
-                        event_id: hand.event_id || '?'
-                    };
+                // Populate date filter dropdown
+                const dateFilter = document.getElementById('date-filter');
+                allDates.forEach(date => {
+                    const option = document.createElement('option');
+                    option.value = date;
+                    option.textContent = date;
+                    dateFilter.appendChild(option);
+                });
 
-                    // Get DD data from backend API
-                    let ddResult = null;
-                    let optimum = null;
-                    let lott = null;
-                    
-                    try {
-                        const apiResponse = await fetch(`/api/hand-data?event=${hand.event_id}&board=${hand.board}`);
-                        if (apiResponse.ok) {
-                            const apiData = await apiResponse.json();
-                            ddResult = apiData.dd_result;
-                            optimum = apiData.optimum;
-                            lott = apiData.lott;
-                        }
-                    } catch (e) {
-                        console.warn(`Failed to fetch DD data for board ${hand.board}:`, e);
-                    }
-
-                    // Create custom HTML with event info
-                    const baseHtml = renderHandDiagram(handObj, hand.board, ddResult, optimum, lott);
-                    const div = document.createElement('div');
-                    div.innerHTML = baseHtml;
-                    
-                    // Add event label above the hand diagram
-                    const eventLabel = document.createElement('div');
-                    eventLabel.style.cssText = 'text-align:center; font-weight:bold; color:#666; margin-bottom:5px; font-size:12px;';
-                    eventLabel.textContent = `Event ${hand.event_id} | ${hand.date}`;
-                    
-                    const container = document.createElement('div');
-                    container.appendChild(eventLabel);
-                    container.appendChild(div.firstElementChild);
-                    grid.appendChild(container);
+                // Check if URL has a date parameter for auto-filtering
+                const params = new URLSearchParams(window.location.search);
+                const urlDate = params.get('date');
+                if (urlDate && allDates.includes(urlDate)) {
+                    document.getElementById('date-filter').value = urlDate;
+                    filterByDate();
+                } else {
+                    renderHands(allHands);
                 }
 
             } catch (error) {

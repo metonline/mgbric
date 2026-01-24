@@ -155,6 +155,20 @@ function renderHandDiagram(handData, boardNum, ddResult, optimum, lott) {
     const sDealerClass = dealer === 'S' ? 'dealer-bg' : '';
     const eDealerClass = dealer === 'E' ? 'dealer-bg' : '';
     const wDealerClass = dealer === 'W' ? 'dealer-bg' : '';
+    
+    // Vulnerability styling - color based on which side is vulnerable
+    let vulClass = 'vul-none';
+    let vulColor = '#999';
+    if (vul === 'NS') {
+        vulClass = 'vul-ns';
+        vulColor = '#ff6b6b';  // Red for NS vulnerable
+    } else if (vul === 'EW') {
+        vulClass = 'vul-ew';
+        vulColor = '#4ecdc4';  // Teal for EW vulnerable
+    } else if (vul === 'Both') {
+        vulClass = 'vul-both';
+        vulColor = '#ffd700';  // Gold for both vulnerable
+    }
 
     const optimumTextColored = optimum && optimum.text ? formatSuitWithColor(optimum.text) : '';
 
@@ -189,7 +203,7 @@ function renderHandDiagram(handData, boardNum, ddResult, optimum, lott) {
                     <div class="board-info-left">
                         <div class="date">${date}</div>
                         <div class="dealer">Dealer: ${dealer}</div>
-                        <div class="vul ${vul && vul.toLowerCase() !== 'none' && vul !== '-' ? 'vul-active' : ''}">Vuln: ${vul}</div>
+                        <div class="vul ${vulClass}" style="color: ${vulColor}; font-weight: bold;">Vuln: ${vul}</div>
                     </div>
                     
                     <!-- HCP Display - Right Side -->
