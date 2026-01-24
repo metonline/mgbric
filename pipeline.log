@@ -12,3 +12,256 @@
 2026-01-23 23:34:16,499 [INFO] Veri tutarlılığı kontrol ediliyor...
 2026-01-23 23:34:16,693 [INFO] Eksik veri yok
 2026-01-23 23:34:16,693 [INFO] Quick update tamamlandı: 0 board çekildi
+2026-01-24 01:18:34,343 [INFO] ============================================================
+2026-01-24 01:18:34,344 [INFO] QUICK UPDATE BAŞLADI
+2026-01-24 01:18:34,344 [INFO] ============================================================
+2026-01-24 01:18:34,344 [INFO] Event Registry yenileniyor...
+2026-01-24 01:18:34,612 [INFO] Veri tutarlılığı kontrol ediliyor...
+2026-01-24 01:18:34,824 [INFO] Eksik veri yok
+2026-01-24 01:18:34,825 [INFO] Quick update tamamlandı: 0 board çekildi
+2026-01-24 01:26:09,061 [INFO] ============================================================
+2026-01-24 01:26:09,062 [INFO] QUICK UPDATE BAŞLADI
+2026-01-24 01:26:09,062 [INFO] ============================================================
+2026-01-24 01:26:09,062 [INFO] Event Registry yenileniyor...
+2026-01-24 01:26:09,324 [INFO] Veri tutarlılığı kontrol ediliyor...
+2026-01-24 01:26:09,557 [INFO] ✅ Tüm veri başarılı şekilde çekildi
+2026-01-24 01:26:09,557 [INFO] 
+✅ Quick update tamamlandı: 0 board çekildi (0 deneme)
+2026-01-24 01:37:38,573 [INFO] ============================================================
+2026-01-24 01:37:38,574 [INFO] FULL UPDATE BAŞLADI
+2026-01-24 01:37:38,574 [INFO] ============================================================
+2026-01-24 01:37:38,574 [INFO] Event Registry kontrol ediliyor...
+2026-01-24 01:37:38,889 [INFO] Detaylı doğrulama yapılıyor...
+2026-01-24 01:37:39,123 [INFO] 
+📂 Yeni eventler için hands verilerini çek...
+2026-01-24 01:37:39,123 [ERROR] Full update hatası: 'DataFetcher' object has no attribute 'find_new_events'
+2026-01-24 01:37:49,250 [INFO] ============================================================
+2026-01-24 01:37:49,250 [INFO] FULL UPDATE BAŞLADI
+2026-01-24 01:37:49,250 [INFO] ============================================================
+2026-01-24 01:37:49,250 [INFO] Event Registry kontrol ediliyor...
+2026-01-24 01:37:49,500 [INFO] Detaylı doğrulama yapılıyor...
+2026-01-24 01:37:49,690 [INFO] 
+📂 Yeni eventler için hands verilerini çek...
+2026-01-24 01:37:49,690 [ERROR] Full update hatası: 'DataFetcher' object has no attribute 'find_new_events'
+2026-01-24 01:41:18,252 [INFO] ============================================================
+2026-01-24 01:41:18,252 [INFO] FULL UPDATE BAŞLADI
+2026-01-24 01:41:18,252 [INFO] ============================================================
+2026-01-24 01:41:18,252 [INFO] Event Registry kontrol ediliyor...
+2026-01-24 01:41:18,494 [INFO] Detaylı doğrulama yapılıyor...
+2026-01-24 01:41:18,689 [INFO] 
+📂 Yeni eventler için hands verilerini çek...
+2026-01-24 01:41:18,750 [INFO] 🔍 1572 yeni event bulundu
+2026-01-24 01:41:18,751 [INFO]   Hands çekiliyor: Event 276369 (01.01.2020)
+2026-01-24 01:41:30,834 [INFO]   Hands çekiliyor: Event 276427 (02.01.2020)
+2026-01-24 01:41:42,557 [INFO]   Hands çekiliyor: Event 276532 (03.01.2020)
+2026-01-24 01:41:56,125 [INFO]   Hands çekiliyor: Event 276637 (04.01.2020)
+2026-01-24 01:42:07,391 [INFO]   Hands çekiliyor: Event 276807 (06.01.2020)
+2026-01-24 01:42:20,067 [INFO]   Hands çekiliyor: Event 276897 (07.01.2020)
+2026-01-24 01:42:38,362 [INFO]   Hands çekiliyor: Event 277019 (08.01.2020)
+2026-01-24 01:42:55,060 [INFO]   Hands çekiliyor: Event 277117 (09.01.2020)
+2026-01-24 01:43:10,575 [INFO]   Hands çekiliyor: Event 277304 (11.01.2020)
+2026-01-24 01:43:23,450 [INFO]   Hands çekiliyor: Event 277514 (13.01.2020)
+2026-01-24 01:43:36,711 [INFO]   Hands çekiliyor: Event 277622 (14.01.2020)
+2026-01-24 01:43:50,292 [INFO]   Hands çekiliyor: Event 277725 (15.01.2020)
+2026-01-24 01:44:05,840 [INFO]   Hands çekiliyor: Event 277810 (15.01.2020)
+2026-01-24 01:44:17,712 [INFO]   Hands çekiliyor: Event 277860 (16.01.2020)
+2026-01-24 01:44:29,262 [INFO]   Hands çekiliyor: Event 277942 (10.01.2020)
+2026-01-24 01:44:40,766 [INFO]   Hands çekiliyor: Event 278079 (18.01.2020)
+2026-01-24 01:44:55,082 [INFO]   Hands çekiliyor: Event 278082 (17.01.2020)
+2026-01-24 01:45:07,693 [INFO]   Hands çekiliyor: Event 278234 (20.01.2020)
+2026-01-24 01:45:20,291 [INFO]   Hands çekiliyor: Event 278334 (21.01.2020)
+2026-01-24 01:45:44,188 [INFO]   Hands çekiliyor: Event 278435 (22.01.2020)
+2026-01-24 01:45:59,763 [INFO]   Hands çekiliyor: Event 278542 (23.01.2020)
+2026-01-24 01:46:17,214 [INFO]   Hands çekiliyor: Event 278640 (24.01.2020)
+2026-01-24 01:46:33,266 [INFO]   Hands çekiliyor: Event 278746 (25.01.2020)
+2026-01-24 01:46:44,888 [INFO]   Hands çekiliyor: Event 279043 (28.01.2020)
+2026-01-24 01:46:56,901 [INFO]   Hands çekiliyor: Event 279047 (27.01.2020)
+2026-01-24 01:47:08,833 [INFO]   Hands çekiliyor: Event 279166 (29.01.2020)
+2026-01-24 01:47:23,420 [INFO]   Hands çekiliyor: Event 279256 (30.01.2020)
+2026-01-24 01:47:37,660 [INFO]   Hands çekiliyor: Event 279382 (31.01.2020)
+2026-01-24 01:47:49,273 [INFO]   Hands çekiliyor: Event 279518 (01.02.2020)
+2026-01-24 01:48:00,548 [INFO]   Hands çekiliyor: Event 279759 (03.02.2020)
+2026-01-24 01:48:12,518 [INFO]   Hands çekiliyor: Event 279799 (04.02.2020)
+2026-01-24 01:48:28,806 [INFO]   Hands çekiliyor: Event 279919 (05.02.2020)
+2026-01-24 01:48:45,259 [INFO]   Hands çekiliyor: Event 279984 (05.02.2020)
+2026-01-24 01:49:00,135 [INFO]   Hands çekiliyor: Event 280019 (06.02.2020)
+2026-01-24 01:49:12,981 [INFO]   Hands çekiliyor: Event 280125 (07.02.2020)
+2026-01-24 01:49:30,997 [INFO]   Hands çekiliyor: Event 280240 (08.02.2020)
+2026-01-24 01:49:43,375 [INFO]   Hands çekiliyor: Event 280353 (10.02.2020)
+2026-01-24 01:49:55,040 [INFO]   Hands çekiliyor: Event 280542 (11.02.2020)
+2026-01-24 01:50:07,848 [INFO]   Hands çekiliyor: Event 280545 (12.02.2020)
+2026-01-24 01:50:21,455 [INFO]   Hands çekiliyor: Event 280656 (13.02.2020)
+2026-01-24 01:50:35,550 [INFO]   Hands çekiliyor: Event 280768 (14.02.2020)
+2026-01-24 01:50:52,189 [INFO]   Hands çekiliyor: Event 280889 (15.02.2020)
+2026-01-24 01:51:42,263 [INFO]   Hands çekiliyor: Event 281056 (17.02.2020)
+2026-01-24 01:52:04,160 [INFO]   Hands çekiliyor: Event 281163 (18.02.2020)
+2026-01-24 01:52:40,948 [INFO]   Hands çekiliyor: Event 281261 (19.02.2020)
+2026-01-24 01:53:05,078 [INFO]   Hands çekiliyor: Event 281357 (20.02.2020)
+2026-01-24 01:53:25,263 [INFO]   Hands çekiliyor: Event 281461 (21.02.2020)
+2026-01-24 01:53:48,990 [INFO]   Hands çekiliyor: Event 281577 (22.02.2020)
+2026-01-24 01:54:09,489 [INFO]   Hands çekiliyor: Event 281696 (23.02.2020)
+2026-01-24 01:54:28,623 [INFO]   Hands çekiliyor: Event 281793 (24.02.2020)
+2026-01-24 01:54:49,302 [INFO]   Hands çekiliyor: Event 281942 (25.02.2020)
+2026-01-24 01:55:09,801 [INFO]   Hands çekiliyor: Event 282049 (26.02.2020)
+2026-01-24 01:55:31,666 [INFO]   Hands çekiliyor: Event 282152 (27.02.2020)
+2026-01-24 01:55:55,324 [INFO]   Hands çekiliyor: Event 282230 (27.02.2020)
+2026-01-24 01:56:15,769 [INFO]   Hands çekiliyor: Event 282290 (28.02.2020)
+2026-01-24 01:56:36,699 [INFO]   Hands çekiliyor: Event 282454 (29.02.2020)
+2026-01-24 01:57:03,143 [INFO]   Hands çekiliyor: Event 282608 (02.03.2020)
+2026-01-24 01:57:23,340 [INFO]   Hands çekiliyor: Event 282713 (03.03.2020)
+2026-01-24 01:57:49,149 [INFO]   Hands çekiliyor: Event 282838 (04.03.2020)
+2026-01-24 02:04:15,165 [INFO] ============================================================
+2026-01-24 02:04:15,165 [INFO] QUICK UPDATE BAŞLADI
+2026-01-24 02:04:15,165 [INFO] ============================================================
+2026-01-24 02:04:15,166 [INFO] Event Registry yenileniyor...
+2026-01-24 02:04:15,461 [INFO] Veri tutarlılığı kontrol ediliyor...
+2026-01-24 02:04:15,724 [INFO] 
+📂 Yeni eventler için hands verilerini çek...
+2026-01-24 02:04:15,733 [INFO] 🔍 1572 yeni event bulundu
+2026-01-24 02:04:15,734 [INFO] ✅ Tüm veri başarılı şekilde çekildi
+2026-01-24 02:04:15,734 [INFO] 
+✅ Quick update tamamlandı: 0 board çekildi (0 deneme)
+2026-01-24 02:10:34,404 [INFO] ============================================================
+2026-01-24 02:10:34,405 [INFO] FULL UPDATE BAŞLADI
+2026-01-24 02:10:34,406 [INFO] ============================================================
+2026-01-24 02:10:34,406 [INFO] Event Registry kontrol ediliyor...
+2026-01-24 02:10:34,761 [INFO] Detaylı doğrulama yapılıyor...
+2026-01-24 02:10:35,040 [INFO] 
+📂 Yeni eventler için hands verilerini çek (2026+ only)...
+2026-01-24 02:10:35,051 [INFO] 🔍 1572 yeni event bulundu
+2026-01-24 02:10:35,052 [INFO] ✅ Tüm veri başarılı şekilde çekildi
+2026-01-24 02:10:35,053 [INFO] 
+✅ Full update tamamlandı: 0 board çekildi (0 deneme)
+2026-01-24 02:11:06,274 [INFO] ============================================================
+2026-01-24 02:11:06,274 [INFO] FULL UPDATE BAŞLADI
+2026-01-24 02:11:06,274 [INFO] ============================================================
+2026-01-24 02:11:06,275 [INFO] Event Registry kontrol ediliyor...
+2026-01-24 02:11:06,541 [INFO] Detaylı doğrulama yapılıyor...
+2026-01-24 02:11:06,739 [INFO] 
+📂 Yeni eventler için hands verilerini çek (2026+ only)...
+2026-01-24 02:11:06,746 [INFO] 🔍 1572 yeni event bulundu
+2026-01-24 02:11:06,746 [INFO] ✅ Tüm veri başarılı şekilde çekildi
+2026-01-24 02:11:06,746 [INFO] 
+✅ Full update tamamlandı: 0 board çekildi (0 deneme)
+2026-01-24 02:22:48,259 [INFO] ============================================================
+2026-01-24 02:22:48,260 [INFO] FULL UPDATE BAŞLADI
+2026-01-24 02:22:48,260 [INFO] ============================================================
+2026-01-24 02:22:48,260 [INFO] 
+📅 Vugraph calendar'dan yeni event'leri tarayıyor...
+2026-01-24 02:22:49,201 [INFO]   ✓ 23 yeni event bulundu
+2026-01-24 02:22:50,362 [INFO]   ✓ database.json güncellendi
+2026-01-24 02:22:50,362 [INFO] 
+Event Registry kontrol ediliyor...
+2026-01-24 02:22:50,788 [INFO] Detaylı doğrulama yapılıyor...
+2026-01-24 02:22:51,086 [INFO] 
+📂 Yeni eventler için hands verilerini çek (2026+ only)...
+2026-01-24 02:22:51,096 [INFO] 🔍 1574 yeni event bulundu
+2026-01-24 02:22:51,097 [INFO] ✅ Tüm veri başarılı şekilde çekildi
+2026-01-24 02:22:51,098 [INFO] 
+✅ Full update tamamlandı: 0 board çekildi (0 deneme)
+2026-01-24 02:23:39,541 [INFO] ============================================================
+2026-01-24 02:23:39,541 [INFO] FULL UPDATE BAŞLADI
+2026-01-24 02:23:39,541 [INFO] ============================================================
+2026-01-24 02:23:39,541 [INFO] 
+📅 Vugraph calendar'dan yeni event'leri tarayıyor...
+2026-01-24 02:23:40,369 [INFO]   ✓ Yeni event yok
+2026-01-24 02:23:40,370 [INFO] 
+Event Registry kontrol ediliyor...
+2026-01-24 02:23:40,667 [INFO] Detaylı doğrulama yapılıyor...
+2026-01-24 02:23:40,919 [INFO] 
+📂 Yeni eventler için hands verilerini çek (2026+ only)...
+2026-01-24 02:23:40,928 [INFO] 🔍 1574 yeni event bulundu
+2026-01-24 02:23:40,929 [INFO] ✅ Tüm veri başarılı şekilde çekildi
+2026-01-24 02:23:40,930 [INFO] 
+✅ Full update tamamlandı: 0 board çekildi (0 deneme)
+2026-01-24 02:30:06,690 [INFO] ============================================================
+2026-01-24 02:30:06,691 [INFO] QUICK UPDATE BAŞLADI
+2026-01-24 02:30:06,691 [INFO] ============================================================
+2026-01-24 02:30:06,691 [INFO] 
+📅 Vugraph calendar'dan yeni event'leri tarayıyor...
+2026-01-24 02:30:07,633 [INFO]   ✓ Yeni event yok
+2026-01-24 02:30:07,633 [INFO] 
+Event Registry yenileniyor...
+2026-01-24 02:30:07,910 [INFO] Veri tutarlılığı kontrol ediliyor...
+2026-01-24 02:30:08,141 [INFO] 
+📂 Yeni eventler için hands verilerini çek...
+2026-01-24 02:30:08,148 [INFO] 🔍 1574 yeni event bulundu
+2026-01-24 02:30:08,148 [INFO]   Hands çekiliyor: Event 405596 (23.01.2026)
+2026-01-24 02:30:22,008 [INFO] ✅ Tüm veri başarılı şekilde çekildi
+2026-01-24 02:30:22,008 [INFO] 
+✅ Quick update tamamlandı: 0 board çekildi (0 deneme)
+2026-01-24 02:30:55,890 [INFO] ============================================================
+2026-01-24 02:30:55,890 [INFO] FULL UPDATE BAŞLADI
+2026-01-24 02:30:55,890 [INFO] ============================================================
+2026-01-24 02:30:55,890 [INFO] 
+📅 Vugraph calendar'dan yeni event'leri tarayıyor...
+2026-01-24 02:30:56,520 [INFO]   ✓ Yeni event yok
+2026-01-24 02:30:56,521 [INFO] 
+Event Registry kontrol ediliyor...
+2026-01-24 02:30:56,757 [INFO] Detaylı doğrulama yapılıyor...
+2026-01-24 02:30:56,956 [INFO] 
+📂 Yeni eventler için hands verilerini çek (2026+ only)...
+2026-01-24 02:30:56,963 [INFO] 🔍 1574 yeni event bulundu
+2026-01-24 02:30:56,963 [INFO]   Hands çekiliyor: Event 405596 (23.01.2026)
+2026-01-24 02:31:08,021 [INFO] ✅ Tüm veri başarılı şekilde çekildi
+2026-01-24 02:31:08,021 [INFO] 
+✅ Full update tamamlandı: 0 board çekildi (0 deneme)
+2026-01-24 02:45:08,319 [INFO] ============================================================
+2026-01-24 02:45:08,319 [INFO] QUICK UPDATE BAŞLADI
+2026-01-24 02:45:08,334 [INFO] ============================================================
+2026-01-24 02:45:08,335 [INFO] 
+📅 Vugraph calendar'dan yeni event'leri tarayıyor...
+2026-01-24 02:45:09,204 [INFO]   ✓ Yeni event yok
+2026-01-24 02:45:09,204 [INFO] 
+Event Registry yenileniyor...
+2026-01-24 02:45:09,435 [INFO] Veri tutarlılığı kontrol ediliyor...
+2026-01-24 02:45:09,614 [INFO] 
+📂 Yeni eventler için hands verilerini çek...
+2026-01-24 02:45:09,637 [INFO] 🔍 1574 yeni event bulundu
+2026-01-24 02:45:09,638 [INFO]   Hands çekiliyor: Event 405596 (23.01.2026)
+2026-01-24 02:45:20,868 [INFO]     ✓ 30 el çekildi
+2026-01-24 02:45:20,883 [INFO] ✅ Tüm veri başarılı şekilde çekildi
+2026-01-24 02:45:20,884 [INFO] 
+✅ Quick update tamamlandı: 0 board çekildi (0 deneme)
+2026-01-24 02:46:23,391 [INFO] ============================================================
+2026-01-24 02:46:23,392 [INFO] QUICK UPDATE BAŞLADI
+2026-01-24 02:46:23,392 [INFO] ============================================================
+2026-01-24 02:46:23,392 [INFO] 
+📅 Vugraph calendar'dan yeni event'leri tarayıyor...
+2026-01-24 02:46:24,218 [INFO]   ✓ Yeni event yok
+2026-01-24 02:46:24,218 [INFO] 
+Event Registry yenileniyor...
+2026-01-24 02:46:24,554 [INFO] Veri tutarlılığı kontrol ediliyor...
+2026-01-24 02:46:24,772 [INFO] 
+📂 Yeni eventler için hands verilerini çek...
+2026-01-24 02:46:24,777 [INFO] 🔍 1574 yeni event bulundu
+2026-01-24 02:46:24,777 [INFO]   Hands çekiliyor: Event 405596 (23.01.2026)
+2026-01-24 02:46:36,777 [INFO]     ✓ 30 el çekildi
+2026-01-24 02:46:36,809 [INFO]   ✓ Hands veritabanı kaydedildi (690 toplam el)
+2026-01-24 02:46:36,809 [INFO] ✅ Tüm veri başarılı şekilde çekildi
+2026-01-24 02:46:36,809 [INFO] 
+✅ Quick update tamamlandı: 0 board çekildi (0 deneme)
+2026-01-24 02:53:16,546 [INFO] ============================================================
+2026-01-24 02:53:16,547 [INFO] QUICK UPDATE BAŞLADI
+2026-01-24 02:53:16,547 [INFO] ============================================================
+2026-01-24 02:53:16,547 [INFO] 
+📅 Vugraph calendar'dan yeni event'leri tarayıyor...
+2026-01-24 02:53:17,607 [INFO]   ✓ Yeni event yok
+2026-01-24 02:53:17,607 [INFO] 
+Event Registry yenileniyor...
+2026-01-24 02:53:17,858 [INFO] Veri tutarlılığı kontrol ediliyor...
+2026-01-24 02:53:18,063 [INFO] 
+📂 Yeni eventler için hands verilerini çek...
+2026-01-24 02:53:18,072 [INFO] 🔍 1573 yeni event bulundu
+2026-01-24 02:53:18,073 [INFO] 
+📊 Çekiliş #1: 1 event, 30 eksik board bulundu
+2026-01-24 02:58:20,951 [INFO] ✓ 30 board çekildi
+2026-01-24 02:58:20,952 [INFO] 
+📊 Çekiliş #2: 1 event, 30 eksik board bulundu
+2026-01-24 03:05:12,309 [INFO] ✓ 30 board çekildi
+2026-01-24 03:05:12,309 [INFO] 
+📊 Çekiliş #3: 1 event, 30 eksik board bulundu
+2026-01-24 03:11:11,950 [INFO] ✓ 30 board çekildi
+2026-01-24 03:11:11,950 [WARNING] ⚠️  1 event'de 30 board hâlâ eksik
+2026-01-24 03:11:11,951 [INFO] 
+✅ Quick update tamamlandı: 90 board çekildi (3 deneme)

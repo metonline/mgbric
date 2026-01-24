@@ -29,6 +29,17 @@ import sys
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from typing import Dict, List, Set, Optional, Tuple
 
+# Try to import Selenium for JavaScript-rendered pages
+try:
+    from selenium import webdriver
+    from selenium.webdriver.chrome.options import Options
+    from selenium.webdriver.support.ui import WebDriverWait
+    from selenium.webdriver.support import expected_conditions as EC
+    from selenium.webdriver.common.by import By
+    SELENIUM_AVAILABLE = True
+except ImportError:
+    SELENIUM_AVAILABLE = False
+
 # Local imports
 try:
     from event_registry import EventRegistry, get_event_id
@@ -194,9 +205,22 @@ class DataFetcher:
             return {'ns_count': 13, 'ew_count': 13, 'ns_names': {}, 'ew_names': {}}
     
     def fetch_hands_for_event(self, event_id: str) -> List[dict]:
-        """Bir event için el verilerini çek"""
+        """Bir event için el verilerini çek (Selenium fallback ile)"""
         hands = []
         date = self.get_date_for_event(event_id)
+        
+        # Önce normal yöntemle çek
+        hands = self._fetch_hands_regular(event_id, date)
+        
+        # Eğer hiç el çekilemediyse ve Selenium kullanılabilirse, Selenium'u kullan
+        if not hands and SELENIUM_AVAILABLE:
+            hands = self._fetch_hands_selenium(event_id, date)
+        
+        return hands
+    
+    def _fetch_hands_regular(self, event_id: str, date: str) -> List[dict]:
+        """Normal method ile hands çek"""
+        hands = []
         
         for board_num in range(1, 31):
             url = f'{BASE_URL}/boarddetails.php?event={event_id}&section=A&pair=1&direction=NS&board={board_num}'
@@ -223,31 +247,134 @@ class DataFetcher:
         
         return hands
     
-    def _parse_hand_diagram(self, soup) -> Optional[dict]:
-        """HTML'den el dağılımını parse et"""
+    def _fetch_hands_selenium(self, event_id: str, date: str) -> List[dict]:
+        """Selenium ile JavaScript-rendered hands çek"""
+        hands = []
+        
         try:
-            # Hand diagram table'ını bul
-            hand_div = soup.find('div', class_='handwrap')
-            if not hand_div:
+            options = Options()
+            options.add_argument('--headless')
+            options.add_argument('--no-sandbox')
+            options.add_argument('--disable-dev-shm-usage')
+            options.add_argument('--disable-gpu')
+            
+            driver = webdriver.Chrome(options=options)
+            
+            for board_num in range(1, 31):
+                url = f'{BASE_URL}/boarddetails.php?event={event_id}&section=A&pair=1&direction=NS&board={board_num}'
+                
+                try:
+                    driver.get(url)
+                    time.sleep(1)  # Wait for page load
+                    
+                    page_html = driver.page_source
+                    
+                    if 'Page not Found' in page_html:
+                        continue
+                    
+                    soup = BeautifulSoup(page_html, 'html.parser')
+                    hand_data = self._parse_hand_diagram(soup)
+                    
+                    if hand_data:
+                        hand_data['event_id'] = event_id
+                        hand_data['Tarih'] = date
+                        hand_data['Board'] = board_num
+                        hands.append(hand_data)
+                        
+                except Exception as e:
+                    continue
+            
+            driver.quit()
+            
+        except Exception as e:
+            pass  # Selenium failed, return empty
+        
+        return hands
+    
+    def _parse_hand_diagram(self, soup) -> Optional[dict]:
+        """HTML'den el dağılımını parse et - Working method from fetch_all_2026_boards.py"""
+        try:
+            # PROVEN METHOD: Look for bridgetable with oyuncu class cells
+            bridge_table = soup.find('table', class_='bridgetable')
+            if not bridge_table:
                 return None
             
-            # Her yön için kartları çıkar
-            hands = {'N': '', 'S': '', 'E': '', 'W': ''}
+            hands = {
+                'N': {'S': '', 'H': '', 'D': '', 'C': ''},
+                'S': {'S': '', 'H': '', 'D': '', 'C': ''},
+                'E': {'S': '', 'H': '', 'D': '', 'C': ''},
+                'W': {'S': '', 'H': '', 'D': '', 'C': ''}
+            }
             
-            for direction in ['N', 'S', 'E', 'W']:
-                dir_div = hand_div.find('div', class_=f'hand{direction.lower()}')
-                if dir_div:
-                    suits = []
-                    for suit_span in dir_div.find_all('span', class_='suit'):
-                        cards = suit_span.get_text(strip=True)
-                        cards = cards.replace('♠', '').replace('♥', '').replace('♦', '').replace('♣', '')
-                        suits.append(cards if cards else '-')
+            # Get player cells (oyuncu class)
+            player_cells = bridge_table.find_all('td', class_='oyuncu')
+            
+            if len(player_cells) < 4:
+                return None
+            
+            # Extract from each player cell - order: West, North, East, South
+            directions = ['W', 'N', 'E', 'S']
+            
+            for idx, cell in enumerate(player_cells):
+                if idx >= 4:
+                    break
+                
+                direction = directions[idx]
+                
+                # Find all img tags with suit images
+                suit_imgs = cell.find_all('img')
+                
+                # Extract suits and cards
+                for img in suit_imgs:
+                    # Get the alt attribute to determine suit
+                    alt_text = img.get('alt', '').lower()
                     
-                    if len(suits) == 4:
-                        hands[direction] = '.'.join(suits)
+                    suit = None
+                    if 'spade' in alt_text:
+                        suit = 'S'
+                    elif 'heart' in alt_text:
+                        suit = 'H'
+                    elif 'diamond' in alt_text:
+                        suit = 'D'
+                    elif 'club' in alt_text:
+                        suit = 'C'
+                    
+                    if not suit:
+                        continue
+                    
+                    # Get text immediately after the img tag
+                    next_elem = img.next_sibling
+                    cards = ''
+                    
+                    while next_elem:
+                        if isinstance(next_elem, str):
+                            text = str(next_elem).strip()
+                            if text and text != '<br />' and text != '-':
+                                cards = text.replace('<br />', '').replace('\n', '').strip()
+                                break
+                            if text == '-':
+                                cards = ''
+                                break
+                        next_elem = next_elem.next_sibling
+                    
+                    if cards:
+                        hands[direction][suit] = cards
             
-            if any(hands.values()):
-                return hands
+            # Convert to PBN format (S.H.D.C)
+            result = {}
+            for direction in ['N', 'S', 'E', 'W']:
+                spades = hands[direction].get('S', '')
+                hearts = hands[direction].get('H', '')
+                diamonds = hands[direction].get('D', '')
+                clubs = hands[direction].get('C', '')
+                pbn_hand = f"{spades}.{hearts}.{diamonds}.{clubs}"
+                # Only return if we got valid data
+                if any([spades, hearts, diamonds, clubs]):
+                    result[direction] = pbn_hand
+            
+            if result:
+                return result
+            
             return None
             
         except:

@@ -150,6 +150,43 @@ class EventRegistry:
         
         return result
     
+    def fetch_and_register_calendar_events(self) -> Dict[str, str]:
+        """
+        Vugraph calendar'dan yeni event'leri getir ve registry'ye ekle
+        
+        Returns:
+            Yeni eklenen event'ler: {date: event_id}
+        """
+        try:
+            import requests
+            from bs4 import BeautifulSoup
+            
+            BASE_URL = "https://clubs.vugraph.com/hosgoru"
+            response = requests.get(f"{BASE_URL}/calendar.php", timeout=10)
+            response.raise_for_status()
+            
+            soup = BeautifulSoup(response.content, 'html.parser')
+            new_events = {}
+            
+            # Find all calendar event links
+            for link in soup.find_all('a', href=True):
+                href = link.get('href', '')
+                if 'eventresults.php' in href:
+                    match = re.search(r'event=(\d+)', href)
+                    if match:
+                        event_id = match.group(1)
+                        # Try to extract date from context (this is a simple approach)
+                        # For full solution, would need to parse calendar structure
+                        if event_id not in self._event_to_date:
+                            # Don't add without date - need more parsing
+                            pass
+            
+            return new_events
+            
+        except Exception as e:
+            print(f"[EventRegistry] Calendar fetch error: {e}")
+            return {}
+    
     def validate_hands_database(self) -> List[dict]:
         """
         hands_database.json'daki event ID'leri doğrula

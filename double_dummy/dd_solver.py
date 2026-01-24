@@ -383,6 +383,11 @@ def main():
     # Filtreleme
     filtered_hands = hands.copy()
     
+    # Varsayılan olarak DD analizi OLMAyan elleri işle
+    filtered_hands = [h for h in filtered_hands if 'dd_analysis' not in h]
+    if filtered_hands:
+        print(f"⚡ DD analizi olmayan elleri işleniyor: {len(filtered_hands)} el")
+    
     if args.date:
         filtered_hands = [h for h in filtered_hands if h.get('date') == args.date]
         print(f"📅 {args.date} tarihli {len(filtered_hands)} el filtrelendi")
