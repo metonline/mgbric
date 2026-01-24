@@ -45538,5 +45538,1985 @@
         "tricks": 12
       }
     }
+  },
+  {
+    "N": "J7.974.T7654.QT3",
+    "S": "KT863.QJ6.A3.J54",
+    "E": "Q542.83.KQJ92.K2",
+    "W": "A9.AKT52.8.A9876",
+    "event_id": 405659,
+    "date": "24.01.2026",
+    "board": 1,
+    "dealer": "N",
+    "lin_string": "qx|o1|md|1SJ7H974DT7654CQT3,SQ542H83DKQJ92CK2,SKT863HQJ6DA3CJ54,|rh||ah|Board|sv|0|pg||",
+    "bbo_url": "https://www.bridgebase.com/tools/handviewer.html?lin=qx%7Co1%7Cmd%7C1SJ7H974DT7654CQT3%2CSQ542H83DKQJ92CK2%2CSKT863HQJ6DA3CJ54%2C%7Crh%7C%7Cah%7CBoard%7Csv%7C0%7Cpg%7C%7C",
+    "dd_analysis": {
+      "N": {
+        "C": 2,
+        "D": 2,
+        "H": 2,
+        "S": 4,
+        "NT": 2
+      },
+      "E": {
+        "C": 10,
+        "D": 11,
+        "H": 11,
+        "S": 9,
+        "NT": 10
+      },
+      "S": {
+        "C": 2,
+        "D": 2,
+        "H": 2,
+        "S": 4,
+        "NT": 3
+      },
+      "W": {
+        "C": 9,
+        "D": 10,
+        "H": 10,
+        "S": 9,
+        "NT": 10
+      }
+    },
+    "optimum": {
+      "text": "EW 11♥; -450",
+      "score": -450,
+      "declarer": "EW",
+      "contract": "11♥",
+      "level": 4,
+      "denom": "♥",
+      "tricks": 11
+    },
+    "lott": {
+      "total_tricks": 15,
+      "ns_fit": {
+        "suit": "♠",
+        "suit_code": "S",
+        "length": 7,
+        "tricks": 4
+      },
+      "ew_fit": {
+        "suit": "♥",
+        "suit_code": "H",
+        "length": 7,
+        "tricks": 11
+      }
+    }
+  },
+  {
+    "N": "Q43.63.AJ653.J86",
+    "S": "JT985.A9.T2.AQ92",
+    "E": "AK62.Q742.Q987.T",
+    "W": "7.KJT85.K4.K7543",
+    "event_id": 405659,
+    "date": "24.01.2026",
+    "board": 2,
+    "dealer": "E",
+    "lin_string": "qx|o1|md|2SAK62HQ742DQ987CT,SJT985HA9DT2CAQ92,S7HKJT85DK4CK7543,|rh||ah|Board|sv|0|pg||",
+    "bbo_url": "https://www.bridgebase.com/tools/handviewer.html?lin=qx%7Co1%7Cmd%7C2SAK62HQ742DQ987CT%2CSJT985HA9DT2CAQ92%2CS7HKJT85DK4CK7543%2C%7Crh%7C%7Cah%7CBoard%7Csv%7C0%7Cpg%7C%7C",
+    "dd_analysis": {
+      "N": {
+        "C": 5,
+        "D": 6,
+        "H": 3,
+        "S": 7,
+        "NT": 5
+      },
+      "E": {
+        "C": 7,
+        "D": 7,
+        "H": 10,
+        "S": 6,
+        "NT": 7
+      },
+      "S": {
+        "C": 5,
+        "D": 6,
+        "H": 3,
+        "S": 7,
+        "NT": 5
+      },
+      "W": {
+        "C": 7,
+        "D": 7,
+        "H": 10,
+        "S": 6,
+        "NT": 7
+      }
+    },
+    "optimum": {
+      "text": "EW 10♥; -420",
+      "score": -420,
+      "declarer": "EW",
+      "contract": "10♥",
+      "level": 4,
+      "denom": "♥",
+      "tricks": 10
+    },
+    "lott": {
+      "total_tricks": 17,
+      "ns_fit": {
+        "suit": "♠",
+        "suit_code": "S",
+        "length": 8,
+        "tricks": 7
+      },
+      "ew_fit": {
+        "suit": "♥",
+        "suit_code": "H",
+        "length": 9,
+        "tricks": 10
+      }
+    }
+  },
+  {
+    "N": "K53.K742.A96.QJ5",
+    "S": "QJ987642.5.T87.7",
+    "E": "T.JT93.Q52.T9632",
+    "W": "A.AQ86.KJ43.AK84",
+    "event_id": 405659,
+    "date": "24.01.2026",
+    "board": 3,
+    "dealer": "S",
+    "lin_string": "qx|o1|md|3SQJ987642H5DT87C7,SAHAQ86DKJ43CAK84,SK53HK742DA96CQJ5,|rh||ah|Board|sv|0|pg||",
+    "bbo_url": "https://www.bridgebase.com/tools/handviewer.html?lin=qx%7Co1%7Cmd%7C3SQJ987642H5DT87C7%2CSAHAQ86DKJ43CAK84%2CSK53HK742DA96CQJ5%2C%7Crh%7C%7Cah%7CBoard%7Csv%7C0%7Cpg%7C%7C",
+    "dd_analysis": {
+      "N": {
+        "C": 3,
+        "D": 4,
+        "H": 3,
+        "S": 8,
+        "NT": 6
+      },
+      "E": {
+        "C": 10,
+        "D": 9,
+        "H": 10,
+        "S": 4,
+        "NT": 5
+      },
+      "S": {
+        "C": 3,
+        "D": 4,
+        "H": 3,
+        "S": 8,
+        "NT": 6
+      },
+      "W": {
+        "C": 10,
+        "D": 9,
+        "H": 10,
+        "S": 5,
+        "NT": 5
+      }
+    },
+    "optimum": {
+      "text": "NS 10♠; -300",
+      "score": -300,
+      "declarer": "NS",
+      "contract": "10♠",
+      "level": 4,
+      "denom": "♠",
+      "tricks": 10
+    },
+    "lott": {
+      "total_tricks": 18,
+      "ns_fit": {
+        "suit": "♠",
+        "suit_code": "S",
+        "length": 11,
+        "tricks": 8
+      },
+      "ew_fit": {
+        "suit": "♣",
+        "suit_code": "C",
+        "length": 9,
+        "tricks": 10
+      }
+    }
+  },
+  {
+    "N": "KT73.KQ932.T8.KJ",
+    "S": "65.J76.K65.A7643",
+    "E": "AQ942.A8.Q9732.T",
+    "W": "J8.T54.AJ4.Q9852",
+    "event_id": 405659,
+    "date": "24.01.2026",
+    "board": 4,
+    "dealer": "W",
+    "lin_string": "qx|o1|md|4SJ8HT54DAJ4CQ9852,SKT73HKQ932DT8CKJ,SAQ942HA8DQ9732CT,|rh||ah|Board|sv|0|pg||",
+    "bbo_url": "https://www.bridgebase.com/tools/handviewer.html?lin=qx%7Co1%7Cmd%7C4SJ8HT54DAJ4CQ9852%2CSKT73HKQ932DT8CKJ%2CSAQ942HA8DQ9732CT%2C%7Crh%7C%7Cah%7CBoard%7Csv%7C0%7Cpg%7C%7C",
+    "dd_analysis": {
+      "N": {
+        "C": 5,
+        "D": 3,
+        "H": 6,
+        "S": 3,
+        "NT": 3
+      },
+      "E": {
+        "C": 7,
+        "D": 10,
+        "H": 6,
+        "S": 9,
+        "NT": 9
+      },
+      "S": {
+        "C": 5,
+        "D": 3,
+        "H": 6,
+        "S": 3,
+        "NT": 4
+      },
+      "W": {
+        "C": 7,
+        "D": 10,
+        "H": 6,
+        "S": 9,
+        "NT": 9
+      }
+    },
+    "optimum": {
+      "text": "NS 9NT; -400",
+      "score": -400,
+      "declarer": "NS",
+      "contract": "9NT",
+      "level": 3,
+      "denom": "NT",
+      "tricks": 9
+    },
+    "lott": {
+      "total_tricks": 16,
+      "ns_fit": {
+        "suit": "♥",
+        "suit_code": "H",
+        "length": 8,
+        "tricks": 6
+      },
+      "ew_fit": {
+        "suit": "♦",
+        "suit_code": "D",
+        "length": 8,
+        "tricks": 10
+      }
+    }
+  },
+  {
+    "N": "K74.Q86.863.QT95",
+    "S": "QJ92.AJ943.KQ4.J",
+    "E": "63.KT72.AT97.K83",
+    "W": "AT85.5.J52.A7642",
+    "event_id": 405659,
+    "date": "24.01.2026",
+    "board": 5,
+    "dealer": "N",
+    "lin_string": "qx|o1|md|1SK74HQ86D863CQT95,S63HKT72DAT97CK83,SQJ92HAJ943DKQ4CJ,|rh||ah|Board|sv|0|pg||",
+    "bbo_url": "https://www.bridgebase.com/tools/handviewer.html?lin=qx%7Co1%7Cmd%7C1SK74HQ86D863CQT95%2CS63HKT72DAT97CK83%2CSQJ92HAJ943DKQ4CJ%2C%7Crh%7C%7Cah%7CBoard%7Csv%7C0%7Cpg%7C%7C",
+    "dd_analysis": {
+      "N": {
+        "C": 6,
+        "D": 6,
+        "H": 8,
+        "S": 7,
+        "NT": 7
+      },
+      "E": {
+        "C": 7,
+        "D": 7,
+        "H": 5,
+        "S": 6,
+        "NT": 6
+      },
+      "S": {
+        "C": 6,
+        "D": 6,
+        "H": 8,
+        "S": 7,
+        "NT": 7
+      },
+      "W": {
+        "C": 7,
+        "D": 7,
+        "H": 5,
+        "S": 6,
+        "NT": 6
+      }
+    },
+    "optimum": {
+      "text": "NS 8♥; +110",
+      "score": 110,
+      "declarer": "NS",
+      "contract": "8♥",
+      "level": 2,
+      "denom": "♥",
+      "tricks": 8
+    },
+    "lott": {
+      "total_tricks": 15,
+      "ns_fit": {
+        "suit": "♥",
+        "suit_code": "H",
+        "length": 8,
+        "tricks": 8
+      },
+      "ew_fit": {
+        "suit": "♣",
+        "suit_code": "C",
+        "length": 8,
+        "tricks": 7
+      }
+    }
+  },
+  {
+    "N": "KT87542.52.A.AJT",
+    "S": "QJ.AJT.KQ64.K853",
+    "E": "A6.KQ976.J82.974",
+    "W": "93.843.T9753.Q62",
+    "event_id": 405659,
+    "date": "24.01.2026",
+    "board": 6,
+    "dealer": "E",
+    "lin_string": "qx|o1|md|2SA6HKQ976DJ82C974,SQJHAJTDKQ64CK853,S93H843DT9753CQ62,|rh||ah|Board|sv|0|pg||",
+    "bbo_url": "https://www.bridgebase.com/tools/handviewer.html?lin=qx%7Co1%7Cmd%7C2SA6HKQ976DJ82C974%2CSQJHAJTDKQ64CK853%2CS93H843DT9753CQ62%2C%7Crh%7C%7Cah%7CBoard%7Csv%7C0%7Cpg%7C%7C",
+    "dd_analysis": {
+      "N": {
+        "C": 11,
+        "D": 9,
+        "H": 9,
+        "S": 12,
+        "NT": 11
+      },
+      "E": {
+        "C": 1,
+        "D": 4,
+        "H": 4,
+        "S": 1,
+        "NT": 1
+      },
+      "S": {
+        "C": 11,
+        "D": 9,
+        "H": 9,
+        "S": 12,
+        "NT": 11
+      },
+      "W": {
+        "C": 1,
+        "D": 4,
+        "H": 4,
+        "S": 1,
+        "NT": 1
+      }
+    },
+    "optimum": {
+      "text": "NS 12♠; +980",
+      "score": 980,
+      "declarer": "NS",
+      "contract": "12♠",
+      "level": 6,
+      "denom": "♠",
+      "tricks": 12
+    },
+    "lott": {
+      "total_tricks": 16,
+      "ns_fit": {
+        "suit": "♠",
+        "suit_code": "S",
+        "length": 9,
+        "tricks": 12
+      },
+      "ew_fit": {
+        "suit": "♥",
+        "suit_code": "H",
+        "length": 8,
+        "tricks": 4
+      }
+    }
+  },
+  {
+    "N": "Q.K93.KT96.AQ965",
+    "S": "AJ76532.T64..KT8",
+    "E": "984.752.Q732.J72",
+    "W": "KT.AQJ8.AJ854.43",
+    "event_id": 405659,
+    "date": "24.01.2026",
+    "board": 7,
+    "dealer": "S",
+    "lin_string": "qx|o1|md|3SAJ76532HT64DCKT8,SKTHAQJ8DAJ854C43,SQHK93DKT96CAQ965,|rh||ah|Board|sv|0|pg||",
+    "bbo_url": "https://www.bridgebase.com/tools/handviewer.html?lin=qx%7Co1%7Cmd%7C3SAJ76532HT64DCKT8%2CSKTHAQJ8DAJ854C43%2CSQHK93DKT96CAQ965%2C%7Crh%7C%7Cah%7CBoard%7Csv%7C0%7Cpg%7C%7C",
+    "dd_analysis": {
+      "N": {
+        "C": 11,
+        "D": 6,
+        "H": 8,
+        "S": 10,
+        "NT": 8
+      },
+      "E": {
+        "C": 1,
+        "D": 7,
+        "H": 5,
+        "S": 2,
+        "NT": 3
+      },
+      "S": {
+        "C": 11,
+        "D": 6,
+        "H": 8,
+        "S": 10,
+        "NT": 8
+      },
+      "W": {
+        "C": 1,
+        "D": 7,
+        "H": 5,
+        "S": 2,
+        "NT": 3
+      }
+    },
+    "optimum": {
+      "text": "NS 10♠; +420",
+      "score": 420,
+      "declarer": "NS",
+      "contract": "10♠",
+      "level": 4,
+      "denom": "♠",
+      "tricks": 10
+    },
+    "lott": {
+      "total_tricks": 18,
+      "ns_fit": {
+        "suit": "♣",
+        "suit_code": "C",
+        "length": 8,
+        "tricks": 11
+      },
+      "ew_fit": {
+        "suit": "♦",
+        "suit_code": "D",
+        "length": 9,
+        "tricks": 7
+      }
+    }
+  },
+  {
+    "N": "KQJ94.AK763.A.Q7",
+    "S": "765.J54.Q875.983",
+    "E": "3.Q9.JT432.AJT52",
+    "W": "AT82.T82.K96.K64",
+    "event_id": 405659,
+    "date": "24.01.2026",
+    "board": 8,
+    "dealer": "W",
+    "lin_string": "qx|o1|md|4SAT82HT82DK96CK64,SKQJ94HAK763DACQ7,S3HQ9DJT432CAJT52,|rh||ah|Board|sv|0|pg||",
+    "bbo_url": "https://www.bridgebase.com/tools/handviewer.html?lin=qx%7Co1%7Cmd%7C4SAT82HT82DK96CK64%2CSKQJ94HAK763DACQ7%2CS3HQ9DJT432CAJT52%2C%7Crh%7C%7Cah%7CBoard%7Csv%7C0%7Cpg%7C%7C",
+    "dd_analysis": {
+      "N": {
+        "C": 4,
+        "D": 4,
+        "H": 8,
+        "S": 10,
+        "NT": 5
+      },
+      "E": {
+        "C": 9,
+        "D": 9,
+        "H": 3,
+        "S": 3,
+        "NT": 6
+      },
+      "S": {
+        "C": 4,
+        "D": 4,
+        "H": 8,
+        "S": 10,
+        "NT": 5
+      },
+      "W": {
+        "C": 9,
+        "D": 9,
+        "H": 3,
+        "S": 3,
+        "NT": 6
+      }
+    },
+    "optimum": {
+      "text": "EW 11♦; +300",
+      "score": 300,
+      "declarer": "EW",
+      "contract": "11♦",
+      "level": 5,
+      "denom": "♦",
+      "tricks": 11
+    },
+    "lott": {
+      "total_tricks": 19,
+      "ns_fit": {
+        "suit": "♠",
+        "suit_code": "S",
+        "length": 8,
+        "tricks": 10
+      },
+      "ew_fit": {
+        "suit": "♦",
+        "suit_code": "D",
+        "length": 8,
+        "tricks": 9
+      }
+    }
+  },
+  {
+    "N": "T72.Q763.KJT7.K2",
+    "S": "KJ5.T.Q864.J9764",
+    "E": "Q9.A542.A953.AQ5",
+    "W": "A8643.KJ98.2.T83",
+    "event_id": 405659,
+    "date": "24.01.2026",
+    "board": 9,
+    "dealer": "N",
+    "lin_string": "qx|o1|md|1ST72HQ763DKJT7CK2,SQ9HA542DA953CAQ5,SKJ5HTDQ864CJ9764,|rh||ah|Board|sv|0|pg||",
+    "bbo_url": "https://www.bridgebase.com/tools/handviewer.html?lin=qx%7Co1%7Cmd%7C1ST72HQ763DKJT7CK2%2CSQ9HA542DA953CAQ5%2CSKJ5HTDQ864CJ9764%2C%7Crh%7C%7Cah%7CBoard%7Csv%7C0%7Cpg%7C%7C",
+    "dd_analysis": {
+      "N": {
+        "C": 5,
+        "D": 6,
+        "H": 3,
+        "S": 3,
+        "NT": 5
+      },
+      "E": {
+        "C": 8,
+        "D": 7,
+        "H": 10,
+        "S": 10,
+        "NT": 8
+      },
+      "S": {
+        "C": 5,
+        "D": 6,
+        "H": 3,
+        "S": 3,
+        "NT": 5
+      },
+      "W": {
+        "C": 8,
+        "D": 6,
+        "H": 10,
+        "S": 10,
+        "NT": 8
+      }
+    },
+    "optimum": {
+      "text": "EW 10♠; -420",
+      "score": -420,
+      "declarer": "EW",
+      "contract": "10♠",
+      "level": 4,
+      "denom": "♠",
+      "tricks": 10
+    },
+    "lott": {
+      "total_tricks": 16,
+      "ns_fit": {
+        "suit": "♦",
+        "suit_code": "D",
+        "length": 8,
+        "tricks": 6
+      },
+      "ew_fit": {
+        "suit": "♥",
+        "suit_code": "H",
+        "length": 8,
+        "tricks": 10
+      }
+    }
+  },
+  {
+    "N": "KQT2.T863.K.K954",
+    "S": "A84.AKJ.T53.AQ86",
+    "E": "J973.92.AQJ6.732",
+    "W": "65.Q754.98742.JT",
+    "event_id": 405659,
+    "date": "24.01.2026",
+    "board": 10,
+    "dealer": "E",
+    "lin_string": "qx|o1|md|2SJ973H92DAQJ6C732,SA84HAKJDT53CAQ86,S65HQ754D98742CJT,|rh||ah|Board|sv|0|pg||",
+    "bbo_url": "https://www.bridgebase.com/tools/handviewer.html?lin=qx%7Co1%7Cmd%7C2SJ973H92DAQJ6C732%2CSA84HAKJDT53CAQ86%2CS65HQ754D98742CJT%2C%7Crh%7C%7Cah%7CBoard%7Csv%7C0%7Cpg%7C%7C",
+    "dd_analysis": {
+      "N": {
+        "C": 11,
+        "D": 6,
+        "H": 10,
+        "S": 10,
+        "NT": 8
+      },
+      "E": {
+        "C": 2,
+        "D": 6,
+        "H": 3,
+        "S": 3,
+        "NT": 3
+      },
+      "S": {
+        "C": 11,
+        "D": 6,
+        "H": 10,
+        "S": 10,
+        "NT": 8
+      },
+      "W": {
+        "C": 2,
+        "D": 6,
+        "H": 3,
+        "S": 3,
+        "NT": 3
+      }
+    },
+    "optimum": {
+      "text": "NS 10♠; +420",
+      "score": 420,
+      "declarer": "NS",
+      "contract": "10♠",
+      "level": 4,
+      "denom": "♠",
+      "tricks": 10
+    },
+    "lott": {
+      "total_tricks": 17,
+      "ns_fit": {
+        "suit": "♣",
+        "suit_code": "C",
+        "length": 8,
+        "tricks": 11
+      },
+      "ew_fit": {
+        "suit": "♦",
+        "suit_code": "D",
+        "length": 9,
+        "tricks": 6
+      }
+    }
+  },
+  {
+    "N": "T962.AJ53.K.J432",
+    "S": "J853.K.T7.AKQT97",
+    "E": "Q74.T7.A985432.5",
+    "W": "AK.Q98642.QJ6.86",
+    "event_id": 405659,
+    "date": "24.01.2026",
+    "board": 11,
+    "dealer": "S",
+    "lin_string": "qx|o1|md|3SJ853HKDT7CAKQT97,SAKHQ98642DQJ6C86,ST962HAJ53DKCJ432,|rh||ah|Board|sv|0|pg||",
+    "bbo_url": "https://www.bridgebase.com/tools/handviewer.html?lin=qx%7Co1%7Cmd%7C3SJ853HKDT7CAKQT97%2CSAKHQ98642DQJ6C86%2CST962HAJ53DKCJ432%2C%7Crh%7C%7Cah%7CBoard%7Csv%7C0%7Cpg%7C%7C",
+    "dd_analysis": {
+      "N": {
+        "C": 9,
+        "D": 2,
+        "H": 5,
+        "S": 9,
+        "NT": 3
+      },
+      "E": {
+        "C": 4,
+        "D": 9,
+        "H": 8,
+        "S": 4,
+        "NT": 5
+      },
+      "S": {
+        "C": 9,
+        "D": 2,
+        "H": 5,
+        "S": 9,
+        "NT": 3
+      },
+      "W": {
+        "C": 4,
+        "D": 9,
+        "H": 8,
+        "S": 4,
+        "NT": 5
+      }
+    },
+    "optimum": {
+      "text": "EW 10♦; +100",
+      "score": 100,
+      "declarer": "EW",
+      "contract": "10♦",
+      "level": 4,
+      "denom": "♦",
+      "tricks": 10
+    },
+    "lott": {
+      "total_tricks": 18,
+      "ns_fit": {
+        "suit": "♣",
+        "suit_code": "C",
+        "length": 10,
+        "tricks": 9
+      },
+      "ew_fit": {
+        "suit": "♦",
+        "suit_code": "D",
+        "length": 10,
+        "tricks": 9
+      }
+    }
+  },
+  {
+    "N": "95.AJ762.K854.83",
+    "S": "AQ87432.93.AJ3.Q",
+    "E": "J.KT54.6.AKJT642",
+    "W": "KT6.Q8.QT972.975",
+    "event_id": 405659,
+    "date": "24.01.2026",
+    "board": 12,
+    "dealer": "W",
+    "lin_string": "qx|o1|md|4SKT6HQ8DQT972C975,S95HAJ762DK854C83,SJHKT54D6CAKJT642,|rh||ah|Board|sv|0|pg||",
+    "bbo_url": "https://www.bridgebase.com/tools/handviewer.html?lin=qx%7Co1%7Cmd%7C4SKT6HQ8DQT972C975%2CS95HAJ762DK854C83%2CSJHKT54D6CAKJT642%2C%7Crh%7C%7Cah%7CBoard%7Csv%7C0%7Cpg%7C%7C",
+    "dd_analysis": {
+      "N": {
+        "C": 3,
+        "D": 7,
+        "H": 7,
+        "S": 9,
+        "NT": 4
+      },
+      "E": {
+        "C": 10,
+        "D": 6,
+        "H": 6,
+        "S": 4,
+        "NT": 9
+      },
+      "S": {
+        "C": 3,
+        "D": 7,
+        "H": 6,
+        "S": 9,
+        "NT": 4
+      },
+      "W": {
+        "C": 10,
+        "D": 6,
+        "H": 6,
+        "S": 4,
+        "NT": 9
+      }
+    },
+    "optimum": {
+      "text": "NS 10♠; -100",
+      "score": -100,
+      "declarer": "NS",
+      "contract": "10♠",
+      "level": 4,
+      "denom": "♠",
+      "tricks": 10
+    },
+    "lott": {
+      "total_tricks": 19,
+      "ns_fit": {
+        "suit": "♠",
+        "suit_code": "S",
+        "length": 9,
+        "tricks": 9
+      },
+      "ew_fit": {
+        "suit": "♣",
+        "suit_code": "C",
+        "length": 10,
+        "tricks": 10
+      }
+    }
+  },
+  {
+    "N": "754.J6.JT9532.86",
+    "S": "JT3.QT972.KQ.AJT",
+    "E": "AKQ96.A4.A76.K72",
+    "W": "82.K853.84.Q9543",
+    "event_id": 405659,
+    "date": "24.01.2026",
+    "board": 13,
+    "dealer": "N",
+    "lin_string": "qx|o1|md|1S754HJ6DJT9532C86,SAKQ96HA4DA76CK72,SJT3HQT972DKQCAJT,|rh||ah|Board|sv|0|pg||",
+    "bbo_url": "https://www.bridgebase.com/tools/handviewer.html?lin=qx%7Co1%7Cmd%7C1S754HJ6DJT9532C86%2CSAKQ96HA4DA76CK72%2CSJT3HQT972DKQCAJT%2C%7Crh%7C%7Cah%7CBoard%7Csv%7C0%7Cpg%7C%7C",
+    "dd_analysis": {
+      "N": {
+        "C": 2,
+        "D": 6,
+        "H": 4,
+        "S": 3,
+        "NT": 3
+      },
+      "E": {
+        "C": 11,
+        "D": 7,
+        "H": 9,
+        "S": 10,
+        "NT": 10
+      },
+      "S": {
+        "C": 2,
+        "D": 6,
+        "H": 4,
+        "S": 3,
+        "NT": 3
+      },
+      "W": {
+        "C": 11,
+        "D": 7,
+        "H": 9,
+        "S": 10,
+        "NT": 10
+      }
+    },
+    "optimum": {
+      "text": "NS 10NT; -430",
+      "score": -430,
+      "declarer": "NS",
+      "contract": "10NT",
+      "level": 3,
+      "denom": "NT",
+      "tricks": 10
+    },
+    "lott": {
+      "total_tricks": 17,
+      "ns_fit": {
+        "suit": "♦",
+        "suit_code": "D",
+        "length": 8,
+        "tricks": 6
+      },
+      "ew_fit": {
+        "suit": "♣",
+        "suit_code": "C",
+        "length": 8,
+        "tricks": 11
+      }
+    }
+  },
+  {
+    "N": "KQ76.KJT852.K7.9",
+    "S": "T93.3.AQ5432.AK2",
+    "E": "A2.974.J9.QJT853",
+    "W": "J854.AQ6.T86.764",
+    "event_id": 405659,
+    "date": "24.01.2026",
+    "board": 14,
+    "dealer": "E",
+    "lin_string": "qx|o1|md|2SA2H974DJ9CQJT853,ST93H3DAQ5432CAK2,SJ854HAQ6DT86C764,|rh||ah|Board|sv|0|pg||",
+    "bbo_url": "https://www.bridgebase.com/tools/handviewer.html?lin=qx%7Co1%7Cmd%7C2SA2H974DJ9CQJT853%2CST93H3DAQ5432CAK2%2CSJ854HAQ6DT86C764%2C%7Crh%7C%7Cah%7CBoard%7Csv%7C0%7Cpg%7C%7C",
+    "dd_analysis": {
+      "N": {
+        "C": 7,
+        "D": 11,
+        "H": 9,
+        "S": 10,
+        "NT": 11
+      },
+      "E": {
+        "C": 6,
+        "D": 2,
+        "H": 3,
+        "S": 2,
+        "NT": 2
+      },
+      "S": {
+        "C": 7,
+        "D": 11,
+        "H": 9,
+        "S": 10,
+        "NT": 11
+      },
+      "W": {
+        "C": 6,
+        "D": 2,
+        "H": 3,
+        "S": 3,
+        "NT": 2
+      }
+    },
+    "optimum": {
+      "text": "NS 11NT; +460",
+      "score": 460,
+      "declarer": "NS",
+      "contract": "11NT",
+      "level": 3,
+      "denom": "NT",
+      "tricks": 11
+    },
+    "lott": {
+      "total_tricks": 17,
+      "ns_fit": {
+        "suit": "♦",
+        "suit_code": "D",
+        "length": 8,
+        "tricks": 11
+      },
+      "ew_fit": {
+        "suit": "♣",
+        "suit_code": "C",
+        "length": 9,
+        "tricks": 6
+      }
+    }
+  },
+  {
+    "N": "K74.A8.AJ5.AQ952",
+    "S": "AQJ965.764.Q842.",
+    "E": "T.JT952.K976.K84",
+    "W": "832.KQ3.T3.JT763",
+    "event_id": 405659,
+    "date": "24.01.2026",
+    "board": 15,
+    "dealer": "S",
+    "lin_string": "qx|o1|md|3SAQJ965H764DQ842C,S832HKQ3DT3CJT763,SK74HA8DAJ5CAQ952,|rh||ah|Board|sv|0|pg||",
+    "bbo_url": "https://www.bridgebase.com/tools/handviewer.html?lin=qx%7Co1%7Cmd%7C3SAQJ965H764DQ842C%2CS832HKQ3DT3CJT763%2CSK74HA8DAJ5CAQ952%2C%7Crh%7C%7Cah%7CBoard%7Csv%7C0%7Cpg%7C%7C",
+    "dd_analysis": {
+      "N": {
+        "C": 7,
+        "D": 10,
+        "H": 7,
+        "S": 12,
+        "NT": 10
+      },
+      "E": {
+        "C": 5,
+        "D": 2,
+        "H": 6,
+        "S": 1,
+        "NT": 2
+      },
+      "S": {
+        "C": 7,
+        "D": 10,
+        "H": 7,
+        "S": 12,
+        "NT": 10
+      },
+      "W": {
+        "C": 5,
+        "D": 2,
+        "H": 6,
+        "S": 1,
+        "NT": 2
+      }
+    },
+    "optimum": {
+      "text": "NS 12♠; +980",
+      "score": 980,
+      "declarer": "NS",
+      "contract": "12♠",
+      "level": 6,
+      "denom": "♠",
+      "tricks": 12
+    },
+    "lott": {
+      "total_tricks": 18,
+      "ns_fit": {
+        "suit": "♠",
+        "suit_code": "S",
+        "length": 9,
+        "tricks": 12
+      },
+      "ew_fit": {
+        "suit": "♥",
+        "suit_code": "H",
+        "length": 8,
+        "tricks": 6
+      }
+    }
+  },
+  {
+    "N": "QT642.QJ87.T2.86",
+    "S": "AJ9753.542.8.942",
+    "E": "8.T6.AJ953.KQT73",
+    "W": "K.AK93.KQ764.AJ5",
+    "event_id": 405659,
+    "date": "24.01.2026",
+    "board": 16,
+    "dealer": "W",
+    "lin_string": "qx|o1|md|4SKHAK93DKQ764CAJ5,SQT642HQJ87DT2C86,S8HT6DAJ953CKQT73,|rh||ah|Board|sv|0|pg||",
+    "bbo_url": "https://www.bridgebase.com/tools/handviewer.html?lin=qx%7Co1%7Cmd%7C4SKHAK93DKQ764CAJ5%2CSQT642HQJ87DT2C86%2CS8HT6DAJ953CKQT73%2C%7Crh%7C%7Cah%7CBoard%7Csv%7C0%7Cpg%7C%7C",
+    "dd_analysis": {
+      "N": {
+        "C": 1,
+        "D": 0,
+        "H": 3,
+        "S": 7,
+        "NT": 1
+      },
+      "E": {
+        "C": 12,
+        "D": 12,
+        "H": 9,
+        "S": 5,
+        "NT": 7
+      },
+      "S": {
+        "C": 1,
+        "D": 0,
+        "H": 3,
+        "S": 7,
+        "NT": 1
+      },
+      "W": {
+        "C": 12,
+        "D": 12,
+        "H": 9,
+        "S": 5,
+        "NT": 7
+      }
+    },
+    "optimum": {
+      "text": "EW 12♦; -920",
+      "score": -920,
+      "declarer": "EW",
+      "contract": "12♦",
+      "level": 6,
+      "denom": "♦",
+      "tricks": 12
+    },
+    "lott": {
+      "total_tricks": 19,
+      "ns_fit": {
+        "suit": "♠",
+        "suit_code": "S",
+        "length": 11,
+        "tricks": 7
+      },
+      "ew_fit": {
+        "suit": "♦",
+        "suit_code": "D",
+        "length": 10,
+        "tricks": 12
+      }
+    }
+  },
+  {
+    "N": "T982.Q8652.65.Q2",
+    "S": "74.AJ973.K74.J63",
+    "E": "QJ3.K.T32.AKT985",
+    "W": "AK65.T4.AQJ98.74",
+    "event_id": 405659,
+    "date": "24.01.2026",
+    "board": 17,
+    "dealer": "N",
+    "lin_string": "qx|o1|md|1ST982HQ8652D65CQ2,SQJ3HKDT32CAKT985,S74HAJ973DK74CJ63,|rh||ah|Board|sv|0|pg||",
+    "bbo_url": "https://www.bridgebase.com/tools/handviewer.html?lin=qx%7Co1%7Cmd%7C1ST982HQ8652D65CQ2%2CSQJ3HKDT32CAKT985%2CS74HAJ973DK74CJ63%2C%7Crh%7C%7Cah%7CBoard%7Csv%7C0%7Cpg%7C%7C",
+    "dd_analysis": {
+      "N": {
+        "C": 1,
+        "D": 0,
+        "H": 7,
+        "S": 1,
+        "NT": 2
+      },
+      "E": {
+        "C": 11,
+        "D": 12,
+        "H": 6,
+        "S": 11,
+        "NT": 8
+      },
+      "S": {
+        "C": 1,
+        "D": 0,
+        "H": 7,
+        "S": 1,
+        "NT": 2
+      },
+      "W": {
+        "C": 11,
+        "D": 12,
+        "H": 6,
+        "S": 11,
+        "NT": 8
+      }
+    },
+    "optimum": {
+      "text": "EW 12♦; -920",
+      "score": -920,
+      "declarer": "EW",
+      "contract": "12♦",
+      "level": 6,
+      "denom": "♦",
+      "tricks": 12
+    },
+    "lott": {
+      "total_tricks": 19,
+      "ns_fit": {
+        "suit": "♥",
+        "suit_code": "H",
+        "length": 10,
+        "tricks": 7
+      },
+      "ew_fit": {
+        "suit": "♦",
+        "suit_code": "D",
+        "length": 8,
+        "tricks": 12
+      }
+    }
+  },
+  {
+    "N": "KQ2.KT8754.KJ6.T",
+    "S": "5.A932.T842.K985",
+    "E": "A8764.6.AQ73.AJ7",
+    "W": "JT93.QJ.95.Q6432",
+    "event_id": 405659,
+    "date": "24.01.2026",
+    "board": 18,
+    "dealer": "E",
+    "lin_string": "qx|o1|md|2SA8764H6DAQ73CAJ7,S5HA932DT842CK985,SJT93HQJD95CQ6432,|rh||ah|Board|sv|0|pg||",
+    "bbo_url": "https://www.bridgebase.com/tools/handviewer.html?lin=qx%7Co1%7Cmd%7C2SA8764H6DAQ73CAJ7%2CS5HA932DT842CK985%2CSJT93HQJD95CQ6432%2C%7Crh%7C%7Cah%7CBoard%7Csv%7C0%7Cpg%7C%7C",
+    "dd_analysis": {
+      "N": {
+        "C": 5,
+        "D": 8,
+        "H": 9,
+        "S": 4,
+        "NT": 8
+      },
+      "E": {
+        "C": 8,
+        "D": 5,
+        "H": 4,
+        "S": 9,
+        "NT": 5
+      },
+      "S": {
+        "C": 5,
+        "D": 7,
+        "H": 8,
+        "S": 3,
+        "NT": 7
+      },
+      "W": {
+        "C": 8,
+        "D": 5,
+        "H": 4,
+        "S": 9,
+        "NT": 5
+      }
+    },
+    "optimum": {
+      "text": "NS 9NT; -100",
+      "score": -100,
+      "declarer": "NS",
+      "contract": "9NT",
+      "level": 3,
+      "denom": "NT",
+      "tricks": 9
+    },
+    "lott": {
+      "total_tricks": 18,
+      "ns_fit": {
+        "suit": "♥",
+        "suit_code": "H",
+        "length": 10,
+        "tricks": 9
+      },
+      "ew_fit": {
+        "suit": "♠",
+        "suit_code": "S",
+        "length": 9,
+        "tricks": 9
+      }
+    }
+  },
+  {
+    "N": "AJ76543.AQ54..Q2",
+    "S": "K2.T732.K85.K863",
+    "E": "T9.KJ8.T9642.A95",
+    "W": "Q8.96.AQJ73.JT74",
+    "event_id": 405659,
+    "date": "24.01.2026",
+    "board": 19,
+    "dealer": "S",
+    "lin_string": "qx|o1|md|3SK2HT732DK85CK863,SQ8H96DAQJ73CJT74,SAJ76543HAQ54DCQ2,|rh||ah|Board|sv|0|pg||",
+    "bbo_url": "https://www.bridgebase.com/tools/handviewer.html?lin=qx%7Co1%7Cmd%7C3SK2HT732DK85CK863%2CSQ8H96DAQJ73CJT74%2CSAJ76543HAQ54DCQ2%2C%7Crh%7C%7Cah%7CBoard%7Csv%7C0%7Cpg%7C%7C",
+    "dd_analysis": {
+      "N": {
+        "C": 6,
+        "D": 4,
+        "H": 9,
+        "S": 10,
+        "NT": 7
+      },
+      "E": {
+        "C": 6,
+        "D": 9,
+        "H": 3,
+        "S": 3,
+        "NT": 5
+      },
+      "S": {
+        "C": 5,
+        "D": 4,
+        "H": 10,
+        "S": 10,
+        "NT": 7
+      },
+      "W": {
+        "C": 7,
+        "D": 9,
+        "H": 3,
+        "S": 3,
+        "NT": 5
+      }
+    },
+    "optimum": {
+      "text": "EW 11♦; +300",
+      "score": 300,
+      "declarer": "EW",
+      "contract": "11♦",
+      "level": 5,
+      "denom": "♦",
+      "tricks": 11
+    },
+    "lott": {
+      "total_tricks": 19,
+      "ns_fit": {
+        "suit": "♠",
+        "suit_code": "S",
+        "length": 9,
+        "tricks": 10
+      },
+      "ew_fit": {
+        "suit": "♦",
+        "suit_code": "D",
+        "length": 10,
+        "tricks": 9
+      }
+    }
+  },
+  {
+    "N": "J843.K95.QT.T742",
+    "S": "AQT92.A2.K96.986",
+    "E": "K7.Q74.8543.AKQ3",
+    "W": "65.JT863.AJ72.J5",
+    "event_id": 405659,
+    "date": "24.01.2026",
+    "board": 20,
+    "dealer": "W",
+    "lin_string": "qx|o1|md|4S65HJT863DAJ72CJ5,SJ843HK95DQTCT742,SK7HQ74D8543CAKQ3,|rh||ah|Board|sv|0|pg||",
+    "bbo_url": "https://www.bridgebase.com/tools/handviewer.html?lin=qx%7Co1%7Cmd%7C4S65HJT863DAJ72CJ5%2CSJ843HK95DQTCT742%2CSK7HQ74D8543CAKQ3%2C%7Crh%7C%7Cah%7CBoard%7Csv%7C0%7Cpg%7C%7C",
+    "dd_analysis": {
+      "N": {
+        "C": 7,
+        "D": 5,
+        "H": 5,
+        "S": 9,
+        "NT": 8
+      },
+      "E": {
+        "C": 6,
+        "D": 7,
+        "H": 8,
+        "S": 4,
+        "NT": 5
+      },
+      "S": {
+        "C": 7,
+        "D": 5,
+        "H": 5,
+        "S": 9,
+        "NT": 8
+      },
+      "W": {
+        "C": 6,
+        "D": 7,
+        "H": 7,
+        "S": 4,
+        "NT": 5
+      }
+    },
+    "optimum": {
+      "text": "NS 9♠; +140",
+      "score": 140,
+      "declarer": "NS",
+      "contract": "9♠",
+      "level": 3,
+      "denom": "♠",
+      "tricks": 9
+    },
+    "lott": {
+      "total_tricks": 17,
+      "ns_fit": {
+        "suit": "♠",
+        "suit_code": "S",
+        "length": 9,
+        "tricks": 9
+      },
+      "ew_fit": {
+        "suit": "♥",
+        "suit_code": "H",
+        "length": 8,
+        "tricks": 8
+      }
+    }
+  },
+  {
+    "N": "62.AQ54.865.KQT7",
+    "S": "QJT53.K93.J7.J83",
+    "E": "4.JT82.KQT32.965",
+    "W": "AK987.76.A94.A42",
+    "event_id": 405659,
+    "date": "24.01.2026",
+    "board": 21,
+    "dealer": "N",
+    "lin_string": "qx|o1|md|1S62HAQ54D865CKQT7,S4HJT82DKQT32C965,SQJT53HK93DJ7CJ83,|rh||ah|Board|sv|0|pg||",
+    "bbo_url": "https://www.bridgebase.com/tools/handviewer.html?lin=qx%7Co1%7Cmd%7C1S62HAQ54D865CKQT7%2CS4HJT82DKQT32C965%2CSQJT53HK93DJ7CJ83%2C%7Crh%7C%7Cah%7CBoard%7Csv%7C0%7Cpg%7C%7C",
+    "dd_analysis": {
+      "N": {
+        "C": 7,
+        "D": 4,
+        "H": 6,
+        "S": 6,
+        "NT": 5
+      },
+      "E": {
+        "C": 6,
+        "D": 9,
+        "H": 7,
+        "S": 7,
+        "NT": 8
+      },
+      "S": {
+        "C": 6,
+        "D": 4,
+        "H": 6,
+        "S": 6,
+        "NT": 5
+      },
+      "W": {
+        "C": 6,
+        "D": 9,
+        "H": 7,
+        "S": 7,
+        "NT": 8
+      }
+    },
+    "optimum": {
+      "text": "NS 8NT; -120",
+      "score": -120,
+      "declarer": "NS",
+      "contract": "8NT",
+      "level": 2,
+      "denom": "NT",
+      "tricks": 8
+    },
+    "lott": {
+      "total_tricks": 16,
+      "ns_fit": {
+        "suit": "♣",
+        "suit_code": "C",
+        "length": 7,
+        "tricks": 7
+      },
+      "ew_fit": {
+        "suit": "♦",
+        "suit_code": "D",
+        "length": 8,
+        "tricks": 9
+      }
+    }
+  },
+  {
+    "N": "AQ.K84.K82.Q9642",
+    "S": "KT876432.975.A.5",
+    "E": "J9.QJT.Q6543.AJ7",
+    "W": "5.A632.JT97.KT83",
+    "event_id": 405659,
+    "date": "24.01.2026",
+    "board": 22,
+    "dealer": "E",
+    "lin_string": "qx|o1|md|2SJ9HQJTDQ6543CAJ7,SKT876432H975DAC5,S5HA632DJT97CKT83,|rh||ah|Board|sv|0|pg||",
+    "bbo_url": "https://www.bridgebase.com/tools/handviewer.html?lin=qx%7Co1%7Cmd%7C2SJ9HQJTDQ6543CAJ7%2CSKT876432H975DAC5%2CS5HA632DJT97CKT83%2C%7Crh%7C%7Cah%7CBoard%7Csv%7C0%7Cpg%7C%7C",
+    "dd_analysis": {
+      "N": {
+        "C": 6,
+        "D": 4,
+        "H": 5,
+        "S": 11,
+        "NT": 9
+      },
+      "E": {
+        "C": 7,
+        "D": 9,
+        "H": 8,
+        "S": 2,
+        "NT": 3
+      },
+      "S": {
+        "C": 6,
+        "D": 4,
+        "H": 5,
+        "S": 11,
+        "NT": 9
+      },
+      "W": {
+        "C": 7,
+        "D": 9,
+        "H": 8,
+        "S": 2,
+        "NT": 3
+      }
+    },
+    "optimum": {
+      "text": "NS 11♠; +450",
+      "score": 450,
+      "declarer": "NS",
+      "contract": "11♠",
+      "level": 5,
+      "denom": "♠",
+      "tricks": 11
+    },
+    "lott": {
+      "total_tricks": 20,
+      "ns_fit": {
+        "suit": "♠",
+        "suit_code": "S",
+        "length": 10,
+        "tricks": 11
+      },
+      "ew_fit": {
+        "suit": "♦",
+        "suit_code": "D",
+        "length": 9,
+        "tricks": 9
+      }
+    }
+  },
+  {
+    "N": "Q84.QT.Q8754.A73",
+    "S": "K653.53.AKJT9.82",
+    "E": "A92.A2.6.KQJT954",
+    "W": "JT7.KJ98764.32.6",
+    "event_id": 405659,
+    "date": "24.01.2026",
+    "board": 23,
+    "dealer": "S",
+    "lin_string": "qx|o1|md|3SK653H53DAKJT9C82,SJT7HKJ98764D32C6,SQ84HQTDQ8754CA73,|rh||ah|Board|sv|0|pg||",
+    "bbo_url": "https://www.bridgebase.com/tools/handviewer.html?lin=qx%7Co1%7Cmd%7C3SK653H53DAKJT9C82%2CSJT7HKJ98764D32C6%2CSQ84HQTDQ8754CA73%2C%7Crh%7C%7Cah%7CBoard%7Csv%7C0%7Cpg%7C%7C",
+    "dd_analysis": {
+      "N": {
+        "C": 2,
+        "D": 8,
+        "H": 2,
+        "S": 7,
+        "NT": 5
+      },
+      "E": {
+        "C": 9,
+        "D": 5,
+        "H": 10,
+        "S": 5,
+        "NT": 7
+      },
+      "S": {
+        "C": 2,
+        "D": 8,
+        "H": 2,
+        "S": 7,
+        "NT": 5
+      },
+      "W": {
+        "C": 9,
+        "D": 5,
+        "H": 10,
+        "S": 5,
+        "NT": 7
+      }
+    },
+    "optimum": {
+      "text": "EW 10♥; -420",
+      "score": -420,
+      "declarer": "EW",
+      "contract": "10♥",
+      "level": 4,
+      "denom": "♥",
+      "tricks": 10
+    },
+    "lott": {
+      "total_tricks": 18,
+      "ns_fit": {
+        "suit": "♦",
+        "suit_code": "D",
+        "length": 10,
+        "tricks": 8
+      },
+      "ew_fit": {
+        "suit": "♥",
+        "suit_code": "H",
+        "length": 9,
+        "tricks": 10
+      }
+    }
+  },
+  {
+    "N": "AJT53.J5.KJT87.4",
+    "S": "Q.KQ932.9.AQJ752",
+    "E": "987.A86.AQ654.93",
+    "W": "K642.T74.32.KT86",
+    "event_id": 405659,
+    "date": "24.01.2026",
+    "board": 24,
+    "dealer": "W",
+    "lin_string": "qx|o1|md|4SK642HT74D32CKT86,SAJT53HJ5DKJT87C4,S987HA86DAQ654C93,|rh||ah|Board|sv|0|pg||",
+    "bbo_url": "https://www.bridgebase.com/tools/handviewer.html?lin=qx%7Co1%7Cmd%7C4SK642HT74D32CKT86%2CSAJT53HJ5DKJT87C4%2CS987HA86DAQ654C93%2C%7Crh%7C%7Cah%7CBoard%7Csv%7C0%7Cpg%7C%7C",
+    "dd_analysis": {
+      "N": {
+        "C": 9,
+        "D": 8,
+        "H": 9,
+        "S": 8,
+        "NT": 8
+      },
+      "E": {
+        "C": 4,
+        "D": 5,
+        "H": 3,
+        "S": 5,
+        "NT": 5
+      },
+      "S": {
+        "C": 9,
+        "D": 8,
+        "H": 9,
+        "S": 8,
+        "NT": 8
+      },
+      "W": {
+        "C": 4,
+        "D": 5,
+        "H": 3,
+        "S": 5,
+        "NT": 5
+      }
+    },
+    "optimum": {
+      "text": "NS 9♥; +140",
+      "score": 140,
+      "declarer": "NS",
+      "contract": "9♥",
+      "level": 1,
+      "denom": "♥",
+      "tricks": 9
+    },
+    "lott": {
+      "total_tricks": 14,
+      "ns_fit": {
+        "suit": "♥",
+        "suit_code": "H",
+        "length": 7,
+        "tricks": 9
+      },
+      "ew_fit": {
+        "suit": "♠",
+        "suit_code": "S",
+        "length": 7,
+        "tricks": 5
+      }
+    }
+  },
+  {
+    "N": "K6.AT2.Q9832.632",
+    "S": "QJT2.K7.KJ7.KJT5",
+    "E": "7543.Q94.AT4.A74",
+    "W": "A98.J8653.65.Q98",
+    "event_id": 405659,
+    "date": "24.01.2026",
+    "board": 25,
+    "dealer": "N",
+    "lin_string": "qx|o1|md|1SK6HAT2DQ9832C632,S7543HQ94DAT4CA74,SQJT2HK7DKJ7CKJT5,|rh||ah|Board|sv|0|pg||",
+    "bbo_url": "https://www.bridgebase.com/tools/handviewer.html?lin=qx%7Co1%7Cmd%7C1SK6HAT2DQ9832C632%2CS7543HQ94DAT4CA74%2CSQJT2HK7DKJ7CKJT5%2C%7Crh%7C%7Cah%7CBoard%7Csv%7C0%7Cpg%7C%7C",
+    "dd_analysis": {
+      "N": {
+        "C": 8,
+        "D": 9,
+        "H": 6,
+        "S": 8,
+        "NT": 8
+      },
+      "E": {
+        "C": 5,
+        "D": 3,
+        "H": 6,
+        "S": 4,
+        "NT": 4
+      },
+      "S": {
+        "C": 8,
+        "D": 9,
+        "H": 6,
+        "S": 8,
+        "NT": 8
+      },
+      "W": {
+        "C": 4,
+        "D": 3,
+        "H": 6,
+        "S": 4,
+        "NT": 4
+      }
+    },
+    "optimum": {
+      "text": "NS 8NT; +120",
+      "score": 120,
+      "declarer": "NS",
+      "contract": "8NT",
+      "level": 1,
+      "denom": "NT",
+      "tricks": 8
+    },
+    "lott": {
+      "total_tricks": 15,
+      "ns_fit": {
+        "suit": "♦",
+        "suit_code": "D",
+        "length": 8,
+        "tricks": 9
+      },
+      "ew_fit": {
+        "suit": "♥",
+        "suit_code": "H",
+        "length": 8,
+        "tricks": 6
+      }
+    }
+  },
+  {
+    "N": "KQ4.AKT9.98654.8",
+    "S": "AJT83.J532.J.QJ5",
+    "E": "9652.4.AKQ2.A742",
+    "W": "7.Q876.T73.KT963",
+    "event_id": 405659,
+    "date": "24.01.2026",
+    "board": 26,
+    "dealer": "E",
+    "lin_string": "qx|o1|md|2S9652H4DAKQ2CA742,SAJT83HJ532DJCQJ5,S7HQ876DT73CKT963,|rh||ah|Board|sv|0|pg||",
+    "bbo_url": "https://www.bridgebase.com/tools/handviewer.html?lin=qx%7Co1%7Cmd%7C2S9652H4DAKQ2CA742%2CSAJT83HJ532DJCQJ5%2CS7HQ876DT73CKT963%2C%7Crh%7C%7Cah%7CBoard%7Csv%7C0%7Cpg%7C%7C",
+    "dd_analysis": {
+      "N": {
+        "C": 3,
+        "D": 6,
+        "H": 9,
+        "S": 9,
+        "NT": 7
+      },
+      "E": {
+        "C": 10,
+        "D": 7,
+        "H": 3,
+        "S": 3,
+        "NT": 4
+      },
+      "S": {
+        "C": 3,
+        "D": 6,
+        "H": 9,
+        "S": 9,
+        "NT": 7
+      },
+      "W": {
+        "C": 10,
+        "D": 7,
+        "H": 3,
+        "S": 3,
+        "NT": 4
+      }
+    },
+    "optimum": {
+      "text": "NS 10♠; -100",
+      "score": -100,
+      "declarer": "NS",
+      "contract": "10♠",
+      "level": 4,
+      "denom": "♠",
+      "tricks": 10
+    },
+    "lott": {
+      "total_tricks": 19,
+      "ns_fit": {
+        "suit": "♠",
+        "suit_code": "S",
+        "length": 8,
+        "tricks": 9
+      },
+      "ew_fit": {
+        "suit": "♣",
+        "suit_code": "C",
+        "length": 9,
+        "tricks": 10
+      }
+    }
+  },
+  {
+    "N": "QT8752.42.K76.73",
+    "S": "A4.KJ5.QJT82.J82",
+    "E": "K96.QT9763.53.A4",
+    "W": "J3.A8.A94.KQT965",
+    "event_id": 405659,
+    "date": "24.01.2026",
+    "board": 27,
+    "dealer": "S",
+    "lin_string": "qx|o1|md|3SA4HKJ5DQJT82CJ82,SJ3HA8DA94CKQT965,SQT8752H42DK76C73,|rh||ah|Board|sv|0|pg||",
+    "bbo_url": "https://www.bridgebase.com/tools/handviewer.html?lin=qx%7Co1%7Cmd%7C3SA4HKJ5DQJT82CJ82%2CSJ3HA8DA94CKQT965%2CSQT8752H42DK76C73%2C%7Crh%7C%7Cah%7CBoard%7Csv%7C0%7Cpg%7C%7C",
+    "dd_analysis": {
+      "N": {
+        "C": 4,
+        "D": 7,
+        "H": 2,
+        "S": 7,
+        "NT": 4
+      },
+      "E": {
+        "C": 9,
+        "D": 6,
+        "H": 10,
+        "S": 6,
+        "NT": 9
+      },
+      "S": {
+        "C": 4,
+        "D": 7,
+        "H": 3,
+        "S": 7,
+        "NT": 4
+      },
+      "W": {
+        "C": 9,
+        "D": 6,
+        "H": 10,
+        "S": 6,
+        "NT": 9
+      }
+    },
+    "optimum": {
+      "text": "EW 10♥; -420",
+      "score": -420,
+      "declarer": "EW",
+      "contract": "10♥",
+      "level": 4,
+      "denom": "♥",
+      "tricks": 10
+    },
+    "lott": {
+      "total_tricks": 17,
+      "ns_fit": {
+        "suit": "♠",
+        "suit_code": "S",
+        "length": 8,
+        "tricks": 7
+      },
+      "ew_fit": {
+        "suit": "♥",
+        "suit_code": "H",
+        "length": 8,
+        "tricks": 10
+      }
+    }
+  },
+  {
+    "N": "65.QJ.762.AKT643",
+    "S": "AKQ32.AKT8.AT95.",
+    "E": "T8.7542.J843.J85",
+    "W": "J974.963.KQ.Q972",
+    "event_id": 405659,
+    "date": "24.01.2026",
+    "board": 28,
+    "dealer": "W",
+    "lin_string": "qx|o1|md|4SJ974H963DKQCQ972,S65HQJD762CAKT643,ST8H7542DJ843CJ85,|rh||ah|Board|sv|0|pg||",
+    "bbo_url": "https://www.bridgebase.com/tools/handviewer.html?lin=qx%7Co1%7Cmd%7C4SJ974H963DKQCQ972%2CS65HQJD762CAKT643%2CST8H7542DJ843CJ85%2C%7Crh%7C%7Cah%7CBoard%7Csv%7C0%7Cpg%7C%7C",
+    "dd_analysis": {
+      "N": {
+        "C": 11,
+        "D": 11,
+        "H": 12,
+        "S": 11,
+        "NT": 11
+      },
+      "E": {
+        "C": 2,
+        "D": 2,
+        "H": 1,
+        "S": 1,
+        "NT": 2
+      },
+      "S": {
+        "C": 11,
+        "D": 11,
+        "H": 12,
+        "S": 11,
+        "NT": 11
+      },
+      "W": {
+        "C": 2,
+        "D": 2,
+        "H": 1,
+        "S": 1,
+        "NT": 2
+      }
+    },
+    "optimum": {
+      "text": "NS 12♥; +980",
+      "score": 980,
+      "declarer": "NS",
+      "contract": "12♥",
+      "level": 6,
+      "denom": "♥",
+      "tricks": 12
+    },
+    "lott": {
+      "total_tricks": 13,
+      "ns_fit": {
+        "suit": "♠",
+        "suit_code": "S",
+        "length": 7,
+        "tricks": 11
+      },
+      "ew_fit": {
+        "suit": "♣",
+        "suit_code": "C",
+        "length": 7,
+        "tricks": 2
+      }
+    }
+  },
+  {
+    "N": "K8754.Q.AK543.Q8",
+    "S": "JT93.J865.Q76.J4",
+    "E": "AQ6.AK94.T.AK962",
+    "W": "2.T732.J982.T753",
+    "event_id": 405659,
+    "date": "24.01.2026",
+    "board": 29,
+    "dealer": "N",
+    "lin_string": "qx|o1|md|1SK8754HQDAK543CQ8,SAQ6HAK94DTCAK962,SJT93HJ865DQ76CJ4,|rh||ah|Board|sv|0|pg||",
+    "bbo_url": "https://www.bridgebase.com/tools/handviewer.html?lin=qx%7Co1%7Cmd%7C1SK8754HQDAK543CQ8%2CSAQ6HAK94DTCAK962%2CSJT93HJ865DQ76CJ4%2C%7Crh%7C%7Cah%7CBoard%7Csv%7C0%7Cpg%7C%7C",
+    "dd_analysis": {
+      "N": {
+        "C": 2,
+        "D": 7,
+        "H": 2,
+        "S": 8,
+        "NT": 4
+      },
+      "E": {
+        "C": 11,
+        "D": 6,
+        "H": 10,
+        "S": 5,
+        "NT": 9
+      },
+      "S": {
+        "C": 2,
+        "D": 7,
+        "H": 2,
+        "S": 8,
+        "NT": 4
+      },
+      "W": {
+        "C": 11,
+        "D": 6,
+        "H": 10,
+        "S": 5,
+        "NT": 9
+      }
+    },
+    "optimum": {
+      "text": "EW 11♣; -400",
+      "score": -400,
+      "declarer": "EW",
+      "contract": "11♣",
+      "level": 5,
+      "denom": "♣",
+      "tricks": 11
+    },
+    "lott": {
+      "total_tricks": 19,
+      "ns_fit": {
+        "suit": "♠",
+        "suit_code": "S",
+        "length": 9,
+        "tricks": 8
+      },
+      "ew_fit": {
+        "suit": "♣",
+        "suit_code": "C",
+        "length": 9,
+        "tricks": 11
+      }
+    }
+  },
+  {
+    "N": "9.AT9743.43.9732",
+    "S": "KQT54..Q9872.AT5",
+    "E": "862.862.KJT6.KJ6",
+    "W": "AJ73.KQJ5.A5.Q84",
+    "event_id": 405659,
+    "date": "24.01.2026",
+    "board": 30,
+    "dealer": "E",
+    "lin_string": "qx|o1|md|2S862H862DKJT6CKJ6,SKQT54HDQ9872CAT5,SAJ73HKQJ5DA5CQ84,|rh||ah|Board|sv|0|pg||",
+    "bbo_url": "https://www.bridgebase.com/tools/handviewer.html?lin=qx%7Co1%7Cmd%7C2S862H862DKJT6CKJ6%2CSKQT54HDQ9872CAT5%2CSAJ73HKQJ5DA5CQ84%2C%7Crh%7C%7Cah%7CBoard%7Csv%7C0%7Cpg%7C%7C",
+    "dd_analysis": {
+      "N": {
+        "C": 6,
+        "D": 5,
+        "H": 5,
+        "S": 5,
+        "NT": 4
+      },
+      "E": {
+        "C": 7,
+        "D": 7,
+        "H": 7,
+        "S": 8,
+        "NT": 9
+      },
+      "S": {
+        "C": 6,
+        "D": 5,
+        "H": 5,
+        "S": 5,
+        "NT": 4
+      },
+      "W": {
+        "C": 7,
+        "D": 6,
+        "H": 7,
+        "S": 8,
+        "NT": 9
+      }
+    },
+    "optimum": {
+      "text": "NS 9NT; -400",
+      "score": -400,
+      "declarer": "NS",
+      "contract": "9NT",
+      "level": 3,
+      "denom": "NT",
+      "tricks": 9
+    },
+    "lott": {
+      "total_tricks": 14,
+      "ns_fit": {
+        "suit": "♣",
+        "suit_code": "C",
+        "length": 7,
+        "tricks": 6
+      },
+      "ew_fit": {
+        "suit": "♠",
+        "suit_code": "S",
+        "length": 7,
+        "tricks": 8
+      }
+    }
   }
 ]

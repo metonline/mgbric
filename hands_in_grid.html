@@ -412,33 +412,29 @@
                 const database = await response.json();
                 document.getElementById('loading').style.display = 'none';
 
-                // Group by event and date
-                const groupedByDate = {};
-                database.forEach(entry => {
-                    const key = `${entry.date}`;
-                    if (!groupedByDate[key]) groupedByDate[key] = [];
-                    groupedByDate[key].push(entry);
+                // Filter for 24.1.2026 only
+                const filtered = database.filter(hand => {
+                    const date = hand.date || '';
+                    return date.includes('24.1');
                 });
 
-                // Get most recent date
-                const dates = Object.keys(groupedByDate).sort().reverse();
-                if (dates.length === 0) throw new Error('No hands found');
-
-                const currentDate = dates[0];
-                const hands = groupedByDate[currentDate];
+                if (filtered.length === 0) throw new Error('No hands found for 24.1.2026');
 
                 // Update header
-                document.getElementById('tournament-name').textContent = currentDate;
-                document.getElementById('board-count').textContent = hands.length;
+                document.getElementById('tournament-name').textContent = `24.1.2026 (${filtered.length} hands)`;
+                document.getElementById('board-count').textContent = filtered.length;
 
-                // Sort by board number
-                hands.sort((a, b) => a.board - b.board);
+                // Sort by event_id, then board number
+                filtered.sort((a, b) => {
+                    if (a.event_id !== b.event_id) return a.event_id - b.event_id;
+                    return a.board - b.board;
+                });
 
                 // Render hands
                 const grid = document.getElementById('hands-grid');
                 grid.innerHTML = '';
 
-                for (const hand of hands) {
+                for (const hand of filtered) {
                     const handObj = {
                         N: hand.N,
                         E: hand.E,
@@ -446,7 +442,7 @@
                         W: hand.W,
                         dealer: hand.dealer || 'N',
                         vulnerability: hand.vulnerability || 'None',
-                        date: hand.date || currentDate
+                        date: hand.date || 'Unknown'
                     };
 
                     // Get DD data from backend API (same as board_ranking.html does)
@@ -466,7 +462,7 @@
                         console.warn(`Failed to fetch DD data for board ${hand.board}:`, e);
                     }
 
-                    console.log(`Board ${hand.board}:`, { ddResult, optimum, lott });
+                    console.log(`Board ${hand.board} (${hand.date}):`, { ddResult, optimum, lott });
 
                     const html = renderHandDiagram(handObj, hand.board, ddResult, optimum, lott);
                     const div = document.createElement('div');
