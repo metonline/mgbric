@@ -231,7 +231,7 @@ function renderHandDiagram(handData, boardNum, ddResult, optimum, lott) {
                     </div>
                 
                 <!-- North -->
-                <div class="nameRowDivStyle pos-n-name ${nDealerClass}" style="background-color: ${vulColor} !important; color: white !important;">
+                <div class="nameRowDivStyle pos-n-name ${nDealerClass}" style="background-color: ${vulColor} !important;">
                     <span class="nameInitial">N</span>
                 </div>
                 <div class="handDivStyle pos-n-hand">
@@ -242,7 +242,7 @@ function renderHandDiagram(handData, boardNum, ddResult, optimum, lott) {
                 </div>
                 
                 <!-- West -->
-                <div class="nameRowDivStyle pos-w-name ${wDealerClass}" style="background-color: ${vulColor} !important; color: white !important;">
+                <div class="nameRowDivStyle pos-w-name ${wDealerClass}" style="background-color: ${vulColor} !important;">
                     <span class="nameInitial">W</span>
                 </div>
                 <div class="handDivStyle pos-w-hand">
@@ -256,7 +256,7 @@ function renderHandDiagram(handData, boardNum, ddResult, optimum, lott) {
                 <div class="vulInnerDivStyle pos-board">${boardNum}</div>
                 
                 <!-- East -->
-                <div class="nameRowDivStyle pos-e-name ${eDealerClass}" style="background-color: ${vulColor} !important; color: white !important;">
+                <div class="nameRowDivStyle pos-e-name ${eDealerClass}" style="background-color: ${vulColor} !important;">
                     <span class="nameInitial">E</span>
                 </div>
                 <div class="handDivStyle pos-e-hand">
@@ -267,7 +267,7 @@ function renderHandDiagram(handData, boardNum, ddResult, optimum, lott) {
                 </div>
                 
                 <!-- South -->
-                <div class="nameRowDivStyle pos-s-name ${sDealerClass}" style="background-color: ${vulColor} !important; color: white !important;">
+                <div class="nameRowDivStyle pos-s-name ${sDealerClass}" style="background-color: ${vulColor} !important;">
                     <span class="nameInitial">S</span>
                 </div>
                 <div class="handDivStyle pos-s-hand">
