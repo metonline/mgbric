@@ -318,17 +318,13 @@ class DataFetcher:
             if len(player_cells) < 4:
                 return None
             
-            # HTML table displays hands in VISUAL order: W, N, E, S (but we extract as compass N, E, S, W)
-            # CRITICAL: Don't apply any rotation here - just map visual positions to compass
-            # Position 0 (W visually) = West compass position
-            # Position 1 (N visually) = North compass position
-            # Position 2 (E visually) = East compass position
-            # Position 3 (S visually) = South compass position
+            # HTML table lists player cells in vugraph order: N (top), W (left), E (right), S (bottom)
+            # Map vugraph HTML positions DIRECTLY to compass positions (no rotation)
             visual_to_compass = {
-                0: 'W',
-                1: 'N', 
-                2: 'E',
-                3: 'S'
+                0: 'N',  # Position 0: North (top player)
+                1: 'W',  # Position 1: West (left side player)
+                2: 'E',  # Position 2: East (right side player)
+                3: 'S'   # Position 3: South (bottom player)
             }
             
             for idx, cell in enumerate(player_cells):
