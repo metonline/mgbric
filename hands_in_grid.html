@@ -538,10 +538,15 @@
                 console.log(`Added hand: Event ${hand.event_id}, Board ${hand.board}`);
             }
             
-            console.log(`Total hands added to grid: ${grid.children.length}`);
+            console.log(`%cTOTAL HANDS ADDED TO GRID: ${grid.children.length}`, 'color:green;font-size:14px;font-weight:bold');
             const dateCount = new Set(handsToRender.map(h => h.date)).size;
-            document.getElementById('tournament-name').textContent = `Events (${handsToRender.length} hands from ${dateCount} date(s))`;
+            
+            const summaryText = `Events (${handsToRender.length} hands from ${dateCount} date(s))`;
+            document.getElementById('tournament-name').textContent = summaryText;
             document.getElementById('board-count').textContent = handsToRender.length;
+            
+            // Also log to a visible element for debugging
+            console.log(`Summary updated: "${summaryText}"`);
         }
 
         // Filter by selected date
