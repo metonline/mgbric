@@ -72,7 +72,7 @@ def main():
     print("="*70)
     
     # Load current database
-    hands = json.load(open('hands_database.json')) if Path('hands_database.json').exists() else []
+    hands = json.load(open('hands_database.json', encoding='utf-8')) if Path('hands_database.json').exists() else []
     
     # Get events already in database
     fetched_events = set(str(h.get('event_id')) for h in hands)
@@ -104,7 +104,7 @@ def main():
             return False
     
     # Final summary
-    hands = json.load(open('hands_database.json'))
+    hands = json.load(open('hands_database.json', encoding='utf-8'))
     events = len(set(str(h.get('event_id')) for h in hands))
     
     print(f"\n{'='*70}")

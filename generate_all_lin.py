@@ -49,7 +49,7 @@ def generate_bbo_viewer_url(hand, dealer, vulnerability='None', board_num=''):
 def main():
     # Load hands database
     try:
-        with open('hands_database.json', 'r') as f:
+        with open('hands_database.json', 'r', encoding='utf-8') as f:
             hands = json.load(f)
     except FileNotFoundError:
         print("❌ hands_database.json not found")
