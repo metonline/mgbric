@@ -31,16 +31,10 @@ function getVulnerabilityByBoard(boardNum) {
 /**
  * Get CSS color for vulnerability display
  * @param {string} vulnerability - Vulnerability type
- * @returns {string} - Hex color code
+ * @returns {string} - Hex color code (always red)
  */
 function getVulnerabilityColor(vulnerability) {
-    const colors = {
-        'None': '#999999',   // Gray
-        'NS': '#ff6b6b',     // Red
-        'EW': '#4ecdc4',     // Teal
-        'Both': '#ffd700'    // Gold
-    };
-    return colors[vulnerability] || '#999999';
+    return '#cb0000';  // Red for all vulnerabilities
 }
 
 /**
@@ -189,16 +183,6 @@ function renderHandDiagram(handData, boardNum, ddResult, optimum, lott) {
     // Vulnerability styling - color based on vulnerability type (PRESET)
     const vulColor = getVulnerabilityColor(vul);
     const vulClass = 'vul-' + vul.toLowerCase();
-    if (vul === 'NS') {
-        vulClass = 'vul-ns';
-        vulColor = '#ff6b6b';  // Red for NS vulnerable
-    } else if (vul === 'EW') {
-        vulClass = 'vul-ew';
-        vulColor = '#4ecdc4';  // Teal for EW vulnerable
-    } else if (vul === 'Both') {
-        vulClass = 'vul-both';
-        vulColor = '#ffd700';  // Gold for both vulnerable
-    }
 
     const optimumTextColored = optimum && optimum.text ? formatSuitWithColor(optimum.text) : '';
 
@@ -233,7 +217,7 @@ function renderHandDiagram(handData, boardNum, ddResult, optimum, lott) {
                     <div class="board-info-left">
                         <div class="date">${date}</div>
                         <div class="dealer">Dealer: ${dealer}</div>
-                        <div class="vul ${vulClass}" style="color: ${vulColor}; font-weight: bold;">Vuln: ${vul}</div>
+                        <div class="vul ${vulClass}" style="background-color: ${vulColor} !important; color: white !important; font-weight: bold;">Vuln: ${vul}</div>
                     </div>
                     
                     <!-- HCP Display - Right Side -->
@@ -247,7 +231,7 @@ function renderHandDiagram(handData, boardNum, ddResult, optimum, lott) {
                     </div>
                 
                 <!-- North -->
-                <div class="nameRowDivStyle pos-n-name ${nDealerClass}">
+                <div class="nameRowDivStyle pos-n-name ${nDealerClass}" style="background-color: ${vulColor} !important; color: white !important;">
                     <span class="nameInitial">N</span>
                 </div>
                 <div class="handDivStyle pos-n-hand">
@@ -258,7 +242,7 @@ function renderHandDiagram(handData, boardNum, ddResult, optimum, lott) {
                 </div>
                 
                 <!-- West -->
-                <div class="nameRowDivStyle pos-w-name ${wDealerClass}">
+                <div class="nameRowDivStyle pos-w-name ${wDealerClass}" style="background-color: ${vulColor} !important; color: white !important;">
                     <span class="nameInitial">W</span>
                 </div>
                 <div class="handDivStyle pos-w-hand">
@@ -272,7 +256,7 @@ function renderHandDiagram(handData, boardNum, ddResult, optimum, lott) {
                 <div class="vulInnerDivStyle pos-board">${boardNum}</div>
                 
                 <!-- East -->
-                <div class="nameRowDivStyle pos-e-name ${eDealerClass}">
+                <div class="nameRowDivStyle pos-e-name ${eDealerClass}" style="background-color: ${vulColor} !important; color: white !important;">
                     <span class="nameInitial">E</span>
                 </div>
                 <div class="handDivStyle pos-e-hand">
@@ -283,7 +267,7 @@ function renderHandDiagram(handData, boardNum, ddResult, optimum, lott) {
                 </div>
                 
                 <!-- South -->
-                <div class="nameRowDivStyle pos-s-name ${sDealerClass}">
+                <div class="nameRowDivStyle pos-s-name ${sDealerClass}" style="background-color: ${vulColor} !important; color: white !important;">
                     <span class="nameInitial">S</span>
                 </div>
                 <div class="handDivStyle pos-s-hand">
