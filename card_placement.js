@@ -188,6 +188,7 @@ function renderHandDiagram(handData, boardNum, ddResult, optimum, lott) {
     
     // Vulnerability styling - color based on vulnerability type (PRESET)
     const vulColor = getVulnerabilityColor(vul);
+    const vulClass = 'vul-' + vul.toLowerCase();
     if (vul === 'NS') {
         vulClass = 'vul-ns';
         vulColor = '#ff6b6b';  // Red for NS vulnerable
