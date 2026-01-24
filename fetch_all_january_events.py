@@ -3,6 +3,8 @@
 
 import json
 import time
+import requests
+from bs4 import BeautifulSoup
 from unified_fetch import DataFetcher, EventRegistry
 
 def is_event_from_2026_or_later(date_str):
@@ -23,20 +25,103 @@ def is_hand_from_2026_or_later(hand):
     """Check if hand is from 2026 or later"""
     return is_event_from_2026_or_later(hand.get('date', ''))
 
+def fetch_calendar_events(month=1, year=2026):
+    """Crawl vugraph calendar page to get fresh event list for a specific month
+    
+    Returns: {event_id: date_string}
+    """
+    try:
+        url = f"https://clubs.vugraph.com/hosgoru/calendar.php?month={month}&year={year}"
+        print(f"Crawling calendar: {url}")
+        
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+        }
+        response = requests.get(url, headers=headers, timeout=10)
+        response.encoding = 'utf-8'
+        
+        if response.status_code != 200:
+            print(f"  ✗ Failed to fetch calendar (status: {response.status_code})")
+            return {}
+        
+        soup = BeautifulSoup(response.text, 'html.parser')
+        
+        events = {}
+        import re
+        
+        # Find all links with event IDs
+        # Links are in format: eventresults.php?event=405659
+        for link in soup.find_all('a', href=True):
+            href = link['href']
+            
+            # Extract event ID from eventresults.php?event=XXXXX
+            event_match = re.search(r'event=(\d+)', href)
+            if not event_match:
+                continue
+            
+            event_id = event_match.group(1)
+            
+            # The calendar is organized by date, so we can infer the date
+            # from the position in the page, but simpler is to use month/year
+            # All events on this calendar page are in this month/year
+            # We need to find which day - look for nearby text that contains day number
+            
+            # For now, collect all event IDs on this page
+            # We'll assign them a placeholder date (first day of month)
+            # and then update via another method
+            date_str = f"01.{month:02d}.{year}"
+            events[event_id] = date_str
+        
+        print(f"  Found {len(events)} events in calendar for {month}/{year}")
+        return events
+        
+    except Exception as e:
+        print(f"  ✗ Error fetching calendar: {e}")
+        return {}
+
 def get_events_to_fetch():
-    """Get events from 2026 onwards that need hands fetched"""
+    """Get events from 2026 onwards that need hands fetched
+    
+    First checks vugraph calendar for fresh event list with dates, then falls back to registry
+    """
     fetcher = DataFetcher()
+    
+    # STEP 1: Try to fetch fresh event list from vugraph calendar
+    print("\n📅 STEP 1: Checking vugraph calendar for new events...")
+    calendar_events = {}  # {event_id: date_string}
+    
+    # Check multiple months (focusing on 2026)
+    for year in [2026]:
+        for month in [1, 2, 3]:  # Check Jan, Feb, Mar
+            month_events = fetch_calendar_events(month, year)
+            calendar_events.update(month_events)
+            time.sleep(0.5)  # Be respectful to the server
+    
+    print(f"   Total events from calendar crawl: {len(calendar_events)}\n")
+    
+    # STEP 2: Fall back to registry for comprehensive event list
+    print("📅 STEP 2: Loading registry as fallback...")
     registry = EventRegistry()
+    registry_dict = registry.get_all_events()  # Returns {date: event_id}
     
-    # Get all events from registry using get_all_events() method
-    all_events_dict = registry.get_all_events()  # Returns {date: event_id}
+    # Reverse to get {event_id: date}
+    registry_events = {str(v): k for k, v in registry_dict.items()}
     
-    # Filter to only include events from 2026 onwards
-    events_2026_plus = [
-        int(event_id)
-        for date_str, event_id in all_events_dict.items() 
-        if str(event_id).isdigit() and is_event_from_2026_or_later(date_str)
-    ]
+    print(f"   Total events from registry: {len(registry_events)}\n")
+    
+    # Combine both sources
+    all_events_with_dates = {}
+    all_events_with_dates.update(registry_events)  # Registry as base
+    all_events_with_dates.update(calendar_events)  # Calendar overwrites (fresher data)
+    
+    # Filter to only 2026+ events
+    events_2026_plus = {
+        int(eid): date_str
+        for eid, date_str in all_events_with_dates.items()
+        if str(eid).isdigit() and is_event_from_2026_or_later(date_str)
+    }
+    
+    print(f"✓ Total 2026+ events: {len(events_2026_plus)}\n")
     
     # Build a set of existing (event_id, board) tuples to skip duplicates
     existing_hands = set(
@@ -46,7 +131,15 @@ def get_events_to_fetch():
     )
     
     # Get events already in database
-    fetched_events = set(str(h.get('event_id')) for h in fetcher.hands)
+    fetched_events = set(int(h.get('event_id', 0)) for h in fetcher.hands if h.get('event_id'))
+    
+    # Return events not yet fetched, sorted, plus the existing hands set and event dates
+    unfetched = sorted([e for e in events_2026_plus.keys() if e not in fetched_events])
+    
+    # Also store event_dates for later use
+    get_events_to_fetch.event_dates = events_2026_plus
+    
+    return unfetched, fetcher, existing_hands
     
     # Return events not yet fetched, sorted, plus the existing hands set
     unfetched = [e for e in events_2026_plus if str(e) not in fetched_events]
@@ -54,6 +147,9 @@ def get_events_to_fetch():
 
 def main():
     events, fetcher, existing_hands = get_events_to_fetch()
+    
+    # Get the event dates we collected during get_events_to_fetch()
+    event_dates = getattr(get_events_to_fetch, 'event_dates', {})
     
     initial_count = len(fetcher.hands)
     print(f"Fetching hands from {len(events)} events in 2026 onwards...")
@@ -74,12 +170,19 @@ def main():
             hands = fetcher.fetch_hands_for_event(event_id)
             elapsed = time.time() - start
             
+            # Get the date for this event from our collected data
+            event_date = event_dates.get(event_id)
+            
             # Process hands: add only new 2026+ hands
             new_count = 0
             skipped_count = 0
             ignored_count = 0
             
             for hand in hands:
+                # Set the date from our known event dates
+                if event_date and (not hand.get('date') or hand.get('date') == 'unknown'):
+                    hand['date'] = event_date
+                
                 # Filter 1: Only keep hands from 2026 or later
                 if not is_hand_from_2026_or_later(hand):
                     ignored_count += 1
