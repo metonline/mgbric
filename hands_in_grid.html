@@ -412,16 +412,22 @@
                 const database = await response.json();
                 document.getElementById('loading').style.display = 'none';
 
-                // Filter for 24.01.2026 only
-                const filtered = database.filter(hand => {
-                    const date = hand.date || '';
-                    return date.includes('24.01');
+                // Show all hands with all events and dates
+                const filtered = database;
+
+                if (filtered.length === 0) throw new Error('No hands found in database');
+
+                // Group by date
+                const byDate = {};
+                filtered.forEach(hand => {
+                    const date = hand.date || 'Unknown';
+                    if (!byDate[date]) byDate[date] = [];
+                    byDate[date].push(hand);
                 });
 
-                if (filtered.length === 0) throw new Error('No hands found for 24.01.2026');
-
                 // Update header
-                document.getElementById('tournament-name').textContent = `24.01.2026 (${filtered.length} hands)`;
+                const dateCount = Object.keys(byDate).length;
+                document.getElementById('tournament-name').textContent = `All Events (${filtered.length} hands from ${dateCount} dates)`;
                 document.getElementById('board-count').textContent = filtered.length;
 
                 // Sort by event_id, then board number
@@ -442,10 +448,11 @@
                         W: hand.W,
                         dealer: hand.dealer || 'N',
                         vulnerability: hand.vulnerability || 'None',
-                        date: hand.date || 'Unknown'
+                        date: hand.date || 'Unknown',
+                        event_id: hand.event_id || '?'
                     };
 
-                    // Get DD data from backend API (same as board_ranking.html does)
+                    // Get DD data from backend API
                     let ddResult = null;
                     let optimum = null;
                     let lott = null;
@@ -462,12 +469,20 @@
                         console.warn(`Failed to fetch DD data for board ${hand.board}:`, e);
                     }
 
-                    console.log(`Board ${hand.board} (${hand.date}):`, { ddResult, optimum, lott });
-
-                    const html = renderHandDiagram(handObj, hand.board, ddResult, optimum, lott);
+                    // Create custom HTML with event info
+                    const baseHtml = renderHandDiagram(handObj, hand.board, ddResult, optimum, lott);
                     const div = document.createElement('div');
-                    div.innerHTML = html;
-                    grid.appendChild(div.firstElementChild);
+                    div.innerHTML = baseHtml;
+                    
+                    // Add event label above the hand diagram
+                    const eventLabel = document.createElement('div');
+                    eventLabel.style.cssText = 'text-align:center; font-weight:bold; color:#666; margin-bottom:5px; font-size:12px;';
+                    eventLabel.textContent = `Event ${hand.event_id} | ${hand.date}`;
+                    
+                    const container = document.createElement('div');
+                    container.appendChild(eventLabel);
+                    container.appendChild(div.firstElementChild);
+                    grid.appendChild(container);
                 }
 
             } catch (error) {
