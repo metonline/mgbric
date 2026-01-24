@@ -268,9 +268,6 @@ function renderHandDiagram(handData, boardNum, ddResult, optimum, lott) {
                         <div class="vul ${vulClass}" style="background-color: ${vulColor} !important; color: white !important; font-weight: bold;">Vuln: ${vul}</div>
                     </div>
                     
-                    <!-- Date Display - Right Top Corner -->
-                    <div class="date-header" style="position: absolute; top: 8px; right: 15px; font-weight: bold; color: black; font-size: 15px;">${date.replace(/20(\d{2})$/, '$1')}</div>
-                    
                     <!-- HCP Display - Right Side -->
                     <div class="hcp-display">
                         <div class="hcp-north"><span class="hcp-value">${hcpN}</span></div>
@@ -280,6 +277,12 @@ function renderHandDiagram(handData, boardNum, ddResult, optimum, lott) {
                         </div>
                         <div class="hcp-south"><span class="hcp-value">${hcpS}</span></div>
                     </div>
+                
+                <!-- Board Number -->
+                <div class="vulInnerDivStyle pos-board">${boardNum}</div>
+                
+                <!-- Date Display - Between Board and North -->
+                <div class="date-header" style="grid-column: 2; grid-row: 2; text-align: center; font-weight: bold; color: black; font-size: 15px; align-self: center;">${date.replace(/20(\d{2})$/, '$1')}</div>
                 
                 <!-- North -->
                 <div class="nameRowDivStyle pos-n-name" style="background-color: ${nHeaderBgColor} !important;">
@@ -302,9 +305,6 @@ function renderHandDiagram(handData, boardNum, ddResult, optimum, lott) {
                     ${formatSuitRow('♦', w.D, true)}
                     ${formatSuitRow('♣', w.C, false)}
                 </div>
-                
-                <!-- Board Number -->
-                <div class="vulInnerDivStyle pos-board">${boardNum}</div>
                 
                 <!-- East -->
                 <div class="nameRowDivStyle pos-e-name" style="background-color: ${eHeaderBgColor} !important;">
