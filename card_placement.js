@@ -1,8 +1,47 @@
 /**
  * Card Placement & Diagram Display Module
- * Handles rendering bridge hand diagrams
+ * Handles rendering bridge hand diagrams with PRESET vulnerability calculation
  * Separated from LIN generation logic
  */
+
+/**
+ * Get vulnerability based on board number (PRESET - always same for given board)
+ * Standard duplicate bridge pattern (repeats every 32 boards)
+ * @param {number} boardNum - Board number
+ * @returns {string} - Vulnerability type: 'None', 'NS', 'EW', or 'Both'
+ */
+function getVulnerabilityByBoard(boardNum) {
+    // Standard vulnerability pattern (repeats every 32 boards)
+    const vulnMap = {
+        1: 'None',  2: 'NS',   3: 'EW',   4: 'Both',
+        5: 'None',  6: 'NS',   7: 'EW',   8: 'Both',
+        9: 'None',  10: 'NS',  11: 'EW',  12: 'Both',
+        13: 'None', 14: 'NS',  15: 'EW',  16: 'Both',
+        17: 'None', 18: 'NS',  19: 'EW',  20: 'Both',
+        21: 'None', 22: 'NS',  23: 'EW',  24: 'Both',
+        25: 'None', 26: 'NS',  27: 'EW',  28: 'Both',
+        29: 'None', 30: 'NS',  31: 'EW',  32: 'Both'
+    };
+    
+    // For boards beyond 32, use modulo
+    const boardPos = ((boardNum - 1) % 32) + 1;
+    return vulnMap[boardPos] || 'None';
+}
+
+/**
+ * Get CSS color for vulnerability display
+ * @param {string} vulnerability - Vulnerability type
+ * @returns {string} - Hex color code
+ */
+function getVulnerabilityColor(vulnerability) {
+    const colors = {
+        'None': '#999999',   // Gray
+        'NS': '#ff6b6b',     // Red
+        'EW': '#4ecdc4',     // Teal
+        'Both': '#ffd700'    // Gold
+    };
+    return colors[vulnerability] || '#999999';
+}
 
 /**
  * Parse hand string from compass notation to object
@@ -113,16 +152,6 @@ function renderDDTable(ddResult) {
     return html;
 }
 
-/**
- * Render hand diagram in BBO style format
- * This handles DISPLAY ONLY - not data generation or LIN
- * @param {Object} handData - Hand data with N, E, S, W properties
- * @param {number} boardNum - Board number
- * @param {Object} ddResult - Optional DD analysis results
- * @param {Object} optimum - Optional optimum contract
- * @param {Object} lott - Optional LoTT data
- * @returns {string} - HTML for hand diagram
- */
 function renderHandDiagram(handData, boardNum, ddResult, optimum, lott) {
     if (!handData) {
         return '<div class="hand-diagram-container"><div style="color:#aaa;padding:20px;">Hand data not found</div></div>';
@@ -143,7 +172,8 @@ function renderHandDiagram(handData, boardNum, ddResult, optimum, lott) {
     }
 
     const dealer = handData.dealer || 'N';
-    const vul = handData.vulnerability || 'None';
+    // Calculate vulnerability from board number (PRESET - not from database)
+    const vul = getVulnerabilityByBoard(boardNum);
     const date = handData.date || '';
 
     const hcpN = calculateHCP(n);
@@ -156,9 +186,8 @@ function renderHandDiagram(handData, boardNum, ddResult, optimum, lott) {
     const eDealerClass = dealer === 'E' ? 'dealer-bg' : '';
     const wDealerClass = dealer === 'W' ? 'dealer-bg' : '';
     
-    // Vulnerability styling - color based on which side is vulnerable
-    let vulClass = 'vul-none';
-    let vulColor = '#999';
+    // Vulnerability styling - color based on vulnerability type (PRESET)
+    const vulColor = getVulnerabilityColor(vul);
     if (vul === 'NS') {
         vulClass = 'vul-ns';
         vulColor = '#ff6b6b';  // Red for NS vulnerable

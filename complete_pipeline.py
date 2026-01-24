@@ -1,7 +1,10 @@
 #!/usr/bin/env python3
 """
 Complete integrated pipeline: Fetch → Extract Dates → Generate LIN → Generate DD
-All steps in proper sequence with date extraction built into the fetch process
+
+SIMPLIFIED (5 steps - no separate vulnerability step):
+Vulnerability is PRESET by board number - calculated on-the-fly during rendering.
+Not stored in database since it's always deterministic.
 """
 
 import json
@@ -14,6 +17,7 @@ from bs4 import BeautifulSoup
 from collections import defaultdict, Counter
 from urllib.parse import quote
 from unified_fetch import DataFetcher, EventRegistry
+from vulnerability import get_vulnerability_by_board
 
 # ============================================================================
 # STEP 1: FETCH ALL HANDS
@@ -139,53 +143,7 @@ def update_dates():
     return hands
 
 # ============================================================================
-# STEP 2.5: FIX VULNERABILITY DATA
-# ============================================================================
-
-def get_vulnerability_by_board(board_num):
-    """
-    Calculate vulnerability based on board number (standard duplicate bridge)
-    Pattern repeats every 16 boards
-    """
-    vuln_map = {
-        1: 'None',  2: 'NS', 3: 'EW', 4: 'Both',
-        5: 'None',  6: 'EW', 7: 'Both', 8: 'None',
-        9: 'NS',    10: 'EW', 11: 'Both', 12: 'None',
-        13: 'EW',   14: 'Both', 15: 'None', 16: 'NS',
-        17: 'EW',   18: 'Both', 19: 'None', 20: 'NS',
-        21: 'Both', 22: 'None', 23: 'NS', 24: 'EW',
-        25: 'Both', 26: 'None', 27: 'EW', 28: 'Both',
-        29: 'None', 30: 'NS'
-    }
-    return vuln_map.get(board_num, 'None')
-
-def fix_vulnerability(hands):
-    """Fix vulnerability data based on board numbers"""
-    print("\n" + "="*70)
-    print("STEP 2.5: FIXING VULNERABILITY DATA")
-    print("="*70)
-    
-    vuln_counts = {}
-    for hand in hands:
-        board_num = hand.get('board', 1)
-        vuln = get_vulnerability_by_board(board_num)
-        hand['vulnerability'] = vuln
-        vuln_counts[vuln] = vuln_counts.get(vuln, 0) + 1
-    
-    # Save updated database
-    with open('hands_database.json', 'w', encoding='utf-8') as f:
-        json.dump(hands, f, indent=2, ensure_ascii=False)
-    
-    print(f"\nVulnerability distribution:")
-    for vuln in ['None', 'NS', 'EW', 'Both']:
-        count = vuln_counts.get(vuln, 0)
-        print(f"  {vuln:4s}: {count:3d} hands")
-    
-    print(f"\nFixed vulnerability for {len(hands)} hands")
-    return hands
-
-# ============================================================================
-# STEP 3: GENERATE LIN STRINGS
+# STEP 3: GENERATE LIN STRINGS (using preset vulnerability from board)
 # ============================================================================
 
 def hand_string_to_lin(hand_str):
@@ -228,14 +186,16 @@ def generate_bbo_viewer_url(hand, dealer, vulnerability='None'):
     return f'{base_url}?lin={quote(lin)}'
 
 def generate_lin_strings(hands):
-    """Generate LIN strings for all hands"""
+    """Generate LIN strings for all hands (using preset vulnerability from board)"""
     print("\n" + "="*70)
     print("STEP 3: GENERATING LIN STRINGS")
     print("="*70)
     
     for i, hand in enumerate(hands, 1):
         dealer = hand.get('dealer', 'N')
-        vuln = hand.get('vulnerability', 'None')
+        board_num = hand.get('board', 1)
+        # Get vulnerability from preset board mapping (not from database)
+        vuln = get_vulnerability_by_board(board_num)
         hand['lin_string'] = generate_bbo_lin(hand, dealer, vuln)
         hand['bbo_url'] = generate_bbo_viewer_url(hand, dealer, vuln)
         
@@ -337,7 +297,7 @@ def verify_database():
 def main():
     print("\n" + "█"*70)
     print("█" + " "*68 + "█")
-    print("█" + "  COMPLETE PIPELINE: FETCH → DATES → VULN → LIN → DD".center(68) + "█")
+    print("█" + "  PIPELINE: FETCH → DATES → LIN → DD (Vulnerability Preset)".center(68) + "█")
     print("█" + " "*68 + "█")
     print("█"*70)
     
@@ -350,10 +310,7 @@ def main():
         # Step 2: Extract and update dates
         hands = update_dates()
         
-        # Step 2.5: Fix vulnerability data
-        hands = fix_vulnerability(hands)
-        
-        # Step 3: Generate LIN strings
+        # Step 3: Generate LIN strings (vulnerability calculated from board number)
         hands = generate_lin_strings(hands)
         
         # Step 4: Generate DD analysis
@@ -361,11 +318,6 @@ def main():
         
         # Step 5: Verify database
         verify_database()
-        
-        elapsed = time.time() - start_time
-        print("\n" + "█"*70)
-        print(f"█ PIPELINE COMPLETED in {elapsed/60:.1f} minutes".ljust(70) + "█")
-        print("█"*70)
         
         elapsed = time.time() - start_time
         print("\n" + "█"*70)
