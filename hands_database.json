@@ -467,7 +467,7 @@
     "board": 8,
     "date": "01.01.2026",
     "dealer": "W",
-    "vulnerability": "None",
+    "vulnerability": "Both",
     "N": "Q864.J5.Q8632.J7",
     "S": "K9.KQT876.KJT.AK",
     "E": "AJT3.32.54.QT932",
@@ -665,7 +665,7 @@
     "board": 11,
     "date": "01.01.2026",
     "dealer": "S",
-    "vulnerability": "None",
+    "vulnerability": "EW",
     "N": "A7.J752.K9875.Q6",
     "S": "J32.86.Q4.JT8542",
     "E": "KQ98654.AQ4.T.K7",
@@ -863,7 +863,7 @@
     "board": 14,
     "date": "01.01.2026",
     "dealer": "E",
-    "vulnerability": "None",
+    "vulnerability": "NS",
     "N": "AQ98.6.QJT98.AQ5",
     "S": "K542.K752.6.JT72",
     "E": "JT73.J93.542.984",
@@ -1523,7 +1523,7 @@
     "board": 24,
     "date": "01.01.2026",
     "dealer": "W",
-    "vulnerability": "None",
+    "vulnerability": "Both",
     "N": "A83.AT4.T965.AT6",
     "S": "T97.KQ8.KJ82.Q53",
     "E": "KQJ652.J9.A7.KJ2",
@@ -1721,7 +1721,7 @@
     "board": 27,
     "date": "01.01.2026",
     "dealer": "S",
-    "vulnerability": "None",
+    "vulnerability": "EW",
     "N": "J8.KQ62.AKQJ2.KT",
     "S": "AT93.J9.653.AJ52",
     "E": "KQ4.T83.97.Q9874",
@@ -1919,7 +1919,7 @@
     "board": 30,
     "date": "01.01.2026",
     "dealer": "E",
-    "vulnerability": "None",
+    "vulnerability": "NS",
     "N": "KJT987.K873.86.9",
     "S": "43.JT.A7543.J874",
     "E": "A.Q6542.KQ2.QT32",
@@ -2447,7 +2447,7 @@
     "board": 8,
     "date": "02.01.2026",
     "dealer": "W",
-    "vulnerability": "None",
+    "vulnerability": "Both",
     "N": "63.AT7652.KJT8.9",
     "S": "QJ85.K4.95.J8753",
     "E": "T74.Q93.64.AQT64",
@@ -2645,7 +2645,7 @@
     "board": 11,
     "date": "02.01.2026",
     "dealer": "S",
-    "vulnerability": "None",
+    "vulnerability": "EW",
     "N": "A3.T85.T532.J643",
     "S": "986.AKJ2.QJ.KT97",
     "E": "JT5.973.AK9864.2",
@@ -2843,7 +2843,7 @@
     "board": 14,
     "date": "02.01.2026",
     "dealer": "E",
-    "vulnerability": "None",
+    "vulnerability": "NS",
     "N": "T873.AK98.K2.AQ5",
     "S": "Q952.T4.Q874.T43",
     "E": "K4.QJ7.AJ953.862",
@@ -3503,7 +3503,7 @@
     "board": 24,
     "date": "02.01.2026",
     "dealer": "W",
-    "vulnerability": "None",
+    "vulnerability": "Both",
     "N": "Q52.93.T87642.A5",
     "S": "AT984.-.QJ3.K8643",
     "E": "KJ76.AJT54.A95.J",
@@ -3701,7 +3701,7 @@
     "board": 27,
     "date": "02.01.2026",
     "dealer": "S",
-    "vulnerability": "None",
+    "vulnerability": "EW",
     "N": "K72.KQ.KJ32.K432",
     "S": "QJT6.A2.AT94.JT6",
     "E": "983.J987.875.Q98",
@@ -3899,7 +3899,7 @@
     "board": 30,
     "date": "02.01.2026",
     "dealer": "E",
-    "vulnerability": "None",
+    "vulnerability": "NS",
     "N": "76.AQ93.AJ.KT843",
     "S": "QJ852.K52.Q86.J7",
     "E": "AT943.84.T542.92",
@@ -4427,7 +4427,7 @@
     "board": 8,
     "date": "03.01.2026",
     "dealer": "W",
-    "vulnerability": "None",
+    "vulnerability": "Both",
     "N": "KQ43.Q9652.J.J73",
     "S": "T865.T.KQT84.QT9",
     "E": "9.A87.9753.A8642",
@@ -4625,7 +4625,7 @@
     "board": 11,
     "date": "03.01.2026",
     "dealer": "S",
-    "vulnerability": "None",
+    "vulnerability": "EW",
     "N": "AT.J8632.Q95.A43",
     "S": "K92.AKT7.KJ87.Q7",
     "E": "J743.Q4.A4.JT852",
@@ -4823,7 +4823,7 @@
     "board": 14,
     "date": "03.01.2026",
     "dealer": "E",
-    "vulnerability": "None",
+    "vulnerability": "NS",
     "N": "AK8.83.942.AQ983",
     "S": "T2.KJ954.KJT.J72",
     "E": "Q543.QT7.AQ76.T5",
@@ -5483,7 +5483,7 @@
     "board": 24,
     "date": "03.01.2026",
     "dealer": "W",
-    "vulnerability": "None",
+    "vulnerability": "Both",
     "N": "KQ3.863.AJ876.K9",
     "S": "752.QT.K5.T87632",
     "E": "A64.A95.QT9.AQ54",
@@ -5681,7 +5681,7 @@
     "board": 27,
     "date": "03.01.2026",
     "dealer": "S",
-    "vulnerability": "None",
+    "vulnerability": "EW",
     "N": "KQ.QJ87.Q4.KJ652",
     "S": "A643.K654.T63.T4",
     "E": "J75.AT93.J5.AQ93",
@@ -5879,7 +5879,7 @@
     "board": 30,
     "date": "03.01.2026",
     "dealer": "E",
-    "vulnerability": "None",
+    "vulnerability": "NS",
     "N": "-.AT7.QT7432.J542",
     "S": "QT982.842.865.A6",
     "E": "AK643.KJ65.J.T83",
@@ -6407,7 +6407,7 @@
     "board": 8,
     "date": "04.01.2026",
     "dealer": "W",
-    "vulnerability": "None",
+    "vulnerability": "Both",
     "N": "JT72.KJ.K942.K52",
     "S": "A4.AT98543.AJ.Q6",
     "E": "KQ65.Q6.Q73.T874",
@@ -6605,7 +6605,7 @@
     "board": 11,
     "date": "04.01.2026",
     "dealer": "S",
-    "vulnerability": "None",
+    "vulnerability": "EW",
     "N": "QT3.AT92.54.8752",
     "S": "A964.8.KJT97.AK3",
     "E": "875.73.A832.QJT9",
@@ -6803,7 +6803,7 @@
     "board": 14,
     "date": "04.01.2026",
     "dealer": "E",
-    "vulnerability": "None",
+    "vulnerability": "NS",
     "N": "A7.QJT8.A763.T86",
     "S": "Q85.A97543.84.J5",
     "E": "KJT962.K.JT2.Q32",
@@ -7463,7 +7463,7 @@
     "board": 24,
     "date": "04.01.2026",
     "dealer": "W",
-    "vulnerability": "None",
+    "vulnerability": "Both",
     "N": "Q5.KT863.K9.8642",
     "S": "K9642.Q942.T7.K3",
     "E": "A873.75.AQJ8.J95",
@@ -7661,7 +7661,7 @@
     "board": 27,
     "date": "04.01.2026",
     "dealer": "S",
-    "vulnerability": "None",
+    "vulnerability": "EW",
     "N": "AJ94.Q83.KQ74.K4",
     "S": "T876.74.J83.AJ72",
     "E": "32.A65.62.QT8653",
@@ -7859,7 +7859,7 @@
     "board": 30,
     "date": "04.01.2026",
     "dealer": "E",
-    "vulnerability": "None",
+    "vulnerability": "NS",
     "N": "973.AQ532.KQ4.K7",
     "S": "T542.T4.T93.T852",
     "E": "KJ6.876.A876.J96",
@@ -8387,7 +8387,7 @@
     "board": 8,
     "date": "05.01.2026",
     "dealer": "W",
-    "vulnerability": "None",
+    "vulnerability": "Both",
     "N": "Q9843.Q.T62.9865",
     "S": "T65.T7.QJ874.AJ2",
     "E": "J72.A865.A53.K74",
@@ -8585,7 +8585,7 @@
     "board": 11,
     "date": "05.01.2026",
     "dealer": "S",
-    "vulnerability": "None",
+    "vulnerability": "EW",
     "N": "Q.63.AT942.Q9742",
     "S": "K9752.Q98.QJ7.65",
     "E": "AT6.T754.653.AT8",
@@ -8783,7 +8783,7 @@
     "board": 14,
     "date": "05.01.2026",
     "dealer": "E",
-    "vulnerability": "None",
+    "vulnerability": "NS",
     "N": "K654.AQ6.AQJ2.63",
     "S": "Q7.K9742.9643.Q4",
     "E": "AJ832.J5.8.KT852",
@@ -9443,7 +9443,7 @@
     "board": 24,
     "date": "05.01.2026",
     "dealer": "W",
-    "vulnerability": "None",
+    "vulnerability": "Both",
     "N": "T76.Q5.JT92.7643",
     "S": "AQ942.K963.8.AT8",
     "E": "J8.AT742.K764.52",
@@ -9641,7 +9641,7 @@
     "board": 27,
     "date": "05.01.2026",
     "dealer": "S",
-    "vulnerability": "None",
+    "vulnerability": "EW",
     "N": "K7653.Q.QT653.43",
     "S": "Q92.K98762.J.AQJ",
     "E": "J84.AJ43.K82.765",
@@ -9839,7 +9839,7 @@
     "board": 30,
     "date": "05.01.2026",
     "dealer": "E",
-    "vulnerability": "None",
+    "vulnerability": "NS",
     "N": "Q754.QT43.T42.72",
     "S": "632.A72.Q986.AK4",
     "E": "KT98.86.7.QJT865",
@@ -10367,7 +10367,7 @@
     "board": 8,
     "date": "06.01.2026",
     "dealer": "W",
-    "vulnerability": "None",
+    "vulnerability": "Both",
     "N": "974.JT543.2.Q765",
     "S": "AKT2.Q87.QT64.A3",
     "E": "Q3.K6.KJ83.KJT84",
@@ -10565,7 +10565,7 @@
     "board": 11,
     "date": "06.01.2026",
     "dealer": "S",
-    "vulnerability": "None",
+    "vulnerability": "EW",
     "N": "T75.87652.KQ9.96",
     "S": "AQ864.AKT.863.42",
     "E": "KJ932.Q9.A742.QT",
@@ -10763,7 +10763,7 @@
     "board": 14,
     "date": "06.01.2026",
     "dealer": "E",
-    "vulnerability": "None",
+    "vulnerability": "NS",
     "N": "AK843.KQ42.AJ83.-",
     "S": "75.T973.Q9.Q7532",
     "E": "Q.J6.T7652.JT864",
@@ -11423,7 +11423,7 @@
     "board": 24,
     "date": "06.01.2026",
     "dealer": "W",
-    "vulnerability": "None",
+    "vulnerability": "Both",
     "N": "AJ9542.AQ97.4.82",
     "S": "K76.K2.QJ86.AJT4",
     "E": "Q8.84.K9732.K653",
@@ -11621,7 +11621,7 @@
     "board": 27,
     "date": "06.01.2026",
     "dealer": "S",
-    "vulnerability": "None",
+    "vulnerability": "EW",
     "N": "65.A8542.T42.KQ9",
     "S": "732.KJ963.Q.8432",
     "E": "KQ4.QT7.K9853.J6",
@@ -11819,7 +11819,7 @@
     "board": 30,
     "date": "06.01.2026",
     "dealer": "E",
-    "vulnerability": "None",
+    "vulnerability": "NS",
     "N": "AT92.K.J964.Q972",
     "S": "QJ65.AT8.853.AK5",
     "E": "4.976.AKQ72.J864",
@@ -12347,7 +12347,7 @@
     "board": 8,
     "date": "07.01.2026",
     "dealer": "W",
-    "vulnerability": "None",
+    "vulnerability": "Both",
     "N": "AKQJ62.6.QT64.87",
     "S": "T4.98543.K5.9543",
     "E": "83.72.J9873.AQJT",
@@ -12545,7 +12545,7 @@
     "board": 11,
     "date": "07.01.2026",
     "dealer": "S",
-    "vulnerability": "None",
+    "vulnerability": "EW",
     "N": "A84.AJT92.Q6.762",
     "S": "Q765.654.J4.Q843",
     "E": "JT93.87.8732.AJ5",
@@ -12743,7 +12743,7 @@
     "board": 14,
     "date": "07.01.2026",
     "dealer": "E",
-    "vulnerability": "None",
+    "vulnerability": "NS",
     "N": "A4.K743.K864.J72",
     "S": "KJT72.AJ5.Q92.43",
     "E": "965.T6.AT53.9865",
@@ -13403,7 +13403,7 @@
     "board": 24,
     "date": "07.01.2026",
     "dealer": "W",
-    "vulnerability": "None",
+    "vulnerability": "Both",
     "N": "AK83.T.A973.Q643",
     "S": "QT762.K97.8.AK95",
     "E": "-.AQJ6543.JT642.T",
@@ -13601,7 +13601,7 @@
     "board": 27,
     "date": "07.01.2026",
     "dealer": "S",
-    "vulnerability": "None",
+    "vulnerability": "EW",
     "N": "Q65.KQJ654.7.Q43",
     "S": "J842.82.QT3.JT96",
     "E": "T97.9.J854.K8752",
@@ -13799,7 +13799,7 @@
     "board": 30,
     "date": "07.01.2026",
     "dealer": "E",
-    "vulnerability": "None",
+    "vulnerability": "NS",
     "N": "AQ96.8532.KQJ9.6",
     "S": "T85.9.763.KT9875",
     "E": "K32.AKJ.A852.AJ3",
@@ -14327,7 +14327,7 @@
     "board": 8,
     "date": "08.01.2026",
     "dealer": "W",
-    "vulnerability": "None",
+    "vulnerability": "Both",
     "N": "KT9.754.AT8.J964",
     "S": "654.Q3.75432.T87",
     "E": "AJ7.AT862.KJ6.A5",
@@ -14525,7 +14525,7 @@
     "board": 11,
     "date": "08.01.2026",
     "dealer": "S",
-    "vulnerability": "None",
+    "vulnerability": "EW",
     "N": "T97432.9753.-.J74",
     "S": "5.KT86.KQJ42.865",
     "E": "AJ8.AQ2.T975.AQT",
@@ -14723,7 +14723,7 @@
     "board": 14,
     "date": "08.01.2026",
     "dealer": "E",
-    "vulnerability": "None",
+    "vulnerability": "NS",
     "N": "AKQ43.Q853.43.KQ",
     "S": "J52.AK62.AT95.73",
     "E": "T976.T7.KQJ8.JT9",
@@ -15383,7 +15383,7 @@
     "board": 24,
     "date": "08.01.2026",
     "dealer": "W",
-    "vulnerability": "None",
+    "vulnerability": "Both",
     "N": "AKT32.QT87.J5.92",
     "S": "7.A642.AKQT6.J86",
     "E": "QJ985.K.7432.Q43",
@@ -15581,7 +15581,7 @@
     "board": 27,
     "date": "08.01.2026",
     "dealer": "S",
-    "vulnerability": "None",
+    "vulnerability": "EW",
     "N": "Q752.T52.KQ84.QJ",
     "S": "AJ8.4.AJT.AT9532",
     "E": "K96.KQJ3.73.K864",
@@ -15779,7 +15779,7 @@
     "board": 30,
     "date": "08.01.2026",
     "dealer": "E",
-    "vulnerability": "None",
+    "vulnerability": "NS",
     "N": "K8.AQ.KJ.AT87632",
     "S": "QJ32.32.AQ93.KQJ",
     "E": "T97.K97654.T62.5",
@@ -16307,7 +16307,7 @@
     "board": 8,
     "date": "09.01.2026",
     "dealer": "W",
-    "vulnerability": "None",
+    "vulnerability": "Both",
     "N": "A64.QJT93.42.862",
     "S": "KT3.842.KT863.Q5",
     "E": "Q7.75.AQ5.AKJ973",
@@ -16505,7 +16505,7 @@
     "board": 11,
     "date": "09.01.2026",
     "dealer": "S",
-    "vulnerability": "None",
+    "vulnerability": "EW",
     "N": "54.T84.T73.KJ754",
     "S": "AT.AK52.K95.Q962",
     "E": "KQJ7.J76.AQ86.A8",
@@ -16703,7 +16703,7 @@
     "board": 14,
     "date": "09.01.2026",
     "dealer": "E",
-    "vulnerability": "None",
+    "vulnerability": "NS",
     "N": "AJ9874.4.QJ76.64",
     "S": "T65.AQ83.AT84.J5",
     "E": "KQ3.KJ52.52.A872",
@@ -17363,7 +17363,7 @@
     "board": 24,
     "date": "09.01.2026",
     "dealer": "W",
-    "vulnerability": "None",
+    "vulnerability": "Both",
     "N": "T8764.T8.854.864",
     "S": "AK32.Q654.K93.T9",
     "E": "J95.97.A76.KJ753",
@@ -17561,7 +17561,7 @@
     "board": 27,
     "date": "09.01.2026",
     "dealer": "S",
-    "vulnerability": "None",
+    "vulnerability": "EW",
     "N": "-.K9.A7532.QJT854",
     "S": "T9853.A4.Q98.763",
     "E": "AJ764.8753.K64.K",
@@ -17759,7 +17759,7 @@
     "board": 30,
     "date": "09.01.2026",
     "dealer": "E",
-    "vulnerability": "None",
+    "vulnerability": "NS",
     "N": "AT52.T95.KT74.94",
     "S": "Q.AKJ2.QJ652.J87",
     "E": "9763.64.A83.T632",
@@ -18287,7 +18287,7 @@
     "board": 8,
     "date": "10.01.2026",
     "dealer": "W",
-    "vulnerability": "None",
+    "vulnerability": "Both",
     "N": "Q872.652.K986.K8",
     "S": "A43.AJT4.QT3.A95",
     "E": "KJT.Q873.AJ4.QJ2",
@@ -18485,7 +18485,7 @@
     "board": 11,
     "date": "10.01.2026",
     "dealer": "S",
-    "vulnerability": "None",
+    "vulnerability": "EW",
     "N": "QJ.AKT9862.7.863",
     "S": "A85.7.AQJ954.J54",
     "E": "K96.J54.KT3.QT97",
@@ -18683,7 +18683,7 @@
     "board": 14,
     "date": "10.01.2026",
     "dealer": "E",
-    "vulnerability": "None",
+    "vulnerability": "NS",
     "N": "AT93.K765.65.987",
     "S": "Q762.QT.QJ82.KQT",
     "E": "54.AJ98.K9.65432",
@@ -19343,7 +19343,7 @@
     "board": 24,
     "date": "10.01.2026",
     "dealer": "W",
-    "vulnerability": "None",
+    "vulnerability": "Both",
     "N": "AT73.A4.86.AQ742",
     "S": "KQ642.KQ9.A75.JT",
     "E": "J985.7632.QT4.K8",
@@ -19541,7 +19541,7 @@
     "board": 27,
     "date": "10.01.2026",
     "dealer": "S",
-    "vulnerability": "None",
+    "vulnerability": "EW",
     "N": "853.A43.AKT7.Q97",
     "S": "76.KQJ7.62.AT653",
     "E": "AQT9.95.QJ9853.2",
@@ -19739,7 +19739,7 @@
     "board": 30,
     "date": "10.01.2026",
     "dealer": "E",
-    "vulnerability": "None",
+    "vulnerability": "NS",
     "N": "K8742.-.T874.AK84",
     "S": "T965.K9872.62.Q9",
     "E": "Q.A64.K3.JT76532",
@@ -20267,7 +20267,7 @@
     "board": 8,
     "date": "11.01.2026",
     "dealer": "W",
-    "vulnerability": "None",
+    "vulnerability": "Both",
     "N": "QJ98.A5.Q9852.A5",
     "S": "K4.JT763.K.K8764",
     "E": "A652.K82.T743.QT",
@@ -20465,7 +20465,7 @@
     "board": 11,
     "date": "11.01.2026",
     "dealer": "S",
-    "vulnerability": "None",
+    "vulnerability": "EW",
     "N": "Q6432.52.43.J986",
     "S": "A98.AQT3.A8.AQT5",
     "E": "K5.J984.KJ972.42",
@@ -20663,7 +20663,7 @@
     "board": 14,
     "date": "11.01.2026",
     "dealer": "E",
-    "vulnerability": "None",
+    "vulnerability": "NS",
     "N": "K75.K6.AK43.AK43",
     "S": "Q963.AQ7.QT6.975",
     "E": "T2.JT93.J852.T62",
@@ -21323,7 +21323,7 @@
     "board": 24,
     "date": "11.01.2026",
     "dealer": "W",
-    "vulnerability": "None",
+    "vulnerability": "Both",
     "N": "AQJ.842.Q2.AT873",
     "S": "K75.53.A984.KQ94",
     "E": "9832.T.KT753.J65",
@@ -21521,7 +21521,7 @@
     "board": 27,
     "date": "11.01.2026",
     "dealer": "S",
-    "vulnerability": "None",
+    "vulnerability": "EW",
     "N": "QT96.K876.T864.2",
     "S": "KJ8.-.KQ9753.Q763",
     "E": "5.AQJ542.AJ.KT98",
@@ -21719,7 +21719,7 @@
     "board": 30,
     "date": "11.01.2026",
     "dealer": "E",
-    "vulnerability": "None",
+    "vulnerability": "NS",
     "N": "A8.AK9753.J52.95",
     "S": "Q7652.86.A.QJT64",
     "E": "KJ93.Q4.KQ873.A7",
@@ -22247,7 +22247,7 @@
     "board": 8,
     "date": "12.01.2026",
     "dealer": "W",
-    "vulnerability": "None",
+    "vulnerability": "Both",
     "N": "JT963.AKQ.K864.8",
     "S": "AK2.T.QT9.QT6542",
     "E": "Q85.J82.J32.KJ93",
@@ -22445,7 +22445,7 @@
     "board": 11,
     "date": "12.01.2026",
     "dealer": "S",
-    "vulnerability": "None",
+    "vulnerability": "EW",
     "N": "95.K9872.K9764.7",
     "S": "K2.J643.3.KJ8543",
     "E": "AJT763.AT5.Q8.A9",
@@ -22643,7 +22643,7 @@
     "board": 14,
     "date": "12.01.2026",
     "dealer": "E",
-    "vulnerability": "None",
+    "vulnerability": "NS",
     "N": "KQJT96532.J5.-.A4",
     "S": "A.8763.AK965.Q97",
     "E": "4.A4.QJ872.K8632",
@@ -23303,7 +23303,7 @@
     "board": 24,
     "date": "12.01.2026",
     "dealer": "W",
-    "vulnerability": "None",
+    "vulnerability": "Both",
     "N": "KJ7652.6.KJ875.2",
     "S": "43.KQ52.Q6.AKQJ3",
     "E": "A98.AJT983.2.876",
@@ -23501,7 +23501,7 @@
     "board": 27,
     "date": "12.01.2026",
     "dealer": "S",
-    "vulnerability": "None",
+    "vulnerability": "EW",
     "N": "QJ94.KJ86.J63.A9",
     "S": "852.AT94.975.JT6",
     "E": "AK.Q75.QT42.8542",
@@ -23699,7 +23699,7 @@
     "board": 30,
     "date": "12.01.2026",
     "dealer": "E",
-    "vulnerability": "None",
+    "vulnerability": "NS",
     "N": "A82.64.AK753.843",
     "S": "J75.A.QJ64.KQT97",
     "E": "QT.K9832.982.J65",
@@ -24227,7 +24227,7 @@
     "board": 8,
     "date": "13.01.2026",
     "dealer": "W",
-    "vulnerability": "None",
+    "vulnerability": "Both",
     "N": "Q82.A8.AKT74.965",
     "S": "K94.K32.J932.K74",
     "E": "AT.QJT654.865.Q8",
@@ -24425,7 +24425,7 @@
     "board": 11,
     "date": "13.01.2026",
     "dealer": "S",
-    "vulnerability": "None",
+    "vulnerability": "EW",
     "N": "AQ653.A.AT93.KT3",
     "S": "74.J97.K64.98752",
     "E": "J8.6532.J7.AQJ64",
@@ -24623,7 +24623,7 @@
     "board": 14,
     "date": "13.01.2026",
     "dealer": "E",
-    "vulnerability": "None",
+    "vulnerability": "NS",
     "N": "KQ865.953.K93.K7",
     "S": "AT94.QJT.J5.A543",
     "E": "-.K62.A8762.QJ982",
@@ -25283,7 +25283,7 @@
     "board": 24,
     "date": "13.01.2026",
     "dealer": "W",
-    "vulnerability": "None",
+    "vulnerability": "Both",
     "N": "AKT2.A.AT8753.QT",
     "S": "93.Q9.QJ.J975432",
     "E": "QJ86.KT85432.K.A",
@@ -25481,7 +25481,7 @@
     "board": 27,
     "date": "13.01.2026",
     "dealer": "S",
-    "vulnerability": "None",
+    "vulnerability": "EW",
     "N": "T.QJ74.T874.9654",
     "S": "A9875.AK832.6.72",
     "E": "64.T6.AQ952.AT83",
@@ -25679,7 +25679,7 @@
     "board": 30,
     "date": "13.01.2026",
     "dealer": "E",
-    "vulnerability": "None",
+    "vulnerability": "NS",
     "N": "QT7.T73.AT975.65",
     "S": "8653.J98.QJ.9832",
     "E": "AJ942.-.K432.AKQT",
@@ -26207,7 +26207,7 @@
     "board": 8,
     "date": "14.01.2026",
     "dealer": "W",
-    "vulnerability": "None",
+    "vulnerability": "Both",
     "N": "QT632.9.6.AQ9743",
     "S": "7.QT73.AJ532.KT8",
     "E": "984.AK4.QT9874.2",
@@ -26405,7 +26405,7 @@
     "board": 11,
     "date": "14.01.2026",
     "dealer": "S",
-    "vulnerability": "None",
+    "vulnerability": "EW",
     "N": "Q742.Q875.K6.J98",
     "S": "AJT.K9.T43.QT642",
     "E": "K985.AJT2.A2.A53",
@@ -26603,7 +26603,7 @@
     "board": 14,
     "date": "14.01.2026",
     "dealer": "E",
-    "vulnerability": "None",
+    "vulnerability": "NS",
     "N": "AQJT5.A9.Q86.432",
     "S": "-.KQT72.J53.AJT95",
     "E": "K9864.8.AKT9.KQ8",
@@ -27263,7 +27263,7 @@
     "board": 24,
     "date": "14.01.2026",
     "dealer": "W",
-    "vulnerability": "None",
+    "vulnerability": "Both",
     "N": "K75.T8.KQ83.AKQ9",
     "S": "A864.K953.A64.42",
     "E": "932.7642.752.J65",
@@ -27461,7 +27461,7 @@
     "board": 27,
     "date": "14.01.2026",
     "dealer": "S",
-    "vulnerability": "None",
+    "vulnerability": "EW",
     "N": "JT5.QJ54.A9.K842",
     "S": "AQ974.932.QJ6.65",
     "E": "83.K876.542.JT97",
@@ -27659,7 +27659,7 @@
     "board": 30,
     "date": "14.01.2026",
     "dealer": "E",
-    "vulnerability": "None",
+    "vulnerability": "NS",
     "N": "J974.J5.87.QT863",
     "S": "A83.AKT92.6.J974",
     "E": "T2.6.KQJ9532.AK2",
@@ -28187,7 +28187,7 @@
     "board": 8,
     "date": "15.01.2026",
     "dealer": "W",
-    "vulnerability": "None",
+    "vulnerability": "Both",
     "N": "92.QJ976.J32.KT8",
     "S": "T4.T42.987.AJ762",
     "E": "AQ83.A3.AQT4.Q94",
@@ -28385,7 +28385,7 @@
     "board": 11,
     "date": "15.01.2026",
     "dealer": "S",
-    "vulnerability": "None",
+    "vulnerability": "EW",
     "N": "AJ86.74.872.QT64",
     "S": "K3.A953.AJ.K9732",
     "E": "Q54.K862.KQ643.A",
@@ -28583,7 +28583,7 @@
     "board": 14,
     "date": "15.01.2026",
     "dealer": "E",
-    "vulnerability": "None",
+    "vulnerability": "NS",
     "N": "74.2.AKJ974.AQ75",
     "S": "862.K8754.52.JT2",
     "E": "AKT9.QJ9.QT6.K96",
@@ -29243,7 +29243,7 @@
     "board": 24,
     "date": "15.01.2026",
     "dealer": "W",
-    "vulnerability": "None",
+    "vulnerability": "Both",
     "N": "AK754.T42.KT76.K",
     "S": "Q9632.93.J4.A875",
     "E": "JT8.AQ8.A983.T63",
@@ -29441,7 +29441,7 @@
     "board": 27,
     "date": "15.01.2026",
     "dealer": "S",
-    "vulnerability": "None",
+    "vulnerability": "EW",
     "N": "2.KT9742.QJ75.65",
     "S": "T85.AQ5.AT864.94",
     "E": "J643.83.K92.KT72",
@@ -29639,7 +29639,7 @@
     "board": 30,
     "date": "15.01.2026",
     "dealer": "E",
-    "vulnerability": "None",
+    "vulnerability": "NS",
     "N": "K85.972.9643.T72",
     "S": "Q63.QJT5.KJ75.K6",
     "E": "AJ7.63.QT2.AQJ93",
@@ -30167,7 +30167,7 @@
     "board": 8,
     "date": "16.01.2026",
     "dealer": "W",
-    "vulnerability": "None",
+    "vulnerability": "Both",
     "N": "A987.T864.JT5.95",
     "S": "KQT5.A9753.4.T72",
     "E": "63.Q2.Q98762.K86",
@@ -30365,7 +30365,7 @@
     "board": 11,
     "date": "16.01.2026",
     "dealer": "S",
-    "vulnerability": "None",
+    "vulnerability": "EW",
     "N": "T64.3.QJ76.J8654",
     "S": "K53.T652.K432.Q3",
     "E": "AQ872.Q87.AT.A72",
@@ -30563,7 +30563,7 @@
     "board": 14,
     "date": "16.01.2026",
     "dealer": "E",
-    "vulnerability": "None",
+    "vulnerability": "NS",
     "N": "QJ8.T542.52.9542",
     "S": "653.97.AQJ86.Q63",
     "E": "AKT92.Q3.4.AKJT8",
@@ -31223,7 +31223,7 @@
     "board": 24,
     "date": "16.01.2026",
     "dealer": "W",
-    "vulnerability": "None",
+    "vulnerability": "Both",
     "N": "T76.62.Q765.J943",
     "S": "AJ9.973.KJ932.A6",
     "E": "K8542.AQJT85.4.8",
@@ -31421,7 +31421,7 @@
     "board": 27,
     "date": "16.01.2026",
     "dealer": "S",
-    "vulnerability": "None",
+    "vulnerability": "EW",
     "N": "A654.K.QJ63.KT65",
     "S": "KJ982.Q972.A.A84",
     "E": "Q3.AJ84.T72.J732",
@@ -31619,7 +31619,7 @@
     "board": 30,
     "date": "16.01.2026",
     "dealer": "E",
-    "vulnerability": "None",
+    "vulnerability": "NS",
     "N": "9754.Q75.3.KQ953",
     "S": "AQT2.K8.AQJ85.A2",
     "E": "K86.AJ3.T972.J86",
@@ -32147,7 +32147,7 @@
     "board": 8,
     "date": "17.01.2026",
     "dealer": "W",
-    "vulnerability": "None",
+    "vulnerability": "Both",
     "N": "J3.KQT2.QT843.A9",
     "S": "AQ8.A9854.5.KT43",
     "E": "95.J763.AJ7.Q752",
@@ -32345,7 +32345,7 @@
     "board": 11,
     "date": "17.01.2026",
     "dealer": "S",
-    "vulnerability": "None",
+    "vulnerability": "EW",
     "N": "Q6.AQ5.T976.QJT9",
     "S": "94.9632.J54.6542",
     "E": "AJ53.K7.AK2.AK87",
@@ -32543,7 +32543,7 @@
     "board": 14,
     "date": "17.01.2026",
     "dealer": "E",
-    "vulnerability": "None",
+    "vulnerability": "NS",
     "N": "A732.86.AT53.K98",
     "S": "98.K42.Q42.AQT32",
     "E": "KT6.AQT75.K76.64",
@@ -33203,7 +33203,7 @@
     "board": 24,
     "date": "17.01.2026",
     "dealer": "W",
-    "vulnerability": "None",
+    "vulnerability": "Both",
     "N": "-.AK63.J764.T9753",
     "S": "AKJ874.Q74.Q.A84",
     "E": "T32.T5.AKT98.KQ2",
@@ -33401,7 +33401,7 @@
     "board": 27,
     "date": "17.01.2026",
     "dealer": "S",
-    "vulnerability": "None",
+    "vulnerability": "EW",
     "N": "K.AKT6532.T62.K3",
     "S": "T983.J7.K43.AJ76",
     "E": "AQJ2.Q.AQJ7.QT85",
@@ -33599,7 +33599,7 @@
     "board": 30,
     "date": "17.01.2026",
     "dealer": "E",
-    "vulnerability": "None",
+    "vulnerability": "NS",
     "N": "A752.982.KT98.73",
     "S": "KT8.5.6432.AKJ82",
     "E": "QJ94.AK74.Q7.QT6",
@@ -34127,7 +34127,7 @@
     "board": 8,
     "date": "18.01.2026",
     "dealer": "W",
-    "vulnerability": "None",
+    "vulnerability": "Both",
     "N": "A875.J52.J73.K64",
     "S": "KT9.Q97.K84.AJT3",
     "E": "Q64.A6.Q95.Q9752",
@@ -34325,7 +34325,7 @@
     "board": 11,
     "date": "18.01.2026",
     "dealer": "S",
-    "vulnerability": "None",
+    "vulnerability": "EW",
     "N": "KQ953.AKT96.K5.T",
     "S": "T4.4.J874.J98762",
     "E": "AJ2.52.A62.AKQ53",
@@ -34523,7 +34523,7 @@
     "board": 14,
     "date": "18.01.2026",
     "dealer": "E",
-    "vulnerability": "None",
+    "vulnerability": "NS",
     "N": "KQ52.Q963.-.AT974",
     "S": "96.KJ72.AKQ98.K3",
     "E": "AJT.A4.7432.QJ86",
@@ -35183,7 +35183,7 @@
     "board": 24,
     "date": "18.01.2026",
     "dealer": "W",
-    "vulnerability": "None",
+    "vulnerability": "Both",
     "N": "KJ72.T9.A7.AT852",
     "S": "864.AKJ.9862.KQ9",
     "E": "T.Q864.QT543.J63",
@@ -35381,7 +35381,7 @@
     "board": 27,
     "date": "18.01.2026",
     "dealer": "S",
-    "vulnerability": "None",
+    "vulnerability": "EW",
     "N": "Q9864.Q2.T4.J763",
     "S": "J.JT864.62.T9854",
     "E": "K53.A975.AJ75.KQ",
@@ -35579,7 +35579,7 @@
     "board": 30,
     "date": "18.01.2026",
     "dealer": "E",
-    "vulnerability": "None",
+    "vulnerability": "NS",
     "N": "QJT3.QJ2.K9.AKJ3",
     "S": "52.AK643.763.Q72",
     "E": "9874.98.AQ42.984",
@@ -36107,7 +36107,7 @@
     "board": 8,
     "date": "19.01.2026",
     "dealer": "W",
-    "vulnerability": "None",
+    "vulnerability": "Both",
     "N": "T2.J92.AK4.AKQ64",
     "S": "8653.K65.QT96.J3",
     "E": "J.AT743.J752.T85",
@@ -36305,7 +36305,7 @@
     "board": 11,
     "date": "19.01.2026",
     "dealer": "S",
-    "vulnerability": "None",
+    "vulnerability": "EW",
     "N": "Q43.A5.A8.QJT983",
     "S": "AJ7.KQ843.T632.6",
     "E": "K8652.97.KJ75.54",
@@ -36503,7 +36503,7 @@
     "board": 14,
     "date": "19.01.2026",
     "dealer": "E",
-    "vulnerability": "None",
+    "vulnerability": "NS",
     "N": "Q84.AQJ43.5.QJ75",
     "S": "J2.9875.KJT76.63",
     "E": "AT9.KT.AQ98.T984",
@@ -37163,7 +37163,7 @@
     "board": 24,
     "date": "19.01.2026",
     "dealer": "W",
-    "vulnerability": "None",
+    "vulnerability": "Both",
     "N": "K5.KQ8754.2.KJ62",
     "S": "97.932.AQ9543.A4",
     "E": "AQJT.A.J876.Q973",
@@ -37361,7 +37361,7 @@
     "board": 27,
     "date": "19.01.2026",
     "dealer": "S",
-    "vulnerability": "None",
+    "vulnerability": "EW",
     "N": "AK7.AKQ54.KJ3.94",
     "S": "T962.7.QT98.A632",
     "E": "J4.T9862.642.QT7",
@@ -37559,7 +37559,7 @@
     "board": 30,
     "date": "19.01.2026",
     "dealer": "E",
-    "vulnerability": "None",
+    "vulnerability": "NS",
     "N": "T963.KJ.T5.KQ873",
     "S": "A72.AQT93.AK2.A9",
     "E": "QJ4.754.QJ87.J62",
@@ -38087,7 +38087,7 @@
     "board": 8,
     "date": "20.01.2026",
     "dealer": "W",
-    "vulnerability": "None",
+    "vulnerability": "Both",
     "N": "K4.Q.Q9654.Q7432",
     "S": "JT86.74.AKJ72.AJ",
     "E": "Q97532.KJ9652..K",
@@ -38285,7 +38285,7 @@
     "board": 11,
     "date": "20.01.2026",
     "dealer": "S",
-    "vulnerability": "None",
+    "vulnerability": "EW",
     "N": "AQ9432.A94.84.Q9",
     "S": "KT5.Q632.K73.K75",
     "E": "J8.KJ75.AJ6.8642",
@@ -38483,7 +38483,7 @@
     "board": 14,
     "date": "20.01.2026",
     "dealer": "E",
-    "vulnerability": "None",
+    "vulnerability": "NS",
     "N": "T43.QT987.AJ4.65",
     "S": "A5.KJ4.98763.QT8",
     "E": "Q97.A652.Q5.AKJ3",
@@ -39143,7 +39143,7 @@
     "board": 24,
     "date": "20.01.2026",
     "dealer": "W",
-    "vulnerability": "None",
+    "vulnerability": "Both",
     "N": "AJ62.QJ6.KJ.T876",
     "S": "85.A5.976542.KQ9",
     "E": "KQ4.KT32.AQ8.AJ2",
@@ -39341,7 +39341,7 @@
     "board": 27,
     "date": "20.01.2026",
     "dealer": "S",
-    "vulnerability": "None",
+    "vulnerability": "EW",
     "N": "K4.A74.AK42.K754",
     "S": "Q983.83.QJT96.QJ",
     "E": "JT652.J9.75.AT62",
@@ -39539,7 +39539,7 @@
     "board": 30,
     "date": "20.01.2026",
     "dealer": "E",
-    "vulnerability": "None",
+    "vulnerability": "NS",
     "N": "98.973.8765.AK97",
     "S": "QJ65432.86.KJ9.J",
     "E": "AT.AKT5.AT32.832",
@@ -40067,7 +40067,7 @@
     "board": 8,
     "date": "21.01.2026",
     "dealer": "W",
-    "vulnerability": "None",
+    "vulnerability": "Both",
     "N": "KT763.J9.J52.JT4",
     "S": "2.AK.A9874.AK753",
     "E": "A9854.QT73.KQT.Q",
@@ -40265,7 +40265,7 @@
     "board": 11,
     "date": "21.01.2026",
     "dealer": "S",
-    "vulnerability": "None",
+    "vulnerability": "EW",
     "N": "AK6.Q87532.3.K98",
     "S": "QJT2.KJ9.AK.AJ65",
     "E": "754.T64.Q42.7432",
@@ -40463,7 +40463,7 @@
     "board": 14,
     "date": "21.01.2026",
     "dealer": "E",
-    "vulnerability": "None",
+    "vulnerability": "NS",
     "N": "A8732.A9742.Q62.-",
     "S": "J64.KJ5.AK94.AK6",
     "E": "KT5.T6.853.Q9732",
@@ -41123,7 +41123,7 @@
     "board": 24,
     "date": "21.01.2026",
     "dealer": "W",
-    "vulnerability": "None",
+    "vulnerability": "Both",
     "N": "AKQ75.Q62.J973.6",
     "S": "JT.KJT843.AK.KJ9",
     "E": "9832.A95.QT.8753",
@@ -41321,7 +41321,7 @@
     "board": 27,
     "date": "21.01.2026",
     "dealer": "S",
-    "vulnerability": "None",
+    "vulnerability": "EW",
     "N": "AK9.Q87432.Q73.Q",
     "S": "QJT4.J.JT96.KT62",
     "E": "853.AKT5.K.A9853",
@@ -41519,7 +41519,7 @@
     "board": 30,
     "date": "21.01.2026",
     "dealer": "E",
-    "vulnerability": "None",
+    "vulnerability": "NS",
     "N": "KQ32.AQT7.A9.JT2",
     "S": "AJT97.9432.J53.4",
     "E": "5.J86.Q862.A8763",
@@ -42046,7 +42046,7 @@
     "board": 8,
     "date": "22.01.2026",
     "dealer": "W",
-    "vulnerability": "None",
+    "vulnerability": "Both",
     "N": "T975.732.A5.KQ96",
     "S": "A86.KJT5.QJT98.7",
     "E": "QJ43.A.7432.AJ82",
@@ -42244,7 +42244,7 @@
     "board": 11,
     "date": "22.01.2026",
     "dealer": "S",
-    "vulnerability": "None",
+    "vulnerability": "EW",
     "N": "K6.8763.Q843.QJ6",
     "S": "J9853.AT.T5.9754",
     "E": "T7.KQJ42.J96.AK3",
@@ -42442,7 +42442,7 @@
     "board": 14,
     "date": "22.01.2026",
     "dealer": "E",
-    "vulnerability": "None",
+    "vulnerability": "NS",
     "N": "KT5.KT654.AK.A86",
     "S": "AQ82.-.8643.QJ542",
     "E": "J4.AQ9873.Q75.K9",
@@ -43102,7 +43102,7 @@
     "board": 24,
     "date": "22.01.2026",
     "dealer": "W",
-    "vulnerability": "None",
+    "vulnerability": "Both",
     "N": "43.T874.AJT3.Q94",
     "S": "AJT7.3.984.KJT32",
     "E": "85.Q962.KQ762.A7",
@@ -43300,7 +43300,7 @@
     "board": 27,
     "date": "22.01.2026",
     "dealer": "S",
-    "vulnerability": "None",
+    "vulnerability": "EW",
     "N": "AKQT.AT82.Q.QJT2",
     "S": "2.9.KJ8643.K7653",
     "E": "6543.QJ7654.52.8",
@@ -43498,7 +43498,7 @@
     "board": 30,
     "date": "22.01.2026",
     "dealer": "E",
-    "vulnerability": "None",
+    "vulnerability": "NS",
     "N": "AJ842.6.J3.QT853",
     "S": "K973.752.Q872.J2",
     "E": "T6.A983.AKT6.974",
@@ -43622,7 +43622,9 @@
         "length": 9,
         "tricks": 10
       }
-    }
+    },
+    "vulnerability": "None",
+    "dealer": "N"
   },
   {
     "N": "J974.AT42.T73.J7",
@@ -43687,7 +43689,9 @@
         "length": 10,
         "tricks": 11
       }
-    }
+    },
+    "vulnerability": "NS",
+    "dealer": "E"
   },
   {
     "N": "7.Q986.KT7.AJ964",
@@ -43752,7 +43756,9 @@
         "length": 9,
         "tricks": 7
       }
-    }
+    },
+    "vulnerability": "EW",
+    "dealer": "S"
   },
   {
     "N": "J7.Q8.AKJ98.AQ93",
@@ -43817,7 +43823,9 @@
         "length": 7,
         "tricks": 5
       }
-    }
+    },
+    "vulnerability": "Both",
+    "dealer": "W"
   },
   {
     "N": "A65.A8.T4.A98542",
@@ -43882,7 +43890,9 @@
         "length": 7,
         "tricks": 7
       }
-    }
+    },
+    "vulnerability": "None",
+    "dealer": "N"
   },
   {
     "N": "AKT943.Q.A854.A6",
@@ -43947,7 +43957,9 @@
         "length": 8,
         "tricks": 4
       }
-    }
+    },
+    "vulnerability": "NS",
+    "dealer": "E"
   },
   {
     "N": "J9763.JT5.52.K64",
@@ -44012,7 +44024,9 @@
         "length": 10,
         "tricks": 12
       }
-    }
+    },
+    "vulnerability": "EW",
+    "dealer": "S"
   },
   {
     "N": ".K.K98754.AKQ742",
@@ -44077,7 +44091,9 @@
         "length": 10,
         "tricks": 7
       }
-    }
+    },
+    "vulnerability": "Both",
+    "dealer": "W"
   },
   {
     "N": "KQ43.K7.973.QT73",
@@ -44142,7 +44158,9 @@
         "length": 9,
         "tricks": 9
       }
-    }
+    },
+    "vulnerability": "None",
+    "dealer": "N"
   },
   {
     "N": "Q7.KQ82.K642.T74",
@@ -44207,7 +44225,9 @@
         "length": 10,
         "tricks": 12
       }
-    }
+    },
+    "vulnerability": "NS",
+    "dealer": "E"
   },
   {
     "N": "AK962..AJ76.AQT9",
@@ -44272,7 +44292,9 @@
         "length": 9,
         "tricks": 6
       }
-    }
+    },
+    "vulnerability": "EW",
+    "dealer": "S"
   },
   {
     "N": "KJ6.K753.AQJ3.43",
@@ -44337,7 +44359,9 @@
         "length": 9,
         "tricks": 7
       }
-    }
+    },
+    "vulnerability": "Both",
+    "dealer": "W"
   },
   {
     "N": "832.T7.T97.AKT52",
@@ -44402,7 +44426,9 @@
         "length": 7,
         "tricks": 9
       }
-    }
+    },
+    "vulnerability": "None",
+    "dealer": "N"
   },
   {
     "N": "AQ43.973.Q4.9765",
@@ -44467,7 +44493,9 @@
         "length": 8,
         "tricks": 8
       }
-    }
+    },
+    "vulnerability": "NS",
+    "dealer": "E"
   },
   {
     "N": "QJ65.Q852.JT87.6",
@@ -44532,7 +44560,9 @@
         "length": 8,
         "tricks": 9
       }
-    }
+    },
+    "vulnerability": "EW",
+    "dealer": "S"
   },
   {
     "N": "9762.Q76.JT8.A52",
@@ -44597,7 +44627,9 @@
         "length": 8,
         "tricks": 10
       }
-    }
+    },
+    "vulnerability": "Both",
+    "dealer": "W"
   },
   {
     "N": "KQ53.AKQ3.A94.A7",
@@ -44662,7 +44694,9 @@
         "length": 8,
         "tricks": 5
       }
-    }
+    },
+    "vulnerability": "None",
+    "dealer": "N"
   },
   {
     "N": "K63.T64.965.Q754",
@@ -44727,7 +44761,9 @@
         "length": 8,
         "tricks": 8
       }
-    }
+    },
+    "vulnerability": "NS",
+    "dealer": "E"
   },
   {
     "N": "AQ93.7.JT85432.Q",
@@ -44792,7 +44828,9 @@
         "length": 9,
         "tricks": 12
       }
-    }
+    },
+    "vulnerability": "EW",
+    "dealer": "S"
   },
   {
     "N": "K764.QT4.KT8.QJ6",
@@ -44857,7 +44895,9 @@
         "length": 10,
         "tricks": 8
       }
-    }
+    },
+    "vulnerability": "Both",
+    "dealer": "W"
   },
   {
     "N": "8432.T6.AK7.K873",
@@ -44922,7 +44962,9 @@
         "length": 8,
         "tricks": 10
       }
-    }
+    },
+    "vulnerability": "None",
+    "dealer": "N"
   },
   {
     "N": "Q92.64.654.KJT64",
@@ -44987,7 +45029,9 @@
         "length": 11,
         "tricks": 9
       }
-    }
+    },
+    "vulnerability": "NS",
+    "dealer": "E"
   },
   {
     "N": "JT653.642.983.QT",
@@ -45052,7 +45096,9 @@
         "length": 7,
         "tricks": 11
       }
-    }
+    },
+    "vulnerability": "EW",
+    "dealer": "S"
   },
   {
     "N": "J2.AT4.7643.6532",
@@ -45117,7 +45163,9 @@
         "length": 7,
         "tricks": 9
       }
-    }
+    },
+    "vulnerability": "Both",
+    "dealer": "W"
   },
   {
     "N": "QJ62.A43.2.J9874",
@@ -45182,7 +45230,9 @@
         "length": 8,
         "tricks": 8
       }
-    }
+    },
+    "vulnerability": "None",
+    "dealer": "N"
   },
   {
     "N": "J8.JT82.K7652.J4",
@@ -45247,7 +45297,9 @@
         "length": 9,
         "tricks": 11
       }
-    }
+    },
+    "vulnerability": "NS",
+    "dealer": "E"
   },
   {
     "N": "8753.AJT76.73.AT",
@@ -45312,7 +45364,9 @@
         "length": 8,
         "tricks": 7
       }
-    }
+    },
+    "vulnerability": "EW",
+    "dealer": "S"
   },
   {
     "N": "AJ4.AJ53.T82.Q65",
@@ -45377,7 +45431,9 @@
         "length": 7,
         "tricks": 11
       }
-    }
+    },
+    "vulnerability": "Both",
+    "dealer": "W"
   },
   {
     "N": "JT4.KT76.2.98742",
@@ -45442,7 +45498,9 @@
         "length": 9,
         "tricks": 9
       }
-    }
+    },
+    "vulnerability": "None",
+    "dealer": "N"
   },
   {
     "N": "A5.J86.A9873.862",
@@ -45507,6 +45565,8 @@
         "length": 8,
         "tricks": 9
       }
-    }
+    },
+    "vulnerability": "NS",
+    "dealer": "E"
   }
 ]
