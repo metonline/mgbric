@@ -412,16 +412,16 @@
                 const database = await response.json();
                 document.getElementById('loading').style.display = 'none';
 
-                // Filter for 24.1.2026 only
+                // Filter for 24.01.2026 only
                 const filtered = database.filter(hand => {
                     const date = hand.date || '';
-                    return date.includes('24.1');
+                    return date.includes('24.01');
                 });
 
-                if (filtered.length === 0) throw new Error('No hands found for 24.1.2026');
+                if (filtered.length === 0) throw new Error('No hands found for 24.01.2026');
 
                 // Update header
-                document.getElementById('tournament-name').textContent = `24.1.2026 (${filtered.length} hands)`;
+                document.getElementById('tournament-name').textContent = `24.01.2026 (${filtered.length} hands)`;
                 document.getElementById('board-count').textContent = filtered.length;
 
                 // Sort by event_id, then board number
