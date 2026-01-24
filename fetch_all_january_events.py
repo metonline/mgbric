@@ -28,7 +28,7 @@ def is_hand_from_2026_or_later(hand):
 def fetch_calendar_events(month=1, year=2026):
     """Crawl vugraph calendar page to get fresh event list for a specific month
     
-    Returns: {event_id: date_string} with proper dates extracted from calendar table
+    Returns: {event_id: date_string} with dates extracted from calendar
     """
     try:
         url = f"https://clubs.vugraph.com/hosgoru/calendar.php?month={month}&year={year}"
@@ -49,47 +49,30 @@ def fetch_calendar_events(month=1, year=2026):
         events = {}
         import re
         
-        # Find calendar table with events organized by week/day
-        table = soup.find('table')
-        if not table:
-            print(f"  ⚠ No calendar table found, falling back to placeholder dates")
-            # Fallback: extract all event IDs with placeholder date
-            for link in soup.find_all('a', href=True):
-                event_match = re.search(r'event=(\d+)', link['href'])
-                if event_match:
-                    event_id = event_match.group(1)
-                    date_str = f"01.{month:02d}.{year}"
-                    events[event_id] = date_str
-            return events
+        # The calendar page has event links mixed throughout the HTML
+        # Simply extract all event IDs and assign them the month/year
+        # (We can't determine exact day from this calendar structure easily)
         
-        # Parse calendar table rows (each row is a week)
-        rows = table.find_all('tr')
-        for row in rows:
-            cells = row.find_all('td')
-            if len(cells) >= 7:  # Week row with days
-                # Each cell is a day (0=Mon, 1=Tue, ..., 6=Sun)
-                for day_idx, cell in enumerate(cells):
-                    # Extract day number (1-31)
-                    # First try to get it from cell text
-                    cell_text = cell.get_text().strip()
-                    
-                    # Look for all event links in this cell
-                    links = cell.find_all('a', href=True)
-                    for link in links:
-                        event_match = re.search(r'event=(\d+)', link['href'])
-                        if event_match:
-                            event_id = event_match.group(1)
-                            
-                            # Try to extract day from cell text
-                            day_match = re.search(r'\b(\d{1,2})\b', cell_text)
-                            if day_match:
-                                day = int(day_match.group(1))
-                                date_str = f"{day:02d}.{month:02d}.{year}"
-                                events[event_id] = date_str
-                            else:
-                                # Fallback: use placeholder
-                                date_str = f"01.{month:02d}.{year}"
-                                events[event_id] = date_str
+        # Find all links with event IDs
+        # Links are in format: eventresults.php?event=405659
+        for link in soup.find_all('a', href=True):
+            href = link['href']
+            
+            # Extract event ID from eventresults.php?event=XXXXX
+            event_match = re.search(r'event=(\d+)', href)
+            if not event_match:
+                continue
+            
+            event_id = int(event_match.group(1))
+            
+            # For now, use first day of month as placeholder
+            # The actual dates will come from fetching the event pages
+            # or from registry fallback
+            date_str = f"01.{month:02d}.{year}"
+            
+            # Only add if not already added
+            if event_id not in events:
+                events[event_id] = date_str
         
         print(f"  Found {len(events)} events in calendar for {month}/{year}")
         return events
