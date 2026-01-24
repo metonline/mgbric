@@ -50,18 +50,20 @@
     "lott": {
       "total_tricks": 16,
       "ns_fit": {
-        "suit": "♥",
+        "suit": "\u00e2\u2122\u00a5",
         "suit_code": "H",
         "length": 7,
         "tricks": 11
       },
       "ew_fit": {
-        "suit": "♠",
+        "suit": "\u00e2\u2122\u00a0",
         "suit_code": "S",
         "length": 8,
         "tricks": 5
       }
-    }
+    },
+    "lin_string": "qx|o1|md|1SJHAKQJ75DA76CK92,SKQ765H984DQ32CJ6,SA932H3DJT84CAT73,|rh||ah|Board|sv|0|pg||",
+    "bbo_url": "https://www.bridgebase.com/tools/handviewer.html?lin=qx%7Co1%7Cmd%7C1SJHAKQJ75DA76CK92%2CSKQ765H984DQ32CJ6%2CSA932H3DJT84CAT73%2C%7Crh%7C%7Cah%7CBoard%7Csv%7C0%7Cpg%7C%7C"
   },
   {
     "N": "KT.K63.K52.T9854",
@@ -114,18 +116,20 @@
     "lott": {
       "total_tricks": 14,
       "ns_fit": {
-        "suit": "♠",
+        "suit": "\u00e2\u2122\u00a0",
         "suit_code": "S",
         "length": 7,
         "tricks": 5
       },
       "ew_fit": {
-        "suit": "♦",
+        "suit": "\u00e2\u2122\u00a6",
         "suit_code": "D",
         "length": 7,
         "tricks": 9
       }
-    }
+    },
+    "lin_string": "qx|o1|md|2SA6HQ5DAJ84CAKQ62,SQ8532HJ987DQ96C3,SJ974HAT42DT73CJ7,|rh||ah|Board|sv|0|pg||",
+    "bbo_url": "https://www.bridgebase.com/tools/handviewer.html?lin=qx%7Co1%7Cmd%7C2SA6HQ5DAJ84CAKQ62%2CSQ8532HJ987DQ96C3%2CSJ974HAT42DT73CJ7%2C%7Crh%7C%7Cah%7CBoard%7Csv%7C0%7Cpg%7C%7C"
   },
   {
     "N": "A98542.53.A.KQ52",
@@ -167,29 +171,31 @@
       }
     },
     "optimum": {
-      "text": "NS 11♠; +450",
+      "text": "NS 11\u00e2\u2122\u00a0; +450",
       "score": 450,
       "declarer": "NS",
-      "contract": "11♠",
+      "contract": "11\u00e2\u2122\u00a0",
       "level": 4,
-      "denom": "♠",
+      "denom": "\u00e2\u2122\u00a0",
       "tricks": 11
     },
     "lott": {
       "total_tricks": 18,
       "ns_fit": {
-        "suit": "♠",
+        "suit": "\u00e2\u2122\u00a0",
         "suit_code": "S",
         "length": 9,
         "tricks": 11
       },
       "ew_fit": {
-        "suit": "♦",
+        "suit": "\u00e2\u2122\u00a6",
         "suit_code": "D",
         "length": 8,
         "tricks": 7
       }
-    }
+    },
+    "lin_string": "qx|o1|md|3SKJTHAJ74DQ942C83,S7HQ986DKT7CAJ964,SA98542H53DACKQ52,|rh||ah|Board|sv|0|pg||",
+    "bbo_url": "https://www.bridgebase.com/tools/handviewer.html?lin=qx%7Co1%7Cmd%7C3SKJTHAJ74DQ942C83%2CS7HQ986DKT7CAJ964%2CSA98542H53DACKQ52%2C%7Crh%7C%7Cah%7CBoard%7Csv%7C0%7Cpg%7C%7C"
   },
   {
     "N": "932.J93.T65.J875",
@@ -242,18 +248,20 @@
     "lott": {
       "total_tricks": 14,
       "ns_fit": {
-        "suit": "♠",
+        "suit": "\u00e2\u2122\u00a0",
         "suit_code": "S",
         "length": 7,
         "tricks": 3
       },
       "ew_fit": {
-        "suit": "♦",
+        "suit": "\u00e2\u2122\u00a6",
         "suit_code": "D",
         "length": 7,
         "tricks": 11
       }
-    }
+    },
+    "lin_string": "qx|o1|md|4SJ7HQ8DAKJ98CAQ93,S932HJ93DT65CJ875,SAK65HK752D73CK64,|rh||ah|Board|sv|0|pg||",
+    "bbo_url": "https://www.bridgebase.com/tools/handviewer.html?lin=qx%7Co1%7Cmd%7C4SJ7HQ8DAKJ98CAQ93%2CS932HJ93DT65CJ875%2CSAK65HK752D73CK64%2C%7Crh%7C%7Cah%7CBoard%7Csv%7C0%7Cpg%7C%7C"
   },
   {
     "N": "KJ982.KT93.A62.6",
@@ -295,29 +303,31 @@
       }
     },
     "optimum": {
-      "text": "NS 10♠; -100",
+      "text": "NS 10\u00e2\u2122\u00a0; -100",
       "score": -100,
       "declarer": "NS",
-      "contract": "10♠",
+      "contract": "10\u00e2\u2122\u00a0",
       "level": 4,
-      "denom": "♠",
+      "denom": "\u00e2\u2122\u00a0",
       "tricks": 10
     },
     "lott": {
       "total_tricks": 19,
       "ns_fit": {
-        "suit": "♠",
+        "suit": "\u00e2\u2122\u00a0",
         "suit_code": "S",
         "length": 8,
         "tricks": 9
       },
       "ew_fit": {
-        "suit": "♣",
+        "suit": "\u00e2\u2122\u00a3",
         "suit_code": "C",
         "length": 10,
         "tricks": 10
       }
-    }
+    },
+    "lin_string": "qx|o1|md|1SKJ982HKT93DA62C6,S74HJ75DK983CQJT7,SQT3HQ642DQJ75CK3,|rh||ah|Board|sv|0|pg||",
+    "bbo_url": "https://www.bridgebase.com/tools/handviewer.html?lin=qx%7Co1%7Cmd%7C1SKJ982HKT93DA62C6%2CS74HJ75DK983CQJT7%2CSQT3HQ642DQJ75CK3%2C%7Crh%7C%7Cah%7CBoard%7Csv%7C0%7Cpg%7C%7C"
   },
   {
     "N": "QJ8.863.QT9.JT54",
@@ -359,29 +369,31 @@
       }
     },
     "optimum": {
-      "text": "EW 10♠; -420",
+      "text": "EW 10\u00e2\u2122\u00a0; -420",
       "score": -420,
       "declarer": "EW",
-      "contract": "10♠",
+      "contract": "10\u00e2\u2122\u00a0",
       "level": 4,
-      "denom": "♠",
+      "denom": "\u00e2\u2122\u00a0",
       "tricks": 10
     },
     "lott": {
       "total_tricks": 17,
       "ns_fit": {
-        "suit": "♣",
+        "suit": "\u00e2\u2122\u00a3",
         "suit_code": "C",
         "length": 9,
         "tricks": 6
       },
       "ew_fit": {
-        "suit": "♦",
+        "suit": "\u00e2\u2122\u00a6",
         "suit_code": "D",
         "length": 8,
         "tricks": 11
       }
-    }
+    },
+    "lin_string": "qx|o1|md|2S62HAKT52DJ763C73,S75HJ974DK2CKQ982,SAKT943HQDA854CA6,|rh||ah|Board|sv|0|pg||",
+    "bbo_url": "https://www.bridgebase.com/tools/handviewer.html?lin=qx%7Co1%7Cmd%7C2S62HAKT52DJ763C73%2CS75HJ974DK2CKQ982%2CSAKT943HQDA854CA6%2C%7Crh%7C%7Cah%7CBoard%7Csv%7C0%7Cpg%7C%7C"
   },
   {
     "N": "84.AQ6.AT743.AT2",
@@ -423,29 +435,31 @@
       }
     },
     "optimum": {
-      "text": "NS 11♣; +400",
+      "text": "NS 11\u00e2\u2122\u00a3; +400",
       "score": 400,
       "declarer": "NS",
-      "contract": "11♣",
+      "contract": "11\u00e2\u2122\u00a3",
       "level": 5,
-      "denom": "♣",
+      "denom": "\u00e2\u2122\u00a3",
       "tricks": 11
     },
     "lott": {
       "total_tricks": 17,
       "ns_fit": {
-        "suit": "♣",
+        "suit": "\u00e2\u2122\u00a3",
         "suit_code": "C",
         "length": 9,
         "tricks": 11
       },
       "ew_fit": {
-        "suit": "♠",
+        "suit": "\u00e2\u2122\u00a0",
         "suit_code": "S",
         "length": 9,
         "tricks": 6
       }
-    }
+    },
+    "lin_string": "qx|o1|md|3SQ5HK843D6CQ98753,SJ9763HJT5D52CK64,S84HAQ6DAT743CAT2,|rh||ah|Board|sv|0|pg||",
+    "bbo_url": "https://www.bridgebase.com/tools/handviewer.html?lin=qx%7Co1%7Cmd%7C3SQ5HK843D6CQ98753%2CSJ9763HJT5D52CK64%2CS84HAQ6DAT743CAT2%2C%7Crh%7C%7Cah%7CBoard%7Csv%7C0%7Cpg%7C%7C"
   },
   {
     "N": "JT653.J852.J32.J",
@@ -487,29 +501,31 @@
       }
     },
     "optimum": {
-      "text": "EW 10♦; -130",
+      "text": "EW 10\u00e2\u2122\u00a6; -130",
       "score": -130,
       "declarer": "EW",
-      "contract": "10♦",
+      "contract": "10\u00e2\u2122\u00a6",
       "level": 4,
-      "denom": "♦",
+      "denom": "\u00e2\u2122\u00a6",
       "tricks": 10
     },
     "lott": {
       "total_tricks": 18,
       "ns_fit": {
-        "suit": "♠",
+        "suit": "\u00e2\u2122\u00a0",
         "suit_code": "S",
         "length": 10,
         "tricks": 8
       },
       "ew_fit": {
-        "suit": "♦",
+        "suit": "\u00e2\u2122\u00a6",
         "suit_code": "D",
         "length": 8,
         "tricks": 10
       }
-    }
+    },
+    "lin_string": "qx|o1|md|4SHKDK98754CAKQ742,SJT653HJ852DJ32CJ,SQ84HAQT643DQ6C63,|rh||ah|Board|sv|0|pg||",
+    "bbo_url": "https://www.bridgebase.com/tools/handviewer.html?lin=qx%7Co1%7Cmd%7C4SHKDK98754CAKQ742%2CSJT653HJ852DJ32CJ%2CSQ84HAQT643DQ6C63%2C%7Crh%7C%7Cah%7CBoard%7Csv%7C0%7Cpg%7C%7C"
   },
   {
     "N": "862.JT963.6.AK65",
@@ -562,18 +578,20 @@
     "lott": {
       "total_tricks": 15,
       "ns_fit": {
-        "suit": "♦",
+        "suit": "\u00e2\u2122\u00a6",
         "suit_code": "D",
         "length": 7,
         "tricks": 7
       },
       "ew_fit": {
-        "suit": "♣",
+        "suit": "\u00e2\u2122\u00a3",
         "suit_code": "C",
         "length": 7,
         "tricks": 8
       }
-    }
+    },
+    "lin_string": "qx|o1|md|1S862HJT963D6CAK65,ST97HAQ54DAQ5CJ92,SAJ5H82DKJT842C84,|rh||ah|Board|sv|0|pg||",
+    "bbo_url": "https://www.bridgebase.com/tools/handviewer.html?lin=qx%7Co1%7Cmd%7C1S862HJT963D6CAK65%2CST97HAQ54DAQ5CJ92%2CSAJ5H82DKJT842C84%2C%7Crh%7C%7Cah%7CBoard%7Csv%7C0%7Cpg%7C%7C"
   },
   {
     "N": "T98654.653.T.KJ6",
@@ -626,18 +644,20 @@
     "lott": {
       "total_tricks": 17,
       "ns_fit": {
-        "suit": "♥",
+        "suit": "\u00e2\u2122\u00a5",
         "suit_code": "H",
         "length": 9,
         "tricks": 6
       },
       "ew_fit": {
-        "suit": "♦",
+        "suit": "\u00e2\u2122\u00a6",
         "suit_code": "D",
         "length": 8,
         "tricks": 11
       }
-    }
+    },
+    "lin_string": "qx|o1|md|2SAJ32HDA987CAQ852,SKHAJT974DQJ53C93,SQ7HKQ82DK642CT74,|rh||ah|Board|sv|0|pg||",
+    "bbo_url": "https://www.bridgebase.com/tools/handviewer.html?lin=qx%7Co1%7Cmd%7C2SAJ32HDA987CAQ852%2CSKHAJT974DQJ53C93%2CSQ7HKQ82DK642CT74%2C%7Crh%7C%7Cah%7CBoard%7Csv%7C0%7Cpg%7C%7C"
   },
   {
     "N": "JT85.AJT975.Q.84",
@@ -679,29 +699,31 @@
       }
     },
     "optimum": {
-      "text": "EW 12♣; -920",
+      "text": "EW 12\u00e2\u2122\u00a3; -920",
       "score": -920,
       "declarer": "EW",
-      "contract": "12♣",
+      "contract": "12\u00e2\u2122\u00a3",
       "level": 6,
-      "denom": "♣",
+      "denom": "\u00e2\u2122\u00a3",
       "tricks": 12
     },
     "lott": {
       "total_tricks": 19,
       "ns_fit": {
-        "suit": "♥",
+        "suit": "\u00e2\u2122\u00a5",
         "suit_code": "H",
         "length": 10,
         "tricks": 7
       },
       "ew_fit": {
-        "suit": "♣",
+        "suit": "\u00e2\u2122\u00a3",
         "suit_code": "C",
         "length": 9,
         "tricks": 12
       }
-    }
+    },
+    "lin_string": "qx|o1|md|3SQ43HK432DKT32CK7,SAK962HDAJ76CAQT9,SJT85HAJT975DQC84,|rh||ah|Board|sv|0|pg||",
+    "bbo_url": "https://www.bridgebase.com/tools/handviewer.html?lin=qx%7Co1%7Cmd%7C3SQ43HK432DKT32CK7%2CSAK962HDAJ76CAQT9%2CSJT85HAJT975DQC84%2C%7Crh%7C%7Cah%7CBoard%7Csv%7C0%7Cpg%7C%7C"
   },
   {
     "N": "T3.J98.642.KQ952",
@@ -743,29 +765,31 @@
       }
     },
     "optimum": {
-      "text": "EW 10♦; -130",
+      "text": "EW 10\u00e2\u2122\u00a6; -130",
       "score": -130,
       "declarer": "EW",
-      "contract": "10♦",
+      "contract": "10\u00e2\u2122\u00a6",
       "level": 2,
-      "denom": "♦",
+      "denom": "\u00e2\u2122\u00a6",
       "tricks": 10
     },
     "lott": {
       "total_tricks": 16,
       "ns_fit": {
-        "suit": "♠",
+        "suit": "\u00e2\u2122\u00a0",
         "suit_code": "S",
         "length": 7,
         "tricks": 6
       },
       "ew_fit": {
-        "suit": "♦",
+        "suit": "\u00e2\u2122\u00a6",
         "suit_code": "D",
         "length": 8,
         "tricks": 10
       }
-    }
+    },
+    "lin_string": "qx|o1|md|4SKJ6HK753DAQJ3C43,ST3HJ98D642CKQ952,S974H42DKT95CAJT7,|rh||ah|Board|sv|0|pg||",
+    "bbo_url": "https://www.bridgebase.com/tools/handviewer.html?lin=qx%7Co1%7Cmd%7C4SKJ6HK753DAQJ3C43%2CST3HJ98D642CKQ952%2CS974H42DKT95CAJT7%2C%7Crh%7C%7Cah%7CBoard%7Csv%7C0%7Cpg%7C%7C"
   },
   {
     "N": "A7.AKQJ52.43.Q73",
@@ -818,18 +842,20 @@
     "lott": {
       "total_tricks": 17,
       "ns_fit": {
-        "suit": "♥",
+        "suit": "\u00e2\u2122\u00a5",
         "suit_code": "H",
         "length": 10,
         "tricks": 10
       },
       "ew_fit": {
-        "suit": "♠",
+        "suit": "\u00e2\u2122\u00a0",
         "suit_code": "S",
         "length": 8,
         "tricks": 7
       }
-    }
+    },
+    "lin_string": "qx|o1|md|1SA7HAKQJ52D43CQ73,SQ9654H9DAQJ8CJ86,SKJTH8643DK652C94,|rh||ah|Board|sv|0|pg||",
+    "bbo_url": "https://www.bridgebase.com/tools/handviewer.html?lin=qx%7Co1%7Cmd%7C1SA7HAKQJ52D43CQ73%2CSQ9654H9DAQJ8CJ86%2CSKJTH8643DK652C94%2C%7Crh%7C%7Cah%7CBoard%7Csv%7C0%7Cpg%7C%7C"
   },
   {
     "N": "J82.KT84.63.AKQ3",
@@ -882,18 +908,20 @@
     "lott": {
       "total_tricks": 16,
       "ns_fit": {
-        "suit": "♠",
+        "suit": "\u00e2\u2122\u00a0",
         "suit_code": "S",
         "length": 7,
         "tricks": 10
       },
       "ew_fit": {
-        "suit": "♦",
+        "suit": "\u00e2\u2122\u00a6",
         "suit_code": "D",
         "length": 8,
         "tricks": 6
       }
-    }
+    },
+    "lin_string": "qx|o1|md|2ST7HJ65DAT9875CT4,SK965HAQ2DKJ2CJ82,SAQ43H973DQ4C9765,|rh||ah|Board|sv|0|pg||",
+    "bbo_url": "https://www.bridgebase.com/tools/handviewer.html?lin=qx%7Co1%7Cmd%7C2ST7HJ65DAT9875CT4%2CSK965HAQ2DKJ2CJ82%2CSAQ43H973DQ4C9765%2C%7Crh%7C%7Cah%7CBoard%7Csv%7C0%7Cpg%7C%7C"
   },
   {
     "N": "KT4.KJT4.6.JT987",
@@ -935,29 +963,31 @@
       }
     },
     "optimum": {
-      "text": "NS 9♣; +110",
+      "text": "NS 9\u00e2\u2122\u00a3; +110",
       "score": 110,
       "declarer": "NS",
-      "contract": "9♣",
+      "contract": "9\u00e2\u2122\u00a3",
       "level": 3,
-      "denom": "♣",
+      "denom": "\u00e2\u2122\u00a3",
       "tricks": 9
     },
     "lott": {
       "total_tricks": 16,
       "ns_fit": {
-        "suit": "♣",
+        "suit": "\u00e2\u2122\u00a3",
         "suit_code": "C",
         "length": 9,
         "tricks": 9
       },
       "ew_fit": {
-        "suit": "♦",
+        "suit": "\u00e2\u2122\u00a6",
         "suit_code": "D",
         "length": 8,
         "tricks": 7
       }
-    }
+    },
+    "lin_string": "qx|o1|md|3S932HA7DK432CA432,SQJ65HQ852DJT87C6,SKT4HKJT4D6CJT987,|rh||ah|Board|sv|0|pg||",
+    "bbo_url": "https://www.bridgebase.com/tools/handviewer.html?lin=qx%7Co1%7Cmd%7C3S932HA7DK432CA432%2CSQJ65HQ852DJT87C6%2CSKT4HKJT4D6CJT987%2C%7Crh%7C%7Cah%7CBoard%7Csv%7C0%7Cpg%7C%7C"
   },
   {
     "N": "QJ8.A.AK965.KT98",
@@ -999,29 +1029,31 @@
       }
     },
     "optimum": {
-      "text": "NS 11♠; +450",
+      "text": "NS 11\u00e2\u2122\u00a0; +450",
       "score": 450,
       "declarer": "NS",
-      "contract": "11♠",
+      "contract": "11\u00e2\u2122\u00a0",
       "level": 4,
-      "denom": "♠",
+      "denom": "\u00e2\u2122\u00a0",
       "tricks": 11
     },
     "lott": {
       "total_tricks": 15,
       "ns_fit": {
-        "suit": "♠",
+        "suit": "\u00e2\u2122\u00a0",
         "suit_code": "S",
         "length": 7,
         "tricks": 11
       },
       "ew_fit": {
-        "suit": "♥",
+        "suit": "\u00e2\u2122\u00a5",
         "suit_code": "H",
         "length": 7,
         "tricks": 4
       }
-    }
+    },
+    "lin_string": "qx|o1|md|4S9762HQ76DJT8CA52,SQJ8HADAK965CKT98,S53HKJ32DQ74CJ764,|rh||ah|Board|sv|0|pg||",
+    "bbo_url": "https://www.bridgebase.com/tools/handviewer.html?lin=qx%7Co1%7Cmd%7C4S9762HQ76DJT8CA52%2CSQJ8HADAK965CKT98%2CS53HKJ32DQ74CJ764%2C%7Crh%7C%7Cah%7CBoard%7Csv%7C0%7Cpg%7C%7C"
   },
   {
     "N": "AJT872.75.53.KJT",
@@ -1074,18 +1106,20 @@
     "lott": {
       "total_tricks": 15,
       "ns_fit": {
-        "suit": "♠",
+        "suit": "\u00e2\u2122\u00a0",
         "suit_code": "S",
         "length": 7,
         "tricks": 5
       },
       "ew_fit": {
-        "suit": "♥",
+        "suit": "\u00e2\u2122\u00a5",
         "suit_code": "H",
         "length": 8,
         "tricks": 10
       }
-    }
+    },
+    "lin_string": "qx|o1|md|1SAJT872H75D53CKJT,S96HJ642DJT6CQ932,S4HT98DKQ872C8654,|rh||ah|Board|sv|0|pg||",
+    "bbo_url": "https://www.bridgebase.com/tools/handviewer.html?lin=qx%7Co1%7Cmd%7C1SAJT872H75D53CKJT%2CS96HJ642DJT6CQ932%2CS4HT98DKQ872C8654%2C%7Crh%7C%7Cah%7CBoard%7Csv%7C0%7Cpg%7C%7C"
   },
   {
     "N": "QT9854.987.AKT.K",
@@ -1138,18 +1172,20 @@
     "lott": {
       "total_tricks": 17,
       "ns_fit": {
-        "suit": "♠",
+        "suit": "\u00e2\u2122\u00a0",
         "suit_code": "S",
         "length": 10,
         "tricks": 11
       },
       "ew_fit": {
-        "suit": "♣",
+        "suit": "\u00e2\u2122\u00a3",
         "suit_code": "C",
         "length": 9,
         "tricks": 6
       }
-    }
+    },
+    "lin_string": "qx|o1|md|2SHKQ5DJ7432CJ8632,SAJ72HAJ32DQ8CAT9,SK63HT64D965CQ754,|rh||ah|Board|sv|0|pg||",
+    "bbo_url": "https://www.bridgebase.com/tools/handviewer.html?lin=qx%7Co1%7Cmd%7C2SHKQ5DJ7432CJ8632%2CSAJ72HAJ32DQ8CAT9%2CSK63HT64D965CQ754%2C%7Crh%7C%7Cah%7CBoard%7Csv%7C0%7Cpg%7C%7C"
   },
   {
     "N": "7642.AT84.Q96.J3",
@@ -1202,18 +1238,20 @@
     "lott": {
       "total_tricks": 15,
       "ns_fit": {
-        "suit": "♠",
+        "suit": "\u00e2\u2122\u00a0",
         "suit_code": "S",
         "length": 8,
         "tricks": 5
       },
       "ew_fit": {
-        "suit": "♦",
+        "suit": "\u00e2\u2122\u00a6",
         "suit_code": "D",
         "length": 8,
         "tricks": 10
       }
-    }
+    },
+    "lin_string": "qx|o1|md|3SKJT8HQ95DK7C9875,SAQ93H7DJT85432CQ,S7642HAT84DQ96CJ3,|rh||ah|Board|sv|0|pg||",
+    "bbo_url": "https://www.bridgebase.com/tools/handviewer.html?lin=qx%7Co1%7Cmd%7C3SKJT8HQ95DK7C9875%2CSAQ93H7DJT85432CQ%2CS7642HAT84DQ96CJ3%2C%7Crh%7C%7Cah%7CBoard%7Csv%7C0%7Cpg%7C%7C"
   },
   {
     "N": "A3.83.43.AT98543",
@@ -1255,29 +1293,31 @@
       }
     },
     "optimum": {
-      "text": "NS 10♦; +130",
+      "text": "NS 10\u00e2\u2122\u00a6; +130",
       "score": 130,
       "declarer": "NS",
-      "contract": "10♦",
+      "contract": "10\u00e2\u2122\u00a6",
       "level": 3,
-      "denom": "♦",
+      "denom": "\u00e2\u2122\u00a6",
       "tricks": 10
     },
     "lott": {
       "total_tricks": 15,
       "ns_fit": {
-        "suit": "♦",
+        "suit": "\u00e2\u2122\u00a6",
         "suit_code": "D",
         "length": 8,
         "tricks": 10
       },
       "ew_fit": {
-        "suit": "♥",
+        "suit": "\u00e2\u2122\u00a5",
         "suit_code": "H",
         "length": 8,
         "tricks": 5
       }
-    }
+    },
+    "lin_string": "qx|o1|md|4SK764HQT4DKT8CQJ6,SA3H83D43CAT98543,ST52HKJ972DQ2CK72,|rh||ah|Board|sv|0|pg||",
+    "bbo_url": "https://www.bridgebase.com/tools/handviewer.html?lin=qx%7Co1%7Cmd%7C4SK764HQT4DKT8CQJ6%2CSA3H83D43CAT98543%2CST52HKJ972DQ2CK72%2C%7Crh%7C%7Cah%7CBoard%7Csv%7C0%7Cpg%7C%7C"
   },
   {
     "N": "AK765.KQ32.T.J42",
@@ -1330,18 +1370,20 @@
     "lott": {
       "total_tricks": 15,
       "ns_fit": {
-        "suit": "♠",
+        "suit": "\u00e2\u2122\u00a0",
         "suit_code": "S",
         "length": 7,
         "tricks": 7
       },
       "ew_fit": {
-        "suit": "♦",
+        "suit": "\u00e2\u2122\u00a6",
         "suit_code": "D",
         "length": 8,
         "tricks": 8
       }
-    }
+    },
+    "lin_string": "qx|o1|md|1SAK765HKQ32DTCJ42,SQ9HAJ75DQ9642CT9,SJTH984DJ853CAQ65,|rh||ah|Board|sv|0|pg||",
+    "bbo_url": "https://www.bridgebase.com/tools/handviewer.html?lin=qx%7Co1%7Cmd%7C1SAK765HKQ32DTCJ42%2CSQ9HAJ75DQ9642CT9%2CSJTH984DJ853CAQ65%2C%7Crh%7C%7Cah%7CBoard%7Csv%7C0%7Cpg%7C%7C"
   },
   {
     "N": "6.AKQ9872.92.Q95",
@@ -1383,29 +1425,31 @@
       }
     },
     "optimum": {
-      "text": "NS 11♥; +450",
+      "text": "NS 11\u00e2\u2122\u00a5; +450",
       "score": 450,
       "declarer": "NS",
-      "contract": "11♥",
+      "contract": "11\u00e2\u2122\u00a5",
       "level": 4,
-      "denom": "♥",
+      "denom": "\u00e2\u2122\u00a5",
       "tricks": 11
     },
     "lott": {
       "total_tricks": 16,
       "ns_fit": {
-        "suit": "♥",
+        "suit": "\u00e2\u2122\u00a5",
         "suit_code": "H",
         "length": 7,
         "tricks": 11
       },
       "ew_fit": {
-        "suit": "♠",
+        "suit": "\u00e2\u2122\u00a0",
         "suit_code": "S",
         "length": 7,
         "tricks": 5
       }
-    }
+    },
+    "lin_string": "qx|o1|md|2SKT87HJT53DKJT7C3,SAJ543HDAQ83CA872,SQ92H64D654CKJT64,|rh||ah|Board|sv|0|pg||",
+    "bbo_url": "https://www.bridgebase.com/tools/handviewer.html?lin=qx%7Co1%7Cmd%7C2SKT87HJT53DKJT7C3%2CSAJ543HDAQ83CA872%2CSQ92H64D654CKJT64%2C%7Crh%7C%7Cah%7CBoard%7Csv%7C0%7Cpg%7C%7C"
   },
   {
     "N": "AK.J9.KJ76.K7643",
@@ -1447,29 +1491,31 @@
       }
     },
     "optimum": {
-      "text": "NS 11♦; +400",
+      "text": "NS 11\u00e2\u2122\u00a6; +400",
       "score": 400,
       "declarer": "NS",
-      "contract": "11♦",
+      "contract": "11\u00e2\u2122\u00a6",
       "level": 5,
-      "denom": "♦",
+      "denom": "\u00e2\u2122\u00a6",
       "tricks": 11
     },
     "lott": {
       "total_tricks": 17,
       "ns_fit": {
-        "suit": "♣",
+        "suit": "\u00e2\u2122\u00a3",
         "suit_code": "C",
         "length": 9,
         "tricks": 11
       },
       "ew_fit": {
-        "suit": "♠",
+        "suit": "\u00e2\u2122\u00a0",
         "suit_code": "S",
         "length": 8,
         "tricks": 6
       }
-    }
+    },
+    "lin_string": "qx|o1|md|3S874HK53DQ54CAJ85,SJT653H642D983CQT,SAKHJ9DKJ76CK7643,|rh||ah|Board|sv|0|pg||",
+    "bbo_url": "https://www.bridgebase.com/tools/handviewer.html?lin=qx%7Co1%7Cmd%7C3S874HK53DQ54CAJ85%2CSJT653H642D983CQT%2CSAKHJ9DKJ76CK7643%2C%7Crh%7C%7Cah%7CBoard%7Csv%7C0%7Cpg%7C%7C"
   },
   {
     "N": "Q953.98.K92.AQ87",
@@ -1511,29 +1557,31 @@
       }
     },
     "optimum": {
-      "text": "NS 11♠; +450",
+      "text": "NS 11\u00e2\u2122\u00a0; +450",
       "score": 450,
       "declarer": "NS",
-      "contract": "11♠",
+      "contract": "11\u00e2\u2122\u00a0",
       "level": 4,
-      "denom": "♠",
+      "denom": "\u00e2\u2122\u00a0",
       "tricks": 11
     },
     "lott": {
       "total_tricks": 16,
       "ns_fit": {
-        "suit": "♠",
+        "suit": "\u00e2\u2122\u00a0",
         "suit_code": "S",
         "length": 9,
         "tricks": 11
       },
       "ew_fit": {
-        "suit": "♦",
+        "suit": "\u00e2\u2122\u00a6",
         "suit_code": "D",
         "length": 8,
         "tricks": 5
       }
-    }
+    },
+    "lin_string": "qx|o1|md|4SJ2HAT4D7643C6532,SQ953H98DK92CAQ87,S64HQ765DAJT5CT94,|rh||ah|Board|sv|0|pg||",
+    "bbo_url": "https://www.bridgebase.com/tools/handviewer.html?lin=qx%7Co1%7Cmd%7C4SJ2HAT4D7643C6532%2CSQ953H98DK92CAQ87%2CS64HQ765DAJT5CT94%2C%7Crh%7C%7Cah%7CBoard%7Csv%7C0%7Cpg%7C%7C"
   },
   {
     "N": "KT743.K.Q974.Q65",
@@ -1575,29 +1623,31 @@
       }
     },
     "optimum": {
-      "text": "NS 9♠; -100",
+      "text": "NS 9\u00e2\u2122\u00a0; -100",
       "score": -100,
       "declarer": "NS",
-      "contract": "9♠",
+      "contract": "9\u00e2\u2122\u00a0",
       "level": 3,
-      "denom": "♠",
+      "denom": "\u00e2\u2122\u00a0",
       "tricks": 9
     },
     "lott": {
       "total_tricks": 17,
       "ns_fit": {
-        "suit": "♠",
+        "suit": "\u00e2\u2122\u00a0",
         "suit_code": "S",
         "length": 8,
         "tricks": 8
       },
       "ew_fit": {
-        "suit": "♣",
+        "suit": "\u00e2\u2122\u00a3",
         "suit_code": "C",
         "length": 9,
         "tricks": 9
       }
-    }
+    },
+    "lin_string": "qx|o1|md|1SKT743HKDQ974CQ65,S5HJ972DKJT8CAKT2,SA98HQT865DA653C3,|rh||ah|Board|sv|0|pg||",
+    "bbo_url": "https://www.bridgebase.com/tools/handviewer.html?lin=qx%7Co1%7Cmd%7C1SKT743HKDQ974CQ65%2CS5HJ972DKJT8CAKT2%2CSA98HQT865DA653C3%2C%7Crh%7C%7Cah%7CBoard%7Csv%7C0%7Cpg%7C%7C"
   },
   {
     "N": "AT94.K753.3.AK32",
@@ -1639,29 +1689,31 @@
       }
     },
     "optimum": {
-      "text": "NS 9♥; +140",
+      "text": "NS 9\u00e2\u2122\u00a5; +140",
       "score": 140,
       "declarer": "NS",
-      "contract": "9♥",
+      "contract": "9\u00e2\u2122\u00a5",
       "level": 2,
-      "denom": "♥",
+      "denom": "\u00e2\u2122\u00a5",
       "tricks": 9
     },
     "lott": {
       "total_tricks": 15,
       "ns_fit": {
-        "suit": "♥",
+        "suit": "\u00e2\u2122\u00a5",
         "suit_code": "H",
         "length": 7,
         "tricks": 9
       },
       "ew_fit": {
-        "suit": "♦",
+        "suit": "\u00e2\u2122\u00a6",
         "suit_code": "D",
         "length": 7,
         "tricks": 6
       }
-    }
+    },
+    "lin_string": "qx|o1|md|2SK532HQ4DAQCQT965,SQ76HA96DJT984C87,SJ8HJT82DK7652CJ4,|rh||ah|Board|sv|0|pg||",
+    "bbo_url": "https://www.bridgebase.com/tools/handviewer.html?lin=qx%7Co1%7Cmd%7C2SK532HQ4DAQCQT965%2CSQ76HA96DJT984C87%2CSJ8HJT82DK7652CJ4%2C%7Crh%7C%7Cah%7CBoard%7Csv%7C0%7Cpg%7C%7C"
   },
   {
     "N": "64.KQ53.KT8.KJ87",
@@ -1714,18 +1766,20 @@
     "lott": {
       "total_tricks": 14,
       "ns_fit": {
-        "suit": "♥",
+        "suit": "\u00e2\u2122\u00a5",
         "suit_code": "H",
         "length": 7,
         "tricks": 9
       },
       "ew_fit": {
-        "suit": "♦",
+        "suit": "\u00e2\u2122\u00a6",
         "suit_code": "D",
         "length": 7,
         "tricks": 5
       }
-    }
+    },
+    "lin_string": "qx|o1|md|3SAKQ2H982DA42CQ94,S8753HAJT76D73CAT,S64HKQ53DKT8CKJ87,|rh||ah|Board|sv|0|pg||",
+    "bbo_url": "https://www.bridgebase.com/tools/handviewer.html?lin=qx%7Co1%7Cmd%7C3SAKQ2H982DA42CQ94%2CS8753HAJT76D73CAT%2CS64HKQ53DKT8CKJ87%2C%7Crh%7C%7Cah%7CBoard%7Csv%7C0%7Cpg%7C%7C"
   },
   {
     "N": "Q7.KT84.QJ765.A2",
@@ -1778,18 +1832,20 @@
     "lott": {
       "total_tricks": 16,
       "ns_fit": {
-        "suit": "♦",
+        "suit": "\u00e2\u2122\u00a6",
         "suit_code": "D",
         "length": 8,
         "tricks": 5
       },
       "ew_fit": {
-        "suit": "♠",
+        "suit": "\u00e2\u2122\u00a0",
         "suit_code": "S",
         "length": 8,
         "tricks": 11
       }
-    }
+    },
+    "lin_string": "qx|o1|md|4SAJ4HAJ53DT82CQ65,SQ7HKT84DQJ765CA2,SK6532HQ2DAKCK843,|rh||ah|Board|sv|0|pg||",
+    "bbo_url": "https://www.bridgebase.com/tools/handviewer.html?lin=qx%7Co1%7Cmd%7C4SAJ4HAJ53DT82CQ65%2CSQ7HKT84DQJ765CA2%2CSK6532HQ2DAKCK843%2C%7Crh%7C%7Cah%7CBoard%7Csv%7C0%7Cpg%7C%7C"
   },
   {
     "N": "2.AJ84.AT6543.T3",
@@ -1842,18 +1898,20 @@
     "lott": {
       "total_tricks": 16,
       "ns_fit": {
-        "suit": "♦",
+        "suit": "\u00e2\u2122\u00a6",
         "suit_code": "D",
         "length": 9,
         "tricks": 11
       },
       "ew_fit": {
-        "suit": "♠",
+        "suit": "\u00e2\u2122\u00a0",
         "suit_code": "S",
         "length": 8,
         "tricks": 5
       }
-    }
+    },
+    "lin_string": "qx|o1|md|1S2HAJ84DAT6543CT3,SK9653H52DK97CKQ5,SAQ87HQ93DQJ8CAJ6,|rh||ah|Board|sv|0|pg||",
+    "bbo_url": "https://www.bridgebase.com/tools/handviewer.html?lin=qx%7Co1%7Cmd%7C1S2HAJ84DAT6543CT3%2CSK9653H52DK97CKQ5%2CSAQ87HQ93DQJ8CAJ6%2C%7Crh%7C%7Cah%7CBoard%7Csv%7C0%7Cpg%7C%7C"
   },
   {
     "N": "98763.K532.4.KT5",
@@ -1906,17 +1964,19 @@
     "lott": {
       "total_tricks": 15,
       "ns_fit": {
-        "suit": "♠",
+        "suit": "\u00e2\u2122\u00a0",
         "suit_code": "S",
         "length": 8,
         "tricks": 6
       },
       "ew_fit": {
-        "suit": "♣",
+        "suit": "\u00e2\u2122\u00a3",
         "suit_code": "C",
         "length": 8,
         "tricks": 9
       }
-    }
+    },
+    "lin_string": "qx|o1|md|2SQ42HAQTDJ6CAJ743,SKJTH974DKQT52CQ9,SA5HJ86DA9873C862,|rh||ah|Board|sv|0|pg||",
+    "bbo_url": "https://www.bridgebase.com/tools/handviewer.html?lin=qx%7Co1%7Cmd%7C2SQ42HAQTDJ6CAJ743%2CSKJTH974DKQT52CQ9%2CSA5HJ86DA9873C862%2C%7Crh%7C%7Cah%7CBoard%7Csv%7C0%7Cpg%7C%7C"
   }
 ]
