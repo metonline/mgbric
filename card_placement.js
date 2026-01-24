@@ -281,8 +281,8 @@ function renderHandDiagram(handData, boardNum, ddResult, optimum, lott) {
                 <!-- Board Number -->
                 <div class="vulInnerDivStyle pos-board">${boardNum}</div>
                 
-                <!-- Date Display - Between Board and North -->
-                <div class="date-header" style="grid-column: 2; grid-row: 2; text-align: center; font-weight: bold; color: black; font-size: 15px; align-self: center;">${date.replace(/20(\d{2})$/, '$1')}</div>
+                <!-- Date Display - Above Board Number in Center -->
+                <div style="position: absolute; left: 220px; top: 180px; width: 60px; text-align: center; font-weight: bold; color: black; font-size: 12px;">${date.replace(/20(\d{2})$/, '$1')}</div>
                 
                 <!-- North -->
                 <div class="nameRowDivStyle pos-n-name" style="background-color: ${nHeaderBgColor} !important;">
