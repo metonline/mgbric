@@ -529,3 +529,21 @@ Event Registry kontrol ediliyor...
 2026-01-24 05:20:15,614 [INFO] ✅ Tüm veri başarılı şekilde çekildi
 2026-01-24 05:20:15,614 [INFO] 
 ✅ Full update tamamlandı: 0 board çekildi (0 deneme)
+2026-01-24 05:27:36,646 [INFO] ============================================================
+2026-01-24 05:27:36,648 [INFO] FULL UPDATE BAŞLADI
+2026-01-24 05:27:36,648 [INFO] ============================================================
+2026-01-24 05:27:36,648 [INFO] 
+📅 Vugraph calendar'dan yeni event'leri tarayıyor...
+2026-01-24 05:27:37,429 [INFO]   ✓ Yeni event yok
+2026-01-24 05:27:37,429 [INFO] 
+Event Registry kontrol ediliyor...
+2026-01-24 05:27:37,670 [INFO] Detaylı doğrulama yapılıyor...
+2026-01-24 05:27:37,855 [INFO] 
+📂 Yeni eventler için hands verilerini çek (2026+ only)...
+2026-01-24 05:27:37,856 [INFO] 🔍 1595 yeni event bulundu
+2026-01-24 05:27:37,857 [INFO]   Hands çekiliyor: Event 405596 (23.01.2026)
+2026-01-24 05:27:49,784 [INFO]     ✓ 30 el çekildi
+2026-01-24 05:27:49,787 [INFO]   ✓ Hands veritabanı kaydedildi (30 toplam el)
+2026-01-24 05:27:49,787 [INFO] ✅ Tüm veri başarılı şekilde çekildi
+2026-01-24 05:27:49,788 [INFO] 
+✅ Full update tamamlandı: 0 board çekildi (0 deneme)
