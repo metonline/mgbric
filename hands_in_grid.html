@@ -482,9 +482,16 @@
             const grid = document.getElementById('hands-grid');
             grid.innerHTML = '';
             
-            console.log(`Rendering ${handsToRender.length} hands`);
+            console.log(`%cRENDERING ${handsToRender.length} HANDS`, 'color:blue;font-size:16px;font-weight:bold');
+            if (handsToRender.length === 0) {
+                console.warn('No hands to render!');
+                return;
+            }
 
+            let handCount = 0;
             for (const hand of handsToRender) {
+                handCount++;
+                console.log(`Hand ${handCount}/${handsToRender.length}: Event ${hand.event_id}, Board ${hand.board}`);
                 const handObj = {
                     N: hand.N,
                     E: hand.E,
@@ -580,6 +587,8 @@
 
                 // Get unique dates sorted
                 allDates = [...new Set(allHands.map(h => h.date))].sort();
+                console.log(`Loaded ${allHands.length} hands from database`);
+                console.log(`Dates: ${allDates.join(', ')}`);
 
                 // Populate date filter dropdown
                 const dateFilter = document.getElementById('date-filter');
