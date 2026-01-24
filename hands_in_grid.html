@@ -446,7 +446,7 @@
                         W: hand.W,
                         dealer: hand.dealer || 'N',
                         vulnerability: hand.vulnerability || 'None',
-                        date: hand.date
+                        date: hand.date || currentDate
                     };
 
                     // Get DD data from backend API (same as board_ranking.html does)
