@@ -240,6 +240,9 @@ class DataFetcher:
                     hand_data['event_id'] = event_id
                     hand_data['date'] = date
                     hand_data['board'] = board_num
+                    # Calculate dealer based on board number (standard bridge convention)
+                    dealers = ['N', 'E', 'S', 'W']
+                    hand_data['dealer'] = dealers[(board_num - 1) % 4]
                     hands.append(hand_data)
                     
             except Exception as e:
@@ -279,6 +282,9 @@ class DataFetcher:
                         hand_data['event_id'] = event_id
                         hand_data['date'] = date
                         hand_data['board'] = board_num
+                        # Calculate dealer based on board number (standard bridge convention)
+                        dealers = ['N', 'E', 'S', 'W']
+                        hand_data['dealer'] = dealers[(board_num - 1) % 4]
                         hands.append(hand_data)
                         
                 except Exception as e:
@@ -291,30 +297,6 @@ class DataFetcher:
         
         return hands
     
-    def _calc_4th_hand(self, h1_pbn: str, h2_pbn: str, h3_pbn: str) -> str:
-        """Calculate 4th hand from 3 known hands (PBN format)"""
-        all_cards = set('23456789TJQKA')
-        
-        for hand_pbn in [h1_pbn, h2_pbn, h3_pbn]:
-            if not hand_pbn:
-                continue
-            # Remove suit separators and count cards
-            for card in hand_pbn.replace('.', ''):
-                all_cards.discard(card)
-        
-        # Group remaining cards by suit
-        suits = {
-            'S': [], 'H': [], 'D': [], 'C': []
-        }
-        
-        # Distribute remaining cards (should be 13 total)
-        # This is simplified - in real scenario, we'd need more logic
-        # but for now just return what's left
-        remaining = ''.join(sorted(all_cards))
-        if remaining:
-            return remaining
-        return ''
-    
     def _parse_hand_diagram(self, soup) -> Optional[dict]:
         """HTML'den el dağılımını parse et - With proper dealer-based rotation"""
         try:
@@ -322,11 +304,6 @@ class DataFetcher:
             bridge_table = soup.find('table', class_='bridgetable')
             if not bridge_table:
                 return None
-            
-            # Extract dealer from board info section
-            dealer = self._extract_dealer_from_html(soup)
-            if not dealer:
-                dealer = 'N'  # Default if not found
             
             hands = {
                 'N': {'S': '', 'H': '', 'D': '', 'C': ''},
@@ -342,8 +319,6 @@ class DataFetcher:
                 return None
             
             # HTML table displays hands in order: West, North, East, South (visual positions)
-            # But vugraph.com displays them as dealer-relative
-            # Extract in visual table order first
             html_order = ['W', 'N', 'E', 'S']
             extracted_hands = {}
             
@@ -404,48 +379,17 @@ class DataFetcher:
                 else:
                     hands[direction] = None
             
-            # Now we have hands in HTML visual order (W, N, E, S)
-            # Map to compass positions based on dealer
-            # NOTE: vugraph displays hands in visual positions, not dealer-relative
-            # So we just return them as displayed
+            # Return hands in compass positions
             result = {}
             for direction in ['N', 'S', 'E', 'W']:
                 if hands[direction]:
                     result[direction] = hands[direction]
             
             if result and len(result) >= 3:
-                result['dealer'] = dealer
                 return result
             
             return None
             
-        except:
-            return None
-    
-    def _extract_dealer_from_html(self, soup) -> Optional[str]:
-        """Extract dealer from HTML board info"""
-        try:
-            # Look for dealer info in the page
-            # Common patterns: "Dealer: N" or similar
-            text = soup.get_text()
-            
-            # Turkish variant
-            if 'Müzayedeci:' in text:
-                idx = text.find('Müzayedeci:')
-                snippet = text[idx:idx+50]
-                for dealer in ['N', 'E', 'S', 'W']:
-                    if dealer in snippet:
-                        return dealer
-            
-            # English variant
-            if 'Dealer:' in text:
-                idx = text.find('Dealer:')
-                snippet = text[idx:idx+50]
-                for dealer in ['N', 'E', 'S', 'W']:
-                    if dealer in snippet:
-                        return dealer
-            
-            return None
         except:
             return None
     
