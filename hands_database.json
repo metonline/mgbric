@@ -8,7 +8,61 @@
     "date": "23.01.2026",
     "board": 1,
     "dealer": "N",
-    "vulnerability": "None"
+    "vulnerability": "None",
+    "dd_analysis": {
+      "N": {
+        "C": 7,
+        "D": 6,
+        "H": 3,
+        "S": 5,
+        "NT": 4
+      },
+      "E": {
+        "C": 6,
+        "D": 7,
+        "H": 10,
+        "S": 8,
+        "NT": 8
+      },
+      "S": {
+        "C": 7,
+        "D": 6,
+        "H": 3,
+        "S": 5,
+        "NT": 4
+      },
+      "W": {
+        "C": 6,
+        "D": 7,
+        "H": 10,
+        "S": 8,
+        "NT": 8
+      }
+    },
+    "optimum": {
+      "text": "EW 10♥; -420",
+      "score": -420,
+      "declarer": "EW",
+      "contract": "10♥",
+      "level": 4,
+      "denom": "♥",
+      "tricks": 10
+    },
+    "lott": {
+      "total_tricks": 17,
+      "ns_fit": {
+        "suit": "♣",
+        "suit_code": "C",
+        "length": 8,
+        "tricks": 7
+      },
+      "ew_fit": {
+        "suit": "♥",
+        "suit_code": "H",
+        "length": 9,
+        "tricks": 10
+      }
+    }
   },
   {
     "N": "J974.AT42.T73.J7",
@@ -19,7 +73,61 @@
     "date": "23.01.2026",
     "board": 2,
     "dealer": "E",
-    "vulnerability": "NS"
+    "vulnerability": "NS",
+    "dd_analysis": {
+      "N": {
+        "C": 2,
+        "D": 2,
+        "H": 6,
+        "S": 6,
+        "NT": 2
+      },
+      "E": {
+        "C": 11,
+        "D": 11,
+        "H": 6,
+        "S": 6,
+        "NT": 10
+      },
+      "S": {
+        "C": 2,
+        "D": 2,
+        "H": 6,
+        "S": 6,
+        "NT": 2
+      },
+      "W": {
+        "C": 11,
+        "D": 11,
+        "H": 6,
+        "S": 6,
+        "NT": 10
+      }
+    },
+    "optimum": {
+      "text": "NS 10NT; -430",
+      "score": -430,
+      "declarer": "NS",
+      "contract": "10NT",
+      "level": 3,
+      "denom": "NT",
+      "tricks": 10
+    },
+    "lott": {
+      "total_tricks": 17,
+      "ns_fit": {
+        "suit": "♠",
+        "suit_code": "S",
+        "length": 9,
+        "tricks": 6
+      },
+      "ew_fit": {
+        "suit": "♣",
+        "suit_code": "C",
+        "length": 10,
+        "tricks": 11
+      }
+    }
   },
   {
     "N": "7.Q986.KT7.AJ964",
@@ -30,7 +138,61 @@
     "date": "23.01.2026",
     "board": 3,
     "dealer": "S",
-    "vulnerability": "EW"
+    "vulnerability": "EW",
+    "dd_analysis": {
+      "N": {
+        "C": 9,
+        "D": 9,
+        "H": 10,
+        "S": 6,
+        "NT": 10
+      },
+      "E": {
+        "C": 4,
+        "D": 4,
+        "H": 3,
+        "S": 7,
+        "NT": 3
+      },
+      "S": {
+        "C": 9,
+        "D": 9,
+        "H": 10,
+        "S": 6,
+        "NT": 10
+      },
+      "W": {
+        "C": 4,
+        "D": 4,
+        "H": 3,
+        "S": 7,
+        "NT": 3
+      }
+    },
+    "optimum": {
+      "text": "NS 10NT; +430",
+      "score": 430,
+      "declarer": "NS",
+      "contract": "10NT",
+      "level": 3,
+      "denom": "NT",
+      "tricks": 10
+    },
+    "lott": {
+      "total_tricks": 17,
+      "ns_fit": {
+        "suit": "♥",
+        "suit_code": "H",
+        "length": 8,
+        "tricks": 10
+      },
+      "ew_fit": {
+        "suit": "♠",
+        "suit_code": "S",
+        "length": 9,
+        "tricks": 7
+      }
+    }
   },
   {
     "N": "J7.Q8.AKJ98.AQ93",
@@ -41,7 +203,61 @@
     "date": "23.01.2026",
     "board": 4,
     "dealer": "W",
-    "vulnerability": "Both"
+    "vulnerability": "Both",
+    "dd_analysis": {
+      "N": {
+        "C": 9,
+        "D": 10,
+        "H": 8,
+        "S": 9,
+        "NT": 10
+      },
+      "E": {
+        "C": 4,
+        "D": 3,
+        "H": 5,
+        "S": 3,
+        "NT": 3
+      },
+      "S": {
+        "C": 9,
+        "D": 10,
+        "H": 8,
+        "S": 9,
+        "NT": 10
+      },
+      "W": {
+        "C": 4,
+        "D": 3,
+        "H": 5,
+        "S": 3,
+        "NT": 3
+      }
+    },
+    "optimum": {
+      "text": "NS 10NT; +630",
+      "score": 630,
+      "declarer": "NS",
+      "contract": "10NT",
+      "level": 3,
+      "denom": "NT",
+      "tricks": 10
+    },
+    "lott": {
+      "total_tricks": 15,
+      "ns_fit": {
+        "suit": "♦",
+        "suit_code": "D",
+        "length": 8,
+        "tricks": 10
+      },
+      "ew_fit": {
+        "suit": "♥",
+        "suit_code": "H",
+        "length": 7,
+        "tricks": 5
+      }
+    }
   },
   {
     "N": "A65.A8.T4.A98542",
@@ -52,7 +268,61 @@
     "date": "23.01.2026",
     "board": 5,
     "dealer": "N",
-    "vulnerability": "None"
+    "vulnerability": "None",
+    "dd_analysis": {
+      "N": {
+        "C": 7,
+        "D": 6,
+        "H": 5,
+        "S": 5,
+        "NT": 6
+      },
+      "E": {
+        "C": 5,
+        "D": 7,
+        "H": 7,
+        "S": 7,
+        "NT": 7
+      },
+      "S": {
+        "C": 8,
+        "D": 6,
+        "H": 6,
+        "S": 6,
+        "NT": 6
+      },
+      "W": {
+        "C": 5,
+        "D": 7,
+        "H": 7,
+        "S": 7,
+        "NT": 7
+      }
+    },
+    "optimum": {
+      "text": "NS 8♣; +90",
+      "score": 90,
+      "declarer": "NS",
+      "contract": "8♣",
+      "level": 2,
+      "denom": "♣",
+      "tricks": 8
+    },
+    "lott": {
+      "total_tricks": 15,
+      "ns_fit": {
+        "suit": "♣",
+        "suit_code": "C",
+        "length": 8,
+        "tricks": 8
+      },
+      "ew_fit": {
+        "suit": "♠",
+        "suit_code": "S",
+        "length": 7,
+        "tricks": 7
+      }
+    }
   },
   {
     "N": "AKT943.Q.A854.A6",
@@ -63,7 +333,61 @@
     "date": "23.01.2026",
     "board": 6,
     "dealer": "E",
-    "vulnerability": "NS"
+    "vulnerability": "NS",
+    "dd_analysis": {
+      "N": {
+        "C": 10,
+        "D": 9,
+        "H": 9,
+        "S": 11,
+        "NT": 11
+      },
+      "E": {
+        "C": 2,
+        "D": 3,
+        "H": 4,
+        "S": 2,
+        "NT": 2
+      },
+      "S": {
+        "C": 10,
+        "D": 9,
+        "H": 9,
+        "S": 11,
+        "NT": 11
+      },
+      "W": {
+        "C": 3,
+        "D": 3,
+        "H": 4,
+        "S": 2,
+        "NT": 2
+      }
+    },
+    "optimum": {
+      "text": "NS 11NT; +660",
+      "score": 660,
+      "declarer": "NS",
+      "contract": "11NT",
+      "level": 3,
+      "denom": "NT",
+      "tricks": 11
+    },
+    "lott": {
+      "total_tricks": 15,
+      "ns_fit": {
+        "suit": "♠",
+        "suit_code": "S",
+        "length": 8,
+        "tricks": 11
+      },
+      "ew_fit": {
+        "suit": "♥",
+        "suit_code": "H",
+        "length": 8,
+        "tricks": 4
+      }
+    }
   },
   {
     "N": "J9763.JT5.52.K64",
@@ -74,7 +398,61 @@
     "date": "23.01.2026",
     "board": 7,
     "dealer": "S",
-    "vulnerability": "EW"
+    "vulnerability": "EW",
+    "dd_analysis": {
+      "N": {
+        "C": 6,
+        "D": 1,
+        "H": 4,
+        "S": 4,
+        "NT": 2
+      },
+      "E": {
+        "C": 7,
+        "D": 12,
+        "H": 9,
+        "S": 9,
+        "NT": 10
+      },
+      "S": {
+        "C": 6,
+        "D": 1,
+        "H": 4,
+        "S": 4,
+        "NT": 2
+      },
+      "W": {
+        "C": 7,
+        "D": 12,
+        "H": 9,
+        "S": 9,
+        "NT": 10
+      }
+    },
+    "optimum": {
+      "text": "EW 12♦; -1370",
+      "score": -1370,
+      "declarer": "EW",
+      "contract": "12♦",
+      "level": 6,
+      "denom": "♦",
+      "tricks": 12
+    },
+    "lott": {
+      "total_tricks": 18,
+      "ns_fit": {
+        "suit": "♣",
+        "suit_code": "C",
+        "length": 9,
+        "tricks": 6
+      },
+      "ew_fit": {
+        "suit": "♦",
+        "suit_code": "D",
+        "length": 10,
+        "tricks": 12
+      }
+    }
   },
   {
     "N": ".K.K98754.AKQ742",
@@ -85,7 +463,61 @@
     "date": "23.01.2026",
     "board": 8,
     "dealer": "W",
-    "vulnerability": "Both"
+    "vulnerability": "Both",
+    "dd_analysis": {
+      "N": {
+        "C": 12,
+        "D": 11,
+        "H": 5,
+        "S": 7,
+        "NT": 7
+      },
+      "E": {
+        "C": 0,
+        "D": 1,
+        "H": 7,
+        "S": 5,
+        "NT": 3
+      },
+      "S": {
+        "C": 12,
+        "D": 11,
+        "H": 5,
+        "S": 7,
+        "NT": 7
+      },
+      "W": {
+        "C": 0,
+        "D": 1,
+        "H": 7,
+        "S": 5,
+        "NT": 3
+      }
+    },
+    "optimum": {
+      "text": "NS 12♣; +1370",
+      "score": 1370,
+      "declarer": "NS",
+      "contract": "12♣",
+      "level": 6,
+      "denom": "♣",
+      "tricks": 12
+    },
+    "lott": {
+      "total_tricks": 19,
+      "ns_fit": {
+        "suit": "♣",
+        "suit_code": "C",
+        "length": 10,
+        "tricks": 12
+      },
+      "ew_fit": {
+        "suit": "♥",
+        "suit_code": "H",
+        "length": 10,
+        "tricks": 7
+      }
+    }
   },
   {
     "N": "KQ43.K7.973.QT73",
@@ -96,7 +528,61 @@
     "date": "23.01.2026",
     "board": 9,
     "dealer": "N",
-    "vulnerability": "None"
+    "vulnerability": "None",
+    "dd_analysis": {
+      "N": {
+        "C": 5,
+        "D": 8,
+        "H": 4,
+        "S": 6,
+        "NT": 5
+      },
+      "E": {
+        "C": 8,
+        "D": 5,
+        "H": 9,
+        "S": 6,
+        "NT": 8
+      },
+      "S": {
+        "C": 5,
+        "D": 8,
+        "H": 4,
+        "S": 6,
+        "NT": 5
+      },
+      "W": {
+        "C": 8,
+        "D": 5,
+        "H": 9,
+        "S": 6,
+        "NT": 8
+      }
+    },
+    "optimum": {
+      "text": "EW 9♥; -140",
+      "score": -140,
+      "declarer": "EW",
+      "contract": "9♥",
+      "level": 3,
+      "denom": "♥",
+      "tricks": 9
+    },
+    "lott": {
+      "total_tricks": 17,
+      "ns_fit": {
+        "suit": "♦",
+        "suit_code": "D",
+        "length": 9,
+        "tricks": 8
+      },
+      "ew_fit": {
+        "suit": "♥",
+        "suit_code": "H",
+        "length": 9,
+        "tricks": 9
+      }
+    }
   },
   {
     "N": "Q7.KQ82.K642.T74",
@@ -107,7 +593,61 @@
     "date": "23.01.2026",
     "board": 10,
     "dealer": "E",
-    "vulnerability": "NS"
+    "vulnerability": "NS",
+    "dd_analysis": {
+      "N": {
+        "C": 1,
+        "D": 7,
+        "H": 6,
+        "S": 1,
+        "NT": 6
+      },
+      "E": {
+        "C": 12,
+        "D": 6,
+        "H": 4,
+        "S": 12,
+        "NT": 7
+      },
+      "S": {
+        "C": 1,
+        "D": 6,
+        "H": 6,
+        "S": 1,
+        "NT": 6
+      },
+      "W": {
+        "C": 12,
+        "D": 6,
+        "H": 4,
+        "S": 12,
+        "NT": 7
+      }
+    },
+    "optimum": {
+      "text": "EW 12♠; -980",
+      "score": -980,
+      "declarer": "EW",
+      "contract": "12♠",
+      "level": 6,
+      "denom": "♠",
+      "tricks": 12
+    },
+    "lott": {
+      "total_tricks": 18,
+      "ns_fit": {
+        "suit": "♥",
+        "suit_code": "H",
+        "length": 10,
+        "tricks": 6
+      },
+      "ew_fit": {
+        "suit": "♠",
+        "suit_code": "S",
+        "length": 10,
+        "tricks": 12
+      }
+    }
   },
   {
     "N": "AK962..AJ76.AQT9",
@@ -118,7 +658,61 @@
     "date": "23.01.2026",
     "board": 11,
     "dealer": "S",
-    "vulnerability": "EW"
+    "vulnerability": "EW",
+    "dd_analysis": {
+      "N": {
+        "C": 9,
+        "D": 13,
+        "H": 6,
+        "S": 13,
+        "NT": 7
+      },
+      "E": {
+        "C": 4,
+        "D": 0,
+        "H": 6,
+        "S": 0,
+        "NT": 0
+      },
+      "S": {
+        "C": 9,
+        "D": 13,
+        "H": 6,
+        "S": 13,
+        "NT": 12
+      },
+      "W": {
+        "C": 4,
+        "D": 0,
+        "H": 6,
+        "S": 0,
+        "NT": 0
+      }
+    },
+    "optimum": {
+      "text": "NS 13♠; +1510",
+      "score": 1510,
+      "declarer": "NS",
+      "contract": "13♠",
+      "level": 7,
+      "denom": "♠",
+      "tricks": 13
+    },
+    "lott": {
+      "total_tricks": 19,
+      "ns_fit": {
+        "suit": "♠",
+        "suit_code": "S",
+        "length": 8,
+        "tricks": 13
+      },
+      "ew_fit": {
+        "suit": "♥",
+        "suit_code": "H",
+        "length": 9,
+        "tricks": 6
+      }
+    }
   },
   {
     "N": "KJ6.K753.AQJ3.43",
@@ -129,7 +723,61 @@
     "date": "23.01.2026",
     "board": 12,
     "dealer": "W",
-    "vulnerability": "Both"
+    "vulnerability": "Both",
+    "dd_analysis": {
+      "N": {
+        "C": 6,
+        "D": 8,
+        "H": 10,
+        "S": 10,
+        "NT": 8
+      },
+      "E": {
+        "C": 7,
+        "D": 5,
+        "H": 1,
+        "S": 3,
+        "NT": 3
+      },
+      "S": {
+        "C": 6,
+        "D": 8,
+        "H": 10,
+        "S": 10,
+        "NT": 8
+      },
+      "W": {
+        "C": 7,
+        "D": 5,
+        "H": 1,
+        "S": 3,
+        "NT": 3
+      }
+    },
+    "optimum": {
+      "text": "NS 10♠; +620",
+      "score": 620,
+      "declarer": "NS",
+      "contract": "10♠",
+      "level": 4,
+      "denom": "♠",
+      "tricks": 10
+    },
+    "lott": {
+      "total_tricks": 17,
+      "ns_fit": {
+        "suit": "♠",
+        "suit_code": "S",
+        "length": 8,
+        "tricks": 10
+      },
+      "ew_fit": {
+        "suit": "♣",
+        "suit_code": "C",
+        "length": 9,
+        "tricks": 7
+      }
+    }
   },
   {
     "N": "832.T7.T97.AKT52",
@@ -140,7 +788,61 @@
     "date": "23.01.2026",
     "board": 13,
     "dealer": "N",
-    "vulnerability": "None"
+    "vulnerability": "None",
+    "dd_analysis": {
+      "N": {
+        "C": 6,
+        "D": 5,
+        "H": 3,
+        "S": 5,
+        "NT": 3
+      },
+      "E": {
+        "C": 6,
+        "D": 8,
+        "H": 9,
+        "S": 8,
+        "NT": 9
+      },
+      "S": {
+        "C": 6,
+        "D": 5,
+        "H": 3,
+        "S": 5,
+        "NT": 3
+      },
+      "W": {
+        "C": 6,
+        "D": 8,
+        "H": 9,
+        "S": 8,
+        "NT": 8
+      }
+    },
+    "optimum": {
+      "text": "NS 9NT; -400",
+      "score": -400,
+      "declarer": "NS",
+      "contract": "9NT",
+      "level": 3,
+      "denom": "NT",
+      "tricks": 9
+    },
+    "lott": {
+      "total_tricks": 15,
+      "ns_fit": {
+        "suit": "♣",
+        "suit_code": "C",
+        "length": 7,
+        "tricks": 6
+      },
+      "ew_fit": {
+        "suit": "♥",
+        "suit_code": "H",
+        "length": 7,
+        "tricks": 9
+      }
+    }
   },
   {
     "N": "AQ43.973.Q4.9765",
@@ -151,7 +853,61 @@
     "date": "23.01.2026",
     "board": 14,
     "dealer": "E",
-    "vulnerability": "NS"
+    "vulnerability": "NS",
+    "dd_analysis": {
+      "N": {
+        "C": 6,
+        "D": 4,
+        "H": 6,
+        "S": 7,
+        "NT": 7
+      },
+      "E": {
+        "C": 5,
+        "D": 8,
+        "H": 7,
+        "S": 5,
+        "NT": 5
+      },
+      "S": {
+        "C": 7,
+        "D": 4,
+        "H": 6,
+        "S": 8,
+        "NT": 8
+      },
+      "W": {
+        "C": 5,
+        "D": 8,
+        "H": 7,
+        "S": 5,
+        "NT": 5
+      }
+    },
+    "optimum": {
+      "text": "EW 9♦; +100",
+      "score": 100,
+      "declarer": "EW",
+      "contract": "9♦",
+      "level": 3,
+      "denom": "♦",
+      "tricks": 9
+    },
+    "lott": {
+      "total_tricks": 16,
+      "ns_fit": {
+        "suit": "♠",
+        "suit_code": "S",
+        "length": 8,
+        "tricks": 8
+      },
+      "ew_fit": {
+        "suit": "♦",
+        "suit_code": "D",
+        "length": 8,
+        "tricks": 8
+      }
+    }
   },
   {
     "N": "QJ65.Q852.JT87.6",
@@ -162,7 +918,61 @@
     "date": "23.01.2026",
     "board": 15,
     "dealer": "S",
-    "vulnerability": "EW"
+    "vulnerability": "EW",
+    "dd_analysis": {
+      "N": {
+        "C": 4,
+        "D": 7,
+        "H": 5,
+        "S": 6,
+        "NT": 4
+      },
+      "E": {
+        "C": 9,
+        "D": 6,
+        "H": 8,
+        "S": 6,
+        "NT": 8
+      },
+      "S": {
+        "C": 4,
+        "D": 7,
+        "H": 5,
+        "S": 6,
+        "NT": 4
+      },
+      "W": {
+        "C": 9,
+        "D": 6,
+        "H": 8,
+        "S": 6,
+        "NT": 8
+      }
+    },
+    "optimum": {
+      "text": "NS 8NT; -120",
+      "score": -120,
+      "declarer": "NS",
+      "contract": "8NT",
+      "level": 2,
+      "denom": "NT",
+      "tricks": 8
+    },
+    "lott": {
+      "total_tricks": 16,
+      "ns_fit": {
+        "suit": "♦",
+        "suit_code": "D",
+        "length": 8,
+        "tricks": 7
+      },
+      "ew_fit": {
+        "suit": "♣",
+        "suit_code": "C",
+        "length": 8,
+        "tricks": 9
+      }
+    }
   },
   {
     "N": "9762.Q76.JT8.A52",
@@ -173,7 +983,61 @@
     "date": "23.01.2026",
     "board": 16,
     "dealer": "W",
-    "vulnerability": "Both"
+    "vulnerability": "Both",
+    "dd_analysis": {
+      "N": {
+        "C": 3,
+        "D": 3,
+        "H": 6,
+        "S": 6,
+        "NT": 3
+      },
+      "E": {
+        "C": 10,
+        "D": 10,
+        "H": 7,
+        "S": 7,
+        "NT": 9
+      },
+      "S": {
+        "C": 3,
+        "D": 3,
+        "H": 6,
+        "S": 6,
+        "NT": 3
+      },
+      "W": {
+        "C": 10,
+        "D": 10,
+        "H": 7,
+        "S": 7,
+        "NT": 9
+      }
+    },
+    "optimum": {
+      "text": "NS 9NT; -600",
+      "score": -600,
+      "declarer": "NS",
+      "contract": "9NT",
+      "level": 3,
+      "denom": "NT",
+      "tricks": 9
+    },
+    "lott": {
+      "total_tricks": 16,
+      "ns_fit": {
+        "suit": "♠",
+        "suit_code": "S",
+        "length": 8,
+        "tricks": 6
+      },
+      "ew_fit": {
+        "suit": "♦",
+        "suit_code": "D",
+        "length": 8,
+        "tricks": 10
+      }
+    }
   },
   {
     "N": "KQ53.AKQ3.A94.A7",
@@ -184,7 +1048,61 @@
     "date": "23.01.2026",
     "board": 17,
     "dealer": "N",
-    "vulnerability": "None"
+    "vulnerability": "None",
+    "dd_analysis": {
+      "N": {
+        "C": 9,
+        "D": 11,
+        "H": 10,
+        "S": 8,
+        "NT": 9
+      },
+      "E": {
+        "C": 4,
+        "D": 2,
+        "H": 2,
+        "S": 5,
+        "NT": 3
+      },
+      "S": {
+        "C": 9,
+        "D": 11,
+        "H": 10,
+        "S": 8,
+        "NT": 9
+      },
+      "W": {
+        "C": 4,
+        "D": 2,
+        "H": 2,
+        "S": 5,
+        "NT": 3
+      }
+    },
+    "optimum": {
+      "text": "NS 10♥; +420",
+      "score": 420,
+      "declarer": "NS",
+      "contract": "10♥",
+      "level": 4,
+      "denom": "♥",
+      "tricks": 10
+    },
+    "lott": {
+      "total_tricks": 16,
+      "ns_fit": {
+        "suit": "♦",
+        "suit_code": "D",
+        "length": 8,
+        "tricks": 11
+      },
+      "ew_fit": {
+        "suit": "♠",
+        "suit_code": "S",
+        "length": 8,
+        "tricks": 5
+      }
+    }
   },
   {
     "N": "K63.T64.965.Q754",
@@ -195,7 +1113,61 @@
     "date": "23.01.2026",
     "board": 18,
     "dealer": "E",
-    "vulnerability": "NS"
+    "vulnerability": "NS",
+    "dd_analysis": {
+      "N": {
+        "C": 6,
+        "D": 4,
+        "H": 7,
+        "S": 7,
+        "NT": 7
+      },
+      "E": {
+        "C": 6,
+        "D": 8,
+        "H": 6,
+        "S": 6,
+        "NT": 6
+      },
+      "S": {
+        "C": 6,
+        "D": 4,
+        "H": 7,
+        "S": 7,
+        "NT": 7
+      },
+      "W": {
+        "C": 6,
+        "D": 8,
+        "H": 5,
+        "S": 6,
+        "NT": 6
+      }
+    },
+    "optimum": {
+      "text": "EW 8♦; -90",
+      "score": -90,
+      "declarer": "EW",
+      "contract": "8♦",
+      "level": 2,
+      "denom": "♦",
+      "tricks": 8
+    },
+    "lott": {
+      "total_tricks": 15,
+      "ns_fit": {
+        "suit": "♠",
+        "suit_code": "S",
+        "length": 7,
+        "tricks": 7
+      },
+      "ew_fit": {
+        "suit": "♦",
+        "suit_code": "D",
+        "length": 8,
+        "tricks": 8
+      }
+    }
   },
   {
     "N": "AQ93.7.JT85432.Q",
@@ -206,7 +1178,61 @@
     "date": "23.01.2026",
     "board": 19,
     "dealer": "S",
-    "vulnerability": "EW"
+    "vulnerability": "EW",
+    "dd_analysis": {
+      "N": {
+        "C": 0,
+        "D": 9,
+        "H": 0,
+        "S": 7,
+        "NT": 1
+      },
+      "E": {
+        "C": 12,
+        "D": 4,
+        "H": 12,
+        "S": 5,
+        "NT": 9
+      },
+      "S": {
+        "C": 0,
+        "D": 9,
+        "H": 0,
+        "S": 7,
+        "NT": 1
+      },
+      "W": {
+        "C": 12,
+        "D": 4,
+        "H": 12,
+        "S": 5,
+        "NT": 9
+      }
+    },
+    "optimum": {
+      "text": "NS 13♦; -800",
+      "score": -800,
+      "declarer": "NS",
+      "contract": "13♦",
+      "level": 7,
+      "denom": "♦",
+      "tricks": 13
+    },
+    "lott": {
+      "total_tricks": 21,
+      "ns_fit": {
+        "suit": "♦",
+        "suit_code": "D",
+        "length": 9,
+        "tricks": 9
+      },
+      "ew_fit": {
+        "suit": "♥",
+        "suit_code": "H",
+        "length": 9,
+        "tricks": 12
+      }
+    }
   },
   {
     "N": "K764.QT4.KT8.QJ6",
@@ -217,7 +1243,61 @@
     "date": "23.01.2026",
     "board": 20,
     "dealer": "W",
-    "vulnerability": "Both"
+    "vulnerability": "Both",
+    "dd_analysis": {
+      "N": {
+        "C": 5,
+        "D": 10,
+        "H": 7,
+        "S": 11,
+        "NT": 8
+      },
+      "E": {
+        "C": 8,
+        "D": 3,
+        "H": 6,
+        "S": 2,
+        "NT": 3
+      },
+      "S": {
+        "C": 4,
+        "D": 10,
+        "H": 6,
+        "S": 11,
+        "NT": 7
+      },
+      "W": {
+        "C": 8,
+        "D": 3,
+        "H": 6,
+        "S": 2,
+        "NT": 3
+      }
+    },
+    "optimum": {
+      "text": "NS 11♠; +650",
+      "score": 650,
+      "declarer": "NS",
+      "contract": "11♠",
+      "level": 4,
+      "denom": "♠",
+      "tricks": 11
+    },
+    "lott": {
+      "total_tricks": 18,
+      "ns_fit": {
+        "suit": "♦",
+        "suit_code": "D",
+        "length": 9,
+        "tricks": 10
+      },
+      "ew_fit": {
+        "suit": "♣",
+        "suit_code": "C",
+        "length": 10,
+        "tricks": 8
+      }
+    }
   },
   {
     "N": "8432.T6.AK7.K873",
@@ -228,7 +1308,61 @@
     "date": "23.01.2026",
     "board": 21,
     "dealer": "N",
-    "vulnerability": "None"
+    "vulnerability": "None",
+    "dd_analysis": {
+      "N": {
+        "C": 8,
+        "D": 6,
+        "H": 3,
+        "S": 5,
+        "NT": 6
+      },
+      "E": {
+        "C": 5,
+        "D": 7,
+        "H": 10,
+        "S": 8,
+        "NT": 7
+      },
+      "S": {
+        "C": 8,
+        "D": 6,
+        "H": 3,
+        "S": 5,
+        "NT": 6
+      },
+      "W": {
+        "C": 5,
+        "D": 7,
+        "H": 10,
+        "S": 8,
+        "NT": 7
+      }
+    },
+    "optimum": {
+      "text": "EW 10♥; -420",
+      "score": -420,
+      "declarer": "EW",
+      "contract": "10♥",
+      "level": 4,
+      "denom": "♥",
+      "tricks": 10
+    },
+    "lott": {
+      "total_tricks": 18,
+      "ns_fit": {
+        "suit": "♣",
+        "suit_code": "C",
+        "length": 8,
+        "tricks": 8
+      },
+      "ew_fit": {
+        "suit": "♥",
+        "suit_code": "H",
+        "length": 8,
+        "tricks": 10
+      }
+    }
   },
   {
     "N": "Q92.64.654.KJT64",
@@ -239,7 +1373,61 @@
     "date": "23.01.2026",
     "board": 22,
     "dealer": "E",
-    "vulnerability": "NS"
+    "vulnerability": "NS",
+    "dd_analysis": {
+      "N": {
+        "C": 11,
+        "D": 9,
+        "H": 4,
+        "S": 10,
+        "NT": 6
+      },
+      "E": {
+        "C": 2,
+        "D": 4,
+        "H": 9,
+        "S": 3,
+        "NT": 4
+      },
+      "S": {
+        "C": 11,
+        "D": 9,
+        "H": 4,
+        "S": 10,
+        "NT": 6
+      },
+      "W": {
+        "C": 1,
+        "D": 4,
+        "H": 9,
+        "S": 3,
+        "NT": 4
+      }
+    },
+    "optimum": {
+      "text": "EW 11♥; +300",
+      "score": 300,
+      "declarer": "EW",
+      "contract": "11♥",
+      "level": 5,
+      "denom": "♥",
+      "tricks": 11
+    },
+    "lott": {
+      "total_tricks": 20,
+      "ns_fit": {
+        "suit": "♣",
+        "suit_code": "C",
+        "length": 9,
+        "tricks": 11
+      },
+      "ew_fit": {
+        "suit": "♥",
+        "suit_code": "H",
+        "length": 11,
+        "tricks": 9
+      }
+    }
   },
   {
     "N": "JT653.642.983.QT",
@@ -250,7 +1438,61 @@
     "date": "23.01.2026",
     "board": 23,
     "dealer": "S",
-    "vulnerability": "EW"
+    "vulnerability": "EW",
+    "dd_analysis": {
+      "N": {
+        "C": 3,
+        "D": 1,
+        "H": 2,
+        "S": 4,
+        "NT": 2
+      },
+      "E": {
+        "C": 10,
+        "D": 11,
+        "H": 11,
+        "S": 9,
+        "NT": 10
+      },
+      "S": {
+        "C": 3,
+        "D": 2,
+        "H": 2,
+        "S": 4,
+        "NT": 2
+      },
+      "W": {
+        "C": 10,
+        "D": 11,
+        "H": 11,
+        "S": 9,
+        "NT": 10
+      }
+    },
+    "optimum": {
+      "text": "EW 11♥; -650",
+      "score": -650,
+      "declarer": "EW",
+      "contract": "11♥",
+      "level": 4,
+      "denom": "♥",
+      "tricks": 11
+    },
+    "lott": {
+      "total_tricks": 15,
+      "ns_fit": {
+        "suit": "♠",
+        "suit_code": "S",
+        "length": 8,
+        "tricks": 4
+      },
+      "ew_fit": {
+        "suit": "♥",
+        "suit_code": "H",
+        "length": 7,
+        "tricks": 11
+      }
+    }
   },
   {
     "N": "J2.AT4.7643.6532",
@@ -261,7 +1503,61 @@
     "date": "23.01.2026",
     "board": 24,
     "dealer": "W",
-    "vulnerability": "Both"
+    "vulnerability": "Both",
+    "dd_analysis": {
+      "N": {
+        "C": 4,
+        "D": 4,
+        "H": 6,
+        "S": 7,
+        "NT": 5
+      },
+      "E": {
+        "C": 9,
+        "D": 8,
+        "H": 6,
+        "S": 6,
+        "NT": 8
+      },
+      "S": {
+        "C": 4,
+        "D": 4,
+        "H": 6,
+        "S": 7,
+        "NT": 5
+      },
+      "W": {
+        "C": 9,
+        "D": 8,
+        "H": 6,
+        "S": 6,
+        "NT": 8
+      }
+    },
+    "optimum": {
+      "text": "NS 8NT; -120",
+      "score": -120,
+      "declarer": "NS",
+      "contract": "8NT",
+      "level": 1,
+      "denom": "NT",
+      "tricks": 8
+    },
+    "lott": {
+      "total_tricks": 16,
+      "ns_fit": {
+        "suit": "♠",
+        "suit_code": "S",
+        "length": 7,
+        "tricks": 7
+      },
+      "ew_fit": {
+        "suit": "♣",
+        "suit_code": "C",
+        "length": 7,
+        "tricks": 9
+      }
+    }
   },
   {
     "N": "QJ62.A43.2.J9874",
@@ -272,7 +1568,61 @@
     "date": "23.01.2026",
     "board": 25,
     "dealer": "N",
-    "vulnerability": "None"
+    "vulnerability": "None",
+    "dd_analysis": {
+      "N": {
+        "C": 6,
+        "D": 4,
+        "H": 8,
+        "S": 7,
+        "NT": 5
+      },
+      "E": {
+        "C": 6,
+        "D": 8,
+        "H": 4,
+        "S": 5,
+        "NT": 5
+      },
+      "S": {
+        "C": 6,
+        "D": 4,
+        "H": 8,
+        "S": 7,
+        "NT": 5
+      },
+      "W": {
+        "C": 6,
+        "D": 8,
+        "H": 4,
+        "S": 5,
+        "NT": 5
+      }
+    },
+    "optimum": {
+      "text": "EW 9♦; +100",
+      "score": 100,
+      "declarer": "EW",
+      "contract": "9♦",
+      "level": 3,
+      "denom": "♦",
+      "tricks": 9
+    },
+    "lott": {
+      "total_tricks": 16,
+      "ns_fit": {
+        "suit": "♥",
+        "suit_code": "H",
+        "length": 8,
+        "tricks": 8
+      },
+      "ew_fit": {
+        "suit": "♦",
+        "suit_code": "D",
+        "length": 8,
+        "tricks": 8
+      }
+    }
   },
   {
     "N": "J8.JT82.K7652.J4",
@@ -283,7 +1633,61 @@
     "date": "23.01.2026",
     "board": 26,
     "dealer": "E",
-    "vulnerability": "NS"
+    "vulnerability": "NS",
+    "dd_analysis": {
+      "N": {
+        "C": 2,
+        "D": 6,
+        "H": 3,
+        "S": 2,
+        "NT": 2
+      },
+      "E": {
+        "C": 11,
+        "D": 7,
+        "H": 9,
+        "S": 11,
+        "NT": 11
+      },
+      "S": {
+        "C": 2,
+        "D": 6,
+        "H": 3,
+        "S": 2,
+        "NT": 2
+      },
+      "W": {
+        "C": 11,
+        "D": 7,
+        "H": 9,
+        "S": 11,
+        "NT": 10
+      }
+    },
+    "optimum": {
+      "text": "NS 11NT; -460",
+      "score": -460,
+      "declarer": "NS",
+      "contract": "11NT",
+      "level": 3,
+      "denom": "NT",
+      "tricks": 11
+    },
+    "lott": {
+      "total_tricks": 17,
+      "ns_fit": {
+        "suit": "♦",
+        "suit_code": "D",
+        "length": 10,
+        "tricks": 6
+      },
+      "ew_fit": {
+        "suit": "♣",
+        "suit_code": "C",
+        "length": 9,
+        "tricks": 11
+      }
+    }
   },
   {
     "N": "8753.AJT76.73.AT",
@@ -294,7 +1698,61 @@
     "date": "23.01.2026",
     "board": 27,
     "dealer": "S",
-    "vulnerability": "EW"
+    "vulnerability": "EW",
+    "dd_analysis": {
+      "N": {
+        "C": 6,
+        "D": 6,
+        "H": 10,
+        "S": 11,
+        "NT": 9
+      },
+      "E": {
+        "C": 6,
+        "D": 7,
+        "H": 2,
+        "S": 2,
+        "NT": 3
+      },
+      "S": {
+        "C": 7,
+        "D": 6,
+        "H": 10,
+        "S": 11,
+        "NT": 9
+      },
+      "W": {
+        "C": 6,
+        "D": 7,
+        "H": 2,
+        "S": 2,
+        "NT": 3
+      }
+    },
+    "optimum": {
+      "text": "NS 11♠; +450",
+      "score": 450,
+      "declarer": "NS",
+      "contract": "11♠",
+      "level": 4,
+      "denom": "♠",
+      "tricks": 11
+    },
+    "lott": {
+      "total_tricks": 18,
+      "ns_fit": {
+        "suit": "♠",
+        "suit_code": "S",
+        "length": 8,
+        "tricks": 11
+      },
+      "ew_fit": {
+        "suit": "♦",
+        "suit_code": "D",
+        "length": 8,
+        "tricks": 7
+      }
+    }
   },
   {
     "N": "AJ4.AJ53.T82.Q65",
@@ -305,7 +1763,61 @@
     "date": "23.01.2026",
     "board": 28,
     "dealer": "W",
-    "vulnerability": "Both"
+    "vulnerability": "Both",
+    "dd_analysis": {
+      "N": {
+        "C": 4,
+        "D": 2,
+        "H": 3,
+        "S": 3,
+        "NT": 3
+      },
+      "E": {
+        "C": 8,
+        "D": 11,
+        "H": 9,
+        "S": 10,
+        "NT": 9
+      },
+      "S": {
+        "C": 4,
+        "D": 2,
+        "H": 3,
+        "S": 3,
+        "NT": 3
+      },
+      "W": {
+        "C": 8,
+        "D": 11,
+        "H": 10,
+        "S": 10,
+        "NT": 9
+      }
+    },
+    "optimum": {
+      "text": "EW 10♠; -620",
+      "score": -620,
+      "declarer": "EW",
+      "contract": "10♠",
+      "level": 4,
+      "denom": "♠",
+      "tricks": 10
+    },
+    "lott": {
+      "total_tricks": 15,
+      "ns_fit": {
+        "suit": "♣",
+        "suit_code": "C",
+        "length": 7,
+        "tricks": 4
+      },
+      "ew_fit": {
+        "suit": "♦",
+        "suit_code": "D",
+        "length": 7,
+        "tricks": 11
+      }
+    }
   },
   {
     "N": "JT4.KT76.2.98742",
@@ -316,7 +1828,61 @@
     "date": "23.01.2026",
     "board": 29,
     "dealer": "N",
-    "vulnerability": "None"
+    "vulnerability": "None",
+    "dd_analysis": {
+      "N": {
+        "C": 9,
+        "D": 4,
+        "H": 8,
+        "S": 8,
+        "NT": 7
+      },
+      "E": {
+        "C": 4,
+        "D": 9,
+        "H": 5,
+        "S": 5,
+        "NT": 5
+      },
+      "S": {
+        "C": 9,
+        "D": 4,
+        "H": 8,
+        "S": 8,
+        "NT": 7
+      },
+      "W": {
+        "C": 3,
+        "D": 8,
+        "H": 5,
+        "S": 5,
+        "NT": 5
+      }
+    },
+    "optimum": {
+      "text": "NS 9♠; -100",
+      "score": -100,
+      "declarer": "NS",
+      "contract": "9♠",
+      "level": 3,
+      "denom": "♠",
+      "tricks": 9
+    },
+    "lott": {
+      "total_tricks": 18,
+      "ns_fit": {
+        "suit": "♣",
+        "suit_code": "C",
+        "length": 8,
+        "tricks": 9
+      },
+      "ew_fit": {
+        "suit": "♦",
+        "suit_code": "D",
+        "length": 9,
+        "tricks": 9
+      }
+    }
   },
   {
     "N": "A5.J86.A9873.862",
@@ -327,6 +1893,60 @@
     "date": "23.01.2026",
     "board": 30,
     "dealer": "E",
-    "vulnerability": "NS"
+    "vulnerability": "NS",
+    "dd_analysis": {
+      "N": {
+        "C": 4,
+        "D": 8,
+        "H": 4,
+        "S": 4,
+        "NT": 4
+      },
+      "E": {
+        "C": 9,
+        "D": 4,
+        "H": 9,
+        "S": 9,
+        "NT": 5
+      },
+      "S": {
+        "C": 4,
+        "D": 8,
+        "H": 4,
+        "S": 4,
+        "NT": 4
+      },
+      "W": {
+        "C": 9,
+        "D": 4,
+        "H": 9,
+        "S": 9,
+        "NT": 5
+      }
+    },
+    "optimum": {
+      "text": "EW 9♠; -140",
+      "score": -140,
+      "declarer": "EW",
+      "contract": "9♠",
+      "level": 2,
+      "denom": "♠",
+      "tricks": 9
+    },
+    "lott": {
+      "total_tricks": 17,
+      "ns_fit": {
+        "suit": "♦",
+        "suit_code": "D",
+        "length": 10,
+        "tricks": 8
+      },
+      "ew_fit": {
+        "suit": "♠",
+        "suit_code": "S",
+        "length": 8,
+        "tricks": 9
+      }
+    }
   }
 ]
