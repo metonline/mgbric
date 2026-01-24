@@ -390,7 +390,7 @@
             const hands = board.hands || {};
             const ddData = getDDData(eventId, boardNum);
             
-            const formatHand = (h) => h ? [h.S||'-', h.H||'-', h.D||'-', h.C||'-'].join('.') : '';
+            const formatHand = (h) => h ? [h.S||'-', h.H||'-', h.D||'-', h.C||'-'].join('.').replace(/T/g, '10') : '';
             
             let lott = '-';
             if (ddData?.tricks) {

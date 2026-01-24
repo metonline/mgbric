@@ -274,14 +274,14 @@
             eventSelect.addEventListener('change', applyFilters);
         }
         
-        // Format hand in BBO style
+        // Format hand in BBO style - replace T with 10
         function formatHandBBO(hand) {
             if (!hand) return '';
             const suits = ['S', 'H', 'D', 'C'];
             const suitSymbols = {'S': '♠', 'H': '♥', 'D': '♦', 'C': '♣'};
             let result = '';
             for (let suit of suits) {
-                const cards = hand[suit] || '';
+                const cards = (hand[suit] || '').replace(/T/g, '10');
                 if (result) result += ' ';
                 result += suitSymbols[suit] + cards;
             }

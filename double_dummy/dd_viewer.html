@@ -493,10 +493,10 @@
             if (!hand) return { spades: '-', hearts: '-', diamonds: '-', clubs: '-' };
             const parts = hand.split('.');
             return {
-                spades: parts[0] || '-',
-                hearts: parts[1] || '-',
-                diamonds: parts[2] || '-',
-                clubs: parts[3] || '-'
+                spades: (parts[0] || '-').replace(/T/g, '10'),
+                hearts: (parts[1] || '-').replace(/T/g, '10'),
+                diamonds: (parts[2] || '-').replace(/T/g, '10'),
+                clubs: (parts[3] || '-').replace(/T/g, '10')
             };
         }
         

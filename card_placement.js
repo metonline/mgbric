@@ -108,6 +108,16 @@ function calculateHCP(hand) {
 }
 
 /**
+ * Format card holdings for display - replace T with 10
+ * @param {string} cards - Card notation (e.g., "AKQ")
+ * @returns {string} - Formatted cards with T replaced by 10
+ */
+function formatCardDisplay(cards) {
+    if (!cards) return '-';
+    return cards.replace(/T/g, '10');
+}
+
+/**
  * Format a single suit row for diagram display
  * @param {string} suitSymbol - Unicode suit symbol (♠, ♥, ♦, ♣)
  * @param {string} cards - Card notation (e.g., "AKQ")
@@ -116,22 +126,27 @@ function calculateHCP(hand) {
  */
 function formatSuitRow(suitSymbol, cards, isRed) {
     const color = isRed ? 'suit-red' : 'suit-black';
+    const displayCards = formatCardDisplay(cards);
     return `
         <div class="suitRowDivStyle">
             <span class="suitSymbol ${color}">${suitSymbol}</span>
-            <span class="suitHolding">${cards || '-'}</span>
+            <span class="suitHolding">${displayCards}</span>
         </div>
     `;
 }
 
 /**
  * Apply suit colors to text (convert S/H/D/C to colored symbols)
+ * Also replaces T with 10 for display
  * @param {string} text - Text with suit letters
  * @returns {string} - HTML with colored suit symbols
  */
 function formatSuitWithColor(text) {
     if (!text) return '';
-    return text
+    // First replace T with 10
+    const formattedText = text.replace(/T/g, '10');
+    // Then apply suit colors
+    return formattedText
         .replace(/♠/g, '<span class="suit-black">♠</span>')
         .replace(/♣/g, '<span class="suit-black">♣</span>')
         .replace(/♥/g, '<span class="suit-red">♥</span>')

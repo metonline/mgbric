@@ -840,7 +840,8 @@
         
         function formatSuitRow(symbol, holding, isRed) {
             const colorClass = isRed ? 'suit-red' : 'suit-black';
-            return `<div class="suitRowDivStyle"><span class="suitSymbol ${colorClass}">${symbol}</span><span class="suitHolding">${holding || '-'}</span></div>`;
+            const displayHolding = (holding || '-').replace(/T/g, '10');
+            return `<div class="suitRowDivStyle"><span class="suitSymbol ${colorClass}">${symbol}</span><span class="suitHolding">${displayHolding}</span></div>`;
         }
         
         function calculateHCP(hand) {

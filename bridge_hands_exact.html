@@ -388,7 +388,7 @@
             const hands = board.hands || {};
             const ddData = getDDData(eventId, boardNum);
             
-            const formatHand = (h) => h ? `${h.S||'.'}.${h.H||'.'}.${h.D||'.'}.${h.C||'.'}` : '';
+            const formatHand = (h) => h ? `${h.S||'.'}.${h.H||'.'}.${h.D||'.'}.${h.C||'.'}`.replace(/T/g, '10') : '';
             
             let nsNT = 0, ewNT = 0;
             if (ddData?.tricks) {

@@ -397,14 +397,14 @@
             }
         }
         
-        // Format hand for display
+        // Format hand for display - replace T with 10
         function formatHand(handObj) {
             if (!handObj) return '';
             const suits = ['S', 'H', 'D', 'C'];
             const suitSymbols = { 'S': '♠', 'H': '♥', 'D': '♦', 'C': '♣' };
             
             return suits.map(suit => {
-                const cards = handObj[suit] || '';
+                const cards = (handObj[suit] || '').replace(/T/g, '10');
                 return `${suitSymbols[suit]}${cards}`;
             }).join(' ');
         }

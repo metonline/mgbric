@@ -405,7 +405,7 @@
             const suits = ['S', 'H', 'D', 'C'];
             const lines = [];
             for (let suit of suits) {
-                const cards = handObj[suit] || '';
+                const cards = (handObj[suit] || '').replace(/T/g, '10');
                 lines.push(`<div class="suit-${suit.toLowerCase()}"><strong>${cards || '-'}</strong></div>`);
             }
             return lines.join('');
