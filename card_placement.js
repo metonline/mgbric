@@ -269,7 +269,7 @@ function renderHandDiagram(handData, boardNum, ddResult, optimum, lott) {
                     </div>
                     
                     <!-- Date Display - Right Top Corner -->
-                    <div class="date-header" style="position: absolute; top: 8px; right: 15px; font-weight: bold; color: black; font-size: 15px;">${date}</div>
+                    <div class="date-header" style="position: absolute; top: 8px; right: 15px; font-weight: bold; color: black; font-size: 15px;">${date.replace(/20(\d{2})$/, '$1')}</div>
                     
                     <!-- HCP Display - Right Side -->
                     <div class="hcp-display">
