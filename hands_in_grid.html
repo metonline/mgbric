@@ -500,25 +500,70 @@
 
             const dealer = handData.dealer || 'N';
             const vul = handData.vulnerability || 'None';
+            
+            // ROTATE HANDS BASED ON DEALER POSITION
+            // Dealer always appears at bottom-left (West position in display)
+            // So we need to rotate the hand display accordingly
+            let displayN, displayS, displayE, displayW;
+            let displayDealerN, displayDealerS, displayDealerE, displayDealerW;
+            
+            switch(dealer) {
+                case 'N': // Dealer North stays North
+                    displayN = n; displayS = s; displayE = e; displayW = w;
+                    displayDealerN = 'N'; displayDealerS = 'S'; displayDealerE = 'E'; displayDealerW = 'W';
+                    break;
+                case 'E': // Rotate 90° clockwise: N->E, E->S, S->W, W->N
+                    displayN = w; displayS = e; displayE = s; displayW = n;
+                    displayDealerN = 'W'; displayDealerS = 'E'; displayDealerE = 'S'; displayDealerW = 'N';
+                    break;
+                case 'S': // Rotate 180°: N->S, S->N, E->W, W->E
+                    displayN = s; displayS = n; displayE = w; displayW = e;
+                    displayDealerN = 'S'; displayDealerS = 'N'; displayDealerE = 'W'; displayDealerW = 'E';
+                    break;
+                case 'W': // Rotate 90° counter-clockwise: N->W, W->S, S->E, E->N
+                    displayN = e; displayS = w; displayE = n; displayW = s;
+                    displayDealerN = 'E'; displayDealerS = 'W'; displayDealerE = 'N'; displayDealerW = 'S';
+                    break;
+                default:
+                    displayN = n; displayS = s; displayE = e; displayW = w;
+                    displayDealerN = 'N'; displayDealerS = 'S'; displayDealerE = 'E'; displayDealerW = 'W';
+            }
+            
+            // Calculate HCP for rotated display
+            const hcpN = calculateHCP(displayN);
+            const hcpS = calculateHCP(displayS);
+            const hcpE = calculateHCP(displayE);
+            const hcpW = calculateHCP(displayW);
             const date = handData.date || '';
 
-            const hcpN = calculateHCP(n);
-            const hcpS = calculateHCP(s);
-            const hcpE = calculateHCP(e);
-            const hcpW = calculateHCP(w);
+            // Dealer class based on ROTATED position in display
+            const nDealerClass = displayDealerN === dealer ? 'dealer-bg' : '';
+            const sDealerClass = displayDealerS === dealer ? 'dealer-bg' : '';
+            const eDealerClass = displayDealerE === dealer ? 'dealer-bg' : '';
+            const wDealerClass = displayDealerW === dealer ? 'dealer-bg' : '';
 
-            const nDealerClass = dealer === 'N' ? 'dealer-bg' : '';
-            const sDealerClass = dealer === 'S' ? 'dealer-bg' : '';
-            const eDealerClass = dealer === 'E' ? 'dealer-bg' : '';
-            const wDealerClass = dealer === 'W' ? 'dealer-bg' : '';
-
-            // Vulnerability class
+            // Vulnerability class - based on ACTUAL compass positions not rotated
+            // NS vuln affects North and South (actual compass), EW vuln affects East and West (actual compass)
             const isNSVul = vul && (vul.includes('NS') || vul.includes('Both') || vul === 'All');
             const isEWVul = vul && (vul.includes('EW') || vul.includes('Both') || vul === 'All');
-            const nVulClass = isNSVul ? 'vul-bg' : '';
-            const sVulClass = isNSVul ? 'vul-bg' : '';
-            const eVulClass = isEWVul ? 'vul-bg' : '';
-            const wVulClass = isEWVul ? 'vul-bg' : '';
+            
+            // Vulnerability display based on which actual player is in which display position
+            let nVulClass = '';
+            let sVulClass = '';
+            let eVulClass = '';
+            let wVulClass = '';
+            
+            if (displayDealerN === 'N' || displayDealerN === 'S') nVulClass = isNSVul ? 'vul-bg' : '';
+            else nVulClass = isEWVul ? 'vul-bg' : '';
+            
+            if (displayDealerS === 'N' || displayDealerS === 'S') sVulClass = isNSVul ? 'vul-bg' : '';
+            else sVulClass = isEWVul ? 'vul-bg' : '';
+            
+            if (displayDealerE === 'N' || displayDealerE === 'S') eVulClass = isNSVul ? 'vul-bg' : '';
+            else eVulClass = isEWVul ? 'vul-bg' : '';
+            
+            if (displayDealerW === 'N' || displayDealerW === 'S') wVulClass = isNSVul ? 'vul-bg' : '';
+            else wVulClass = isEWVul ? 'vul-bg' : '';
 
             // Format optimum display clearly: "NS 10♥ +420"
             let optimumDisplay = '';
@@ -579,24 +624,24 @@
                         
                         <!-- North -->
                         <div class="nameRowDivStyle pos-n-name ${nDealerClass} ${nVulClass}">
-                            <span class="nameInitial">N</span>
+                            <span class="nameInitial">${displayDealerN}</span>
                         </div>
                         <div class="handDivStyle pos-n-hand">
-                            ${formatSuitRow('♠', n.S, false)}
-                            ${formatSuitRow('♥', n.H, true)}
-                            ${formatSuitRow('♦', n.D, true)}
-                            ${formatSuitRow('♣', n.C, false)}
+                            ${formatSuitRow('♠', displayN.S, false)}
+                            ${formatSuitRow('♥', displayN.H, true)}
+                            ${formatSuitRow('♦', displayN.D, true)}
+                            ${formatSuitRow('♣', displayN.C, false)}
                         </div>
                         
                         <!-- West -->
                         <div class="nameRowDivStyle pos-w-name ${wDealerClass} ${wVulClass}">
-                            <span class="nameInitial">W</span>
+                            <span class="nameInitial">${displayDealerW}</span>
                         </div>
                         <div class="handDivStyle pos-w-hand">
-                            ${formatSuitRow('♠', w.S, false)}
-                            ${formatSuitRow('♥', w.H, true)}
-                            ${formatSuitRow('♦', w.D, true)}
-                            ${formatSuitRow('♣', w.C, false)}
+                            ${formatSuitRow('♠', displayW.S, false)}
+                            ${formatSuitRow('♥', displayW.H, true)}
+                            ${formatSuitRow('♦', displayW.D, true)}
+                            ${formatSuitRow('♣', displayW.C, false)}
                         </div>
                         
                         <!-- Board Number -->
@@ -604,24 +649,24 @@
                         
                         <!-- East -->
                         <div class="nameRowDivStyle pos-e-name ${eDealerClass} ${eVulClass}">
-                            <span class="nameInitial">E</span>
+                            <span class="nameInitial">${displayDealerE}</span>
                         </div>
                         <div class="handDivStyle pos-e-hand">
-                            ${formatSuitRow('♠', e.S, false)}
-                            ${formatSuitRow('♥', e.H, true)}
-                            ${formatSuitRow('♦', e.D, true)}
-                            ${formatSuitRow('♣', e.C, false)}
+                            ${formatSuitRow('♠', displayE.S, false)}
+                            ${formatSuitRow('♥', displayE.H, true)}
+                            ${formatSuitRow('♦', displayE.D, true)}
+                            ${formatSuitRow('♣', displayE.C, false)}
                         </div>
                         
                         <!-- South -->
                         <div class="nameRowDivStyle pos-s-name ${sDealerClass} ${sVulClass}">
-                            <span class="nameInitial">S</span>
+                            <span class="nameInitial">${displayDealerS}</span>
                         </div>
                         <div class="handDivStyle pos-s-hand">
-                            ${formatSuitRow('♠', s.S, false)}
-                            ${formatSuitRow('♥', s.H, true)}
-                            ${formatSuitRow('♦', s.D, true)}
-                            ${formatSuitRow('♣', s.C, false)}
+                            ${formatSuitRow('♠', displayS.S, false)}
+                            ${formatSuitRow('♥', displayS.H, true)}
+                            ${formatSuitRow('♦', displayS.D, true)}
+                            ${formatSuitRow('♣', displayS.C, false)}
                         </div>
                         
                         ${ddTableHtml}
