@@ -298,7 +298,7 @@ class DataFetcher:
         return hands
     
     def _parse_hand_diagram(self, soup) -> Optional[dict]:
-        """HTML'den el dağılımını parse et - With proper dealer-based rotation"""
+        """HTML'den el dağılımını parse et - RAW COMPASS POSITIONS ONLY (NO ROTATION)"""
         try:
             # PROVEN METHOD: Look for bridgetable with oyuncu class cells
             bridge_table = soup.find('table', class_='bridgetable')
@@ -318,15 +318,24 @@ class DataFetcher:
             if len(player_cells) < 4:
                 return None
             
-            # HTML table displays hands in order: West, North, East, South (visual positions)
-            html_order = ['W', 'N', 'E', 'S']
-            extracted_hands = {}
+            # HTML table displays hands in VISUAL order: W, N, E, S (but we extract as compass N, E, S, W)
+            # CRITICAL: Don't apply any rotation here - just map visual positions to compass
+            # Position 0 (W visually) = West compass position
+            # Position 1 (N visually) = North compass position
+            # Position 2 (E visually) = East compass position
+            # Position 3 (S visually) = South compass position
+            visual_to_compass = {
+                0: 'W',
+                1: 'N', 
+                2: 'E',
+                3: 'S'
+            }
             
             for idx, cell in enumerate(player_cells):
                 if idx >= 4:
                     break
                 
-                position = html_order[idx]
+                compass_pos = visual_to_compass[idx]
                 
                 # Find all img tags with suit images
                 suit_imgs = cell.find_all('img')
@@ -365,9 +374,9 @@ class DataFetcher:
                         next_elem = next_elem.next_sibling
                     
                     if cards:
-                        hands[position][suit] = cards
+                        hands[compass_pos][suit] = cards
             
-            # Convert extracted HTML positions to PBN format
+            # Convert extracted compass positions to PBN format (NO rotation applied)
             for direction in ['N', 'S', 'E', 'W']:
                 spades = hands[direction].get('S', '')
                 hearts = hands[direction].get('H', '')
@@ -379,7 +388,7 @@ class DataFetcher:
                 else:
                     hands[direction] = None
             
-            # Return hands in compass positions
+            # Return hands in RAW compass positions (N=North, E=East, S=South, W=West)
             result = {}
             for direction in ['N', 'S', 'E', 'W']:
                 if hands[direction]:
