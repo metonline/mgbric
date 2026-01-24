@@ -31,10 +31,43 @@ function getVulnerabilityByBoard(boardNum) {
 /**
  * Get CSS color for vulnerability display
  * @param {string} vulnerability - Vulnerability type
- * @returns {string} - Hex color code (always red)
+ * @returns {string} - Hex color code (always red for label)
  */
 function getVulnerabilityColor(vulnerability) {
-    return '#cb0000';  // Red for all vulnerabilities
+    return '#cb0000';  // Red for all vulnerabilities in label
+}
+
+/**
+ * Check if a position is vulnerable based on the vulnerability type
+ * @param {string} position - Position (N, S, E, W)
+ * @param {string} vulnerability - Vulnerability type (None, NS, EW, Both)
+ * @returns {boolean} - True if position is vulnerable
+ */
+function isPositionVulnerable(position, vulnerability) {
+    if (vulnerability === 'None') return false;
+    if (vulnerability === 'Both') return true;
+    if (vulnerability === 'NS') return position === 'N' || position === 'S';
+    if (vulnerability === 'EW') return position === 'E' || position === 'W';
+    return false;
+}
+
+/**
+ * Get background color for a position based on vulnerability and dealer
+ * Dealer gets yellow, vulnerable positions get red, non-vulnerable get white
+ * @param {string} position - Position (N, S, E, W)
+ * @param {string} vulnerability - Vulnerability type
+ * @param {string} dealer - Dealer position
+ * @returns {string} - Hex color code
+ */
+function getPositionBackgroundColor(position, vulnerability, dealer) {
+    if (dealer === position) {
+        return '#ffce00';  // Yellow for dealer (overrides everything)
+    }
+    // Check if this position is vulnerable in their pair
+    if (isPositionVulnerable(position, vulnerability)) {
+        return '#cb0000';  // Red for vulnerable
+    }
+    return '#ffffff';  // White for not vulnerable
 }
 
 /**
@@ -175,14 +208,15 @@ function renderHandDiagram(handData, boardNum, ddResult, optimum, lott) {
     const hcpE = calculateHCP(e);
     const hcpW = calculateHCP(w);
 
-    const nDealerClass = dealer === 'N' ? 'dealer-bg' : '';
-    const sDealerClass = dealer === 'S' ? 'dealer-bg' : '';
-    const eDealerClass = dealer === 'E' ? 'dealer-bg' : '';
-    const wDealerClass = dealer === 'W' ? 'dealer-bg' : '';
-    
-    // Vulnerability styling - color based on vulnerability type (PRESET)
+    // Vulnerability styling - colors based on position and dealer
     const vulColor = getVulnerabilityColor(vul);
     const vulClass = 'vul-' + vul.toLowerCase();
+    
+    // Card header colors: yellow for dealer, vulnerability-based for others
+    const nHeaderBgColor = getPositionBackgroundColor('N', vul, dealer);
+    const sHeaderBgColor = getPositionBackgroundColor('S', vul, dealer);
+    const eHeaderBgColor = getPositionBackgroundColor('E', vul, dealer);
+    const wHeaderBgColor = getPositionBackgroundColor('W', vul, dealer);
 
     const optimumTextColored = optimum && optimum.text ? formatSuitWithColor(optimum.text) : '';
 
@@ -231,7 +265,7 @@ function renderHandDiagram(handData, boardNum, ddResult, optimum, lott) {
                     </div>
                 
                 <!-- North -->
-                <div class="nameRowDivStyle pos-n-name ${nDealerClass}" style="background-color: ${vulColor} !important;">
+                <div class="nameRowDivStyle pos-n-name" style="background-color: ${nHeaderBgColor} !important;">
                     <span class="nameInitial">N</span>
                 </div>
                 <div class="handDivStyle pos-n-hand">
@@ -242,7 +276,7 @@ function renderHandDiagram(handData, boardNum, ddResult, optimum, lott) {
                 </div>
                 
                 <!-- West -->
-                <div class="nameRowDivStyle pos-w-name ${wDealerClass}" style="background-color: ${vulColor} !important;">
+                <div class="nameRowDivStyle pos-w-name" style="background-color: ${wHeaderBgColor} !important;">
                     <span class="nameInitial">W</span>
                 </div>
                 <div class="handDivStyle pos-w-hand">
@@ -256,7 +290,7 @@ function renderHandDiagram(handData, boardNum, ddResult, optimum, lott) {
                 <div class="vulInnerDivStyle pos-board">${boardNum}</div>
                 
                 <!-- East -->
-                <div class="nameRowDivStyle pos-e-name ${eDealerClass}" style="background-color: ${vulColor} !important;">
+                <div class="nameRowDivStyle pos-e-name" style="background-color: ${eHeaderBgColor} !important;">
                     <span class="nameInitial">E</span>
                 </div>
                 <div class="handDivStyle pos-e-hand">
@@ -267,7 +301,7 @@ function renderHandDiagram(handData, boardNum, ddResult, optimum, lott) {
                 </div>
                 
                 <!-- South -->
-                <div class="nameRowDivStyle pos-s-name ${sDealerClass}" style="background-color: ${vulColor} !important;">
+                <div class="nameRowDivStyle pos-s-name" style="background-color: ${sHeaderBgColor} !important;">
                     <span class="nameInitial">S</span>
                 </div>
                 <div class="handDivStyle pos-s-hand">
