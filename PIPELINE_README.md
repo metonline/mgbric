@@ -42,7 +42,11 @@ python automated_pipeline.py
 - Must run AFTER LIN generation
 - Adds `dd_analysis`, `optimum`, and `lott` fields
 
-## Correct Processing Order
+## Data Retention Policy
+
+- **Event Tournament Data:** Fetches from 2020 onwards (complete tournament history)
+- **Hand Data:** Keeps ONLY hands from 2026 onwards (current season)
+- **Rationale:** Maintains event calendar/scores since 2020 but focuses on hands from 2026+
 
 ```
 ┌──────────────────┐

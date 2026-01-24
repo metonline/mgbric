@@ -3,8 +3,9 @@
 Fully automated pipeline for continuous hand data collection and analysis.
 Workflow: Fetch → Generate LIN → Calculate DD Analysis
 
-Handles all events in the registry, not just a fixed date range.
-Can be run repeatedly to add new events as they become available.
+Event Data Policy:
+- Fetches tournament events from 2020 onwards (historical tournament records)
+- But keeps ONLY hands from 2026 onwards (current season data)
 """
 
 import json
