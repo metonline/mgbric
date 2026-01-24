@@ -268,9 +268,11 @@ function renderHandDiagram(handData, boardNum, ddResult, optimum, lott) {
                         <div class="vul ${vulClass}" style="background-color: ${vulColor} !important; color: white !important; font-weight: bold;">Vuln: ${vul}</div>
                     </div>
                     
+                    <!-- Date Display - Right Top Corner -->
+                    <div class="date-header" style="position: absolute; top: 8px; right: 15px; font-weight: bold; color: black; font-size: 15px;">${date}</div>
+                    
                     <!-- HCP Display - Right Side -->
                     <div class="hcp-display">
-                        <div class="date-display" style="text-align: center; font-size: 12px; color: #999; margin-bottom: 8px; font-weight: 500;">${date}</div>
                         <div class="hcp-north"><span class="hcp-value">${hcpN}</span></div>
                         <div class="hcp-middle">
                             <span class="hcp-value">${hcpW}</span>
