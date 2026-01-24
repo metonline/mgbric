@@ -326,7 +326,8 @@ def update_hands_database(hands, results_map):
     """
     updated_count = 0
     for hand in hands:
-        key = f"{hand.get('date')}_{hand.get('board')}"
+        # KEY: Use event_id + board (not date, since multiple events can be on same date)
+        key = f"{hand.get('event_id')}_{hand.get('board')}"
         if key in results_map:
             hand['dd_analysis'] = results_map[key]['dd']
             hand['optimum'] = results_map[key]['optimum']
@@ -417,6 +418,7 @@ def main():
     for i, hand in enumerate(filtered_hands):
         board_num = hand.get('board', i+1)
         date = hand.get('date', 'Unknown')
+        event_id = hand.get('event_id', 'unknown')
         
         print(f"[{i+1}/{len(filtered_hands)}] Board {board_num} ({date})...", end=' ')
         
@@ -450,7 +452,8 @@ def main():
             results.append(result_entry)
             
             # Map'e ekle (dd_result, optimum ve lott birlikte)
-            key = f"{date}_{board_num}"
+            # KEY: Use event_id + board (not date, since multiple events can be on same date)
+            key = f"{event_id}_{board_num}"
             results_map[key] = {'dd': dd_result, 'optimum': optimum, 'lott': lott}
             
             # Verbose modda tabloyu göster
