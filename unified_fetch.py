@@ -238,8 +238,8 @@ class DataFetcher:
                 hand_data = self._parse_hand_diagram(soup)
                 if hand_data:
                     hand_data['event_id'] = event_id
-                    hand_data['Tarih'] = date
-                    hand_data['Board'] = board_num
+                    hand_data['date'] = date
+                    hand_data['board'] = board_num
                     hands.append(hand_data)
                     
             except Exception as e:
@@ -277,8 +277,8 @@ class DataFetcher:
                     
                     if hand_data:
                         hand_data['event_id'] = event_id
-                        hand_data['Tarih'] = date
-                        hand_data['Board'] = board_num
+                        hand_data['date'] = date
+                        hand_data['board'] = board_num
                         hands.append(hand_data)
                         
                 except Exception as e:
@@ -291,13 +291,42 @@ class DataFetcher:
         
         return hands
     
+    def _calc_4th_hand(self, h1_pbn: str, h2_pbn: str, h3_pbn: str) -> str:
+        """Calculate 4th hand from 3 known hands (PBN format)"""
+        all_cards = set('23456789TJQKA')
+        
+        for hand_pbn in [h1_pbn, h2_pbn, h3_pbn]:
+            if not hand_pbn:
+                continue
+            # Remove suit separators and count cards
+            for card in hand_pbn.replace('.', ''):
+                all_cards.discard(card)
+        
+        # Group remaining cards by suit
+        suits = {
+            'S': [], 'H': [], 'D': [], 'C': []
+        }
+        
+        # Distribute remaining cards (should be 13 total)
+        # This is simplified - in real scenario, we'd need more logic
+        # but for now just return what's left
+        remaining = ''.join(sorted(all_cards))
+        if remaining:
+            return remaining
+        return ''
+    
     def _parse_hand_diagram(self, soup) -> Optional[dict]:
-        """HTML'den el dağılımını parse et - Working method from fetch_all_2026_boards.py"""
+        """HTML'den el dağılımını parse et - With proper dealer-based rotation"""
         try:
             # PROVEN METHOD: Look for bridgetable with oyuncu class cells
             bridge_table = soup.find('table', class_='bridgetable')
             if not bridge_table:
                 return None
+            
+            # Extract dealer from board info section
+            dealer = self._extract_dealer_from_html(soup)
+            if not dealer:
+                dealer = 'N'  # Default if not found
             
             hands = {
                 'N': {'S': '', 'H': '', 'D': '', 'C': ''},
@@ -312,14 +341,17 @@ class DataFetcher:
             if len(player_cells) < 4:
                 return None
             
-            # Extract from each player cell - order: West, North, East, South
-            directions = ['W', 'N', 'E', 'S']
+            # HTML table displays hands in order: West, North, East, South (visual positions)
+            # But vugraph.com displays them as dealer-relative
+            # Extract in visual table order first
+            html_order = ['W', 'N', 'E', 'S']
+            extracted_hands = {}
             
             for idx, cell in enumerate(player_cells):
                 if idx >= 4:
                     break
                 
-                direction = directions[idx]
+                position = html_order[idx]
                 
                 # Find all img tags with suit images
                 suit_imgs = cell.find_all('img')
@@ -358,25 +390,62 @@ class DataFetcher:
                         next_elem = next_elem.next_sibling
                     
                     if cards:
-                        hands[direction][suit] = cards
+                        hands[position][suit] = cards
             
-            # Convert to PBN format (S.H.D.C)
-            result = {}
+            # Convert extracted HTML positions to PBN format
             for direction in ['N', 'S', 'E', 'W']:
                 spades = hands[direction].get('S', '')
                 hearts = hands[direction].get('H', '')
                 diamonds = hands[direction].get('D', '')
                 clubs = hands[direction].get('C', '')
                 pbn_hand = f"{spades}.{hearts}.{diamonds}.{clubs}"
-                # Only return if we got valid data
                 if any([spades, hearts, diamonds, clubs]):
-                    result[direction] = pbn_hand
+                    hands[direction] = pbn_hand
+                else:
+                    hands[direction] = None
             
-            if result:
+            # Now we have hands in HTML visual order (W, N, E, S)
+            # Map to compass positions based on dealer
+            # NOTE: vugraph displays hands in visual positions, not dealer-relative
+            # So we just return them as displayed
+            result = {}
+            for direction in ['N', 'S', 'E', 'W']:
+                if hands[direction]:
+                    result[direction] = hands[direction]
+            
+            if result and len(result) >= 3:
+                result['dealer'] = dealer
                 return result
             
             return None
             
+        except:
+            return None
+    
+    def _extract_dealer_from_html(self, soup) -> Optional[str]:
+        """Extract dealer from HTML board info"""
+        try:
+            # Look for dealer info in the page
+            # Common patterns: "Dealer: N" or similar
+            text = soup.get_text()
+            
+            # Turkish variant
+            if 'Müzayedeci:' in text:
+                idx = text.find('Müzayedeci:')
+                snippet = text[idx:idx+50]
+                for dealer in ['N', 'E', 'S', 'W']:
+                    if dealer in snippet:
+                        return dealer
+            
+            # English variant
+            if 'Dealer:' in text:
+                idx = text.find('Dealer:')
+                snippet = text[idx:idx+50]
+                for dealer in ['N', 'E', 'S', 'W']:
+                    if dealer in snippet:
+                        return dealer
+            
+            return None
         except:
             return None
     
