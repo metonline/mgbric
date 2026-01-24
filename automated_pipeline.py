@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
 Fully automated pipeline for continuous hand data collection and analysis.
 Workflow: Fetch → Generate LIN → Calculate DD Analysis
 
 Event Data Policy:
-- Fetches tournament events from 2020 onwards (historical tournament records)
-- But keeps ONLY hands from 2026 onwards (current season data)
+- Fetches tournament events from 2026 onwards ONLY (no historical data)
+- All hands are from 2026 or later
 """
 
 import json
@@ -14,16 +15,31 @@ import sys
 from pathlib import Path
 from unified_fetch import DataFetcher, EventRegistry
 
+def is_event_2026_or_later(date_str):
+    """Check if event date is from 2026 or later"""
+    if not date_str or date_str == 'unknown':
+        return False
+    try:
+        parts = date_str.split('.')
+        if len(parts) == 3:
+            year = int(parts[2])
+            return year >= 2026
+    except:
+        return False
+    return False
+
 def get_available_events():
-    """Get all events from registry that we should fetch"""
+    """Get all events from 2026 onwards that we should fetch"""
     registry = EventRegistry()
     
-    # Get all event IDs from registry
-    all_events = []
-    if hasattr(registry, 'events'):
-        all_events = list(registry.events.keys())
+    # Get all event IDs from registry, filter to 2026+ only
+    all_events_dict = registry.get_all_events()  # Returns {date: event_id}
+    all_event_ids = [
+        int(e) for date_str, e in all_events_dict.items() 
+        if str(e).isdigit() and is_event_2026_or_later(date_str)
+    ]
     
-    return sorted([int(e) for e in all_events if e.isdigit()])
+    return sorted(all_event_ids)
 
 def get_unfetched_events(fetched_event_ids):
     """Get events that haven't been fetched yet"""
@@ -71,6 +87,8 @@ def main():
     
     if unfetched:
         print(f"   Events: {unfetched[:10]}{'...' if len(unfetched) > 10 else ''}")
+    elif len(all_events) > 0:
+        print(f"   ✅ No new events - all {len(all_events)} events already processed!")
     
     # Pipeline steps
     steps = [
