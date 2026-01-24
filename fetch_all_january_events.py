@@ -1,27 +1,37 @@
 #!/usr/bin/env python3
-"""Fetch all hands from January 2026 events using the existing unified_fetch infrastructure"""
+"""Fetch all hands from all available events in the registry"""
 
 import json
 import time
-from unified_fetch import DataFetcher
+from unified_fetch import DataFetcher, EventRegistry
 
-# All 23 January 2026 events
-EVENTS = [
-    404155, 404197, 404275, 404377, 404426, 404498, 404562, 404628,
-    404691, 404854, 404821, 404876, 405128, 405007, 405061, 405123,
-    405204, 405278, 405315, 405376, 405445, 405535, 405596,
-]
+def get_events_to_fetch():
+    """Get all events from registry that need hands fetched"""
+    fetcher = DataFetcher()
+    registry = EventRegistry()
+    
+    # Get all event IDs from registry
+    all_events = []
+    if hasattr(registry, 'events'):
+        all_events = [int(e) for e in registry.events.keys() if str(e).isdigit()]
+    
+    # Get events already in database
+    fetched_events = set(str(h.get('event_id')) for h in fetcher.hands)
+    
+    # Return events not yet fetched, sorted
+    unfetched = [e for e in all_events if str(e) not in fetched_events]
+    return sorted(unfetched), fetcher
 
 def main():
-    fetcher = DataFetcher()
+    events, fetcher = get_events_to_fetch()
     
     initial_count = len(fetcher.hands)
-    print(f"Fetching hands from {len(EVENTS)} January 2026 events...")
+    print(f"Fetching hands from {len(events)} available events...")
     print(f"Starting with: {initial_count} hands\n")
     
     total_added = 0
     
-    for idx, event_id in enumerate(EVENTS, 1):
+    for idx, event_id in enumerate(events, 1):
         try:
             start = time.time()
             
@@ -44,14 +54,14 @@ def main():
             total_added += new_count
             
             status = f"✓ {len(hands)} hands, +{new_count} new"
-            print(f"[{idx:2d}/{len(EVENTS)}] Event {event_id}: {status} ({elapsed:.1f}s)")
+            print(f"[{idx:3d}/{len(events)}] Event {event_id}: {status} ({elapsed:.1f}s)")
             
             # Save after each event to preserve progress
             with open('hands_database.json', 'w', encoding='utf-8') as f:
                 json.dump(fetcher.hands, f, ensure_ascii=False, indent=2)
                 
         except Exception as e:
-            print(f"[{idx:2d}/{len(EVENTS)}] Event {event_id}: ✗ Error: {e}")
+            print(f"[{idx:3d}/{len(events)}] Event {event_id}: ✗ Error: {e}")
             continue
     
     final_count = len(fetcher.hands)
