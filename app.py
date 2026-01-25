@@ -883,6 +883,60 @@ def pair_board_ranking():
         traceback.print_exc()
         return jsonify({'error': str(e)}), 500
 
+
+@app.route('/api/hands-database', methods=['GET'])
+def api_hands_database():
+    """API endpoint to get hands database"""
+    try:
+        hands_db_path = Path(__file__).parent / 'hands_database.json'
+        if hands_db_path.exists():
+            with open(hands_db_path, 'r', encoding='utf-8') as f:
+                hands = json.load(f)
+            return jsonify(hands)
+        else:
+            return jsonify({'error': 'Hands database not found'}), 404
+    except Exception as e:
+        print(f"Error loading hands database: {e}")
+        return jsonify({'error': str(e)}), 500
+
+
+@app.route('/api/board-results', methods=['GET'])
+def api_board_results():
+    """API endpoint to get board results (rankings)"""
+    try:
+        event_id = request.args.get('event')
+        board_num = request.args.get('board')
+        
+        board_results_path = Path(__file__).parent / 'board_results.json'
+        if board_results_path.exists():
+            with open(board_results_path, 'r', encoding='utf-8') as f:
+                data = json.load(f)
+            
+            # If specific board requested, return just that board's results
+            if event_id and board_num:
+                board_key = f"{event_id}_{board_num}"
+                board_data = data.get('boards', {}).get(board_key)
+                if board_data:
+                    return jsonify({
+                        'event': event_id,
+                        'board': int(board_num),
+                        'results': board_data.get('results', [])
+                    })
+                else:
+                    return jsonify({
+                        'event': event_id,
+                        'board': int(board_num),
+                        'results': []
+                    }), 200
+            
+            # Otherwise return all boards
+            return jsonify(data)
+        else:
+            return jsonify({'boards': {}}), 200
+    except Exception as e:
+        print(f"Error loading board results: {e}")
+        return jsonify({'error': str(e)}), 500
+
 @app.errorhandler(404)
 def not_found(e):
     return safe_send_file('index.html')
