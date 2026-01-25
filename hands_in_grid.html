@@ -248,12 +248,14 @@
             padding: 0;
             overflow: visible;
             width: 100%;
+            min-height: 475px;
         }
         
         /* Scale wrapper for mobile - proper spacing management */
         .scale-wrapper {
             display: inline-block;
             transform-origin: top center;
+            width: 500px;
         }
         
         /* Desktop: normal size */
@@ -268,7 +270,9 @@
         @media (max-width: 768px) {
             .scale-wrapper {
                 transform: scale(0.64);
+                transform-origin: top center;
                 margin-bottom: -105px;
+                width: 500px;
             }
         }
         
@@ -276,7 +280,9 @@
         @media (max-width: 480px) {
             .scale-wrapper {
                 transform: scale(0.56);
+                transform-origin: top center;
                 margin-bottom: -95px;
+                width: 500px;
             }
         }
         
