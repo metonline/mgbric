@@ -189,10 +189,10 @@
         }
         
         /* GRID LAYOUT */
-        /* Desktop: 2 columns */
+        /* Desktop: 3 columns */
         .hands-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(3, 1fr);
             gap: 12px;
             margin-bottom: 20px;
             padding: 0;
@@ -253,27 +253,27 @@
             
             .scale-wrapper {
                 transform: scale(0.88);
-                transform-origin: top left;
-                margin: 0 0 -60px 0;
-                width: 113.6vw;
+                transform-origin: top center;
+                margin: 0 auto;
+                width: 500px;
             }
         }
         
         @media (max-width: 480px) {
             .scale-wrapper {
                 transform: scale(0.76);
-                transform-origin: top left;
-                margin: 0 0 -115px 0;
-                width: 131.6vw;
+                transform-origin: top center;
+                margin: 0 auto;
+                width: 500px;
             }
         }
         
         @media (max-width: 380px) {
             .scale-wrapper {
                 transform: scale(0.68);
-                transform-origin: top left;
-                margin: 0 0 -150px 0;
-                width: 147.1vw;
+                transform-origin: top center;
+                margin: 0 auto;
+                width: 500px;
             }
         }
         
