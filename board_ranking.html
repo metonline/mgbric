@@ -1081,7 +1081,7 @@
             
             // 2. Sonra ranking listesini yükle (yavaş)
             try {
-                const response = await fetch(`/api/board-ranking?event=${eventId}&board=${boardNum}`);
+                const response = await fetch(`/api/board-results?event=${eventId}&board=${boardNum}`);
                 const data = await response.json();
                 
                 if (data.error) {
@@ -1100,14 +1100,10 @@
                     return;
                 }
                 
-                // Update tournament info
-                document.getElementById('tournamentInfo').textContent = 
-                    `${data.tournament_name || 'Turnuva'} - ${data.tournament_date || ''}`;
-                
                 // Hand Diagram (DD ve LoTT dahil)
                 let html = renderHandDiagram(
-                    handResult ? handResult.hand_data : data.hand_data, 
-                    data.board,
+                    handResult ? handResult.hand_data : {}, 
+                    data.board || currentBoard,
                     handResult ? handResult.dd_result : null,
                     handResult ? handResult.optimum : null,
                     handResult ? handResult.lott : null
@@ -1143,28 +1139,23 @@
                 `;
                 
                 for (const r of data.results) {
-                    const rowClass = r.direction === 'NS' ? 'ns-row' : 'ew-row';
                     const rankClass = r.rank <= 3 ? `rank-${r.rank}` : '';
-                    const dirBadge = `<span class="direction-badge direction-${r.direction.toLowerCase()}">${r.direction}</span>`;
                     
                     const score = String(r.score || '');
                     const displayScore = score.startsWith('-') ? score.substring(1) : score;
                     
-                    // Kontrat + Deklaran
-                    const contractDisplay = r.contract ? `${formatContract(r.contract)} ${r.declarer}` : '-';
-                    
-                    // Yüzde rengi: >= 50 yeşil, < 50 kırmızı
-                    const percentClass = r.percent >= 50 ? 'percent-high' : 'percent-low';
+                    // Kontrat
+                    const contractDisplay = r.contract ? formatContract(r.contract) : '-';
                     
                     html += `
-                        <tr class="${rowClass}">
+                        <tr>
                             <td class="rank-cell ${rankClass}">${r.rank}</td>
-                            <td class="player-cell">${r.pair_names}${dirBadge}</td>
+                            <td class="player-cell">${r.pair_names || '-'}</td>
                             <td class="contract-cell">${contractDisplay}</td>
-                            <td>${formatLead(r.lead)}</td>
+                            <td>${formatLead(r.lead) || '-'}</td>
                             <td>${r.result || '='}</td>
                             <td class="score-cell">${displayScore || '-'}</td>
-                            <td class="percent-cell ${percentClass}">${r.percent.toFixed(2)}%</td>
+                            <td class="percent-cell">${r.percent ? r.percent.toFixed(2) : '0.00'}%</td>
                         </tr>
                     `;
                 }
