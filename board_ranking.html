@@ -1081,7 +1081,9 @@
             
             // 2. Sonra ranking listesini yükle (yavaş)
             try {
+                console.log('Starting board-results fetch for:', eventId, boardNum);
                 const response = await fetch(`/api/board-results?event=${eventId}&board=${boardNum}`);
+                console.log('Fetch response status:', response.status);
                 const data = await response.json();
                 
                 console.log('Board results response:', data);
@@ -1089,6 +1091,7 @@
                 console.log('Results length:', data.results ? data.results.length : 'null');
                 
                 if (data.error) {
+                    console.error('API error:', data.error);
                     // Hata durumunda sadece el diyagramını göster
                     if (handResult && handResult.hand_data) {
                         content.innerHTML = renderHandDiagram(
@@ -1173,6 +1176,7 @@
                 
             } catch (error) {
                 console.error('Board results error:', error);
+                console.error('Error stack:', error.stack);
                 content.innerHTML = `<div class="error">Bağlantı hatası: ${error.message}</div>`;
             } finally {
                 if (loadBtn) loadBtn.disabled = false;
