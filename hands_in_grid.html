@@ -194,8 +194,10 @@
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 12px;
-            margin-bottom: 20px;
+            margin: 0 auto 20px auto;
             padding: 0;
+            max-width: 1600px;
+            justify-items: center;
         }
         
         /* Tablet: 2 columns */
@@ -211,17 +213,16 @@
             .hands-grid {
                 grid-template-columns: 1fr;
                 gap: 8px;
-                margin-bottom: 0;
+                margin: 0;
                 padding: 0;
                 width: 100%;
+                justify-items: center;
             }
         }
         
         /* ===== BBO STYLE HAND DIAGRAM ===== */
         .hand-diagram-container {
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
+            display: block;
             margin: 0;
             padding: 0;
             overflow: visible;
@@ -246,34 +247,32 @@
         
         /* Mobile: scale to fit width with minimal padding */
         @media (max-width: 768px) {
-            .hand-diagram-container {
-                padding: 0;
-                margin: 0;
-            }
-            
             .scale-wrapper {
                 transform: scale(0.88);
-                transform-origin: top center;
+                transform-origin: center center;
                 margin: 0 auto;
                 width: 500px;
+                display: block;
             }
         }
         
         @media (max-width: 480px) {
             .scale-wrapper {
                 transform: scale(0.76);
-                transform-origin: top center;
+                transform-origin: center center;
                 margin: 0 auto;
                 width: 500px;
+                display: block;
             }
         }
         
         @media (max-width: 380px) {
             .scale-wrapper {
                 transform: scale(0.68);
-                transform-origin: top center;
+                transform-origin: center center;
                 margin: 0 auto;
                 width: 500px;
+                display: block;
             }
         }
         
