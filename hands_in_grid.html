@@ -241,9 +241,8 @@
         
         /* ===== BBO STYLE HAND DIAGRAM ===== */
         .hand-diagram-container {
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
+            display: grid;
+            place-items: start center;
             margin: 0;
             padding: 0;
             overflow: visible;
@@ -253,9 +252,10 @@
         
         /* Scale wrapper for mobile - proper spacing management */
         .scale-wrapper {
-            display: inline-block;
+            display: block;
             transform-origin: top center;
             width: 500px;
+            margin: 0 auto;
         }
         
         /* Desktop: normal size */
