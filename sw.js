@@ -1,5 +1,5 @@
 // Service Worker - Offline support and caching
-const CACHE_NAME = 'hosgoru-v12';
+const CACHE_NAME = 'hosgoru-v14';
 const urlsToCache = [
   '/',
   '/index.html',
@@ -46,11 +46,14 @@ self.addEventListener('fetch', event => {
   // GET istekleri için network-first stratejisi
   if (event.request.method === 'GET') {
     // JSON files and grid view ASLA cache'lenmesin - her zaman network'ten al
+    // Also exclude all API endpoints from caching
     if (event.request.url.includes('database.json') || 
         event.request.url.includes('database_temp.json') ||
         event.request.url.includes('hands_database.json') ||
         event.request.url.includes('board_results.json') ||
-        event.request.url.includes('boards_grid_view.html')) {
+        event.request.url.includes('boards_grid_view.html') ||
+        event.request.url.includes('board_ranking.html') ||
+        event.request.url.includes('/api/')) {
       event.respondWith(
         fetch(event.request)
           .catch(() => {

@@ -980,3 +980,93 @@ Traceback (most recent call last):
 PermissionError: [Errno 13] Permission denied: 'C:\\Users\\metin\\Desktop\\BRIC\\complete_update_log.txt'
 [Cum 23.01.2026 23:55:02,54] Update completed 
  
+[Paz 25.01.2026 16:00:01,99] Starting BRIC Complete Update 
+[2026-01-25 16:00:02] [INFO] ============================================================
+Traceback (most recent call last):
+  File "C:\Users\metin\Desktop\BRIC\complete_update.py", line 604, in <module>
+    run_complete_update()
+    ~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\metin\Desktop\BRIC\complete_update.py", line 464, in run_complete_update
+    log_section("BRIC COMPLETE DATA UPDATE")
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\metin\Desktop\BRIC\complete_update.py", line 60, in log_section
+    log("=" * 60)
+    ~~~^^^^^^^^^^
+  File "C:\Users\metin\Desktop\BRIC\complete_update.py", line 56, in log
+    with open(LOG_FILE, 'a', encoding='utf-8') as f:
+         ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+PermissionError: [Errno 13] Permission denied: 'C:\\Users\\metin\\Desktop\\BRIC\\complete_update_log.txt'
+[Paz 25.01.2026 16:00:02,55] Update completed 
+ 
+[Paz 25.01.2026 17:49:47,22] Starting BRIC Complete Update 
+[2026-01-25 17:49:48] [INFO] ============================================================
+Traceback (most recent call last):
+  File "C:\Users\metin\Desktop\BRIC\complete_update.py", line 604, in <module>
+    run_complete_update()
+    ~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\metin\Desktop\BRIC\complete_update.py", line 464, in run_complete_update
+    log_section("BRIC COMPLETE DATA UPDATE")
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\metin\Desktop\BRIC\complete_update.py", line 60, in log_section
+    log("=" * 60)
+    ~~~^^^^^^^^^^
+  File "C:\Users\metin\Desktop\BRIC\complete_update.py", line 56, in log
+    with open(LOG_FILE, 'a', encoding='utf-8') as f:
+         ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+PermissionError: [Errno 13] Permission denied: 'C:\\Users\\metin\\Desktop\\BRIC\\complete_update_log.txt'
+[Paz 25.01.2026 17:49:48,17] Update completed 
+ 
+[Paz 25.01.2026 17:50:01,88] Starting BRIC Complete Update 
+[2026-01-25 17:50:02] [INFO] ============================================================
+Traceback (most recent call last):
+  File "C:\Users\metin\Desktop\BRIC\complete_update.py", line 604, in <module>
+    run_complete_update()
+    ~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\metin\Desktop\BRIC\complete_update.py", line 464, in run_complete_update
+    log_section("BRIC COMPLETE DATA UPDATE")
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\metin\Desktop\BRIC\complete_update.py", line 60, in log_section
+    log("=" * 60)
+    ~~~^^^^^^^^^^
+  File "C:\Users\metin\Desktop\BRIC\complete_update.py", line 56, in log
+    with open(LOG_FILE, 'a', encoding='utf-8') as f:
+         ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+PermissionError: [Errno 13] Permission denied: 'C:\\Users\\metin\\Desktop\\BRIC\\complete_update_log.txt'
+[Paz 25.01.2026 17:50:02,19] Update completed 
+ 
+[Paz 25.01.2026 17:55:01,61] Starting BRIC Complete Update 
+[2026-01-25 17:55:01] [INFO] ============================================================
+Traceback (most recent call last):
+  File "C:\Users\metin\Desktop\BRIC\complete_update.py", line 604, in <module>
+    run_complete_update()
+    ~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\metin\Desktop\BRIC\complete_update.py", line 464, in run_complete_update
+    log_section("BRIC COMPLETE DATA UPDATE")
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\metin\Desktop\BRIC\complete_update.py", line 60, in log_section
+    log("=" * 60)
+    ~~~^^^^^^^^^^
+  File "C:\Users\metin\Desktop\BRIC\complete_update.py", line 56, in log
+    with open(LOG_FILE, 'a', encoding='utf-8') as f:
+         ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+PermissionError: [Errno 13] Permission denied: 'C:\\Users\\metin\\Desktop\\BRIC\\complete_update_log.txt'
+[Paz 25.01.2026 17:55:01,93] Update completed 
+ 
+[Paz 25.01.2026 18:00:01,60] Starting BRIC Complete Update 
+[2026-01-25 18:00:01] [INFO] ============================================================
+Traceback (most recent call last):
+  File "C:\Users\metin\Desktop\BRIC\complete_update.py", line 604, in <module>
+    run_complete_update()
+    ~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\metin\Desktop\BRIC\complete_update.py", line 464, in run_complete_update
+    log_section("BRIC COMPLETE DATA UPDATE")
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\metin\Desktop\BRIC\complete_update.py", line 60, in log_section
+    log("=" * 60)
+    ~~~^^^^^^^^^^
+  File "C:\Users\metin\Desktop\BRIC\complete_update.py", line 56, in log
+    with open(LOG_FILE, 'a', encoding='utf-8') as f:
+         ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+PermissionError: [Errno 13] Permission denied: 'C:\\Users\\metin\\Desktop\\BRIC\\complete_update_log.txt'
+[Paz 25.01.2026 18:00:01,91] Update completed 
+ 

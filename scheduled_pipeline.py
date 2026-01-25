@@ -282,7 +282,19 @@ class ScheduledPipeline:
             
             result['retry_attempts'] = retry_count
             
-            # 5. Sonuç
+            # 5. Board rankings otomatik olarak generate et
+            logger.info("\n🏆 Board rankings otomatik olarak generate ediliyor...")
+            try:
+                from generate_board_rankings import BoardRankingsGenerator
+                generator = BoardRankingsGenerator()
+                if generator.generate_all():
+                    logger.info("✅ Board rankings başarılı şekilde generate edildi")
+                else:
+                    logger.warning("⚠️  Board rankings generate edilirken hata")
+            except Exception as e:
+                logger.warning(f"⚠️  Board rankings hatası: {e}")
+            
+            # 6. Sonuç
             logger.info(f"\n✅ Quick update tamamlandı: {result['boards_fetched']} board çekildi ({retry_count} deneme)")
             
         except Exception as e:
@@ -515,6 +527,18 @@ class ScheduledPipeline:
             
             result['retry_attempts'] = retry_count
             
+            # 6. Board rankings otomatik olarak generate et
+            logger.info("\n🏆 Board rankings otomatik olarak generate ediliyor...")
+            try:
+                from generate_board_rankings import BoardRankingsGenerator
+                generator = BoardRankingsGenerator()
+                if generator.generate_all():
+                    logger.info("✅ Board rankings başarılı şekilde generate edildi")
+                else:
+                    logger.warning("⚠️  Board rankings generate edilirken hata")
+            except Exception as e:
+                logger.warning(f"⚠️  Board rankings hatası: {e}")
+            
             logger.info(f"\n✅ Full update tamamlandı: {result['boards_fetched']} board çekildi ({retry_count} deneme)")
             
         except Exception as e:
@@ -687,7 +711,7 @@ def main():
     parser = argparse.ArgumentParser(description='Scheduled Pipeline')
     parser.add_argument('--quick', action='store_true', help='Hızlı güncelleme')
     parser.add_argument('--full', action='store_true', help='Tam güncelleme')
-    parser.add_argument('--rankings', action='store_true', help='Sadece sıralama verileri')
+    parser.add_argument('--rankings', action='store_true', help='Sadece board rankings generate et')
     parser.add_argument('--daemon', action='store_true', help='Daemon modu')
     parser.add_argument('--interval', type=int, default=30, help='Daemon aralığı (dakika)')
     parser.add_argument('--status', action='store_true', help='Durum göster')
@@ -698,6 +722,19 @@ def main():
     
     if args.status:
         print(pipeline.get_status_summary())
+        return
+    
+    if args.rankings:
+        logger.info("Board rankings generate ediliyor...")
+        try:
+            from generate_board_rankings import BoardRankingsGenerator
+            generator = BoardRankingsGenerator()
+            if generator.generate_all():
+                logger.info("✅ Board rankings başarılı şekilde generate edildi")
+            else:
+                logger.error("❌ Board rankings generate edilirken hata")
+        except Exception as e:
+            logger.error(f"❌ Board rankings hatası: {e}")
         return
     
     if args.daemon:
