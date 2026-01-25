@@ -1084,6 +1084,10 @@
                 const response = await fetch(`/api/board-results?event=${eventId}&board=${boardNum}`);
                 const data = await response.json();
                 
+                console.log('Board results response:', data);
+                console.log('Results array:', data.results);
+                console.log('Results length:', data.results ? data.results.length : 'null');
+                
                 if (data.error) {
                     // Hata durumunda sadece el diyagramını göster
                     if (handResult && handResult.hand_data) {
@@ -1111,6 +1115,7 @@
                 
                 // Sıralama verisi yoksa mesaj göster
                 if (!data.results || data.results.length === 0) {
+                    console.log('No results found, showing empty state');
                     html += `
                         <div class="error" style="background: rgba(255,165,0,0.1); color: #ffa500; margin-top: 15px;">
                             ⏳ Bu board için sıralama verisi henüz yüklenmedi.<br>
@@ -1122,6 +1127,7 @@
                 }
                 
                 // Build results table
+                console.log('Building results table for', data.results.length, 'results');
                 html += `
                     <table class="results-table">
                         <thead>
@@ -1162,9 +1168,11 @@
                 
                 html += '</tbody></table>';
                 
+                console.log('Setting content HTML');
                 content.innerHTML = html;
                 
             } catch (error) {
+                console.error('Board results error:', error);
                 content.innerHTML = `<div class="error">Bağlantı hatası: ${error.message}</div>`;
             } finally {
                 if (loadBtn) loadBtn.disabled = false;
