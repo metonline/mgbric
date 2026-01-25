@@ -721,7 +721,14 @@
                 
                 const database = await response.json();
                 document.getElementById('loading').style.display = 'none';
-                document.getElementById('filter-section').style.display = 'flex';
+                
+                // Only show filter on desktop (>768px)
+                const filterSection = document.getElementById('filter-section');
+                if (window.innerWidth > 768) {
+                    filterSection.style.display = 'flex';
+                } else {
+                    filterSection.style.display = 'none';
+                }
 
                 allHands = database;
 
