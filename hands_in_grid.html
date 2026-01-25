@@ -227,21 +227,51 @@
         }
         
         /* Responsive sizing for hand diagrams */
-        @media (max-width: 768px) {
+        @media (max-width: 900px) {
             .mainDivStyle {
                 width: 100%;
                 max-width: 500px;
                 height: auto;
                 aspect-ratio: 500/475;
+                font-size: 0.9em;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .mainDivStyle {
+                width: 100%;
+                max-width: 450px;
+                aspect-ratio: 500/475;
+                font-size: 0.8em;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .mainDivStyle {
+                width: 100%;
+                max-width: 380px;
+                aspect-ratio: 500/475;
+                font-size: 0.7em;
             }
         }
         
         @media (max-width: 480px) {
             .mainDivStyle {
                 width: 100%;
-                max-width: 420px;
+                max-width: 350px;
                 aspect-ratio: 500/475;
+                font-size: 0.65em;
             }
+        }
+        
+        /* Scale all absolute positioned elements */
+        .mainDivStyle .handDivStyle,
+        .mainDivStyle .nameRowDivStyle,
+        .mainDivStyle .vulInnerDivStyle,
+        .mainDivStyle .board-info-left,
+        .mainDivStyle .hcp-display {
+            transform: scale(var(--scale, 1));
+            transform-origin: left top;
         }
         
         .handDivStyle {
@@ -252,12 +282,52 @@
             font-size: 22px;
         }
         
+        @media (max-width: 768px) {
+            .handDivStyle {
+                width: 160px;
+                height: 124px;
+                font-size: 18px;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .handDivStyle {
+                width: 140px;
+                height: 110px;
+                font-size: 16px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .handDivStyle {
+                width: 120px;
+                height: 95px;
+                font-size: 14px;
+            }
+        }
+        
         .suitRowDivStyle {
             position: relative;
             height: 25px;
             line-height: 25px;
             white-space: nowrap;
             padding-left: 5px;
+        }
+        
+        @media (max-width: 768px) {
+            .suitRowDivStyle {
+                height: 22px;
+                line-height: 22px;
+                padding-left: 4px;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .suitRowDivStyle {
+                height: 20px;
+                line-height: 20px;
+                padding-left: 3px;
+            }
         }
         
         .suitSymbol {
@@ -268,12 +338,54 @@
             vertical-align: middle;
         }
         
+        @media (max-width: 768px) {
+            .suitSymbol {
+                width: 26px;
+                font-size: 26px;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .suitSymbol {
+                width: 22px;
+                font-size: 22px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .suitSymbol {
+                width: 18px;
+                font-size: 18px;
+            }
+        }
+        
         .suitHolding {
             display: inline-block;
             font-size: 22px;
             letter-spacing: 2px;
             vertical-align: middle;
             color: #000;
+        }
+        
+        @media (max-width: 768px) {
+            .suitHolding {
+                font-size: 18px;
+                letter-spacing: 1px;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .suitHolding {
+                font-size: 16px;
+                letter-spacing: 0.5px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .suitHolding {
+                font-size: 13px;
+                letter-spacing: 0.3px;
+            }
         }
         
         .nameRowDivStyle {
@@ -287,6 +399,30 @@
             background: white;
         }
         
+        @media (max-width: 768px) {
+            .nameRowDivStyle {
+                height: 26px;
+                line-height: 26px;
+                font-size: 16px;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .nameRowDivStyle {
+                height: 23px;
+                line-height: 23px;
+                font-size: 14px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .nameRowDivStyle {
+                height: 20px;
+                line-height: 20px;
+                font-size: 12px;
+            }
+        }
+        
         .nameInitial {
             display: inline-block;
             width: 30px;
@@ -294,6 +430,27 @@
             font-weight: bold;
             color: #000;
             font-size: 16px;
+        }
+        
+        @media (max-width: 768px) {
+            .nameInitial {
+                width: 26px;
+                font-size: 14px;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .nameInitial {
+                width: 23px;
+                font-size: 12px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .nameInitial {
+                width: 20px;
+                font-size: 10px;
+            }
         }
         
         .vulInnerDivStyle {
@@ -308,6 +465,36 @@
             line-height: 54px;
         }
         
+        @media (max-width: 768px) {
+            .vulInnerDivStyle {
+                font-size: 36px;
+                width: 52px;
+                height: 52px;
+                line-height: 47px;
+                border: 2px solid #880000;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .vulInnerDivStyle {
+                font-size: 30px;
+                width: 46px;
+                height: 46px;
+                line-height: 42px;
+                border: 2px solid #880000;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .vulInnerDivStyle {
+                font-size: 24px;
+                width: 40px;
+                height: 40px;
+                line-height: 36px;
+                border: 1.5px solid #880000;
+            }
+        }
+        
         .dealer-bg { background: #ffce00 !important; color: black !important; }
         .vul-bg { background: #cb0000 !important; color: white !important; }
         
@@ -320,6 +507,29 @@
         .pos-e-hand { left: 335px; top: 190px; }
         .pos-s-name { left: 170px; top: 315px; width: 160px; }
         .pos-s-hand { left: 170px; top: 345px; }
+        
+        @media (max-width: 768px) {
+            .pos-n-name { left: 15%; top: 1%; width: 70%; }
+            .pos-n-hand { left: 15%; top: 8%; }
+            .pos-w-name { left: 1%; top: 33%; width: 32%; }
+            .pos-w-hand { left: 1%; top: 40%; }
+            .pos-e-name { left: 67%; top: 33%; width: 32%; }
+            .pos-e-hand { left: 67%; top: 40%; }
+            .pos-s-name { left: 15%; top: 66%; width: 70%; }
+            .pos-s-hand { left: 15%; top: 73%; }
+        }
+        
+        @media (max-width: 600px) {
+            .pos-n-name { left: 15%; top: 2%; width: 70%; }
+            .pos-n-hand { left: 15%; top: 9%; }
+            .pos-w-name { left: 2%; top: 34%; width: 31%; }
+            .pos-w-hand { left: 2%; top: 41%; }
+            .pos-e-name { left: 67%; top: 34%; width: 31%; }
+            .pos-e-hand { left: 67%; top: 41%; }
+            .pos-s-name { left: 15%; top: 65%; width: 70%; }
+            .pos-s-hand { left: 15%; top: 72%; }
+        }
+        
         .pos-board { 
             left: 220px; 
             top: 215px;
@@ -337,6 +547,42 @@
             line-height: 60px;
         }
         
+        @media (max-width: 768px) {
+            .pos-board {
+                left: 42%;
+                top: 45%;
+                width: 52px;
+                height: 52px;
+                font-size: 24px !important;
+                line-height: 52px;
+                border: 2px solid #333 !important;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .pos-board {
+                left: 42%;
+                top: 46%;
+                width: 46px;
+                height: 46px;
+                font-size: 20px !important;
+                line-height: 46px;
+                border: 2px solid #333 !important;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .pos-board {
+                left: 42%;
+                top: 47%;
+                width: 40px;
+                height: 40px;
+                font-size: 16px !important;
+                line-height: 40px;
+                border: 1.5px solid #333 !important;
+            }
+        }
+        
         /* Board Info - Left Side */
         .board-info-left {
             position: absolute;
@@ -346,6 +592,33 @@
             color: #333;
             line-height: 1.6;
             text-align: left;
+        }
+        
+        @media (max-width: 768px) {
+            .board-info-left {
+                font-size: 13px;
+                left: 6px;
+                top: 6px;
+                line-height: 1.4;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .board-info-left {
+                font-size: 11px;
+                left: 5px;
+                top: 5px;
+                line-height: 1.3;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .board-info-left {
+                font-size: 9px;
+                left: 4px;
+                top: 4px;
+                line-height: 1.2;
+            }
         }
         
         .board-info-left .date {
@@ -386,6 +659,33 @@
             text-align: center;
         }
         
+        @media (max-width: 768px) {
+            .hcp-display {
+                left: 67%;
+                top: 8%;
+                width: 32%;
+                font-size: 14px;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .hcp-display {
+                left: 67%;
+                top: 9%;
+                width: 31%;
+                font-size: 12px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hcp-display {
+                left: 65%;
+                top: 10%;
+                width: 33%;
+                font-size: 10px;
+            }
+        }
+        
         .hcp-display .hcp-north {
             text-align: center;
             font-weight: bold;
@@ -397,11 +697,24 @@
             margin-top: 10px;
         }
         
+        @media (max-width: 600px) {
+            .hcp-display .hcp-south {
+                margin-top: 5px;
+            }
+        }
+        
         .hcp-display .hcp-middle {
             display: flex;
             justify-content: space-between;
             padding: 8px 20px;
             margin-top: 5px;
+        }
+        
+        @media (max-width: 600px) {
+            .hcp-display .hcp-middle {
+                padding: 5px 10px;
+                margin-top: 3px;
+            }
         }
         
         .hcp-display .hcp-value {
@@ -410,20 +723,44 @@
             font-size: 18px;
         }
         
+        @media (max-width: 768px) {
+            .hcp-display .hcp-value {
+                font-size: 16px;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .hcp-display .hcp-value {
+                font-size: 14px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hcp-display .hcp-value {
+                font-size: 12px;
+            }
+        }
+        
         /* DD Table - BBO Style */
         .bhDoubleDummy {
-            position: absolute;
+            position: relative;
             padding: 5px 3px;
             border: none;
-            background: #c0c1c0;
+            background: transparent;
             font-size: 10px;
             width: auto;
             min-width: 150px;
-            left: 1px;
-            bottom: 5px;
             color: #000;
-            transform: scale(1);
-            transform-origin: bottom left;
+            margin-top: 10px;
+            margin-bottom: 5px;
+        }
+        
+        @media (max-width: 768px) {
+            .bhDoubleDummy {
+                font-size: 9px;
+                padding: 3px 2px;
+                margin-top: 8px;
+            }
         }
         
         .bh-dd {
@@ -438,6 +775,14 @@
             height: 21px;
             text-align: center;
             color: #000;
+        }
+        
+        @media (max-width: 768px) {
+            .bh-dd th, .bh-dd td {
+                width: 22px;
+                height: 18px;
+                padding: 1px;
+            }
         }
         
         .bh-dd th {
@@ -482,17 +827,27 @@
         
         /* LoTT Display */
         .lottDisplay {
-            position: absolute;
+            position: relative;
             padding: 8px;
-            border: 1px solid #c0c1c0;
-            background: #c0c1c0;
+            border: 1px solid #999;
+            background: #e8e8e8;
             color: #000;
-            font-size: 15px;
+            font-size: 13px;
             text-align: center;
-            min-width: 100px;
-            right: 25px;
-            bottom: 25px;
-            color: black;
+            min-width: 80px;
+            margin-top: 8px;
+            margin-left: auto;
+            margin-right: auto;
+            width: fit-content;
+        }
+        
+        @media (max-width: 768px) {
+            .lottDisplay {
+                padding: 6px;
+                font-size: 11px;
+                min-width: 70px;
+                margin-top: 6px;
+            }
         }
         
         .lott-title {
