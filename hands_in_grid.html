@@ -34,12 +34,14 @@
             body {
                 padding: 0;
                 margin: 0;
+                overflow-x: hidden;
             }
             
             .container {
                 max-width: 100%;
                 padding: 0;
                 margin: 0;
+                overflow-x: hidden;
             }
         }
         
@@ -247,13 +249,18 @@
         @media (max-width: 768px) {
             .hand-diagram-container {
                 padding: 0;
+                margin: 0;
+                overflow: visible;
             }
             
             .scale-wrapper {
                 transform: scale(0.88);
                 transform-origin: top center;
-                margin-bottom: -60px;
+                margin: 0 auto -60px auto;
                 width: 500px;
+                position: relative;
+                left: 0;
+                right: 0;
             }
         }
         
@@ -261,8 +268,11 @@
             .scale-wrapper {
                 transform: scale(0.76);
                 transform-origin: top center;
-                margin-bottom: -115px;
+                margin: 0 auto -115px auto;
                 width: 500px;
+                position: relative;
+                left: 0;
+                right: 0;
             }
         }
         
@@ -270,8 +280,11 @@
             .scale-wrapper {
                 transform: scale(0.68);
                 transform-origin: top center;
-                margin-bottom: -150px;
+                margin: 0 auto -150px auto;
                 width: 500px;
+                position: relative;
+                left: 0;
+                right: 0;
             }
         }
         
