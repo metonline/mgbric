@@ -74,12 +74,22 @@
             background: #2a2a4a;
             color: #fff;
             font-size: 1em;
-            min-width: 120px;
+            min-width: 140px;
+        }
+        
+        .control-group input[type="date"] {
+            cursor: pointer;
+        }
+        
+        .control-group input[type="date"]::-webkit-calendar-picker-indicator {
+            filter: invert(1) brightness(1.2);
+            cursor: pointer;
         }
         
         .control-group input:focus, .control-group select:focus {
             outline: none;
             border-color: #00d9ff;
+            background: #3a3a5a;
         }
         
         .btn {
@@ -733,6 +743,24 @@
             <div class="tournament-info" id="tournamentInfo" style="display:none;"></div>
         </div>
         
+        <!-- Filter Controls -->
+        <div class="controls" id="filterControls">
+            <div class="control-group">
+                <label for="dateFilter">📅 Tarih</label>
+                <input type="date" id="dateFilter" onchange="handleDateChange()">
+            </div>
+            <div class="control-group" id="eventGroupContainer" style="display:none;">
+                <label for="eventFilter">🏆 Turnuva</label>
+                <select id="eventFilter" onchange="handleEventChange()">
+                    <option value="">-- Turnuva Seçin --</option>
+                </select>
+            </div>
+            <div class="control-group">
+                <label for="boardFilter">🎴 Board</label>
+                <input type="number" id="boardFilter" min="1" max="30" value="1" onchange="handleBoardChange()">
+            </div>
+        </div>
+        
         <!-- Hidden inputs for JS compatibility -->
         <input type="hidden" id="eventId" value="">
         <input type="hidden" id="boardNum" value="1">
@@ -1026,6 +1054,144 @@
             `;
         }
         
+        // ===== FILTER FUNCTIONS =====
+        
+        let allEventsData = {}; // Cache for board_results.json
+        let dateToEventsMap = {}; // Map date -> event IDs
+        
+        // Load and parse board_results.json to build date/event mapping
+        async function loadEventsList() {
+            try {
+                const response = await fetch('/board_results.json');
+                const data = await response.json();
+                allEventsData = data;
+                
+                // Build date to events mapping
+                const eventDates = {};
+                
+                for (const eventId of Object.keys(data.events || {})) {
+                    const eventDate = data.events[eventId].date || '2026-01-25';
+                    eventDates[eventId] = eventDate;
+                }
+                
+                // Build reverse map: date -> events
+                for (const [eventId, date] of Object.entries(eventDates)) {
+                    if (!dateToEventsMap[date]) {
+                        dateToEventsMap[date] = [];
+                    }
+                    dateToEventsMap[date].push(eventId);
+                }
+                
+                // Populate date filter with available dates
+                const dates = Object.keys(dateToEventsMap).sort().reverse();
+                const dateSelect = document.getElementById('dateFilter');
+                
+                // Set date input to today or first available date
+                if (dates.length > 0) {
+                    const today = new Date().toISOString().split('T')[0];
+                    const availableToday = dates.find(d => d.includes(today));
+                    if (availableToday) {
+                        dateSelect.value = availableToday;
+                    } else {
+                        dateSelect.value = dates[0];
+                    }
+                    // Trigger initial load
+                    await handleDateChange();
+                }
+                
+                console.log('Events loaded:', Object.keys(data.events).length, 'events');
+                console.log('Dates available:', dates);
+                
+            } catch (error) {
+                console.error('Error loading events list:', error);
+            }
+        }
+        
+        async function handleDateChange() {
+            const selectedDate = document.getElementById('dateFilter').value;
+            const eventFilterGroup = document.getElementById('eventGroupContainer');
+            const eventFilter = document.getElementById('eventFilter');
+            
+            if (!selectedDate) {
+                eventFilterGroup.style.display = 'none';
+                return;
+            }
+            
+            const eventsForDate = dateToEventsMap[selectedDate] || [];
+            
+            if (eventsForDate.length === 0) {
+                console.warn('No events for date:', selectedDate);
+                eventFilterGroup.style.display = 'none';
+                return;
+            }
+            
+            if (eventsForDate.length === 1) {
+                // Only one event for this date - auto-select it
+                const eventId = eventsForDate[0];
+                document.getElementById('eventId').value = eventId;
+                document.getElementById('boardNum').value = 1;
+                document.getElementById('boardFilter').value = 1;
+                eventFilterGroup.style.display = 'none';
+                
+                // Update tournament info
+                const eventInfo = allEventsData.events[eventId];
+                const tournamentInfo = document.getElementById('tournamentInfo');
+                if (tournamentInfo && eventInfo) {
+                    tournamentInfo.textContent = `${eventInfo.name} - ${eventInfo.date}`;
+                    tournamentInfo.style.display = 'block';
+                }
+                
+                await loadRanking();
+            } else {
+                // Multiple events for this date - show event picker
+                eventFilter.innerHTML = '<option value="">-- Turnuva Seçin --</option>';
+                for (const eventId of eventsForDate.sort()) {
+                    const eventInfo = allEventsData.events[eventId];
+                    const option = document.createElement('option');
+                    option.value = eventId;
+                    option.textContent = eventInfo ? eventInfo.name : `Event ${eventId}`;
+                    eventFilter.appendChild(option);
+                }
+                eventFilterGroup.style.display = 'flex';
+                
+                // Clear previous selections
+                document.getElementById('eventId').value = '';
+            }
+        }
+        
+        async function handleEventChange() {
+            const selectedEvent = document.getElementById('eventFilter').value;
+            if (!selectedEvent) return;
+            
+            document.getElementById('eventId').value = selectedEvent;
+            document.getElementById('boardNum').value = 1;
+            document.getElementById('boardFilter').value = 1;
+            
+            // Update tournament info
+            const eventInfo = allEventsData.events[selectedEvent];
+            const tournamentInfo = document.getElementById('tournamentInfo');
+            if (tournamentInfo && eventInfo) {
+                tournamentInfo.textContent = `${eventInfo.name} - ${eventInfo.date}`;
+                tournamentInfo.style.display = 'block';
+            }
+            
+            await loadRanking();
+        }
+        
+        async function handleBoardChange() {
+            const boardNum = document.getElementById('boardFilter').value;
+            if (!boardNum) return;
+            
+            const eventId = document.getElementById('eventId').value;
+            if (!eventId) {
+                alert('Lütfen önce turnuva seçin');
+                return;
+            }
+            
+            document.getElementById('boardNum').value = boardNum;
+            await loadRanking();
+        }
+        
         async function loadRanking() {
             const eventId = document.getElementById('eventId').value.trim();
             const boardNum = document.getElementById('boardNum').value;
@@ -1156,10 +1322,13 @@
                     // Kontrat
                     const contractDisplay = r.contract ? formatContract(r.contract) : '-';
                     
+                    // Direction badge
+                    const directionBadge = r.direction ? `<span class="direction-badge direction-${r.direction.toLowerCase()}">${r.direction}</span>` : '';
+                    
                     html += `
                         <tr>
                             <td class="rank-cell ${rankClass}">${r.rank}</td>
-                            <td class="player-cell">${r.pair_names || '-'}</td>
+                            <td class="player-cell">${r.pair_names || '-'}${directionBadge}</td>
                             <td class="contract-cell">${contractDisplay}</td>
                             <td>${formatLead(r.lead) || '-'}</td>
                             <td>${r.result || '='}</td>
@@ -1187,6 +1356,7 @@
             const newBoard = currentBoard + delta;
             if (newBoard >= 1 && newBoard <= 30) {
                 document.getElementById('boardNum').value = newBoard;
+                document.getElementById('boardFilter').value = newBoard;
                 loadRanking();
             }
         }
@@ -1197,6 +1367,9 @@
             const content = document.getElementById('content');
             
             console.log('URL params:', Object.fromEntries(params));
+            
+            // First, load the events list for filters
+            await loadEventsList();
             
             // Embed modunda başlık ve kapatma butonunu gizle
             if (params.get('embed') === '1') {
@@ -1220,55 +1393,17 @@
                 document.documentElement.style.height = 'auto';
             }
             
-            // Eğer date parametresi varsa, o tarihteki event'i bul
-            if (params.get('date') && !params.get('event')) {
-                const targetDate = params.get('date');
-                console.log('Looking for date:', targetDate);
-                
-                content.innerHTML = '<div class="loading">Turnuva aranıyor...</div>';
-                
-                try {
-                    const response = await fetch('/database.json');
-                    const db = await response.json();
-                    const records = db.legacy_records || [];
-                    
-                    console.log('Total records:', records.length);
-                    console.log('Sample dates:', records.slice(0, 3).map(r => r.Tarih));
-                    
-                    // Bu tarihteki ilk event'i bul
-                    const matchingRecord = records.find(r => r.Tarih === targetDate && r.Link);
-                    console.log('Matching record:', matchingRecord);
-                    
-                    if (matchingRecord && matchingRecord.Link) {
-                        const match = matchingRecord.Link.match(/event=(\d+)/);
-                        if (match) {
-                            document.getElementById('eventId').value = match[1];
-                            console.log('Found event:', match[1]);
-                        }
-                    } else {
-                        content.innerHTML = `<div class="error">❌ "${targetDate}" tarihi için turnuva bulunamadı.<br>Database format: dd.mm.yyyy (örn: 01.01.2026)</div>`;
-                        return;
-                    }
-                } catch (e) {
-                    console.error('Error loading database for date lookup:', e);
-                    content.innerHTML = `<div class="error">Database yüklenirken hata: ${e.message}</div>`;
-                    return;
-                }
-            }
-            
+            // Check if event/board passed via URL params
             let eventId = params.get('event') || params.get('eventId');
-            if (eventId) {
-                document.getElementById('eventId').value = eventId;
-            }
             const boardNum = params.get('board');
-            if (boardNum) {
-                document.getElementById('boardNum').value = boardNum;
-            }
-            
-            // Event ID varsa (URL'den veya date'den bulunmuşsa) yükle
-            console.log('Final eventId:', eventId);
             
             if (eventId) {
+                // If event passed directly via URL, use it
+                document.getElementById('eventId').value = eventId;
+                if (boardNum) {
+                    document.getElementById('boardNum').value = boardNum;
+                    document.getElementById('boardFilter').value = boardNum;
+                }
                 loadRanking();
             }
             
