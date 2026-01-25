@@ -580,6 +580,28 @@
                 return;
             }
 
+            // Batch fetch all DD data in parallel
+            console.log('Fetching DD data for all hands in parallel...');
+            const ddDataMap = {};
+            const ddFetchPromises = handsToRender.map(hand => 
+                fetch(`/api/hand-data?event=${hand.event_id}&board=${hand.board}`)
+                    .then(res => res.ok ? res.json() : null)
+                    .then(data => {
+                        const key = `${hand.event_id}_${hand.board}`;
+                        if (data) {
+                            ddDataMap[key] = {
+                                dd_result: data.dd_result,
+                                optimum: data.optimum,
+                                lott: data.lott
+                            };
+                        }
+                    })
+                    .catch(e => console.warn(`Failed to fetch DD data for event ${hand.event_id} board ${hand.board}:`, e))
+            );
+            
+            await Promise.all(ddFetchPromises);
+            console.log('DD data fetched. Rendering hands...');
+
             let handCount = 0;
             for (const hand of handsToRender) {
                 handCount++;
@@ -595,22 +617,12 @@
                     event_id: hand.event_id || '?'
                 };
 
-                // Get DD data from backend API
-                let ddResult = null;
-                let optimum = null;
-                let lott = null;
-                
-                try {
-                    const apiResponse = await fetch(`/api/hand-data?event=${hand.event_id}&board=${hand.board}`);
-                    if (apiResponse.ok) {
-                        const apiData = await apiResponse.json();
-                        ddResult = apiData.dd_result;
-                        optimum = apiData.optimum;
-                        lott = apiData.lott;
-                    }
-                } catch (e) {
-                    console.warn(`Failed to fetch DD data for board ${hand.board}:`, e);
-                }
+                // Get DD data from map (already fetched)
+                const key = `${hand.event_id}_${hand.board}`;
+                const ddData = ddDataMap[key] || {};
+                const ddResult = ddData.dd_result || null;
+                const optimum = ddData.optimum || null;
+                const lott = ddData.lott || null;
 
                 // Create custom HTML with event info
                 const baseHtml = renderHandDiagram(handObj, hand.board, ddResult, optimum, lott);
