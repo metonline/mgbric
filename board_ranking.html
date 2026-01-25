@@ -741,23 +741,19 @@
         <input type="hidden" id="eventId" value="">
         <input type="hidden" id="boardNum" value="1">
         
-        <!-- Advanced Filters -->
-        <div class="controls" id="filterControls" style="display:none;">
+        <!-- Event & Board Selection Filters -->
+        <div class="controls" id="filterControls">
             <div class="control-group">
-                <label for="filterDate">Tarih:</label>
-                <select id="filterDate">
-                    <option value="">Tüm Tarihler</option>
+                <label for="filterEvent">🏆 Turnuva Seçin:</label>
+                <select id="filterEvent" onchange="onEventChange()">
+                    <option value="">-- Turnuva Seçiniz --</option>
                 </select>
             </div>
             <div class="control-group">
-                <label for="filterEvent">Turnuva:</label>
-                <select id="filterEvent">
-                    <option value="">Tüm Turnuvalar</option>
+                <label for="filterBoard">🎴 Board Seçin:</label>
+                <select id="filterBoard" onchange="onBoardChange()">
+                    <option value="">-- Board Seçiniz --</option>
                 </select>
-            </div>
-            <div class="control-group">
-                <label for="filterBoard">Board:</label>
-                <input type="number" id="filterBoard" min="1" max="30" placeholder="1-30">
             </div>
         </div>
         
@@ -1232,6 +1228,76 @@
             }
         }
         
+        // Load all available events and boards from board_results.json
+        async function loadAvailableBoards() {
+            try {
+                const response = await fetch('/board_results.json');
+                const data = await response.json();
+                const boardData = data.boards || {};
+                
+                // Extract unique events
+                const events = new Set();
+                Object.keys(boardData).forEach(key => {
+                    const eventId = key.split('_')[0];
+                    events.add(eventId);
+                });
+                
+                const eventSelect = document.getElementById('filterEvent');
+                const sortedEvents = Array.from(events).sort((a, b) => parseInt(a) - parseInt(b));
+                
+                sortedEvents.forEach(eventId => {
+                    const option = document.createElement('option');
+                    option.value = eventId;
+                    
+                    // Count boards for this event
+                    const boardCount = Object.keys(boardData).filter(k => k.startsWith(eventId + '_')).length;
+                    option.textContent = `Event ${eventId} (${boardCount} boards)`;
+                    eventSelect.appendChild(option);
+                });
+                
+                console.log(`Loaded ${sortedEvents.length} events from board_results.json`);
+                return boardData;
+                
+            } catch (error) {
+                console.error('Error loading board data:', error);
+                return {};
+            }
+        }
+        
+        // When event is selected, populate boards
+        function onEventChange() {
+            const eventId = document.getElementById('filterEvent').value;
+            const boardSelect = document.getElementById('filterBoard');
+            
+            // Clear board options
+            boardSelect.innerHTML = '<option value="">-- Board Seçiniz --</option>';
+            
+            if (!eventId) return;
+            
+            // This will be populated on-demand when needed
+            for (let i = 1; i <= 30; i++) {
+                const option = document.createElement('option');
+                option.value = i;
+                option.textContent = `Board ${i}`;
+                boardSelect.appendChild(option);
+            }
+        }
+        
+        // When board is selected, load ranking
+        async function onBoardChange() {
+            const eventId = document.getElementById('filterEvent').value;
+            const boardNum = document.getElementById('filterBoard').value;
+            
+            if (!eventId || !boardNum) {
+                document.getElementById('content').innerHTML = '<div style="padding:20px; color:#aaa; text-align:center;">Turnuva ve Board seçiniz</div>';
+                return;
+            }
+            
+            document.getElementById('eventId').value = eventId;
+            document.getElementById('boardNum').value = boardNum;
+            loadRanking();
+        }
+        
         // URL parametrelerinden yükle
         window.onload = async function() {
             const params = new URLSearchParams(window.location.search);
@@ -1239,81 +1305,45 @@
             
             console.log('URL params:', Object.fromEntries(params));
             
+            // Load available events and boards first
+            await loadAvailableBoards();
+            
             // Embed modunda başlık ve kapatma butonunu gizle
             if (params.get('embed') === '1') {
                 const headerContainer = document.getElementById('headerContainer');
                 if (headerContainer) {
                     headerContainer.style.display = 'none';
                 }
-                // Container'ın üst padding'ini azalt
                 const container = document.querySelector('.container');
                 if (container) {
                     container.style.paddingTop = '5px';
                 }
-                // Body scroll ayarları
                 document.body.style.overflow = 'auto';
                 document.body.style.overflowX = 'hidden';
                 document.body.style.height = 'auto';
                 document.body.style.minHeight = 'auto';
                 document.body.style.padding = '10px';
-                // HTML element scroll
                 document.documentElement.style.overflow = 'auto';
                 document.documentElement.style.height = 'auto';
             }
             
-            // Eğer date parametresi varsa, o tarihteki event'i bul
-            if (params.get('date') && !params.get('event')) {
-                const targetDate = params.get('date');
-                console.log('Looking for date:', targetDate);
-                
-                content.innerHTML = '<div class="loading">Turnuva aranıyor...</div>';
-                
-                try {
-                    const response = await fetch('/database.json');
-                    const db = await response.json();
-                    const records = db.legacy_records || [];
-                    
-                    console.log('Total records:', records.length);
-                    console.log('Sample dates:', records.slice(0, 3).map(r => r.Tarih));
-                    
-                    // Bu tarihteki ilk event'i bul
-                    const matchingRecord = records.find(r => r.Tarih === targetDate && r.Link);
-                    console.log('Matching record:', matchingRecord);
-                    
-                    if (matchingRecord && matchingRecord.Link) {
-                        const match = matchingRecord.Link.match(/event=(\d+)/);
-                        if (match) {
-                            document.getElementById('eventId').value = match[1];
-                            console.log('Found event:', match[1]);
-                        }
-                    } else {
-                        content.innerHTML = `<div class="error">❌ "${targetDate}" tarihi için turnuva bulunamadı.<br>Database format: dd.mm.yyyy (örn: 01.01.2026)</div>`;
-                        return;
-                    }
-                } catch (e) {
-                    console.error('Error loading database for date lookup:', e);
-                    content.innerHTML = `<div class="error">Database yüklenirken hata: ${e.message}</div>`;
-                    return;
-                }
-            }
-            
+            // Check URL parameters
             let eventId = params.get('event') || params.get('eventId');
-            if (eventId) {
-                document.getElementById('eventId').value = eventId;
-            }
             const boardNum = params.get('board');
-            if (boardNum) {
-                document.getElementById('boardNum').value = boardNum;
-            }
             
-            // Initialize filters
-            initializeFilters();
-            
-            // Event ID varsa (URL'den veya date'den bulunmuşsa) yükle
-            console.log('Final eventId:', eventId);
-            
-            if (eventId) {
+            if (eventId && boardNum) {
+                // Load directly from URL parameters
+                document.getElementById('filterEvent').value = eventId;
+                onEventChange();
+                document.getElementById('filterBoard').value = boardNum;
                 loadRanking();
+            } else if (eventId) {
+                // Load event from URL
+                document.getElementById('filterEvent').value = eventId;
+                onEventChange();
+            } else {
+                // Show message to select event and board
+                content.innerHTML = '<div style="padding:40px; color:#aaa; text-align:center; font-size:1.1em;">👆 Yukarıdan Turnuva ve Board seçiniz</div>';
             }
             
             // Service Worker kayıt
