@@ -23,6 +23,18 @@
             min-height: 100vh;
         }
         
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            body {
+                padding: 8px;
+            }
+        }
+        
         .container {
             max-width: 1600px;
             margin: 0 auto;
@@ -35,11 +47,32 @@
             font-size: 1.8em;
         }
         
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.4em;
+                margin-bottom: 8px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.2em;
+                margin-bottom: 5px;
+            }
+        }
+        
         .tournament-info {
             text-align: center;
             color: #aaa;
             margin-bottom: 25px;
             font-size: 0.95em;
+        }
+        
+        @media (max-width: 768px) {
+            .tournament-info {
+                margin-bottom: 15px;
+                font-size: 0.85em;
+            }
         }
         
         /* Filter Section */
@@ -54,6 +87,14 @@
             border-radius: 8px;
         }
         
+        @media (max-width: 768px) {
+            .filter-section {
+                gap: 10px;
+                padding: 10px;
+                margin-bottom: 15px;
+            }
+        }
+        
         .filter-group {
             display: flex;
             align-items: center;
@@ -66,6 +107,12 @@
             font-size: 0.95em;
         }
         
+        @media (max-width: 768px) {
+            .filter-group label {
+                font-size: 0.85em;
+            }
+        }
+        
         .filter-group select {
             padding: 8px 12px;
             background: #2a3f5f;
@@ -75,6 +122,14 @@
             font-size: 0.95em;
             cursor: pointer;
             min-width: 150px;
+        }
+        
+        @media (max-width: 768px) {
+            .filter-group select {
+                padding: 6px 10px;
+                font-size: 0.85em;
+                min-width: 120px;
+            }
         }
         
         .filter-group select:hover {
@@ -116,6 +171,7 @@
         }
         
         /* GRID LAYOUT */
+        /* Desktop: Multiple columns */
         .hands-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(520px, 1fr));
@@ -123,15 +179,26 @@
             margin-bottom: 30px;
         }
         
-        @media (max-width: 1200px) {
+        /* Tablet: 2 columns */
+        @media (max-width: 1024px) {
             .hands-grid {
-                grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+                grid-template-columns: repeat(2, 1fr);
             }
         }
         
+        /* Large Mobile: 2 columns */
+        @media (max-width: 900px) {
+            .hands-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        /* Mobile: 1 column */
         @media (max-width: 768px) {
             .hands-grid {
                 grid-template-columns: 1fr;
+                gap: 15px;
+                padding: 0 10px;
             }
         }
         
@@ -140,6 +207,14 @@
             display: flex;
             justify-content: center;
             margin-bottom: 25px;
+            padding: 0 10px;
+        }
+        
+        @media (max-width: 768px) {
+            .hand-diagram-container {
+                margin-bottom: 15px;
+                padding: 0 5px;
+            }
         }
         
         .mainDivStyle {
@@ -149,6 +224,24 @@
             background: #c0c1c0;
             border-radius: 4px;
             overflow: visible;
+        }
+        
+        /* Responsive sizing for hand diagrams */
+        @media (max-width: 768px) {
+            .mainDivStyle {
+                width: 100%;
+                max-width: 500px;
+                height: auto;
+                aspect-ratio: 500/475;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .mainDivStyle {
+                width: 100%;
+                max-width: 420px;
+                aspect-ratio: 500/475;
+            }
         }
         
         .handDivStyle {
