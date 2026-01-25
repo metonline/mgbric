@@ -193,12 +193,21 @@
             }
         }
         
-        /* Mobile: 1 column */
+        /* Mobile: 3 columns - fit all 30 hands on 1 page */
         @media (max-width: 768px) {
             .hands-grid {
-                grid-template-columns: 1fr;
-                gap: 15px;
-                padding: 0 10px;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 10px;
+                padding: 0 5px;
+            }
+        }
+        
+        /* Small mobile: 2 columns */
+        @media (max-width: 480px) {
+            .hands-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 8px;
+                padding: 0 2px;
             }
         }
         
@@ -217,6 +226,22 @@
             }
         }
         
+        :root {
+            --scale-factor: 1;
+        }
+        
+        @media (max-width: 768px) {
+            :root {
+                --scale-factor: 0.64;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            :root {
+                --scale-factor: 0.56;
+            }
+        }
+        
         .mainDivStyle {
             position: relative;
             width: 500px;
@@ -224,24 +249,8 @@
             background: #c0c1c0;
             border-radius: 4px;
             overflow: visible;
-        }
-        
-        /* Responsive sizing for hand diagrams */
-        @media (max-width: 768px) {
-            .mainDivStyle {
-                width: 100%;
-                max-width: 500px;
-                height: auto;
-                aspect-ratio: 500/475;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .mainDivStyle {
-                width: 100%;
-                max-width: 420px;
-                aspect-ratio: 500/475;
-            }
+            transform: scale(var(--scale-factor));
+            transform-origin: top center;
         }
         
         .handDivStyle {
