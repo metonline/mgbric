@@ -147,6 +147,20 @@
             padding: 0 10px;
         }
         
+        @media (max-width: 768px) {
+            .hand-diagram-container {
+                transform-origin: top center;
+                transform: scale(0.9);
+                margin-bottom: 15px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hand-diagram-container {
+                transform: scale(0.75);
+            }
+        }
+        
         .mainDivStyle {
             position: relative;
             width: 500px;
@@ -154,24 +168,6 @@
             background: #c0c1c0;
             border-radius: 4px;
             overflow: visible;
-        }
-
-        /* Responsive sizing for hand diagrams on mobile */
-        @media (max-width: 768px) {
-            .mainDivStyle {
-                width: 100%;
-                max-width: 500px;
-                height: auto;
-                aspect-ratio: 500/475;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .mainDivStyle {
-                width: 100%;
-                max-width: 420px;
-                aspect-ratio: 500/475;
-            }
         }
         
         .handDivStyle {
