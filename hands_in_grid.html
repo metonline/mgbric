@@ -23,6 +23,18 @@
             min-height: 100vh;
         }
         
+        @media (max-width: 768px) {
+            body {
+                padding: 10px 5px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            body {
+                padding: 8px 2px;
+            }
+        }
+        
         .container {
             max-width: 1600px;
             margin: 0 auto;
@@ -135,7 +147,14 @@
             .hands-grid {
                 grid-template-columns: 1fr;
                 gap: 15px;
-                padding: 0 10px;
+                padding: 0 5px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hands-grid {
+                padding: 0 2px;
+                gap: 10px;
             }
         }
         
