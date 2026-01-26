@@ -1,5 +1,5 @@
 // Service Worker - Offline support and caching
-const CACHE_NAME = 'hosgoru-v14';
+const CACHE_NAME = 'hosgoru-v15';
 const urlsToCache = [
   '/',
   '/index.html',

@@ -282,15 +282,58 @@ class ScheduledPipeline:
             
             result['retry_attempts'] = retry_count
             
-            # 5. Board rankings otomatik olarak generate et
-            logger.info("\n🏆 Board rankings otomatik olarak generate ediliyor...")
+            # 5. Board rankings otomatik olarak fetch et (gerçek vugraph verileri)
+            logger.info("\n🏆 Board rankings fetch ediliyor (vugraph'tan gerçek veriler)...")
             try:
-                from generate_board_rankings import BoardRankingsGenerator
-                generator = BoardRankingsGenerator()
-                if generator.generate_all():
-                    logger.info("✅ Board rankings başarılı şekilde generate edildi")
-                else:
-                    logger.warning("⚠️  Board rankings generate edilirken hata")
+                from fetch_real_board_results import fetch_all_boards_for_event, fetch_event_info
+                
+                # Get all events from registry
+                all_events = self.registry.get_all_events()
+                
+                # Load existing board_results
+                board_results_file = self.base_path / 'board_results.json'
+                existing_data = {'boards': {}, 'events': {}}
+                try:
+                    with open(board_results_file, 'r', encoding='utf-8') as f:
+                        existing_data = json.load(f)
+                except:
+                    pass
+                
+                output = {
+                    'boards': existing_data.get('boards', {}),
+                    'events': existing_data.get('events', {}),
+                    'updated_at': datetime.now().isoformat()
+                }
+                
+                new_rankings = 0
+                for date, event_id in sorted(all_events.items(), reverse=True):
+                    # Only process 2026 events
+                    if not date or '2026' not in date:
+                        continue
+                        
+                    # Skip if already have enough boards for this event
+                    existing_boards = [k for k in output['boards'].keys() if k.startswith(f"{event_id}_")]
+                    if len(existing_boards) >= 20:
+                        continue
+                    
+                    logger.info(f"  Fetching rankings for event {event_id} ({date})...")
+                    try:
+                        event_info, boards = fetch_all_boards_for_event(event_id)
+                        for board_key, board_data in boards.items():
+                            output['boards'][board_key] = board_data
+                            new_rankings += 1
+                        output['events'][event_id] = event_info
+                    except Exception as e:
+                        logger.warning(f"    Error: {e}")
+                        continue
+                
+                # Save board_results
+                output['updated_at'] = datetime.now().isoformat()
+                with open(board_results_file, 'w', encoding='utf-8') as f:
+                    json.dump(output, f, ensure_ascii=False, indent=2)
+                
+                logger.info(f"✅ Board rankings: {new_rankings} yeni board, toplam {len(output['boards'])} board")
+                
             except Exception as e:
                 logger.warning(f"⚠️  Board rankings hatası: {e}")
             
@@ -528,14 +571,57 @@ class ScheduledPipeline:
             result['retry_attempts'] = retry_count
             
             # 6. Board rankings otomatik olarak generate et
-            logger.info("\n🏆 Board rankings otomatik olarak generate ediliyor...")
+            logger.info("\n🏆 Board rankings fetch ediliyor (vugraph'tan gerçek veriler)...")
             try:
-                from generate_board_rankings import BoardRankingsGenerator
-                generator = BoardRankingsGenerator()
-                if generator.generate_all():
-                    logger.info("✅ Board rankings başarılı şekilde generate edildi")
-                else:
-                    logger.warning("⚠️  Board rankings generate edilirken hata")
+                from fetch_real_board_results import fetch_all_boards_for_event, fetch_event_info
+                
+                # Get all events from registry
+                all_events = self.registry.get_all_events()
+                
+                # Load existing board_results
+                board_results_file = self.base_path / 'board_results.json'
+                existing_data = {'boards': {}, 'events': {}}
+                try:
+                    with open(board_results_file, 'r', encoding='utf-8') as f:
+                        existing_data = json.load(f)
+                except:
+                    pass
+                
+                output = {
+                    'boards': existing_data.get('boards', {}),
+                    'events': existing_data.get('events', {}),
+                    'updated_at': datetime.now().isoformat()
+                }
+                
+                new_rankings = 0
+                for date, event_id in sorted(all_events.items(), reverse=True):
+                    # Only process 2026 events
+                    if not date or '2026' not in date:
+                        continue
+                        
+                    # Skip if already have enough boards for this event
+                    existing_boards = [k for k in output['boards'].keys() if k.startswith(f"{event_id}_")]
+                    if len(existing_boards) >= 20:
+                        continue
+                    
+                    logger.info(f"  Fetching rankings for event {event_id} ({date})...")
+                    try:
+                        event_info, boards = fetch_all_boards_for_event(event_id)
+                        for board_key, board_data in boards.items():
+                            output['boards'][board_key] = board_data
+                            new_rankings += 1
+                        output['events'][event_id] = event_info
+                    except Exception as e:
+                        logger.warning(f"    Error: {e}")
+                        continue
+                
+                # Save board_results
+                output['updated_at'] = datetime.now().isoformat()
+                with open(board_results_file, 'w', encoding='utf-8') as f:
+                    json.dump(output, f, ensure_ascii=False, indent=2)
+                
+                logger.info(f"✅ Board rankings: {new_rankings} yeni board, toplam {len(output['boards'])} board")
+                
             except Exception as e:
                 logger.warning(f"⚠️  Board rankings hatası: {e}")
             

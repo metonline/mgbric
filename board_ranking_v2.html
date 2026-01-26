@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Board Bazında Kulüp Sıralaması</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: #fff;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #00d9ff;
+            margin-bottom: 20px;
+        }
+        
+        .controls {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 25px;
+            padding: 15px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+        }
+        
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        
+        .control-group label {
+            font-size: 0.9em;
+            color: #aaa;
+        }
+        
+        .control-group input, 
+        .control-group select {
+            padding: 10px 15px;
+            border: 1px solid #444;
+            border-radius: 6px;
+            background: #2a2a4a;
+            color: #fff;
+            font-size: 1em;
+            min-width: 140px;
+        }
+        
+        .control-group input:focus,
+        .control-group select:focus {
+            outline: none;
+            border-color: #00d9ff;
+            background: #3a3a5a;
+        }
+        
+        #content {
+            background: rgba(255,255,255,0.05);
+            padding: 20px;
+            border-radius: 10px;
+            min-height: 400px;
+            color: #aaa;
+        }
+        
+        .error {
+            color: #ff6b6b;
+            padding: 20px;
+            background: rgba(255,107,107,0.1);
+            border-radius: 6px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎴 Board Bazında Kulüp Sıralaması</h1>
+        
+        <div class="controls">
+            <div class="control-group">
+                <label for="dateFilter">📅 Tarih</label>
+                <input type="date" id="dateFilter">
+            </div>
+            <div class="control-group" id="eventGroupContainer" style="display:none;">
+                <label for="eventFilter">🏆 Turnuva</label>
+                <select id="eventFilter">
+                    <option value="">-- Turnuva Seçin --</option>
+                </select>
+            </div>
+            <div class="control-group">
+                <label for="boardFilter">🎴 Board</label>
+                <input type="number" id="boardFilter" min="1" max="30" value="1">
+            </div>
+        </div>
+        
+        <div id="content">
+            Yükleniyor...
+        </div>
+    </div>
+    
+    <script>
+        let dateToEventsMap = {};
+        let allEventsData = {};
+        
+        function convertDateFormat(dateStr) {
+            if (!dateStr) return null;
+            if (dateStr.includes('.')) {
+                const [day, month, year] = dateStr.split('.');
+                return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
+            }
+            return dateStr;
+        }
+        
+        async function loadEventsList() {
+            try {
+                console.log('Fetching board_results.json...');
+                const response = await fetch('/board_results.json');
+                console.log('Response status:', response.status);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+                
+                const data = await response.json();
+                console.log('Data loaded, events:', Object.keys(data.events || {}).length);
+                
+                allEventsData = data;
+                
+                // Build date map
+                for (const eventId of Object.keys(data.events || {})) {
+                    let eventDate = data.events[eventId].date || '2026-01-25';
+                    eventDate = convertDateFormat(eventDate);
+                    
+                    if (!dateToEventsMap[eventDate]) {
+                        dateToEventsMap[eventDate] = [];
+                    }
+                    dateToEventsMap[eventDate].push(eventId);
+                }
+                
+                console.log('Date map built:', Object.keys(dateToEventsMap).length, 'dates');
+                
+                // Set first available date
+                const dates = Object.keys(dateToEventsMap).sort().reverse();
+                if (dates.length > 0) {
+                    document.getElementById('dateFilter').value = dates[0];
+                    console.log('Set initial date:', dates[0]);
+                }
+                
+                document.getElementById('content').innerHTML = '<div style="color: #00d9ff;">✓ Veriler yüklendi. Tarih seçiniz.</div>';
+                
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('content').innerHTML = `<div class="error">Hata: ${error.message}</div>`;
+            }
+        }
+        
+        // Initialize on load
+        window.addEventListener('load', function() {
+            console.log('Page loaded');
+            loadEventsList();
+        });
+    </script>
+</body>
+</html>

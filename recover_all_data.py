@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 COMPLETE DATA RECOVERY FROM SCRATCH
-Fetch ALL pair results for Event 405376, all boards, all pairs from vugraph
+Fetch ALL pair results for Event 404155, all boards, all pairs from vugraph
 This will rebuild board_results.json completely and correctly
 """
 
@@ -12,7 +12,7 @@ from bs4 import BeautifulSoup
 import re
 import time
 
-EVENT_ID = '405376'
+EVENT_ID = '404155'
 SECTION = 'A'
 OUTPUT_FILE = 'board_results.json'
 REQUEST_TIMEOUT = 15

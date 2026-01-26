@@ -86,44 +86,90 @@ class BoardRankingsGenerator:
                 for board_num in sorted(event_boards.keys()):
                     board_key = f"{event_id}_{board_num}"
                     
-                    # Generate 14-16 pairs for this board
-                    num_pairs = random.randint(14, 16)
+                    # Generate 7-8 tables (each table has 1 NS pair and 1 EW pair)
+                    num_tables = random.randint(7, 8)
+                    
+                    # Shuffle pair names and split into NS and EW
+                    shuffled_pairs = random.sample(self.PAIR_NAMES, min(num_tables * 2, len(self.PAIR_NAMES)))
+                    ns_pairs = shuffled_pairs[:num_tables]
+                    ew_pairs = shuffled_pairs[num_tables:num_tables*2]
+                    
+                    # Generate table results - each table has one NS score (EW gets negative)
+                    table_results = []
+                    for i in range(min(len(ns_pairs), len(ew_pairs))):
+                        ns_score = self.generate_score(board_num)
+                        contract = self.generate_contract()
+                        lead = random.choice(['♠K', '♥Q', '♦A', '♣J', '♠2', '♥3', '♦4', '♣5', '♦T', '♥6', '♠8', '♣5'])
+                        result = random.choice(['=', '+1', '-1', '+2', '-2'])
+                        
+                        table_results.append({
+                            'ns_pair': ns_pairs[i],
+                            'ew_pair': ew_pairs[i],
+                            'ns_score': ns_score,
+                            'contract': contract,
+                            'lead': lead,
+                            'result': result
+                        })
+                    
+                    # Calculate matchpoints for NS pairs (compared to other NS scores)
+                    ns_scores = [t['ns_score'] for t in table_results]
+                    
                     results = []
                     
-                    # Create random pair results with realistic percentages
-                    pair_indices = random.sample(range(len(self.PAIR_NAMES)), 
-                                                min(num_pairs, len(self.PAIR_NAMES)))
-                    scores = []
-                    
-                    for pair_idx in pair_indices:
-                        score = self.generate_score(board_num)
-                        scores.append(score)
-                    
-                    # Calculate percentages based on scores
-                    min_score = min(scores)
-                    max_score = max(scores)
-                    score_range = max_score - min_score if max_score != min_score else 1
-                    
-                    for rank, pair_idx in enumerate(sorted(pair_indices, 
-                                                          key=lambda i: scores[pair_indices.index(i)], 
-                                                          reverse=True), 1):
-                        score = scores[pair_indices.index(pair_idx)]
-                        # Calculate percentage (0-100)
-                        percent = ((score - min_score) / score_range * 100) if score_range > 0 else 50.0
+                    # Process NS pairs
+                    for i, table in enumerate(table_results):
+                        # Matchpoints: 2 points for each pair you beat, 1 for each tie
+                        matchpoints = 0
+                        for j, other_score in enumerate(ns_scores):
+                            if i != j:
+                                if table['ns_score'] > other_score:
+                                    matchpoints += 2
+                                elif table['ns_score'] == other_score:
+                                    matchpoints += 1
                         
-                        # Randomly assign direction for realistic data
-                        direction = random.choice(['NS', 'EW'])
+                        max_matchpoints = (len(ns_scores) - 1) * 2
+                        percent = (matchpoints / max_matchpoints * 100) if max_matchpoints > 0 else 50.0
                         
                         results.append({
-                            'rank': rank,
-                            'pair_names': self.PAIR_NAMES[pair_idx],
-                            'direction': direction,
-                            'contract': self.generate_contract(),
-                            'lead': random.choice(['♠K', '♥Q', '♦A', '♣J', '♠2', '♥3', '♦4', '♣5']),
-                            'result': random.choice(['=', '+1', '-1', '+2', '-2', 'X']),
-                            'score': score,
+                            'pair_names': table['ns_pair'],
+                            'direction': 'NS',
+                            'contract': table['contract'],
+                            'lead': table['lead'],
+                            'result': table['result'],
+                            'score': table['ns_score'],
                             'percent': round(percent, 2)
                         })
+                    
+                    # Process EW pairs (their matchpoints are inverse - they want NS to score low)
+                    for i, table in enumerate(table_results):
+                        ew_score = -table['ns_score']  # EW score is negative of NS
+                        
+                        matchpoints = 0
+                        for j, other_ns_score in enumerate(ns_scores):
+                            if i != j:
+                                other_ew_score = -other_ns_score
+                                if ew_score > other_ew_score:
+                                    matchpoints += 2
+                                elif ew_score == other_ew_score:
+                                    matchpoints += 1
+                        
+                        max_matchpoints = (len(ns_scores) - 1) * 2
+                        percent = (matchpoints / max_matchpoints * 100) if max_matchpoints > 0 else 50.0
+                        
+                        results.append({
+                            'pair_names': table['ew_pair'],
+                            'direction': 'EW',
+                            'contract': table['contract'],
+                            'lead': table['lead'],
+                            'result': table['result'],
+                            'score': ew_score,
+                            'percent': round(percent, 2)
+                        })
+                    
+                    # Sort by percent descending and assign ranks
+                    results.sort(key=lambda x: x['percent'], reverse=True)
+                    for rank, r in enumerate(results, 1):
+                        r['rank'] = rank
                     
                     output['boards'][board_key] = {'results': results}
             
